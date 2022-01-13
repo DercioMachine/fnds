@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Registar Reclamacao  (Fase 1)</h3>
+        </div>
+        <div class="card-body">
+
+          <div class="row" >
+
+              <div class="col-6 col-sm-6">
+                  <div class="form-group">
+                      <label class="form-label">Provincia</label>
+                      <select class="form-control custom-select">
+                          <option value="">Maputo</option>
+                          <option value="">Gaza</option>
+                          <option value="">Inhambane</option>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="col-6 col-sm-6">
+                  <div class="form-group">
+                      <label class="form-label">Distrito</label>
+                      <select class="form-control custom-select">
+                          <option value="">Manhica</option>
+                          <option value="">Boana</option>
+                          <option value="">Katembe</option>
+                      </select>
+                  </div>
+              </div>
+
+          </div>
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Motivo</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Assunto</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Descricao </label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Data de Ocorrencia">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Data de Ocorrencia</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="date" class="form-control" placeholder="Data de Ocorrencia">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Anexo</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="file" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Descricao</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="card-footer text-right">
+            <a th:href="@{/reclamacao/fase2}"><button type="submit" class="btn btn-primary">Continuar </button></a>
+        </div>
+    </div>
+    <!-- Conteudo-->
+</div>
+</body>
+</html>

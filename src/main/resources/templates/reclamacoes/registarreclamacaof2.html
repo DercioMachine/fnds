@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Registar Reclamacao  (Fase F2)</h3>
+        </div>
+        <div class="card-body">
+
+          <div class="row" >
+
+              <div class="col-6 col-sm-6">
+                  <div class="form-group">
+                      <label class="form-label">Projecto</label>
+                      <select class="form-control custom-select">
+                          <option value="">Projecto 1</option>
+                          <option value="">Projecto 2</option>
+                          <option value="">Projecto 3</option>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="col-6 col-sm-6">
+                  <div class="form-group">
+                      <label class="form-label">Faixa Etaria</label>
+                      <select class="form-control custom-select">
+                          <option value="">20 - 30</option>
+                          <option value="">30 - 40</option>
+                          <option value="">40 - 60</option>
+                      </select>
+                  </div>
+              </div>
+
+          </div>
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Genero</label>
+                        <select class="form-control custom-select">
+                            <option value="">Masculino</option>
+                            <option value="">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Contacto</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Morada</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Data de Ocorrencia">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Queixa</label>
+                        <select class="form-control custom-select">
+                            <option value="">Queixa A</option>
+                            <option value="">Queixa B</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Anexo2</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="file" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Descricao de anexo 2</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-user"></i>
+                                    </span>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="card-footer text-right">
+            <button type="submit" class="btn btn-primary">Finalizar</button>
+        </div>
+    </div>
+    <!-- Conteudo-->
+</div>
+</body>
+</html>
