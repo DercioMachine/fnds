@@ -17,4 +17,5 @@ public class IndexController {
 
         return "reclamacoes/home";
     }
+    
 }

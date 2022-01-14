@@ -1,5 +1,5 @@
 <meta charset="UTF-8" />
-<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse" xmlns:th="http://www.w3.org/1999/xhtml">
+<div style="background:#fae8ea;" class="header collapse d-lg-flex p-0" id="headerMenuCollapse" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-3 ml-auto">
@@ -11,7 +11,7 @@
                         <a th:href="@{/home}" class="nav-link active"><i class="fe fe-home"></i> Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Reclamações</a>
+                        <a th:href="@{/listar/reclamacao}"  class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Ocorrências</a>
                         <div class="dropdown-menu dropdown-menu-arrow">
                             <a th:href="@{/registar/reclamacao}" class="dropdown-item ">Registar</a>
                             <a th:href="@{/listar/reclamacao}" class="dropdown-item ">Listar</a>
