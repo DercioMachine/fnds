@@ -3,8 +3,17 @@
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+
+<style type="text/css">
+		.h1{
+		margin-top: 0;
+   		margin-bottom: 0;
+		}
+		
+</style>
+
     <meta charset="UTF-8">
-     <link rel="icon" th:href="@{/image/logo.jpg}" />
+     <link rel="icon" th:href="@{/image/log.png}" />
     <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
 </head>
 <body>
@@ -21,10 +30,11 @@
                   <div class="card-body">
                     <div class="d-flex align-items-center">
                       <div class="subheader">Reclamações</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <div class="h1 mb-3">75</div>
-                      <div >Registadas</div>
-                      <i sclass="fe fe-home"></i>
+                    <div class="h1">75</div>
+                      
                   </div>
                 </div>
               </div>
@@ -35,29 +45,13 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Revenue</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#">Last 7 days</a>
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="subheader">Sugestões</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-0 me-2">$4,300</div>
-                      <div class="me-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
-                          8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
-                      </div>
-                    </div>
+                    <div class="h1">31</div>
+                      
                   </div>
-                  <div id="chart-revenue-bg" class="chart-sm"></div>
                 </div>
               </div>
               
@@ -66,34 +60,32 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">New clients</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#">Last 7 days</a>
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="subheader">Solicitações</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-3 me-2">6,782</div>
-                      <div class="me-auto">
-                        <span class="text-yellow d-inline-flex align-items-center lh-1">
-                          0% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                        </span>
-                      </div>
+                    <div class="h1">43</div>
+                      
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">Consultas</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <div id="chart-new-clients" class="chart-sm"></div>
+                    <div class="h1">12</div>
+                      
                   </div>
                 </div>
               </div>
               
               
-              <div class="col-sm-6 col-lg-3">
+              <!-- <div class="col-sm-6 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -113,7 +105,7 @@
                       <div class="h1 mb-3 me-2">2,986</div>
                       <div class="me-auto">
                         <span class="text-green d-inline-flex align-items-center lh-1">
-                          4% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                          4% Download SVG icon from http://tabler-icons.io/i/trending-up
                           <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
                         </span>
                       </div>
@@ -121,7 +113,7 @@
                     <div id="chart-active-users" class="chart-sm"></div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               
               
               
@@ -142,33 +134,9 @@
                 <div style="background:#42f554;" class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Sales</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#">Last 7 days</a>
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="subheader">Reclamações Resolvidas</div>
                     </div>
-                    <div class="h1 mb-3">75%</div>
-                    <div class="d-flex mb-2">
-                      <div>Conversion rate</div>
-                      <div class="ms-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
-                          7% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-blue" style="width: 75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        <span class="visually-hidden">75% Complete</span>
-                      </div>
-                    </div>
+                    <div class="h1">27</div>
                   </div>
                 </div>
               </div>
@@ -179,29 +147,10 @@
                 <div style="background:#f5ec42;" class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Revenue</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#">Last 7 days</a>
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="subheader">Reclamações em Andamento</div>
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-0 me-2">$4,300</div>
-                      <div class="me-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
-                          8% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
-                      </div>
-                    </div>
+                    <div class="h1">21</div>
                   </div>
-                  <div id="chart-revenue-bg" class="chart-sm"></div>
                 </div>
               </div>
               
@@ -210,28 +159,9 @@
                 <div style="background:#4299f5;" class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">New clients</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#">Last 7 days</a>
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="subheader">Reclamações Estagnadas</div>
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-3 me-2">6,782</div>
-                      <div class="me-auto">
-                        <span class="text-yellow d-inline-flex align-items-center lh-1">
-                          0% <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div id="chart-new-clients" class="chart-sm"></div>
+                    <div class="h1">16</div>
                   </div>
                 </div>
               </div>
@@ -241,28 +171,9 @@
                 <div style="background:#f55d42;" class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Active users</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#">Last 7 days</a>
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="subheader">Reclamações não Resolvidas</div>
                     </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-3 me-2">2,986</div>
-                      <div class="me-auto">
-                        <span class="text-green d-inline-flex align-items-center lh-1">
-                          4% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div id="chart-active-users" class="chart-sm"></div>
+                    <div class="h1">11</div>
                   </div>
                 </div>
               </div>
@@ -599,7 +510,7 @@
                           </td>
                           <td class="td-truncate">
                             <div class="text-truncate">
-                              Fix dart Sass compatibility (#29755)
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
                           </td>
                           <td class="text-nowrap text-muted">28 Nov 2019</td>
@@ -610,7 +521,7 @@
                           </td>
                           <td class="td-truncate">
                             <div class="text-truncate">
-                              Change deprecated html tags to text decoration classes (#29604)
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
                           </td>
                           <td class="text-nowrap text-muted">27 Nov 2019</td>
@@ -621,7 +532,7 @@
                           </td>
                           <td class="td-truncate">
                             <div class="text-truncate">
-                              justify-content:between ⇒ justify-content:space-between (#29734)
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
                           </td>
                           <td class="text-nowrap text-muted">26 Nov 2019</td>
@@ -632,7 +543,7 @@
                           </td>
                           <td class="td-truncate">
                             <div class="text-truncate">
-                              Update change-version.js (#29736)
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
                           </td>
                           <td class="text-nowrap text-muted">26 Nov 2019</td>
@@ -643,7 +554,7 @@
                           </td>
                           <td class="td-truncate">
                             <div class="text-truncate">
-                              Regenerate package-lock.json (#29730)
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
                           </td>
                           <td class="text-nowrap text-muted">25 Nov 2019</td>
@@ -654,7 +565,7 @@
                           </td>
                           <td class="td-truncate">
                             <div class="text-truncate">
-                              Some minor text tweaks
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
                           </td>
                           <td class="text-nowrap text-muted">24 Nov 2019</td>
