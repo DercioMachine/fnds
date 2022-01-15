@@ -31,9 +31,11 @@ public abstract class AbstractEntity implements Serializable  {
 	@Column(name = "updated", nullable = false)
 	private Date updated;
 	
-	private Long userCreated;
-	
-	private Long userUpdated;
+	/*
+	 * private Long userCreated;
+	 * 
+	 * private Long userUpdated;
+	 */
 	
 	public AbstractEntity() {
 		super();
@@ -83,21 +85,17 @@ public abstract class AbstractEntity implements Serializable  {
 		this.updated = updated;
 	}
 
-	public Long getUserCreated() {
-		return userCreated;
-	}
-
-	public void setUserCreated(Long userCreated) {
-		this.userCreated = userCreated;
-	}
-
-	public Long getUserUpdated() {
-		return userUpdated;
-	}
-
-	public void setUserUpdated(Long userUpdated) {
-		this.userUpdated = userUpdated;
-	}
+	/*
+	 * public Long getUserCreated() { return userCreated; }
+	 * 
+	 * public void setUserCreated(Long userCreated) { this.userCreated =
+	 * userCreated; }
+	 * 
+	 * public Long getUserUpdated() { return userUpdated; }
+	 * 
+	 * public void setUserUpdated(Long userUpdated) { this.userUpdated =
+	 * userUpdated; }
+	 */
 
 	@Override
 	public int hashCode() {

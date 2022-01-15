@@ -10,20 +10,23 @@
                     <li class="nav-item">
                         <a th:href="@{/home}" class="nav-link active"><i class="fe fe-home"></i> Home</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    
+                    <li class="nav-item">
+                        <a th:href="@{/listar/reclamacao}" class="nav-link active"><i class="fe fe-home"></i> Ocorrências</a>
+                    </li>
+                    
+                    <!-- <li class="nav-item dropdown">
                         <a th:href="@{/listar/reclamacao}"  class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Ocorrências</a>
                         <div class="dropdown-menu dropdown-menu-arrow">
                             <a th:href="@{/registar/reclamacao}" class="dropdown-item ">Registar</a>
                             <a th:href="@{/listar/reclamacao}" class="dropdown-item ">Listar</a>
                         </div>
-                    </li>
+                    </li> -->
+                    
                     <li class="nav-item dropdown">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-file"></i> Parametrização</a>
                         <div class="dropdown-menu dropdown-menu-arrow">
-                            <a href="./profile.html" class="dropdown-item ">Registar</a>
-                            <a href="./login.html" class="dropdown-item ">Listar</a>
-                            <a href="./register.html" class="dropdown-item ">Register</a>
-                            <a href="./forgot-password.html" class="dropdown-item ">Forgot password</a>
+                            <a th:href="@{/listar/posto}" class="dropdown-item ">Posto Administrativo</a>
                         </div>
                     </li>
 
