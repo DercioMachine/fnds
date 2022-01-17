@@ -26,6 +26,7 @@ public class OcorrenciaServiceImpl implements OcorrenciaService{
 		ocorrenciaDao.update(ocorrencia);
 	}
 
+
 	@Override
 	public void excluir(Long id) {
 		ocorrenciaDao.delete(id);

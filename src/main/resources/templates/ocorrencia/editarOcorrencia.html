@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Ocorrencia F2</h3>
+        </div>
+        <div class="card-body">
+		<form th:action="@{/ocorrencia/fase2}"
+	                  th:object="${ocorrencia}" method="POST">
+	                  
+	        <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Comunidade</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{comunidade}" class="form-control" required placeholder="Designação..."
+                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+                                   oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Assento</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{assento}" class="form-control" required placeholder="Designação..."
+                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+                                   oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Nome Utente</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{nomeUtente}" class="form-control" required placeholder="Designação..."
+                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+                                   oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">genero</label>
+                        <select class="form-control custom-select" th:field="*{sexo}" >
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Contacto Utente</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input re type="text" th:field="*{contactoUtente}" class="form-control" required placeholder="Designação..."
+                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+                                   oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Faixa Etaria</label>
+                        <select class="form-control custom-select" th:field="*{faixaEtaria}" >
+                            <option value="20 a 30">20 a 30</option>
+                            <option value="30 a 40">30 a 60</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="card-footer text-right">
+            <button type="submit" class="btn btn-success">Finalizar </button>
+        </div>
+          </form>
+
+
+
+
+
+        </div>
+        
+    </div>
+    <!-- Conteudo-->
+</div>
+</body>
+</html>

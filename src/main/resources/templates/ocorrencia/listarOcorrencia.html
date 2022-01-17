@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+
+
+
+    <div class="col-12">
+        <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/ocorrencia }" role="button">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span>Nova Ocorrencia</span>
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">OCORRENCIAS</h3>
+            </div>
+            <div th:replace="fragmentos/alert"></div>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap">
+                    <thead>
+                    <tr>
+                        <th class="w-1">No.</th>
+                        <th>Nome de Utente</th>
+                        <th>Genero</th>
+                        <th>Faixa Etaria</th>
+                        <th>Contacto</th>
+                        <th></th>
+                        <!--  <th></th> -->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--  <tr th:each="p : ${postos}"> -->
+                    <tr th:each="p : ${ocorrencias}">
+                        <td th:text="${p.id}"><span class="text-muted">01401</span></td>
+                        <td th:text="${p.nomeUtente}">Auxiliar Contábil</td>
+                        <td th:text="${p.sexo}">Auxiliar Contábil</td>
+                        <td th:text="${p.faixaEtaria}">Auxiliar Contábil</td>
+                        <td th:text="${p.contactoUtente}">Auxiliar Contábil</td>
+                        <td>
+                            <a class="icon" th:href="${'/postos/editar/'+p.id}">
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </td>
+
+                        <!-- <td>
+                            <a class="icon" th:href="${'/postos/excluir/'+p.id}">
+                                <i class="fe fe-trash-2"></i>
+                            </a>
+                        </td> -->
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Conteudo-->
+</div>
+</body>
+</html>
