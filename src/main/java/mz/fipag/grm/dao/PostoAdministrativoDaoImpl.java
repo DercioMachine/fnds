@@ -12,7 +12,7 @@ public class PostoAdministrativoDaoImpl extends AbstractDao<PostoAdministrativo,
 
 	public PaginacaoUtil<PostoAdministrativo> buscaPaginada(int pagina){
 		
-		int tamanho = 5;
+		int tamanho = 4;
 		int inicio = (pagina-1) * tamanho;
 		
 		
