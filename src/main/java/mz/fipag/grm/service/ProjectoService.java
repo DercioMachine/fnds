@@ -3,6 +3,7 @@ package mz.fipag.grm.service;
 import java.util.List;
 
 import mz.fipag.grm.domain.Projecto;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 public interface ProjectoService {
 
@@ -15,4 +16,6 @@ public interface ProjectoService {
 	Projecto buscarPorId(Long id);
 	
 	List<Projecto> buscarTodos();
+	
+	public PaginacaoUtil<Projecto> buscaPorPagina(int pagina);
 }

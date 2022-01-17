@@ -28,7 +28,7 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input re type="text" th:field="*{designacao}" class="form-control" required placeholder="Designação..." 
+                            <input re type="text" th:field="*{designacao}" class="form-control"required pattern="\S(.*\S)?" placeholder="Designação..." 
                             oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
   								oninput="this.setCustomValidity('')">
                         </div>

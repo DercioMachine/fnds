@@ -6,7 +6,7 @@
 
             </div>
             <div class="col-lg order-lg-first">
-                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                <ul class="nav  nav-tabs border-0 flex-column flex-lg-row">
                     <li class="nav-item">
                         <a th:href="@{/home}" class="nav-link active"><i class="fe fe-home"></i> Home</a>
                     </li>
@@ -18,12 +18,14 @@
 
                     
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown"><i class="fe fe-file"></i> Parametrização</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fe fe-file"></i> Parametrização</a>
+                        <div class="dropdown-menu-columns">
                         <div class="dropdown-menu dropdown-menu-arrow">
-                            <a th:href="@{/listar/posto}" class="dropdown-item ">Posto Administrativo</a>
+                           <!--  <a th:href="@{/listar/posto}" class="dropdown-item ">Posto Administrativo</a> -->
                             <a th:href="@{/listar/categoria}" class="dropdown-item ">Categoria</a>
                             <a th:href="@{/listar/projecto}" class="dropdown-item ">Projecto</a>
                             <a th:href="@{/listar/tipoqueixa}" class="dropdown-item ">Tipo de Queixa</a>
+                        </div>
                         </div>
                     </li>
 

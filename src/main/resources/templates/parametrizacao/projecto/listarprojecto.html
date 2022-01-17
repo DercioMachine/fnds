@@ -5,6 +5,30 @@
 <head>
     <meta charset="UTF-8">
     <title>FIPAG</title>
+    <style>
+#tabela {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tabela td, #tabela th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tabela tr:nth-child(even){background-color: #f2f2f2;}
+
+#tabela tr:hover {background-color: #ddd;}
+
+#tabela th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #a7ebaa;
+  color: white;
+}
+</style>
 </head>
 <body>
 <div  layout:fragment="corpo">
@@ -20,11 +44,11 @@
 		</a> 
     
         <div class="card">
-            <div class="card-header">
+            <div style="background:#04AA6D;" class="card-header">
                 <h3 class="card-title">PROJECTOS</h3>
             </div>
             <div class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap">
+                <table id="tabela" class="table card-table table-vcenter text-nowrap">
                     <thead>
                     <tr>
                         <th class="w-1">No.</th>
@@ -34,7 +58,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="p : ${projectos}">
+                    <!-- <tr th:each="p : ${projectos}"> -->
+                     <tr th:each="p : ${pageProjecto.registros}">
                         <td th:text="${p.codigo}"><span class="text-muted">01401</span></td>
                          <td th:text="${p.designacao}">Auxiliar Contábil</td>
                         <td>
@@ -56,6 +81,32 @@
             </div>
         </div>
     </div>
+    
+    <nav aria-label="Page navigation example">
+				  	<ul class="pagination justify-content-center">
+				  	
+				  	 <li th:class="${pageProjecto.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/projecto(page=${1})}" tabindex="-1">Primeira</a>
+				    </li>
+				    
+				    <li th:class="${pageProjecto.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.pagina - 1})}" tabindex="-1">Anterior</a>
+				    </li>
+				    
+				    <li class="page-item">
+				    	<span class="page-link" th:text="|${pageProjecto.pagina} de ${pageProjecto.totalDePaginas}|"></span>
+				    </li>
+				    
+				    <li th:class="${pageProjecto.pagina == pageProjecto.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.pagina + 1})}">Próxima</a>
+				    </li>
+				    
+				    <li th:class="${pageProjecto.pagina == pageProjecto.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.totalDePaginas})}" tabindex="-1">Última</a>
+				    </li>
+				    
+				  </ul>
+				</nav>
 
     <!-- Conteudo-->
 </div>

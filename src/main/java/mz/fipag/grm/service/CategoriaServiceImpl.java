@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mz.fipag.grm.dao.CategoriaDao;
 import mz.fipag.grm.domain.Categoria;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 @Service
 @Transactional(readOnly = false)
@@ -41,6 +42,11 @@ public class CategoriaServiceImpl implements CategoriaService{
 	@Transactional(readOnly = false)
 	public List<Categoria> buscarTodos() {
 		return categoriaDao.findAll();
+	}
+
+	@Override
+	public PaginacaoUtil<Categoria> buscaPorPagina(int pagina) {
+		return categoriaDao.buscaPaginada(pagina);
 	}
 
 }

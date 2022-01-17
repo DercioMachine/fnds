@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mz.fipag.grm.dao.ProjectoDao;
 import mz.fipag.grm.domain.Projecto;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 @Service
 @Transactional(readOnly = false)
@@ -39,6 +40,11 @@ public class ProjectoServiceImpl implements ProjectoService{
 	@Override @Transactional(readOnly = false)
 	public List<Projecto> buscarTodos() {
 		return projectoDao.findAll();
+	}
+
+	@Override
+	public PaginacaoUtil<Projecto> buscaPorPagina(int pagina) {
+		return projectoDao.buscaPaginada(pagina);
 	}
 
 }
