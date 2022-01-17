@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+    
+    	
+
+    <div class="col-12">
+    
+    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/projecto}" role="button">
+		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		     <span>Novo Projecto</span>
+		</a> 
+    
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">PROJECTOS</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap">
+                    <thead>
+                    <tr>
+                        <th class="w-1">No.</th>
+                        <th>Designação</th>
+                        <th></th>
+                       <!--  <th></th> -->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p : ${projectos}">
+                        <td th:text="${p.codigo}"><span class="text-muted">01401</span></td>
+                         <td th:text="${p.designacao}">Auxiliar Contábil</td>
+                        <td>
+                            <a class="icon" th:href="${'/projectos/editar/'+p.id}">
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </td>
+                        
+                        <!-- <td>
+                            <a class="icon" th:href="${'/postos/excluir/'+p.id}">
+                                <i class="fe fe-trash-2"></i>
+                            </a>
+                        </td> -->
+                    </tr>
+                    
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conteudo-->
+</div>
+</body>
+</html>

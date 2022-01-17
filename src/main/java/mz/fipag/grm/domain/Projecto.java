@@ -9,6 +9,10 @@ import javax.persistence.Table;
 @Table(name = "projecto")
 public class Projecto extends AbstractEntity{
 
+	@Column(name = "codigo", nullable = false,length=120,unique=true)
+	private String codigo;
+	
+	
 	@Column(name = "designacao", nullable = false,length=120,unique=true)
 	private String designacao;
 	
@@ -21,4 +25,13 @@ public class Projecto extends AbstractEntity{
 	public void setDesignacao(String designacao) {
 		this.designacao = designacao;
 	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	
 }

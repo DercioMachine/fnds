@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mz.fipag.grm.dao.PostoAdministrativoDao;
 import mz.fipag.grm.domain.PostoAdministrativo;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 @Service
 @Transactional(readOnly = false)
@@ -39,6 +40,11 @@ public class PostoAdministrativoServiceImpl implements  PostoAdministrativoServi
 	@Override
 	public List<PostoAdministrativo> buscarTodos() {
 		return postoAdministrativoDao.findAll();
+	}
+
+	@Override
+	public PaginacaoUtil<PostoAdministrativo> buscaPorPagina(int pagina) {
+		return postoAdministrativoDao.buscaPaginada(pagina);
 	}
 
 }

@@ -10,17 +10,18 @@
 <div  layout:fragment="corpo">
     <!-- Conteudo -->
     
-    
+    	
 
     <div class="col-12">
-	    <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/posto}" role="button">
+    
+    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/tipoqueixa}" role="button">
 		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		     <span>Novo Posto Administrativo</span>
-		</a>
+		     <span>Novo Tipo de Queixa</span>
+		</a> 
     
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">POSTOS ADMINISTRATIVOS</h3>
+                <h3 class="card-title">TIPOS DE QUEIXA</h3>
             </div>
             <div class="table-responsive">
                 <table class="table card-table table-vcenter text-nowrap">
@@ -29,15 +30,15 @@
                         <th class="w-1">No.</th>
                         <th>Designação</th>
                         <th></th>
-                        <th></th>
+                       <!--  <th></th> -->
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="p : ${postos}">
-                        <td th:text="${p.id}"><span class="text-muted">01401</span></td>
+                    <tr th:each="p : ${tipoqueixas}">
+                        <td th:text="${p.codigo}"><span class="text-muted">01401</span></td>
                          <td th:text="${p.designacao}">Auxiliar Contábil</td>
                         <td>
-                            <a class="icon" th:href="${'/postos/editar/'+p.id}">
+                            <a class="icon" th:href="${'/tipoqueixas/editar/'+p.id}">
                                 <i class="fe fe-edit"></i>
                             </a>
                         </td>

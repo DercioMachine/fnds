@@ -12,20 +12,32 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Registar Posto</h3>
+            <h3 class="card-title">Registar Categoria</h3>
         </div>
         <div class="card-body">
-		<form th:action="@{/postos/cadastrar}" 
-	                  th:object="${posto}" method="POST">
+		<form th:action="@{/categorias/cadastrar}" 
+	                  th:object="${categoria}" method="POST">
 
             <div class="row" >
+            
+            <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Codigo</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{codigo}" class="form-control" placeholder="Codigo...">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Designação</label>
                         <div class="input-icon">
                                     <span class="input-icon-addon">
-                                      <i class="fe fe-user"></i>
+                                      <i class="fe fe-edit-2"></i>
                                     </span>
                             <input type="text" th:field="*{designacao}" class="form-control" placeholder="Designação...">
                         </div>

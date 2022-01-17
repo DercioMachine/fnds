@@ -1,28 +1,36 @@
 package mz.fipag.grm.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.fipag.grm.domain.PostoAdministrativo;
 import mz.fipag.grm.service.PostoAdministrativoService;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 @Controller
-public class ParametrizacaoController {
+public class PostoAdministrativoController {
 	
 	@Autowired
 	private PostoAdministrativoService postoAdministrativoService;
 	
 	@GetMapping("/listar/posto")
-    public String listarReclmacao(ModelMap model){
+    public String listarReclmacao(ModelMap model, @RequestParam("page") Optional<Integer> page){
 		
-		model.addAttribute("postos", postoAdministrativoService.buscarTodos());
+		int paginaActual = page.orElse(1);
+		PaginacaoUtil<PostoAdministrativo> pagePosto = postoAdministrativoService.buscaPorPagina(paginaActual);
 		
-        return "parametrizacao/listarposto";
+		model.addAttribute("pagePosto", pagePosto);
+		//model.addAttribute("postos", postoAdministrativoService.buscarTodos());
+		
+        return "parametrizacao/postoAdministrativo/listarposto";
     }
 	
 	  @GetMapping("/registar/posto")
@@ -30,7 +38,7 @@ public class ParametrizacaoController {
 		  
 		  model.addAttribute("posto", new PostoAdministrativo());
 
-	        return "parametrizacao/cadastrarposto";
+	        return "parametrizacao/postoAdministrativo/cadastrarposto";
 	    }
 	
 	@PostMapping("/postos/cadastrar")
@@ -40,7 +48,7 @@ public class ParametrizacaoController {
 		 * if (result.hasErrors()) { return "cargo/cadastro"; }
 		 */
 		postoAdministrativoService.salvar(postoAdministrativo);
-		attr.addFlashAttribute("success", "Posto Administrativo inserido com sucesso.");
+		//attr.addFlashAttribute("success", "Posto Administrativo inserido com sucesso.");
 		return "redirect:/listar/posto";
 	}
 	
@@ -48,7 +56,7 @@ public class ParametrizacaoController {
 	public String editarPosto(PostoAdministrativo postoAdministrativo, RedirectAttributes attr) {
 		
 		postoAdministrativoService.editar(postoAdministrativo);
-		attr.addFlashAttribute("success", "Posto Administrativo inserido com sucesso.");
+		//attr.addFlashAttribute("success", "Posto Administrativo editado com sucesso.");
 		return "redirect:/listar/posto";
 	}
 	
@@ -56,7 +64,7 @@ public class ParametrizacaoController {
 	@GetMapping("/postos/editar/{id}")
 	public String vistaEditarPosto(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("posto", postoAdministrativoService.buscarPorId(id));
-		 return "parametrizacao/editarposto";
+		 return "parametrizacao/postoAdministrativo/editarposto";
 	}
 	
 	@GetMapping("/postos/excluir/{id}")
