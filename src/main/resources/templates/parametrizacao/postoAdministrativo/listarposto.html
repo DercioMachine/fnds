@@ -29,6 +29,7 @@
                     <tr>
                         <th class="w-1">No.</th>
                         <th>Designação</th>
+                        <th>Distrito</th>
                         <th></th>
                        <!--  <th></th> -->
                     </tr>
@@ -38,6 +39,7 @@
                     <tr th:each="p : ${pagePosto.registros}">
                         <td th:text="${p.id}"><span class="text-muted">01401</span></td>
                          <td th:text="${p.designacao}">Auxiliar Contábil</td>
+                         <td th:text="${p.distrito.designacao}">Auxiliar Contábil</td>
                         <td>
                             <a class="icon" th:href="${'/postos/editar/'+p.id}">
                                 <i class="fe fe-edit"></i>

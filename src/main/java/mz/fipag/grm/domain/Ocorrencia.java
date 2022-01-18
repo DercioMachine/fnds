@@ -1,5 +1,6 @@
 package mz.fipag.grm.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,98 +12,109 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "ocorrencia")
 public class Ocorrencia extends AbstractEntity{
 
-	@Column(name = "grm_stamp", nullable = true)
+	@Column(name = "grm_stamp")
 	private String grmStamp;
 	
-	@Column(name = "numero", nullable = true)
+	@Column(name = "numero")
 	private int numero;
 	
-	@Column(name = "data_grm", nullable = true)
+	@Column(name = "data_grm")
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dataOcorrencia;
 	
-	@Column(name = "comunidade", nullable = false)
+	@Column(name = "comunidade")
 	private String comunidade;
 	
-	@Column(name = "assento", nullable = false)
-	private String assento;
+	@Column(name = "assunto")
+	private String assunto;
 	
-	@Column(name = "nome_utente",  nullable = false)
+	@Column(name = "descricao")
+	private String descricao;
+	
+	@Column(name = "nome_utente")
 	private String nomeUtente;
 	
-	@Column(name = "sexo",  nullable = false)
+	@Column(name = "sexo")
 	private String sexo;
 	
-	@Column(name = "faixa_etaria", nullable = false)
+	@Column(name = "faixa_etaria")
 	private String faixaEtaria;
 	
-	@Column(name = "contacto_utente", nullable = false)
+	@Column(name = "contacto_utente")
 	private String contactoUtente;
 	
-	@Column(name = "email_utente", nullable = true)
+	@Column(name = "email_utente")
 	private String emailUtente;
 	
-	@Column(name = "morada_utente", nullable = true)
+	@Column(name = "morada_utente")
 	private String moradaUtente;
 	
-	@Column(name = "nome_grupo", nullable = true)
+	@Column(name = "nome_grupo")
 	private String nomeGrupo;
 	
-	@Column(name = "forma_comunicacao", nullable = true)
+	@Column(name = "forma_comunicacao")
 	private String formaComunicacao;
 	
-	@Column(name = "numero_homens", nullable = true)
+	@Column(name = "numero_homens")
 	private int numeroHomens;
 	
-	@Column(name = "numero_mulheres", nullable = true)
+	@Column(name = "numero_mulheres")
 	private int numeroMulheres;
 	
-	@Column(name = "numero_mdias_registo", nullable = true)
+	@Column(name = "numero_mdias_registo")
 	private int numeroDiasRegisto;
 	
-	@Column(name = "origem", nullable = true)
+	@Column(name = "origem")
 	private String origem;
 	
-	@Column(name = "data_classificacao", nullable = true)
+	@Column(name = "data_classificacao")
 	private Date dataClassificacao;
 	
-	@Column(name = "procedencia", nullable = true)
+	@Column(name = "procedencia")
 	private boolean procedencia;
 	
-	@Column(name = "data_resposta", nullable = true)
-	private Date dataResposta;
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "data_resposta", columnDefinition = "DATE")
+	private LocalDate dataResposta;
 	
-	@Column(name = "forma_resposta", nullable = true)
+	@Column(name = "forma_resposta")
 	private String formaResposta;
 	
-	@Column(name = "resposta",  nullable = true)
+	@Column(name = "resposta")
 	private String resposta;
 	
-	@Column(name = "tipo_correncia",nullable = true)
-	private String tipoOcorrencia;
 	
 	@ManyToOne
-	@JoinColumn(name="distrito_id", nullable = true)
+	@JoinColumn(name="distrito_id")
 	private Distrito distrito;
 	
 	@ManyToOne
-	@JoinColumn(name="posto_id", nullable = true)
+	@JoinColumn(name="provincia_id")
+	private Provincia provincia;
+	
+	@ManyToOne
+	@JoinColumn(name="posto_id")
 	private PostoAdministrativo postoAdministrativo;
 	
 	@ManyToOne
-	@JoinColumn(name="queixa_id", nullable = true)
+	@JoinColumn(name="tipoOcorrencia_id")
+	private TipoOcorrencia tipoOcorrencia;
+	
+	@ManyToOne
+	@JoinColumn(name="queixa_id")
 	private TipoQueixa tipoQueixa;
 	
 	@ManyToOne
-	@JoinColumn(name="projecto_id", nullable = true)
+	@JoinColumn(name="projecto_id")
 	private Projecto projecto;
 	
 	@ManyToOne
-	@JoinColumn(name="categoria_id", nullable = true)
+	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 
 	public String getGrmStamp() {
@@ -121,9 +133,6 @@ public class Ocorrencia extends AbstractEntity{
 		return comunidade;
 	}
 
-	public String getAssento() {
-		return assento;
-	}
 
 	public String getNomeUtente() {
 		return nomeUtente;
@@ -147,6 +156,14 @@ public class Ocorrencia extends AbstractEntity{
 
 	public String getMoradaUtente() {
 		return moradaUtente;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public String getNomeGrupo() {
@@ -181,9 +198,6 @@ public class Ocorrencia extends AbstractEntity{
 		return procedencia;
 	}
 
-	public Date getDataResposta() {
-		return dataResposta;
-	}
 
 	public String getFormaResposta() {
 		return formaResposta;
@@ -191,10 +205,6 @@ public class Ocorrencia extends AbstractEntity{
 
 	public String getResposta() {
 		return resposta;
-	}
-
-	public String getTipoOcorrencia() {
-		return tipoOcorrencia;
 	}
 
 	public Distrito getDistrito() {
@@ -233,8 +243,12 @@ public class Ocorrencia extends AbstractEntity{
 		this.comunidade = comunidade;
 	}
 
-	public void setAssento(String assento) {
-		this.assento = assento;
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
 	}
 
 	public void setNomeUtente(String nomeUtente) {
@@ -293,7 +307,12 @@ public class Ocorrencia extends AbstractEntity{
 		this.procedencia = procedencia;
 	}
 
-	public void setDataResposta(Date dataResposta) {
+
+	public LocalDate getDataResposta() {
+		return dataResposta;
+	}
+
+	public void setDataResposta(LocalDate dataResposta) {
 		this.dataResposta = dataResposta;
 	}
 
@@ -305,7 +324,12 @@ public class Ocorrencia extends AbstractEntity{
 		this.resposta = resposta;
 	}
 
-	public void setTipoOcorrencia(String tipoOcorrencia) {
+
+	public TipoOcorrencia getTipoOcorrencia() {
+		return tipoOcorrencia;
+	}
+
+	public void setTipoOcorrencia(TipoOcorrencia tipoOcorrencia) {
 		this.tipoOcorrencia = tipoOcorrencia;
 	}
 
@@ -328,4 +352,13 @@ public class Ocorrencia extends AbstractEntity{
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
+	}
+	
 }

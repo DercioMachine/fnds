@@ -38,14 +38,14 @@
 
     <div class="col-12">
     
-    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/projecto}" role="button">
+    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/tipoOcorrencia}" role="button">
 		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		     <span>Novo Projecto</span>
+		     <span>Novo Tipo de Ocorrência</span>
 		</a> 
     
         <div class="card">
             <div style="background:#04AA6D;" class="card-header">
-                <h3 style="font-weight:bolder" class="card-title">PROJECTOS</h3>
+                <h3 style="font-weight:bolder" class="card-title">TIPOS DE OCORRÊNCIA</h3>
             </div>
             <div class="table-responsive">
                 <table id="tabela" class="table card-table table-vcenter text-nowrap">
@@ -59,11 +59,11 @@
                     </thead>
                     <tbody>
                     <!-- <tr th:each="p : ${projectos}"> -->
-                     <tr th:each="p : ${pageProjecto.registros}">
+                     <tr th:each="p : ${pageTipoOcorrencia.registros}">
                         <td th:text="${p.codigo}"><span class="text-muted">01401</span></td>
                          <td th:text="${p.designacao}">Auxiliar Contábil</td>
                         <td>
-                            <a class="icon" th:href="${'/projectos/editar/'+p.id}">
+                            <a class="icon" th:href="${'/tipoOcorrencias/editar/'+p.id}">
                                 <i class="fe fe-edit"></i>
                             </a>
                         </td>
@@ -85,24 +85,24 @@
     <nav aria-label="Page navigation example">
 				  	<ul class="pagination justify-content-center">
 				  	
-				  	 <li th:class="${pageProjecto.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${1})}" tabindex="-1">Primeira</a>
+				  	 <li th:class="${pageTipoOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/tipoOcorrencia(page=${1})}" tabindex="-1">Primeira</a>
 				    </li>
 				    
-				    <li th:class="${pageProjecto.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.pagina - 1})}" tabindex="-1">Anterior</a>
+				    <li th:class="${pageTipoOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/tipoOcorrencia(page=${pageTipoOcorrencia.pagina - 1})}" tabindex="-1">Anterior</a>
 				    </li>
 				    
 				    <li class="page-item">
-				    	<span class="page-link" th:text="|${pageProjecto.pagina} de ${pageProjecto.totalDePaginas}|"></span>
+				    	<span class="page-link" th:text="|${pageTipoOcorrencia.pagina} de ${pageTipoOcorrencia.totalDePaginas}|"></span>
 				    </li>
 				    
-				    <li th:class="${pageProjecto.pagina == pageProjecto.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.pagina + 1})}">Próxima</a>
+				    <li th:class="${pageTipoOcorrencia.pagina == pageTipoOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/tipoOcorrencia(page=${pageTipoOcorrencia.pagina + 1})}">Próxima</a>
 				    </li>
 				    
-				    <li th:class="${pageProjecto.pagina == pageProjecto.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.totalDePaginas})}" tabindex="-1">Última</a>
+				    <li th:class="${pageTipoOcorrencia.pagina == pageTipoOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/tipoOcorrencia(page=${pageTipoOcorrencia.totalDePaginas})}" tabindex="-1">Última</a>
 				    </li>
 				    
 				  </ul>

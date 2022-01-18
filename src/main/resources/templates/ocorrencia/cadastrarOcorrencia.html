@@ -11,8 +11,8 @@
     <!-- Conteudo -->
 
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Registar Ocorrencia  Fase 1</h3>
+        <div style="background:#E6FFFE;" class="card-header">
+            <h3 class="card-title">Registar Ocorrência  Fase 1</h3>
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
@@ -20,40 +20,112 @@
 	                  th:object="${ocorrencia}" method="POST">
 
             <div class="row" >
+            
+            <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="provincia" class="form-label">Província</label>
+                        <select id="provincia" class="form-control custom-select form-select" th:field="*{provincia}" >
+                            <option value="">Selecione a Província...</option>
+                            <option th:each="p : ${provincias}" 
+	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="distrito" class="form-label">Distrito</label>
+                        <select id="distrito" class="form-control custom-select form-select" th:field="*{distrito}" >
+                            <option value="">Selecione o Distrito...</option>
+                            <option th:each="d : ${distritos}" 
+	                                    th:value="${d.id}" th:text="${d.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="postoAdministrativo" class="form-label">Posto Administrativo</label>
+                        <select id="postoAdministrativo" class="form-control custom-select form-select" th:field="*{postoAdministrativo}" >
+                            <option value="">Selecione o Posto Administrativo...</option>
+                            <option th:each="p : ${postos}" 
+	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-                <div class="col-6 col-sm-6">
+            <div class="row">
+            
+            <div class="col-6 col-sm-3">
                     <div class="form-group">
                         <label class="form-label">Comunidade</label>
                         <div class="input-icon">
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input type="text" th:field="*{comunidade}" class="form-control" required placeholder="Designação..."
-                            oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-  								oninput="this.setCustomValidity('')">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Assento</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="text" th:field="*{assento}" class="form-control" required placeholder="Designação..."
+                            <input type="text" th:field="*{comunidade}" class="form-control" required placeholder="Escreva a Comunidade..."
                                    oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
                                    oninput="this.setCustomValidity('')">
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-6 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-label">Assunto</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{assunto}" class="form-control" required placeholder="Escreva o Assunto..."
+                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+                                   oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-3">
+                    <div class="form-group">
+                        <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
+                        <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
+                            <option value="">Selecione o Tipo de Ocorrência...</option>
+                            <option th:each="p : ${tipoDeOcorrencias}" 
+	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-label">Data da Reclamação</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-calendar"></i>
+                                    </span>
+                            <input re type="date" th:field="*{dataOcorrencia}" class="form-control" required placeholder=""
+                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+                                   oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+                
+                
+	                <div class="col-6 col-sm-12">
+	                    <div class="form-group">
+	                        <label class="form-label">Descrição do Assunto(mínimo 80 Caracteres)</label>
+	                        <div class="input-icon">
+	                                    <span class="input-icon-addon">
+	                                      <i class="fe fe-edit-2"></i>
+	                                    </span>
+	                            <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" required placeholder="Descreva o Assunto..."
+	                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+	                                   oninput="this.setCustomValidity('')"></textarea>
+	                        </div>
+	                    </div>
+	                </div>
 
-            </div>
-
-            <div class="row" >
-
-                <div class="col-6 col-sm-6">
+                <!-- <div class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Nome Utente</label>
                         <div class="input-icon">
@@ -75,27 +147,14 @@
                             <option value="Femenino">Femenino</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
-            <div class="row" >
 
-                <div class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Contacto Utente</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input re type="text" th:field="*{contactoUtente}" class="form-control" required placeholder="Designação..."
-                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-                                   oninput="this.setCustomValidity('')">
-                        </div>
-                    </div>
-                </div>
+                
 
-                <div class="col-6 col-sm-6">
+                <!-- <div class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Faixa Etaria</label>
                         <select class="form-control custom-select" th:field="*{faixaEtaria}" >
@@ -103,14 +162,13 @@
                             <option value="30 a 40">30 a 60</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
-            </div>
 
 
             
             <div class="card-footer text-right">
-            <button type="submit" class="btn btn-success">Gravar </button>
+            <button type="submit" class="btn btn-primary">Continuar </button>
         </div>
           </form>
 
