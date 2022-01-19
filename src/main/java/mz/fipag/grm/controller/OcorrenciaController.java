@@ -2,13 +2,14 @@ package mz.fipag.grm.controller;
 
 import java.util.List;
 
+import com.google.gson.Gson;
+import mz.fipag.grm.repository.DistritoRepository;
+import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.repository.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Ocorrencia;
@@ -30,6 +31,16 @@ public class OcorrenciaController {
     @Autowired
     private ProvinciaService provinciaService;
     
+    @Autowired
+    private DistritoRepository distritoRepository;
+
+    @Autowired
+    private ProvinciaRepository provinciaRepository;
+
+
+    @Autowired
+    private PostoAdminitrativoRepository postoAdminitrativoRepository;
+
     @Autowired
     private DistritoService distritoService;
     
@@ -64,7 +75,27 @@ public class OcorrenciaController {
         return "ocorrencia/registarOcorrenciaCompleta";
     }
 
-    
+    @ResponseBody
+    @GetMapping("/distrito/{id}")
+    public String listarDistrito(@PathVariable("id") Long id){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(provinciaRepository.findAllById(id));
+    }
+
+
+    @ResponseBody
+    @GetMapping("/posto/{id}")
+    public String listarPosto(@PathVariable("id") Long id){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(postoAdminitrativoRepository.findAllById(id));
+    }
+
+
+
 
     @PostMapping("/ocorrencias/cadastrar")
 	public String salvarOcorrencia(Ocorrencia ocorrencia) {

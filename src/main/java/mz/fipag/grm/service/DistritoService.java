@@ -15,4 +15,7 @@ public interface DistritoService {
 	Distrito buscarPorId(Long id);
 	
 	List<Distrito> buscarTodos();
+
+	List<Distrito> buscarTodosPorId(Long id);
+
 }

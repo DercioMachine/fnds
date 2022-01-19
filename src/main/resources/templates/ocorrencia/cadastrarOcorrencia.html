@@ -10,6 +10,26 @@
 <div  layout:fragment="corpo">
     <!-- Conteudo -->
 
+    <script type="text/javascript">
+
+            $('document').ready(function () {
+            $('#comboboxCountry').on('change',function () {
+            $('#ddlStateAdd').empty().append('<option value="null">-Seleciona os Distrito-</option>');
+            var countryid = $(this).val();
+            var href = "http://localhost:8081/distrito/" + countryid
+
+            $.get(href, function (country, status) {
+            var states = country.states;
+            for (var i = 0; i <= states.length-1; i++) {
+                $('#ddlStateAdd').append('<option value="' + states[i].id + '">' + states[i].name + '</option>');
+            }
+        })
+    })
+})
+
+
+        </script>
+
     <div class="card">
         <div style="background:#E6FFFE;" class="card-header">
             <h3 class="card-title">Registar Ocorrência  Fase 1</h3>
@@ -25,8 +45,8 @@
             
             <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="provincia" class="form-label">Província</label>
-                        <select id="provincia" class="form-control custom-select form-select" th:field="*{provincia}" >
+                        <label for="comboboxCountry" class="form-label">Província</label>
+                        <select id="comboboxCountry" class="form-control custom-select form-select" th:field="*{provincia}" >
                             <option value="">Selecione a Província...</option>
                             <option th:each="p : ${provincias}" 
 	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -36,11 +56,11 @@
                 
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="distrito" class="form-label">Distrito</label>
-                        <select id="distrito" class="form-control custom-select form-select" th:field="*{distrito}" >
-                            <option value="">Selecione o Distrito...</option>
-                            <option th:each="d : ${distritos}" 
-	                                    th:value="${d.id}" th:text="${d.designacao}">Maputo</option>
+                        <label class="form-label">Distrito</label>
+                        <select  class="form-control custom-select form-select" th:field="*{provincia}" >
+                            <option value="">Selecione a Província...</option>
+                            <option th:each="p : ${provincias}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                         </select>
                     </div>
                 </div>
@@ -200,13 +220,13 @@
           		</tbody>
           	</table>
           </div> -->
-          
-
-
-
-
 
         </div>
+
+
+
+
+
         
     </div>
     <!-- Conteudo-->

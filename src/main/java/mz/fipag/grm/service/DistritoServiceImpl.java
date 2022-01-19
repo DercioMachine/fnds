@@ -44,4 +44,10 @@ public class DistritoServiceImpl implements DistritoService{
 		return distritoDao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly = false)
+	public List<Distrito> buscarTodosPorId(Long id) {
+		return distritoDao.findAllById(id);
+	}
+
 }

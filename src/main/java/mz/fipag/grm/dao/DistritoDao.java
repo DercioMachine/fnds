@@ -15,4 +15,6 @@ public interface DistritoDao {
 	Distrito findById(Long id);
 	
 	List<Distrito> findAll();
+
+	List<Distrito> findAllById(Long id);
 }
