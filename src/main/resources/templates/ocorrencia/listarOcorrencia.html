@@ -58,7 +58,6 @@
                         <th>Tipo de Ocorrência</th>
                         <th>Data da Ocorrência</th>
                         <th></th>
-                         <!-- <th></th> -->
                         <!--  <th></th> -->
                     </tr>
                     </thead>
@@ -68,13 +67,21 @@
                     <td th:text="${p.id}"><span class="text-muted">01401</span></td>
                         <td th:text="${p.comunidade}"><span class="text-muted">01401</span></td>
                         <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td>
+                        
                         <!-- <td th:text="${p.dataOcorrencia}">Auxiliar Contábil</td> -->
+                        
                      <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td>
-                            <a class="icon" th:href="${'/ocorrencias/editar/'+p.id}">
-                                <i class="fe fe-settings"></i>
+                        
+                         <td align="center">
+                            <a class="icon" th:href="${'/ocorrencias/fase2/'+p.id}">
+                                <i style="font-size:30px " class="fe fe-settings"></i>
                             </a>
-                        </td>
+                            
+                            <a class="icon" th:href="${'/ocorrencias/detalhar/'+p.id}">
+                                <i style="font-size:30px"  class="fe fe-eye ml-2"></i>
+                            </a>
+                        </td> 
+                        
                         
                         <!-- <td>
                             <a class="icon" th:href="${'/ocorrencias/fase2/'+p.id}">

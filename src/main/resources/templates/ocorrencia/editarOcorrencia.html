@@ -17,11 +17,62 @@
       		
       		if(status.value=="individual"){
       			
-      			document.getElementById("nrHomens").style.visibility="hidden";
+      			document.getElementById("nome").style.display="block";
+      			document.getElementById("genero").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("faixaEtaria").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
       			
       			
+      			
+      			
+      		}else if(status.value=="grupo"){
+      			
+      			document.getElementById("nome").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			document.getElementById("nrHomens").style.display="block";
+      			document.getElementById("nrMulheres").style.display="block";
+      			document.getElementById("nomeGrupo").style.display="block";
+      			
+      			document.getElementById("faixaEtaria").style.display="none";
+      			document.getElementById("genero").style.display="none";
+      			
+      			
+      		}else if(status.value=="anonimo"){
+      			
+      			document.getElementById("genero").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("faixaEtaria").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			document.getElementById("nome").style.display="none";
       		}else{
-      			document.getElementById("nrHomens").style.visibility="visible";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			document.getElementById("nome").style.display="none";
+      			document.getElementById("genero").style.display="none";
+      			document.getElementById("comunicacao").style.display="none";
+      			document.getElementById("contacto").style.display="none";
+      			document.getElementById("faixaEtaria").style.display="none";
+      			document.getElementById("endereco").style.display="none";
+      			document.getElementById("email").style.display="none";
+      			
       		}
       	}
       </script>
@@ -96,7 +147,7 @@
                 
                 <div class="col-6 col-sm-3">
                     <div class="form-group">
-                        <label class="form-label">Assunto: <span th:text="${ocorrencia.assunto}"></span></label>
+                        <label class="form-label">Assunto</label>
                         
                         <div class="input-icon">
                                     <span class="input-icon-addon">
@@ -160,10 +211,11 @@
 	                
 	                <div class="row">
 	                
-	                <div class="col-6 col-sm-4">
+	                <div class="col-6 col-sm-">
                     <div class="form-group">
                         <label class="form-label">Origem da Ocorrência</label>
                         <select id="origem" onchange="onChangeStatus()" class="form-control custom-select" th:field="*{nomeGrupo}" >
+                            <option value="selecione">Selecione Origem da Ocorrência...</option>
                             <option value="individual">Individual</option>
                             <option value="grupo">Grupo</option>
                             <option value="anonimo">Anonimo</option>
@@ -171,7 +223,7 @@
                     </div>
                 </div>
                 
-                <div style="visibility: hidden" id="nrHomens" class="col-6 col-sm-2">
+                <div style="display: none" id="nrHomens" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Nr. de Homens</label>
                         <div class="input-icon">
@@ -183,7 +235,7 @@
                     </div>
                 </div>
                 
-                <div class="col-6 col-sm-2">
+                <div style="display: none" id="nrMulheres" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Nr. de Mulheres</label>
                         <div class="input-icon">
@@ -196,9 +248,21 @@
                 </div>
 
 
-                <div class="col-6 col-sm-4">
+                <div style="display: none" id="nome" class="col-6 col-sm-6">
                     <div class="form-group">
-                        <label class="form-label">Nome do Utente/Grupo</label>
+                        <label class="form-label">Nome</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Designação...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: none" id="nomeGrupo" class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Nome Do Grupo</label>
                         <div class="input-icon">
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
@@ -208,24 +272,24 @@
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-3">
+                <div  style="display: none" id="genero" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Genero</label>
                         <select class="form-control custom-select" th:field="*{sexo}" >
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
-                            <option value="Femenino">Outro</option>
+                            <option value="Femenino">ND</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class="col-6 col-sm-3">
+                <div  style="display: none" id="comunicacao" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Forma de Comunicação </label>
                         <select class="form-control custom-select" th:field="*{formaComunicacao}" >
-                            <option value="Masculino">Verbal</option>
-                            <option value="Femenino">Telemóvel</option>
-                            <option value="Femenino">Outro</option>
+                            <option value="Verbal">Verbal</option>
+                            <option value="Telemóvel">Telemóvel</option>
+                            <option value="Outro">ND</option>
                         </select>
                     </div>
                 </div>
@@ -233,21 +297,23 @@
 
             
 
-                <div class="col-6 col-sm-3">
+                <div  style="display: none" id="contacto" class="col-6 col-sm-6">
                     <div class="form-group">
-                        <label class="form-label">Contacto do Utente/Responsavel do Grupo</label>
+                        <label class="form-label">Contacto</label>
                         <div class="input-icon">
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input re type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
+                            <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
                         </div>
                     </div>
                 </div>
+                
+                
 
-                <div class="col-6 col-sm-3">
+                <div style="display: none" id="faixaEtaria" class="col-6 col-sm-6">
                     <div class="form-group">
-                        <label class="form-label">Faixa Etaria</label>
+                        <label class="form-label">Faixa Etária</label>
                         <select class="form-control custom-select" th:field="*{faixaEtaria}" >
                             <option value="20 a 30">20 a 30</option>
                             <option value="30 a 40">31 a 60</option>
@@ -255,6 +321,33 @@
                         </select>
                     </div>
                 </div>
+                
+                <div  style="display: none" id="endereco" class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Endereço</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text"  th:field="*{moradaUtente}" class="form-control" placeholder="Designação...">
+                        </div>
+                    </div>
+                </div>
+                
+                 
+                <div  style="display: none" id="email" class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
+                        </div>
+                    </div>
+                </div>
+                
+                
                 
                 
                 

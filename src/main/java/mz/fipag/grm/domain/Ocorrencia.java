@@ -39,6 +39,9 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "nome_utente")
 	private String nomeUtente;
 	
+	@Column(name = "nome_representante_grupo")
+	private String nomeDoRepresentanteDoGrupo;
+	
 	@Column(name = "sexo")
 	private String sexo;
 	
@@ -311,6 +314,7 @@ public class Ocorrencia extends AbstractEntity{
 	public LocalDate getDataResposta() {
 		return dataResposta;
 	}
+	
 
 	public void setDataResposta(LocalDate dataResposta) {
 		this.dataResposta = dataResposta;
@@ -323,7 +327,16 @@ public class Ocorrencia extends AbstractEntity{
 	public void setResposta(String resposta) {
 		this.resposta = resposta;
 	}
+	
 
+
+	public String getNomeDoRepresentanteDoGrupo() {
+		return nomeDoRepresentanteDoGrupo;
+	}
+
+	public void setNomeDoRepresentanteDoGrupo(String nomeDoRepresentanteDoGrupo) {
+		this.nomeDoRepresentanteDoGrupo = nomeDoRepresentanteDoGrupo;
+	}
 
 	public TipoOcorrencia getTipoOcorrencia() {
 		return tipoOcorrencia;

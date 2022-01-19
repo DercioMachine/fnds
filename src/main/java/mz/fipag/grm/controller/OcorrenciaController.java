@@ -100,8 +100,6 @@ public class OcorrenciaController {
 
         ocorrenciaService.editar(ocorrencia);
         
-        //model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(ocorrencia.getId()));
-		
         return "redirect:/listar/ocorrencia2";
     }
     
@@ -109,13 +107,33 @@ public class OcorrenciaController {
     public String editarOcorrenciaFase2(@PathVariable("id") Long id, ModelMap model) {
 
     	 model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
-        
-        //model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(ocorrencia.getId()));
 		
-        return "ocorrencia/cadastrarOcorrencia2";
+        return "ocorrencia/editarOcorrencia";
     }
 
+    @GetMapping("/listar/detalhes")
+    public String listarDetalhes(ModelMap model){
+
+        model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
+
+        return "ocorrencia/detalharOcorrencia";
+    }
     
+    @PostMapping("/ocorrencias/detalhar")
+    public String detalhesVista(Ocorrencia ocorrencia) {
+
+        ocorrenciaService.editar(ocorrencia);
+        
+        return "redirect:/listar/detalhes";
+    }
+    
+    @GetMapping("/ocorrencias/detalhar/{id}")
+    public String detalhesVistaAccao (@PathVariable("id") Long id, ModelMap model) {
+
+    	 model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+        
+        return "ocorrencia/detalharOcorrencia";
+    }
     
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {
