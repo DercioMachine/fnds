@@ -16,8 +16,10 @@
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{/ocorrencia/cadastrar}"
+		<form th:action="@{/ocorrencias/cadastrar}" 
 	                  th:object="${ocorrencia}" method="POST">
+	                  
+	                  <!-- enctype="multipart/form-data" -->
 
             <div class="row" >
             
@@ -124,6 +126,8 @@
 	                        </div>
 	                    </div>
 	                </div>
+	                
+	                <!-- <input type="file" name="files" multiple required /> -->
 
                 <!-- <div class="col-6 col-sm-6">
                     <div class="form-group">
@@ -150,9 +154,7 @@
                 </div> -->
 
             </div>
-
-
-                
+            
 
                 <!-- <div class="col-6 col-sm-6">
                     <div class="form-group">
@@ -168,9 +170,37 @@
 
             
             <div class="card-footer text-right">
-            <button type="submit" class="btn btn-primary">Continuar </button>
+            <button type="submit" class="btn btn-success">Gravar </button>
         </div>
           </form>
+          
+          <!-- <form id="uploadFiles" name="uploadFiles" method="post", th:action="@{/upload/ficheiro}" enctype="multipart/form-data">
+          	<input type="file" name="files" multiple required />
+          	<button type="submit">Anexar</button>
+          </form>
+          
+          <div style="background:#04AA6D;" class="card-header">
+                <h3 style="font-weight:bolder" class="card-title">Lista de Anexos</h3>
+            </div>
+            <div class="table-responsive">
+          	<table class="table card-table table-vcenter text-nowrap">
+          		<thead>
+          			<tr>
+          				<th class="w-1">No.</th>
+          				<th>Nome</th>
+          				<th>Link para download</th>
+          			</tr>
+          		</thead>
+          		<tbody>
+          			<tr th:each="doc:${docs}">
+          				<td th:text="${doc.id}" />
+          				<td th:text="${doc.docName}" />
+          				<td><a th:href="@{'/download/ficheiro/'+${doc.id}}">Donwload</a></td>
+          			</tr>
+          		</tbody>
+          	</table>
+          </div> -->
+          
 
 
 

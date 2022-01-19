@@ -40,14 +40,14 @@
 
 
     <div class="col-12">
-        <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/ocorrencia}" role="button">
+        <!-- <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/ocorrencia}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Nova Ocorrência</span>
-        </a>
+        </a> -->
 
         <div class="card">
             <div style="background:#04AA6D;" class="card-header">
-                <h3 style="font-weight:bolder" class="card-title">OCORRÊNCIAS</h3>
+                <h3 style="font-weight:bolder" class="card-title">OCORRÊNCIAS-FASE 2</h3>
             </div>
             <div class="table-responsive">
                 <table id="tabela" class="table card-table table-vcenter text-nowrap">
@@ -58,7 +58,7 @@
                         <th>Tipo de Ocorrência</th>
                         <th>Data da Ocorrência</th>
                         <th></th>
-                         <!-- <th></th> -->
+                         <<!-- th></th> -->
                         <!--  <th></th> -->
                     </tr>
                     </thead>
@@ -71,8 +71,8 @@
                         <!-- <td th:text="${p.dataOcorrencia}">Auxiliar Contábil</td> -->
                      <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td>
-                            <a class="icon" th:href="${'/ocorrencias/editar/'+p.id}">
-                                <i class="fe fe-settings"></i>
+                            <a class="icon" th:href="${'/ocorrencias/fase2/'+p.id}">
+                                <i class="fe fe-edit"></i>
                             </a>
                         </td>
                         

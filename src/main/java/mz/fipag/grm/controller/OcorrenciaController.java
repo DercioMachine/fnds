@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Ocorrencia;
@@ -47,27 +47,15 @@ public class OcorrenciaController {
 
         return "ocorrencia/listarOcorrencia";
     }
+    
+    @GetMapping("/listar/ocorrencia2")
+    public String listarOcorrencia2(ModelMap model){
 
-    @PostMapping("/ocorrencia/fase2")
-    public String ocorrenciaFase2(Ocorrencia ocorrencia, RedirectAttributes attr) {
+        model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
 
-        ocorrenciaService.editar(ocorrencia);
-        attr.addFlashAttribute("success","Ocorrencia fase 2 registada com sucesso.");
-
-        return "redirect:/listar/ocorrencia";
+        return "ocorrencia/listarOcorrencia2";
     }
-
-    @PostMapping("/ocorrencia/cadastrar")
-    public String salvarOcorrencia(Ocorrencia ocorrencia, ModelMap model) {
-
-        ocorrenciaService.salvar(ocorrencia);
-
-        model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(ocorrencia.getId()));
-
-        //return "ocorrencia/editarOcorrencia";
-        return "redirect:/listar/ocorrencia";
-    }
-
+    
     @GetMapping("/registar/ocorrencia")
     public String novaOcorrencia(ModelMap model){
 
@@ -75,6 +63,59 @@ public class OcorrenciaController {
 
         return "ocorrencia/cadastrarOcorrencia";
     }
+
+    
+
+    @PostMapping("/ocorrencias/cadastrar")
+	public String salvarOcorrencia(Ocorrencia ocorrencia) {
+		
+		/*
+		 * if (result.hasErrors()) { return "cargo/cadastro"; }
+		 */
+    	ocorrenciaService.salvar(ocorrencia);
+    	return "redirect:/listar/ocorrencia";
+	}
+    
+    
+    @PostMapping("/ocorrencias/editar") 
+	  public String editarCategoria(Ocorrencia ocorrencia) {
+	  
+    	ocorrenciaService.editar(ocorrencia);
+		  
+		  
+		  return "redirect:/listar/ocorrencia"; 
+	  }
+    
+    @GetMapping("/ocorrencias/editar/{id}") 
+	  public String vistaEditarOcorrencia(@PathVariable("id") Long id, ModelMap model) {
+	  
+    	model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+	  
+	  return "ocorrencia/editarOcorrencia"; 
+	  }
+    
+    
+    @PostMapping("/ocorrencias/fase2")
+    public String editarOcorrenciaFase2Vista(Ocorrencia ocorrencia) {
+
+        ocorrenciaService.editar(ocorrencia);
+        
+        //model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(ocorrencia.getId()));
+		
+        return "redirect:/listar/ocorrencia2";
+    }
+    
+    @GetMapping("/ocorrencias/fase2/{id}")
+    public String editarOcorrenciaFase2(@PathVariable("id") Long id, ModelMap model) {
+
+    	 model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+        
+        //model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(ocorrencia.getId()));
+		
+        return "ocorrencia/cadastrarOcorrencia2";
+    }
+
+    
     
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {
@@ -95,5 +136,7 @@ public class OcorrenciaController {
 	public List<TipoOcorrencia> listaDetipoDeOcorrencias() {
 		return tipoDeOcorrenciasService.buscarTodos();
 	}
+    
+    
 
 }

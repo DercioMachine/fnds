@@ -55,20 +55,24 @@ public class CategoriaController {
 	}
 	
 	
-	  @PostMapping("/categorias/editar") public String editarCategoria(Categoria categoria, RedirectAttributes attr) {
+	  @PostMapping("/categorias/editar") 
+	  public String editarCategoria(Categoria categoria, RedirectAttributes attr) {
 	  
 		  categoriaService.editar(categoria);
-		  attr.addFlashAttribute("success",
-		  "Categoria editada com sucesso."); 
+		  
+		  attr.addFlashAttribute("success","Categoria editada com sucesso."); 
 		  
 		  return "redirect:/listar/categoria"; 
 	  }
 	 
 	  
-	  @GetMapping("/categorias/editar/{id}") public String
-	  vistaEditarCategoria(@PathVariable("id") Long id, ModelMap model) {
+	  @GetMapping("/categorias/editar/{id}") 
+	  public String vistaEditarCategoria(@PathVariable("id") Long id, ModelMap model) {
+		  
 	  model.addAttribute("categoria", categoriaService.buscarPorId(id));
-	  return "parametrizacao/categoria/editarcategoria"; }
+	  
+	  return "parametrizacao/categoria/editarcategoria"; 
+	  }
 	  
 	  /*@GetMapping("/categorias/excluir/{id}") public String
 	  vistaExcluirCategoria(@PathVariable("id") Long id, ModelMap model) {
