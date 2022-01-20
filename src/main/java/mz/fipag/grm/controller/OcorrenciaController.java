@@ -61,7 +61,7 @@ public class OcorrenciaController {
 
         model.addAttribute("ocorrencia",new Ocorrencia());
 
-        return "ocorrencia/cadastrarOcorrencia";
+        return "ocorrencia/registarOcorrenciaCompleta";
     }
 
     
