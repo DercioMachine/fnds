@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface PostoAdminitrativoRepository extends CrudRepository<PostoAdministrativo, Long> {
 
-    @Query(value="select d from PostoAdministrativo d where d.id=:id")
+    @Query(value="select id,designacao from posto_administrativo where distrito_id=:id", nativeQuery=true)
     public List<PostoAdministrativo> findAllById(@Param("id") Long id);
+
 }

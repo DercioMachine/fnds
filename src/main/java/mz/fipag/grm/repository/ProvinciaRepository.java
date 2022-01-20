@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ProvinciaRepository extends CrudRepository<Provincia, Long> {
 
-    @Query(value="select distinct p from Provincia p join p.distritos d where d.id=:id")
-    public List<Provincia> findAllById(@Param("id") Long id);
+    // @Query(value="select distinct p from Provincia p join p.distritos d where d.id=:id")
+   // public List<Provincia> findAllById(@Param("id") Long id);
 }

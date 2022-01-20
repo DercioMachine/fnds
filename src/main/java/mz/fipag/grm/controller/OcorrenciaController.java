@@ -34,9 +34,6 @@ public class OcorrenciaController {
     @Autowired
     private DistritoRepository distritoRepository;
 
-    @Autowired
-    private ProvinciaRepository provinciaRepository;
-
 
     @Autowired
     private PostoAdminitrativoRepository postoAdminitrativoRepository;
@@ -81,7 +78,7 @@ public class OcorrenciaController {
 
         Gson gson=new Gson();
 
-        return gson.toJson(provinciaRepository.findAllById(id));
+        return gson.toJson(distritoRepository.findAllById(id));
     }
 
 

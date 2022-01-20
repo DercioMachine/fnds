@@ -12,10 +12,8 @@ import java.util.List;
 @Repository
 public interface DistritoRepository extends CrudRepository<Distrito, Long> {
 
-    //@Query(value="select * from distrito where ")
-    //public List<Distrito> findAllById(Long id);
+    @Query(value="select id,designacao from distrito where provincia_id=:id", nativeQuery=true)
+    public List<Distrito> findAllById(@Param("id") Long id);
 
-    //@Query(value="select * from produto where nome like ‘%:nome%’ ", nativeQuery=true)
-    //List<Produto> pesquisarProdutos(String nome);
 
 }

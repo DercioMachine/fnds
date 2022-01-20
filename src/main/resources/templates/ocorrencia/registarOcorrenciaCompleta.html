@@ -11,6 +11,59 @@
 <body>
 <div  layout:fragment="corpo">
 
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comboboxProvincias').on('change',function(){
+
+          var provinciaId = $(this).val();
+
+          $.ajax({
+          type: 'GET',
+          url: 'http://localhost:8081/distrito/'+provinciaId,
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comoboxDistrito').html(s);
+    }
+});
+
+
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comoboxDistrito').on('change',function(){
+
+          var distritoId = $(this).val();
+
+          alert(distritoId);
+
+          $.ajax({
+          type: 'GET',
+          url: 'http://localhost:8081/posto/'+distritoId,
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comboboxPosto').html(s);
+    }
+});
+
+
+        });
+    });
+    </script>
+
 	<script type="text/javascript">
       	function onChangeStatus(){
       		var status = document.getElementById("origem");
@@ -95,36 +148,32 @@
 	                  <!-- enctype="multipart/form-data" -->
 
             <div class="row" >
-            
-            <div class="col-6 col-sm-4">
+
+                <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="provincia" class="form-label">Província</label>
-                        <select id="provincia" class="form-control custom-select form-select" th:field="*{provincia}" >
+                        <label for="comboboxProvincias" class="form-label">Província</label>
+                        <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
                             <option value="">Selecione a Província...</option>
-                            <option th:each="p : ${provincias}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            <option th:each="p : ${provincias}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label">Distrito</label>
+                        <select  id="comoboxDistrito" th:field="*{distrito}" >
+
                         </select>
                     </div>
                 </div>
                 
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="distrito" class="form-label">Distrito</label>
-                        <select id="distrito" class="form-control custom-select form-select" th:field="*{distrito}" >
-                            <option value="">Selecione o Distrito...</option>
-                            <option th:each="d : ${distritos}" 
-	                                    th:value="${d.id}" th:text="${d.designacao}">Maputo</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-6 col-sm-4">
-                    <div class="form-group">
-                        <label for="postoAdministrativo" class="form-label">Posto Administrativo</label>
-                        <select id="postoAdministrativo" class="form-control custom-select form-select" th:field="*{postoAdministrativo}" >
-                            <option value="">Selecione o Posto Administrativo...</option>
-                            <option th:each="p : ${postos}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
+                        <select id="comboboxPosto"  th:field="*{postoAdministrativo}" >
+
                         </select>
                     </div>
                 </div>

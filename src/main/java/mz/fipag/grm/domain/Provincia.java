@@ -17,18 +17,6 @@ public class Provincia extends AbstractEntity{
 	@Column(name = "situacao", nullable = false)
 	private boolean situacao;
 
-
-	@OneToMany(mappedBy = "provincia")
-	private List<Distrito> distritos;
-
-	public List<Distrito> getDistritos() {
-		return distritos;
-	}
-
-	public void setDistritos(List<Distrito> distritos) {
-		this.distritos = distritos;
-	}
-
 	public String getDesignacao() {
 		return designacao;
 	}
