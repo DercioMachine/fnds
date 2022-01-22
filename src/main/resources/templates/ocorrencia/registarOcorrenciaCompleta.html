@@ -11,6 +11,19 @@
 <body>
 <div  layout:fragment="corpo">
 
+    <script type="text/javascript">
+        let fileInput = document.getElementById("file");
+        let numOfFiles = document.getElementById("num-of-files");
+        let imageContainer = document.getElementById("images");
+
+        function preview(){
+
+           document.getElementById("num-of-files").innerHTML = "";
+
+           numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
+        }
+
+    </script>
 
     <script type="text/javascript">
 
@@ -144,8 +157,7 @@
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{/ocorrencias/cadastrar}" 
-	                  th:object="${ocorrencia}" method="POST">
+		<form th:action="@{/ocorrencias/cadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 		
 			<div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
 				<h2 class="card-title" >Dados da Ocorrência</h2>
@@ -224,6 +236,19 @@
                             <input type="date" th:field="*{dataOcorrencia}" class="form-control" required placeholder=""
                                    oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
                                    oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="form-label">Anexar Doc (Pode anexar varios)</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-calendar"></i>
+                                    </span>
+                            <input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
+                            <p id="num-of-files"></p>
                         </div>
                     </div>
                 </div>

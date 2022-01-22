@@ -3,6 +3,7 @@ package mz.fipag.grm.service;
 import java.util.List;
 import java.util.Optional;
 
+import mz.fipag.grm.domain.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,7 @@ public class DocStorageService {
 	@Autowired
 	private DocRepository docRepository;
 	
-	public Doc saveFile(MultipartFile file) {
+	public Doc saveFile(MultipartFile file, Ocorrencia ocorrencia) {
 		String docname = file.getOriginalFilename();
 		String tipo = file.getContentType();
 		
@@ -25,6 +26,7 @@ public class DocStorageService {
 			byte[] dado = file.getBytes();
 			
 			Doc doc = new Doc();
+			doc.setOcorrencia(ocorrencia);
 			doc.setDocName(docname);
 			doc.setDocType(tipo);
 			doc.setData(dado);
@@ -36,7 +38,7 @@ public class DocStorageService {
 		return null;
 	}
 	
-	public Optional<Doc> getFile(Integer fileId){
+	public Optional<Doc> getFile(Long fileId){
 		return docRepository.findById(fileId);
 	}
 	

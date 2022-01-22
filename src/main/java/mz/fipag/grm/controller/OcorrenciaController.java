@@ -2,14 +2,13 @@ package mz.fipag.grm.controller;
 
 import java.util.List;
 
+import mz.fipag.grm.repository.DocsRepository;
+import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -22,12 +21,6 @@ import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
-import mz.fipag.grm.service.DistritoService;
-import mz.fipag.grm.service.OcorrenciaService;
-import mz.fipag.grm.service.PostoAdministrativoService;
-import mz.fipag.grm.service.ProvinciaService;
-import mz.fipag.grm.service.TipoAlertaService;
-import mz.fipag.grm.service.TipoOcorrenciaService;
 
 @Controller
 public class OcorrenciaController {
@@ -41,22 +34,28 @@ public class OcorrenciaController {
     @Autowired
     private DistritoRepository distritoRepository;
 
+    @Autowired
+    private DocsRepository docsRepository;
+
 
     @Autowired
     private PostoAdminitrativoRepository postoAdminitrativoRepository;
 
     @Autowired
     private DistritoService distritoService;
+
+    @Autowired
+    private TipoAlertaService tipoAlertaService;
     
     @Autowired
     private PostoAdministrativoService postoAdminService;
     
     @Autowired
     private TipoOcorrenciaService tipoDeOcorrenciasService;
-    
-    
+
     @Autowired
-    private TipoAlertaService tipoAlertaService;
+    private DocStorageService docStorageService;
+
 
     @GetMapping("/listar/ocorrencia")
     public String listarOcorrencia(ModelMap model){
@@ -114,37 +113,35 @@ public class OcorrenciaController {
 
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia) {
-		
-		/*
-		 * if (result.hasErrors()) { return "cargo/cadastro"; }
-		 */
-    	
+	public String salvarOcorrencia(Ocorrencia ocorrencia, @RequestParam("files") MultipartFile[] files) {
+
     	ocorrenciaService.salvar(ocorrencia);
+
+    	for(MultipartFile file: files) {
+            docStorageService.saveFile(file, ocorrencia);
+        }
+
     	return "redirect:/listar/ocorrencia";
 	}
     
     @PostMapping("/ocorrencias/listar")
    	public String verOcorrencias(Ocorrencia ocorrencia) {
-   		
+
    		/*
    		 * if (result.hasErrors()) { return "cargo/cadastro"; }
    		 */
        //	ocorrenciaService.salvar(ocorrencia);
        	return "redirect:/listar/ocorrencia";
    	}
-    
+
     @PostMapping("/ocorrencias/editar") 
 	  public String editarCategoria(Ocorrencia ocorrencia) {
 	  
-    	ocorrencia.setValidado(true);
-    	ocorrencia.setValido("Validada");
     	ocorrenciaService.editar(ocorrencia);
 		  
 		  
 		  return "redirect:/listar/ocorrencia"; 
 	  }
-    
     
     @GetMapping("/ocorrencias/editar/{id}") 
 	  public String vistaEditarOcorrencia(@PathVariable("id") Long id, ModelMap model) {
@@ -179,11 +176,6 @@ public class OcorrenciaController {
         return "ocorrencia/detalharOcorrencia";
     }
     
-    /* 
-	 *  DETALHES 
-	 * 
-	 */
-    
     @PostMapping("/ocorrencias/detalhar")
     public String detalhesVista(Ocorrencia ocorrencia) {
 
@@ -196,45 +188,47 @@ public class OcorrenciaController {
     public String detalhesVistaAccao (@PathVariable("id") Long id, ModelMap model) {
 
     	 model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
-        
+    	 model.addAttribute("anexos", docsRepository.findAllById(id));
+
         return "ocorrencia/detalharOcorrencia";
+
     }
     
-    /* 
-	 *  VALIDACAO 
-	 * 
+    /*
+	 *  VALIDACAO
+	 *
 	 */
-    
+
     @PostMapping("/ocorrencias/validar")
     public String validacaoVista(Ocorrencia ocorrencia,  RedirectAttributes redirAttrs) {
-    	
+
     	if(ocorrencia.getValido()==null) {
     		System.out.println();
-    	
+
 
     	ocorrencia.setValidado(true);
     	ocorrencia.setValido("Validada");
-    	
+
         ocorrenciaService.editar(ocorrencia);
-    	
+
     	}else {
     		redirAttrs.addFlashAttribute("error", "Ja foi Validada");
     	}
-        
+
         return "redirect:/listar/ocorrencia";
-    	
+
     }
-    
+
     @GetMapping("/ocorrencias/validar/{id}")
     public String validacaoAccao (@PathVariable("id") Long id, ModelMap model) {
 
     	 model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
-        
+
         return "ocorrencia/registarValidacao";
     }
-    
-    
-    
+
+
+
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {
 		return provinciaService.buscarTodos();
@@ -259,8 +253,8 @@ public class OcorrenciaController {
     	public List<TipoAlerta> listaDetipoDeAlertas(){
     		return tipoAlertaService.buscarTodos();
     	}
-    
-    
-    
+
+
+
 
 }

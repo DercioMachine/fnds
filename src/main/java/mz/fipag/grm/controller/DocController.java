@@ -2,6 +2,7 @@ package mz.fipag.grm.controller;
 
 import java.util.List;
 
+import mz.fipag.grm.domain.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,7 @@ public class DocController {
 
 	@Autowired
 	private DocStorageService docStorageService;
-	
+
 	//@GetMapping("/")
 	@GetMapping("/listar/ficheiro")
 	public String get(Model model) {
@@ -35,16 +36,16 @@ public class DocController {
 	
 	//@PostMapping("/uploadFiles")
 	@PostMapping("/upload/ficheiro")
-	public String uploadMultipleFiles (@RequestParam("files") MultipartFile[] files) {
+	public String uploadMultipleFiles (@RequestParam("files") MultipartFile[] files, Ocorrencia ocorrencia) {
 		for(MultipartFile file: files) {
-			docStorageService.saveFile(file);
+			docStorageService.saveFile(file, ocorrencia);
 		}
 		return "redirect:/listar/ficheiro";
 	}
 	
 	//@GetMapping("/downloadFile/{fileId}")
 	@GetMapping("/download/ficheiro/{fileId}")
-	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Integer fileId){
+	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long fileId){
 		Doc doc = docStorageService.getFile(fileId).get();
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(doc.getDocType()))
