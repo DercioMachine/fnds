@@ -44,7 +44,7 @@
 
           var distritoId = $(this).val();
 
-          alert(distritoId);
+         // alert(distritoId);
 
           $.ajax({
           type: 'GET',
@@ -130,6 +130,13 @@
       	}
       </script>
     <!-- Conteudo -->
+    
+    <div align="right" class="col-12">
+        <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span>Listar Ocorrências</span>
+      	</a>
+    </div>
 
     <div class="card">
         <div style="background:#E6FFFE;" class="card-header">
@@ -163,8 +170,8 @@
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Distrito</label>
-                        <select  id="comoboxDistrito" th:field="*{distrito}" >
-
+                        <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
+							<option value="">Selecione o Distrito...</option>
                         </select>
                     </div>
                 </div>
@@ -172,8 +179,8 @@
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
-                        <select id="comboboxPosto"  th:field="*{postoAdministrativo}" >
-
+                        <select class="form-control custom-select form-select" id="comboboxPosto"  th:field="*{postoAdministrativo}" >
+							<option value="">Selecione o Postos Administrativos...</option>
                         </select>
                     </div>
                 </div>
@@ -435,5 +442,6 @@
     </div>
     <!-- Conteudo-->
 </div>
+
 </body>
 </html>

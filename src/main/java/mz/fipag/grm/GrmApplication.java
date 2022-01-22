@@ -13,5 +13,13 @@ public class GrmApplication {
 
 		System.out.println("Compilado com Sucesso ...");
 	}
-
+	
+	/*
+	 * @Bean public FilterRegistrationBean<Filter> disableSpringBootErrorFilter
+	 * (ErrorPageFilter filter){ FilterRegistrationBean filterRegistrationBean = new
+	 * FilterRegistrationBean(); filterRegistrationBean.setFilter(filter);
+	 * filterRegistrationBean.setEnabled(false);
+	 * 
+	 * return filterRegistrationBean; }
+	 */
 }

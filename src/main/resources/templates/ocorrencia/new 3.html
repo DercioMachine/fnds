@@ -11,7 +11,8 @@
 <body>
 <div  layout:fragment="corpo">
 
-<script type="text/javascript">
+
+    <script type="text/javascript">
 
     $(document).ready(function(){
         $('#comboboxProvincias').on('change',function(){
@@ -34,9 +35,8 @@
 
         });
     });
-    
     </script>
-    
+
     <script type="text/javascript">
 
     $(document).ready(function(){
@@ -128,70 +128,85 @@
       			
       		}
       	}
+      	
+      	function onChangeSim(){
+      		var estado = document.getElementById("radioSim");
+      		
+      		
+      		if(estado.value=="sim"){
+      			document.getElementById("tipoAlertaa").style.display="block";
+      			
+      		}
+      	}
+      		
+      		function onChangeNao(){
+          		var estado = document.getElementById("radioNao");
+          		
+          		
+          		if(estado.value=="nao"){
+          			document.getElementById("tipoAlertaa").style.display="none";
+          			
+          		}
+      		
+      	}
       </script>
     <!-- Conteudo -->
-
-	<div align="right" class="col-12">
+    
+    <div align="right" class="col-12">
         <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Listar Ocorrências</span>
       	</a>
     </div>
-    
+
     <div class="card">
         <div style="background:#E6FFFE;" class="card-header">
-            <h3 class="card-title">Editar Ocorrências da Fase 1 e/ou Adicionar as da Fase 2</h3>
+            <h3 class="card-title">Validação da Ocorrência</h3>
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{/ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
+		<form th:action="@{/ocorrencias/cadastrar}" 
+	                  th:object="${ocorrencia}" method="POST">
 		
-			<div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
-				<h2 class="card-title" >Dados da Fase 1</h2>
-			</div>
 	                  
-	                  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
+	                 <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
 	                  <!-- enctype="multipart/form-data" -->
 
-            <div class="row" >
-            
-            <div class="col-6 col-sm-4">
+            <div style="display:none;" class="row" >
+
+                <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="provincia" class="form-label">Província</label>
-                        <select id="provincia" class="form-control custom-select form-select" th:field="*{provincia}" >
+                        <label for="comboboxProvincias" class="form-label">Província</label>
+                        <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
                             <option value="">Selecione a Província...</option>
-                            <option th:each="p : ${provincias}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            <option th:each="p : ${provincias}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label">Distrito</label>
+                        <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
+							<option value="">Selecione o Distrito...</option>
                         </select>
                     </div>
                 </div>
                 
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="distrito" class="form-label">Distrito</label>
-                        <select id="distrito" class="form-control custom-select form-select" th:field="*{distrito}" >
-                            <option value="">Selecione o Distrito...</option>
-                            <option th:each="d : ${distritos}" 
-	                                    th:value="${d.id}" th:text="${d.designacao}">Maputo</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-6 col-sm-4">
-                    <div class="form-group">
-                        <label for="postoAdministrativo" class="form-label">Posto Administrativo</label>
-                        <select id="postoAdministrativo" class="form-control custom-select form-select" th:field="*{postoAdministrativo}" >
-                            <option value="">Selecione o Posto Administrativo...</option>
-                            <option th:each="p : ${postos}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
+                        <select class="form-control custom-select form-select" id="comboboxPosto"  th:field="*{postoAdministrativo}" >
+							<option value="">Selecione o Postos Administrativos...</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div style="display:none;" class="row">
             
-            <div class="col-6 col-sm-3">
+            <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Comunidade</label>
                         <div class="input-icon">
@@ -206,18 +221,7 @@
                 </div>
                 
                 
-                <div class="col-6 col-sm-3">
-                    <div class="form-group">
-                        <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
-                        <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
-                            <option value="">Selecione o Tipo de Ocorrência...</option>
-                            <option th:each="p : ${tipoDeOcorrencias}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Data da Ocorrência: </label>
                         <div class="input-icon">
@@ -235,7 +239,7 @@
                 
 	                <div class="col-6 col-sm-12">
 	                    <div class="form-group">
-	                        <label class="form-label">Assunto</label>
+	                        <label class="form-label">Assunto (mínimo 80 Caracteres)</label>
 	                        <div class="input-icon">
 	                                    <span class="input-icon-addon">
 	                                      <i class="fe fe-edit-2"></i>
@@ -250,12 +254,12 @@
 	                
 	                
 	                
-	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
-						<h2 class="card-title" >Dados da Fase 2</h2>
+	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE; display: none;" class="mb-2">
+						<h2 class="card-title" >Outros dados</h2>
 					</div>
 	                
 	                
-	                <div class="row">
+	                <div style="display:none;" class="row">
 	                
 	                <div class="col-6 col-sm-">
                     <div class="form-group">
@@ -392,19 +396,81 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
-                
-                
                 </div>
                 
                 <!-- <input type="file" name="files" multiple /> -->
-
+                
+                <div class="row">
+	                <div class="input-icon">
+	                <label  class="form-label ml-3">Procede?</label>
+	                </div>
+	            </div>
+            
+            <div>
+            	<div class="form-check-inline ">
+			  <label class="form-check-label">
+			    <input onchange="onChangeSim()" id="radioSim" type="radio" value="sim" class="form-check-input" name="optradio">Sim
+			  </label>
+			</div>
+			
+			<div class="form-check-inline mb-2">
+			  <label class="form-check-label">
+			    <input onchange="onChangeNao()" id="radioNao" type="radio" value="nao" class="form-check-input" name="optradio">Não
+			  </label>
+			</div>
+			
+			</div>
+			
+			
+			
+			<div class="row">
+				< <div style="display: none;" id="tipoAlertaa" class="col-6 col-sm-6">
+	                    <div class="form-group">
+	                        <label for="tipoAlerta" class="form-label">Tipo de Alerta</label>
+	                        <select id="tipoAlerta" class="form-control custom-select form-select" th:field="*{tipoAlerta}" >
+	                            <option value="">Selecione o Tipo de Alerta...</option>
+	                            <option th:each="tp : ${tipoAlertas}"
+	                                    th:value="${tp.id}" th:text="${tp.designacao}">Maputo</option>
+	                        </select>
+	                    </div>
+	                </div> 
+	                
+	                
+	               <div class="col-6 col-sm-6">
+	                    <div class="form-group">
+	                        <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
+	                        <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
+	                            <option value="">Selecione o Tipo de Ocorrência...</option>
+	                            <option th:each="p : ${tipoDeOcorrencias}" 
+		                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+	                        </select>
+	                    </div>
+	                </div> 
+	                
+	                
+                </div>
+	                
+	                <div class="col-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="form-label">Obs.</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <textarea data-bs-toggle="autosize" th:field="*{observacao}" class="form-control" placeholder="Descreva..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+                
+                
+                
+                
             
             
             <div class="card-footer text-right">
-            <button type="submit" class="btn btn-success">Finalizar </button>
+            <button type="submit" class="btn btn-success">Validar</button>
         </div>
           </form>
           

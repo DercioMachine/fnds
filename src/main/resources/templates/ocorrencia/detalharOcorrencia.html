@@ -15,7 +15,7 @@
             <h3 class="card-title">Detalhes da Ocorrência</h3>
         </div>
         <div class="card-body">
-		<form th:action="@{/listar/ocorrencia}"
+		<form th:action="@{/ocorrencias/listar}"
 	                  th:object="${ocorrencia}" method="POST">
 	                  
 	        <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
@@ -23,14 +23,19 @@
 
             <div class="row" >
             
-            <div class="col-6 col-sm-4">
+            <!--BLOCO 1  -->
+            
+            <div class="col-6 col-sm-12">
             	<div class="form-group">
-            		<span style="font-size:50px; color: red; font-weight: bolder;" th:text="${ocorrencia.id}"></span>
+            		<span style="font-size:50px; color: red; font-weight: bolder;">Nr. </span> <span style="font-size:50px; color: red; font-weight: bolder;" th:text="${ocorrencia.id}"></span>
             	</div>
             </div>
+            
+            <!--BLOCO 1  -->
+            
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            			<span>- </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd/MM/yyyy')}"></span>
+            			<span style="font-weight: bolder;">Data da Ocorrência: </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd/MM/yyyy')}"></span>
             			
             	</div>
             </div>
@@ -38,101 +43,103 @@
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            			<span>- </span><span th:text="${ocorrencia.provincia.designacao}"></span>
+            			<span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.provincia.designacao}"></span>
             	</div>
             </div>
             
-             <!--BLOCO 1  -->
-            
-            
+             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
+            		<span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
+            	</div>
+            </div>
+            
+            <!--BLOCO 2  -->
+            
+            <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.postoAdministrativo != null && ocorrencia.postoAdministrativo.designacao != null}">
+            
+            	<div class="form-group">
+            		<span style="font-weight: bolder;">Posto Administrativo: </span>	<span th:text="${ocorrencia.postoAdministrativo.designacao}"></span>
             	</div>
             </div>
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.postoAdministrativo.designacao}"></span>
-            	</div>
-            </div>
-            
-            <div class="col-6 col-sm-4">
-            	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.comunidade}"></span>
+            		<span style="font-weight: bolder;">Comunidade: </span>	<span th:text="${ocorrencia.comunidade}"></span>
             	</div>
             </div>
             
              
             
-            <!--BLOCO 3  -->
+              <!--BLOCO 3  -->
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.assunto}"></span>
-            	</div>
-            </div>
-            
-            <div class="col-6 col-sm-4">
-            	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
+            		<span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
             	</div>
             </div>
             
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.moradaUtente}"></span>
+            		<span style="font-weight: bolder;">Endereço do Utente: </span>	<span th:text="${ocorrencia.moradaUtente}"></span>
             	</div>
             </div>
             
-             <!--BLOCO 4  -->
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.emailUtente}"></span>
+            		<span style="font-weight: bolder;">Email do Utente: </span>	<span th:text="${ocorrencia.emailUtente}"></span>
+            	</div>
+            </div>
+            
+            <!--BLOCO 4  -->
+            
+            <div class="col-6 col-sm-4">
+            	<div class="form-group">
+            		<span style="font-weight: bolder;">Forma de Comunicação: </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
             	</div>
             </div>
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
+            		<span style="font-weight: bolder;">Nome do Grupo: </span>	<span th:text="${ocorrencia.nomeGrupo}"></span>
             	</div>
             </div>
+            
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.nomeGrupo}"></span>
+            		<span style="font-weight: bolder;">Sexo: </span>	<span th:text="${ocorrencia.sexo}"></span>
             	</div>
             </div>
             
-            <!--BLOCO 5  -->
-            
-            <div class="col-6 col-sm-4">
-            	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.sexo}"></span>
-            	</div>
-            </div>
-            
+             <!--BLOCO 5  -->
              
-             <div class="col-6 col-sm-8">
+             <div class="col-6 col-sm-12">
             	<div class="form-group">
-            		<span>- </span>	<span th:text="${ocorrencia.descricao}"></span>
+            		<span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
             	</div>
             </div>
             
             
             </div>
-
             
-            <div class="card-footer text-right">
-            <button type="submit" class="btn btn-primary">Fechar</button>
+         
+         <div class="card-footer text-right">
+            <button type="submit" class="btn btn-info" >Voltar</button>
+          <a class="btn btn-primary" th:href="${'/ocorrencias/validar/'+ocorrencia.id}" role="button">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span>Validação</span>
+      	</a>
         </div>
-          </form>
-
-
-
-
+        
+        
+        
+        
+        
+        
+     </form>
 
         </div>
         

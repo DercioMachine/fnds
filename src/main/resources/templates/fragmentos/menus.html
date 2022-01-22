@@ -1,4 +1,9 @@
-<meta charset="UTF-8" />
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
 <div style="background:white;" class="header collapse d-lg-flex p-0" id="headerMenuCollapse" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="container">
         <div class="row align-items-center">
@@ -25,7 +30,8 @@
                             <a th:href="@{/listar/categoria}" class="dropdown-item ">Categoria</a>
                             <a th:href="@{/listar/projecto}" class="dropdown-item ">Projecto</a>
 <!--                             <a th:href="@{/listar/tipoqueixa}" class="dropdown-item ">Tipo de Queixa</a> -->
-							<a th:href="@{/listar/tipoOcorrencia}" class="dropdown-item ">Tipo de Ocorrência</a>	
+							<a th:href="@{/listar/tipoOcorrencia}" class="dropdown-item ">Tipo de Ocorrência</a>
+							<a th:href="@{/listar/tipoAlerta}" class="dropdown-item ">Tipo de Alerta</a>	
                         </div>
                         </div>
                     </li>
@@ -35,3 +41,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>

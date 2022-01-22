@@ -30,8 +30,17 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "comunidade")
 	private String comunidade;
 	
+	@Column(name = "validado")
+	private boolean validado;
+	
+	@Column(name = "valido")
+	private String valido;
+	
 	@Column(name = "assunto")
 	private String assunto;
+	
+	@Column(name = "observacao")
+	private String observacao;
 	
 	@Column(name = "descricao")
 	private String descricao;
@@ -119,6 +128,10 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
+	
+	@ManyToOne
+	@JoinColumn(name="tipoAlerta_id")
+	private TipoAlerta tipoAlerta;
 
 	public String getGrmStamp() {
 		return grmStamp;
@@ -316,6 +329,14 @@ public class Ocorrencia extends AbstractEntity{
 	}
 	
 
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
 	public void setDataResposta(LocalDate dataResposta) {
 		this.dataResposta = dataResposta;
 	}
@@ -373,5 +394,30 @@ public class Ocorrencia extends AbstractEntity{
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
+
+	public TipoAlerta getTipoAlerta() {
+		return tipoAlerta;
+	}
+
+	public void setTipoAlerta(TipoAlerta tipoAlerta) {
+		this.tipoAlerta = tipoAlerta;
+	}
+
+	public boolean isValidado() {
+		return validado;
+	}
+
+	public void setValidado(boolean validado) {
+		this.validado = validado;
+	}
+
+	public String getValido() {
+		return valido;
+	}
+
+	public void setValido(String valido) {
+		this.valido = valido;
+	}
+	
 	
 }

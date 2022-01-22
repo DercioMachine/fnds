@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Registar Tipo de Alerta</h3>
+        </div>
+       <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
+         <div class="card-body">
+		<form th:action="@{/tipoAlertas/cadastrar}" 
+	                  th:object="${tipoAlerta}" method="POST">
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Designação</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input re type="text" th:field="*{designacao}" class="form-control"required pattern="\S(.*\S)?" placeholder="Designação..." 
+                            oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
+  								oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="card-footer text-right">
+            <button type="submit" class="btn btn-success">Gravar </button>
+        </div>
+          </form>
+
+
+
+
+
+        </div>
+        
+    </div>
+    <!-- Conteudo-->
+</div>
+</body>
+</html>

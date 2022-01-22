@@ -30,6 +30,8 @@
   color: white;
 }
 </style>
+
+
 </head>
 
 
@@ -48,15 +50,18 @@
         <div class="card">
             <div style="background:#04AA6D;" class="card-header">
                 <h3 style="font-weight:bolder" class="card-title">OCORRÊNCIAS</h3>
+             <input id="txtSearch" name="keyword" type="text" class="form-control ml-2" width="50%" placeholder="Filtrar...">
             </div>
             <div class="table-responsive">
                 <table id="tabela" class="table card-table table-vcenter text-nowrap">
                     <thead>
                     <tr>
                         <th class="w-1">No.</th>
-                        <th>Comunidade</th>
-                        <th>Tipo de Ocorrência</th>
+                        <th>Província</th>
+                        <th>Distrito</th>
+                        <th>Data de Cadastro</th>
                         <th>Data da Ocorrência</th>
+                        <th>Tipo de Ocorrência</th>
                         <th></th>
                         <!--  <th></th> -->
                     </tr>
@@ -65,20 +70,23 @@
                     <!--  <tr th:each="p : ${postos}"> -->
                     <tr th:each="p : ${ocorrencias}">
                     <td th:text="${p.id}"><span class="text-muted">01401</span></td>
-                        <td th:text="${p.comunidade}"><span class="text-muted">01401</span></td>
-                        <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td>
+                    <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+                        <td th:text="${p.distrito.designacao}"><span class="text-muted">01401</span></td>
+                     
+                     <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
+                        <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
+                        <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td> 
                         
-                        <!-- <td th:text="${p.dataOcorrencia}">Auxiliar Contábil</td> -->
+                       
                         
-                     <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         
                          <td align="center">
                             <a class="icon" th:href="${'/ocorrencias/fase2/'+p.id}">
-                                <i style="font-size:25px " class="fe fe-edit-2"></i>
+                                <i style="font-size:25px " class="fa fa-pencil-square-o"></i>
                             </a>
                             
                             <a class="icon" th:href="${'/ocorrencias/detalhar/'+p.id}">
-                                <i style="font-size:25px"  class="fe fe-eye ml-2"></i>
+                                <i style="font-size:25px"  class="fa fa-cogs ml-2"></i>
                             </a>
                         </td> 
                         
@@ -104,6 +112,69 @@
 
         </div>
     </div>
+    
+    
+    <script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+	var ocorrencias = /*[[${ocorrencias}]]*/;
+	/*]]>*/
+ 
+	$('#txtSearch').on('keyup',function(){
+		var value = $(this).val();
+		//console.log('Value =' + value);
+		
+		var data = FilterFunction(value, ocorrencias);
+		
+		rebuildTable(data);
+	});
+		
+		function FilterFunction(value, data){
+			var filteredData = [];
+			
+			for(var i = 0; i<data.length; i++){
+				value.toLowerCase();
+				//var ocomunidade = data[i].comunidade.toLowerCase();
+				//var oassunto = data[i].assunto.toLowerCase();
+				
+				var oprovincia = data[i].provincia.designacao.toLowerCase();
+				var odistrito = data[i].distrito.designacao.toLowerCase();
+				var otipoocorrencia = data[i].tipoOcorrencia.designacao.toLowerCase();
+				
+				if(oprovincia.includes(value) || odistrito.includes(value) || otipoocorrencia.includes(value)) {
+					filteredData.push(data[i]);
+				}
+			}
+			return filteredData;
+		}
+	
+	
+		
+		function rebuildTable(data){
+			var table = document.getElementById('tabela');
+			
+			
+			table.innerHTML=''
+			for(var i = 0; i<data.length; i++){
+				var row = `
+					<tr>
+						<td>${data[i].id}</td>
+						<td>${data[i].provincia.designacao}</td>
+						<td>${data[i].distrito.designacao}</td>
+						<td>${data[i].dataOcorrencia}</td>
+						<td>${data[i].created}</td>
+						<td>${data[i].tipoOcorrencia.designacao}</td>
+						
+						
+					</tr>`
+					table.innerHTML += row
+					
+					
+			}
+		}
+	
+ 
+</script>
 
 
     <!-- Conteudo-->
