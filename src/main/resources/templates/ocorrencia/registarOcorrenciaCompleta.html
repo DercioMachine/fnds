@@ -34,7 +34,7 @@
 
           $.ajax({
           type: 'GET',
-          url: 'http://localhost:8081/distrito/'+provinciaId,
+          url: 'https://fipag.herokuapp.com/distrito/'+provinciaId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -61,7 +61,7 @@
 
           $.ajax({
           type: 'GET',
-          url: 'http://localhost:8081/posto/'+distritoId,
+          url: 'https://fipag.herokuapp.com/posto/'+distritoId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -152,14 +152,14 @@
     </div>
 
     <div class="card">
-        <div style="background:#E6FFFE;" class="card-header">
-            <h3 class="card-title">Cadastro de Ocorrência</h3>
+        <div style="background:#04AA6D;" class="card-header">
+            <h3 style="font-weight: bolder;" class="card-title">CADASTRO DE OCORRÊNCIA</h3>
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
 		<form th:action="@{/ocorrencias/cadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 		
-			<div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
+			<div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
 				<h2 class="card-title" >Dados da Ocorrência</h2>
 			</div>
 	                  
@@ -240,20 +240,6 @@
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-12">
-                    <div class="form-group">
-                        <label class="form-label">Anexar Doc (Pode anexar varios)</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-calendar"></i>
-                                    </span>
-                            <input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
-                            <p id="num-of-files"></p>
-                        </div>
-                    </div>
-                </div>
-                
-                
                 
 	                <div class="col-6 col-sm-12">
 	                    <div class="form-group">
@@ -268,12 +254,13 @@
 	                        </div>
 	                    </div>
 	                </div>
+	                
 	                </div>
 	                
 	                
 	                
-	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
-						<h2 class="card-title" >Outros dados</h2>
+	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
+						<h2 class="card-title" >Dados do Utente</h2>
 					</div>
 	                
 	                
@@ -414,12 +401,30 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
-                
-                
                 </div>
+                
+                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
+						<h2 class="card-title" >Dados do dos Anexos</h2>
+				</div>
+				
+				<div class="col-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="form-label">Anexar Doc (Pode Selecionar Vários)</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-calendar"></i>
+                                    </span>
+                            <input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
+                            <p id="num-of-files"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
                 
                 <!-- <input type="file" name="files" multiple /> -->
 

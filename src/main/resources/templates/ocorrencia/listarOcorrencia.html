@@ -25,12 +25,17 @@
 
 #tabela tr:hover {background-color: #ddd;}
 
+#tabela tr{font-weight: bolder;
+
+}
+
 #tabela th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: #a7ebaa;
   color: white;
+  font-weight: bolder;
 }
 </style>
 
@@ -81,8 +86,8 @@
                         <th>Data de Cadastro</th>
                         <th>Data da Ocorrência</th>
                         <th>Tipo de Ocorrência</th>
-                        <th>Assunto</th>
-                        <th></th>
+                        <th class="w-4">Assunto</th>
+                        <th class="w-3">Acção</th>
                         <!--  <th></th> -->
                     </tr>
                     </thead>
@@ -96,25 +101,25 @@
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td> 
                         <td>
-		                            <button type="button" data-target="#exampleModal" class="btn btn-secondary btn-sm" data-container="body"
+		                            <button type="button" data-target="#exampleModal" class="btn btn-primary btn-sm ml-5" data-container="body"
 		                                    data-toggle="popover" data-placement="top"
 		                                    th:attr="data-content=${#strings.concat(
 			                                    p.descricao
 		                                    )}">
 		                                
-		                                <span class="fa fa-eye" title="Visualizar" aria-hidden="true"></span>
+		                                <span class="fa fa-eye" th:title="${p.descricao}" aria-hidden="true"></span>
 		                            </button>
 		                        </td>
                        
                         
                         
-                         <td align="center">
-                            <a class="icon" th:href="${'/ocorrencias/fase2/'+p.id}">
-                                <i style="font-size:25px " class="fa fa-pencil-square-o"></i>
+                         <td  align="center">
+                            <a class="icon btn btn-warning btn-sm" th:href="${'/ocorrencias/fase2/'+p.id}">
+                                <i style="color: #fff" aria-hidden="true" class="fa fa-pencil-square-o"></i>
                             </a>
                             
-                            <a class="icon" th:href="${'/ocorrencias/detalhar/'+p.id}">
-                                <i style="font-size:25px"  class="fa fa-cogs ml-2"></i>
+                            <a class="icon btn btn-info btn-sm" th:href="${'/ocorrencias/detalhar/'+p.id}">
+                                <i style="color: #fff" aria-hidden="true" class="fa fa-cogs ml-2 "></i>
                             </a>
                         </td> 
                         

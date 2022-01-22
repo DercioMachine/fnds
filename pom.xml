@@ -11,6 +11,8 @@
 	<groupId>mz.fipag</groupId>
 	<artifactId>grm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
 	<name>grm</name>
 	<description>Sistema de gestao de Reclamacoes</description>
 	<properties>
