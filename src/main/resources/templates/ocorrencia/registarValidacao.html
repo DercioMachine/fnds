@@ -21,7 +21,7 @@
 
           $.ajax({
           type: 'GET',
-          url: 'http://localhost:8081/distrito/'+provinciaId,
+          url: '/'+provinciaId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -48,7 +48,7 @@
 
           $.ajax({
           type: 'GET',
-          url: 'http://localhost:8081/posto/'+distritoId,
+          url: '/'+distritoId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
