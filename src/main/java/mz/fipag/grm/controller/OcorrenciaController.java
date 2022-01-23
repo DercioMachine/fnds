@@ -66,6 +66,15 @@ public class OcorrenciaController {
         return "ocorrencia/listarOcorrencia";
     }
     
+    
+    @GetMapping("/listar/teste")
+    public String litarTeste(ModelMap model){
+
+        model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
+
+        return "ocorrencia/teste";
+    }
+    
     @GetMapping("/listar/ocorrencia2")
     public String listarOcorrencia2(ModelMap model){
 

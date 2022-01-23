@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+
+
 <html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -35,9 +38,25 @@
 </head>
 
 
+
+
+
 <body>
+
+
+
+
+
 <div  layout:fragment="corpo">
     <!-- Conteudo -->
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -62,6 +81,7 @@
                         <th>Data de Cadastro</th>
                         <th>Data da Ocorrência</th>
                         <th>Tipo de Ocorrência</th>
+                        <th>Assunto</th>
                         <th></th>
                         <!--  <th></th> -->
                     </tr>
@@ -72,11 +92,19 @@
                     <td th:text="${p.id}"><span class="text-muted">01401</span></td>
                     <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
                         <td th:text="${p.distrito.designacao}"><span class="text-muted">01401</span></td>
-                     
                      <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td> 
-                        
+                        <td>
+		                            <button type="button" data-target="#exampleModal" class="btn btn-secondary btn-sm" data-container="body"
+		                                    data-toggle="popover" data-placement="top"
+		                                    th:attr="data-content=${#strings.concat(
+			                                    p.descricao
+		                                    )}">
+		                                
+		                                <span class="fa fa-eye" title="Visualizar" aria-hidden="true"></span>
+		                            </button>
+		                        </td>
                        
                         
                         
@@ -112,6 +140,8 @@
 
         </div>
     </div>
+    
+ 
     
     
     <script type="text/javascript" th:inline="javascript">
