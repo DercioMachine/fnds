@@ -20,7 +20,7 @@
 
           $.ajax({
           type: 'GET',
-          url: '/'+provinciaId,
+          url: '/us-cdbr-east-05.cleardb.net/distrito/'+provinciaId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -48,7 +48,7 @@
 
           $.ajax({
           type: 'GET',
-          url: '/'+distritoId,
+          url: '/us-cdbr-east-05.cleardb.net/posto/'+distritoId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
