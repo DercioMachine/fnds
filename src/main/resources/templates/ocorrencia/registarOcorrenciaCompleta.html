@@ -34,7 +34,9 @@
 
           $.ajax({
           type: 'GET',
-          url: 'https://fipag.herokuapp.com/distrito/'+provinciaId,
+          url: 'https://fnds-mdr.herokuapp.com/distrito/'+provinciaId,
+          //url: 'http://localhost:8081/distrito/'+provinciaId,
+          
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -61,7 +63,9 @@
 
           $.ajax({
           type: 'GET',
-          url: 'https://fipag.herokuapp.com/posto/'+distritoId,
+         // url: 'http://localhost:8081/posto/'+distritoId,
+          url: 'https://fnds-mdr.herokuapp.com/posto/'+distritoId,
+          
            success: function (result){
            var result = JSON.parse(result);
            var s = '';

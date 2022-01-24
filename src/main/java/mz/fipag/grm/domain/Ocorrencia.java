@@ -36,6 +36,12 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "valido")
 	private String valido;
 	
+	@Column(name = "registado")
+	private String registado;
+	
+	@Column(name = "regista")
+	private boolean regista;
+	
 	@Column(name = "assunto")
 	private String assunto;
 	
@@ -417,6 +423,22 @@ public class Ocorrencia extends AbstractEntity{
 
 	public void setValido(String valido) {
 		this.valido = valido;
+	}
+
+	public String getRegistado() {
+		return registado;
+	}
+
+	public void setRegistado(String registado) {
+		this.registado = registado;
+	}
+
+	public boolean isRegista() {
+		return regista;
+	}
+
+	public void setRegista(boolean regista) {
+		this.regista = regista;
 	}
 	
 	

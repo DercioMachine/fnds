@@ -18,7 +18,7 @@
 		<form th:action="@{/ocorrencias/listar}"
 	                  th:object="${ocorrencia}" method="POST">
 	                  
-	        <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
+	       <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
 
 
             <div class="row" >
@@ -167,12 +167,12 @@
 
 
          <div class="card-footer text-right">
-            <button type="submit" class="btn btn-info" >Voltar</button>
+            <button type="submit" class="btn btn-info" >Fechar</button>
             
-          <a class="btn btn-primary" th:href="${'/ocorrencias/validar/'+ocorrencia.id}" role="button">
+          <!-- <a class="btn btn-primary" th:href="${'/ocorrencias/validar/'+ocorrencia.id}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Validação</span>
-      	</a>
+      	</a> -->
         </div>
 
 
