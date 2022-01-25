@@ -115,6 +115,9 @@ public class OcorrenciaController {
     @PostMapping("/ocorrencias/cadastrar")
 	public String salvarOcorrencia(Ocorrencia ocorrencia, @RequestParam("files") MultipartFile[] files) {
 
+    	
+    	ocorrencia.setRegistado(true);
+    	ocorrencia.setEstado("Registado");
     	ocorrenciaService.salvar(ocorrencia);
 
     	for(MultipartFile file: files) {
@@ -137,6 +140,8 @@ public class OcorrenciaController {
     @PostMapping("/ocorrencias/editar") 
 	  public String editarCategoria(Ocorrencia ocorrencia) {
 	  
+    	ocorrencia.setRegistado(true);
+    	ocorrencia.setEstado("Registado");
     	ocorrenciaService.editar(ocorrencia);
 		  
 		  
@@ -201,19 +206,10 @@ public class OcorrenciaController {
 
     @PostMapping("/ocorrencias/validar")
     public String validacaoVista(Ocorrencia ocorrencia,  RedirectAttributes redirAttrs) {
-
-    	if(ocorrencia.getValido()==null) {
-    		System.out.println();
-
-
+    	
     	ocorrencia.setValidado(true);
-    	ocorrencia.setValido("Validada");
-
+    	ocorrencia.setEstado("Validado");
         ocorrenciaService.editar(ocorrencia);
-
-    	}else {
-    		redirAttrs.addFlashAttribute("error", "Ja foi Validada");
-    	}
 
         return "redirect:/listar/ocorrencia";
 
