@@ -22,6 +22,7 @@ import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 
+
 @Controller
 public class OcorrenciaController {
 
