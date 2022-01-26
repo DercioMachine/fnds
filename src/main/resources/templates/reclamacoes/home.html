@@ -63,7 +63,7 @@
                       <div class="subheader">Solicitações</div>
                     </div>
                     <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">43</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fe fe-git-pull-request"></i></span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-git-pull-request"></i></span>
                       
                   </div>
                 </div>
@@ -76,7 +76,7 @@
                       <div class="subheader">Consultas</div>
                     </div>
                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">43</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fe fe-book-open"></i></span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-book-open"></i></span>
                       
                   </div>
                 </div>
@@ -155,68 +155,90 @@
               </div>
               
               
-    
-    
-    
-    
 
     <div class="row">
+
         <div class="col-lg-8 col-xl-8">
             <div class="card">
                 <div  style="background:#E6FFFE;" class="card-header">
                     <h3 style="font-weight: bolder" class="card-title">Ocorrências</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-bar" style="height: 16rem"></div>
+                    <div id="chart-completion-tasks-8"></div>
                 </div>
             </div>
-            <script>
-                  require(['c3', 'jquery'], function(c3, $) {
-                  	$(document).ready(function(){
-                  		var chart = c3.generate({
-                  			bindto: '#chart-bar', // id of chart wrapper
-                  			data: {
-                  				columns: [
-                  				    // each columns data
-                  					['data1', 11, 8, 15, 18, 19, 17],
-                  					['data2', 7, 7, 5, 7, 9, 12],
-                  					['data3', 11, 8, 15, 18, 19, 17]
-                  				],
-                  				type: 'bar', // default type of chart
-                  				colors: {
-                  					'data1': tabler.colors["red"],
-                  					'data2': tabler.colors["orange"],
-                  					'data3': tabler.colors["green"]
-                  				},
-                  				names: {
-                  				    // name of each serie
-                  					'data1': 'Pendentes',
-                  					'data2': 'Em andamento',
-                  					'data3': 'Resolvidas'
 
-                  				}
-                  			},
-                  			axis: {
-                  				x: {
-                  					type: 'category',
-                  					// name of each category
-                  					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
-                  				},
-                  			},
-                  			bar: {
-                  				width: 16
-                  			},
-                  			legend: {
-                                  show: false, //hide legend
-                  			},
-                  			padding: {
-                  				bottom: 0,
-                  				top: 0
-                  			},
-                  		});
-                  	});
-                  });
-                </script>
+            <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-8'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		},{
+      			name: "",
+      			data: [113, 42, 65, 54, 76, 65, 35]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4", "#cd201f"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
         </div>
 
         <div class="col-lg-4 col-xl-4">
@@ -276,53 +298,54 @@
                     <h3 style="font-weight: bolder" class="card-title">RECLAMAÇÕES POR CATEGORIA</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-pie2" style="height: 16rem"></div>
+                    <div id="chart-demo-pie" style="height: 16rem"></div>
                 </div>
             </div>
             <script>
-                  require(['c3', 'jquery'], function(c3, $) {
-                  	$(document).ready(function(){
-                  		var chart = c3.generate({
-                  			bindto: '#chart-pie2', // id of chart wrapper
-                  			data: {
-                  				columns: [
-                  				    // each columns data
-                  					['data1', 63],
-                  					['data2', 44],
-                  					['data3', 6],
-                  					['data3', 9],
-                  					['data3', 6]
-                  				],
-                  				type: 'pie', // default type of chart
-                  				colors: {
-                  					'data1': tabler.colors["Pink"],
-                  					'data2': tabler.colors["Gray"],
-                  					'data3': tabler.colors["green"],
-                  					'data4': tabler.colors["blue"],
-                  					'data5': tabler.colors["black"]
-                  				},
-                  				names: {
-                  				    // name of each serie
-                  					'data1': 'Ambiental',
-                  					'data2': 'Perda de Agua',
-                  					'data3': 'Faturamento',
-                  					'data4': 'Qualidade de Servicos',
-                  					'data5': 'Outras'
-                  				}
-                  			},
-                  			axis: {
-                  			},
-                  			legend: {
-                                  show: false, //hide legend
-                  			},
-                  			padding: {
-                  				bottom: 0,
-                  				top: 0
-                  			},
-                  		});
-                  	});
-                  });
-                </script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Direct", "Affilliate", "E-mail", "Other"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#79a6dc", "#d2e1f3", "#e9ecf1"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
         </div>
 
         <div class="col-lg-6 col-xl-6">

@@ -1,74 +1,229 @@
 <!doctype html>
 <html lang="en" dir="ltr" Xmlns:th="http://www.thymeleaf.org"
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
-      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Language" content="en" />
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="theme-color" content="#4188c9">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <!-- Generated: 2018-04-06 16:27:42 +0200 -->
-    <title>Homepage - tabler.github.io - a responsive, flat and full featured admin template</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title> FIPAG </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-    <script th:src="@{../assets/js/require.min.js}"></script>
-    <script>
-      requirejs.config({
-          baseUrl: '.'
-      });
-    </script>
+    <!-- CSS files -->
+    <link th:href="@{/dist/css/tabler.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-flags.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-payments.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-vendors.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/demo.min.css}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Dashboard Core -->
-    <link th:href="@{../assets/css/dashboard.css}" rel="stylesheet" />
-    <script th:src="@{../assets/js/dashboard.js}"></script>
+    <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/js/dashboard.js}"></script>
     <!-- c3.js Charts Plugin -->
-    <link th:href="@{../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
-    <script th:src="@{../assets/plugins/charts-c3/plugin.js}"></script>
+    <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script>
     <!-- Google Maps Plugin -->
-    <link th:href="@{../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
-    <script th:src="@{../assets/plugins/maps-google/plugin.js}"></script>
+    <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
     <!-- Input Mask Plugin -->
-    <script th:src="@{../assets/plugins/input-mask/plugin.js}"></script>
+    <script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
 </head>
-<body class="">
-<div class="page">
-    <div class="page-main">
+<body class="antialiased">
+<div class="wrapper">
 
-        <!-- Fragmentos de header -->
-        <footer th:replace="fragmentos/header"></footer>
-        <!-- Fim de frgmento de header-->
+    <!-- Fragmentos de header -->
+    <header th:replace="/fragmentos/header"></header>
+    <!-- Fim de frgmento de header-->
 
-        <!-- Fragmentos de menus -->
-        <footer th:replace="fragmentos/menus"></footer>
-        <!-- Fim de frgmento de menus-->
+    <!-- Fragmentos de menus -->
+    <menus th:replace="/fragmentos/menus"></menus>
+    <!-- Fim de frgmento de menus-->
+
+    <div class="page-wrapper">
+        <div class="container-xl">
+
+        </div>
+        <div class="page-body">
+            <div class="container-xl" layout:fragment="corpo">
 
 
-        <div class="my-3 my-md-5">
-            <div class="container" >
-
-                <!-- Conteudo -->
-                <div layout:fragment="corpo">
-
-                </div>
-                <!-- Conteudo -->
 
             </div>
         </div>
+
+        <footer th:replace="/fragmentos/footer"></footer>
     </div>
-
-    <!-- Fragmentos de footer -->
-    <footer th:replace="fragmentos/footer"></footer>
-    <!-- Fim de frgmento de footer-->
-
-
 </div>
+<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="example-text-input" placeholder="Your report name">
+                </div>
+                <label class="form-label">Report type</label>
+                <div class="form-selectgroup-boxes row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked>
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Simple</span>
+                      <span class="d-block text-muted">Provide only basic data needed for the report</span>
+                    </span>
+                  </span>
+                        </label>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Advanced</span>
+                      <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in the report</span>
+                    </span>
+                  </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mb-3">
+                            <label class="form-label">Report url</label>
+                            <div class="input-group input-group-flat">
+                    <span class="input-group-text">
+                      https://tabler.io/reports/
+                    </span>
+                                <input type="text" class="form-control ps-0"  value="report-01" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Visibility</label>
+                            <select class="form-select">
+                                <option value="1" selected>Private</option>
+                                <option value="2">Public</option>
+                                <option value="3">Hidden</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Client name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Reporting period</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div>
+                            <label class="form-label">Additional information</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </a>
+                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                    Create new report
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Libs JS -->
+<script th:src="@{/dist/libs/apexcharts/dist/apexcharts.min.js}"></script>
+<!-- Tabler Core -->
+<script th:src="@{/dist/js/tabler.min.js}"></script>
+
+<script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenue-bg'), {
+      		chart: {
+      			type: "area",
+      			fontFamily: 'inherit',
+      			height: 40.0,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: .16,
+      			type: 'solid'
+      		},
+      		stroke: {
+      			width: 2,
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "Profits",
+      			data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
+      		}],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+      		],
+      		colors: ["#206bc4"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
 </body>
 </html>

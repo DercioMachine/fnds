@@ -1,603 +1,1232 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta3
+* @link https://tabler.io
+* Copyright 2018-2021 The Tabler Authors
+* Copyright 2018-2021 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Language" content="en" />
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="theme-color" content="#4188c9">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
-    <!-- Generated: 2018-04-06 16:27:42 +0200 -->
-    <title>Cards - Documentation - tabler.github.io - a responsive, flat and full featured admin template</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-    <script src="../assets/js/require.min.js"></script>
-    <script>
-      requirejs.config({
-          baseUrl: '..'
-      });
-    </script>
-    <!-- Dashboard Core -->
-    <link href="../assets/css/dashboard.css" rel="stylesheet" />
-    <script src="../assets/js/dashboard.js"></script>
-    <!-- c3.js Charts Plugin -->
-    <link href="../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
-    <script src="../assets/plugins/charts-c3/plugin.js"></script>
-    <!-- Google Maps Plugin -->
-    <link href="../assets/plugins/maps-google/plugin.css" rel="stylesheet" />
-    <script src="../assets/plugins/maps-google/plugin.js"></script>
-    <!-- Input Mask Plugin -->
-    <script src="../assets/plugins/input-mask/plugin.js"></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Cards - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <!-- CSS files -->
+    <link href="../dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="../dist/css/tabler-flags.min.css" rel="stylesheet"/>
+    <link href="../dist/css/tabler-payments.min.css" rel="stylesheet"/>
+    <link href="../dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link href="../dist/css/demo.min.css" rel="stylesheet"/>
   </head>
-  <body class="">
-    <div class="page">
-      <div class="page-main">
-        <div class="header py-4">
-          <div class="container">
-            <div class="d-flex">
-              <a class="header-brand" href="../index.html">
-                <img src="../demo/brand/tabler.svg" class="header-brand-img" alt="tabler logo">
+  <body class="antialiased">
+    <div class="wrapper">
+      <header class="navbar navbar-expand-md navbar-light d-print-none">
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href="..">
+              <img src="../static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            </a>
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <a href="https://github.com/tabler/tabler" class="btn btn-outline-white" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon text-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>
+                  Source code
+                </a>
+                <a href="https://github.com/sponsors/codecalm" class="btn btn-outline-white" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                  Sponsor
+                </a>
+              </div>
+            </div>
+            <div class="nav-item dropdown d-none d-md-flex me-3">
+              <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
+                <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+                <span class="badge bg-red"></span>
               </a>
-              <div class="d-flex order-lg-2 ml-auto">
-                <div class="nav-item d-none d-md-flex">
-                  <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-outline-primary" target="_blank">Source code</a>
-                </div>
-                <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" data-toggle="dropdown">
-                    <i class="fe fe-bell"></i>
-                    <span class="nav-unread"></span>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item d-flex">
-                      <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/male/41.jpg)"></span>
-                      <div>
-                        <strong>Nathan</strong> pushed new commit: Fix page load performance issue.
-                        <div class="small text-muted">10 minutes ago</div>
-                      </div>
-                    </a>
-                    <a href="#" class="dropdown-item d-flex">
-                      <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/female/1.jpg)"></span>
-                      <div>
-                        <strong>Alice</strong> started new task: Tabler UI design.
-                        <div class="small text-muted">1 hour ago</div>
-                      </div>
-                    </a>
-                    <a href="#" class="dropdown-item d-flex">
-                      <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/female/18.jpg)"></span>
-                      <div>
-                        <strong>Rose</strong> deployed new version of NodeJS REST Api V3
-                        <div class="small text-muted">2 hours ago</div>
-                      </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item text-center text-muted-dark">Mark all as read</a>
-                  </div>
-                </div>
-                <div class="dropdown">
-                  <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-                    <span class="avatar" style="background-image: url(../demo/faces/female/25.jpg)"></span>
-                    <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Jane Pearson</span>
-                      <small class="text-muted d-block mt-1">Administrator</small>
-                    </span>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a class="dropdown-item" href="#">
-                      <i class="dropdown-icon fe fe-user"></i> Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="dropdown-icon fe fe-settings"></i> Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <span class="float-right"><span class="badge badge-primary">6</span></span>
-                      <i class="dropdown-icon fe fe-mail"></i> Inbox
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="dropdown-icon fe fe-send"></i> Message
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                      <i class="dropdown-icon fe fe-help-circle"></i> Need help?
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <i class="dropdown-icon fe fe-log-out"></i> Sign out
-                    </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
+                <div class="card">
+                  <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur exercitationem fugiat in ipsa ipsum, natus odio quidem quod repudiandae sapiente. Amet debitis et magni maxime necessitatibus ullam.
                   </div>
                 </div>
               </div>
-              <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
-                <span class="header-toggler-icon"></span>
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <span class="avatar avatar-sm" style="background-image: url(../static/avatars/000m.jpg)"></span>
+                <div class="d-none d-xl-block ps-2">
+                  <div>Paweł Kuna</div>
+                  <div class="mt-1 small text-muted">UI Designer</div>
+                </div>
               </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">Set status</a>
+                <a href="#" class="dropdown-item">Profile & account</a>
+                <a href="#" class="dropdown-item">Feedback</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">Settings</a>
+                <a href="#" class="dropdown-item">Logout</a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-lg-3 ml-auto">
-                <form class="input-icon my-3 my-lg-0">
-                  <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">
-                  <div class="input-icon-addon">
-                    <i class="fe fe-search"></i>
+      </header>
+      <div class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar navbar-light">
+            <div class="container-xl">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.html" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Home
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" /><line x1="12" y1="12" x2="20" y2="7.5" /><line x1="12" y1="12" x2="12" y2="21" /><line x1="12" y1="12" x2="4" y2="7.5" /><line x1="16" y1="5.25" x2="8" y2="9.75" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Interface
+                    </span>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                      <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="../empty.html" >
+                          Empty page
+                        </a>
+                        <a class="dropdown-item" href="../accordion.html" >
+                          Accordion
+                        </a>
+                        <a class="dropdown-item" href="../blank.html" >
+                          Blank page
+                        </a>
+                        <a class="dropdown-item" href="../buttons.html" >
+                          Buttons
+                        </a>
+                        <a class="dropdown-item" href="../cards.html" >
+                          Cards
+                        </a>
+                        <a class="dropdown-item" href="../cards-masonry.html" >
+                          Cards Masonry
+                        </a>
+                        <a class="dropdown-item" href="../colors.html" >
+                          Colors
+                        </a>
+                        <a class="dropdown-item" href="../dropdowns.html" >
+                          Dropdowns
+                        </a>
+                        <a class="dropdown-item" href="../icons.html" >
+                          Icons
+                        </a>
+                        <a class="dropdown-item" href="../modals.html" >
+                          Modals
+                        </a>
+                        <a class="dropdown-item" href="../maps.html" >
+                          Maps
+                        </a>
+                        <a class="dropdown-item" href="../map-fullsize.html" >
+                          Map fullsize
+                        </a>
+                        <a class="dropdown-item" href="../maps-vector.html" >
+                          Vector maps
+                        </a>
+                      </div>
+                      <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="../navigation.html" >
+                          Navigation
+                        </a>
+                        <a class="dropdown-item" href="../charts.html" >
+                          Charts
+                        </a>
+                        <a class="dropdown-item" href="../pagination.html" >
+                          Pagination
+                        </a>
+                        <a class="dropdown-item" href="../skeleton.html" >
+                          Skeleton
+                        </a>
+                        <a class="dropdown-item" href="../tabs.html" >
+                          Tabs
+                        </a>
+                        <a class="dropdown-item" href="../tables.html" >
+                          Tables
+                        </a>
+                        <a class="dropdown-item" href="../carousel.html" >
+                          Carousel
+                        </a>
+                        <a class="dropdown-item" href="../lists.html" >
+                          Lists
+                        </a>
+                        <a class="dropdown-item" href="../typography.html" >
+                          Typography
+                        </a>
+                        <a class="dropdown-item" href="../markdown.html" >
+                          Markdown
+                        </a>
+                        <div class="dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                            Authentication
+                          </a>
+                          <div class="dropdown-menu">
+                            <a href="../sign-in.html" class="dropdown-item">Sign in</a>
+                            <a href="../sign-up.html" class="dropdown-item">Sign up</a>
+                            <a href="../forgot-password.html" class="dropdown-item">Forgot password</a>
+                            <a href="../terms-of-service.html" class="dropdown-item">Terms of service</a>
+                            <a href="../auth-lock.html" class="dropdown-item">Lock screen</a>
+                          </div>
+                        </div>
+                        <div class="dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#sidebar-error" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                            Error pages
+                          </a>
+                          <div class="dropdown-menu">
+                            <a href="../error-404.html" class="dropdown-item">404 page</a>
+                            <a href="../error-500.html" class="dropdown-item">500 page</a>
+                            <a href="../error-maintenance.html" class="dropdown-item">Maintenance page</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../form-elements.html" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 11 12 14 20 6" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Form elements
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Extra
+                    </span>
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="../activity.html" >
+                      Activity
+                    </a>
+                    <a class="dropdown-item" href="../gallery.html" >
+                      Gallery
+                    </a>
+                    <a class="dropdown-item" href="../invoice.html" >
+                      Invoice
+                    </a>
+                    <a class="dropdown-item" href="../search-results.html" >
+                      Search results
+                    </a>
+                    <a class="dropdown-item" href="../pricing.html" >
+                      Pricing cards
+                    </a>
+                    <a class="dropdown-item" href="../users.html" >
+                      Users
+                    </a>
+                    <a class="dropdown-item" href="../license.html" >
+                      License
+                    </a>
+                    <a class="dropdown-item" href="../music.html" >
+                      Music
+                    </a>
+                    <a class="dropdown-item" href="../widgets.html" >
+                      Widgets
+                    </a>
+                    <a class="dropdown-item" href="../wizard.html" >
+                      Wizard
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="4" width="6" height="5" rx="2" /><rect x="4" y="13" width="6" height="7" rx="2" /><rect x="14" y="4" width="6" height="7" rx="2" /><rect x="14" y="15" width="6" height="5" rx="2" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Layout
+                    </span>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                      <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="../layout-horizontal.html" >
+                          Horizontal
+                        </a>
+                        <a class="dropdown-item" href="../layout-vertical.html" >
+                          Vertical
+                        </a>
+                        <a class="dropdown-item" href="../layout-vertical-transparent.html" >
+                          Vertical transparent
+                        </a>
+                        <a class="dropdown-item" href="../layout-vertical-right.html" >
+                          Right vertical
+                        </a>
+                        <a class="dropdown-item" href="../layout-condensed.html" >
+                          Condensed
+                        </a>
+                        <a class="dropdown-item" href="../layout-condensed-dark.html" >
+                          Condensed dark
+                        </a>
+                        <a class="dropdown-item" href="../layout-combo.html" >
+                          Combined
+                        </a>
+                      </div>
+                      <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="../layout-navbar-dark.html" >
+                          Navbar dark
+                        </a>
+                        <a class="dropdown-item" href="../layout-navbar-sticky.html" >
+                          Navbar sticky
+                        </a>
+                        <a class="dropdown-item" href="../layout-navbar-overlap.html" >
+                          Navbar overlap
+                        </a>
+                        <a class="dropdown-item" href="../layout-dark.html" >
+                          Dark mode
+                        </a>
+                        <a class="dropdown-item" href="../layout-rtl.html" >
+                          RTL mode
+                        </a>
+                        <a class="dropdown-item" href="../layout-fluid.html" >
+                          Fluid
+                        </a>
+                        <a class="dropdown-item" href="../layout-fluid-vertical.html" >
+                          Fluid vertical
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="../docs/index.html" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><line x1="9" y1="9" x2="10" y2="9" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="15" y2="17" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Documentation
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                <form action="." method="get">
+                  <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Search…" aria-label="Search in website">
                   </div>
                 </form>
               </div>
-              <div class="col-lg order-lg-first">
-                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-wrapper">
+        <div class="container-xl">
+          <!-- Page title -->
+          <div class="page-header d-print-none">
+            <div class="row align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  Documentation
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row gx-lg-4">
+              <div class="d-none d-lg-block col-lg-3">
+                <ul class="nav nav-pills nav-vertical">
                   <li class="nav-item">
-                    <a href="../index.html" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                    <a href="../docs/" class="nav-link">
+                      Introduction
+                    </a>
                   </li>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-box"></i> Interface</a>
-                    <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="../cards.html" class="dropdown-item ">Cards design</a>
-                      <a href="../charts.html" class="dropdown-item ">Charts</a>
-                      <a href="../pricing-cards.html" class="dropdown-item ">Pricing cards</a>
+                    <a href="#menu-base" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
+                      Getting started
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse" id="menu-base">
+                      <li class="nav-item">
+                        <a href="../docs/getting-started.html" class="nav-link">
+                          Getting Started
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/download.html" class="nav-link">
+                          Download
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/browser-support.html" class="nav-link">
+                          Browser Support
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#menu-content" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
+                      Content
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse" id="menu-content">
+                      <li class="nav-item">
+                        <a href="../docs/colors.html" class="nav-link">
+                          Colors
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/typography.html" class="nav-link">
+                          Typography
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/icons.html" class="nav-link">
+                          Icons
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#menu-layout" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
+                      Layout
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse" id="menu-layout">
+                      <li class="nav-item">
+                        <a href="../docs/page-headers.html" class="nav-link">
+                          Page headers
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#menu-forms" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
+                      Form components
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse" id="menu-forms">
+                      <li class="nav-item">
+                        <a href="../docs/form-elements.html" class="nav-link">
+                          Form elements
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/form-helpers.html" class="nav-link">
+                          Form helpers
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/form-validation.html" class="nav-link">
+                          Validation states
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/form-image-check.html" class="nav-link">
+                          Image check
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/form-color-check.html" class="nav-link">
+                          Color check
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/form-selectboxes.html" class="nav-link">
+                          Form selectboxes
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/form-fieldset.html" class="nav-link">
+                          Form fieldset
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#menu-components" class="nav-link" data-bs-toggle="collapse" aria-expanded="true">
+                      Components
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse show" id="menu-components">
+                      <li class="nav-item">
+                        <a href="../docs/alerts.html" class="nav-link">
+                          Alerts
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/avatars.html" class="nav-link">
+                          Avatars
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/badges.html" class="nav-link">
+                          Badges
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/breadcrumb.html" class="nav-link">
+                          Breadcrumb
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/buttons.html" class="nav-link">
+                          Buttons
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/cards.html" class="nav-link active">
+                          Cards
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/carousel.html" class="nav-link">
+                          Carousel
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/dropdowns.html" class="nav-link">
+                          Dropdowns
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/divider.html" class="nav-link">
+                          Divider
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/empty.html" class="nav-link">
+                          Empty states
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/modals.html" class="nav-link">
+                          Modals
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/page-headers.html" class="nav-link">
+                          Page headers
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/progress.html" class="nav-link">
+                          Progress
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/range-slider.html" class="nav-link">
+                          Range slider
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/ribbons.html" class="nav-link">
+                          Ribbons
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/skeleton.html" class="nav-link">
+                          Skeleton
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/spinners.html" class="nav-link">
+                          Spinners
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/steps.html" class="nav-link">
+                          Steps
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/switch-icon.html" class="nav-link">
+                          Switch icon
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/tables.html" class="nav-link">
+                          Tables
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/tabs.html" class="nav-link">
+                          Tabs
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/timelines.html" class="nav-link">
+                          Timelines
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/toasts.html" class="nav-link">
+                          Toasts
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/tooltips.html" class="nav-link">
+                          Tooltips
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#menu-utils" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
+                      Utilities
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse" id="menu-utils">
+                      <li class="nav-item">
+                        <a href="../docs/borders.html" class="nav-link">
+                          Borders
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/cursors.html" class="nav-link">
+                          Cursors
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/interactions.html" class="nav-link">
+                          Interactions
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#menu-plugins" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
+                      Plugins
+                      <span class="nav-link-toggle"></span>
+                    </a>
+                    <ul class="nav nav-pills collapse" id="menu-plugins">
+                      <li class="nav-item">
+                        <a href="../docs/autosize.html" class="nav-link">
+                          Autosize
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/input-mask.html" class="nav-link">
+                          Form input mask
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/flags.html" class="nav-link">
+                          Flags
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/payments.html" class="nav-link">
+                          Payments
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="../docs/charts.html" class="nav-link">
+                          Charts
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a href="../changelog.html" class="nav-link">
+                      Changelog
+                      <span class="badge bg-blue-lt ms-auto">1.0.0-beta3</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-9">
+                <div class="card card-lg">
+                  <div class="card-body">
+                    <div class="markdown">
+                      <div>
+                        <div class="d-flex mb-3">
+                          <h1 class="m-0">Cards</h1>
+                          <p class="ms-auto">
+                            <a href="https://getbootstrap.com/docs/5.0/components/card/" target="_blank" class="d-flex align-items-center">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/external-link -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon pe-1 text-blue" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" /><line x1="10" y1="14" x2="20" y2="4" /><polyline points="15 4 20 4 20 9" /></svg>
+                              Bootstrap documentation
+                            </a>
+                          </p>
+                        </div>
+                        <p>Cards are flexible user interface elements, which help organize content into meaningful sections and make it easier to display on different screen sizes. Cards contain various smaller components, such as images, text, links and buttons and may act as an entry to more detailed information, helping users scan the page quickly and find the most relevant content.</p>
+                      </div>
+                      <h2 id="default-card">Default card</h2>
+                      <p>Use the <code class="language-plaintext highlighter-rouge">.card</code> and <code class="language-plaintext highlighter-rouge">.card-body</code> classes to create a card and use it as the basis for a more advanced card design. A card is a perfect way to organize content and make it look neat and tidy.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-1">
+                            <div class="card">
+                              <div class="card-body">
+                                <p>This is some text within a card body.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="card-padding">Card padding</h2>
+                      <p>You can change the padding of a newly created card. To do it, use the <code class="language-plaintext highlighter-rouge">.card-sm</code>, <code class="language-plaintext highlighter-rouge">.card-md</code> or <code class="language-plaintext highlighter-rouge">.card-lg</code> classes.</p>
+                      <p>Cards with the <code class="language-plaintext highlighter-rouge">.card-sm</code> class are well suited for small items such as widgets, etc., while the <code class="language-plaintext highlighter-rouge">.card-lg</code> class can be used for large blocks of text. Padding will be automatically reduced on small devices, to fit the screen size.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-2">
+                            <div class="space-y">
+                              <div class="card card-sm">
+                                <div class="card-body">
+                                  <p>This is some text within a card body.</p>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-body">
+                                  <p>This is some text within a card body.</p>
+                                </div>
+                              </div>
+                              <div class="card card-md">
+                                <div class="card-body">
+                                  <p>This is some text within a card body.</p>
+                                </div>
+                              </div>
+                              <div class="card card-lg">
+                                <div class="card-body">
+                                  <p>This is some text within a card body.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card card-sm"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card card-md"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card card-lg"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="card-with-title">Card with title</h2>
+                      <p>Add a title to your card by including the <code class="language-plaintext highlighter-rouge">.card-title</code> class within <code class="language-plaintext highlighter-rouge">.card-body</code>. You can also place the title inside the <code class="language-plaintext highlighter-rouge">.card-header</code> element to separate the title from the content with a horizontal line.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-1">
+                            <div class="space-y">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h3 class="card-title">Card title</h3>
+                                  <p>This is some text within a card body.</p>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header">
+                                  <h3 class="card-title">Card title</h3>
+                                </div>
+                                <div class="card-body">
+                                  <p>This is some text within a card body.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card title<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card title<span class="nt">&lt;/h3&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This is some text within a card body.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="card-with-title-and-image">Card with title and image</h2>
+                      <p>To create a more visually appealing card, add a title and an image. Thanks to that, the card will go well with your inteface design and draw users’ attention.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-1">
+                            <div class="card">
+                              <div class="card-img-top img-responsive img-responsive-16by9" style="background-image: url(../static/photos/9f36332564ca271d.jpg)"></div>
+                              <div class="card-body">
+                                <h3 class="card-title">Card with title and image</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+                                  neque pariatur perferendis sed suscipit velit vitae voluptatem.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-img-top img-responsive img-responsive-16by9"</span> <span class="na">style=</span><span class="s">"background-image: url(...)"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card with title and image<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+      neque pariatur perferendis sed suscipit velit vitae voluptatem.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="blog-post-card">Blog post card</h2>
+                      <p>Add an image to your blog post card to make it eye-catching. You can do it by adding the image in the <code class="language-plaintext highlighter-rouge">.card-img-top</code> class. Thanks to the <code class="language-plaintext highlighter-rouge">.d-flex</code> and <code class="language-plaintext highlighter-rouge">.flex-column</code> classes within <code class="language-plaintext highlighter-rouge">.card-body</code>, the author details will be displayed at the bottom of the card.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-1">
+                            <div class="card d-flex flex-column">
+                              <a href="javascript:void(0)">
+                                <img class="card-img-top" src="../static/photos/36e273986ed577b8.jpg" alt="How do you know she is a witch?" />
+                              </a>
+                              <div class="card-body d-flex flex-column">
+                                <h3 class="card-title"><a href="javascript:void(0)">How do you know she is a witch?</a></h3>
+                                <div class="text-muted">Are you suggesting that coconuts migrate? No, no, no! Yes, yes. A bit. But she's got a wart. You ...</div>
+                                <div class="d-flex align-items-center pt-4 mt-auto">
+                                  <span class="avatar" style="background-image: url(../static/avatars/000f.jpg)"></span>
+                                  <div class="ms-3">
+                                    <a href="../profile.html" class="text-body">Maryjo Lebarree</a>
+                                    <div class="text-muted">3 days ago</div>
+                                  </div>
+                                  <div class="ms-auto">
+                                    <a href="javascript:void(0)" class="icon d-none d-md-inline-block ms-3 text-muted">
+                                      <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card d-flex flex-column"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">"card-img-top"</span> <span class="na">src=</span><span class="s">"..."</span> <span class="na">alt=</span><span class="s">"How do you know she is a witch?"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body d-flex flex-column"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>How do you know she is a witch?<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>Are you suggesting that coconuts migrate? No, no, no! Yes, yes. A bit. But she's got a wart. You ...<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"d-flex align-items-center pt-4 mt-auto"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"avatar"</span> <span class="na">style=</span><span class="s">"background-image: url(...)"</span><span class="nt">&gt;&lt;/span&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ms-3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"text-body"</span><span class="nt">&gt;</span>Maryjo Lebarree<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>3 days ago<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ms-auto"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"icon d-none d-md-inline-block ms-3 text-muted"</span><span class="nt">&gt;</span>
+          <span class="c">&lt;!-- Download SVG icon from http://tabler-icons.io/i/heart --&gt;</span>
+          <span class="c">&lt;!-- SVG icon code --&gt;</span>
+        <span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="row-deck">Row deck</h2>
+                      <p>Add the <code class="language-plaintext highlighter-rouge">.row-deck</code> class to <code class="language-plaintext highlighter-rouge">.row</code>, if you want to display several cards next to one another. Thanks to that, they will all have the same height.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-2">
+                            <div class="row row-deck">
+                              <div class="col-md-4">
+                                <div class="card">
+                                  <div class="card-body">Short content</div>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="card">
+                                  <div class="card-body">Extra long content of card. Lorem ipsum dolor sit amet, consetetur sadipscing elitr</div>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="card">
+                                  <div class="card-body">Short content</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row row-deck"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>Short content<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>Extra long content of card. Lorem ipsum dolor sit amet, consetetur sadipscing elitr<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>Short content<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="post-card-with-aside-image">Post card with aside image</h2>
+                      <p>You can also add an image on the left side of the card. To do it, add the <code class="language-plaintext highlighter-rouge">.card-aside</code> class to the element with the <code class="language-plaintext highlighter-rouge">.card</code> class. Then add the image in the <code class="language-plaintext highlighter-rouge">.card-aside-column</code> element and it will be automatically centered and scaled to the right size.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-2">
+                            <div class="card d-flex flex-column">
+                              <div class="row row-0 flex-fill">
+                                <div class="col-md-3">
+                                  <a href="javascript:void(0)">
+                                    <img src="../static/photos/75b555b99d5b38c4.jpg" class="w-100 h-100 object-cover" alt="Card side image" />
+                                  </a>
+                                </div>
+                                <div class="col">
+                                  <div class="card-body">
+                                    <h3 class="card-title"><a href="javascript:void(0)">Shut up!</a></h3>
+                                    <div class="text-muted">Burn her! How do you know she is a witch? You don't frighten us, English pig-dogs! Go and boil yo...</div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                      <span class="avatar" style="background-image: url(../static/avatars/001f.jpg)"></span>
+                                      <div class="ms-3">
+                                        <a href="../profile.html" class="text-body">Egan Poetz</a>
+                                        <div class="text-muted">3 days ago</div>
+                                      </div>
+                                      <div class="ms-auto">
+                                        <a href="javascript:void(0)" class="icon d-none d-md-inline-block ms-3 text-red">
+                                          <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                                        </a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card d-flex flex-column"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row row-0 flex-fill"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-3"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"..."</span> <span class="na">class=</span><span class="s">"w-100 h-100 object-cover"</span> <span class="na">alt=</span><span class="s">"Card side image"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Shut up!<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>Burn her! How do you know she is a witch? You don't frighten us, English pig-dogs! Go and boil yo...<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"d-flex align-items-center pt-4 mt-auto"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"avatar"</span> <span class="na">style=</span><span class="s">"background-image: url(...)"</span><span class="nt">&gt;&lt;/span&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ms-3"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"text-body"</span><span class="nt">&gt;</span>Egan Poetz<span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>3 days ago<span class="nt">&lt;/div&gt;</span>
+          <span class="nt">&lt;/div&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ms-auto"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"icon d-none d-md-inline-block ms-3 text-red"</span><span class="nt">&gt;</span>
+              <span class="c">&lt;!-- Download SVG icon from http://tabler-icons.io/i/heart --&gt;</span>
+              <span class="c">&lt;!-- SVG icon code --&gt;</span>
+            <span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="color-variations">Color variations</h2>
+                      <p>Add a status color to your card, either at the top or on the side of the card, to customise it and make it more eye-catching.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-2">
+                            <div class="row row-deck">
+                              <div class="col-md-6">
+                                <div class="card">
+                                  <div class="card-status-top bg-danger"></div>
+                                  <div class="card-body">
+                                    <h3 class="card-title">Card with top status</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+                                      neque pariatur perferendis sed suscipit velit vitae voluptatem.</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="card">
+                                  <div class="card-status-start bg-green"></div>
+                                  <div class="card-body">
+                                    <h3 class="card-title">Card with side status</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+                                      neque pariatur perferendis sed suscipit velit vitae voluptatem.</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row row-deck"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-status-top bg-danger"</span><span class="nt">&gt;&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card with top status<span class="nt">&lt;/h3&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+          neque pariatur perferendis sed suscipit velit vitae voluptatem.<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-status-start bg-green"</span><span class="nt">&gt;&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card with side status<span class="nt">&lt;/h3&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+          neque pariatur perferendis sed suscipit velit vitae voluptatem.<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="stacked-card">Stacked card</h2>
+                      <p>Use the <code class="language-plaintext highlighter-rouge">card-stacked</code> class to stack up multiple cards, if you want to save screen space or create a visually appealing effect.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-1">
+                            <div class="card card-stacked">
+                              <div class="card-body">
+                                <h3 class="card-title">Stacked card</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+                                  neque pariatur perferendis sed suscipit velit vitae voluptatem.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card card-stacked"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Stacked card<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima
+      neque pariatur perferendis sed suscipit velit vitae voluptatem.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
+                      <h2 id="tabbed-card">Tabbed card</h2>
+                      <p>Organize multiple cards into tabs to be able to display more content in a well-organized way and allow users to alternate between them easily.</p>
+                      <div class="example no_toc_section example-bg">
+                        <div class="example-content">
+                          <div class="example-column example-column-2">
+                            <!-- Cards with tabs component -->
+                            <div class="card-tabs ">
+                              <!-- Cards navigation -->
+                              <ul class="nav nav-tabs">
+                                <li class="nav-item"><a href="#tab-top-1" class="nav-link active" data-bs-toggle="tab">Tab 1</a></li>
+                                <li class="nav-item"><a href="#tab-top-2" class="nav-link" data-bs-toggle="tab">Tab 2</a></li>
+                                <li class="nav-item"><a href="#tab-top-3" class="nav-link" data-bs-toggle="tab">Tab 3</a></li>
+                                <li class="nav-item"><a href="#tab-top-4" class="nav-link" data-bs-toggle="tab">Tab 4</a></li>
+                              </ul>
+                              <div class="tab-content">
+                                <!-- Content of card #1 -->
+                                <div id="tab-top-1" class="card tab-pane active show">
+                                  <div class="card-body">
+                                    <div class="card-title">Content of tab #1</div>
+                                    <p>
+                                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                                    </p>
+                                  </div>
+                                </div>
+                                <!-- Content of card #2 -->
+                                <div id="tab-top-2" class="card tab-pane">
+                                  <div class="card-body">
+                                    <div class="card-title">Content of tab #2</div>
+                                    <p>
+                                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                                    </p>
+                                  </div>
+                                </div>
+                                <!-- Content of card #3 -->
+                                <div id="tab-top-3" class="card tab-pane">
+                                  <div class="card-body">
+                                    <div class="card-title">Content of tab #3</div>
+                                    <p>
+                                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                                    </p>
+                                  </div>
+                                </div>
+                                <!-- Content of card #4 -->
+                                <div id="tab-top-4" class="card tab-pane">
+                                  <div class="card-body">
+                                    <div class="card-title">Content of tab #4</div>
+                                    <p>
+                                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="example-code">
+                        <figure class="highlight">
+                          <pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Cards with tabs component --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-tabs "</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Cards navigation --&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav nav-tabs"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-top-1"</span> <span class="na">class=</span><span class="s">"nav-link active"</span> <span class="na">data-bs-toggle=</span><span class="s">"tab"</span><span class="nt">&gt;</span>Tab 1<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-top-2"</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">data-bs-toggle=</span><span class="s">"tab"</span><span class="nt">&gt;</span>Tab 2<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-top-3"</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">data-bs-toggle=</span><span class="s">"tab"</span><span class="nt">&gt;</span>Tab 3<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-top-4"</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">data-bs-toggle=</span><span class="s">"tab"</span><span class="nt">&gt;</span>Tab 4<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tab-content"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- Content of card #1 --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-top-1"</span> <span class="na">class=</span><span class="s">"card tab-pane active show"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Content of tab #1<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="c">&lt;!-- Content of card #2 --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-top-2"</span> <span class="na">class=</span><span class="s">"card tab-pane"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Content of tab #2<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="c">&lt;!-- Content of card #3 --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-top-3"</span> <span class="na">class=</span><span class="s">"card tab-pane"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Content of tab #3<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="c">&lt;!-- Content of card #4 --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-top-4"</span> <span class="na">class=</span><span class="s">"card tab-pane"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Content of tab #4<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, alias aliquid distinctio dolorem expedita, fugiat hic magni molestiae molestias odit.
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre>
+                        </figure>
+                      </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-lg-auto ms-lg-auto">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item"><a href="../docs/index.html" class="link-secondary">Documentation</a></li>
+                  <li class="list-inline-item"><a href="../license.html" class="link-secondary">License</a></li>
+                  <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
+                  <li class="list-inline-item">
+                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                      Sponsor
+                    </a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-calendar"></i> Components</a>
-                    <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="../maps.html" class="dropdown-item ">Maps</a>
-                      <a href="../icons.html" class="dropdown-item ">Icons</a>
-                      <a href="../store.html" class="dropdown-item ">Store</a>
-                      <a href="../blog.html" class="dropdown-item ">Blog</a>
-                    </div>
+                </ul>
+              </div>
+              <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2021
+                    <a href=".." class="link-secondary">Tabler</a>.
+                    All rights reserved.
                   </li>
-                  <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-file"></i> Pages</a>
-                    <div class="dropdown-menu dropdown-menu-arrow">
-                      <a href="../profile.html" class="dropdown-item ">Profile</a>
-                      <a href="../login.html" class="dropdown-item ">Login</a>
-                      <a href="../register.html" class="dropdown-item ">Register</a>
-                      <a href="../forgot-password.html" class="dropdown-item ">Forgot password</a>
-                      <a href="../400.html" class="dropdown-item ">400 error</a>
-                      <a href="../401.html" class="dropdown-item ">401 error</a>
-                      <a href="../403.html" class="dropdown-item ">403 error</a>
-                      <a href="../404.html" class="dropdown-item ">404 error</a>
-                      <a href="../500.html" class="dropdown-item ">500 error</a>
-                      <a href="../503.html" class="dropdown-item ">503 error</a>
-                      <a href="../email.html" class="dropdown-item ">Email</a>
-                      <a href="../empty.html" class="dropdown-item ">Empty page</a>
-                      <a href="../rtl.html" class="dropdown-item ">RTL mode</a>
-                    </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a href="../form-elements.html" class="nav-link"><i class="fe fe-check-square"></i> Forms</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../gallery.html" class="nav-link"><i class="fe fe-image"></i> Gallery</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../docs/index.html" class="nav-link active"><i class="fe fe-file-text"></i> Documentation</a>
+                  <li class="list-inline-item">
+                    <a href="../changelog.html" class="link-secondary" rel="noopener">v1.0.0-beta3</a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-        </div>
-        <div class="my-3 my-md-5">
-          <div class="container">
-            <div class="page-header">
-              <h1 class="page-title">
-                Documentation
-              </h1>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 order-lg-1 mb-4">
-                <a href="https://github.com/tabler/tabler" class="btn btn-block btn-primary mb-6">
-                  <i class="fe fe-github mr-2"></i>Browse source code
-                </a>
-                <!-- Getting started -->
-                <div class="list-group list-group-transparent mb-0">
-                  <a href="../docs/index.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-flag"></i></span>Introduction</a>
-                </div>
-                <!-- Components -->
-                <div class="list-group list-group-transparent mb-0">
-                  <a href="../docs/alerts.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-alert-triangle"></i></span>Alerts</a>
-                  <a href="../docs/avatars.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-user"></i></span>Avatars</a>
-                  <a href="../docs/buttons.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-plus-square"></i></span>Buttons</a>
-                  <a href="../docs/colors.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-feather"></i></span>Colors</a>
-                  <a href="../docs/cards.html" class="list-group-item list-group-item-action active"><span class="icon mr-3"><i class="fe fe-image"></i></span>Cards</a>
-                  <a href="../docs/charts.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-pie-chart"></i></span>Charts</a>
-                  <a href="../docs/form-components.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-check-square"></i></span>Form components</a>
-                  <a href="../docs/tags.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-tag"></i></span>Tags</a>
-                  <a href="../docs/typography.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-type"></i></span>Typography</a>
-                </div>
-                <div class="d-none d-lg-block mt-6">
-                  <a href="https://github.com/tabler/tabler/edit/dev/src/_docs/cards.md" class="text-muted">Edit this page</a>
-                </div>
-              </div>
-              <div class="col-lg-9">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="text-wrap p-lg-6">
-                      <h2 class="mt-0 mb-4">Cards</h2>
-                      <p>A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display options.</p>
-                      <p>The <code class="highlighter-rouge">.card</code> element is simply a container with a shadow, a border, a radius, and some padding. Built with flexbox, they offer easy alignment and mix well with other Bootstrap components.</p>
-                      <h3 id="default-card">Default card</h3>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-1">
-                          <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title">Card title</h3>
-                            </div>
-                            <div class="card-body">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card title<span class="nt">&lt;/h3&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="advanced-card">Advanced card</h3>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-1">
-                          <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title">Card title</h3>
-                              <div class="card-options">
-                                <a class="btn btn-secondary btn-sm">Action 1</a>
-                                <a class="btn btn-secondary btn-sm ml-2">Action 2</a>
-                              </div>
-                            </div>
-                            <div class="card-body">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-                            </div>
-                            <div class="card-footer">
-                              This is standard card footer
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card title<span class="nt">&lt;/h3&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-options"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-secondary btn-sm"</span><span class="nt">&gt;</span>Action 1<span class="nt">&lt;/a&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-secondary btn-sm ml-2"</span><span class="nt">&gt;</span>Action 2<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-footer"</span><span class="nt">&gt;</span>
-    This is standard card footer
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="blog-post-card">Blog post card</h3>
-                      <p>The best way to make your post eye-catching is adding an image to it. To do so, just add the image with the <code class="highlighter-rouge">.card-img-top</code> class. We’ve added the <code class="highlighter-rouge">.d-flex .flex-column</code> classes to the <code class="highlighter-rouge">.card-body</code> to have the author details be on the bottom of the card.</p>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-1">
-                          <div class="card">
-                            <a href="#"><img class="card-img-top" src="../demo/photos/david-klaasen-54203-500.jpg" alt="And this isn&#39;t my nose. This is a false one." /></a>
-                            <div class="card-body d-flex flex-column">
-                              <h4><a href="#">And this isn't my nose. This is a false one.</a></h4>
-                              <div class="text-muted">Look, my liege! The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migr...</div>
-                              <div class="d-flex align-items-center pt-5 mt-auto">
-                                <div class="avatar avatar-md mr-3" style="background-image: url(../demo/faces/female/18.jpg)"></div>
-                                <div>
-                                  <a href="../profile.html" class="text-default">Rose Bradley</a>
-                                  <small class="d-block text-muted">3 days ago</small>
-                                </div>
-                                <div class="ml-auto text-muted">
-                                  <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i class="fe fe-heart mr-1"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;&lt;img</span> <span class="na">class=</span><span class="s">"card-img-top"</span> <span class="na">src=</span><span class="s">"./demo/photos/david-klaasen-54203-500.jpg"</span> <span class="na">alt=</span><span class="s">"And this isn&amp;#39;t my nose. This is a false one."</span><span class="nt">&gt;&lt;/a&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body d-flex flex-column"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h4&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>And this isn't my nose. This is a false one.<span class="nt">&lt;/a&gt;&lt;/h4&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>Look, my liege! The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migr...<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"d-flex align-items-center pt-5 mt-auto"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar avatar-md mr-3"</span> <span class="na">style=</span><span class="s">"background-image: url(./demo/faces/female/18.jpg)"</span><span class="nt">&gt;&lt;/div&gt;</span>
-      <span class="nt">&lt;div&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"./profile.html"</span> <span class="na">class=</span><span class="s">"text-default"</span><span class="nt">&gt;</span>Rose Bradley<span class="nt">&lt;/a&gt;</span>
-        <span class="nt">&lt;small</span> <span class="na">class=</span><span class="s">"d-block text-muted"</span><span class="nt">&gt;</span>3 days ago<span class="nt">&lt;/small&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ml-auto text-muted"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"icon d-none d-md-inline-block ml-3"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fe fe-heart mr-1"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="row-deck">Row deck</h3>
-                      <p>If you want to create a couple of posts next to each other, add the <code class="highlighter-rouge">.row-deck</code> class to <code class="highlighter-rouge">.row</code>—then they will all have the same height.</p>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-2">
-                          <div class="row row-cards row-deck">
-                            <div class="col-md-4">
-                              <div class="card">
-                                <div class="card-body">Short content</div>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="card">
-                                <div class="card-body">Extra long content of card. Lorem ipsum dolor sit amet, consetetur sadipscing elitr</div>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="card">
-                                <div class="card-body">Short content</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row row-cards row-deck"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>Short content<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>Extra long content of card. Lorem ipsum dolor sit amet, consetetur sadipscing elitr<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>Short content<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="post-card-with-aside-image">Post card with aside image</h3>
-                      <p>You can also add the image on the left side of the card. All you need do to is: add the <code class="highlighter-rouge">.card-aside</code> class to the element with the <code class="highlighter-rouge">.card</code> class. Then add the image in the <code class="highlighter-rouge">.card-aside-column</code> element. No worries, tabler will automatically center it and scale to right size:</p>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-2">
-                          <div class="card card-aside">
-                            <a href="#" class="card-aside-column" style="background-image: url(../demo/photos/david-klaasen-54203-500.jpg)"></a>
-                            <div class="card-body d-flex flex-column">
-                              <h4><a href="#">And this isn't my nose. This is a false one.</a></h4>
-                              <div class="text-muted">Look, my liege! The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migr...</div>
-                              <div class="d-flex align-items-center pt-5 mt-auto">
-                                <div class="avatar avatar-md mr-3" style="background-image: url(../demo/faces/female/18.jpg)"></div>
-                                <div>
-                                  <a href="../profile.html" class="text-default">Rose Bradley</a>
-                                  <small class="d-block text-muted">3 days ago</small>
-                                </div>
-                                <div class="ml-auto text-red">
-                                  <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"><i class="fe fe-heart mr-1"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card card-aside"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"card-aside-column"</span> <span class="na">style=</span><span class="s">"background-image: url(./demo/photos/david-klaasen-54203-500.jpg)"</span><span class="nt">&gt;&lt;/a&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body d-flex flex-column"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h4&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>And this isn't my nose. This is a false one.<span class="nt">&lt;/a&gt;&lt;/h4&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>Look, my liege! The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migr...<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"d-flex align-items-center pt-5 mt-auto"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"avatar avatar-md mr-3"</span> <span class="na">style=</span><span class="s">"background-image: url(./demo/faces/female/18.jpg)"</span><span class="nt">&gt;&lt;/div&gt;</span>
-      <span class="nt">&lt;div&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"./profile.html"</span> <span class="na">class=</span><span class="s">"text-default"</span><span class="nt">&gt;</span>Rose Bradley<span class="nt">&lt;/a&gt;</span>
-        <span class="nt">&lt;small</span> <span class="na">class=</span><span class="s">"d-block text-muted"</span><span class="nt">&gt;</span>3 days ago<span class="nt">&lt;/small&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ml-auto text-red"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"icon d-none d-md-inline-block ml-3"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fe fe-heart mr-1"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;</span>
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="color-variations">Color variations</h3>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-2">
-                          <div class="row row-cards row-deck">
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-status bg-purple"></div>
-                                <div class="card-header">
-                                  <h3 class="card-title">Card status</h3>
-                                </div>
-                                <div class="card-body">
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-status card-status-left bg-blue"></div>
-                                <div class="card-header">
-                                  <h3 class="card-title">Card status on left side</h3>
-                                </div>
-                                <div class="card-body">
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row row-cards row-deck"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-status bg-purple"</span><span class="nt">&gt;&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card status<span class="nt">&lt;/h3&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-md-6"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-status card-status-left bg-blue"</span><span class="nt">&gt;&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card status on left side<span class="nt">&lt;/h3&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="card-with-switch">Card with switch</h3>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-1">
-                          <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title">Card with switch</h3>
-                              <div class="card-options">
-                                <label class="custom-switch m-0">
-                                  <input type="checkbox" value="1" class="custom-switch-input" checked="" />
-                                  <span class="custom-switch-indicator"></span>
-                                </label>
-                              </div>
-                            </div>
-                            <div class="card-body">
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card with switch<span class="nt">&lt;/h3&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-options"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"custom-switch m-0"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">value=</span><span class="s">"1"</span> <span class="na">class=</span><span class="s">"custom-switch-input"</span> <span class="na">checked</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"custom-switch-indicator"</span><span class="nt">&gt;&lt;/span&gt;</span>
-      <span class="nt">&lt;/label&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                      <h3 id="card-with-loader">Card with loader</h3>
-                      <div class="example example-bg">
-                        <div class="example-column example-column-1">
-                          <div class="card">
-                            <div class="card-header">
-                              <h3 class="card-title">Card with loader</h3>
-                            </div>
-                            <div class="card-body">
-                              <div class="dimmer active">
-                                <div class="loader"></div>
-                                <div class="dimmer-content">
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="highlight">
-                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card with loader<span class="nt">&lt;/h3&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"dimmer active"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"loader"</span><span class="nt">&gt;&lt;/div&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"dimmer-content"</span><span class="nt">&gt;</span>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span></code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </footer>
       </div>
-      <div class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="row">
-                <div class="col-6 col-md-3">
-                  <ul class="list-unstyled mb-0">
-                    <li><a href="#">First link</a></li>
-                    <li><a href="#">Second link</a></li>
-                  </ul>
-                </div>
-                <div class="col-6 col-md-3">
-                  <ul class="list-unstyled mb-0">
-                    <li><a href="#">Third link</a></li>
-                    <li><a href="#">Fourth link</a></li>
-                  </ul>
-                </div>
-                <div class="col-6 col-md-3">
-                  <ul class="list-unstyled mb-0">
-                    <li><a href="#">Fifth link</a></li>
-                    <li><a href="#">Sixth link</a></li>
-                  </ul>
-                </div>
-                <div class="col-6 col-md-3">
-                  <ul class="list-unstyled mb-0">
-                    <li><a href="#">Other link</a></li>
-                    <li><a href="#">Last link</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 mt-4 mt-lg-0">
-              Premium and Open Source dashboard template with responsive and high quality UI. For Free!
-            </div>
-          </div>
-        </div>
-      </div>
-      <footer class="footer">
-        <div class="container">
-          <div class="row align-items-center flex-row-reverse">
-            <div class="col-auto ml-lg-auto">
-              <div class="row align-items-center">
-                <div class="col-auto">
-                  <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="../docs/index.html">Documentation</a></li>
-                    <li class="list-inline-item"><a href="../faq.html">FAQ</a></li>
-                  </ul>
-                </div>
-                <div class="col-auto">
-                  <a href="https://github.com/tabler/tabler" class="btn btn-outline-primary btn-sm">Source code</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
-              Copyright © 2018 <a href="..">Tabler</a>. Theme by <a href="https://codecalm.net" target="_blank">codecalm.net</a> All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="../dist/js/tabler.min.js"></script>
   </body>
 </html>
