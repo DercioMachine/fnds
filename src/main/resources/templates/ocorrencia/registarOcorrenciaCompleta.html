@@ -34,7 +34,9 @@
 
           $.ajax({
           type: 'GET',
-          url: 'https://fipag.herokuapp.com/distrito/'+provinciaId,
+         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+          url: 'http://localhost:8081/distrito/'+provinciaId,
+          
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -61,7 +63,10 @@
 
           $.ajax({
           type: 'GET',
-          url: 'https://fipag.herokuapp.com/posto/'+distritoId,
+         url: 'http://localhost:8081/posto/'+distritoId,
+         
+         // url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+          
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -322,7 +327,7 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Designação...">
+                            <input type="text" th:field="*{nomeDoRepresentanteDoGrupo}" class="form-control" placeholder="Designação...">
                         </div>
                     </div>
                 </div>

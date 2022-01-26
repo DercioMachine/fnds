@@ -20,7 +20,10 @@
 
           $.ajax({
           type: 'GET',
-          url: 'https://fipag.herokuapp.com/distrito/'+provinciaId,
+          url: 'http://localhost:8081/distrito/'+provinciaId,
+          
+        //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+         
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -51,7 +54,9 @@
          
           $.ajax({
           type: 'GET',
-          url: 'https://fipag.herokuapp.com/posto/'+distritoId,
+        url: 'http://localhost:8081/posto/'+distritoId,
+         
+        //url: 'http://fipag.herokuapp.com/posto/'+provinciaId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -142,51 +147,54 @@
     </div>
     
     <div class="card">
-        <div style="background:#E6FFFE;" class="card-header">
-            <h3 class="card-title">Editar Ocorrências da Fase 1 e/ou Adicionar as da Fase 2</h3>
+        <div style="background:#04AA6D;" class="card-header">
+            <h3 style="font-weight: bolder;" class="card-title">EDITAR DE OCORRÊNCIA</h3>
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
 		<form th:action="@{/ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
 		
-			<div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
-				<h2 class="card-title" >Dados da Fase 1</h2>
-			</div>
-	                  
 	                  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
 	                  <!-- enctype="multipart/form-data" -->
 
+            <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
+				<h2 class="card-title" >Dados da Ocorrência</h2>
+			</div>
+	                  
+	                 <!--  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">  -->
+	                  <!-- enctype="multipart/form-data" -->
+
             <div class="row" >
-            
-            <div class="col-6 col-sm-4">
+
+                <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="provincia" class="form-label">Província</label>
-                        <select id="provincia" class="form-control custom-select form-select" th:field="*{provincia}" >
+                        <label for="comboboxProvincias" class="form-label">Província</label>
+                        <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
                             <option value="">Selecione a Província...</option>
-                            <option th:each="p : ${provincias}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            <option th:each="p : ${provincias}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label">Distrito</label>
+                        <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
+							<option value="">Selecione o Distrito...</option>
+							 <option th:each="p : ${distritos}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                         </select>
                     </div>
                 </div>
                 
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
-                        <label for="distrito" class="form-label">Distrito</label>
-                        <select id="distrito" class="form-control custom-select form-select" th:field="*{distrito}" >
-                            <option value="">Selecione o Distrito...</option>
-                            <option th:each="d : ${distritos}" 
-	                                    th:value="${d.id}" th:text="${d.designacao}">Maputo</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-6 col-sm-4">
-                    <div class="form-group">
-                        <label for="postoAdministrativo" class="form-label">Posto Administrativo</label>
-                        <select id="postoAdministrativo" class="form-control custom-select form-select" th:field="*{postoAdministrativo}" >
-                            <option value="">Selecione o Posto Administrativo...</option>
-                            <option th:each="p : ${postos}" 
-	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
+                        <select class="form-control custom-select form-select" id="comboboxPosto"  th:field="*{postoAdministrativo}" >
+							<option value="">Selecione o Postos Administrativos...</option>
+							<option th:each="p : ${postos}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                         </select>
                     </div>
                 </div>
@@ -194,7 +202,7 @@
 
             <div class="row">
             
-            <div class="col-6 col-sm-3">
+            <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Comunidade</label>
                         <div class="input-icon">
@@ -209,7 +217,7 @@
                 </div>
                 
                 
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
                         <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
@@ -220,7 +228,7 @@
                     </div>
                 </div>
                 
-                <div class="col-6 col-sm-3">
+                <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Data da Ocorrência: </label>
                         <div class="input-icon">
@@ -233,12 +241,11 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
                 
 	                <div class="col-6 col-sm-12">
 	                    <div class="form-group">
-	                        <label class="form-label">Assunto</label>
+	                        <label class="form-label">Assunto (mínimo 80 Caracteres)</label>
 	                        <div class="input-icon">
 	                                    <span class="input-icon-addon">
 	                                      <i class="fe fe-edit-2"></i>
@@ -249,12 +256,13 @@
 	                        </div>
 	                    </div>
 	                </div>
+	                
 	                </div>
 	                
 	                
 	                
-	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: #E6FFFE" class="mb-2">
-						<h2 class="card-title" >Dados da Fase 2</h2>
+	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
+						<h2 class="card-title" >Dados do Utente</h2>
 					</div>
 	                
 	                
@@ -316,7 +324,7 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Designação...">
+                            <input type="text" th:field="*{nomeDoRepresentanteDoGrupo}" class="form-control" placeholder="Designação...">
                         </div>
                     </div>
                 </div>
@@ -395,19 +403,36 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
-                
-                
                 </div>
+                
+                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
+						<h2 class="card-title" >Dados do dos Anexos</h2>
+				</div>
+				
+				<div class="col-6 col-sm-12">
+                    <div class="form-group">
+                        <label class="form-label">Anexar Doc (Pode Selecionar Vários)</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-calendar"></i>
+                                    </span>
+                            <input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
+                            <p id="num-of-files"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
                 
                 <!-- <input type="file" name="files" multiple /> -->
 
             
             
             <div class="card-footer text-right">
-            <button type="submit" class="btn btn-success">Finalizar </button>
+            <button type="submit" class="btn btn-success">Editar</button>
         </div>
           </form>
           

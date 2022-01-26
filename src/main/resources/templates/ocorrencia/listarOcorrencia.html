@@ -87,6 +87,8 @@
                         <th>Data da Ocorrência</th>
                         <th>Tipo de Ocorrência</th>
                         <th class="w-4">Assunto</th>
+                        <!-- <th class="w-4">Estado</th> -->
+                        <th class="w-4">Estado</th>
                         <th class="w-3">Acção</th>
                         <!--  <th></th> -->
                     </tr>
@@ -99,7 +101,8 @@
                         <td th:text="${p.distrito.designacao}"><span class="text-muted">01401</span></td>
                      <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td> 
+                        <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td>
+                        
                         <td>
 		                            <button type="button" data-target="#exampleModal" class="btn btn-primary btn-sm ml-5" data-container="body"
 		                                    data-toggle="popover" data-placement="top"
@@ -110,7 +113,15 @@
 		                                <span class="fa fa-eye" th:title="${p.descricao}" aria-hidden="true"></span>
 		                            </button>
 		                        </td>
-                       
+		                        
+		                      <td>
+		                      	<button type="button" class="btn btn-sucess btn-sm">
+		                      		<span th:text="${p.estado}"></span>
+		                      	</button>
+					
+							</td>
+                        
+                        <!-- <td th:text="${p.registado}">Auxiliar Contábil</td> --> 
                         
                         
                          <td  align="center">
@@ -119,7 +130,7 @@
                             </a>
                             
                             <a class="icon btn btn-info btn-sm" th:href="${'/ocorrencias/detalhar/'+p.id}">
-                                <i style="color: #fff" aria-hidden="true" class="fa fa-cogs ml-2 "></i>
+                                <i style="color: #fff" aria-hidden="true" class="fa fa-cogs"></i>
                             </a>
                         </td> 
                         

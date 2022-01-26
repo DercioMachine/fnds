@@ -30,11 +30,15 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "comunidade")
 	private String comunidade;
 	
+	
+	@Column(name = "estado")
+	private String estado;
+	
 	@Column(name = "validado")
 	private boolean validado;
 	
-	@Column(name = "valido")
-	private String valido;
+	@Column(name = "registado")
+	private boolean registado;
 	
 	@Column(name = "assunto")
 	private String assunto;
@@ -411,13 +415,20 @@ public class Ocorrencia extends AbstractEntity{
 		this.validado = validado;
 	}
 
-	public String getValido() {
-		return valido;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setValido(String valido) {
-		this.valido = valido;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
-	
-	
+
+	public boolean isRegistado() {
+		return registado;
+	}
+
+	public void setRegistado(boolean registado) {
+		this.registado = registado;
+	}
+
 }

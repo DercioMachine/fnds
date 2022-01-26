@@ -11,14 +11,14 @@
     <!-- Conteudo -->
 
     <div class="card">
-        <div style="background:#04AA6D;" class="card-header">
-            <h3 style="font-weight: bolder;" class="card-title">Detalhes da Ocorrência</h3>
+        <div class="card-header">
+            <h3 class="card-title">Detalhes da Ocorrência</h3>
         </div>
         <div class="card-body">
 		<form th:action="@{/ocorrencias/listar}"
 	                  th:object="${ocorrencia}" method="POST">
 	                  
-	        <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
+	       <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
 
 
             <div class="row" >
@@ -31,26 +31,14 @@
             	</div>
             </div>
             
-             </div>
-             
-             
-             <div style="background: rgba(4, 170, 109,0.3)" class="row col-6 col-sm-12" >
-            
-            <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
-						<h2 class="card-title" >Dados da Ocorrência</h2>
-					</div>
-					
-			</div>
-            
-            <!--BLOCO 2  -->
-             <div class="row" >
-            <div class="col-6 col-sm-4">
+            <div class="col-6 col-sm-12">
             	<div class="form-group">
-            			<span style="font-weight: bolder; ">Estado: </span> <span style="color: green; font-weight: bolder" th:text="${ocorrencia.estado}"></span>
-            			
+            		<!-- <span style="font-size:25px; color: green; font-weight: bolder;">Nr. --> 
+            		</span> <span style="font-size:25px; color: green; font-weight: bolder;" th:text="${ocorrencia.valido}"></span>
             	</div>
             </div>
 
+            <!--BLOCO 1  -->
 
             <div class="col-6 col-sm-4">
             	<div class="form-group">
@@ -59,8 +47,6 @@
             	</div>
             </div>
             
-            <!--BLOCO 3  -->
-            
             
             <div class="col-6 col-sm-4">
             	<div class="form-group">
@@ -68,15 +54,14 @@
             	</div>
             </div>
             
-            </div>
-            
- 		<div class="row" >
+
             <div class="col-6 col-sm-4">
             	<div class="form-group">
             		<span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
             	</div>
             </div>
             
+            <!--BLOCO 2  -->
 
             <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.postoAdministrativo != null && ocorrencia.postoAdministrativo.designacao != null}">
 
@@ -85,23 +70,16 @@
             	</div>
             </div>
             
-               <!--BLOCO 4  -->
-            
             <div class="col-6 col-sm-4">
             	<div class="form-group">
             		<span style="font-weight: bolder;">Comunidade: </span>	<span th:text="${ocorrencia.comunidade}"></span>
             	</div>
             </div>
-            </div>
-             <div style="background: rgba(4, 170, 109,0.3)" class="row col-6 col-sm-12" >
             
-             <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
-				<h2 class="card-title" >Dados do Utente</h2>
-			</div>
-			</div>
+             
             
-              <!--BLOCO   -->
-             <div class="row" >
+              <!--BLOCO 3  -->
+            
             <div class="col-6 col-sm-4">
             	<div class="form-group">
             		<span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
@@ -150,18 +128,6 @@
             		<span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
             	</div>
             </div>
-            
-            </div>
-            
-            <div style="background: rgba(4, 170, 109,0.3)" class="row col-6 col-sm-12" >
-            
-            <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
-						<h2 class="card-title" >Dados do Anexo</h2>
-					</div>
-					
-			</div>
-			
-			<div class="row">
 
 
 				<div class="table-responsive">
@@ -201,12 +167,12 @@
 
 
          <div class="card-footer text-right">
-            <button type="submit" class="btn btn-info" >Voltar</button>
+            <button type="submit" class="btn btn-info" >Fechar</button>
             
-          <a class="btn btn-primary" th:href="${'/ocorrencias/validar/'+ocorrencia.id}" role="button">
+          <!-- <a class="btn btn-primary" th:href="${'/ocorrencias/validar/'+ocorrencia.id}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Validação</span>
-      	</a>
+      	</a> -->
         </div>
 
 
