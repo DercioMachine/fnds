@@ -20,7 +20,7 @@
 
           $.ajax({
           type: 'GET',
-          url: 'http://localhost:8081/distrito/'+provinciaId,
+          url: 'http://localhost:9090/distrito/'+provinciaId,
           
         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
          
@@ -54,7 +54,7 @@
          
           $.ajax({
           type: 'GET',
-        url: 'http://localhost:8081/posto/'+distritoId,
+        url: 'http://localhost:9090/posto/'+distritoId,
          
         //url: 'http://fipag.herokuapp.com/posto/'+provinciaId,
            success: function (result){
@@ -152,7 +152,7 @@
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{/ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
+		<form th:action="@{ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
 		
 	                  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
 	                  <!-- enctype="multipart/form-data" -->
