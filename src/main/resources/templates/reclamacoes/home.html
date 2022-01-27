@@ -247,47 +247,56 @@
                     <h3 style="font-weight: bolder" class="card-title">Percentagem das Ocorrências</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-pie" style="height: 16rem"></div>
+                    <div id="chart-demo-pie" style="height: 16rem"></div>
                 </div>
             </div>
+
             <script>
-                  require(['c3', 'jquery'], function(c3, $) {
-                  	$(document).ready(function(){
-                  		var chart = c3.generate({
-                  			bindto: '#chart-pie', // id of chart wrapper
-                  			data: {
-                  				columns: [
-                  				    // each columns data
-                  					['data1', 63],
-                  					['data2', 44],
-                  					['data3', 12]
-                  				],
-                  				type: 'pie', // default type of chart
-                  				colors: {
-                  					'data1': tabler.colors["red"],
-                  					'data2': tabler.colors["orange"],
-                  					'data3': tabler.colors["green"]
-                  				},
-                  				names: {
-                  				    // name of each serie
-                  					'data1': 'Pendentes',
-                  					'data2': 'Em Andamento',
-                  					'data3': 'Resolvidos'
-                  				}
-                  			},
-                  			axis: {
-                  			},
-                  			legend: {
-                                  show: false, //hide legend
-                  			},
-                  			padding: {
-                  				bottom: 0,
-                  				top: 0
-                  			},
-                  		});
-                  	});
-                  });
-                </script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Resolvidos", "Pendentes", "Em Andamento"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#79a6dc", "#d2e1f3"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
         </div>
     </div>
 
@@ -298,13 +307,13 @@
                     <h3 style="font-weight: bolder" class="card-title">RECLAMAÇÕES POR CATEGORIA</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-demo-pie" style="height: 16rem"></div>
+                    <div id="chart-demo-pie3" style="height: 16rem"></div>
                 </div>
             </div>
             <script>
       // @formatter:off
       document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
       		chart: {
       			type: "donut",
       			fontFamily: 'inherit',
@@ -354,47 +363,54 @@
                     <h3 style="font-weight: bolder" class="card-title">RECLAMAÇÕES POR CANAL DE ENTRADA</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-pie3" style="height: 16rem"></div>
+                    <div id="chart-demo-pie4" style="height: 16rem"></div>
                 </div>
             </div>
             <script>
-                  require(['c3', 'jquery'], function(c3, $) {
-                  	$(document).ready(function(){
-                  		var chart = c3.generate({
-                  			bindto: '#chart-pie3', // id of chart wrapper
-                  			data: {
-                  				columns: [
-                  				    // each columns data
-                  					['data1', 63],
-                  					['data2', 44],
-                  					['data3', 12]
-                  				],
-                  				type: 'pie', // default type of chart
-                  				colors: {
-                  					'data1': tabler.colors["Brown"],
-                  					'data2': tabler.colors["Purple"],
-                  					'data3': tabler.colors["green"]
-                  				},
-                  				names: {
-                  				    // name of each serie
-                  					'data1': 'Pendentes',
-                  					'data2': 'Em Andamento',
-                  					'data3': 'Resolvidos'
-                  				}
-                  			},
-                  			axis: {
-                  			},
-                  			legend: {
-                                  show: false, //hide legend
-                  			},
-                  			padding: {
-                  				bottom: 0,
-                  				top: 0
-                  			},
-                  		});
-                  	});
-                  });
-                </script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie4'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Faturamento", "Perda de Agua", "Ambiental", "Other"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#79a6dc", "#d2e1f3", "#e9ecf1"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
         </div>
     </div>
 
@@ -406,61 +422,81 @@
                 <h3 style="font-weight: bolder" class="card-title">RÁCIO DE RECLAMAÇÕES POR CATEGÓRIA/ESTADO</h3>
             </div>
             <div class="card-body">
-                <div id="chart-bar-rotated" style="height: 16rem"></div>
+                <div id="chart-completion-tasks-9" style="height: 16rem"></div>
             </div>
         </div>
         <script>
-                  require(['c3', 'jquery'], function(c3, $) {
-                  	$(document).ready(function(){
-                  		var chart = c3.generate({
-                  			bindto: '#chart-bar-rotated', // id of chart wrapper
-                  			data: {
-                  				columns: [
-                  				    // each columns data
-                  					['data1', 11, 8, 15, 18, 19, 17],
-                  					['data2', 7, 7, 5, 7, 9, 12]
-                  				],
-                  				type: 'bar', // default type of chart
-                  				colors: {
-                  					'data1': tabler.colors["Brown"],
-                  					'data2': tabler.colors["Beige"],
-                  					'data3': tabler.colors["Grey"],
-                  					'data4': tabler.colors["green"],
-                  					'data5': tabler.colors["black"],
-                  					'data6': tabler.colors["Purple"]
-                  				},
-                  				names: {
-                  				    // name of each serie
-                  					'data1': 'Ambiental',
-                  					'data2': 'Saude e Seguranca',
-                  					'data3': 'Perda de Agua',
-                  					'data4': 'Facturamento',
-                  					'data5': 'Qualidade de Servico',
-                  					'data6': 'Outros'
-                  				}
-                  			},
-                  			axis: {
-                  				x: {
-                  					type: 'category',
-                  					// name of each category
-                  					categories: ['Ambiental', 'Saude e Seguranca', 'Perda de Agua', 'Facturamento', 'Qualidade de Servico', 'Outros']
-                  				},
-                  				rotated: true,
-                  			},
-                  			bar: {
-                  				width: 16
-                  			},
-                  			legend: {
-                                  show: false, //hide legend
-                  			},
-                  			padding: {
-                  				bottom: 0,
-                  				top: 0
-                  			},
-                  		});
-                  	});
-                  });
-                </script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-9'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      			stacked: true,
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		},{
+      			name: "",
+      			data: [113, 42, 65, 54, 76, 65, 35]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4", "#cd201f"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
     </div>
     
     
