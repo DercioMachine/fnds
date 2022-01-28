@@ -9,27 +9,33 @@
 <body>
 <div  layout:fragment="corpo">
 
-    <!-- Conteudo -->
-	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao !='T' }"  role="button">
-		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		<span>Resolver Ocorrência</span>
-	</a>
+
 
 	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report1" th:if="${ocorrencia.resolucao == 'A' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Acompanhar Ocorrência</span>
 	</a>
 
-	<a class="btn btn-primary btn-md mb-3" th:href="${'/ocorrencias/validar/'+ocorrencia.id}"  th:if="${ocorrencia.validado == false }"  role="button">
+	<!-- Conteudo -->
+	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'R' }"  role="button">
+		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		<span>Resolver Ocorrência</span>
+	</a>
+	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'V' }"  role="button">
+		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		<span>Resolver Ocorrência</span>
+	</a>
+
+	<a class="btn btn-primary btn-md mb-3" th:href="${'/ocorrencias/validar/'+ocorrencia.id}"  th:if="${ocorrencia.resolucao == 'P' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Validar Ocorrência</span>
 	</a>
 
     <div class="card">
 
-	 <div th:if="${ocorrencia.resolucao !='P' || ocorrencia.resolucao !='R' }">
-		 <div style="background:#04AA6D;" class="card-header">
-			 <h3 style="font-weight: bolder; color: white"  class="card-title">ACOMPANHAMENTO</h3>
+	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		 <div style="background: #0277BD;" class="card-header">
+			 <h3 style="font-weight: bolder; color: white"   class="card-title">ACOMPANHAMENTO</h3>
 		 </div>
 
 		 <div class="card-body">
@@ -67,8 +73,8 @@
 	 </div>
 
 
-	  <div th:if="${ocorrencia.resolucao !='P' }">
-		  <div style="background:#04AA6D;" class="card-header">
+	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		  <div style="background: #0277BD;" class="card-header">
 			  <h3 style="font-weight: bolder; color: white"  class="card-title">RESOLUÇÃO</h3>
 		  </div>
 
@@ -76,7 +82,7 @@
 			  <div class="row" >
 
 				  <div class="table-responsive">
-					  <table  class="table card-table table-vcenter text-nowrap">
+					  <table  class="table card-table table-vcenter text-nowrap" style="background:white">
 						  <thead>
 						  <tr>
 							  <th class="w-1">Nivel</th>
@@ -109,10 +115,10 @@
 	  </div>
 
 
-	   <div th:if="${ocorrencia.estado !='Validado' }">
+	   <div th:if="${ocorrencia.estado =='Validado'}">
 
-		   <div style="background:#04AA6D;" class="card-header">
-			   <h3 style="font-weight: bolder; color: white"  class="card-title">DADOS DA VALIDAÇÃO</h3>
+		   <div style="background: #0277BD;" class="card-header">
+			   <h3 style="font-weight: bolder; color: white"   class="card-title">DADOS DA VALIDAÇÃO</h3>
 		   </div>
 
 		   <div class="card-body">
@@ -132,7 +138,7 @@
 
 				   <div class="col-6 col-sm-6">
 					   <div class="form-group">
-						   <span style="font-weight: bolder;">Faixa Etária: </span> <span th:text="${ocorrencia.faixaEtaria}"></span>
+						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}"></span>
 					   </div>
 				   </div>
 
@@ -142,13 +148,19 @@
 					   </div>
 				   </div>
 
+				   <div class="col-12 col-sm-12">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Observação: </span><span th:text="${ocorrencia.observacao}"></span>
+					   </div>
+				   </div>
+
 			   </div>
 		   </div>
 
 	   </div>
 
 
-        <div style="background:#04AA6D;" class="card-header">
+        <div style="background: #0277BD;" class="card-header">
             <h3 style="font-weight: bolder; color: white"  class="card-title">DADOS DE REGISTO</h3>
         </div>
 
@@ -213,7 +225,7 @@
 		  </div>
 		</div>
 
-		<div style="background:#04AA6D;" class="card-header">
+		<div style="background: #0277BD;" class="card-header">
 			<h3 style="font-weight: bolder; color: white" class="card-title">DADOS DOS ANEXOS</h3>
 		</div>
 
@@ -299,8 +311,6 @@
 							<button type="submit" class="btn btn-success">Adicionar </button>
 						</div>
 
-
-
 					</div>
 
 				</form>
@@ -357,7 +367,7 @@
 
 								<div class="col-12 col-sm-12">
 									<div class="form-group">
-										<label for="provincia" class="form-label">Responsabilidade</label>
+										<label  class="form-label">Responsabilidade</label>
 										<select  class="form-control custom-select form-select" th:field="*{responsabilidade}" >
 											<option value="">Selecione a Responsavel...</option>
 											<option th:each="p : ${responsaveis}"
@@ -373,7 +383,7 @@
 								<div class="col-lg-12">
 									<div   >
 										<label class="form-label"></label>
-										<input class="form-control" name="id" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
+										<input class="form-control" name="ocorrencia2" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
 									</div>
 								</div>
 
@@ -416,7 +426,7 @@
 			</div>
 	</form>
 
-		<form th:action="@{/cadastrar/resolucao}"	 th:object="${resolver}"  method="POST">
+		<form th:action="@{/cadastrar/acompanhamento}"	 th:object="${resolver}"  method="POST">
 			<div class="modal modal-blur fade" id="modal-report1" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
@@ -430,7 +440,7 @@
 							<div class="form-selectgroup-boxes row mb-3">
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
-										<input type="radio" name="report"  class="form-selectgroup-input" checked>
+										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
 										<span class="form-selectgroup-label d-flex align-items-center p-3">
                     <span class="me-3">
                       <span class="form-selectgroup-check"></span>
@@ -443,7 +453,7 @@
 								</div>
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
-										<input type="radio" name="report"  class="form-selectgroup-input">
+										<input type="radio" name="report" value="true"  class="form-selectgroup-input">
 										<span class="form-selectgroup-label d-flex align-items-center p-3">
                     <span class="me-3">
                       <span class="form-selectgroup-check"></span>
@@ -459,10 +469,19 @@
 						<div class="modal-body">
 							<div class="row">
 
+								<div class="col-12 col-sm-12">
+									<div class="form-group">
+										<select hidden class="form-control custom-select form-select" th:field="*{responsabilidade}" >
+											<option th:each="p : ${responsaveis}"
+													th:value="3" th:text="${p.responsavel}">Maputo</option>
+										</select>
+									</div>
+								</div>
+
 								<div class="col-lg-12">
 									<div   >
 										<label class="form-label"></label>
-										<input class="form-control" name="id" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
+										<input class="form-control" name="ocorrencia2" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
 									</div>
 								</div>
 

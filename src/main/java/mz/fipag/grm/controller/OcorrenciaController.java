@@ -154,14 +154,14 @@ public class OcorrenciaController {
 
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, @RequestParam("files") MultipartFile[] files) {
+	public String salvarOcorrencia(Ocorrencia ocorrencia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
 
     		ocorrencia.setRegistado(true);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.salvar(ocorrencia);
 
     	for(MultipartFile file: files) {
-            docStorageService.saveFile(file, ocorrencia);
+            docStorageService.saveFile(file, ocorrencia, descricao);
         }
 
     	return "redirect:/listar/ocorrencia";
@@ -208,17 +208,48 @@ public class OcorrenciaController {
         return "ocorrencia/resolucao";
     }
 
+    @PostMapping("/cadastrar/acompanhamento")
+    public String cadastrarAcompanhamento(Ocorrencia ocorrencia,
+                                     Resolucao resolucao,
+                                     @RequestParam long ocorrencia2,
+                                     @RequestParam boolean report
+    ) {
+
+        ocorrencia = ocorrenciaService.buscarPorId(ocorrencia2);
+
+        System.out.println("Mostrar o valor de report"+report);
+
+
+        if(report == true){
+
+            resolucao.setOcorrencia(ocorrencia);
+            resolucaoRepository.save(resolucao);
+            ocorrencia.setResolucao("T");
+            ocorrenciaService.salvar(ocorrencia);
+
+
+        }else{
+
+            ocorrencia.setResolucao("A");
+            resolucao.setTipo("A");
+            resolucao.setOcorrencia(ocorrencia);
+            resolucaoRepository.save(resolucao);
+            ocorrenciaService.salvar(ocorrencia);
+
+
+        }
+
+        return "redirect:/resolver/ocorrencia/"+ocorrencia2;
+    }
+
     @PostMapping("/cadastrar/resolucao")
     public String cadastrarResolucao(Ocorrencia ocorrencia,
                                      Resolucao resolucao,
-                                     @RequestParam long id,
+                                     @RequestParam long ocorrencia2,
                                      @RequestParam boolean report
                                      ) {
 
-      ocorrencia = ocorrenciaService.buscarPorId(id);
-
-      System.out.println("id Resolucao: "+resolucao.getResponsabilidade().getLevel());
-      System.out.println("id Resolucao: "+resolucao.getResponsabilidade());
+      ocorrencia = ocorrenciaService.buscarPorId(ocorrencia2);
 
 
         if(report == true){
@@ -242,7 +273,7 @@ public class OcorrenciaController {
             ocorrenciaService.salvar(ocorrencia);
         }
 
-        return "redirect:/resolver/ocorrencia/"+id;
+        return "redirect:/resolver/ocorrencia/"+ocorrencia2;
     }
 
     @PostMapping("/anexos/resolucao")
@@ -314,6 +345,7 @@ public class OcorrenciaController {
     	
     		ocorrencia.setValidado(true);
         	ocorrencia.setEstado("Validado");
+        	ocorrencia.setResolucao("V");
             ocorrenciaService.editar(ocorrencia);
 
             return "redirect:/listar/ocorrencia";

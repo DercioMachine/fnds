@@ -17,7 +17,7 @@ public class DocStorageService {
 	@Autowired
 	private DocRepository docRepository;
 	
-	public Doc saveFile(MultipartFile file, Ocorrencia ocorrencia) {
+	public Doc saveFile(MultipartFile file, Ocorrencia ocorrencia, String descricao) {
 		String docname = file.getOriginalFilename();
 		String tipo = file.getContentType();
 		
@@ -28,7 +28,8 @@ public class DocStorageService {
 			Doc doc = new Doc();
 			doc.setOcorrencia(ocorrencia);
 			doc.setDocName(docname);
-			doc.setFase("O");
+			doc.setDescricao(descricao);
+			doc.setFase("Registo");
 			doc.setDocType(tipo);
 			doc.setData(dado);
 			

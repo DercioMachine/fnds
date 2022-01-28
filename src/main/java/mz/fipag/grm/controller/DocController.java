@@ -36,9 +36,9 @@ public class DocController {
 	
 	//@PostMapping("/uploadFiles")
 	@PostMapping("/upload/ficheiro")
-	public String uploadMultipleFiles (@RequestParam("files") MultipartFile[] files, Ocorrencia ocorrencia) {
+	public String uploadMultipleFiles (@RequestParam("files") MultipartFile[] files, Ocorrencia ocorrencia,@RequestParam("descricao") String descricao) {
 		for(MultipartFile file: files) {
-			docStorageService.saveFile(file, ocorrencia);
+			docStorageService.saveFile(file, ocorrencia, descricao);
 		}
 		return "redirect:/listar/ficheiro";
 	}

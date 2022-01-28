@@ -34,7 +34,7 @@ public class Ocorrencia extends AbstractEntity{
 	private String projectoOperacao;
 
 	@Column(name = "resolucao")
-	private String resolucao="R";
+	private String resolucao="P";
 	
 	
 	@Column(name = "estado")
