@@ -1,8 +1,8 @@
 package mz.fipag.grm.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Date;
+
 
 @SuppressWarnings("serial")
 @Entity
@@ -15,8 +15,62 @@ public class Resolucao extends AbstractEntity{
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "level")
-    private String level;
+    @Column(name = "mediador")
+    private String mediador;
+
+    @Column(name = "tipo")
+    private String tipo;
+
+    @Column(name = "dataresolucao")
+    private Date dataResolucao;
+
+    @ManyToOne
+    @JoinColumn(name="responsabilidade_id")
+    private Responsabilidade responsabilidade;
+
+    @ManyToOne
+    @JoinColumn(name="ocorrencia_id")
+    private Ocorrencia ocorrencia;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getMediador() {
+        return mediador;
+    }
+
+    public void setMediador(String mediador) {
+        this.mediador = mediador;
+    }
+
+    public Date getDataResolucao() {
+        return dataResolucao;
+    }
+
+    public void setDataResolucao(Date dataResolucao) {
+        this.dataResolucao = dataResolucao;
+    }
+
+    public Responsabilidade getResponsabilidade() {
+        return responsabilidade;
+    }
+
+    public void setResponsabilidade(Responsabilidade responsabilidade) {
+        this.responsabilidade = responsabilidade;
+    }
+
+    public Ocorrencia getOcorrencia() {
+        return ocorrencia;
+    }
+
+    public void setOcorrencia(Ocorrencia ocorrencia) {
+        this.ocorrencia = ocorrencia;
+    }
 
     public String getDesignacao() {
         return designacao;
@@ -34,11 +88,5 @@ public class Resolucao extends AbstractEntity{
         this.descricao = descricao;
     }
 
-    public String getLevel() {
-        return level;
-    }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
 }

@@ -90,17 +90,17 @@
               <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
                <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
                     <thead>
-                    <tr>
-                        <th class="w-1">No.</th>
-                        <th>Província</th>
-                        <th>Distrito</th>
-                        <th>Cadastro</th>
-                        <th>Ocorrência</th>
-                        <th>Tipo</th>
-                        <th>Natureza</th>
-                        <th class="w-4">Assunto</th>
-                        <th class="w-4">Estado</th>
-                        <th class="w-3">Acção</th>
+                    <tr style="color: rgb(65,105,225)">
+                        <td class="w-1">No.</td>
+                        <td >Província</td>
+                        <td >Distrito</td>
+                        <td>Cadastro</td>
+                        <td>Ocorrência</td>
+                        <td>Tipo</td>
+                        <td>Natureza</td>
+                        <td class="w-4">Assunto</td>
+                        <td class="w-4">Estado</td>
+                        <td class="w-3">Acção</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -141,6 +141,11 @@
                             <a class="icon btn btn-info" th:href="${'/ocorrencias/detalhar/'+p.id}">
                                 <i style="color: #fff" aria-hidden="true" class="fa fa-cog"></i>
                             </a>
+
+                             <a class="icon btn btn-info btn-sm" th:href="${'/resolver/ocorrencia/'+p.id}">
+                                 <i style="color: #fff" aria-hidden="true" class="fa fa-cogs"></i>
+                             </a>
+
                         </td> 
                         
                         

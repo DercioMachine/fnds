@@ -1,8 +1,12 @@
 package mz.fipag.grm.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import mz.fipag.grm.domain.*;
+import mz.fipag.grm.repository.*;
+import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -65,10 +69,16 @@ public class OcorrenciaController {
 
     @Autowired
     private TipoAlertaService tipoAlertaService;
-    
+
+    @Autowired
+    private ResponsabilidadeRepository responsabilidadeRepository;
+
     @Autowired
     private PostoAdministrativoService postoAdminService;
-    
+
+    @Autowired
+    private ResolucaoRepository resolucaoRepository;
+
     @Autowired
     private TipoOcorrenciaService tipoDeOcorrenciasService;
 
@@ -83,13 +93,14 @@ public class OcorrenciaController {
     
     @Autowired
     private CidadeService cidadeService;
+    private long responsavel;
 
     @GetMapping("/listar/ocorrencia")
     public String listarOcorrencia(ModelMap model, @RequestParam("page") Optional<Integer> page){
 
     	int paginaActual = page.orElse(1);
 		PaginacaoUtil<Ocorrencia> pageOcorrencia = ocorrenciaService.buscaPorPagina(paginaActual);
-		
+
 		model.addAttribute("pageOcorrencia", pageOcorrencia);
         //model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
 
@@ -185,7 +196,72 @@ public class OcorrenciaController {
 	  
 	  return "ocorrencia/editarOcorrencia"; 
 	  }
-    
+
+    @GetMapping("/resolver/ocorrencia/{id}")
+    public String resolverOcorrencia(@PathVariable("id") Long id, ModelMap model) {
+
+        model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+        model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
+        model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(id));
+        model.addAttribute("resolver", new Resolucao());
+        model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
+
+        return "ocorrencia/resolucao";
+    }
+
+    @PostMapping("/cadastrar/resolucao")
+    public String cadastrarResolucao(Ocorrencia ocorrencia,
+                                     Resolucao resolucao,
+                                     @RequestParam long id,
+                                     @RequestParam boolean report
+                                     ) {
+
+      ocorrencia = ocorrenciaService.buscarPorId(id);
+
+      System.out.println("id Resolucao: "+resolucao.getResponsabilidade().getLevel());
+      System.out.println("id Resolucao: "+resolucao.getResponsabilidade());
+
+
+        if(report == true){
+
+            if(resolucao.getResponsabilidade().getId() == 3){
+                ocorrencia.setResolucao("A");
+                resolucao.setTipo("A");
+            }else{
+                ocorrencia.setResolucao("R");
+                resolucao.setTipo("R");
+            }
+            resolucao.setOcorrencia(ocorrencia);
+            resolucaoRepository.save(resolucao);
+            ocorrenciaService.salvar(ocorrencia);
+
+        }else{
+
+            resolucao.setOcorrencia(ocorrencia);
+            resolucaoRepository.save(resolucao);
+            ocorrencia.setResolucao("T");
+            ocorrenciaService.salvar(ocorrencia);
+        }
+
+        return "redirect:/resolver/ocorrencia/"+id;
+    }
+
+    @PostMapping("/anexos/resolucao")
+    public String anexarResolucao(Ocorrencia ocorrencia,
+                                  @RequestParam long ocorrencia2,
+                                  @RequestParam String descricao,
+                                  @RequestParam String fase,
+                                  @RequestParam("files") MultipartFile[] files) {
+
+        ocorrencia = ocorrenciaService.buscarPorId(ocorrencia2);
+
+        for(MultipartFile file: files) {
+            docStorageService.saveFileResolucao(file, ocorrencia,descricao,fase);
+        }
+
+        return "redirect:/resolver/ocorrencia/"+ocorrencia2;
+    }
+
     
     @PostMapping("/ocorrencias/fase2")
     public String editarOcorrenciaFase2Vista(Ocorrencia ocorrencia) {

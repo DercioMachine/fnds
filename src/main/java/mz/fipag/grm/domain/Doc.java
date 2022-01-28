@@ -13,6 +13,8 @@ public class Doc extends AbstractEntity{
 
 	private String docName;
 	private String docType;
+	private String descricao;
+
 	
 	@ManyToOne
 	@JoinColumn(name="ocorrencia_id")
@@ -22,8 +24,14 @@ public class Doc extends AbstractEntity{
 	
 	@Lob
 	private byte[] data;
-	
-	
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 	public String getDocName() {
 		return docName;

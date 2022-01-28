@@ -32,6 +32,9 @@ public class Ocorrencia extends AbstractEntity{
 	
 	@Column(name = "projecto_operacao")
 	private String projectoOperacao;
+
+	@Column(name = "resolucao")
+	private String resolucao="R";
 	
 	
 	@Column(name = "estado")
@@ -148,7 +151,14 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
 	private Empreiteiro empreiteiro;
-	
+
+	public String getResolucao() {
+		return resolucao;
+	}
+
+	public void setResolucao(String resolucao) {
+		this.resolucao = resolucao;
+	}
 
 	public String getGrmStamp() {
 		return grmStamp;

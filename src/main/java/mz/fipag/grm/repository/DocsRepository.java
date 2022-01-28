@@ -12,4 +12,7 @@ public interface DocsRepository extends CrudRepository<Doc, Long> {
 
     @Query(value="select * from docs where ocorrencia_id=:id", nativeQuery=true)
     public List<Doc> findAllById(@Param("id") Long id);
+
+    @Query(value="select * from docs where ocorrencia_id=:id", nativeQuery=true)
+    public List<Doc> findAllByIdResolucao(@Param("id") Long id);
 }

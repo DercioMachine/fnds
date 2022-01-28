@@ -28,9 +28,33 @@ public class DocStorageService {
 			Doc doc = new Doc();
 			doc.setOcorrencia(ocorrencia);
 			doc.setDocName(docname);
+			doc.setFase("O");
 			doc.setDocType(tipo);
 			doc.setData(dado);
 			
+			return docRepository.save(doc);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Doc saveFileResolucao(MultipartFile file, Ocorrencia ocorrencia, String descricao,String fase) {
+		String docname = file.getOriginalFilename();
+		String tipo = file.getContentType();
+
+
+		try {
+			byte[] dado = file.getBytes();
+
+			Doc doc = new Doc();
+			doc.setOcorrencia(ocorrencia);
+			doc.setDocName(docname);
+			doc.setDescricao(descricao);
+			doc.setFase(fase);
+			doc.setDocType(tipo);
+			doc.setData(dado);
+
 			return docRepository.save(doc);
 		} catch (Exception e) {
 			e.printStackTrace();
