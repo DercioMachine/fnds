@@ -147,6 +147,40 @@
       			
       		}
       	}
+      	
+      	
+      	function onChangeProjecto(){
+      		var estado = document.getElementById("radioProjecto");
+      		
+      		
+      		if(estado.value=="projecto"){
+      			document.getElementById("projectoo").style.display="block";
+      			document.getElementById("cidadee").style.display="block";
+      			document.getElementById("empreiteiroo").style.display="none";
+      			
+      		}else{
+      			document.getElementById("projectoo").style.display="none";
+      			document.getElementById("empreiteiroo").style.display="block";
+      			document.getElementById("cidadee").style.display="none";
+      		}
+      	}
+      		
+      		function onChangeOperacao(){
+          		var estado = document.getElementById("radioOperacao");
+          		
+          		
+          		if(estado.value=="operacao"){
+          			document.getElementById("empreiteiroo").style.display="block";
+          			document.getElementById("cidadee").style.display="block";
+          			document.getElementById("projectoo").style.display="none";
+          		}else{
+          			document.getElementById("empreiteiroo").style.display="none";
+          			document.getElementById("projectoo").style.display="block";
+          			document.getElementById("cidadee").style.display="none";
+          		}
+      		
+      	}
+      	
       </script>
     <!-- Conteudo -->
     
@@ -171,8 +205,59 @@
 	                  
 	                 <!--  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">  -->
 	                  <!-- enctype="multipart/form-data" -->
+	                  
+            
+            <div>
+            	<div class="form-check-inline ">
+			  <label class="form-check-label">
+			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" type="radio" value="projecto" class="form-check-input" name="optradio">Projecto
+			  </label>
+			</div>
+			
+			<div class="form-check-inline mb-2">
+			  <label class="form-check-label">
+			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" name="optradio">Operação
+			  </label>
+			</div>
+			
+			</div>
 
             <div class="row" >
+            
+            <div style="display: none;" id="projectoo" class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="projecto" class="form-label">Projecto</label>
+                        <select id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
+                            <option value="">Selecione o Projecto...</option>
+                            <option th:each="p : ${projectos}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="display: none;" id="empreiteiroo" class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="empreiteiro" class="form-label">Empreiteiro</label>
+                        <select id="empreiteiro" class="form-control custom-select form-select" th:field="*{empreiteiro}" >
+                            <option value="">Selecione o Empreiteiro...</option>
+                            <option th:each="p : ${empreiteiros}"
+                                    th:value="${p.id}" th:text="${p.nome}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="display: none;" id="cidadee" class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <select id="cidade" class="form-control custom-select form-select" th:field="*{cidade}" >
+                            <option value="">Selecione a Cidade...</option>
+                            <option th:each="p : ${cidades}"
+                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                
 
                 <div class="col-6 col-sm-4">
                     <div class="form-group">

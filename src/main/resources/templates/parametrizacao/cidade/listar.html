@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+    
+    <style>
+    
+#categorias {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#categorias td, #categorias th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#categorias tr:nth-child(even){background-color: #f2f2f2;}
+
+#categorias tr:hover {background-color: #ddd;}
+
+#categorias th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #a7ebaa;
+  color: white;
+}
+</style>
+    
+    
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+    
+    	
+
+    <div class="col-12">
+    
+    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/cidade}" role="button">
+		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		     <span>Nova Cidade</span>
+		</a> 
+    
+        <div class="card">
+            <div style="background:#04AA6D;" class="card-header">
+                <h3 style="font-weight:bolder" class="card-title">CIDADES</h3>
+            </div>
+            <div class="table-responsive">
+                <table id="categorias" class="table card-table table-vcenter text-nowrap">
+                    <thead>
+                    <tr>
+                        <th class="w-1">No.</th>
+                        <th>Nome</th>
+                        <th>Província</th>
+                        <th></th>
+                       <!--  <th></th> -->
+                    </tr>
+                    </thead>
+                    <tbody>
+                   <!--  <tr th:each="p : ${categorias}"> -->
+                   <tr th:each="p : ${pageCidade.registros}">
+                   	     <td th:text="${p.id}"><span class="text-muted">01401</span></td>
+                         <td th:text="${p.designacao}">Auxiliar Contábil</td>
+                         <td th:text="${p.provincia.designacao}">Auxiliar Contábil</td>
+                         
+                        <td>
+                            <a class="icon" th:href="${'/cidades/editar/'+p.id}">
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </td>
+                        
+                        <!-- <td>
+                            <a class="icon" th:href="${'/postos/excluir/'+p.id}">
+                                <i class="fe fe-trash-2"></i>
+                            </a>
+                        </td> -->
+                    </tr>
+                    
+                    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <nav aria-label="Page navigation example">
+				  	<ul class="pagination justify-content-center">
+				  	
+				  	 <li th:class="${pageCidade.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/empreiteiro(page=${1})}" tabindex="-1">Primeira</a>
+				    </li>
+				    
+				    <li th:class="${pageCidade.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/cidade(page=${pageCidade.pagina - 1})}" tabindex="-1">Anterior</a>
+				    </li>
+				    
+				    <li class="page-item">
+				    	<span class="page-link" th:text="|${pageCidade.pagina} de ${pageCidade.totalDePaginas}|"></span>
+				    </li>
+				    
+				    <li th:class="${pageCidade.pagina == pageCidade.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/cidade(page=${pageCidade.pagina + 1})}">Próxima</a>
+				    </li>
+				    
+				    <li th:class="${pageCidade.pagina == pageCidade.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/cidade(page=${pageCidade.totalDePaginas})}" tabindex="-1">Última</a>
+				    </li>
+				    
+				  </ul>
+				</nav>
+
+    <!-- Conteudo-->
+</div>
+</body>
+</html>

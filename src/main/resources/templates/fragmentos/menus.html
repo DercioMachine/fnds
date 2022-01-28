@@ -1,3 +1,4 @@
+ <meta charset="UTF-8">
 <div class="navbar-expand-md" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="collapse navbar-collapse" id="navbar-menu">
         <div class="navbar navbar-light">
@@ -42,27 +43,44 @@
                     </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" th:href="@{/listar/posto}" >
+                           <!--  <a class="dropdown-item" th:href="@{/listar/posto}" >
                                 Posto Administrativo
-                            </a>
+                            </a> -->
+                            
                             <a class="dropdown-item" th:href="@{/listar/categoria}" >
                                 Categoria
                             </a>
-                            <a class="dropdown-item" th:href="@{/listar/projecto}" >
+                            
+                            <a class="dropdown-item" th:href="@{/listar/cidade}" >
+                                Cidade
+                            </a>
+                            
+                            <a class="dropdown-item" th:href="@{/listar/empreiteiro}" >
+                                Empreiteiro
+                            </a>
+                            
+                             <a class="dropdown-item" th:href="@{/listar/projecto}" >
                                 Projecto
                             </a>
-                            <a class="dropdown-item" th:href="@{/listar/tipoqueixa}" >
-                                Tipo de Queixa
+                            
+                             <a class="dropdown-item" th:href="@{/listar/tipoAlerta}" >
+                                Tipo de Alerta
                             </a>
+                            
                             <a class="dropdown-item" th:href="@{/listar/tipoOcorrencia}" >
                                 Tipo de Ocorrência
                             </a>
-                            <a class="dropdown-item" th:href="@{/listar/tipoAlerta}" >
-                                Tipo de Alerta
+                           
+                            <a class="dropdown-item" th:href="@{/listar/tipoqueixa}" >
+                                Tipo de Queixa
                             </a>
-                            <a class="dropdown-item" th:href="@{/listar/teste}" >
+                            
+                           
+                            
+                            
+                            <!-- <a class="dropdown-item" th:href="@{/listar/teste}" >
                                 teste
-                            </a>
+                            </a> -->
                         </div>
                     </li>
                 </ul>

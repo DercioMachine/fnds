@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+    <!-- Conteudo -->
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Registar Empreiteiro</h3>
+        </div>
+        <div class="card-body">
+		<form th:action="@{/empreiteiros/cadastrar}" 
+	                  th:object="${empreiteiro}" method="POST">
+
+            <div class="row" >
+            
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Nome</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{nome}" class="form-control" placeholder="Escreva o Nome...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Contacto</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{contacto}" class="form-control" placeholder="Escreva o Contacto...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{email}" class="form-control" placeholder="Escreva o Email...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Morada</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{morada}" class="form-control" placeholder="Escreva a Morada...">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="card-footer text-right">
+            <button type="submit" class="btn btn-success">Gravar </button>
+        </div>
+          </form>
+
+
+
+
+
+        </div>
+        
+    </div>
+    <!-- Conteudo-->
+</div>
+</body>
+</html>

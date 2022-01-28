@@ -30,6 +30,9 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "comunidade")
 	private String comunidade;
 	
+	@Column(name = "projecto_operacao")
+	private String projectoOperacao;
+	
 	
 	@Column(name = "estado")
 	private String estado;
@@ -136,6 +139,16 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="tipoAlerta_id")
 	private TipoAlerta tipoAlerta;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="cidade_id")
+	private Cidade cidade;
+	
+	@ManyToOne
+	@JoinColumn(name="empreiteiro_id")
+	private Empreiteiro empreiteiro;
+	
 
 	public String getGrmStamp() {
 		return grmStamp;
@@ -354,6 +367,13 @@ public class Ocorrencia extends AbstractEntity{
 	}
 	
 
+	public String getProjectoOperacao() {
+		return projectoOperacao;
+	}
+
+	public void setProjectoOperacao(String projectoOperacao) {
+		this.projectoOperacao = projectoOperacao;
+	}
 
 	public String getNomeDoRepresentanteDoGrupo() {
 		return nomeDoRepresentanteDoGrupo;
@@ -431,4 +451,20 @@ public class Ocorrencia extends AbstractEntity{
 		this.registado = registado;
 	}
 
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public Empreiteiro getEmpreiteiro() {
+		return empreiteiro;
+	}
+
+	public void setEmpreiteiro(Empreiteiro empreiteiro) {
+		this.empreiteiro = empreiteiro;
+	}
+	
 }
