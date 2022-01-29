@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mz.fipag.grm.dao.OcorrenciaDao;
 import mz.fipag.grm.domain.Ocorrencia;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 @Service
 @Transactional(readOnly = false)
@@ -42,6 +43,11 @@ public class OcorrenciaServiceImpl implements OcorrenciaService{
 	@Transactional(readOnly = false)
 	public List<Ocorrencia> buscarTodos() {
 		return ocorrenciaDao.findAll();
+	}
+
+	@Override
+	public PaginacaoUtil<Ocorrencia> buscaPorPagina(int pagina) {
+		return ocorrenciaDao.buscaPaginada(pagina);
 	}
 
 }

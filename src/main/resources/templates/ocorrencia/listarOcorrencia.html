@@ -10,32 +10,27 @@
     <title>FIPAG</title>
     
     <style>
-    #tabela {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+    
+    /* jQuery loading autocomplete */
+.ui-autocomplete-loading {
+  background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
 }
 
-#tabela td, #tabela th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#tabela tr:nth-child(even){background-color: #f2f2f2;}
-
-#tabela tr:hover {background-color: #ddd;}
-
-#tabela tr{font-weight: bolder;
-
-}
 
 #tabela th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #a7ebaa;
-  color: white;
-  font-weight: bolder;
+  font-size:12px;
+}
+
+
+#tabela tr {
+	background-color: #fff;
+}
+
+#tabela td {
+	background-color: #fff;
 }
 </style>
 
@@ -66,40 +61,54 @@
 
 
     <div class="col-12">
-        <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/ocorrencia}" role="button">
-            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-            <span>Nova Ocorrência</span>
-        </a>
-
         <div class="card">
-            <div style="background:#04AA6D;" class="card-header">
-                <h3 style="font-weight:bolder" class="card-title">OCORRÊNCIAS</h3>
-             <input id="txtSearch" name="keyword" type="text" class="form-control ml-2" width="50%" placeholder="Filtrar...">
+            <div class="card-header">
+                <a class="btn btn-primary btn-md" th:href="@{/registar/ocorrencia}" role="button">
+		            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		            <span>Nova Ocorrência</span>
+        		</a>
+                
             </div>
+            
+            <div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+                      <div class="text-muted">
+                        <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Ocorrências</h3>
+                      </div> 
+                      <div class="ms-auto text-muted">
+                        Procurar:
+                        <div class="ms-2 d-inline-block">
+                          <input id="txtSearch" name="keyword"  type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
+            
+            
             <div class="table-responsive">
-                <table id="tabela" class="table card-table table-vcenter text-nowrap">
+              <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
+               <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
                     <thead>
                     <tr>
                         <th class="w-1">No.</th>
                         <th>Província</th>
                         <th>Distrito</th>
-                        <th>Data de Cadastro</th>
-                        <th>Data da Ocorrência</th>
-                        <th>Tipo de Ocorrência</th>
+                        <th>Cadastro</th>
+                        <th>Ocorrência</th>
+                        <th>Tipo</th>
                         <th>Natureza</th>
                         <th class="w-4">Assunto</th>
-                        <!-- <th class="w-4">Estado</th> -->
                         <th class="w-4">Estado</th>
                         <th class="w-3">Acção</th>
-                        <!--  <th></th> -->
                     </tr>
                     </thead>
                     <tbody>
-                    <!--  <tr th:each="p : ${postos}"> -->
-                    <tr th:each="p : ${ocorrencias}">
-                    <td th:text="${p.id}"><span class="text-muted">01401</span></td>
-                    <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
-                        <td th:text="${p.distrito.designacao}"><span class="text-muted">01401</span></td>
+                     <tr th:each="p : ${pageOcorrencia.registros}">
+<!--                     <tr th:each="p : ${ocorrencias}"> -->
+                    <td style="background: #fff" th:text="${p.id}"><span class="text-muted">01401</span></td>
+                    <td style="background: #fff" th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.distrito.designacao}"><span class="text-muted">01401</span></td>
                      <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td>
@@ -116,6 +125,7 @@
 		                            </button>
 		                        </td>
 		                        
+		                        
 		                      <td>
 		                      	<button type="button" class="btn btn-sucess btn-sm">
 		                      		<span th:text="${p.estado}"></span>
@@ -123,34 +133,21 @@
 					
 							</td>
                         
-                        <!-- <td th:text="${p.registado}">Auxiliar Contábil</td> --> 
-                        
                          <td  align="center">
-                            <a class="icon btn btn-warning btn-sm"  th:href="${'/ocorrencias/fase2/'+p.id}">
-                                <i style="color: #fff" aria-hidden="true" class="fa fa-pencil-square-o"></i>
+                            <a class="icon btn btn-warning"  th:href="${'/ocorrencias/editar/'+p.id}">
+                                <i style="color: #fff" aria-hidden="true" class="fa fa-edit"></i>
                             </a>
                             
-                            <a class="icon btn btn-info btn-sm" th:href="${'/ocorrencias/detalhar/'+p.id}">
-                                <i style="color: #fff" aria-hidden="true" class="fa fa-cogs"></i>
+                            <a class="icon btn btn-info" th:href="${'/ocorrencias/detalhar/'+p.id}">
+                                <i style="color: #fff" aria-hidden="true" class="fa fa-cog"></i>
                             </a>
                         </td> 
                         
                         
-                        <!-- <td>
-                            <a class="icon" th:href="${'/ocorrencias/fase2/'+p.id}">
-                                <i class="fe fe-settings"></i>
-                            </a>
-                        </td> -->
-
-                        <!-- <td>
-                            <a class="icon" th:href="${'/postos/excluir/'+p.id}">
-                                <i class="fe fe-trash-2"></i>
-                            </a>
-                        </td> -->
                     </tr>
 
 
-                    </tbody>
+                    </tbody> 
                 </table>
 
             </div>
@@ -158,6 +155,31 @@
         </div>
     </div>
     
+    <nav aria-label="Page navigation example">
+				  	<ul class="pagination justify-content-center">
+				  	
+				  	 <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link btn" th:href="@{/listar/ocorrencia(page=${1})}" tabindex="-1">Primeira</a>
+				    </li>
+				    
+				    <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina - 1})}" tabindex="-1">Anterior</a>
+				    </li>
+				    
+				    <li class="page-item">
+				    	<span class="page-link" th:text="|${pageOcorrencia.pagina} de ${pageOcorrencia.totalDePaginas}|"></span>
+				    </li>
+				    
+				    <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina + 1})}">Próxima</a>
+				    </li>
+				    
+				    <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+				      <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.totalDePaginas})}" tabindex="-1">Última</a>
+				    </li>
+				    
+				  </ul>
+				</nav>
  
     
     
@@ -169,7 +191,7 @@
  
 	$('#txtSearch').on('keyup',function(){
 		var value = $(this).val();
-		//console.log('Value =' + value);
+		console.log('Value =' + value);
 		
 		var data = FilterFunction(value, ocorrencias);
 		
@@ -181,8 +203,6 @@
 			
 			for(var i = 0; i<data.length; i++){
 				value.toLowerCase();
-				//var ocomunidade = data[i].comunidade.toLowerCase();
-				//var oassunto = data[i].assunto.toLowerCase();
 				
 				var oprovincia = data[i].provincia.designacao.toLowerCase();
 				var odistrito = data[i].distrito.designacao.toLowerCase();
@@ -223,8 +243,55 @@
  
 </script>
 
+<!-- <script type="text/javascript">
+$(document).ready(function () {
+	moment.locale('pt-BR');
+	
+	 var table = $('#tabela').DataTable({
+		 searching: true,
+	    	
+	    	lengthMenu: [5, 10],
+	        processing: true,
+	        serverSide: true,
+	        responsive: true,
+	        
+	        ajax: {
+	            url: '/listar/ocorrencia',
+	            data: 'data'
+	        },
+	        columns: [  
+	        	 {data: 'id'},
+	        	 {data: 'provincia.designacao'},
+	        	 {data: 'distrito.designacao'},
+	        	 {data: 'dataOcorrencia'},
+	        	 {data: 'created'},
+	        	 {data: 'tipoOcorrencia.designacao'},
+	        	 {data: 'projectoOperacao'},
+	        	 {data: 'estado'},
+	        	 {orderable: false, 
+	        		 data: 'id',	
+	        		 "render": function(id) {
+	        			 return '<a class="btn btn-success btn-sm btn-block" href="/ocorrencias/editar/'+ 
+	                    	id +'" role="button"><i class="fa fa-edit"></i></a>';
+	        		 }
+	        	 },
+	        	 {orderable: false,
+	                 data: 'id',
+	                    "render": function(id) {
+	                        return '<a class="btn btn-danger btn-sm btn-block" href="/ocorrencias/detalhar/'+ 
+	                        	id +'" role="button"><i class="fa fa-cog"></i></a>';
+	                    }
+	        	 }
+	             ]
+	         });
+	     });    
+
+</script> -->
+
+
 
     <!-- Conteudo-->
+    
 </div>
 </body>
 </html>

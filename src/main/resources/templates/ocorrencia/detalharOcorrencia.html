@@ -97,9 +97,11 @@
             	</div>
             </div>
             
-            <div class="col-6 col-sm-4">
+            <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.empreiteiro != null &&  ocorrencia.empreiteiro.nome != null}">
             	<div class="form-group">
             			<span style="font-weight: bolder;">Empreiteiro: </span><span th:text="${ocorrencia.empreiteiro.nome}"></span>
+            			
+            			
             	</div>
             </div>
             

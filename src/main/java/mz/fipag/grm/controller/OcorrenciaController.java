@@ -1,13 +1,17 @@
 package mz.fipag.grm.controller;
 
 import java.util.List;
+import java.util.Optional;
 
-import mz.fipag.grm.repository.DocsRepository;
-import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,7 +27,19 @@ import mz.fipag.grm.domain.Provincia;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.repository.DistritoRepository;
+import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.service.CidadeService;
+import mz.fipag.grm.service.DistritoService;
+import mz.fipag.grm.service.DocStorageService;
+import mz.fipag.grm.service.EmpreiterioService;
+import mz.fipag.grm.service.OcorrenciaService;
+import mz.fipag.grm.service.PostoAdministrativoService;
+import mz.fipag.grm.service.ProjectoService;
+import mz.fipag.grm.service.ProvinciaService;
+import mz.fipag.grm.service.TipoAlertaService;
+import mz.fipag.grm.service.TipoOcorrenciaService;
+import mz.fipag.grm.util.PaginacaoUtil;
 
 
 @Controller
@@ -69,9 +85,13 @@ public class OcorrenciaController {
     private CidadeService cidadeService;
 
     @GetMapping("/listar/ocorrencia")
-    public String listarOcorrencia(ModelMap model){
+    public String listarOcorrencia(ModelMap model, @RequestParam("page") Optional<Integer> page){
 
-        model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
+    	int paginaActual = page.orElse(1);
+		PaginacaoUtil<Ocorrencia> pageOcorrencia = ocorrenciaService.buscaPorPagina(paginaActual);
+		
+		model.addAttribute("pageOcorrencia", pageOcorrencia);
+        //model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
 
         return "ocorrencia/listarOcorrencia";
     }
@@ -151,9 +171,9 @@ public class OcorrenciaController {
 	  public String editarCategoria(Ocorrencia ocorrencia) {
     	
 	  
-    		//ocorrencia.setRegistado(true);
-    		//ocorrencia.setEstado("Registado");
-    		ocorrenciaService.salvar(ocorrencia);
+    		ocorrencia.setRegistado(true);
+    		ocorrencia.setEstado("Registado");
+    		ocorrenciaService.editar(ocorrencia);
 		  
 		  return "redirect:/listar/ocorrencia"; 
 	  }
@@ -172,7 +192,7 @@ public class OcorrenciaController {
 
         ocorrenciaService.editar(ocorrencia);
         
-        return "redirect:/listar/ocorrencia2";
+        return "redirect:/listar/ocorrencia";
     }
     
     @GetMapping("/ocorrencias/fase2/{id}")

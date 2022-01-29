@@ -192,39 +192,42 @@
     </div>
 
     <div class="card">
-        <div style="background:#04AA6D;" class="card-header">
+        <div  class="card-header">
             <h3 style="font-weight: bolder;" class="card-title">CADASTRO DE OCORRÊNCIA</h3>
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
 		<form th:action="@{/ocorrencias/cadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 		
-			<div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
-				<h2 class="card-title" >Dados da Ocorrência</h2>
+			<div style="background: rgba(158,197,201,100)">
+				<h2 style=" padding: 0px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
 			</div>
+			<br>
 	                  
 	                 <!--  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">  -->
 	                  <!-- enctype="multipart/form-data" -->
-	                  
+	         <div class="card">
+        <div  class="card-header">       
             
-            <div>
             	<div class="form-check-inline ">
 			  <label class="form-check-label">
-			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" type="radio" value="projecto" class="form-check-input" name="optradio">Projecto
+			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
 			  </label>
 			</div>
 			
-			<div class="form-check-inline mb-2">
+			<div class="form-check-inline">
 			  <label class="form-check-label">
-			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" name="optradio">Operação
+			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
 			  </label>
 			</div>
-			
 			</div>
-
-            <div class="row" >
+			</div>
+			<br>
+			
+			
+			<div class="row">
             
-            <div style="display: none;" id="projectoo" class="col-6 col-sm-4">
+            <div id="projectoo" class="col-6 col-sm-4">
                     <div class="form-group">
                         <label for="projecto" class="form-label">Projecto</label>
                         <select id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
@@ -246,7 +249,7 @@
                     </div>
                 </div>
                 
-                <div style="display: none;" id="cidadee" class="col-6 col-sm-4">
+                <div id="cidadee" class="col-6 col-sm-4">
                     <div class="form-group">
                         <label for="cidade" class="form-label">Cidade</label>
                         <select id="cidade" class="form-control custom-select form-select" th:field="*{cidade}" >
@@ -258,7 +261,6 @@
                 </div>
                 
                 
-
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label for="comboboxProvincias" class="form-label">Província</label>
@@ -287,9 +289,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
             
             <div class="col-6 col-sm-4">
                     <div class="form-group">
@@ -306,7 +306,7 @@
                 </div>
                 
                 
-                <div class="col-6 col-sm-4">
+                <div class="col-6 col-sm-6">
                     <div class="form-group">
                         <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
                         <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
@@ -317,7 +317,7 @@
                     </div>
                 </div>
                 
-                <div class="col-6 col-sm-4">
+                <div class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Data da Ocorrência: </label>
                         <div class="input-icon">
@@ -330,7 +330,11 @@
                         </div>
                     </div>
                 </div>
-
+                
+                </div>
+                
+                
+                <div class="row">
                 
 	                <div class="col-6 col-sm-12">
 	                    <div class="form-group">
@@ -347,17 +351,16 @@
 	                </div>
 	                
 	                </div>
+	                <br>
 	                
-	                
-	                
-	                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
-						<h2 class="card-title" >Dados do Utente</h2>
+	                <div style="background: rgba(158,197,201,100)">
+						<h2 style=" padding: 0px; margin: 0px;" class="card-title" >Dados da Utente</h2>
 					</div>
+					<br>
 	                
 	                
 	                <div class="row">
-	                
-	                <div class="col-6 col-sm-">
+	                <div class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Origem da Ocorrência</label>
                         <select id="origem" onchange="onChangeStatus()" class="form-control custom-select" th:field="*{nomeGrupo}" >
@@ -392,6 +395,8 @@
                         </div>
                     </div>
                 </div>
+                
+                
 
 
                 <div style="display: none" id="nome" class="col-6 col-sm-6">
@@ -428,6 +433,8 @@
                         </select>
                     </div>
                 </div>
+                
+                
                 
                 <div  style="display: none" id="comunicacao" class="col-6 col-sm-6">
                     <div class="form-group">
@@ -468,6 +475,8 @@
                     </div>
                 </div>
                 
+                
+                
                 <div  style="display: none" id="endereco" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Endereço</label>
@@ -492,20 +501,24 @@
                         </div>
                     </div>
                 </div>
+                
                 </div>
                 
-                <div style=" border-bottom: 1px solid #E6FFFE; border-top:1px solid #E6FFFE; background: rgba(4, 170, 109,0.3)" class="mb-2">
-						<h2 class="card-title" >Dados do dos Anexos</h2>
-				</div>
+                <br>
+                
+                <div style="background: rgba(158,197,201,100)">
+						<h2 style=" padding: 0px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
+					</div>
+					<br>
 				
 				<div class="col-6 col-sm-12">
                     <div class="form-group">
-                        <label class="form-label">Anexar Doc (Pode Selecionar Vários)</label>
+                        <label style="display:block;" for="file" class="form-label btn">Anexar Doc (Pode Selecionar Vários)</label>
                         <div class="input-icon">
                                     <span class="input-icon-addon">
                                       <i class="fe fe-calendar"></i>
                                     </span>
-                            <input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
+                            <input style="display:none;" type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
                             <p id="num-of-files"></p>
                         </div>
                     </div>

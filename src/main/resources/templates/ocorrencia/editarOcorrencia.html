@@ -188,7 +188,7 @@
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
+		<form th:action="@{/ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
 		
 	                  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
 	                  <!-- enctype="multipart/form-data" -->
@@ -203,13 +203,13 @@
 	                  <div>
             	<div class="form-check-inline ">
 			  <label class="form-check-label">
-			    <input onchange="onChangeProjecto()" id="radioProjecto" type="radio" value="projecto" class="form-check-input" name="optradio">Projecto
+			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" type="radio" value="projecto" class="form-check-input" name="optradio">Projecto
 			  </label>
 			</div>
 			
 			<div class="form-check-inline mb-2">
 			  <label class="form-check-label">
-			    <input onchange="onChangeOperacao()" id="radioOperacao" type="radio" value="operacao" class="form-check-input" name="optradio">Operação
+			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" name="optradio">Operação
 			  </label>
 			</div>
 			
