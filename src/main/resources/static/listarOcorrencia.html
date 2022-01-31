@@ -29,9 +29,7 @@
 	background-color: #fff;
 }
 
-#tabela td {
-	background-color: #fff;
-}
+
 </style>
 
 
@@ -134,16 +132,16 @@
 							</td>
                         
                          <td  align="center">
-                            <a class="icon btn btn-warning"  th:href="${'/ocorrencias/editar/'+p.id}">
-                                <i style="color: #fff" aria-hidden="true" class="fa fa-edit"></i>
+                            <a th:href="${'/ocorrencias/editar/'+p.id}">
+                                <i aria-hidden="true" class="fa fa-edit"></i>
                             </a>
                             
-                            <a class="icon btn btn-info" th:href="${'/ocorrencias/detalhar/'+p.id}">
-                                <i style="color: #fff" aria-hidden="true" class="fa fa-cog"></i>
+                            <a th:href="${'/ocorrencias/detalhar/'+p.id}">
+                                <i aria-hidden="true" class="fa fa-cog"></i>
                             </a>
 
-                             <a class="icon btn btn-info btn-sm" th:href="${'/resolver/ocorrencia/'+p.id}">
-                                 <i style="color: #fff" aria-hidden="true" class="fa fa-cogs"></i>
+                             <a  th:href="${'/resolver/ocorrencia/'+p.id}">
+                                 <i  aria-hidden="true" class="fas fa-cogs"></i>
                              </a>
 
                         </td> 

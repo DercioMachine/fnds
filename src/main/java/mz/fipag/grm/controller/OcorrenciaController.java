@@ -1,12 +1,8 @@
 package mz.fipag.grm.controller;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import mz.fipag.grm.domain.*;
-import mz.fipag.grm.repository.*;
-import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,11 +24,14 @@ import mz.fipag.grm.domain.Ocorrencia;
 import mz.fipag.grm.domain.PostoAdministrativo;
 import mz.fipag.grm.domain.Projecto;
 import mz.fipag.grm.domain.Provincia;
+import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.repository.ResolucaoRepository;
+import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
