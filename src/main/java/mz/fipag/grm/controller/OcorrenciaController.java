@@ -1,7 +1,9 @@
 package mz.fipag.grm.controller;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,8 +156,18 @@ public class OcorrenciaController {
 
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
+	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
 
+    	
+    	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
+    	int ano = Calendar.getInstance().get(Calendar.YEAR);
+    	
+    	String anoo = String.valueOf(ano);
+    	String anooo= anoo.substring(2, 4);
+    	
+    	
+    	
+    		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
     		ocorrencia.setRegistado(true);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.salvar(ocorrencia);
@@ -217,8 +229,6 @@ public class OcorrenciaController {
 
         ocorrencia = ocorrenciaService.buscarPorId(ocorrencia2);
 
-        System.out.println("Mostrar o valor de report"+report);
-
 
         if(report == true){
 
@@ -251,26 +261,26 @@ public class OcorrenciaController {
 
       ocorrencia = ocorrenciaService.buscarPorId(ocorrencia2);
 
-
         if(report == true){
 
-            if(resolucao.getResponsabilidade().getId() == 3){
-                ocorrencia.setResolucao("A");
-                resolucao.setTipo("A");
-            }else{
-                ocorrencia.setResolucao("R");
-                resolucao.setTipo("R");
-            }
-            resolucao.setOcorrencia(ocorrencia);
-            resolucaoRepository.save(resolucao);
-            ocorrenciaService.salvar(ocorrencia);
-
-        }else{
-
+            
             resolucao.setOcorrencia(ocorrencia);
             resolucaoRepository.save(resolucao);
             ocorrencia.setResolucao("T");
             ocorrenciaService.salvar(ocorrencia);
+
+        }else{
+        	   if(resolucao.getResponsabilidade().getId() == 4){
+                   ocorrencia.setResolucao("A");
+                   resolucao.setTipo("A");
+               }else{
+                   ocorrencia.setResolucao("R");
+                   resolucao.setTipo("R");
+               }
+               resolucao.setOcorrencia(ocorrencia);
+               resolucaoRepository.save(resolucao);
+               ocorrenciaService.salvar(ocorrencia);
+           
         }
 
         return "redirect:/resolver/ocorrencia/"+ocorrencia2;
@@ -348,7 +358,7 @@ public class OcorrenciaController {
         	ocorrencia.setResolucao("V");
             ocorrenciaService.editar(ocorrencia);
 
-            return "redirect:/listar/ocorrencia";
+            return "redirect:/resolver/ocorrencia/"+ocorrencia.getId();
 
     }
 
@@ -401,8 +411,6 @@ public class OcorrenciaController {
 public List<Projecto> listaDeDeProjectos(){
 	return projectoService.buscarTodos();
 }
-
-
 
 
 }

@@ -5,11 +5,42 @@
 <head>
     <meta charset="UTF-8">
     <title>FIPAG</title>
+    
+     <style>
+    
+    /* jQuery loading autocomplete */
+.ui-autocomplete-loading {
+  background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+
+
+#tabela th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  font-size:10px;
+  color: rgb(65,105,225);
+}
+
+
+#tabela tr {
+	background-color: #fff;
+}
+
+
+</style>
+    
+    
 </head>
 <body>
 <div  layout:fragment="corpo">
 
-
+<!-- <div align="right" class="col-12">
+        <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span>Listar Ocorrências</span>
+      	</a>
+    </div> -->
 
 	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report1" th:if="${ocorrencia.resolucao == 'A' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
@@ -34,17 +65,18 @@
     <div class="card">
 
 	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		 <div style="background: #0277BD;" class="card-header">
-			 <h3 style="font-weight: bolder; color: white"   class="card-title">ACOMPANHAMENTO</h3>
-		 </div>
+		 <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
+			</div>
+			<br>
 
 		 <div class="card-body">
 			 <div class="row" >
 
 				 <div class="table-responsive">
-					 <table  class="table card-table table-vcenter text-nowrap">
-						 <thead>
-						 <tr>
+					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+						<thead>
+						 <tr style="color: rgb(65,105,225)">
 							 <th class="w-1">Nivel</th>
 							 <th>Designação</th>
 							 <th>Data Resolução</th>
@@ -74,17 +106,18 @@
 
 
 	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		  <div style="background: #0277BD;" class="card-header">
-			  <h3 style="font-weight: bolder; color: white"  class="card-title">RESOLUÇÃO</h3>
-		  </div>
+		  <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Resolução</h2>
+			</div>
+			<br>
 
 		  <div class="card-body">
 			  <div class="row" >
 
 				  <div class="table-responsive">
-					  <table  class="table card-table table-vcenter text-nowrap" style="background:white">
+					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
 						  <thead>
-						  <tr>
+						   <tr style="color: rgb(65,105,225)">
 							  <th class="w-1">Nivel</th>
 							  <th>Designação</th>
 							  <th>Mediador</th>
@@ -104,6 +137,7 @@
 								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
 							</div>
 						  </tr>
+						  
 
 
 						  </tbody>
@@ -117,9 +151,10 @@
 
 	   <div th:if="${ocorrencia.estado =='Validado'}">
 
-		   <div style="background: #0277BD;" class="card-header">
-			   <h3 style="font-weight: bolder; color: white"   class="card-title">DADOS DA VALIDAÇÃO</h3>
-		   </div>
+		   <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Validação</h2>
+			</div>
+			<br>
 
 		   <div class="card-body">
 			   <div class="row" >
@@ -160,16 +195,23 @@
 	   </div>
 
 
-        <div style="background: #0277BD;" class="card-header">
-            <h3 style="font-weight: bolder; color: white"  class="card-title">DADOS DE REGISTO</h3>
-        </div>
+        <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados do Registo</h2>
+			</div>
+			<br>
 
 		<div class="card-body">
 		  <div class="row" >
-
+		  
+		  <div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.id}"></span>
+				 </div>
+			</div>
+		  
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
-					  <span style="font-weight: bolder;">Número De registo: </span>	<span style="color: red;font-weight: bolder;" th:text="${ocorrencia.id}"></span>
+					  <span style="font-weight: bolder;">Código de registo: </span>	<span th:text="${ocorrencia.grmStamp}"></span>
 				 </div>
 			</div>
 
@@ -225,18 +267,19 @@
 		  </div>
 		</div>
 
-		<div style="background: #0277BD;" class="card-header">
-			<h3 style="font-weight: bolder; color: white" class="card-title">DADOS DOS ANEXOS</h3>
-		</div>
+		<div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
+			</div>
+			<br>
 
 		<div class="card-body">
 
 			<div class="row">
 
 				<div class="table-responsive">
-					<table  class="table card-table table-vcenter text-nowrap">
+					<table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
 						<thead>
-						<tr style="font-size: 150%;">
+						 <tr style="color: rgb(65,105,225)">
 							<th class="w-1">#</th>
 							<th>Designação</th>
 							<th>Descrição</th>
@@ -256,7 +299,7 @@
 							<td th:text="${#dates.format(a.created, 'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
 							<td>
 								<a class="icon" th:href="${'/download/ficheiro/'+a.id}">
-									<i class="fa fa-file-pdf"></i>
+									<i class="fa fa-file"></i>
 								</a>
 							</td>
 
@@ -308,7 +351,7 @@
 
 						<div class="col-2 col-sm-2">
 							<label class="form-label">.</label>
-							<button type="submit" class="btn btn-success">Adicionar </button>
+							<button type="submit" class="btn btn-primary">Adicionar </button>
 						</div>
 
 					</div>
@@ -335,7 +378,7 @@
 							<div class="form-selectgroup-boxes row mb-3">
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
-										<input type="radio" name="report"  class="form-selectgroup-input" checked>
+										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
 										<span class="form-selectgroup-label d-flex align-items-center p-3">
                     <span class="me-3">
                       <span class="form-selectgroup-check"></span>
@@ -349,7 +392,7 @@
 								</div>
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
-										<input type="radio" name="report"  class="form-selectgroup-input">
+										<input type="radio" name="report" value="true" class="form-selectgroup-input">
 										<span class="form-selectgroup-label d-flex align-items-center p-3">
                     <span class="me-3">
                       <span class="form-selectgroup-check"></span>

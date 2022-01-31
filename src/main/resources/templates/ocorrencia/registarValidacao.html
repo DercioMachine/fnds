@@ -151,28 +151,57 @@
       	}
       </script>
     <!-- Conteudo -->
-    
-    <div align="right" class="col-12">
-        <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
-            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-            <span>Listar Ocorrências</span>
-      	</a>
-    </div>
+    <div class="row">
+	    <div align="left" class="col-6">
+	        <a class="btn btn-primary btn-md mb-3" th:href="${'/resolver/ocorrencia/'+ocorrencia.id}" role="button">
+	            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+	            <span>Voltar</span>
+	      	</a>
+	    </div>
+	    
+	    <!-- <div align="right" class="col-6">
+	        <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
+	            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+	            <span>Listar Ocorrências</span>
+	      	</a>
+	    </div> -->
+	   </div>
 
     <div class="card">
-        <div style="background:#E6FFFE;" class="card-header">
-            <h3 class="card-title">Validação da Ocorrência</h3>
-        </div>
+    
+    <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Validação da Ocorrência</h2>
+			</div>
+			<br>
+    
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
 		<form th:action="@{/ocorrencias/validar}" 
 	                  th:object="${ocorrencia}" method="POST">
 		
-	                  
+	                 <input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação..."> 
 	                 <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
 	                  <!-- enctype="multipart/form-data" -->
 
             <div style="display: none;" class="row" >
+            
+           <div class="card">
+        <div  class="card-header">       
+            
+            	<div class="form-check-inline ">
+			  <label class="form-check-label">
+			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
+			  </label>
+			</div>
+			
+			<div class="form-check-inline">
+			  <label class="form-check-label">
+			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
+			  </label>
+			</div>
+			</div>
+			</div>
+			<br>
             
             <div style="display: none;" id="projectoo" class="col-6 col-sm-4">
                     <div class="form-group">
@@ -446,13 +475,13 @@
             <div>
             	<div class="form-check-inline ">
 			  <label class="form-check-label">
-			    <input onchange="onChangeSim()" id="radioSim" type="radio" value="sim" class="form-check-input" name="optradio">Sim
+			    <input onchange="onChangeSim()" id="radioSim" type="radio" value="sim" class="form-check-input" name="optradio"> Sim
 			  </label>
 			</div>
 			
 			<div class="form-check-inline mb-2">
 			  <label class="form-check-label">
-			    <input onchange="onChangeNao()" id="radioNao" type="radio" value="nao" class="form-check-input" name="optradio">Não
+			    <input onchange="onChangeNao()" id="radioNao" type="radio" value="nao" class="form-check-input" name="optradio"> Não
 			  </label>
 			</div>
 			

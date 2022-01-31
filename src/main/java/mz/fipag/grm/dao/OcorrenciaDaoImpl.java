@@ -12,12 +12,12 @@ public class OcorrenciaDaoImpl extends AbstractDao<Ocorrencia, Long> implements 
 
 	@Override
 	public PaginacaoUtil<Ocorrencia> buscaPaginada(int pagina) {
-		int tamanho = 5;
+		int tamanho = 10;
 		int inicio = (pagina-1) * tamanho;
 		
 		List<Ocorrencia> ocorrencias = getEntityManager()
 				
-				.createQuery("select o from Ocorrencia o order by o.created desc", Ocorrencia.class)
+				.createQuery("select o from Ocorrencia o order by o.id desc", Ocorrencia.class)
 				.setFirstResult(inicio)
 				.setMaxResults(tamanho)
 				.getResultList();

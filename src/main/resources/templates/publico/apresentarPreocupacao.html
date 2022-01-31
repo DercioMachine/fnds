@@ -425,7 +425,7 @@ ul li:hover {
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{/ocorrencias/cadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
+		<form th:action="@{/ocorrencias/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 		
 			<div style="background: rgba(158,197,201,100)">
 				<h2 style=" padding: 0px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
