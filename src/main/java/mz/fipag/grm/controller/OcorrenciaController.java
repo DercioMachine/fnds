@@ -153,8 +153,6 @@ public class OcorrenciaController {
     }
 
 
-
-
     @PostMapping("/ocorrencias/cadastrar")
 	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
 
@@ -369,6 +367,13 @@ public class OcorrenciaController {
 
         return "ocorrencia/registarValidacao";
     }
+    
+    
+    @GetMapping("/ocorrencias/excluir/{id}") 
+    public String vistaExcluirCategoria(@PathVariable("id") Long id, ModelMap model) {
+		  ocorrenciaService.excluir(id); 
+		  return "redirect:/listar/ocorrencia"; 
+	  }
 
 
 

@@ -35,7 +35,8 @@
           $.ajax({
           type: 'GET',
          //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-          url: 'pigi.fipag.co.mz/grm/distrito/'+provinciaId,
+         // url: 'pigi.fipag.co.mz/grm/distrito/'+provinciaId,
+          url: 'http://localhost:9090/distrito/'+provinciaId,
           
            success: function (result){
            var result = JSON.parse(result);
@@ -63,8 +64,8 @@
 
           $.ajax({
           type: 'GET',
-         url: 'pigi.fipag.co.mz/grm/posto/'+distritoId,
-         
+        // url: 'pigi.fipag.co.mz/grm/posto/'+distritoId,
+          url: 'http://localhost:9090/posto/'+provinciaId,
          
          // url: 'http://fipag.herokuapp.com/posto/'+distritoId,
           

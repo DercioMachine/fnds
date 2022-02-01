@@ -61,6 +61,11 @@
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Validar Ocorrência</span>
 	</a>
+	
+	<a class="btn btn-danger btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"  th:if="${ocorrencia.estado == 'Temporario' }" role="button">
+		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		<span>Excluir Ocorrência</span>
+	</a>
 
     <div class="card">
 
@@ -560,6 +565,38 @@
 				</div>
 			</div>
 		</form>
+		
+		
+			<div class="modal modal-blur fade" id="modal-reportt" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header" style="background: #0277BD; color: white">
+							<h5 class="modal-title">Exlcusão</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p><strong>Deseja Excluir a Ocorrência?</strong></p>
+							<p>Uma vez excluída não poderá ser excluida</p>
+							
+						</div>
+
+
+						<div class="modal-footer">
+							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+								Não
+							</a>
+							
+							<a class="btn btn-danger btn-md mb-3" th:href="${'/ocorrencias/excluir/'+ocorrencia.id}"  th:if="${ocorrencia.estado == 'Temporario' }"  role="button">
+								<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+								<span>Sim</span>
+							</a>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
 
 
 
@@ -568,6 +605,6 @@
         
     </div>
     <!-- Conteudo-->
-</div>
+
 </body>
 </html>

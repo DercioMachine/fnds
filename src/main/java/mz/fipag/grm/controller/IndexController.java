@@ -1,6 +1,8 @@
 package mz.fipag.grm.controller;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -119,11 +121,22 @@ public class IndexController {
         return "publico/apresentarPreocupacao";
     }
     
+    
     @PostMapping("/ocorrencias/preCadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
+	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
 
-    		ocorrencia.setRegistado(true);
-    		ocorrencia.setEstado("Registado");
+    	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
+    	int ano = Calendar.getInstance().get(Calendar.YEAR);
+    	
+    	String anoo = String.valueOf(ano);
+    	String anooo= anoo.substring(2, 4);
+    	
+    	
+    	
+    		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
+    		ocorrencia.setEstado("Temporario");
+    	
+    		ocorrencia.setTemporario(true);
     		ocorrenciaService.salvar(ocorrencia);
 
     	for(MultipartFile file: files) {

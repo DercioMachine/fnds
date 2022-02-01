@@ -36,6 +36,9 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "resolucao")
 	private String resolucao="P";
 	
+	@Column(name = "temporario")
+	private boolean temporario;
+	
 	
 	@Column(name = "estado")
 	private String estado;
@@ -151,6 +154,15 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
 	private Empreiteiro empreiteiro;
+	
+
+	public boolean isTemporario() {
+		return temporario;
+	}
+
+	public void setTemporario(boolean temporario) {
+		this.temporario = temporario;
+	}
 
 	public String getResolucao() {
 		return resolucao;

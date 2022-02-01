@@ -144,6 +144,11 @@
 		                      	Terminado 
 		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
 		                      	</button>
+		                      	
+		                      	<button style="background: red; color: #fff" th:if="${p.estado == 'Temporario' }" type="button" class="btn btn-sucess btn-sm">
+		                      	Pendente 
+		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+		                      	</button>
 					
 							</td>
                         
@@ -161,6 +166,11 @@
                              <a  th:href="${'/resolver/ocorrencia/'+p.id}">
                                  <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
                              </a>
+                             
+                            <!--  <a  th:id="${'btn_ocorrencias/excluir/'+p.id}" th:if="${p.estado == 'Temporario' }"
+                             data-toggle="modal" data-target="#myModal">
+                                 <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-trash-alt"></i>
+                             </a> -->
 
                         </td> 
                         
@@ -175,6 +185,8 @@
 
         </div>
     </div>
+    
+    <div th:replace="fragmentos/modal :: modal"></div>
     
     <nav aria-label="Page navigation example">
 				  	<ul class="pagination justify-content-center">
@@ -295,10 +307,10 @@
 			}
 		}
 	
- 
+		
+		
+
 </script>
-
-
 
 <!-- <script type="text/javascript">
 $(document).ready(function () {
