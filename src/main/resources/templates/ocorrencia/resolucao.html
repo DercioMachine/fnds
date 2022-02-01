@@ -571,19 +571,19 @@
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header" style="background: #0277BD; color: white">
-							<h5 class="modal-title">Exlcusão</h5>
+							<h5 class="modal-title">Exlcusão</h5><span th:text="${ocorrencia.id}"></span>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 							<p><strong>Deseja Excluir a Ocorrência?</strong></p>
-							<p>Uma vez excluída não poderá ser excluida</p>
+							<p>Uma vez excluída não poderá ser recuperada</p>
 							
 						</div>
 
 
 						<div class="modal-footer">
-							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-								Não
+							<a href="#" class="btn btn-info btn-md mb-3" data-bs-dismiss="modal">
+								<span>Não</span>
 							</a>
 							
 							<a class="btn btn-danger btn-md mb-3" th:href="${'/ocorrencias/excluir/'+ocorrencia.id}"  th:if="${ocorrencia.estado == 'Temporario' }"  role="button">
