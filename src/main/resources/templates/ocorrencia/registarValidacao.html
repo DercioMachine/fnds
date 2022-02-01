@@ -153,7 +153,7 @@
     <!-- Conteudo -->
     <div class="row">
 	    <div align="left" class="col-6">
-	        <a class="btn btn-primary btn-md mb-3" th:href="${'/resolver/ocorrencia/'+ocorrencia.id}" role="button">
+	        <a class="btn btn-primary btn-md mb-3" th:href="@{/resolver/ocorrencia/{id} (id=${ocorrencia.id})}" role="button">
 	            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 	            <span>Voltar</span>
 	      	</a>
