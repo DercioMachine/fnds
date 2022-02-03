@@ -586,7 +586,8 @@
 								<span>Não</span>
 							</a>
 							
-							<a class="btn btn-danger btn-md mb-3" th:href="${'/ocorrencias/excluir/'+ocorrencia.id}"  th:if="${ocorrencia.estado == 'Temporario' }"  role="button">
+							<a class="btn btn-danger btn-md mb-3" th:href="@{/ocorrencias/excluir/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.estado == 'Temporario' }"  role="button">
+								
 								<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 								<span>Sim</span>
 							</a>
