@@ -7,11 +7,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Distrito;
@@ -20,10 +23,12 @@ import mz.fipag.grm.domain.Ocorrencia;
 import mz.fipag.grm.domain.PostoAdministrativo;
 import mz.fipag.grm.domain.Projecto;
 import mz.fipag.grm.domain.Provincia;
+import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.DocsRepository;
+import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
@@ -71,6 +76,9 @@ public class IndexController {
 
 	    @Autowired
 	    private ResolucaoRepository resolucaoRepository;
+	    
+	    @Autowired
+	    private OcorrenciaRepository ocorrenciaRepository;
 
 	    @Autowired
 	    private TipoOcorrenciaService tipoDeOcorrenciasService;
@@ -107,6 +115,12 @@ public class IndexController {
     }
     
    
+    @GetMapping("/buscar/preocupacao")
+    public String bucarPreocupacao(){
+
+        return "publico/acompanharQueixa";
+    }
+    
     @GetMapping("/login")
     public String login(){
 
@@ -123,7 +137,7 @@ public class IndexController {
     
     
     @PostMapping("/ocorrencias/preCadastrar")
-	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
+	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
 
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
     	int ano = Calendar.getInstance().get(Calendar.YEAR);
@@ -137,14 +151,59 @@ public class IndexController {
     		ocorrencia.setEstado("Temporario");
     	
     		ocorrencia.setTemporario(true);
+    		
+    		
+    		if (result.hasErrors()) {
+    			return "apresentar/preocupacao";
+    		}
+    		
+    		
     		ocorrenciaService.salvar(ocorrencia);
 
     	for(MultipartFile file: files) {
             docStorageService.saveFile(file, ocorrencia, descricao);
         }
+    	
+    	// model.addAttribute("ocorrenciaa", ocorrencia.getGrmStamp());
 
+    	attr.addFlashAttribute("success", "Preocupação submetida com sucesso.");
+    	
+    	attr.addFlashAttribute("ocorrenciaa", ocorrenciaService.buscarPorId(ocorrencia.getId()));
+    	
+    	
     	return "redirect:/apresentar/preocupacao";
 	}
+    
+    
+    @PostMapping("/pesquisar/ocorrencia")
+    public String pesquisarOcorrencia(Ocorrencia ocorrencia, @RequestParam long codigo, ModelMap model ) {
+
+    	ocorrencia = ocorrenciaRepository.findAllByCodigo(codigo);
+    	
+    	
+    	
+    	model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(ocorrencia.getId()));
+        model.addAttribute("anexos", docsRepository.findAllByIdResolucao(ocorrencia.getId()));
+        model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(ocorrencia.getId()));
+        model.addAttribute("resolver", new Resolucao());
+        model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
+
+        return "redirect:/ver/detalhe/"+ocorrencia.getId();
+    }
+    
+    
+    @GetMapping("/ver/detalhe/{id}")
+    public String resolverOcorrencia(@PathVariable("id") Long id, ModelMap model) {
+
+        model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+        model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
+        model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(id));
+        model.addAttribute("resolver", new Resolucao());
+        model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
+
+        return "publico/detalhe";
+    }
+    
     
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {

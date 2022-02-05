@@ -19,6 +19,9 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 	<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+	
+	<link href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" rel="stylesheet"/>
+	
 	<!-- jQueryUI (autocomplete) -->
 	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
     
@@ -34,103 +37,135 @@
     <script th:src="@{/../assets/js/dashboard.js}"></script> -->
     
     
+    
+    <style type="text/css">
+    
+    .caixa{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+/* #servicos img:hover{
+	color: red;
+	border: 1px solid red;
+}
+ */
+
+#recursos{
+	color: #fff;
+}
+
+
+#servicos h2, h3{
+	color: #7c25f8;
+}
+
+#recursos h3{
+	color: #9bf0e1;
+}
+
+#recursos h2{
+	color: black;
+}
+
+.albuns{
+	padding: 10px 0;
+}
+
+/* .rotacionar{
+	-ms-transform: rotate(30deg);
+	-webkit-transform: rotate(30deg);
+	transform: rotate(30deg);
+	padding-left: 80px;
+} */
+
+
+
+/* Tipografia
+-----------------------------*/
+
+i{
+font-size: 15pt;
+color: #0277BD;
+}
+
+h1 {
+	font-weight: 900;
+	letter-spacing: -0.05em;
+	margin-bottom: 50px;
+	color: white;
+}
+
+h2{
+	font-size: 3em;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+}
+
+h3{
+	font-size: 2em;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+}
+
+/* Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+	.btn-custom {
+		margin: 10px 15px;
+		font-size: 1em;
+	}
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+	h1 {
+		font-size: 3em;
+	}
+	.btn-custom {
+		margin: 10px 15px;
+	}
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+	h1 {
+		font-size: 4em;
+	}
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+	h1 {
+		font-size: 5em;
+	}
+}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+	h1 {
+		font-size: 6em;
+	}
+}
+
+
+
+
+    
+    </style>
+    
 </head>
 
 
-<header class="navbar navbar-expand-md navbar-light d-print-none" style="background: #0277BD;" 
- xmlns:th="http://www.w3.org/1999/xhtml">
- 
- <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-                <img style="margin-right: 115px" th:src="@{/image/logo_light.png}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
-            </a>
-        </h1>
- 
-    <div class="container-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-                <!-- <img style="margin-right: 115px" th:src="@{/image/logo_light.png}" width="110" height="32" alt="Tabler" class="navbar-brand-image"> -->
-            </a>
-        </h1>
-        <div class="navbar-nav flex-row order-md-last">
-            <!-- <div class="nav-item d-none d-md-flex me-3">
-                <div class="btn-list">
-                    <a href="https://github.com/tabler/tabler" class="btn btn-outline-white" target="_blank" rel="noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>
-                        FIPAG
-                    </a>
-                </div>
-            </div> -->
-            
-             <div align="right" class="col-12">
-		        <a class="btn btn-outline-sucess btn-md mt-2" th:href="@{/login}" role="button">
-		            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		            <span>Login</span>
-		      	</a>
-    		</div>
-        </div>
-    </div>
-    
-    
-</header>
+
+<!-- url(/image/fundoo.jpg) no-repeat center center fixed; -->
 
 
-<body style="background: url(/image/fundoo.jpg) no-repeat center center fixed;" class="antialiased wrapper">
-<div style="background: rgba(158,197,201,100);" class="navbar-expand-md page-wrapper page-body" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div style="background: rgba(158,197,201,100);" class="collapse navbar-collapse" id="navbar-menu">
-        <div style="background: rgba(158,197,201,100);" class="navbar navbar-light">
-            <div class="container-xl">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/}" >
-
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-
-                            <span class="nav-link-title">
-                                Home
-                            </span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
-
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-
-                            <span class="nav-link-title">
-                                Apresentar Ocorrência
-                            </span>
-                        </a>
-                    </li>
-
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" target="_blank" href="https://dashboard.tawk.to/login" >
-
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                            </span>
-
-                            <span class="nav-link-title">
-                               Chat
-                            </span>
-                        </a>
-                    </li> -->
+<body style="background: #f4f5fa" class="antialiased wrapper">
 
 
-
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Fragmentos de header -->
+    <header th:replace="/fragmentos/headerPublico"></header>
+    <!-- Fim de frgmento de header-->
     
     <script type="text/javascript">
     function toggleMobileMenu(menu) {
@@ -138,28 +173,502 @@
     }
     </script>
     
-    <div id="conteudo1">
-    	<h1>Conteudo sobre o canal, contactos, ...</h1>
-    </div>
-    
-    
-    <footer style="background: rgba(158,197,201,100);" class="footer footer-transparent d-print-none fixed-bottom">
-    <div class="container">
-        <div class="row text-center align-items-center flex-row-reverse">
-            <!-- <div class="col-lg-auto ms-lg-auto">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="./docs/index.html" class="link-secondary">Documentation</a></li>
-                    <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                    <li class="list-inline-item">
-                        <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
-                            Download SVG icon from http://tabler-icons.io/i/heart
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
-                            Sponsor
+    <section id="servicos" class="caixa">
+      <div class="container">
+      
+      <div style="background: #fff" class="row">
+
+          <div class="col-md-6">
+              <div class="row albuns">
+                <div class="col-md-12">
+                  <img style=" border-radius: 8px; max-width: 100%;  height: auto;" th:src="@{/image/rsz_agua.jpg}" class="img-fluid">
+                </div>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+            <!-- <h2>O que o Spotify tem?</h2> -->
+            <div  class="card-header">
+       	 			<h2 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Informações Básicas</h2>
+       	 	</div>
+       	 		
+            <div class="card-header">
+            	<p style="text-align: justify; font-family: Century Gothic; font-size: 12pt">O Procon trata de problemas decorrentes de relação de consumo, conforme as regras do Código de Defesa do Consumidor (Lei n. 8078/90). IMPORTANTE: Existem dois canais eletrônicos onde o consumidor pode registrar sua reclamação, sem a necessidade de se dirigir a um posto de atendimento do Procon.</p>
+			</div>
+			
+			
+			<div  class="card-header">
+       	 		<h2 style="color: #0277BD; font-family: Century Gothic; margin: 0; padding: 0" class="card-title">Sede</h2>
+       	 	</div>
+			<div class="row card-header">
+			
+			<ul style="color: black;" class="navbar-nav">
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-title">
+                                <strong>Endereço:</strong> Av. Filipe Samuel Magaia, Nº 1291 R/C - Maputo
+                            </span>
                         </a>
                     </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-title">
+                              <strong>Contatos:</strong> (+258) 21 308840 / (+258) 82 3025430
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-title">
+                               <strong>Email: </strong>fipag@fipag.co.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
                 </ul>
-            </div> -->
+			
+			</div>
+
+        </div>
+      </div>
+      </div>
+      
+      
+      
+      
+    </section>
+    
+    
+    
+    
+    <section id="recursos" class="caixa">
+      <div class="container">
+
+        <div style="margin-bottom: 10px" class="row">
+        
+          
+          <div class="col-md-4 card">
+			<div>
+       	 		<div  class="card-header">
+       	 			<h3 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Beira</h3>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						
+				<ul style="color: black;" class="navbar-nav">
+                    
+                    
+                    <!-- text-shadow: 2px 2px 4px #000000;  -->
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               Rua da Companhia de Moç. 35 
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-phone-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               (+258) 21 23 323102
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               admbeira@teledata.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          <div class="col-md-4">
+			<div class="card">
+       	 		<div  class="card-header">
+       	 			<h3 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Tete</h3>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						
+				<ul style="color: black;" class="navbar-nav">
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                                Desvio Baobab Matewa Bairro Chingodzi
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-phone-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               (+258) 25 242293
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               fipag.tete@fipag.co.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          <div class="col-md-4 card">
+			<div >
+       	 		<div  class="card-header">
+       	 			<h3 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Nampula</h3>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						
+				<ul style="color: black;" class="navbar-nav">
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                                Av. Eduardo Mondlane, 46 
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-phone-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               (+258) 26 212121
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               fipag.aguanpl@teledata.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          
+        </div>
+
+        
+        <div class="row">
+          
+          
+          
+          
+          
+          <div class="col-md-4 card">
+			<div >
+       	 		<div  class="card-header">
+       	 			<h3 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Dondo</h3>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						
+				<ul style="color: black;" class="navbar-nav">
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                                Rua da Companhia de Moç. 35 
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-phone-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               (+258) 21 23 323102
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               admbeira@teledata.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          
+          <div class="col-md-4">
+			<div class="card">
+       	 		<div  class="card-header">
+       	 			<h3 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Moatize</h3>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						
+				<ul style="color: black;" class="navbar-nav">
+                    
+                    
+                    <!-- text-shadow: 2px 2px 4px #000000;  -->
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               Desvio Baobab Matewa Bairro Chingodzi 
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-phone-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               (+258) 25 242293
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               fipag.tete@fipag.co.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                </ul>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          
+          
+          
+          
+          <div class="col-md-4 card">
+			<div >
+       	 		<div  class="card-header">
+       	 			<h3 style="color: #0277BD; font-family: Century Gothic;" class="card-title">Nacala</h3>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						
+				<ul style="color: black;" class="navbar-nav">
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-map-marker-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                                Av. Eduardo Mondlane, 46 
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-phone-alt"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               (+258) 29 330028
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+								 <i class="fas fa-envelope"></i>
+                            </span>
+
+                            <span class="nav-link-title">
+                               fipag.nacala@fipag.co.mz
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          
+        </div>
+        
+        
+        
+        
+        
+        
+      </div>
+    </section>
+    
+    
+    <footer style="background: #fff;" class="footer footer-transparent d-print-none">
+    <div class="container">
+        <div class="row text-center align-items-center flex-row-reverse">
             <div align="center" class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
                 <ul class="list-inline list-inline-dots mb-0">
                     <li class="list-inline-item">
@@ -174,7 +683,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> 
     
    </body>
 

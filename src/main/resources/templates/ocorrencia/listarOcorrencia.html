@@ -155,7 +155,7 @@
                          <td  align="center">
                          
                         
-                            <a th:if="${p.resolucao == 'P' }" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
+                            <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
                                 <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                             </a>
                             
@@ -253,7 +253,7 @@
     <script type="text/javascript" th:inline="javascript">
 
 /*<![CDATA[*/
-	var ocorrencias = /*[[${ocorrencias}]]*/
+	var ocorrencias = /*[[${ocorrencias}]]*/ ""; 
 	/*]]>*/
  
 	$('#txtSearch').on('keyup',function(){

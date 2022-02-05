@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt" Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      
+      <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Language" content="en" />
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#4188c9">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+  <!-- Generated: 2018-04-06 16:27:42 +0200 -->
+  <!-- <title>FIPAG – Fundo de Investimento e Património do Abastacimento de Água</title> -->
+  <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+  <script src="./assets/js/require.min.js"></script>
+  <link rel="icon" th:href="@{/image/log.png}" />
+  <script>
+      requirejs.config({
+          baseUrl: '.'
+      });
+    </script>
+      
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title> FIPAG </title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+   
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"  />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <link th:href="@{/dist/css/tabler.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-flags.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-payments.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-vendors.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/demo.min.css}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
+    <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+	<!-- jQueryUI (autocomplete) -->
+	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+    
+   <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
+    
+    
+    <!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
+    <script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+   <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/js/dashboard.js}"></script> -->
+    
+    
+    
+    
+    
+    <style>
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+html {
+    height: 100%
+}
+
+#grad1 {
+    /* background-color: #9C27B0; */
+   /*  background-image: linear-gradient(120deg, #FF4081, #81D4FA) */
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+#msform fieldset .form-card {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px 30px 40px;
+    box-sizing: border-box;
+    width: 94%;
+    margin: 0 3% 20px 3%;
+    position: relative
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
+
+#msform fieldset .form-card {
+    text-align: left;
+    color: #9E9E9E
+}
+
+#msform input,
+#msform textarea {
+    padding: 0px 8px 4px 8px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 16px;
+    letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: none;
+    font-weight: bold;
+    border-bottom: 2px solid skyblue;
+    outline-width: 0
+}
+
+#msform .action-button {
+    width: 100px;
+    background: skyblue;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161
+}
+
+select.list-dt {
+    border: none;
+    outline: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 5px 3px 5px;
+    margin: 2px
+}
+
+select.list-dt:focus {
+    border-bottom: 2px solid skyblue
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    border-radius: 0.5rem;
+    position: relative
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #000000
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative
+}
+
+#progressbar #account:before {
+    font-family: FontAwesome;
+    content: "\f022"
+}
+
+#progressbar #personal:before {
+    font-family: FontAwesome;
+    content: "\f007"
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f15b"
+}
+
+#progressbar #confirm:before {
+    font-family: FontAwesome;
+    content: "\f00c"
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: skyblue
+}
+
+.radio-group {
+    position: relative;
+    margin-bottom: 25px
+}
+
+.radio {
+    display: inline-block;
+    width: 204;
+    height: 104;
+    border-radius: 0;
+    background: lightblue;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 8px 2px
+}
+
+.radio:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3)
+}
+
+.radio.selected {
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+
+</style>
+    
+    
+</head>
+<body style=" background-image: linear-gradient(120deg, #FF4081, #81D4FA) no-repeat center center fixed; background-color: #9C27B0;" class="antialiased wrapper">
+
+<!-- Fragmentos de header -->
+    <header th:replace="/fragmentos/headerPublico"></header>
+    <!-- Fim de frgmento de header-->
+<div>
+
+
+    <div class="card">
+
+	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		 <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
+			</div>
+			<br>
+
+		 <div class="card-body">
+			 <div class="row" >
+
+				 <div class="table-responsive">
+					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+						<thead>
+						 <tr style="color: rgb(65,105,225)">
+							 <th class="w-1">Nivel</th>
+							 <th>Designação</th>
+							 <th>Data Resolução</th>
+							 <!--  <th></th> -->
+						 </tr>
+						 </thead>
+						 <tbody>
+
+						 <!--  <tr th:each="p : ${categorias}"> -->
+						 <tr th:each="r, stat : ${resolucoes}">
+							 <div th:if="${r.tipo =='A' }">
+								 <td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+								 <td th:text="${r.designacao}" >Auxiliar Contábil</td>
+								 <td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+							 </div>
+						 </tr>
+
+
+						 </tbody>
+					 </table>
+				 </div>
+
+			 </div>
+		 </div>
+
+	 </div>
+
+
+	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		  <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Resolução</h2>
+			</div>
+			<br>
+
+		  <div class="card-body">
+			  <div class="row" >
+
+				  <div class="table-responsive">
+					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+						  <thead>
+						   <tr style="color: rgb(65,105,225)">
+							  <th class="w-1">Nivel</th>
+							  <th>Designação</th>
+							  <th>Mediador</th>
+							  <th>Responsabilidade</th>
+							  <th>Data Resolução</th>
+							  <!--  <th></th> -->
+						  </tr>
+						  </thead>
+						  <tbody>
+						  <!--  <tr th:each="p : ${categorias}"> -->
+						  <tr th:each="r : ${resolucoes}">
+							<div th:if="${r.tipo =='R' }">
+								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
+								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
+								<td th:text="${r.responsabilidade.responsavel}" ><span class="text-muted">01401</span></td>
+								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+							</div>
+						  </tr>
+						  
+
+
+						  </tbody>
+					  </table>
+				  </div>
+
+			  </div>
+		  </div>
+	  </div>
+
+
+	   <div th:if="${ocorrencia.estado =='Validado'}">
+
+		   <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Validação</h2>
+			</div>
+			<br>
+
+		   <div class="card-body">
+			   <div class="row" >
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Data de Validação: </span>	<span  th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Tipo de Ocorrência: </span>	<span style="color: red;font-weight: bolder;" th:text="${ocorrencia.tipoOcorrencia.designacao}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Estado da Ocorrência: </span><span th:text="${ocorrencia.estado}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-12 col-sm-12">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Observação: </span><span th:text="${ocorrencia.observacao}"></span>
+					   </div>
+				   </div>
+
+			   </div>
+		   </div>
+
+	   </div>
+
+
+        <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados do Registo</h2>
+			</div>
+			<br>
+
+		<div class="card-body">
+		  <div class="row" >
+		  
+		  <div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.id}"></span>
+				 </div>
+			</div>
+		  
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Código de registo: </span>	<span th:text="${ocorrencia.grmStamp}"></span>
+				 </div>
+			</div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
+				  </div>
+			  </div>
+
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+				  <span style="font-weight: bolder;">Data da Ocorrência: </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
+				</div>
+			</div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.provincia.designacao}"></span>
+				  </div>
+			  </div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
+				  </div>
+			  </div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Comunidade: </span>	<span th:text="${ocorrencia.comunidade}"></span>
+				  </div>
+			  </div>
+
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Genero: </span>	<span th:text="${ocorrencia.sexo}"></span>
+				</div>
+			</div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Forma de Comunicação: </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
+				  </div>
+			  </div>
+
+
+			  <div class="col-12 col-sm-12">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
+				  </div>
+			  </div>
+
+		  </div>
+		</div>
+
+		<div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
+			</div>
+			<br>
+
+		<div class="card-body">
+
+			<div class="row">
+
+				<div class="table-responsive">
+					<table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+						<thead>
+						 <tr style="color: rgb(65,105,225)">
+							<th class="w-1">#</th>
+							<th>Designação</th>
+							<th>Descrição</th>
+							<th>Momento</th>
+							<th>Data</th>
+							<th>Ver</th>
+							<!--  <th></th> -->
+						</tr>
+						</thead>
+						<tbody>
+						<!--  <tr th:each="p : ${categorias}"> -->
+						<tr th:each="a, stat : ${anexos}">
+							<td th:text="${stat.index + 1}" ><span class="text-muted">01401</span></td>
+							<td th:text="${a.docName}" >Auxiliar Contábil</td>
+							<td th:text="${a.descricao}" >Auxiliar Contábil</td>
+							<td th:text="${a.fase}" >Auxiliar Contábil</td>
+							<td th:text="${#dates.format(a.created, 'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+							<td>
+								<a class="icon" th:href="${'/download/ficheiro/'+a.id}">
+									<i class="fa fa-file"></i>
+								</a>
+							</td>
+
+						</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+
+	<form th:action="@{/cadastrar/resolucao}"	 th:object="${resolver}"  method="POST">
+			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header" style="background: blue; color: white">
+							<h5 class="modal-title">Resolução</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+							<label class="form-label">Houve Concesso?</label>
+							<div class="form-selectgroup-boxes row mb-3">
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Não há Concesso</span>
+                      <span class="d-block text-muted">Na conversa que tivemos com nosso cliente não houve concesso</span>
+                    </span>
+                  </span>
+									</label>
+								</div>
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report" value="true" class="form-selectgroup-input">
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Houve Concesso</span>
+                      <span class="d-block text-muted">Na conversa que tivemos com nosso cliente houve concesso</span>
+                    </span>
+                  </span>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+
+
+								<div class="col-12 col-sm-12">
+									<div class="form-group">
+										<label  class="form-label">Responsabilidade</label>
+										<select  class="form-control custom-select form-select" th:field="*{responsabilidade}" >
+											<option value="">Selecione a Responsavel...</option>
+											<option th:each="p : ${responsaveis}"
+													th:value="${p.id}" th:text="${p.responsavel}">Maputo</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+
+								<div class="col-lg-12">
+									<div   >
+										<label class="form-label"></label>
+										<input class="form-control" name="ocorrencia2" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
+									</div>
+								</div>
+
+								<div class="col-lg-6">
+									<div >
+										<label class="form-label">Data da Resolucao</label>
+										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
+									</div>
+								</div>
+
+								<div class="col-lg-6">
+									<div   >
+										<label class="form-label">Mediador </label>
+										<input class="form-control" type="text"  th:field="*{mediador}" ></input>
+									</div>
+								</div>
+
+								<div class="col-lg-12">
+									<div>
+										<label class="form-label">Comentario</label>
+										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="modal-footer">
+							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+								Cancel
+							</a>
+
+							<button type="submit" class="btn btn-info" >Gravar</button>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+	</form>
+
+		<form th:action="@{/cadastrar/acompanhamento}"	 th:object="${resolver}"  method="POST">
+			<div class="modal modal-blur fade" id="modal-report1" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header" style="background: blue; color: white">
+							<h5 class="modal-title">Acompanhamento</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+							<label class="form-label">Fechado?</label>
+							<div class="form-selectgroup-boxes row mb-3">
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Não Foi Fechado</span>
+                    </span>
+                  </span>
+									</label>
+								</div>
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report" value="true"  class="form-selectgroup-input">
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Foi Fechado</span>
+                    </span>
+                  </span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+
+								<div class="col-12 col-sm-12">
+									<div class="form-group">
+										<select hidden class="form-control custom-select form-select" th:field="*{responsabilidade}" >
+											<option th:each="p : ${responsaveis}"
+													th:value="3" th:text="${p.responsavel}">Maputo</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-lg-12">
+									<div   >
+										<label class="form-label"></label>
+										<input class="form-control" name="ocorrencia2" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
+									</div>
+								</div>
+
+								<div class="col-lg-12">
+									<div >
+										<label class="form-label">Data da Resolucao</label>
+										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
+									</div>
+								</div>
+
+
+								<div class="col-lg-12">
+									<div>
+										<label class="form-label">Comentario</label>
+										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="modal-footer">
+							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+								Cancel
+							</a>
+
+							<button type="submit" class="btn btn-info" >Gravar</button>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		
+			<div class="modal modal-blur fade" id="modal-reportt" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header" style="background: #0277BD; color: white">
+							<h5 class="modal-title">Exlcusão</h5><span th:text="${ocorrencia.id}"></span>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p><strong>Deseja Excluir a Ocorrência?</strong></p>
+							<p>Uma vez excluída não poderá ser recuperada</p>
+							
+						</div>
+
+
+						<div class="modal-footer">
+							<a href="#" class="btn btn-info btn-md mb-3" data-bs-dismiss="modal">
+								<span>Não</span>
+							</a>
+							
+							<a class="btn btn-danger btn-md mb-3" th:href="@{/ocorrencias/excluir/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.estado == 'Temporario' }"  role="button">
+								
+								<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+								<span>Sim</span>
+							</a>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+        </div>
+        
+    </div>
+    <!-- Conteudo-->
+
+</body>
+</html>

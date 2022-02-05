@@ -279,9 +279,7 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input type="text" th:field="*{comunidade}" class="form-control" required placeholder="Escreva a Comunidade..."
-                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-                                   oninput="this.setCustomValidity('')">
+                            <input type="text" th:field="*{comunidade}" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -294,9 +292,7 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-calendar"></i>
                                     </span>
-                            <input type="date" th:field="*{dataOcorrencia}" class="form-control" required placeholder=""
-                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-                                   oninput="this.setCustomValidity('')">
+                            <input type="date" th:field="*{dataOcorrencia}" class="form-control" >
                         </div>
                     </div>
                 </div>
@@ -310,9 +306,7 @@
 	                                    <span class="input-icon-addon">
 	                                      <i class="fe fe-edit-2"></i>
 	                                    </span>
-	                            <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" required placeholder="Descreva o Assunto..."
-	                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-	                                   oninput="this.setCustomValidity('')"></textarea>
+	                            <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control"></textarea>
 	                        </div>
 	                    </div>
 	                </div>
