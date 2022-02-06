@@ -156,7 +156,7 @@ public class IndexController {
     @GetMapping("/login")
     public String login(){
 
-        return "login";
+        return "publico/login";
     }
     
     @GetMapping("/apresentar/preocupacao")
@@ -168,7 +168,7 @@ public class IndexController {
     }
     
     
-    @PostMapping("/ocorrencias/preCadastrar")
+    @PostMapping("/preCadastrar")
 	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, @RequestParam("descricao") String descricaoAnx, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
 
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);

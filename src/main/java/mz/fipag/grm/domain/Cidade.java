@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "cidade")
 public class Cidade extends AbstractEntity{
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	@Column(name = "designacao", nullable = false,length=120,unique=true)
 	private String designacao;	
