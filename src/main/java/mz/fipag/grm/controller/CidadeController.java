@@ -3,6 +3,7 @@ package mz.fipag.grm.controller;
 import java.util.List;
 import java.util.Optional;
 
+import mz.fipag.grm.repository.RegiaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +28,9 @@ public class CidadeController {
 	
 	@Autowired
 	private ProvinciaService provinciaService;
+
+	@Autowired
+	private RegiaoRepository regiaoRepository;
 	
 	@GetMapping("/listar/cidade")
     public String listarCidade(ModelMap model, @RequestParam("page") Optional<Integer> page){
@@ -46,6 +50,7 @@ public class CidadeController {
 	    public String registarCidade(ModelMap model){
 		  
 		  model.addAttribute("cidade", new Cidade());
+		  model.addAttribute("regioes", regiaoRepository.findAll());
 
 		  return "parametrizacao/cidade/cadastrar";
 	    }

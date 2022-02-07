@@ -26,9 +26,16 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "email", nullable = true,length=120,unique=true)
     private String email;
 
+    @Column(name = "tipo", nullable = true,length=120)
+    private String tipo;  // L-local  R-regional  N-nacional
+
     @ManyToOne
     @JoinColumn(name="cidade_id")
     private Cidade cidade;
+
+    @ManyToOne
+    @JoinColumn(name="regiao")
+    private Regiao regiao;
 
     @Column(name = "active", nullable = true)
     private boolean active=true;
@@ -40,6 +47,22 @@ public class User extends AbstractEntity implements UserDetails {
                     name = "role_id", referencedColumnName = "id"))
 
     private List<Role> roles;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Regiao getRegiao() {
+        return regiao;
+    }
+
+    public void setRegiao(Regiao regiao) {
+        this.regiao = regiao;
+    }
 
     public String getEmail() {
         return email;

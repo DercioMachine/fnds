@@ -2,6 +2,8 @@
 <html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
 <head>
 
 <style type="text/css">
@@ -18,6 +20,61 @@
 </head>
 <body>
 <div  layout:fragment="corpo">
+
+
+
+
+    <canvas id="ChartDemo"></canvas>
+
+    <script type="text/javascript" th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var ctx = document.getElementById("ChartDemo").getContext('2d');
+
+    var ChartDemo = new Chart(ctx, {
+
+        type: 'line',
+
+        data: {
+
+            .//a label that was stored in the controller only take out a variable formula
+
+            labels: [155, 65, 465, 265, 225, 325, 80],
+
+            datasets: [
+
+                {
+
+                    label: "Chart-1",
+
+                    borderColor: 'rgb(255, 0, 0)',
+
+                    lineTension: 0,
+
+                    fill: false,
+
+                    //the same manner as described above, only is taken out of the point in the variable expression.
+
+                    data: [155, 65, 465, 265, 225, 325, 80],
+
+                },
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+        }
+
+    });
+
+    /*]]>*/
+
+    </script>
     <!-- Conteudo -->
     
     
@@ -247,7 +304,17 @@
                 </div>
             </div>
 
-            <script>
+            <script th:inline="javascript" >
+
+            /*<![CDATA[*/
+
+            var label1 = [];
+
+            label1 = /*[[${label}]]*/"";
+
+
+               /*]]>*/
+
       // @formatter:off
       document.addEventListener("DOMContentLoaded", function () {
       	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-8'), {
@@ -314,6 +381,9 @@
       	})).render();
       });
       // @formatter:on
+
+
+
     </script>
         </div>
 
@@ -570,7 +640,7 @@
       			data: [155, 65, 465, 265, 225, 325, 80]
       		},{
       			name: "",
-      			data: [113, 42, 65, 54, 76, 65, 35]
+      			data: label1,
       		}],
       		grid: {
       			padding: {
@@ -598,9 +668,7 @@
       				padding: 4
       			},
       		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
-      		],
+      		labels: [113, 42, 65, 54, 76, 65, 35],
       		colors: ["#206bc4", "#cd201f"],
       		legend: {
       			show: false,

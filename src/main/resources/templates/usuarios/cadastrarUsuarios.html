@@ -87,101 +87,43 @@
 
     <script type="text/javascript">
       	function onChangeStatus(){
-      		var status = document.getElementById("origem");
 
-      		if(status.value=="individual"){
-
-      			document.getElementById("nome").style.display="block";
-      			document.getElementById("genero").style.display="block";
-      			document.getElementById("comunicacao").style.display="block";
-      			document.getElementById("contacto").style.display="block";
-      			document.getElementById("faixaEtaria").style.display="block";
-      			document.getElementById("endereco").style.display="block";
-      			document.getElementById("email").style.display="block";
-
-      			document.getElementById("nrHomens").style.display="none";
-      			document.getElementById("nrMulheres").style.display="none";
-      			document.getElementById("nomeGrupo").style.display="none";
+      		var status = document.getElementByName("tipo").value;
 
 
+      		if(status=="L"){
 
+      			document.getElementById("local").style.display="block";
 
-      		}else if(status.value=="grupo"){
-
-      			document.getElementById("nome").style.display="block";
-      			document.getElementById("comunicacao").style.display="block";
-      			document.getElementById("contacto").style.display="block";
-      			document.getElementById("endereco").style.display="block";
-      			document.getElementById("email").style.display="block";
-      			document.getElementById("nrHomens").style.display="block";
-      			document.getElementById("nrMulheres").style.display="block";
-      			document.getElementById("nomeGrupo").style.display="block";
-
-      			document.getElementById("faixaEtaria").style.display="none";
-      			document.getElementById("genero").style.display="none";
-
-
-      		}else if(status.value=="anonimo"){
-
-      			document.getElementById("genero").style.display="block";
-      			document.getElementById("comunicacao").style.display="block";
-      			document.getElementById("contacto").style.display="block";
-      			document.getElementById("faixaEtaria").style.display="block";
-      			document.getElementById("endereco").style.display="block";
-      			document.getElementById("email").style.display="block";
-
-      			document.getElementById("nrHomens").style.display="none";
-      			document.getElementById("nrMulheres").style.display="none";
-      			document.getElementById("nomeGrupo").style.display="none";
-      			document.getElementById("nome").style.display="none";
       		}else{
 
-      			document.getElementById("nrHomens").style.display="none";
-      			document.getElementById("nrMulheres").style.display="none";
-      			document.getElementById("nomeGrupo").style.display="none";
-      			document.getElementById("nome").style.display="none";
-      			document.getElementById("genero").style.display="none";
-      			document.getElementById("comunicacao").style.display="none";
-      			document.getElementById("contacto").style.display="none";
-      			document.getElementById("faixaEtaria").style.display="none";
-      			document.getElementById("endereco").style.display="none";
-      			document.getElementById("email").style.display="none";
+      		    document.getElementById("regional").style.display="none";
+      		    document.getElementById("nacional").style.display="none";
+      		}
 
+      		if(status=="R"){
+
+      			document.getElementById("regional").style.display="block";
+
+      		}else{
+
+      		    document.getElementById("nacional").style.display="none";
+      		    document.getElementById("local").style.display="none";
+
+      		}
+
+      		if(status=="N"){
+
+      			document.getElementById("nacional").style.display="block";
+
+      		}else{
+
+      		    document.getElementById("regional").style.display="none";
+      		    document.getElementById("local").style.display="none";
       		}
       	}
 
 
-      	function onChangeProjecto(){
-      		var estado = document.getElementById("radioProjecto");
-
-
-      		if(estado.value=="projecto"){
-      			document.getElementById("projectoo").style.display="block";
-      			document.getElementById("cidadee").style.display="block";
-      			document.getElementById("empreiteiroo").style.display="none";
-
-      		}else{
-      			document.getElementById("projectoo").style.display="none";
-      			document.getElementById("empreiteiroo").style.display="block";
-      			document.getElementById("cidadee").style.display="none";
-      		}
-      	}
-
-      		function onChangeOperacao(){
-          		var estado = document.getElementById("radioOperacao");
-
-
-          		if(estado.value=="operacao"){
-          			document.getElementById("empreiteiroo").style.display="block";
-          			document.getElementById("cidadee").style.display="block";
-          			document.getElementById("projectoo").style.display="block";
-          		}else{
-          			document.getElementById("empreiteiroo").style.display="none";
-          			document.getElementById("projectoo").style.display="block";
-          			document.getElementById("cidadee").style.display="none";
-          		}
-
-      	}
 
       </script>
     <!-- Conteudo -->
@@ -204,7 +146,7 @@
 
                 <div class="row">
 
-                    <div class="col-6 col-sm-6">
+                    <div class="col-12 col-sm-12">
                         <div class="form-group">
                             <label class="form-label">Nome</label>
                             <div class="input-icon">
@@ -253,18 +195,6 @@
                     </div>
 
 
-                    <div id="cidadee" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="cidade" class="form-label">Cidade</label>
-                            <select id="cidade" class="form-control custom-select form-select" th:field="*{cidade}"  >
-                                <option value="">Selecione a Cidade...</option>
-                                <option th:each="p : ${cidades}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-
-                            </select>
-                        </div>
-                    </div>
-
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Email</label>
@@ -279,7 +209,78 @@
 
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
+
+
                     <br>
+                    <br>
+                    <br style="margin-top: 100">
+
+                    <div class="row" style="margin-top: 30">
+                        <br><br>
+                        <th:block >
+
+                            <div class="col-4 col-sm-4">
+                                <div class="form-group">
+                                    <input onclick="onChangeStatus()"  type="radio" id="statuslocal" name="tipo" value="L" >
+                                    <label for="statuslocal">Local</label>
+                                </div>
+                            </div>
+
+                            <div class="col-4 col-sm-4">
+                                <div class="form-group">
+                                    <input onclick="onChangeStatus()" type="radio" id="statusregional" name="tipo" value="R">
+                                    <label for="statusregional">Regional</label>
+                                </div>
+                            </div>
+
+                            <div class="col-4 col-sm-4">
+                                <div class="form-group">
+                                    <input onclick="onChangeStatus()" type="radio" id="statusnacional" name="tipo" value="N">
+                                    <label for="statusnacional">Nacional</label>
+                                </div>
+                            </div>
+
+
+                        </th:block>
+
+
+                    </div>
+
+                    <div style="display: none" id="local" class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="local" class="form-label">Cidade</label>
+                            <select  class="form-control custom-select form-select" th:field="*{cidade}"  >
+                                <option value="">Selecione a Cidade...</option>
+                                <option th:each="p : ${cidades}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: none" id="regional" class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="regional" class="form-label">Regiao</label>
+                            <select  class="form-control custom-select form-select" th:field="*{regiao}"  >
+                                <option  value="">Selecione a Regiao...</option>
+                                <option th:each="p : ${regioes}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: none" id="nacional" class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="nacional" class="form-label">Regiao</label>
+                            <select  class="form-control custom-select form-select" th:field="*{regiao}"  >
+                                <option  th:each="p : ${regioes}"
+                                        th:value="${p.id}" th:text="${p.designacao}" th:if="${p.id == 3}" selected disabled >Maputo</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <br><br>
 
                     <div class="row">
                       <div class="form-group">

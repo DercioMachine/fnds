@@ -1,7 +1,9 @@
 package mz.fipag.grm.controller;
 
 import mz.fipag.grm.domain.Cidade;
+import mz.fipag.grm.domain.Regiao;
 import mz.fipag.grm.domain.User;
+import mz.fipag.grm.repository.RegiaoRepository;
 import mz.fipag.grm.repository.RoleRepository;
 import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CidadeService;
@@ -12,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,11 +33,15 @@ public class UsuarioController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RegiaoRepository regiaoRepository;
+
     @GetMapping("/registar/usuarios")
     public String registarUsuarios(ModelMap model){
 
         model.addAttribute("user", new User());
         model.addAttribute("perfils", roleRepository.findAll());
+        model.addAttribute("regioes", regiaoRepository.findAll());
 
         return "usuarios/cadastrarUsuarios";
     }
@@ -56,8 +63,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrar/usuarios")
-    public String cadastrarUsuarios(User user){
+    public String cadastrarUsuarios(User user, @RequestParam("tipo") String tipo){
 
+        user.setTipo(tipo);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 

@@ -54,11 +54,12 @@
             <div class="table-responsive">
                 <table id="categorias" class="table card-table table-vcenter text-nowrap">
                     <thead>
-                    <tr>
-                        <th class="w-1">No.</th>
-                        <th>Nome</th>
-                        <th>Província</th>
-                        <th></th>
+                    <tr style="font-weight:bolder; color: black">
+                        <td class="w-1">No.</td>
+                        <td>Regiao</td>
+                        <td>Provincia</td>
+                        <td>Cidade</td>
+                        <td></td>
                        <!--  <th></th> -->
                     </tr>
                     </thead>
@@ -66,9 +67,10 @@
                    <!--  <tr th:each="p : ${categorias}"> -->
                    <tr th:each="p : ${pageCidade.registros}">
                    	     <td th:text="${p.id}"><span class="text-muted">01401</span></td>
-                         <td th:text="${p.designacao}">Auxiliar Contábil</td>
+                         <td th:text="${p.regiao.designacao}">Auxiliar Contábil</td>
                          <td th:text="${p.provincia.designacao}">Auxiliar Contábil</td>
-                         
+                         <td th:text="${p.designacao}">Auxiliar Contábil</td>
+
                         <td>
                             <a class="icon" th:href="${'/cidades/editar/'+p.id}">
                                 <i class="fe fe-edit"></i>

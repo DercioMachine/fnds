@@ -19,6 +19,18 @@ public class Cidade extends AbstractEntity{
 	@JoinColumn(name="provincia_id")
 	private Provincia provincia;
 
+	@ManyToOne
+	@JoinColumn(name="regiao_id")
+	private Regiao regiao;
+
+	public Regiao getRegiao() {
+		return regiao;
+	}
+
+	public void setRegiao(Regiao regiao) {
+		this.regiao = regiao;
+	}
+
 	public String getDesignacao() {
 		return designacao;
 	}

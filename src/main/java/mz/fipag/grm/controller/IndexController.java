@@ -136,15 +136,40 @@ public class IndexController {
 	 * 
 	 * return "login"; }
 	 */
-    
+
+	@GetMapping("/dashboard")
+	public String estatisticateste(Model model){
+
+		String label[] = {"a","b","c","d","e","f","g"};
+
+		int point[] = {5,3,7,1,8,3,4};
+
+		model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
+		model.addAttribute("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
+		model.addAttribute("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
+
+		model.addAttribute("label",label);
+		model.addAttribute("point",point);
+
+		return "reclamacoes/home";
+	}
+    /*
     @GetMapping("/dashboard")
-    public ModelAndView dashboard() {
+    public ModelAndView dashboard(Model model) {
 		
 		ModelAndView vm = new ModelAndView("reclamacoes/home");
+
+		String label[] = {"a","b","c","d","e","f","g"};
+
+		int point[] = {5,3,7,1,8,3,4,};
 		
 		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
 		vm.addObject("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
 		vm.addObject("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
+
+		model.addAttribute("label",label);
+
+		model.addAttribute("point",point);
 		
 		//vm.addObject("totalDeOcorrenciasPorMes", ocorrenciaRepository.totalDeOcorrenciasPorMes());
 		
@@ -152,7 +177,7 @@ public class IndexController {
 		
 		return vm;
 		
-	}
+	}  */
     
 
     @GetMapping("/home")
@@ -183,6 +208,14 @@ public class IndexController {
 
         return "publico/apresentarPreocupacao";
     }
+
+	@GetMapping("/apresentar/estatistica")
+	public String apresentarEstartistica(ModelMap model){
+
+		model.addAttribute("ocorrencia",new Ocorrencia());
+
+		return "publico/apresentarEstatistica";
+	}
     
     
     @PostMapping("/preCadastrar")

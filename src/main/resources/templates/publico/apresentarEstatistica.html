@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt" Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      
+      <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Language" content="en" />
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#4188c9">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+  <!-- Generated: 2018-04-06 16:27:42 +0200 -->
+  <!-- <title>FIPAG – Fundo de Investimento e Património do Abastacimento de Água</title> -->
+  <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+  <script src="./assets/js/require.min.js"></script>
+  <link rel="icon" th:href="@{/image/log.png}" />
+  <script>
+      requirejs.config({
+          baseUrl: '.'
+      });
+    </script>
+      
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title> FIPAG </title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+   
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"  />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <link th:href="@{/dist/css/tabler.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-flags.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-payments.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-vendors.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/demo.min.css}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
+    <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+	<!-- jQueryUI (autocomplete) -->
+	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+    
+   <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
+    
+    
+    <!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
+    <script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+   <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/js/dashboard.js}"></script> -->
+    
+    
+    
+    
+    
+    <style>
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+html {
+    height: 100%
+}
+
+#grad1 {
+    /* background-color: #9C27B0; */
+   /*  background-image: linear-gradient(120deg, #FF4081, #81D4FA) */
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+#msform fieldset .form-card {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px 30px 40px;
+    box-sizing: border-box;
+    width: 94%;
+    margin: 0 3% 20px 3%;
+    position: relative
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
+
+#msform fieldset .form-card {
+    text-align: left;
+    color: #9E9E9E
+}
+
+#msform input,
+#msform textarea {
+    padding: 0px 8px 4px 8px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 16px;
+    letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: none;
+    font-weight: bold;
+    border-bottom: 2px solid skyblue;
+    outline-width: 0
+}
+
+#msform .action-button {
+    width: 100px;
+    background: skyblue;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161
+}
+
+select.list-dt {
+    border: none;
+    outline: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 2px 5px 3px 5px;
+    margin: 2px
+}
+
+select.list-dt:focus {
+    border-bottom: 2px solid skyblue
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    border-radius: 0.5rem;
+    position: relative
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #000000
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 12px;
+    width: 25%;
+    float: left;
+    position: relative
+}
+
+#progressbar #account:before {
+    font-family: FontAwesome;
+    content: "\f022"
+}
+
+#progressbar #personal:before {
+    font-family: FontAwesome;
+    content: "\f007"
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f15b"
+}
+
+#progressbar #confirm:before {
+    font-family: FontAwesome;
+    content: "\f00c"
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: skyblue
+}
+
+.radio-group {
+    position: relative;
+    margin-bottom: 25px
+}
+
+.radio {
+    display: inline-block;
+    width: 204;
+    height: 104;
+    border-radius: 0;
+    background: lightblue;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 8px 2px
+}
+
+.radio:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3)
+}
+
+.radio.selected {
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+
+</style>
+    
+    
+</head>
+<body style=" background: #f4f5fa;" class="antialiased wrapper">
+
+<!-- Fragmentos de header -->
+    <header th:replace="/fragmentos/headerPublico"></header>
+    <!-- Fim de frgmento de header-->
+    
+
+<div style="margin-bottom: 100px">
+
+<script type="text/javascript">
+
+//swal("Good job!", "You clicked the button!", "success");
+
+</script>
+
+
+<script type="text/javascript">
+    function toggleMobileMenu(menu) {
+        menu.classList.toggle('open');
+    }
+    </script>
+
+    <script type="text/javascript">
+        let fileInput = document.getElementById("file");
+        let numOfFiles = document.getElementById("num-of-files");
+        let imageContainer = document.getElementById("images");
+
+        function preview(){
+
+           document.getElementById("num-of-files").innerHTML = "";
+
+           numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comboboxProvincias').on('change',function(){
+
+          var provinciaId = $(this).val();
+
+          $.ajax({
+          type: 'GET',
+         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+          url: 'http://localhost:9090/distrito/'+provinciaId,
+          //url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comoboxDistrito').html(s);
+    }
+});
+
+
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comoboxDistrito').on('change',function(){
+
+          var distritoId = $(this).val();
+
+         // alert(distritoId);
+
+          $.ajax({
+          type: 'GET',
+         url: 'http://localhost:9090/posto/'+distritoId,
+         
+       //  url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+         // url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+          
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comboboxPosto').html(s);
+    }
+});
+
+          
+        });
+    });
+    
+    
+    
+    
+    
+    
+    </script>
+    
+    
+    <script>
+
+$(document).ready(function(){
+
+var current_fs, next_fs, previous_fs; //fieldsets
+var opacity;
+
+$(".next").click(function(){
+
+current_fs = $(this).parent();
+next_fs = $(this).parent().next();
+
+//Add Class Active
+$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+//show the next fieldset
+next_fs.show();
+//hide the current fieldset with style
+current_fs.animate({opacity: 0}, {
+step: function(now) {
+// for making fielset appear animation
+opacity = 1 - now;
+
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+next_fs.css({'opacity': opacity});
+},
+duration: 600
+});
+});
+
+$(".previous").click(function(){
+
+current_fs = $(this).parent();
+previous_fs = $(this).parent().prev();
+
+//Remove class active
+$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+//show the previous fieldset
+previous_fs.show();
+
+//hide the current fieldset with style
+current_fs.animate({opacity: 0}, {
+step: function(now) {
+// for making fielset appear animation
+opacity = 1 - now;
+
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+previous_fs.css({'opacity': opacity});
+},
+duration: 600
+});
+});
+
+$('.radio-group .radio').click(function(){
+$(this).parent().find('.radio').removeClass('selected');
+$(this).addClass('selected');
+});
+
+$(".submit").click(function(){
+return false;
+})
+
+});
+
+</script>
+    
+    
+
+	<script type="text/javascript">
+      	function onChangeStatus(){
+      		var status = document.getElementById("origem");
+      		
+      		if(status.value=="individual"){
+      			
+      			document.getElementById("nome").style.display="block";
+      			document.getElementById("genero").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("faixaEtaria").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			
+      			
+      			
+      			
+      		}else if(status.value=="grupo"){
+      			
+      			document.getElementById("nome").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			document.getElementById("nrHomens").style.display="block";
+      			document.getElementById("nrMulheres").style.display="block";
+      			document.getElementById("nomeGrupo").style.display="block";
+      			
+      			document.getElementById("faixaEtaria").style.display="none";
+      			document.getElementById("genero").style.display="none";
+      			
+      			
+      		}else if(status.value=="anonimo"){
+      			
+      			document.getElementById("genero").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("faixaEtaria").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			document.getElementById("nome").style.display="none";
+      		}else{
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			document.getElementById("nome").style.display="none";
+      			document.getElementById("genero").style.display="none";
+      			document.getElementById("comunicacao").style.display="none";
+      			document.getElementById("contacto").style.display="none";
+      			document.getElementById("faixaEtaria").style.display="none";
+      			document.getElementById("endereco").style.display="none";
+      			document.getElementById("email").style.display="none";
+      			
+      		}
+      	}
+      	
+      	
+      	function onChangeProjecto(){
+      		var estado = document.getElementById("radioProjecto");
+      		
+      		
+      		if(estado.value=="projecto"){
+      			document.getElementById("projectoo").style.display="block";
+      			document.getElementById("cidadee").style.display="block";
+      			document.getElementById("empreiteiroo").style.display="none";
+      			
+      		}else{
+      			document.getElementById("projectoo").style.display="none";
+      			document.getElementById("empreiteiroo").style.display="block";
+      			document.getElementById("cidadee").style.display="none";
+      		}
+      	}
+      		
+      		function onChangeOperacao(){
+          		var estado = document.getElementById("radioOperacao");
+          		
+          		
+          		if(estado.value=="operacao"){
+          			document.getElementById("empreiteiroo").style.display="block";
+          			document.getElementById("cidadee").style.display="block";
+          			document.getElementById("projectoo").style.display="none";
+          		}else{
+          			document.getElementById("empreiteiroo").style.display="none";
+          			document.getElementById("projectoo").style.display="block";
+          			document.getElementById("cidadee").style.display="none";
+          		}
+      		
+      	}
+      	
+      </script>
+    <!-- Conteudo -->
+    
+    
+    
+    <div th:if="${success} != null">
+		<script th:inline="javascript">
+
+			/* swal("Parabens!","" + "<strong th:text='${success}'></strong>" +"", "success"); */
+			
+			
+			/*<![CDATA[*/
+			
+			var messagem = /*[[${ocorrenciaa.grmStamp}]]*/"";
+			
+			var sucesso = /*[[${success}]]*/"";
+			
+			/*]]>*/
+			
+			
+			Swal.fire({
+				  //text: 'Preocupacao submetida com sucesso',
+				  html: sucesso + " <br> "+" NOTA: Anote o seu código para o acompanhamento da sua ocorrência: <br>"+"<span style=color:red; font-weight:bolder>"+messagem+"</span>",
+				  icon: 'success',
+				  confirmButtonText: 'Ok'
+				})
+				
+
+	</script>
+	
+	</div>
+	
+	<div th:if="${fail} != null">
+		<script type="text/javascript">
+
+		Swal.fire({
+			  title: 'Erro!',
+			  text: 'Houve um erro ao submeter a preocupacao',
+			  icon: 'error',
+			  confirmButtonText: 'Ok'
+			})
+
+	</script>
+	</div>
+
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="col-lg-7 col-xl-7">
+                    <div class="card">
+                        <div  class="card-header">
+                            <h3 class="card-title">Ocorrências</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-completion-tasks-8"></div>
+                        </div>
+                    </div>
+
+                    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-8'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		},{
+      			name: "",
+      			data: [113, 42, 65, 54, 76, 65, 35]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4", "#cd201f"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+                </div>
+
+                <div class="col-lg-5 col-xl-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Percentagem das Ocorrências</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-demo-pie" style="height: 16rem"></div>
+                        </div>
+                    </div>
+
+                    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Resolvidos", "Pendentes", "Em Andamento"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#79a6dc", "#d2e1f3"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">RECLAMAÇÕES POR CATEGORIA</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-demo-pie3" style="height: 16rem"></div>
+                        </div>
+                    </div>
+                    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Direct", "Affilliate", "E-mail", "Other"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#79a6dc", "#d2e1f3", "#e9ecf1"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+                </div>
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>RECLAMAÇÕES POR CANAL DE ENTRADA</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-demo-pie4" style="height: 16rem"></div>
+                        </div>
+                    </div>
+                    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie4'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Faturamento", "Perda de Agua", "Ambiental", "Other"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#79a6dc", "#d2e1f3", "#e9ecf1"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+	
+	
+    
+    
+
+    <!-- Conteudo-->
+</div>
+
+
+
+
+</body>
+</html>
