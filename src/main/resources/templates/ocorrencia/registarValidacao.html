@@ -133,7 +133,7 @@
       		var estado = document.getElementById("radioSim");
       		
       		
-      		if(estado.value=="sim"){
+      		if(estado.value=="Sim"){
       			document.getElementById("tipoAlertaa").style.display="block";
       			
       		}
@@ -143,7 +143,7 @@
           		var estado = document.getElementById("radioNao");
           		
           		
-          		if(estado.value=="nao"){
+          		if(estado.value=="Não"){
           			document.getElementById("tipoAlertaa").style.display="none";
           			
           		}
@@ -177,7 +177,7 @@
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
 		<form th:action="@{/ocorrencias/validar}" 
-	                  th:object="${ocorrencia}" method="POST">
+	                  th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 		
 	                 <input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação..."> 
 	                 <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
@@ -469,13 +469,13 @@
             <div>
             	<div class="form-check-inline ">
 			  <label class="form-check-label">
-			    <input onchange="onChangeSim()" id="radioSim" type="radio" value="sim" class="form-check-input" name="optradio"> Sim
+			    <input onchange="onChangeSim()" id="radioSim" type="radio" value="Sim" class="form-check-input" name="procedencia" checked> Sim
 			  </label>
 			</div>
 			
 			<div class="form-check-inline mb-2">
 			  <label class="form-check-label">
-			    <input onchange="onChangeNao()" id="radioNao" type="radio" value="nao" class="form-check-input" name="optradio"> Não
+			    <input onchange="onChangeNao()" id="radioNao" type="radio" value="Não" class="form-check-input" name="procedencia" > Não
 			  </label>
 			</div>
 			
@@ -483,7 +483,7 @@
 			
 			
 			<div class="row">
-				<div style="display: none;" id="tipoAlertaa" class="col-6 col-sm-6">
+				<div style="display: block;" id="tipoAlertaa" class="col-6 col-sm-6">
 	                    <div class="form-group">
 	                        <label for="tipoAlerta" class="form-label">Tipo de Alerta</label>
 	                        <select id="tipoAlerta" class="form-control custom-select form-select" th:field="*{tipoAlerta}" >
@@ -518,6 +518,32 @@
                     </div>
                 </div>
 			</div>
+			<br>
+			
+			<div class="row">
+				
+				<div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label style="display:block;" for="file" class="form-label btn">Anexar Ficheiro</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-calendar"></i>
+                                    </span>
+                            <input style="display:none;" type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
+                            <p id="num-of-files"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                   <div class="form-group">
+                    <div class="input-icon">
+                        <input type="text" onchange="preview()" name="descricao" placeholder="Descricao de Anexos" class="form-control" >
+                    </div>
+                </div>
+                </div>
+
+            </div>
 			
                 
                 <div class="card-footer text-right">

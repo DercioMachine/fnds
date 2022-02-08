@@ -23,7 +23,7 @@
                 var result = JSON.parse(result);
                 var s = '';
                 for(var i=0; i< result.length; i++){
-                    s + = '<option value="'+result[i].id+'">'+result[i].name+'</option>';
+                    s = '<option value="'+result[i].id+'">'+result[i].name+'</option>';
                 }
                 $('#comoboxDistrito').html(s);
               }

@@ -101,7 +101,7 @@ public class Ocorrencia extends AbstractEntity{
 	private Date dataClassificacao;
 	
 	@Column(name = "procedencia")
-	private boolean procedencia;
+	private String procedencia;
 	
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_resposta", columnDefinition = "DATE")
@@ -249,10 +249,6 @@ public class Ocorrencia extends AbstractEntity{
 		return dataClassificacao;
 	}
 
-	public boolean isProcedencia() {
-		return procedencia;
-	}
-
 
 	public String getFormaResposta() {
 		return formaResposta;
@@ -358,15 +354,19 @@ public class Ocorrencia extends AbstractEntity{
 		this.dataClassificacao = dataClassificacao;
 	}
 
-	public void setProcedencia(boolean procedencia) {
-		this.procedencia = procedencia;
-	}
-
 
 	public LocalDate getDataResposta() {
 		return dataResposta;
 	}
 	
+	
+	public String getProcedencia() {
+		return procedencia;
+	}
+
+	public void setProcedencia(String procedencia) {
+		this.procedencia = procedencia;
+	}
 
 	public String getObservacao() {
 		return observacao;

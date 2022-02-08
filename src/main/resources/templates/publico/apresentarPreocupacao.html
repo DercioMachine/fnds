@@ -314,7 +314,7 @@ select.list-dt:focus {
     
     
 </head>
-<body style=" background-image: linear-gradient(120deg, #FF4081, #81D4FA) no-repeat center center fixed; background-color: #9C27B0;" class="antialiased wrapper">
+<body style=" background: #f4f5fa;" class="antialiased wrapper">
 
 <!-- Fragmentos de header -->
     <header th:replace="/fragmentos/headerPublico"></header>
@@ -361,7 +361,7 @@ select.list-dt:focus {
           type: 'GET',
          //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
           url: 'http://localhost:9090/distrito/'+provinciaId,
-          
+          //url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -390,7 +390,7 @@ select.list-dt:focus {
           type: 'GET',
          url: 'http://localhost:9090/posto/'+distritoId,
          
-         
+       //  url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
          // url: 'http://fipag.herokuapp.com/posto/'+distritoId,
           
            success: function (result){
@@ -607,18 +607,14 @@ return false;
 			
 			/*]]>*/
 			
-			alert(messagem);
-			alert(sucesso);
 			
 			Swal.fire({
-				  text: 'Preocupacao submetida com sucesso',
-				  html: 'SUCESSO '+messagem + " - " +sucesso,
+				  //text: 'Preocupacao submetida com sucesso',
+				  html: sucesso + " <br> "+" NOTA: Anote o seu código para o acompanhamento da sua ocorrência: <br>"+"<span style=color:red; font-weight:bolder>"+messagem+"</span>",
 				  icon: 'success',
 				  confirmButtonText: 'Ok'
 				})
 				
-				alert(messagem);
-				alert(sucesso);
 
 	</script>
 	
@@ -680,7 +676,7 @@ return false;
 													
 													<div class="row">
 														<div class="form-group col-6 col-sm-6">
-															
+															<label for="comboboxProvincias" class="form-label">Empreiteiro</label>
 															<select id="empreiteiro" class="form-control custom-select form-select" th:field="*{empreiteiro}" >
 																<option value="">Selecione o Empreiteiro...</option>
 																<option th:each="p : ${empreiteiros}"
@@ -689,7 +685,7 @@ return false;
 														</div>
 														
 														<div class="form-group col-6 col-sm-6">
-															
+															<label for="comboboxProvincias" class="form-label">Cidade</label>
 															<select id="empreiteiro" class="form-control custom-select form-select" th:field="*{cidade}" >
 																<option value="">Selecione o Cidade...</option>
 																<option th:each="p : ${cidades}"
@@ -715,6 +711,8 @@ return false;
 															<label for="comoboxDistrito" class="form-label">Distrito</label>
 															<select id="comoboxDistrito" class="form-control custom-select form-select" th:field="*{distrito}" >
 																<option value="">Selecione o Distrito...</option>
+																<option th:each="p : ${distritos}"
+											                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
 															</select>
 														</div>
 														
@@ -726,6 +724,8 @@ return false;
 															<label for="comboboxPosto" class="form-label"> Posto Admnistrativo</label>
 															<select id="comboboxPosto" class="form-control custom-select form-select" th:field="*{postoAdministrativo}" >
 																<option value="">Selecione o Posto Admnistrativo...</option>
+																<option th:each="p : ${postos}"
+											                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
 															</select>
 														</div>
 														
@@ -751,28 +751,38 @@ return false;
 																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
 															</select>
 														</div>
+														
+														<div class="form-group col-6 col-sm-6">
+															<label for="categoria" class="form-label"> Tipo de Categoria</label>
+															<select id="categoria" class="form-control custom-select form-select" th:field="*{categoria}" >
+																<option value="">Selecione o Tipo de Categoria...</option>
+																<option th:each="p : ${categorias}"
+																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+															</select>
+														</div>
 													
 													
-													<div class="col-6 col-sm-6">
-													<label class="form-label"> Comunidade</label>
-													<input type="text" name="comunidade" placeholder="Comunidade" />
-													</div>
 													</div>
 													
 													
 													
 													<div class="row">
-													<div class="col-6 col-sm-12">
-													<label class="form-label"> Data da Ocorrência:</label>
-													<input type="date" th:field="*{dataOcorrencia}" class="form-control">
-															
-													</div>	
+														<div class="col-6 col-sm-6">
+															<label class="form-label"> Data da Ocorrência:</label>
+															<input type="date" th:field="*{dataOcorrencia}" class="form-control">
+														</div>	
+														
+														<div class="col-6 col-sm-6">
+															<label class="form-label"> Comunidade</label>
+															<input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
+														</div>
+													
 													</div>
 													
 													<div class="row">
 													<div class="col-6 col-sm-12">
 													<label class="form-label"> Assunto</label>
-													<textarea name="assunto " placeholder="Assunto " ></textarea>
+													<textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
 													</div>
 													</div>
 													
@@ -980,21 +990,21 @@ return false;
                                 <input type="button" name="Anterior" class="previous action-button-previous" value="Anterior" /> 
 								<input type="button" name="make_payment" class="next action-button" value="Proximo" />
                             </fieldset>
+                            
                             <fieldset>
                                 <div class="form-card">
-                                    <h2 class="fs-title text-center">Success !</h2> <br><br>
                                     <div class="row justify-content-center">
-                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
-                                    </div> <br><br>
-                                    <div class="row justify-content-center">
-                                        <div class="col-7 text-center">
-                                            <h5>You Have Successfully Signed Up</h5>
+                                        <div class="text-center">
+                                            <h5>Certifique o preenchimento dos campos antes  de Finalizar.</h5>
+                                            <h5>Após clicar em confirmar, não poderá alterar os dados</h5>
+                                            <h5>Guarde o código que lhe será fornecido, para a consulta da ocorrência após confirmar o registo</h5>
                                         </div>
                                     </div>
                                 </div>
 								<input type="button" name="Anterior" class="previous action-button-previous" value="Anterior" /> 
 								<input type="submit" name="make_payment" class="next action-button" value="Confirmar" />
                             </fieldset>
+                            
                         </form>
                     </div>
                 </div>

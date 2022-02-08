@@ -20,7 +20,7 @@
 
           $.ajax({
           type: 'GET',
-       url: 'portal.fipag.co.mz/grm/distrito/'+provinciaId,
+      // url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
           url: 'http://localhost:9090/distrito/'+provinciaId, 
         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
          
@@ -54,7 +54,7 @@
          
           $.ajax({
           type: 'GET',
-        url: 'portal.fipag.co.mz/grm/posto/'+distritoId,
+      //  url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
           url: 'http://localhost:9090/posto/'+provinciaId,
        // url: 'http://fipag.herokuapp.com/posto/'+provinciaId,
            success: function (result){
@@ -297,9 +297,7 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                            <input type="text" th:field="*{comunidade}" class="form-control" required placeholder="Escreva a Comunidade..."
-                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-                                   oninput="this.setCustomValidity('')">
+                            <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
                         </div>
                     </div>
                 </div>
@@ -323,10 +321,19 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-calendar"></i>
                                     </span>
-                            <input type="date" th:field="*{dataOcorrencia}" class="form-control" required placeholder=""
-                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-                                   oninput="this.setCustomValidity('')">
+                            <input type="date" th:field="*{dataOcorrencia}" class="form-control">
                         </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select id="categoria" class="form-control custom-select form-select" th:field="*{categoria}" >
+                            <option value="">Selecione a Categoria...</option>
+                            <option th:each="p : ${categorias}" 
+	                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -342,9 +349,7 @@
 	                                    <span class="input-icon-addon">
 	                                      <i class="fe fe-edit-2"></i>
 	                                    </span>
-	                            <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" required placeholder="Descreva o Assunto..."
-	                                   oninvalid="this.setCustomValidity('Campo obrigatório! Não pode ser vazio nem conter espaços em branco.')"
-	                                   oninput="this.setCustomValidity('')"></textarea>
+	                            <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
 	                        </div>
 	                    </div>
 	                </div>

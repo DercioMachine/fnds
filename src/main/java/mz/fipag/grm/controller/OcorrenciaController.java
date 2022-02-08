@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import mz.fipag.grm.domain.Categoria;
 import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Empreiteiro;
@@ -34,6 +35,7 @@ import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
+import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
@@ -94,6 +96,10 @@ public class OcorrenciaController {
     
     @Autowired
     private CidadeService cidadeService;
+    
+    @Autowired
+    private CategoriaService categoriaService; 
+    
     private long responsavel;
 
     @GetMapping("/listar/ocorrencia")
@@ -154,7 +160,7 @@ public class OcorrenciaController {
 
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files) {
+	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) {
 
     	
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
@@ -171,7 +177,10 @@ public class OcorrenciaController {
     		ocorrenciaService.salvar(ocorrencia);
 
     	for(MultipartFile file: files) {
-            docStorageService.saveFile(file, ocorrencia, descricao);
+    		if(!file.getOriginalFilename().isEmpty()) {
+				
+				docStorageService.saveFile(file, ocorrencia, descricaoNexo);
+			}
         }
 
     	return "redirect:/listar/ocorrencia";
@@ -347,14 +356,25 @@ public class OcorrenciaController {
 	 *  VALIDACAO
 	 *
 	 */
+    
+    
 
     @PostMapping("/ocorrencias/validar")
-    public String validacaoVista(Ocorrencia ocorrencia,  RedirectAttributes redirAttrs) {
-    	
+    public String validacaoVista(Ocorrencia ocorrencia,  RedirectAttributes redirAttrs,
+    		@RequestParam String procedencia, @RequestParam("descricao") String descricaoAnexo, @RequestParam("files") MultipartFile[] files) {
+    		
+    		ocorrencia.setProcedencia(procedencia);
     		ocorrencia.setValidado(true);
         	ocorrencia.setEstado("Validado");
         	ocorrencia.setResolucao("V");
             ocorrenciaService.editar(ocorrencia);
+            
+            for(MultipartFile file: files) {
+        		if(!file.getOriginalFilename().isEmpty()) {
+    				
+    				docStorageService.saveFileValidacao(file, ocorrencia, descricaoAnexo);
+    			}
+            }
 
             return "redirect:/resolver/ocorrencia/"+ocorrencia.getId();
 
@@ -412,10 +432,15 @@ public class OcorrenciaController {
 	return cidadeService.buscarTodos();
 }
 
-@ModelAttribute("projectos")
-public List<Projecto> listaDeDeProjectos(){
-	return projectoService.buscarTodos();
-}
+	@ModelAttribute("projectos")
+	public List<Projecto> listaDeDeProjectos(){
+		return projectoService.buscarTodos();
+	}
+	
+	@ModelAttribute("categorias")
+	public List<Categoria> listaDeCategorias(){
+		return categoriaService.buscarTodos();
+	}
 
 
 }

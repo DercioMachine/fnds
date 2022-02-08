@@ -313,12 +313,12 @@ select.list-dt:focus {
     
     
 </head>
-<body style=" background-image: linear-gradient(120deg, #FF4081, #81D4FA) no-repeat center center fixed; background-color: #9C27B0;" class="antialiased wrapper">
+<body style=" background: #f4f5fa;" class="antialiased wrapper">
 
 <!-- Fragmentos de header -->
     <header th:replace="/fragmentos/headerPublico"></header>
     <!-- Fim de frgmento de header-->
-<div>
+<div style="margin-left: 15%; margin-right: 15%">
 
 
     <div class="card">
@@ -430,19 +430,19 @@ select.list-dt:focus {
 					   </div>
 				   </div>
 
-				   <div class="col-6 col-sm-6">
+				   <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.tipoAlerta != null && ocorrencia.tipoAlerta.designacao != null}">
 					   <div class="form-group">
 						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}"></span>
 					   </div>
 				   </div>
-
+				   
 				   <div class="col-6 col-sm-6">
 					   <div class="form-group">
 						   <span style="font-weight: bolder;">Estado da Ocorrência: </span><span th:text="${ocorrencia.estado}"></span>
 					   </div>
 				   </div>
 
-				   <div class="col-12 col-sm-12">
+				   <div class="col-12 col-sm-6">
 					   <div class="form-group">
 						   <span style="font-weight: bolder;">Observação: </span><span th:text="${ocorrencia.observacao}"></span>
 					   </div>
@@ -479,6 +479,12 @@ select.list-dt:focus {
 					  <span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
 				  </div>
 			  </div>
+			  
+			  <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.categoria != null && ocorrencia.categoria.designacao != null}">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Categoria: </span> <span th:text="${ocorrencia.categoria.designacao}"></span>
+					   </div>
+				   </div>
 
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
@@ -517,7 +523,7 @@ select.list-dt:focus {
 			  </div>
 
 
-			  <div class="col-12 col-sm-12">
+			  <div class="col-12 col-sm-4">
 				  <div class="form-group">
 					  <span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
 				  </div>

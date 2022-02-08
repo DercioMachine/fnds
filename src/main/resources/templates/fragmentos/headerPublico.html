@@ -3,7 +3,7 @@
  xmlns:th="http://www.w3.org/1999/xhtml">
  
  <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
+            <a th:href="@{/}">
                 <img style="margin-right: 115px" th:src="@{/image/logo_light.png}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
@@ -62,14 +62,14 @@
                     </li>
 
                     <li style="margin-left: 300px" class="nav-item ">
-                        <a class="nav-link" th:href="@{apresentar/preocupacao}" >
+                        <a class="nav-link" th:href="@{/apresentar/preocupacao}" >
 
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
 								<i style="font-size: 15pt; color: #0277BD" class="far fa-comments"></i>
                             </span>
 
                             <span class="nav-link-title">
-                                Apresentar Preocupação
+                                Apresentar Ocorrência
                             </span>
                         </a>
                     </li>
@@ -83,13 +83,13 @@
                             </span>
 
                             <span class="nav-link-title">
-                                Acompanhar Queixa
+                                Acompanhar Ocorrência
                             </span>
                         </a>
                     </li>
                     
                     <li class="nav-item ">
-                        <a class="nav-link"  th:href="@{/buscar/preocupacao}" >
+                        <a class="nav-link"  th:href="@{/estatistica}" >
 
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
 								 <i style="font-size: 15pt; color: #0277BD" class="fas fa-chart-bar"></i>
@@ -99,6 +99,7 @@
                             <span class="nav-link-title">
                                 Estatísticas
                             </span>
+                            
                         </a>
                     </li> 
 

@@ -97,6 +97,7 @@
                         <td>Ocorrência</td>
                         <td>Tipo</td>
                         <td>Natureza</td>
+                        <td>Procede?</td>
                         <td class="w-4">Assunto</td>
                         <td class="w-4">Estado</td>
                         <td class="w-3">Acção</td>
@@ -113,6 +114,7 @@
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td>
                         <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td>
+                        <td th:text="${p.procedencia}">Auxiliar Contábil</td>
                         
                         <td>
 		                   <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
@@ -120,10 +122,6 @@
 		                        
 		                        
 		                      <td>
-		                      	<!-- <button style="background: green; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Validar 
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-		                      	</button> -->
 		                      	
 		                      	<button style="background: blue; color: #fff" th:if="${p.resolucao == 'V' }" type="button" class="btn btn-sucess btn-sm">
 		                      	Validado 
@@ -145,10 +143,17 @@
 		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
 		                      	</button>
 		                      	
-		                      	<button style="background: red; color: #fff" th:if="${p.estado == 'Temporario' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Pendente 
+		                      	<button style="background: red; color: #fff" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+		                      	<span th:if="${p.estado == 'Temporario'}">Temporario</span>
+		                      	<span th:if="${p.estado == 'Registado'}">Pendente</span>
+		                      	  
 		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
 		                      	</button>
+		                      	
+		                      	<!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
+		                      	Pendente 
+		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+		                      	</button> -->
 					
 							</td>
                         

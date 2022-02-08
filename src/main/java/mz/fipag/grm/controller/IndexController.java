@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.fipag.grm.domain.Categoria;
 import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Empreiteiro;
@@ -32,6 +34,7 @@ import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
+import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
@@ -94,6 +97,11 @@ public class IndexController {
 	    
 	    @Autowired
 	    private CidadeService cidadeService;
+	    
+	    @Autowired
+	    private CategoriaService categoriaService; 
+	    
+	    
 	
 
     @GetMapping("/")
@@ -101,15 +109,39 @@ public class IndexController {
 
         return "publico/principal";
     }
+    
+    @GetMapping("/estatistica")
+    public String estatistica(){
+
+        return "publico/estastica";
+    }
 
 	/*
 	 * @GetMapping("/login") public String homeIndex(){
 	 * 
 	 * return "login"; }
 	 */
+    
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard() {
+		
+		ModelAndView vm = new ModelAndView("reclamacoes/home");
+		
+		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
+		vm.addObject("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
+		vm.addObject("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
+		
+		
+		
+		return vm;
+		
+	}
+    
 
     @GetMapping("/home")
-    public String home(){
+    public String home(ModelMap model){
+    	
+    	 model.addAttribute("ocorrencia",new Ocorrencia());
 
         return "reclamacoes/home";
     }
@@ -137,7 +169,7 @@ public class IndexController {
     
     
     @PostMapping("/ocorrencias/preCadastrar")
-	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, @RequestParam("descricao") String descricao, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
+	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, @RequestParam("descricao") String descricaoAnx, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
 
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
     	int ano = Calendar.getInstance().get(Calendar.YEAR);
@@ -159,11 +191,17 @@ public class IndexController {
     		
     		
     		ocorrenciaService.salvar(ocorrencia);
-
-    	for(MultipartFile file: files) {
-            docStorageService.saveFile(file, ocorrencia, descricao);
-        }
-    	
+    		
+    		if(files!=null) {
+    			for(MultipartFile file: files) {
+    				
+    				if(!file.getOriginalFilename().isEmpty()) {
+    					
+    					docStorageService.saveFile(file, ocorrencia, descricaoAnx);
+    				}
+    	        }
+    		}
+    		
     	// model.addAttribute("ocorrenciaa", ocorrencia.getGrmStamp());
 
     	attr.addFlashAttribute("success", "Preocupação submetida com sucesso.");
@@ -173,6 +211,23 @@ public class IndexController {
     	
     	return "redirect:/apresentar/preocupacao";
 	}
+    
+    
+    
+    
+    @PostMapping("/autenticacao")
+	public String autenticar(@RequestParam("user") String user, @RequestParam("senha") String senha, RedirectAttributes attr) {
+
+		if(user.equals("fipag@fipag.co.mz") && senha.equals("123")) {
+			
+			return "redirect:/dashboard";
+		}else {
+			attr.addFlashAttribute("error", "Utilizador ou Senha invalida.");
+			return "redirect:/login";
+		}
+		
+	}
+    
     
     
     @PostMapping("/pesquisar/ocorrencia")
@@ -240,9 +295,14 @@ public class IndexController {
 	return cidadeService.buscarTodos();
 }
 
-@ModelAttribute("projectos")
-public List<Projecto> listaDeDeProjectos(){
-	return projectoService.buscarTodos();
-}
+	@ModelAttribute("projectos")
+	public List<Projecto> listaDeDeProjectos(){
+		return projectoService.buscarTodos();
+	}
+	
+	@ModelAttribute("categorias")
+	public List<Categoria> listaDeCategorias(){
+		return categoriaService.buscarTodos();
+	}
     
 }

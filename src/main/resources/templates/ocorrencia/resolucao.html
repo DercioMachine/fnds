@@ -48,11 +48,11 @@
 	</a>
 
 	<!-- Conteudo -->
-	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'R' }"  role="button">
+	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'R' && ocorrencia.procedencia=='Sim'}"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Resolver Ocorrência</span>
 	</a>
-	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'V' }"  role="button">
+	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'V'  && ocorrencia.procedencia=='Sim'}"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Resolver Ocorrência</span>
 	</a>
@@ -176,11 +176,12 @@
 					   </div>
 				   </div>
 
-				   <div class="col-6 col-sm-6">
+				   <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.tipoAlerta != null && ocorrencia.tipoAlerta.designacao != null}">
 					   <div class="form-group">
-						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}"></span>
+						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}" ></span>
 					   </div>
 				   </div>
+				   
 
 				   <div class="col-6 col-sm-6">
 					   <div class="form-group">
@@ -188,7 +189,7 @@
 					   </div>
 				   </div>
 
-				   <div class="col-12 col-sm-12">
+				   <div class="col-12 col-sm-6">
 					   <div class="form-group">
 						   <span style="font-weight: bolder;">Observação: </span><span th:text="${ocorrencia.observacao}"></span>
 					   </div>
@@ -225,6 +226,12 @@
 					  <span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
 				  </div>
 			  </div>
+			  
+			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.categoria != null && ocorrencia.categoria.designacao != null}">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Categoria: </span> <span th:text="${ocorrencia.categoria.designacao}"></span>
+					   </div>
+				   </div>
 
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
@@ -263,7 +270,7 @@
 			  </div>
 
 
-			  <div class="col-12 col-sm-12">
+			  <div class="col-12 col-sm-6">
 				  <div class="form-group">
 					  <span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
 				  </div>
@@ -317,8 +324,8 @@
 
 				<form th:action="@{/anexos/resolucao}"  th:object="${anexo}"
 					  method="POST" enctype="multipart/form-data"
-					  th:if="${ocorrencia.resolucao !='T' }">
-
+					  th:if="${ocorrencia.resolucao !='T' && ocorrencia.procedencia=='Sim'}">
+					  
 					<div class="row" >
 
 						<div class="col-3 col-sm-3">

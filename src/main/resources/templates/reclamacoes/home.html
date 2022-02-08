@@ -25,15 +25,30 @@
           <div class="container-xl">
             <div class="row row-deck row-cards">
     
-   		 	<div class="col-sm-6 col-lg-3">
-                <div style="text-shadow: 2px 2px 4px #000000;" class="card">
+   		 	<div class="col-sm-6 col-md-3 col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">ocorrências</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
+                    </div>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-list-alt"></i></span>
+                      
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-md-3 col-lg-4">
+                <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
                       <div class="subheader">Reclamações</div>
                       <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
                     <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">75</span>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoes}]]</span>
                     <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ticket-alt"></i></span>
                       
                   </div>
@@ -42,53 +57,22 @@
               
               
               
-              <div class="col-sm-6 col-lg-3">
-                <div style="text-shadow: 2px 2px 4px #000000;" class="card">
+              <div class="col-sm-6 col-md-3 col-lg-4">
+                <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
                       <div class="subheader">Sugestões</div>
                     </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">31</span>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeSugestoes}]]</span>
                     <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-lightbulb"></i></span>
                       
                   </div>
                 </div>
               </div>
-              
-              
-              <div class="col-sm-6 col-lg-3">
-                <div style="text-shadow: 2px 2px 4px #000000;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Solicitações</div>
-                    </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">43</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-code-branch"></i></span>
-                      
-                  </div>
+              </div>
                 </div>
               </div>
               
-              <div class="col-sm-6 col-lg-3">
-                <div style="text-shadow: 2px 2px 4px #000000;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Consultas</div>
-                    </div>
-                   <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">43</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-book-open"></i></span>
-                      
-                  </div>
-                </div>
-              </div>
-              
-              
-              
-              
-              
-              </div>
-              </div>
-              </div>
               
               
               
@@ -161,8 +145,8 @@
             <div class="row row-deck row-cards">
         <div class="col-lg-7 col-xl-7">
             <div class="card">
-                <div  style="background:rgba(158,197,201,100);" class="card-header">
-                    <h3 style="font-weight: bolder" class="card-title">Ocorrências</h3>
+                <div  class="card-header">
+                    <h3 class="card-title">Ocorrências</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-completion-tasks-8"></div>
@@ -244,8 +228,8 @@
 
         <div class="col-lg-5 col-xl-5">
             <div class="card">
-                <div style="background:rgba(158,197,201,100);" class="card-header">
-                    <h3 style="font-weight: bolder" class="card-title">Percentagem das Ocorrências</h3>
+                <div class="card-header">
+                    <h3 class="card-title">Percentagem das Ocorrências</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-demo-pie" style="height: 16rem"></div>
@@ -309,8 +293,8 @@
             <div class="row row-deck row-cards">
         <div class="col-lg-6 col-xl-6">
             <div class="card">
-                <div style="background:rgba(158,197,201,100);" class="card-header">
-                    <h3 style="font-weight: bolder" class="card-title">RECLAMAÇÕES POR CATEGORIA</h3>
+                <div class="card-header">
+                    <h3 class="card-title">RECLAMAÇÕES POR CATEGORIA</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-demo-pie3" style="height: 16rem"></div>
@@ -365,8 +349,8 @@
 
         <div class="col-lg-6 col-xl-6">
             <div class="card">
-                <div style="background:rgba(158,197,201,100);" class="card-header">
-                    <h3 style="font-weight: bolder" class="card-title">RECLAMAÇÕES POR CANAL DE ENTRADA</h3>
+                <div class="card-header">
+                    <h3>RECLAMAÇÕES POR CANAL DE ENTRADA</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-demo-pie4" style="height: 16rem"></div>
@@ -429,8 +413,8 @@
             <div class="row row-deck row-cards">
     <div class="col-lg-12 col-xl-12">
         <div class="card">
-            <div style="background:rgba(158,197,201,100);" class="card-header">
-                <h3 style="font-weight: bolder" class="card-title">RÁCIO DE RECLAMAÇÕES POR CATEGÓRIA/ESTADO</h3>
+            <div class="card-header">
+                <h3 class="card-title">RÁCIO DE RECLAMAÇÕES POR CATEGÓRIA/ESTADO</h3>
             </div>
             <div class="card-body">
                 <div id="chart-completion-tasks-9" style="height: 16rem"></div>
