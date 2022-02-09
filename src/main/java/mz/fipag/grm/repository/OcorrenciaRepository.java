@@ -23,4 +23,14 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 
     @Query(value="select count(*) from Ocorrencia where tipo_ocorrencia_id=3", nativeQuery=true)
 	public Object totalDeSugestoes();
+    
+    
+	/*
+	 * @Query(value="select date_format(created, '%Y/%m') mes\r\n" +
+	 * ", count(*) \r\n" + "from ocorrencia\r\n" +
+	 * "where created > date_sub(now(), interval 6 month)\r\n" +
+	 * "group by date_format(created, '%Y/%m')\r\n" +
+	 * "order by date_format(created, '%Y/%m') desc;", nativeQuery=true) public
+	 * Object totalDeOcorrenciasPorMes();
+	 */
 }

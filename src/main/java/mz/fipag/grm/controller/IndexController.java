@@ -1,11 +1,14 @@
 package mz.fipag.grm.controller;
 
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -110,10 +113,22 @@ public class IndexController {
         return "publico/principal";
     }
     
+    
     @GetMapping("/estatistica")
-    public String estatistica(){
+    public ModelAndView estatistica(){
+    	
+    	
+    	ModelAndView vm = new ModelAndView("publico/estastica");
+		
+		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
+		vm.addObject("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
+		vm.addObject("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
+		
+		//vm.addObject("totalDeOcorrenciasPorMes", ocorrenciaRepository.totalDeOcorrenciasPorMes());
+		
+		
+		return vm;
 
-        return "publico/estastica";
     }
 
 	/*
@@ -130,6 +145,8 @@ public class IndexController {
 		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
 		vm.addObject("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
 		vm.addObject("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
+		
+		//vm.addObject("totalDeOcorrenciasPorMes", ocorrenciaRepository.totalDeOcorrenciasPorMes());
 		
 		
 		

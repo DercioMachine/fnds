@@ -25,6 +25,100 @@
           <div class="container-xl">
             <div class="row row-deck row-cards">
     
+   		 	<div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Ano</label>
+                        <select id="ano" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Mês</label>
+                        <select id="mes" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="Janeiro">Janeiro</option>
+                            <option value="Fevereiro">Fevereiro</option>
+                            <option value="Março">Março</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Maio ">Maio </option>
+                            <option value="Junho">Junho</option>
+                            <option value="Julho">Julho</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Setembro">Setembro</option>
+                            <option value="Outubo">Outubo</option>
+                            <option value="Novembro">Novembro</option>
+                            <option value="Dezembro">Dezembro</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Trimestre</label>
+                        <select id="trimestre" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="1° Trimestre">1° Trimestre</option>
+                            <option value="2° Trimestre">2° Trimestre</option>
+                            <option value="3° Trimestre">3° Trimestre</option>
+                            <option value="4° Trimestre">4° Trimestre</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Semestre</label>
+                        <select id="semestre" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="1° Semestre">1° Semestre</option>
+                            <option value="2° Semestre">2° Semestre</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
+              </div>
+                </div>
+              </div>
+    
+    
+    
+                  
+    
+    
+    
+    
+    
+    <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+    
    		 	<div class="col-sm-6 col-md-3 col-lg-4">
                 <div class="card">
                   <div class="card-body">
@@ -146,7 +240,7 @@
         <div class="col-lg-7 col-xl-7">
             <div class="card">
                 <div  class="card-header">
-                    <h3 class="card-title">Ocorrências</h3>
+                    <h3 class="card-title">OCORRÊNCIAS</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-completion-tasks-8"></div>
@@ -183,9 +277,6 @@
       		series: [{
       			name: "",
       			data: [155, 65, 465, 265, 225, 325, 80]
-      		},{
-      			name: "",
-      			data: [113, 42, 65, 54, 76, 65, 35]
       		}],
       		grid: {
       			padding: {
@@ -216,7 +307,7 @@
       		labels: [
       			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
       		],
-      		colors: ["#206bc4", "#cd201f"],
+      		colors: ["#206bc4"],
       		legend: {
       			show: false,
       		},
@@ -229,7 +320,7 @@
         <div class="col-lg-5 col-xl-5">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Percentagem das Ocorrências</h3>
+                    <h3 class="card-title">PERCENTAGEM POR OCORRÊNCIAS</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-demo-pie" style="height: 16rem"></div>
@@ -254,12 +345,12 @@
       		fill: {
       			opacity: 1,
       		},
-      		series: [44, 55, 12, 2],
+      		series: [44, 55, 12],
       		labels: ["Resolvidos", "Pendentes", "Em Andamento"],
       		grid: {
-      			strokeDashArray: 4,
+      			strokeDashArray: 3,
       		},
-      		colors: ["#206bc4", "#79a6dc", "#d2e1f3"],
+      		colors: ["#66BB6A", "#EF5350", "#FFA726"],
       		legend: {
       			show: true,
       			position: 'bottom',
@@ -294,7 +385,7 @@
         <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">RECLAMAÇÕES POR CATEGORIA</h3>
+                    <h3 class="card-title">RECLAMAÇÕES POR TIPO OCORRÊNCIAS</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-demo-pie3" style="height: 16rem"></div>
@@ -319,11 +410,11 @@
       			opacity: 1,
       		},
       		series: [44, 55, 12, 2],
-      		labels: ["Direct", "Affilliate", "E-mail", "Other"],
+      		labels: ["Consulta", "Denúcia", "Elogio", "Reclamação", "Sugestão"],
       		grid: {
-      			strokeDashArray: 4,
+      			strokeDashArray: 5,
       		},
-      		colors: ["#206bc4", "#79a6dc", "#d2e1f3", "#e9ecf1"],
+      		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
       		legend: {
       			show: true,
       			position: 'bottom',
@@ -346,56 +437,82 @@
       // @formatter:on
     </script>
         </div>
-
+        
+        
+        
         <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div class="card-header">
-                    <h3>RECLAMAÇÕES POR CANAL DE ENTRADA</h3>
+                    <h3>RECLAMAÇÕES POR ORIGEM</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-demo-pie4" style="height: 16rem"></div>
+                    <div id="chart-completion-tasks-3"></div>
                 </div>
             </div>
             <script>
       // @formatter:off
       document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie4'), {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-3'), {
       		chart: {
-      			type: "donut",
+      			type: "area",
       			fontFamily: 'inherit',
       			height: 240,
-      			sparkline: {
-      				enabled: true
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
       			},
       			animations: {
       				enabled: false
       			},
       		},
-      		fill: {
-      			opacity: 1,
+      		dataLabels: {
+      			enabled: false,
       		},
-      		series: [44, 55, 12, 2],
-      		labels: ["Faturamento", "Perda de Agua", "Ambiental", "Other"],
+      		fill: {
+      			opacity: .16,
+      			type: 'solid'
+      		},
+      		stroke: {
+      			width: 2,
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "Tasks completion",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		}],
       		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
       			strokeDashArray: 4,
       		},
-      		colors: ["#206bc4", "#79a6dc", "#d2e1f3", "#e9ecf1"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
+      		xaxis: {
+      			labels: {
+      				padding: 0,
       			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
       			},
       		},
-      		tooltip: {
-      			fillSeriesColor: false
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4"],
+      		legend: {
+      			show: false,
       		},
       	})).render();
       });
@@ -591,4 +708,6 @@
     <!-- Conteudo-->
 </div>
 </body>
+
+
 </html>

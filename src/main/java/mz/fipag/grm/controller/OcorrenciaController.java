@@ -32,6 +32,7 @@ import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.DocsRepository;
+import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
@@ -98,6 +99,9 @@ public class OcorrenciaController {
     private CidadeService cidadeService;
     
     @Autowired
+    private OcorrenciaRepository ocorrenciaRepository;
+    
+    @Autowired
     private CategoriaService categoriaService; 
     
     private long responsavel;
@@ -157,6 +161,16 @@ public class OcorrenciaController {
 
         return gson.toJson(postoAdminitrativoRepository.findAllById(id));
     }
+    
+    @ResponseBody
+    @GetMapping("/ocorrencias")
+    public String ocorrencias(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.findAll());
+    }
+
 
 
     @PostMapping("/ocorrencias/cadastrar")

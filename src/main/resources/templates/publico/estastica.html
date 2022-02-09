@@ -34,8 +34,18 @@
    <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
     <script th:src="@{/../assets/js/dashboard.js}"></script> -->
     
+    <!-- Libs JS -->
+<script th:src="@{/dist/libs/apexcharts/dist/apexcharts.min.js}"></script>
+<!-- Tabler Core -->
+<script th:src="@{/dist/js/tabler.min.js}"></script>
     
-    
+    <style type="text/css">
+		.h2{
+		margin-top: 0;
+   		margin-bottom: 0;
+		}
+		
+</style>
     
 </head>
 
@@ -57,11 +67,700 @@
     }
     </script>
     
-    <div align="center" class="col-12"> 
-    <h1 style="color: orange; font-weight: bolder; font-size: 50pt">OHHHH!! Ainda em Produção</h1>
-    <img src="/image/dev.png" class="fit-image"> 
+    <body>
+<div>
+    <!-- Conteudo -->
+    
+    
+    <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+    
+   		 	<div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Ano</label>
+                        <select id="ano" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Mês</label>
+                        <select id="mes" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="Janeiro">Janeiro</option>
+                            <option value="Fevereiro">Fevereiro</option>
+                            <option value="Março">Março</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Maio ">Maio </option>
+                            <option value="Junho">Junho</option>
+                            <option value="Julho">Julho</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Setembro">Setembro</option>
+                            <option value="Outubo">Outubo</option>
+                            <option value="Novembro">Novembro</option>
+                            <option value="Dezembro">Dezembro</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Trimestre</label>
+                        <select id="trimestre" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="1° Trimestre">1° Trimestre</option>
+                            <option value="2° Trimestre">2° Trimestre</option>
+                            <option value="3° Trimestre">3° Trimestre</option>
+                            <option value="4° Trimestre">4° Trimestre</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Semestre</label>
+                        <select id="semestre" onchange="onChangeStatus()" class="form-control custom-select">
+                            <option value="selecione">selecione</option>
+                            <option value="1° Semestre">1° Semestre</option>
+                            <option value="2° Semestre">2° Semestre</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
+              </div>
+                </div>
+              </div>
+    
+    
+    
+                  
+    
+    
+    
+    
+    
+    <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+    
+   		 	<div class="col-sm-6 col-md-3 col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">ocorrências</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
+                    </div>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-list-alt"></i></span>
+                      
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-md-3 col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">Reclamações</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
+                    </div>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoes}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ticket-alt"></i></span>
+                      
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              <div class="col-sm-6 col-md-3 col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">Sugestões</div>
+                    </div>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeSugestoes}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-lightbulb"></i></span>
+                      
+                  </div>
+                </div>
+              </div>
+              </div>
+                </div>
+              </div>
+              
+              
+              
+              
+              
+      <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+            
+    		<div class="col-sm-6 col-lg-3">
+                <div style="background:#66BB6A;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Resolvidas</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-check"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">27</span>
+                    
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-sm-6 col-lg-3">
+                <div style="background:#FFA726;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações em Andamento</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-alt"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">21</span>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-sm-6 col-lg-3">
+                <div style="background:#4299f5;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Estagnadas</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-archive"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">16</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-lg-3">
+                <div style="background:#EF5350;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações não Resolvidas</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">11</span>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              </div>
+              </div>
+              </div>
+              
+              
+
+    <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+        <div class="col-lg-7 col-xl-7">
+            <div class="card">
+                <div  class="card-header">
+                    <h3 class="card-title">OCORRÊNCIAS</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-completion-tasks-8"></div>
+                </div>
+            </div>
+
+            <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-8'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+        </div>
+
+        <div class="col-lg-5 col-xl-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">PERCENTAGEM POR OCORRÊNCIAS</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-demo-pie" style="height: 16rem"></div>
+                </div>
+            </div>
+
+            <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12],
+      		labels: ["Resolvidos", "Pendentes", "Em Andamento"],
+      		grid: {
+      			strokeDashArray: 3,
+      		},
+      		colors: ["#66BB6A", "#EF5350", "#FFA726"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    
+<div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">RECLAMAÇÕES POR TIPO OCORRÊNCIAS</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-demo-pie3" style="height: 16rem"></div>
+                </div>
+            </div>
+            <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [44, 55, 12, 2],
+      		labels: ["Consulta", "Denúcia", "Elogio", "Reclamação", "Sugestão"],
+      		grid: {
+      			strokeDashArray: 5,
+      		},
+      		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+        </div>
+        
+        
+        
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>RECLAMAÇÕES POR ORIGEM</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-completion-tasks-3"></div>
+                </div>
+            </div>
+            <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-3'), {
+      		chart: {
+      			type: "area",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: .16,
+      			type: 'solid'
+      		},
+      		stroke: {
+      			width: 2,
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "Tasks completion",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+        </div>
+    </div>
     
     </div>
+    </div>
+    
+    
+    <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">
+    <div class="col-lg-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">RÁCIO DE RECLAMAÇÕES POR CATEGÓRIA/ESTADO</h3>
+            </div>
+            <div class="card-body">
+                <div id="chart-completion-tasks-9" style="height: 16rem"></div>
+            </div>
+        </div>
+        <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-9'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      			stacked: true,
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "",
+      			data: [155, 65, 465, 265, 225, 325, 80]
+      		},{
+      			name: "",
+      			data: [113, 42, 65, 54, 76, 65, 35]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0,
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
+      		colors: ["#206bc4", "#cd201f"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    
+    
+    		<!-- <div class="col-lg-12">
+                <div class="card">
+                  <div style="background:#E6FFFE;" class="card-header border-0">
+                    <div style="font-weight: bolder" class="card-title">MINHAS RECLAMAÇÕES EM ABERTO</div>
+                  </div>
+                  <div class="card-table table-responsive">
+                    <table class="table table-vcenter">
+                      <thead>
+                        <tr>
+                          <th>-</th>
+                          <th>Área operacional</th>
+                          <th>Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="w-1">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                          </td>
+                          <td class="td-truncate">
+                            <div class="text-truncate">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                          </td>
+                          <td class="text-nowrap text-muted">28 Nov 2019</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1">
+                            <span class="avatar avatar-sm">JL</span>
+                          </td>
+                          <td class="td-truncate">
+                            <div class="text-truncate">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                          </td>
+                          <td class="text-nowrap text-muted">27 Nov 2019</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/002m.jpg)"></span>
+                          </td>
+                          <td class="td-truncate">
+                            <div class="text-truncate">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                          </td>
+                          <td class="text-nowrap text-muted">26 Nov 2019</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/003m.jpg)"></span>
+                          </td>
+                          <td class="td-truncate">
+                            <div class="text-truncate">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                          </td>
+                          <td class="text-nowrap text-muted">26 Nov 2019</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000f.jpg)"></span>
+                          </td>
+                          <td class="td-truncate">
+                            <div class="text-truncate">
+                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                          </td>
+                          <td class="text-nowrap text-muted">25 Nov 2019</td>
+                        </tr>
+                        <tr>
+                          <td class="w-1">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/001f.jpg)"></span>
+                          </td>
+                          <td class="td-truncate">
+                            <div class="text-truncate">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                          </td>
+                          <td class="text-nowrap text-muted">24 Nov 2019</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div> -->
+
+
+    <!-- Conteudo-->
+</div>
+</body>
+
+
     
     
    </body>
