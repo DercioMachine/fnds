@@ -7,7 +7,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @SpringBootApplication
-public class GrmApplication extends SpringBootServletInitializer{
+//public class GrmApplication extends SpringBootServletInitializer{
+public class GrmApplication {
 
 	public static void main(String[] args) {
 
@@ -17,12 +18,14 @@ public class GrmApplication extends SpringBootServletInitializer{
 	}
 
 	
-		@Override
+
+    
+		/*
+
+			@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(GrmApplication.class);
     }
-    
-		/*
     
 	 * @Bean public FilterRegistrationBean<Filter> disableSpringBootErrorFilter
 	 * (ErrorPageFilter filter){ FilterRegistrationBean filterRegistrationBean = new

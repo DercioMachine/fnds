@@ -23,6 +23,13 @@
 
 
     <!-- Conteudo -->
+
+
+    <script type="text/javascript">
+
+
+
+    </script>
     
     
     <div class="page-body">
@@ -253,14 +260,24 @@
 
             <script th:inline="javascript" >
 
-            /*<![CDATA[*/
+            var label =[];
 
-            var label1 = [];
+          $.ajax({
+          type: 'GET',
+         url: 'http://localhost:9090/ocorrencias',
 
-            label1 = /*[[${label}]]*/"";
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+
+               label+= result[i].id;
 
 
-               /*]]>*/
+    }
+});
+
+          alert(label);
 
       // @formatter:off
       document.addEventListener("DOMContentLoaded", function () {
@@ -290,7 +307,7 @@
       		},
       		series: [{
       			name: "",
-      			data: [155, 65, 465, 265, 225, 325, 80]
+      			data: [label]
       		}],
       		grid: {
       			padding: {
@@ -329,6 +346,7 @@
       });
       // @formatter:on
 
+          }
 
 
     </script>

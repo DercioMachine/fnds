@@ -27,6 +27,62 @@
 
     <script type="text/javascript">
 
+      var estadobotao = 0 ;
+
+       function onChangeSimOrigem(){
+      		var estado = document.getElementById("radioSimOrigem");
+
+
+      		if(estado.value=="Interno"){
+                estadobotao = 1 ;
+      		}
+      	}
+
+      	function onChangeNaoOrigem(){
+          		var estado = document.getElementById("radioNaoOrigem");
+
+          		if(estado.value=="Externo"){
+          			estadobotao = 2 ;
+                }
+        }
+
+      $.ajax({
+          type: 'GET',
+
+           url: 'http://localhost:9090/origem/externo',
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+           if(estadobotao == 1){
+
+               for(var i=0; i< result.length; i++){
+
+            if(result[i].id==2){
+                s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+            }
+
+           }
+           }
+
+            if(estadobotao == 2){
+               for(var i=0; i< result.length; i++){
+
+            if(result[i].id==1){
+                s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+            }
+
+          }
+          }
+
+        $('#comboboxOrigem').html(s);
+       }
+    });
+
+    </script>
+
+    <script type="text/javascript">
+
     $(document).ready(function(){
         $('#comboboxProvincias').on('change',function(){
 
@@ -55,6 +111,8 @@
         });
     });
     </script>
+
+
 
     <script type="text/javascript">
 
@@ -230,13 +288,13 @@
 			
 			<div class="form-check-inline mr-2">
 			  <label class="form-check-label">
-			    <input id="interno" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
+			    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
 			  </label>
 			</div>
 			
 			<div class="form-check-inline">
 			  <label class="form-check-label">
-			    <input id="projecto" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
+			    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
 			  </label>
 			</div>
 			
@@ -261,14 +319,8 @@
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Origem</label>
-                        <select id="origem2" class="form-control custom-select"  >
+                        <select id="comboboxOrigem" class="form-control custom-select"  >
                             <option value="selecione2">Selecione Origem...</option>
-                            <option value="">Decriminação de Genero</option>
-                            <option value="">Acomudação</option>
-                            <option value="">Organização no Trabalho</option>
-                            <option value="">problema de saúde e segurança</option>
-                               <option value="">...</option>
-                            
                         </select>
                     </div>
                 </div>

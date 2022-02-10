@@ -158,15 +158,19 @@
               </div>
                 </div>
               </div>
-    
-    
-    
-                  
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -488,6 +492,39 @@
       });
       // @formatter:on
     </script>
+
+
+            <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comoboxDistrito').on('change',function(){
+
+          var distritoId = $(this).val();
+
+         // alert(distritoId);
+
+          $.ajax({
+          type: 'GET',
+        url: 'http://localhost:9090/posto/'+provinciaId,
+         //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+        	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comboboxPosto').html(s);
+    }
+});
+
+
+        });
+    });
+    </script>
+
+
         </div>
         
         

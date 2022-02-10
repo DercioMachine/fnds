@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+</head>
+<body>
+<div  layout:fragment="corpo">
+
+    <script type="text/javascript">
+        let fileInput = document.getElementById("file");
+        let numOfFiles = document.getElementById("num-of-files");
+        let imageContainer = document.getElementById("images");
+
+        function preview(){
+
+           document.getElementById("num-of-files").innerHTML = "";
+
+           numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comboboxProvincias').on('change',function(){
+
+          var provinciaId = $(this).val();
+
+        //  alert(provinciaId);
+
+          $.ajax({
+          type: 'GET',
+
+         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+         url: 'http://localhost:9090/distrito/'+provinciaId,
+       // url: 'portal.fipag.co.mz/grm/distrito/'+provinciaId,
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comoboxDistrito').html(s);
+    }
+});
+
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comoboxDistrito').on('change',function(){
+
+          var distritoId = $(this).val();
+
+         // alert(distritoId);
+
+          $.ajax({
+          type: 'GET',
+         url: 'http://localhost:9090/posto/'+provinciaId,
+         //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+        	//url: 'portal.fipag.co.mz/grm/posto/'+distritoId,
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comboboxPosto').html(s);
+    }
+});
+
+
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+      	function onChangeStatus(){
+
+      		var status = document.getElementByName("tipo").value;
+
+
+      		if(status=="L"){
+
+      			document.getElementById("local").style.display="block";
+
+      		}else{
+
+      		    document.getElementById("regional").style.display="none";
+      		    document.getElementById("nacional").style.display="none";
+      		}
+
+      		if(status=="R"){
+
+      			document.getElementById("regional").style.display="block";
+
+      		}else{
+
+      		    document.getElementById("nacional").style.display="none";
+      		    document.getElementById("local").style.display="none";
+
+      		}
+
+      		if(status=="N"){
+
+      			document.getElementById("nacional").style.display="block";
+
+      		}else{
+
+      		    document.getElementById("regional").style.display="none";
+      		    document.getElementById("local").style.display="none";
+      		}
+      	}
+
+
+
+      </script>
+    <!-- Conteudo -->
+
+    <div align="right" class="col-12">
+        <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/usuarios}" role="button">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span>Listar Usuarios</span>
+        </a>
+    </div>
+
+    <div class="card">
+        <div  class="card-header">
+            <h3 style="font-weight: bolder;color: #0277BD; " class="card-title">CADASTRO DE PROCESSO</h3>
+        </div>
+        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
+        <div class="card-body">
+
+             <form  role="c_usuario" id="c_usuario" th:object="${processo}"  th:action="@{/cadastrar/processo}"  method="post" >
+
+                <div class="row">
+
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="form-label">Nome</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{nome}"  class="form-control" required placeholder="Digite o nome"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Descricao</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{descricao}" class="form-control" required placeholder="Digite a Descricao"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Responsavel</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{responsavel}" class="form-control" required placeholder="Digite o Responsavel"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Tempo</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{tempo}" class="form-control" required placeholder="Digite o tempo numero de dias"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label  class="form-label">Tipo</label>
+                            <select  class="form-control custom-select form-select" th:field="*{tipo}" >
+                                <option value="Geral">Ocorrencia Geral</option>
+                                <option value="Laboral">Ocorrencia Laboral</option>
+                                <option value="SEA/SH/GBV">Ocorrencia SEA/SH/GBV</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+
+                </div>
+
+                <br>
+
+
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-success">Gravar </button>
+                </div>
+            </form>
+
+
+
+
+        </div>
+
+    </div>
+    <!-- Conteudo-->
+</div>
+
+</body>
+</html>
