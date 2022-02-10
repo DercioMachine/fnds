@@ -32,6 +32,17 @@
 
 </style>
 
+<script>
+$(document).ready(function(){
+  $("#pesquisa").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tabela tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 
 </head>
 
@@ -76,7 +87,7 @@
                       <div class="ms-auto text-muted">
                         Procurar:
                         <div class="ms-2 d-inline-block">
-                          <input id="txtSearch" name="keyword"  type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                          <input id="pesquisa" name="keyword"  type="text" class="form-control form-control-sm" aria-label="Search invoice">
                         </div>
                       </div>
                     </div>
