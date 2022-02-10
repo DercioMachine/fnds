@@ -359,7 +359,7 @@ select.list-dt:focus {
 
           $.ajax({
           type: 'GET',
-         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+        // url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
           url: 'http://localhost:9090/distrito/'+provinciaId,
           //url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
            success: function (result){
@@ -390,7 +390,7 @@ select.list-dt:focus {
           type: 'GET',
          url: 'http://localhost:9090/posto/'+distritoId,
          
-       //  url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+      //  url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
          // url: 'http://fipag.herokuapp.com/posto/'+distritoId,
           
            success: function (result){
@@ -648,7 +648,7 @@ return false;
                 <p>Preeacha todos os campos do formulário para avancar para o próximo passo</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                    <form id="msform" th:action="@{/ocorrencias/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
+                    <form id="msform" th:action="@{/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Dados da Ocorrência</strong></li>
@@ -995,9 +995,9 @@ return false;
                                 <div class="form-card">
                                     <div class="row justify-content-center">
                                         <div class="text-center">
-                                            <h5>Certifique o preenchimento dos campos antes  de Finalizar.</h5>
-                                            <h5>Após clicar em confirmar, não poderá alterar os dados</h5>
-                                            <h5>Guarde o código que lhe será fornecido, para a consulta da ocorrência após confirmar o registo</h5>
+                                            <h3>Certifique o preenchimento dos campos antes  de Finalizar.</h3>
+                                            <h3>Após clicar em confirmar, não poderá alterar os dados</h3>
+                                            <h3>Guarde o código que lhe será fornecido, para a consulta da ocorrência após confirmar o registo</h3>
                                         </div>
                                     </div>
                                 </div>

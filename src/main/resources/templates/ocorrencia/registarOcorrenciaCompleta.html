@@ -38,9 +38,9 @@
           type: 'GET',
           
          //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-         url: 'http://localhost:9090/distrito/'+provinciaId,
+        // url: 'http://localhost:9090/distrito/'+provinciaId,
        
-       // url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+       url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
           
            success: function (result){
            var result = JSON.parse(result);
@@ -67,9 +67,9 @@
 
           $.ajax({
           type: 'GET',
-        url: 'http://localhost:9090/posto/'+provinciaId,
+        //url: 'http://localhost:9090/posto/'+provinciaId,
          //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-        	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+        	url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
           
            success: function (result){
            var result = JSON.parse(result);
@@ -261,13 +261,13 @@
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Origem</label>
-                        <select id="origem" onchange="onChangeStatus()" class="form-control custom-select"  >
-                            <option value="selecione">Selecione Origem...</option>
-                            <option value="individual">Decriminação de Genero</option>
-                            <option value="grupo">Acomudação</option>
-                            <option value="anonimo">Organização no Trabalho</option>
-                            <option value="anonimo">problema de saúde e segurança</option>
-                               <option value="anonimo">...</option>
+                        <select id="origem2" class="form-control custom-select"  >
+                            <option value="selecione2">Selecione Origem...</option>
+                            <option value="">Decriminação de Genero</option>
+                            <option value="">Acomudação</option>
+                            <option value="">Organização no Trabalho</option>
+                            <option value="">problema de saúde e segurança</option>
+                               <option value="">...</option>
                             
                         </select>
                     </div>
