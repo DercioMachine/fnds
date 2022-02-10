@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //Criacao de uma pagina custumizada de login
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/listar/ocorrencia", true)
+                .defaultSuccessUrl("/dashboard", true)
                 .permitAll()
                 .and()
                 .logout()

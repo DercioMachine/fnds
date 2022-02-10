@@ -69,7 +69,7 @@ public class UsuarioController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-        return "usuarios/cadastrarUsuarios";
+        return "redirect:/listar/usuarios";
     }
 
     @ModelAttribute("cidades")

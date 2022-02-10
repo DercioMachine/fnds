@@ -223,6 +223,23 @@
 			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
 			  </label>
 			</div>
+			
+			<div>|</div>
+			<div></div>
+			
+			
+			<div class="form-check-inline mr-2">
+			  <label class="form-check-label">
+			    <input id="interno" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
+			  </label>
+			</div>
+			
+			<div class="form-check-inline">
+			  <label class="form-check-label">
+			    <input id="projecto" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
+			  </label>
+			</div>
+			
 			</div>
 			</div>
 			<br>
@@ -240,6 +257,22 @@
                         </select>
                     </div>
                 </div>
+                
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label">Origem</label>
+                        <select id="origem" onchange="onChangeStatus()" class="form-control custom-select"  >
+                            <option value="selecione">Selecione Origem...</option>
+                            <option value="individual">Decriminação de Genero</option>
+                            <option value="grupo">Acomudação</option>
+                            <option value="anonimo">Organização no Trabalho</option>
+                            <option value="anonimo">problema de saúde e segurança</option>
+                               <option value="anonimo">...</option>
+                            
+                        </select>
+                    </div>
+                </div>
+                
                 
                 <div style="display: none;" id="empreiteiroo" class="col-6 col-sm-4">
                     <div class="form-group">

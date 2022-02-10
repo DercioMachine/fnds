@@ -22,59 +22,6 @@
 <div  layout:fragment="corpo">
 
 
-
-
-    <canvas id="ChartDemo"></canvas>
-
-    <script type="text/javascript" th:inline="javascript">
-
-    /*<![CDATA[*/
-
-    var ctx = document.getElementById("ChartDemo").getContext('2d');
-
-    var ChartDemo = new Chart(ctx, {
-
-        type: 'line',
-
-        data: {
-
-            .//a label that was stored in the controller only take out a variable formula
-
-            labels: [155, 65, 465, 265, 225, 325, 80],
-
-            datasets: [
-
-                {
-
-                    label: "Chart-1",
-
-                    borderColor: 'rgb(255, 0, 0)',
-
-                    lineTension: 0,
-
-                    fill: false,
-
-                    //the same manner as described above, only is taken out of the point in the variable expression.
-
-                    data: [155, 65, 465, 265, 225, 325, 80],
-
-                },
-
-            ]
-
-        },
-
-        options: {
-
-            responsive: true,
-
-        }
-
-    });
-
-    /*]]>*/
-
-    </script>
     <!-- Conteudo -->
     
     
