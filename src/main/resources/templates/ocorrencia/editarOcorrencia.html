@@ -12,18 +12,106 @@
 <div  layout:fragment="corpo">
 
 <script type="text/javascript">
+        let fileInput = document.getElementById("file");
+        let numOfFiles = document.getElementById("num-of-files");
+        let imageContainer = document.getElementById("images");
+
+        function preview(){
+
+           document.getElementById("num-of-files").innerHTML = "";
+
+           numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
+        }
+
+    </script>
+    
+    <script type="text/javascript">
+
+      var estadobotao = 0 ;
+
+       function onChangeSimOrigem(){
+      		var estado = document.getElementById("radioSimOrigem");
+
+      		if(estado.value=="Interno"){
+                estadobotao = 1 ;
+      		}
+      		OrigemInternoExterno();
+      	}
+
+      	function onChangeNaoOrigem(){
+          		var estado = document.getElementById("radioNaoOrigem");
+
+          		if(estado.value=="Externo"){
+          			estadobotao = 2 ;
+                }
+                OrigemInternoExterno();
+        }
+
+        function OrigemInternoExterno(){
+
+                  $.ajax({
+          type: 'GET',
+
+         //   url: 'http://localhost:9090/origem/externo',
+          //url: 'https://portal.fipag.co.mz/grm/origem/externo/',
+           
+           url:  'http://expediente.uem.mz:8080/grm2/origem/externo',
+          
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+
+           if(estadobotao == 1){
+
+               for(var i=0; i< result.length; i++){
+
+            if(result[i].tipo=="Interno"){
+                s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+            }
+
+           }
+           }
+
+            if(estadobotao == 2){
+
+               for(var i=0; i< result.length; i++){
+
+            if(result[i].tipo=="Externo"){
+                s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+            }
+
+          }
+          }
+
+        $('#comboboxOrigem').html(s);
+       }
+    });
+
+        }
+
+
+
+    </script>
+
+	<script type="text/javascript">
 
     $(document).ready(function(){
         $('#comboboxProvincias').on('change',function(){
 
           var provinciaId = $(this).val();
+          
+        //  alert(provinciaId);
 
           $.ajax({
           type: 'GET',
-      url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-        //  url: 'http://localhost:9090/distrito/'+provinciaId, 
-        //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-         
+          
+         //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+        // url: 'http://localhost:9090/distrito/'+provinciaId,
+        //url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+        url:  'http://expediente.uem.mz:8080/grm2/distrito/'+provinciaId,
+      
+          
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -34,10 +122,8 @@
     }
 });
 
-
         });
     });
-    
     </script>
     
     <script type="text/javascript">
@@ -49,14 +135,14 @@
 
          // alert(distritoId);
 
-         
-         
-         
           $.ajax({
           type: 'GET',
-      url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
-         // url: 'http://localhost:9090/posto/'+provinciaId,
-       // url: 'http://fipag.herokuapp.com/posto/'+provinciaId,
+        //url: 'http://localhost:9090/posto/'+provinciaId,
+         //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+        	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+        	
+        	 url:  'http://expediente.uem.mz:8080/grm2/posto/'+distritoId,
+          
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -67,10 +153,12 @@
     }
 });
 
-
+          
         });
     });
     </script>
+    
+    
 
 	<script type="text/javascript">
       	function onChangeStatus(){
@@ -184,40 +272,87 @@
     
     <div class="card">
         <div  class="card-header">
-            <h3 style="font-weight: bolder;color: #0277BD; " class="card-title">CADASTRO DE OCORRÊNCIA</h3>
+            <h3 style="font-weight: bolder;color: #0277BD; " class="card-title">EDITAR OCORRÊNCIA</h3>
         </div>
        <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
          <div class="card-body">
-		<form th:action="@{/ocorrencias/editar}"  th:object="${ocorrencia}" method="POST">
-		
+		<form th:action="@{/ocorrencias/cadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 	                  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
 	                  <input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação..."> 
-	                  <!-- enctype="multipart/form-data" -->
-
-            <div style="background: #0277BD; color: white">
+		
+			<div style="background: #0277BD; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
 			</div>
 			<br>
 	                  
 	                 <!--  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">  -->
 	                  <!-- enctype="multipart/form-data" -->
-	         <div class="card">
-        <div  class="card-header">       
-            
-            	<div class="form-check-inline ">
-			  <label class="form-check-label">
-			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
-			  </label>
-			</div>
+	                  
+	                  
+	         <div style="margin-bottom: 10px" class="row">
+        
+          
+          <div class="col-md-6 card">
+			<div>
+       	 		<div>
+       	 			 <label class="card-title ml-2" >Projecto ou Operação?</label>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						<div class="form-check-inline ">
+						  <label class="form-check-label">
+						    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
+						  </label>
+						</div>
+						
+						<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
+						  </label>
+						</div>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          <div class="col-md-6">
+			<div class="card  ml-2">
+       	 		<div>
+       	 			<label class="card-title">Interno e Externo?</label>
+       	 		</div>
+       	 		
+       	 		
+			       	 		<div class="card-body border-bottom py-3">
+			                    <div class="d-flex">
+									<div class="form-check-inline mr-2">
+									  <label class="form-check-label">
+									    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
+									  </label>
+									</div>
+									
+									<div class="form-check-inline">
+									  <label class="form-check-label">
+									    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
+									  </label>
+									</div>
+			                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          
+        </div>
+	                  
+	                  
 			
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
-			  </label>
-			</div>
-			</div>
-			</div>
-			<br>
+			
+			
 			
 			
 			<div class="row">
@@ -232,6 +367,16 @@
                         </select>
                     </div>
                 </div>
+                
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label">Origem</label>
+                        <select id="comboboxOrigem" class="form-control custom-select"  >
+                            <option value="selecione2">Selecione Origem...</option>
+                        </select>
+                    </div>
+                </div>
+                
                 
                 <div style="display: none;" id="empreiteiroo" class="col-6 col-sm-4">
                     <div class="form-group">
@@ -533,7 +678,7 @@
                 <div class="col-6 col-sm-6">
                    <div class="form-group">
                     <div class="input-icon">
-                        <input type="text" onchange="preview()" name="descricao" placeholder="Descricao de Anexos" class="form-control" >
+                        <input type="text" onchange="preview()" name="descricaoAnx" placeholder="Descricao de Anexos" class="form-control" >
                     </div>
                 </div>
                 </div>

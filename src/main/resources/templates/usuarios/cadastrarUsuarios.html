@@ -91,7 +91,7 @@
       		var status = document.getElementByName("tipo").value;
 
 
-      		if(status=="L"){
+      		if(status.value=="L"){
 
       			document.getElementById("local").style.display="block";
 
@@ -101,7 +101,7 @@
       		    document.getElementById("nacional").style.display="none";
       		}
 
-      		if(status=="R"){
+      		if(status.value=="R"){
 
       			document.getElementById("regional").style.display="block";
 
@@ -112,7 +112,7 @@
 
       		}
 
-      		if(status=="N"){
+      		if(status.value=="N"){
 
       			document.getElementById("nacional").style.display="block";
 
@@ -214,31 +214,36 @@
                     <br>
                     <br>
                     <br style="margin-top: 100">
-
+					
                     <div class="row" style="margin-top: 30">
                         <br><br>
                         <th:block>
-
-                            <div class="col-4 col-sm-4">
-                                <div class="form-group">
-                                    <input onclick="onChangeStatus()"  type="radio" id="statuslocal" name="tipo" value="L" >
-                                    <label for="statuslocal">Local</label>
-                                </div>
-                            </div>
-
-                            <div class="col-4 col-sm-4">
-                                <div class="form-group">
-                                    <input onclick="onChangeStatus()" type="radio" id="statusregional" name="tipo" value="R">
-                                    <label for="statusregional">Regional</label>
-                                </div>
-                            </div>
-
-                            <div class="col-4 col-sm-4">
-                                <div class="form-group">
-                                    <input onclick="onChangeStatus()" type="radio" id="statusnacional" name="tipo" value="N">
-                                    <label for="statusnacional">Nacional</label>
-                                </div>
-                            </div>
+                        
+                        <div class="card mt-2">
+					        <div  class="card-header">       
+					            
+					            	<div class="form-check-inline ">
+								  <label class="form-check-label">
+								     <input onclick="onChangeStatus()"  type="radio" id="statuslocal" name="tipo" value="L" checked> Local
+								  </label>
+								</div>
+								
+								<div class="form-check-inline">
+								  <label class="form-check-label">
+								    <input onclick="onChangeStatus()" type="radio" id="statusregional" name="tipo" value="R"> Regional
+								  </label>
+								</div>
+								
+								<div class="form-check-inline">
+								  <label class="form-check-label">
+								    <input onclick="onChangeStatus()" type="radio" id="statusnacional" name="tipo" value="N"> Nacional
+								  </label>
+								</div>
+								
+								</div>
+								</div>
+								<br>
+                        
 
 
                         </th:block>
@@ -249,7 +254,7 @@
                     <div style="display: block" id="local" class="col-6 col-sm-6">
                         <div class="form-group">
                             <label for="local" class="form-label">Cidade</label>
-                            <select  class="form-control custom-select form-select" th:field="*{cidade}"  >
+                            <select id="local" class="form-control custom-select form-select" th:field="*{cidade}"  >
                                 <option value="">Selecione a Cidade...</option>
                                 <option th:each="p : ${cidades}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -260,9 +265,9 @@
 
                     <div style="display: block" id="regional" class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label for="regional" class="form-label">Regiao</label>
-                            <select  class="form-control custom-select form-select" th:field="*{regiao}"  >
-                                <option  value="">Selecione a Regiao...</option>
+                            <label for="regional" class="form-label">Região</label>
+                            <select id="regional"  class="form-control custom-select form-select" th:field="*{regiao}"  >
+                                <option  value="">Selecione a Região...</option>
                                 <option th:each="p : ${regioes}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
 

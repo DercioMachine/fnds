@@ -32,10 +32,10 @@
        function onChangeSimOrigem(){
       		var estado = document.getElementById("radioSimOrigem");
 
-
       		if(estado.value=="Interno"){
                 estadobotao = 1 ;
       		}
+      		OrigemInternoExterno();
       	}
 
       	function onChangeNaoOrigem(){
@@ -44,21 +44,29 @@
           		if(estado.value=="Externo"){
           			estadobotao = 2 ;
                 }
+                OrigemInternoExterno();
         }
 
-      $.ajax({
+        function OrigemInternoExterno(){
+
+                  $.ajax({
           type: 'GET',
 
-           url: 'http://localhost:9090/origem/externo',
+         //   url: 'http://localhost:9090/origem/externo',
+          //url: 'https://portal.fipag.co.mz/grm/origem/externo/',
+           
+           url:  'http://expediente.uem.mz:8080/grm2/origem/externo',
+          
 
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
+
            if(estadobotao == 1){
 
                for(var i=0; i< result.length; i++){
 
-            if(result[i].id==2){
+            if(result[i].tipo=="Interno"){
                 s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
             }
 
@@ -66,9 +74,10 @@
            }
 
             if(estadobotao == 2){
+
                for(var i=0; i< result.length; i++){
 
-            if(result[i].id==1){
+            if(result[i].tipo=="Externo"){
                 s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
             }
 
@@ -78,6 +87,10 @@
         $('#comboboxOrigem').html(s);
        }
     });
+
+        }
+
+
 
     </script>
 
@@ -95,8 +108,9 @@
           
          //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
         // url: 'http://localhost:9090/distrito/'+provinciaId,
-       
-       url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+        //url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+        url:  'http://expediente.uem.mz:8080/grm2/distrito/'+provinciaId,
+      
           
            success: function (result){
            var result = JSON.parse(result);
@@ -127,7 +141,9 @@
           type: 'GET',
         //url: 'http://localhost:9090/posto/'+provinciaId,
          //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-        	url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+        	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+        	
+        	 url:  'http://expediente.uem.mz:8080/grm2/posto/'+distritoId,
           
            success: function (result){
            var result = JSON.parse(result);
@@ -267,40 +283,72 @@
 	                  
 	                 <!--  <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">  -->
 	                  <!-- enctype="multipart/form-data" -->
-	         <div class="card">
-        <div  class="card-header">       
-            
-            	<div class="form-check-inline ">
-			  <label class="form-check-label">
-			    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
-			  </label>
-			</div>
+	                  
+	                  
+	         <div style="margin-bottom: 10px" class="row">
+        
+          
+          <div class="col-md-6 card">
+			<div>
+       	 		<div>
+       	 			 <label class="card-title ml-2" >Projecto ou Operação?</label>
+       	 		</div>
+       	 		
+       	 		
+       	 		<div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+						<div class="form-check-inline ">
+						  <label class="form-check-label">
+						    <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
+						  </label>
+						</div>
+						
+						<div class="form-check-inline">
+						  <label class="form-check-label">
+						    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
+						  </label>
+						</div>
+                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          <div class="col-md-6">
+			<div class="card  ml-2">
+       	 		<div>
+       	 			<label class="card-title">Interno e Externo?</label>
+       	 		</div>
+       	 		
+       	 		
+			       	 		<div class="card-body border-bottom py-3">
+			                    <div class="d-flex">
+									<div class="form-check-inline mr-2">
+									  <label class="form-check-label">
+									    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
+									  </label>
+									</div>
+									
+									<div class="form-check-inline">
+									  <label class="form-check-label">
+									    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
+									  </label>
+									</div>
+			                    </div>
+                  </div>
+                  
+       	 	</div>
+          
+          </div>
+          
+          
+        </div>
+	                  
+	                  
 			
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
-			  </label>
-			</div>
-			
-			<div>|</div>
-			<div></div>
 			
 			
-			<div class="form-check-inline mr-2">
-			  <label class="form-check-label">
-			    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
-			  </label>
-			</div>
-			
-			<div class="form-check-inline">
-			  <label class="form-check-label">
-			    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
-			  </label>
-			</div>
-			
-			</div>
-			</div>
-			<br>
 			
 			
 			<div class="row">
