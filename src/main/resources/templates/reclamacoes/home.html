@@ -454,19 +454,64 @@
 <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
-        <div class="col-lg-6 col-xl-6">
+
+
+       <!-- <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">RECLAMAÇÕES POR TIPO OCORRÊNCIAS</h3>
+                    <h3 class="card-title">ENTIDADE</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-demo-pie3" style="height: 16rem"></div>
                 </div>
             </div>
-            <script>
+
+<script>
+            var entidade = [];
+
+            var nome = ["Projecto","Operação"];
+
+       $.ajax({
+          type: 'GET',
+
+         url: 'http://localhost:9090/buscarocorrencias',
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+           var projeto = 0;
+           var opera = 0;
+
+          for(var i=0; i< result.length; i++){
+
+
+              if(result[i].projectoOperacao == 'projecto'){
+                projeto ++;
+
+              }else if(result[i].projectoOperacao == 'operacao'){
+                opera ++;
+              }
+
+          }
+
+        entidade = [projeto, opera];
+
+
+          var tirarVirgula = s.slice(0,-1);
+
+          legendaestado = tirarVirgula.split(',');
+
+
+       }
+    });
+
+
       // @formatter:off
       document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
+
+            window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
+
+
       		chart: {
       			type: "donut",
       			fontFamily: 'inherit',
@@ -481,8 +526,8 @@
       		fill: {
       			opacity: 1,
       		},
-      		series: [44, 55, 12, 2],
-      		labels: ["Consulta", "Denúcia", "Elogio", "Reclamação", "Sugestão"],
+      		series: entidade,
+      		labels: nome,
       		grid: {
       			strokeDashArray: 5,
       		},
@@ -510,38 +555,112 @@
     </script>
 
 
-            <script type="text/javascript">
 
-    $(document).ready(function(){
-        $('#comoboxDistrito').on('change',function(){
+        </div>
 
-          var distritoId = $(this).val();
+-->
 
-         // alert(distritoId);
 
-          $.ajax({
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">INTERNO/EXTERNO</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="interno_externo" style="height: 16rem"></div>
+                        </div>
+                    </div>
+
+                    <script>
+            var interno_externos = [];
+
+            var nomes = ["Interno","Externo"];
+
+       $.ajax({
           type: 'GET',
-        url: 'http://localhost:9090/posto/'+provinciaId,
-         //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-        	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+
+         url: 'http://localhost:9090/buscarocorrencias',
 
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
+           var interno = 0;
+           var externo = 0;
+
           for(var i=0; i< result.length; i++){
-              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+
+
+              if(result[i].internoExterno == 'Interno'){
+                interno ++;
+              }else{
+                externo ++;
+              }
+
           }
-        $('#comboboxPosto').html(s);
-    }
-});
+
+        interno_externos = [interno, externo];
 
 
-        });
+          var tirarVirgula = s.slice(0,-1);
+
+          legendaestado = tirarVirgula.split(',');
+
+
+       }
     });
+
+
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+
+            window.ApexCharts && (new ApexCharts(document.getElementById('interno_externo'), {
+
+
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: interno_externos,
+      		labels: nomes,
+      		grid: {
+      			strokeDashArray: 5,
+      		},
+      		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			offsetY: 12,
+      			markers: {
+      				width: 10,
+      				height: 10,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      				vertical: 8
+      			},
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
     </script>
 
 
-        </div>
+
+                </div>
         
         
         

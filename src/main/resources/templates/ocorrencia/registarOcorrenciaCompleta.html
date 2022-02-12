@@ -328,13 +328,13 @@
 			                    <div class="d-flex">
 									<div class="form-check-inline mr-2">
 									  <label class="form-check-label">
-									    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
+									    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" th:field="*{internoExterno}"  value="Interno" class="form-check-input check" type="radio" checked> Interno
 									  </label>
 									</div>
 									
 									<div class="form-check-inline">
 									  <label class="form-check-label">
-									    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
+									    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" th:field="*{internoExterno}" type="radio" value="Externo" class="form-check-input" > Externo
 									  </label>
 									</div>
 			                    </div>
