@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
+import mz.fipag.grm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,12 +31,6 @@ import mz.fipag.grm.domain.Provincia;
 import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
-import mz.fipag.grm.repository.DistritoRepository;
-import mz.fipag.grm.repository.DocsRepository;
-import mz.fipag.grm.repository.OcorrenciaRepository;
-import mz.fipag.grm.repository.PostoAdminitrativoRepository;
-import mz.fipag.grm.repository.ResolucaoRepository;
-import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
@@ -100,6 +95,9 @@ public class OcorrenciaController {
     
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
+
+    @Autowired
+    private ProcessoRepository processoRepository ;
     
     @Autowired
     private CategoriaService categoriaService; 
@@ -255,7 +253,11 @@ public class OcorrenciaController {
     @GetMapping("/resolver/ocorrencia/{id}")
     public String resolverOcorrencia(@PathVariable("id") Long id, ModelMap model) {
 
+        String processo = ocorrenciaService.buscarPorId(id).getTipoorigem().getProcesso();
+        System.out.println("Tipo de Processos: "+processo);
         model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+        model.addAttribute("processos", processoRepository.BuscarTodosPorProcessos(processo));
+        System.out.println("Processos: "+processoRepository.BuscarTodosPorProcessos(processo));
         model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
         model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(id));
         model.addAttribute("resolver", new Resolucao());

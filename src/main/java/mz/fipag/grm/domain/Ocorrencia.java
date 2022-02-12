@@ -96,7 +96,7 @@ public class Ocorrencia extends AbstractEntity{
 	
 	@Column(name = "numero_mdias_registo")
 	private int numeroDiasRegisto;
-	
+
 	@Column(name = "origem")
 	private String origem;
 	
@@ -120,6 +120,10 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="distrito_id")
 	private Distrito distrito;
+
+	@ManyToOne
+	@JoinColumn(name="tipoorigem")
+	private Origem tipoorigem;
 	
 	@ManyToOne
 	@JoinColumn(name="provincia_id")
@@ -157,7 +161,14 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
 	private Empreiteiro empreiteiro;
-	
+
+	public Origem getTipoorigem() {
+		return tipoorigem;
+	}
+
+	public void setTipoorigem(Origem tipoorigem) {
+		this.tipoorigem = tipoorigem;
+	}
 
 	public boolean isTemporario() {
 		return temporario;

@@ -79,7 +79,7 @@
 			 <div class="row" >
 
 				 <div class="table-responsive">
-					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+					 <table  class="table card-table table-vcenter text-nowrap datatable">
 						<thead>
 						 <tr style="color: rgb(65,105,225)">
 							 <th class="w-1">Nivel</th>
@@ -120,7 +120,7 @@
 			  <div class="row" >
 
 				  <div class="table-responsive">
-					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+					 <table  class="table card-table table-vcenter text-nowrap datatable">
 						  <thead>
 						   <tr style="color: rgb(65,105,225)">
 							  <th class="w-1">Nivel</th>
@@ -152,6 +152,54 @@
 			  </div>
 		  </div>
 	  </div>
+
+		<div th:if="${ocorrencia.procedencia =='Sim' }">
+			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral' }" >
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Geral</h2>
+			</div>
+			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo=='Laboral' }" >
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para os Trabalhadores </h2>
+			</div>
+			<div style="background: red; color: white" th:if="${ocorrencia.tipoorigem.processo =='SEA/SH/GBV' }" >
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para SEA/SH/GBV</h2>
+			</div>
+			<br>
+
+			<div class="card-body">
+				<div class="row" >
+
+					<div class="table-responsive">
+						<table  class="table card-table table-vcenter text-nowrap datatable">
+							<thead>
+							<tr style="color: rgb(65,105,225)">
+								<th class="w-1">No</th>
+								<th>Nome</th>
+								<th>Descrição</th>
+								<th>Responsavel</th>
+								<th>Tempo</th>
+							</tr>
+							</thead>
+							<tbody>
+							<!--  <tr th:each="p : ${categorias}"> -->
+							<tr th:each="r, index : ${processos}">
+								<div  >
+									<td th:text="${index.count}" ><span class="text-muted">01401</span></td>
+									<td th:text="${r.nome}" ><span class="text-muted">01401</span></td>
+									<td th:text="${r.descricao}" >Auxiliar Contábil</td>
+									<td th:text="${r.responsavel}" >Auxiliar Contábil</td>
+									<td th:text="${r.tempo}" ><span class="text-muted">01401</span></td>
+								</div>
+							</tr>
+
+
+
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
 
 
 	   <div th:if="${ocorrencia.estado =='Validado'}">
