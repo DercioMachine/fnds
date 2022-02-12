@@ -14,16 +14,45 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     @Query(value="select * from Ocorrencia where grm_stamp=:codigo", nativeQuery=true)
     public Ocorrencia findAllByCodigo(@Param("codigo") Long codigo);
     
+	/* QUERIES DAS PRIMEIRAS CARDS */
+    @Query(value="select count(*) from ocorrencia where estado!='Temporario' and year(created)= :ano", nativeQuery=true)
+	public Object totalDeOcorrencias(@Param("ano") int ano);
     
-    @Query(value="select count(*) from Ocorrencia", nativeQuery=true)
-	public Object totalDeOcorrencias();
+    @Query(value="select count(*) from Ocorrencia where procedencia='Sim' and estado='Validado' and year(created)= :ano", nativeQuery=true)
+   	public Object totalDeOcorrenciasProcedentes(@Param("ano") int ano);
     
-    @Query(value="select count(*) from Ocorrencia where tipo_ocorrencia_id=1", nativeQuery=true)
-   	public Object totalDeReclamacoes();
+    @Query(value="select count(*) from Ocorrencia where procedencia='Não' and estado='Validado' and year(created)= :ano", nativeQuery=true)
+	public Object totalDeOcorrenciasImprocedentes(@Param("ano") int ano);
+    
+    @Query(value="select count(*) from ocorrencia where estado='Registado' and year(created)= :ano", nativeQuery=true)
+   	public Object totalDeOcorrenciasPorValidar(@Param("ano") int ano);
+    
+    
+	/* FIM */
+    
+	/*--------------------------------------------------------------------------------------------------------*/
+    
+    /* QUERIES DAS PRIMEIRAS CARDS 
+     * 
+     * Todas as ocorrencias procedentes
+     * */
+    @Query(value="select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
+   	public Object totalDeReclamacoesProcedentes(@Param("ano") int ano);
+    
 
-    @Query(value="select count(*) from Ocorrencia where tipo_ocorrencia_id=3", nativeQuery=true)
-	public Object totalDeSugestoes();
+    @Query(value="select count(*) from ocorrencia where tipo_ocorrencia_id!=1 and procedencia='Sim' and estado='Validado' and year(created)= :ano", nativeQuery=true)
+	public Object totalDeReclamacoesNaoProcedentes(@Param("ano") int ano);
     
+    
+    
+    @Query(value="select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and resolucao = 'T' and year(created)= :ano", nativeQuery=true)
+	public Object totalDeReclamacoesTerminadas(@Param("ano") int ano);
+    
+    
+    @Query(value="select count(*) from ocorrencia where tipo_ocorrencia_id=1 and procedencia='Sim' and resolucao = 'R' and year(created)= :ano", nativeQuery=true)
+    public Object totalDeReclamacoesEmResolucao(@Param("ano") int ano);
+
+   
     
 	/*
 	 * @Query(value="select date_format(created, '%Y/%m') mes\r\n" +

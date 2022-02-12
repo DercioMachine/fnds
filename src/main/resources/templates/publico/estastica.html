@@ -175,11 +175,11 @@
           <div class="container-xl">
             <div class="row row-deck row-cards">
     
-   		 	<div class="col-sm-6 col-md-3 col-lg-4">
+   		 	<div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">ocorrências</div>
+                      <div class="subheader">Ocorrências</div>
                       <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
                     <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
@@ -190,46 +190,74 @@
                 </div>
               </div>
               
-              <div class="col-sm-6 col-md-3 col-lg-4">
+              <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Reclamações</div>
+                      <div class="subheader">Ocorrências Procedentes</div>
                       <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
                     <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoes}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ticket-alt"></i></span>
-                      
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-arrow-alt-circle-right"></i></span>
                   </div>
                 </div>
               </div>
               
-              
-              
-              <div class="col-sm-6 col-md-3 col-lg-4">
+              <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Sugestões</div>
+                      <div class="subheader">Ocorrências Improcedentes</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeSugestoes}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-lightbulb"></i></span>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasImprocedentes}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
                       
                   </div>
                 </div>
               </div>
-              </div>
+              
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">Ocorrências Por Validar</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
+                    </div>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasPorValidar}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-hourglass-half"></i></span>
+                      
+                  </div>
                 </div>
               </div>
               
               
               
+              </div>
+              </div>
+              </div>
               
               
-      <div class="page-body">
+              <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
+            
+            
+            <div class="col-sm-6 col-lg-3">
+                <div style="background:#4299f5;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-archive"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
+                  </div>
+                </div>
+              </div>
+              
             
     		<div class="col-sm-6 col-lg-3">
                 <div style="background:#66BB6A;" class="card">
@@ -238,7 +266,7 @@
                       <div style="color:rgb(255,255,255);" class="subheader">Reclamações Resolvidas</div>
                     </div>
                     <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-check"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">27</span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
                     
                   </div>
                 </div>
@@ -252,32 +280,20 @@
                       <div style="color:rgb(255,255,255);" class="subheader">Reclamações em Andamento</div>
                     </div>
                     <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-alt"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">21</span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmResolucao}]]</span>
                   </div>
                 </div>
               </div>
               
-              
-              <div class="col-sm-6 col-lg-3">
-                <div style="background:#4299f5;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Estagnadas</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-archive"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">16</span>
-                  </div>
-                </div>
-              </div>
               
               <div class="col-sm-6 col-lg-3">
                 <div style="background:#EF5350;" class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações não Resolvidas</div>
+                      <div style="color:rgb(255,255,255);" class="subheader">Consultas/Sugestões/Denúcias...</div>
                     </div>
                     <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">11</span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesNaoProcedentes}]]</span>
                   </div>
                 </div>
               </div>
@@ -293,7 +309,7 @@
     <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
-        <div class="col-lg-7 col-xl-7">
+        <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div  class="card-header">
                     <h3 class="card-title">OCORRÊNCIAS</h3>
@@ -373,7 +389,7 @@
     </script>
         </div>
 
-        <div class="col-lg-5 col-xl-5">
+        <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">PERCENTAGEM POR OCORRÊNCIAS</h3>

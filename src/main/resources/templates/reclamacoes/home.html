@@ -17,6 +17,19 @@
     <meta charset="UTF-8">
      <link rel="icon" th:href="@{/image/log.png}" />
     <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
+    
+    
+    
+<!--     PERCENTAGEM POR OCORRÊNCIAS -->
+   
+    <script type="text/javascript">
+    	
+    
+    
+    </script>
+    
+<!--     FIM -->
+    
 </head>
 <body>
 <div  layout:fragment="corpo">
@@ -112,29 +125,19 @@
               </div>
               
               
-              
-              
               </div>
                 </div>
               </div>
-    
-    
-    
-                  
-    
-    
-    
-    
     
     <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
     
-   		 	<div class="col-sm-6 col-md-3 col-lg-4">
+   		 	<div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">ocorrências</div>
+                      <div class="subheader">Ocorrências</div>
                       <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
                     <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
@@ -145,35 +148,52 @@
                 </div>
               </div>
               
-              <div class="col-sm-6 col-md-3 col-lg-4">
+              <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Reclamações</div>
+                      <div class="subheader">Ocorrências Procedentes</div>
                       <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
                     <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoes}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ticket-alt"></i></span>
-                      
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-arrow-alt-circle-right"></i></span>
                   </div>
                 </div>
               </div>
               
-              
-              
-              <div class="col-sm-6 col-md-3 col-lg-4">
+              <div class="col-sm-6 col-md-3 col-lg-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div class="subheader">Sugestões</div>
+                      <div class="subheader">Ocorrências Improcedentes</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
                     </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeSugestoes}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-lightbulb"></i></span>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasImprocedentes}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
                       
                   </div>
                 </div>
               </div>
+              
+              <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="subheader">Ocorrências Por Validar</div>
+                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
+                    </div>
+                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasPorValidar}]]</span>
+                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-hourglass-half"></i></span>
+                      
+                  </div>
+                </div>
+              </div>
+              
+              
+              
               </div>
                 </div>
               </div>
@@ -186,14 +206,40 @@
           <div class="container-xl">
             <div class="row row-deck row-cards">
             
+            
+            <div class="col-sm-6 col-lg-3">
+                <div style="background:#4299f5;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-archive"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6 col-lg-3">
+                <div style="background:#EF5350;" class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div style="color:rgb(255,255,255);" class="subheader">Consultas/Sugestões/Denúcias...</div>
+                    </div>
+                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesNaoProcedentes}]]</span>
+                  </div>
+                </div>
+              </div>
+              
+            
     		<div class="col-sm-6 col-lg-3">
                 <div style="background:#66BB6A;" class="card">
                   <div class="card-body">
                     <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Resolvidas</div>
+                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Resolvidas/Respodindas</div>
                     </div>
                     <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-check"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">27</span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
                     
                   </div>
                 </div>
@@ -207,32 +253,7 @@
                       <div style="color:rgb(255,255,255);" class="subheader">Reclamações em Andamento</div>
                     </div>
                     <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-alt"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">21</span>
-                  </div>
-                </div>
-              </div>
-              
-              
-              <div class="col-sm-6 col-lg-3">
-                <div style="background:#4299f5;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Estagnadas</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-archive"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">16</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-sm-6 col-lg-3">
-                <div style="background:#EF5350;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações não Resolvidas</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">11</span>
+                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmResolucao}]]</span>
                   </div>
                 </div>
               </div>
@@ -248,44 +269,24 @@
     <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
-        <div class="col-lg-7 col-xl-7">
+        <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div  class="card-header">
                     <h3 class="card-title">OCORRÊNCIAS</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-completion-tasks-8"></div>
+                    <div id="chart-tasks-overview"></div>
                 </div>
             </div>
 
-            <script th:inline="javascript" >
-
-            var label =[];
-
-          $.ajax({
-          type: 'GET',
-         url: 'http://localhost:9090/ocorrencias',
-
-           success: function (result){
-           var result = JSON.parse(result);
-           var s = '';
-          for(var i=0; i< result.length; i++){
-
-               label+= result[i].id;
-
-
-    }
-});
-
-          alert(label);
-
+            <script>
       // @formatter:off
       document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-8'), {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks-overview'), {
       		chart: {
       			type: "bar",
       			fontFamily: 'inherit',
-      			height: 240,
+      			height: 320,
       			parentHeightOffset: 0,
       			toolbar: {
       				show: false,
@@ -306,8 +307,8 @@
       			opacity: 1,
       		},
       		series: [{
-      			name: "",
-      			data: [label]
+      			name: "A",
+      			data: [44, 32, 48, 72, 60, 16, 44, 32, 78, 50, 68, 34]
       		}],
       		grid: {
       			padding: {
@@ -328,16 +329,13 @@
       			axisBorder: {
       				show: false,
       			},
-      			type: 'datetime',
+      			categories: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubo', 'Novembro', 'Dezembro'],
       		},
       		yaxis: {
       			labels: {
       				padding: 4
       			},
       		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
-      		],
       		colors: ["#206bc4"],
       		legend: {
       			show: false,
@@ -345,14 +343,11 @@
       	})).render();
       });
       // @formatter:on
-
-          }
-
-
     </script>
+    
         </div>
 
-        <div class="col-lg-5 col-xl-5">
+        <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">PERCENTAGEM POR OCORRÊNCIAS</h3>
@@ -362,10 +357,49 @@
                 </div>
             </div>
 
-            <script>
+          <script th:inline="javascript">
       // @formatter:off
+      var legendaestado = ['Resolvidas', 'Pendentes', 'Em andamento', 'outro', 'Ocorrências', 'Ocorrências Procedentes'];
+          
+      var totalDeReclamacoesProcedentes = /*[[${totalDeReclamacoesProcedentes}]]*/"";
+      var totalDeReclamacoesTerminadas = /*[[${totalDeReclamacoesTerminadas}]]*/"";
+      var totalDeReclamacoesEmResolucao = /*[[${totalDeReclamacoesEmResolucao}]]*/"";
+      var totalDeReclamacoesNaoProcedentes = /*[[${totalDeReclamacoesNaoProcedentes}]]*/"";
+      
+      var totalOcorrencias = /*[[${totalOcorrencias}]]*/"";
+      var totalDeOcorrenciasProcedentes = /*[[${totalDeOcorrenciasProcedentes}]]*/"";
+      
+      var reclamacoes = [totalDeReclamacoesProcedentes, totalDeReclamacoesTerminadas, totalDeReclamacoesEmResolucao, totalDeReclamacoesNaoProcedentes, totalOcorrencias, totalDeOcorrenciasProcedentes];
+      
+      var options = {
+  	          pieHole: 0.4,
+  	        };
+      
+  /*     $.ajax({
+          type: 'GET',
+
+         url: 'http://localhost:9090/buscarocorrencias',
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+           
+          for(var i=0; i< result.length; i++){
+              s+=result[i].designacao+',';
+          }
+          
+          
+          var tirarVirgula = s.slice(0,-1);
+          
+          legendaestado = tirarVirgula.split(','); 
+          
+          
+    }
+}); */
+      
       document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+      	
+    	  window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
       		chart: {
       			type: "donut",
       			fontFamily: 'inherit',
@@ -380,12 +414,15 @@
       		fill: {
       			opacity: 1,
       		},
-      		series: [44, 55, 12],
-      		labels: ["Resolvidos", "Pendentes", "Em Andamento"],
+      		series: reclamacoes,
+      		labels: legendaestado,
+      		
+      		
+      		
       		grid: {
       			strokeDashArray: 3,
       		},
-      		colors: ["#66BB6A", "#EF5350", "#FFA726"],
+      		colors: ["#66BB6A", "#EF5350", "#FFA726", "#4299f5"],
       		legend: {
       			show: true,
       			position: 'bottom',
@@ -471,6 +508,39 @@
       });
       // @formatter:on
     </script>
+
+
+            <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comoboxDistrito').on('change',function(){
+
+          var distritoId = $(this).val();
+
+         // alert(distritoId);
+
+          $.ajax({
+          type: 'GET',
+        url: 'http://localhost:9090/posto/'+provinciaId,
+         //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+        	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comboboxPosto').html(s);
+    }
+});
+
+
+        });
+    });
+    </script>
+
+
         </div>
         
         
@@ -605,7 +675,7 @@
       			data: [155, 65, 465, 265, 225, 325, 80]
       		},{
       			name: "",
-      			data: label1,
+      			data: [113, 42, 65, 54, 76, 65, 35]
       		}],
       		grid: {
       			padding: {
@@ -633,7 +703,9 @@
       				padding: 4
       			},
       		},
-      		labels: [113, 42, 65, 54, 76, 65, 35],
+      		labels: [
+      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
+      		],
       		colors: ["#206bc4", "#cd201f"],
       		legend: {
       			show: false,

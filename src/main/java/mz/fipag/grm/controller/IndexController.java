@@ -1,9 +1,9 @@
 package mz.fipag.grm.controller;
 
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +104,8 @@ public class IndexController {
 	    @Autowired
 	    private CategoriaService categoriaService; 
 	    
-	    
+	    LocalDate currentdate = LocalDate.now();
+	    int currentYear = currentdate.getYear();
 	
 
     @GetMapping("/")
@@ -117,14 +118,19 @@ public class IndexController {
     @GetMapping("/estatistica")
     public ModelAndView estatistica(){
     	
-    	
     	ModelAndView vm = new ModelAndView("publico/estastica");
 		
-		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
-		vm.addObject("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
-		vm.addObject("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
+		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear));
+		vm.addObject("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentes(currentYear));
+		vm.addObject("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentes(currentYear));
+		vm.addObject("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
 		
-		//vm.addObject("totalDeOcorrenciasPorMes", ocorrenciaRepository.totalDeOcorrenciasPorMes());
+		vm.addObject("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
+		vm.addObject("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
+		vm.addObject("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
+		vm.addObject("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
+		
+		
 		
 		
 		return vm;
@@ -139,18 +145,18 @@ public class IndexController {
 
 	@GetMapping("/dashboard")
 	public String estatisticateste(Model model){
-
-		String label[] = {"a","b","c","d","e","f","g"};
-
-		int point[] = {5,3,7,1,8,3,4};
-
-		model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
-		model.addAttribute("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
-		model.addAttribute("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
-
-		model.addAttribute("label",label);
-		model.addAttribute("point",point);
-
+		
+		model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear));
+		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
+		
+		
+		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
+		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
+		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
+		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
+		
 		return "reclamacoes/home";
 	}
     /*
