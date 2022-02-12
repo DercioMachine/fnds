@@ -33,6 +33,9 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "projecto_operacao")
 	private String projectoOperacao;
 
+	@Column(name = "interno_externo")
+	private String internoExterno;
+
 	@Column(name = "resolucao")
 	private String resolucao="P";
 	
@@ -488,5 +491,12 @@ public class Ocorrencia extends AbstractEntity{
 	public void setEmpreiteiro(Empreiteiro empreiteiro) {
 		this.empreiteiro = empreiteiro;
 	}
-	
+
+	public String getInternoExterno() {
+		return internoExterno;
+	}
+
+	public void setInternoExterno(String internoExterno) {
+		this.internoExterno = internoExterno;
+	}
 }

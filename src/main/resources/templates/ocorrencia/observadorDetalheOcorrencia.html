@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>FIPAG</title>
+    
+     <style>
+    
+    /* jQuery loading autocomplete */
+.ui-autocomplete-loading {
+  background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+
+
+#tabela th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  font-size:10px;
+  color: rgb(65,105,225);
+}
+
+
+#tabela tr {
+	background-color: #fff;
+}
+
+
+</style>
+    
+    
+</head>
+<body>
+<div  layout:fragment="corpo">
+
+
+
+
+
+    <div class="card">
+
+	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		 <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
+			</div>
+			<br>
+
+		 <div class="card-body">
+			 <div class="row" >
+
+				 <div class="table-responsive">
+					 <table   class="table card-table table-vcenter text-nowrap datatable">
+						<thead>
+						 <tr style="color: rgb(65,105,225)">
+							 <th class="w-1">Nivel</th>
+							 <th>Designação</th>
+							 <th>Data Resolução</th>
+							 <!--  <th></th> -->
+						 </tr>
+						 </thead>
+						 <tbody>
+
+						 <!--  <tr th:each="p : ${categorias}"> -->
+						 <tr th:each="r, stat : ${resolucoes}">
+							 <div th:if="${r.tipo =='A' }">
+								 <td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+								 <td th:text="${r.designacao}" >Auxiliar Contábil</td>
+								 <td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+							 </div>
+						 </tr>
+
+
+						 </tbody>
+					 </table>
+				 </div>
+
+			 </div>
+		 </div>
+
+	 </div>
+
+
+	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		  <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Resolução</h2>
+			</div>
+			<br>
+
+		  <div class="card-body">
+			  <div class="row" >
+
+				  <div class="table-responsive">
+					 <table   class="table card-table table-vcenter text-nowrap datatable">
+						  <thead>
+						   <tr style="color: rgb(65,105,225)">
+							  <th class="w-1">Nivel</th>
+							  <th>Designação</th>
+							  <th>Mediador</th>
+							  <th>Responsabilidade</th>
+							  <th>Data Resolução</th>
+							  <!--  <th></th> -->
+						  </tr>
+						  </thead>
+						  <tbody>
+						  <!--  <tr th:each="p : ${categorias}"> -->
+						  <tr th:each="r : ${resolucoes}">
+							<div th:if="${r.tipo =='R' }">
+								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
+								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
+								<td th:text="${r.responsabilidade.responsavel}" ><span class="text-muted">01401</span></td>
+								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+							</div>
+						  </tr>
+						  
+
+
+						  </tbody>
+					  </table>
+				  </div>
+
+			  </div>
+		  </div>
+	  </div>
+
+
+	   <div th:if="${ocorrencia.estado =='Validado'}">
+
+		   <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Validação</h2>
+			</div>
+			<br>
+
+		   <div class="card-body">
+			   <div class="row" >
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Data de Validação: </span>	<span  th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Tipo de Ocorrência: </span>	<span style="color: red;font-weight: bolder;" th:text="${ocorrencia.tipoOcorrencia.designacao}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.tipoAlerta != null && ocorrencia.tipoAlerta.designacao != null}">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}" ></span>
+					   </div>
+				   </div>
+				   
+
+				   <div class="col-6 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Estado da Ocorrência: </span><span th:text="${ocorrencia.estado}"></span>
+					   </div>
+				   </div>
+
+				   <div class="col-12 col-sm-6">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Observação: </span><span th:text="${ocorrencia.observacao}"></span>
+					   </div>
+				   </div>
+
+			   </div>
+		   </div>
+
+	   </div>
+
+
+        <div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados do Registo</h2>
+			</div>
+			<br>
+
+		<div class="card-body">
+		  <div class="row" >
+		  
+		  <div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.id}"></span>
+				 </div>
+			</div>
+		  
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Código de registo: </span>	<span th:text="${ocorrencia.grmStamp}"></span>
+				 </div>
+			</div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
+				  </div>
+			  </div>
+			  
+			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.categoria != null && ocorrencia.categoria.designacao != null}">
+					   <div class="form-group">
+						   <span style="font-weight: bolder;">Categoria: </span> <span th:text="${ocorrencia.categoria.designacao}"></span>
+					   </div>
+				   </div>
+
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+				  <span style="font-weight: bolder;">Data da Ocorrência: </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
+				</div>
+			</div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.provincia.designacao}"></span>
+				  </div>
+			  </div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
+				  </div>
+			  </div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Comunidade: </span>	<span th:text="${ocorrencia.comunidade}"></span>
+				  </div>
+			  </div>
+
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Genero: </span>	<span th:text="${ocorrencia.sexo}"></span>
+				</div>
+			</div>
+
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Forma de Comunicação: </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
+				  </div>
+			  </div>
+
+
+			  <div class="col-12 col-sm-6">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
+				  </div>
+			  </div>
+
+		  </div>
+		</div>
+
+		<div style="background: #0277BD; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
+			</div>
+			<br>
+
+		<div class="card-body">
+
+			<div class="row">
+
+				<div class="table-responsive">
+					<table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
+						<thead>
+						 <tr style="color: rgb(65,105,225)">
+							<th class="w-1">#</th>
+							<th>Designação</th>
+							<th>Descrição</th>
+							<th>Momento</th>
+							<th>Data</th>
+							<th>Ver</th>
+							<!--  <th></th> -->
+						</tr>
+						</thead>
+						<tbody>
+						<!--  <tr th:each="p : ${categorias}"> -->
+						<tr th:each="a, stat : ${anexos}">
+							<td th:text="${stat.index + 1}" ><span class="text-muted">01401</span></td>
+							<td th:text="${a.docName}" >Auxiliar Contábil</td>
+							<td th:text="${a.descricao}" >Auxiliar Contábil</td>
+							<td th:text="${a.fase}" >Auxiliar Contábil</td>
+							<td th:text="${#dates.format(a.created, 'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+							<td>
+								<a class="icon" th:href="${'/download/ficheiro/'+a.id}">
+									<i class="fa fa-file"></i>
+								</a>
+							</td>
+
+						</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+
+
+			</div>
+		</div>
+
+
+        </div>
+        
+    </div>
+    <!-- Conteudo-->
+
+</body>
+</html>

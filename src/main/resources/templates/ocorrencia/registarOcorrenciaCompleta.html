@@ -49,10 +49,12 @@
 
         function OrigemInternoExterno(){
 
+        function OrigemInternoExterno(){
+
                   $.ajax({
           type: 'GET',
 
-            url: 'http://localhost:9090/origem/externo',
+              url: 'http://localhost:9090/origem/externo',
           //url: 'https://portal.fipag.co.mz/grm/origem/externo/',
            
           // url:  'http://expediente.uem.mz:8080/grm2/origem/externo',
@@ -107,9 +109,9 @@
           type: 'GET',
           
          //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-         url: 'http://localhost:9090/distrito/'+provinciaId,
-      //  url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-        //url:  'http://expediente.uem.mz:8080/grm2/distrito/'+provinciaId,
+        // url: 'http://localhost:9090/distrito/'+provinciaId,
+        //url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+        url:  'http://expediente.uem.mz:8080/grm2/distrito/'+provinciaId,
       
           
            success: function (result){
@@ -139,11 +141,11 @@
 
           $.ajax({
           type: 'GET',
-        url: 'http://localhost:9090/posto/'+provinciaId,
+        //url: 'http://localhost:9090/posto/'+provinciaId,
          //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
         	//url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
         	
-        	// url:  'http://expediente.uem.mz:8080/grm2/posto/'+distritoId,
+        	 url:  'http://expediente.uem.mz:8080/grm2/posto/'+distritoId,
           
            success: function (result){
            var result = JSON.parse(result);
@@ -326,13 +328,13 @@
 			                    <div class="d-flex">
 									<div class="form-check-inline mr-2">
 									  <label class="form-check-label">
-									    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" value="Interno" name="origem" class="form-check-input check" type="radio" checked> Interno
+									    <input  onchange="onChangeSimOrigem()" id="radioSimOrigem" th:field="*{internoExterno}"  value="Interno" class="form-check-input check" type="radio" checked> Interno
 									  </label>
 									</div>
 									
 									<div class="form-check-inline">
 									  <label class="form-check-label">
-									    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" type="radio" value="Externo" name="origem" class="form-check-input" > Externo
+									    <input  onchange="onChangeNaoOrigem()" id="radioNaoOrigem" th:field="*{internoExterno}" type="radio" value="Externo" class="form-check-input" > Externo
 									  </label>
 									</div>
 			                    </div>

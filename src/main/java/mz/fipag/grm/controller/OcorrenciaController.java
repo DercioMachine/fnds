@@ -117,6 +117,29 @@ public class OcorrenciaController {
 
         return "ocorrencia/listarOcorrencia";
     }
+
+    @GetMapping("/ocorrencia/observador")
+    public String listarOcorrenciaObservador(ModelMap model, @RequestParam("page") Optional<Integer> page){
+
+        int paginaActual = page.orElse(1);
+        PaginacaoUtil<Ocorrencia> pageOcorrencia = ocorrenciaService.buscaPorPagina(paginaActual);
+
+        model.addAttribute("pageOcorrencia", pageOcorrencia);
+
+        return "ocorrencia/listarOcorrenciaObservador";
+    }
+
+    @GetMapping("/observador/ocorrencia/{id}")
+    public String DetalheObservadorOcorrencia(@PathVariable("id") Long id, ModelMap model) {
+
+        model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
+        model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
+        model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(id));
+        model.addAttribute("resolver", new Resolucao());
+        model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
+
+        return "ocorrencia/observadorDetalheOcorrencia";
+    }
     
     
     @GetMapping("/listar/teste")
