@@ -16,7 +16,7 @@
 
     <meta charset="UTF-8">
      <link rel="icon" th:href="@{/image/log.png}" />
-    <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Águaf</title>
+    <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
     
     
     
@@ -272,7 +272,7 @@
         <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS</h3>
+                    <h3 class="card-title">OCORRÊNCIAS POR CATEGORIA</h3>
                 </div>
                 <div class="card-body">
                     <div id="chart-tasks-overview"></div>
@@ -280,72 +280,287 @@
             </div>
 
             <script>
-      // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks-overview'), {
-      		chart: {
-      			type: "bar",
-      			fontFamily: 'inherit',
-      			height: 320,
-      			parentHeightOffset: 0,
-      			toolbar: {
-      				show: false,
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		plotOptions: {
-      			bar: {
-      				columnWidth: '50%',
-      			}
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: [{
-      			name: "A",
-      			data: [44, 32, 48, 72, 60, 16, 44, 32, 78, 50, 68, 34]
-      		}],
-      		grid: {
-      			padding: {
-      				top: -20,
-      				right: 0,
-      				left: -4,
-      				bottom: -4
-      			},
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			categories: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubo', 'Novembro', 'Dezembro'],
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		colors: ["#206bc4"],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
+            categoria();
+            function categoria(){
+            	// @formatter:off
+                
+                
+                var ocorrencias = [];
+
+                var legendaestado = [];
+                
+                var legendaids = [];
+                
+                var total = [];
+                
+                var nomess = [];
+                
+                
+                $.ajax({
+                    type: 'GET',
+
+                   url: 'http://localhost:9090/buscarcategorias',
+
+                     success: function (result){
+                     var result = JSON.parse(result);
+                     var s = '';
+                     var idd = '';
+
+                    for(var i=0; i< result.length; i++){
+
+                  	 s+= result[i].designacao+',';
+                  	  idd+= result[i].id+',';
+                  	  
+                    }
+
+                    var tirarVirgula = s.slice(0,-1);
+					var tirarVirgulaid = idd.slice(0,-1);
+                    
+                    legendaestado = tirarVirgula.split(',');
+                   legendaids = tirarVirgulaid.split(',');
+
+                  }
+                  });      
+
+           $.ajax({
+            type: 'GET',
+
+           url: 'http://localhost:9090/apiocorrencias',
+
+           success: function (result){
+               var result = JSON.parse(result);
+               var s = '';
+               var nomeee='';
+               
+               for(var k=0; k<result.length; k++){
+            	   s+= result[k].categoria.id+',';
+            	   nomeee+=result[k].categoria.designacao+',';
+            	   
+               }
+               
+               alert(nomeee);
+               
+               var tirarVirgula = s.slice(0,-1);
+               
+               ocorrencias = tirarVirgula.split(',');
+               
+
+              for(var i=0; i< legendaids.length; i++){
+            		 var soma = 0;
+            	  
+            	 for(var j=0; j< ocorrencias.length; j++){
+            		 if(legendaids[i]==ocorrencias[j]){
+            			soma++;
+            			
+            			
+            		 }
+            	 	
+            	 }
+            	 total[i]=soma;
+            	 
+            	  
+              }
+              
+            }
+          });  
+                
+                
+                document.addEventListener("DOMContentLoaded", function () {
+                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks-overview'), {
+                		chart: {
+                			type: "bar",
+                			fontFamily: 'inherit',
+                			height: 320,
+                			parentHeightOffset: 0,
+                			toolbar: {
+                				show: false,
+                			},
+                			animations: {
+                				enabled: false
+                			},
+                		},
+                		plotOptions: {
+                			bar: {
+                				columnWidth: '50%',
+                			}
+                		},
+                		dataLabels: {
+                			enabled: false,
+                		},
+                		fill: {
+                			opacity: 1,
+                		},
+                		series: [{
+                			name: "A",
+                			data: total
+                		}],
+                		grid: {
+                			padding: {
+                				top: -20,
+                				right: 0,
+                				left: -4,
+                				bottom: -4
+                			},
+                			strokeDashArray: 4,
+                		},
+                		xaxis: {
+                			labels: {
+                				padding: 0,
+                			},
+                			tooltip: {
+                				enabled: false
+                			},
+                			axisBorder: {
+                				show: false,
+                			},
+                			categories: legendaestado,
+                		},
+                		yaxis: {
+                			labels: {
+                				padding: 4
+                			},
+                		},
+                		colors: ["#206bc4"],
+                		legend: {
+                			show: false,
+                		},
+                	})).render();
+                });
+                // @formatter:on
+            }
+            
+            
+      
     </script>
     
         </div>
+        
+        
+        
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div  class="card-header">
+                    <h3 class="card-title">OCORRÊNCIAS INTERNO/EXTERNO</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-tasks"></div>
+                </div>
+            </div>
+
+            <script>
+            mes();
+            function mes(){
+            	// @formatter:off
+                
+                
+                var interno_externos = [];
+
+                var nomes = ["Interno","Externo"];
+
+                $.ajax({
+                    type: 'GET',
+
+                   url: 'http://localhost:9090/buscarocorrencias',
+
+                     success: function (result){
+                     var result = JSON.parse(result);
+                     var s = '';
+                     var interno = 0;
+                     var externo = 0;
+
+                    for(var i=0; i< result.length; i++){
+
+
+                        if(result[i].internoExterno == 'Interno'){
+                          interno ++;
+                        }else{
+                          externo ++;
+                        }
+
+                    }
+
+                  interno_externos = [interno, externo];
+
+
+                    var tirarVirgula = s.slice(0,-1);
+
+                    legendaestado = tirarVirgula.split(',');
+
+
+                 }
+              });
+                
+                
+                document.addEventListener("DOMContentLoaded", function () {
+                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks'), {
+                		chart: {
+                			type: "bar",
+                			fontFamily: 'inherit',
+                			height: 320,
+                			parentHeightOffset: 0,
+                			toolbar: {
+                				show: false,
+                			},
+                			animations: {
+                				enabled: false
+                			},
+                		},
+                		plotOptions: {
+                			bar: {
+                				columnWidth: '50%',
+                			}
+                		},
+                		dataLabels: {
+                			enabled: false,
+                		},
+                		fill: {
+                			opacity: 1,
+                		},
+                		series: [{
+                			name: "A",
+                			data: interno_externos
+                		}],
+                		grid: {
+                			padding: {
+                				top: -20,
+                				right: 0,
+                				left: -4,
+                				bottom: -4
+                			},
+                			strokeDashArray: 4,
+                		},
+                		xaxis: {
+                			labels: {
+                				padding: 0,
+                			},
+                			tooltip: {
+                				enabled: false
+                			},
+                			axisBorder: {
+                				show: false,
+                			},
+                			categories: nomes,
+                		},
+                		yaxis: {
+                			labels: {
+                				padding: 4
+                			},
+                		},
+                		colors: ["#206bc4"],
+                		legend: {
+                			show: false,
+                		},
+                	})).render();
+                });
+                // @formatter:on
+            }
+            
+            
+      
+    </script>
+    
+        </div>
+        
 
         <div class="col-lg-6 col-xl-6">
             <div class="card">
@@ -374,28 +589,7 @@
       var options = {
   	          pieHole: 0.4,
   	        };
-      
-  /*     $.ajax({
-          type: 'GET',
 
-         url: 'http://localhost:9090/buscarocorrencias',
-
-           success: function (result){
-           var result = JSON.parse(result);
-           var s = '';
-           
-          for(var i=0; i< result.length; i++){
-              s+=result[i].designacao+',';
-          }
-          
-          
-          var tirarVirgula = s.slice(0,-1);
-          
-          legendaestado = tirarVirgula.split(','); 
-          
-          
-    }
-}); */
       
       document.addEventListener("DOMContentLoaded", function () {
       	
@@ -456,7 +650,7 @@
             <div class="row row-deck row-cards">
 
 
-       <!-- <div class="col-lg-6 col-xl-6">
+      <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">ENTIDADE</h3>
@@ -467,98 +661,108 @@
             </div>
 
 <script>
-            var entidade = [];
 
-            var nome = ["Projecto","Operação"];
+projEnt();
 
-       $.ajax({
-          type: 'GET',
+function projEnt(){
+	
+	var entidade = [];
 
-         url: 'http://localhost:9090/buscarocorrencias',
+    var nome = ["Projecto","Operação"];
 
-           success: function (result){
-           var result = JSON.parse(result);
-           var s = '';
-           var projeto = 0;
-           var opera = 0;
+$.ajax({
+  type: 'GET',
 
-          for(var i=0; i< result.length; i++){
+ url: 'http://localhost:9090/apiocorrencias',
 
+   success: function (result1){
+   var result1 = JSON.parse(result1);
+   var si = '';
+   var projeto = 0;
+   var opera = 0;
 
-              if(result[i].projectoOperacao == 'projecto'){
-                projeto ++;
-
-              }else if(result[i].projectoOperacao == 'operacao'){
-                opera ++;
-              }
-
-          }
-
-        entidade = [projeto, opera];
+  for(var j=0; j< result1.length; j++){
 
 
-          var tirarVirgula = s.slice(0,-1);
+      if(result1[j].projectoOperacao == 'projecto'){
+        projeto ++;
 
-          legendaestado = tirarVirgula.split(',');
+      }else if(result1[j].projectoOperacao == 'operacao'){
+        opera ++;
+      }
 
+  }
 
-       }
-    });
-
-
-      // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-
-            window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
+entidade = [projeto, opera];
 
 
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: entidade,
-      		labels: nome,
-      		grid: {
-      			strokeDashArray: 5,
-      		},
-      		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
-      // @formatter:on
+  var tirarVirgula = s.slice(0,-1);
+
+  legendaestado = tirarVirgula.split(',');
+
+
+}
+});
+
+
+// @formatter:off
+document.addEventListener("DOMContentLoaded", function () {
+
+    window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
+
+
+		chart: {
+			type: "donut",
+			fontFamily: 'inherit',
+			height: 240,
+			sparkline: {
+				enabled: true
+			},
+			animations: {
+				enabled: false
+			},
+		},
+		fill: {
+			opacity: 1,
+		},
+		series: entidade,
+		labels: nome,
+		grid: {
+			strokeDashArray: 5,
+		},
+		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
+		legend: {
+			show: true,
+			position: 'bottom',
+			offsetY: 12,
+			markers: {
+				width: 10,
+				height: 10,
+				radius: 100,
+			},
+			itemMargin: {
+				horizontal: 8,
+				vertical: 8
+			},
+		},
+		tooltip: {
+			fillSeriesColor: false
+		},
+	})).render();
+});
+	
+	
+}
+            
     </script>
+    
+    
 
 
 
         </div>
 
--->
+
 
 
                 <div class="col-lg-6 col-xl-6">
@@ -572,90 +776,93 @@
                     </div>
 
                     <script>
-            var interno_externos = [];
+                    
+                    entidad();
+                    
+                    function entidad(){
+                    	var interno_externos = [];
 
-            var nomes = ["Interno","Externo"];
+                        var nomes = ["Interno","Externo"];
 
-       $.ajax({
-          type: 'GET',
+                   $.ajax({
+                      type: 'GET',
 
-         url: 'http://localhost:9090/buscarocorrencias',
+                     url: 'http://localhost:9090/buscarocorrencias',
 
-           success: function (result){
-           var result = JSON.parse(result);
-           var s = '';
-           var interno = 0;
-           var externo = 0;
+                       success: function (result){
+                       var result = JSON.parse(result);
+                       var s = '';
+                       var interno = 0;
+                       var externo = 0;
 
-          for(var i=0; i< result.length; i++){
-
-
-              if(result[i].internoExterno == 'Interno'){
-                interno ++;
-              }else{
-                externo ++;
-              }
-
-          }
-
-        interno_externos = [interno, externo];
+                      for(var i=0; i< result.length; i++){
 
 
-          var tirarVirgula = s.slice(0,-1);
+                          if(result[i].internoExterno == 'Interno'){
+                            interno ++;
+                          }else{
+                            externo ++;
+                          }
 
-          legendaestado = tirarVirgula.split(',');
+                      }
 
-
-       }
-    });
-
-
-      // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-
-            window.ApexCharts && (new ApexCharts(document.getElementById('interno_externo'), {
+                    interno_externos = [interno, externo];
 
 
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: interno_externos,
-      		labels: nomes,
-      		grid: {
-      			strokeDashArray: 5,
-      		},
-      		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
-      // @formatter:on
+                      var tirarVirgula = s.slice(0,-1);
+
+                      legendaestado = tirarVirgula.split(',');
+
+
+                   }
+                });
+
+
+                  document.addEventListener("DOMContentLoaded", function () {
+
+                        window.ApexCharts && (new ApexCharts(document.getElementById('interno_externo'), {
+
+
+                  		chart: {
+                  			type: "donut",
+                  			fontFamily: 'inherit',
+                  			height: 240,
+                  			sparkline: {
+                  				enabled: true
+                  			},
+                  			animations: {
+                  				enabled: false
+                  			},
+                  		},
+                  		fill: {
+                  			opacity: 1,
+                  		},
+                  		series: interno_externos,
+                  		labels: nomes,
+                  		grid: {
+                  			strokeDashArray: 5,
+                  		},
+                  		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
+                  		legend: {
+                  			show: true,
+                  			position: 'bottom',
+                  			offsetY: 12,
+                  			markers: {
+                  				width: 10,
+                  				height: 10,
+                  				radius: 100,
+                  			},
+                  			itemMargin: {
+                  				horizontal: 8,
+                  				vertical: 8
+                  			},
+                  		},
+                  		tooltip: {
+                  			fillSeriesColor: false
+                  		},
+                  	})).render();
+                  });
+                    }
     </script>
 
 

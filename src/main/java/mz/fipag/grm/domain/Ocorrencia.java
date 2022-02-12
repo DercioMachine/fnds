@@ -142,7 +142,7 @@ public class Ocorrencia extends AbstractEntity{
 	private Projecto projecto;
 	
 	@ManyToOne
-	@JoinColumn(name="categoria_id")
+	@JoinColumn(name="categoriaid")
 	private Categoria categoria;
 	
 	@ManyToOne

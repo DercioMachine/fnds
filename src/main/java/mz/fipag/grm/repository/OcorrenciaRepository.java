@@ -1,6 +1,9 @@
 package mz.fipag.grm.repository;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -52,6 +55,9 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     @Query(value="select count(*) from ocorrencia where tipo_ocorrencia_id=1 and procedencia='Sim' and resolucao = 'R' and year(created)= :ano", nativeQuery=true)
     public Object totalDeReclamacoesEmResolucao(@Param("ano") int ano);
 
+    @Query(value="select *, count(*) from ocorrencia  group by categoriaid", nativeQuery=true)
+    public List<Ocorrencia> busqueTudoAgrupadoPorCategoria();
+    
    
     
 	/*

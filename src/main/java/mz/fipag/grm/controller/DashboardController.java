@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import mz.fipag.grm.repository.OcorrenciaRepository;
+import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
 
 @Controller
@@ -19,6 +20,9 @@ public class DashboardController {
 	@Autowired
 	TipoOcorrenciaService tipoOcorrenciaService;
 	
+	@Autowired
+	CategoriaService categoriaService;
+	
 	@ResponseBody
     @GetMapping("/buscarocorrencias")
     public String buscarOcorrencias(){
@@ -26,6 +30,34 @@ public class DashboardController {
         Gson gson=new Gson();
 
         return gson.toJson(ocorrenciaRepository.findAll());
+    }
+	
+	@ResponseBody
+    @GetMapping("/buscarcategorias")
+    public String buscarCategorias(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(categoriaService.buscarTodos());
+    }
+	
+	
+	@ResponseBody
+    @GetMapping("/apiocorrencias")
+    public String buscarOcorrenciass(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.findAll());
+    }
+	
+	@ResponseBody
+    @GetMapping("/apiococate")
+    public String buscarOcorrenciasAgrupadasPorCategoria(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.busqueTudoAgrupadoPorCategoria());
     }
 	
 	
