@@ -1,5 +1,7 @@
 package mz.fipag.grm.controller;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,8 @@ import com.google.gson.Gson;
 
 import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.service.CategoriaService;
+import mz.fipag.grm.service.CidadeService;
+import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
 
 @Controller
@@ -23,13 +27,69 @@ public class DashboardController {
 	@Autowired
 	CategoriaService categoriaService;
 	
+	
+	@Autowired
+	CidadeService cidadeService;
+	
+	@Autowired
+	ProjectoService projectoService;
+	
+	int ano=Calendar.getInstance().get(Calendar.YEAR);
+	
 	@ResponseBody
     @GetMapping("/buscarocorrencias")
     public String buscarOcorrencias(){
 
         Gson gson=new Gson();
 
-        return gson.toJson(ocorrenciaRepository.findAll());
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
+    }
+	
+	@ResponseBody
+    @GetMapping("/apiocorrenciascidades")
+    public String buscarOcorrenciasCidades(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
+    }
+	
+	@ResponseBody
+    @GetMapping("/apicidades")
+    public String apiCidades(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(cidadeService.buscarTodos());
+    }
+	
+	@ResponseBody
+    @GetMapping("/buscarocorrenciasforma")
+    public String buscarOcorrenciasForma(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
+    }
+	
+	
+	@ResponseBody
+    @GetMapping("/buscarocorrencias_teste")
+    public String buscarOcorrenciasTeste(){
+
+		Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
+    }
+	
+	
+	@ResponseBody
+    @GetMapping("/buscarocoent")
+    public String buscarEtnidade(){
+
+		Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
     }
 	
 	@ResponseBody
@@ -43,22 +103,34 @@ public class DashboardController {
 	
 	
 	@ResponseBody
+    @GetMapping("/buscarprojectos")
+    public String buscarProjectos(){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(projectoService.buscarTodos());
+    }
+	
+	
+	@ResponseBody
     @GetMapping("/apiocorrencias")
     public String buscarOcorrenciass(){
 
         Gson gson=new Gson();
 
-        return gson.toJson(ocorrenciaRepository.findAll());
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
     }
 	
-	@ResponseBody
-    @GetMapping("/apiococate")
-    public String buscarOcorrenciasAgrupadasPorCategoria(){
-
-        Gson gson=new Gson();
-
-        return gson.toJson(ocorrenciaRepository.busqueTudoAgrupadoPorCategoria());
-    }
+	/*
+	 * @ResponseBody
+	 * 
+	 * @GetMapping("/apiococate") public String
+	 * buscarOcorrenciasAgrupadasPorCategoria(){
+	 * 
+	 * Gson gson=new Gson();
+	 * 
+	 * return gson.toJson(ocorrenciaRepository.busqueTudoAgrupadoPorCategoria()); }
+	 */
 	
 	
 	@ResponseBody

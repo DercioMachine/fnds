@@ -266,22 +266,23 @@
               
               
 
-    <div class="page-body">
+     <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
+        
         <div class="col-lg-6 col-xl-6">
             <div class="card">
                 <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS POR CATEGORIA</h3>
+                    <h3 class="card-title">OCORRÊNCIAS POR PROJECTO</h3>
                 </div>
                 <div class="card-body">
-                    <div id="chart-tasks-overview"></div>
+                    <div id="ocorrencias_project"></div>
                 </div>
             </div>
 
             <script>
-            categoria();
-            function categoria(){
+            projecto();
+            function projecto(){
             	// @formatter:off
                 
                 
@@ -294,6 +295,175 @@
                 var total = [];
                 
                 var nomess = [];
+                
+                var anos = [];
+                
+                
+                $.ajax({
+                    type: 'GET',
+
+                   url: 'http://localhost:9090/buscarprojectos',
+
+                     success: function (result){
+                     var result = JSON.parse(result);
+                     var s = '';
+                     var idd = '';
+
+                    for(var i=0; i< result.length; i++){
+
+                  	 s+= result[i].designacao+',';
+                  	  idd+= result[i].id+',';
+                  	  
+                    }
+
+                    var tirarVirgula = s.slice(0,-1);
+					var tirarVirgulaid = idd.slice(0,-1);
+                    
+                    legendaestado = tirarVirgula.split(',');
+                   legendaids = tirarVirgulaid.split(',');
+
+                  }
+                  });      
+
+                $.ajax({
+                	            type: 'GET',
+                	
+                	           url: 'http://localhost:9090/buscarocorrencias_teste',
+                	
+                	           success: function (result){
+                	               var result = JSON.parse(result);
+                	               var s = '';
+                	               
+                	               for(var k=0; k<result.length; k++){
+                	            	   s+= result[k].projecto.id+',';
+                	            	   
+                	               }
+                	               
+                	              // alert(nomeee);
+                	               
+                	               var tirarVirgula = s.slice(0,-1);
+                	               
+                	               ocorrencias = tirarVirgula.split(',');
+                	               
+                	
+                	              for(var i=0; i< legendaids.length; i++){
+                	            		 var soma = 0;
+                	            	  
+                	            	 for(var j=0; j< ocorrencias.length; j++){
+                	            		 if(legendaids[i]==ocorrencias[j]){
+                	            			soma++;
+                	            			
+                	            			
+                	            		 }
+                	            	 	
+                	            	 }
+                	            	 total[i]=soma;
+                	            	 
+                	            	  
+                	              }
+                              
+                	            }
+                	          });  
+                
+                
+                document.addEventListener("DOMContentLoaded", function () {
+                	window.ApexCharts && (new ApexCharts(document.getElementById('ocorrencias_project'), {
+                		chart: {
+                			type: "bar",
+                			fontFamily: 'inherit',
+                			height: 320,
+                			parentHeightOffset: 0,
+                			toolbar: {
+                				show: false,
+                			},
+                			animations: {
+                				enabled: false
+                			},
+                		},
+                		plotOptions: {
+                			bar: {
+                				columnWidth: '50%',
+                			}
+                		},
+                		dataLabels: {
+                			enabled: false,
+                		},
+                		fill: {
+                			opacity: 1,
+                		},
+                		series: [{
+                			name: "OCORRÊNCIAS POR PROJECTO",
+                			data: total
+                		}],
+                		grid: {
+                			padding: {
+                				top: -20,
+                				right: 0,
+                				left: -4,
+                				bottom: -4
+                			},
+                			strokeDashArray: 4,
+                		},
+                		xaxis: {
+                			labels: {
+                				padding: 0,
+                			},
+                			tooltip: {
+                				enabled: false
+                			},
+                			axisBorder: {
+                				show: false,
+                			},
+                			categories: legendaestado,
+                		},
+                		yaxis: {
+                			labels: {
+                				padding: 4
+                			},
+                		},
+                		colors: ["#66BB6A"],
+                		legend: {
+                			show: false,
+                		},
+                	})).render();
+                });
+                // @formatter:on
+            }
+            
+            
+      
+    </script>
+    
+        </div>
+        
+        
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div  class="card-header">
+                    <h3 class="card-title">OCORRÊNCIAS POR CATEGORIA</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-combination"></div>
+                </div>
+            </div>
+
+            <script>
+            ococatega();
+            function ococatega(){
+            	// @formatter:off
+                
+                
+                var ocorrencias = [];
+
+                var legendaestado = [];
+                
+                var legendaids = [];
+                
+                var total = [];
+                
+                var nomess = [];
+                
+                var anos = [];
                 
                 
                 $.ajax({
@@ -322,51 +492,215 @@
                   }
                   });      
 
-           $.ajax({
-            type: 'GET',
-
-           url: 'http://localhost:9090/apiocorrencias',
-
-           success: function (result){
-               var result = JSON.parse(result);
-               var s = '';
-               var nomeee='';
-               
-               for(var k=0; k<result.length; k++){
-            	   s+= result[k].categoria.id+',';
-            	   nomeee+=result[k].categoria.designacao+',';
-            	   
-               }
-               
-               alert(nomeee);
-               
-               var tirarVirgula = s.slice(0,-1);
-               
-               ocorrencias = tirarVirgula.split(',');
-               
-
-              for(var i=0; i< legendaids.length; i++){
-            		 var soma = 0;
-            	  
-            	 for(var j=0; j< ocorrencias.length; j++){
-            		 if(legendaids[i]==ocorrencias[j]){
-            			soma++;
-            			
-            			
-            		 }
-            	 	
-            	 }
-            	 total[i]=soma;
-            	 
-            	  
-              }
-              
+                $.ajax({
+                	            type: 'GET',
+                	
+                	           url: 'http://localhost:9090/apiocorrencias',
+                	
+                	           success: function (result){
+                	               var result = JSON.parse(result);
+                	               var s = '';
+                	               
+                	               for(var k=0; k<result.length; k++){
+                	            	   s+= result[k].categoria.id+',';
+                	            	   
+                	               }
+                	               
+                	              // alert(nomeee);
+                	               
+                	               var tirarVirgula = s.slice(0,-1);
+                	               
+                	               ocorrencias = tirarVirgula.split(',');
+                	               
+                	
+                	              for(var i=0; i< legendaids.length; i++){
+                	            		 var soma = 0;
+                	            	  
+                	            	 for(var j=0; j< ocorrencias.length; j++){
+                	            		 if(legendaids[i]==ocorrencias[j]){
+                	            			soma++;
+                	            			
+                	            			
+                	            		 }
+                	            	 	
+                	            	 }
+                	            	 total[i]=soma;
+                	            	 
+                	            	  
+                	              }
+                              
+                	            }
+                	          });  
+                
+                
+                // @formatter:off
+                document.addEventListener("DOMContentLoaded", function () {
+                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
+                		chart: {
+                			type: "bar",
+                			fontFamily: 'inherit',
+                			height: 320,
+                			parentHeightOffset: 0,
+                			toolbar: {
+                				show: false,
+                			},
+                			animations: {
+                				enabled: false
+                			},
+                		},
+                		plotOptions: {
+                			bar: {
+                				columnWidth: '50%',
+                			}
+                		},
+                		dataLabels: {
+                			enabled: false,
+                		},
+                		fill: {
+                			opacity: 1,
+                		},
+                		series: [{
+                			name: "OCORRÊNCIAS POR CATEGORIA",
+                			data: total
+                		}],
+                		grid: {
+                			padding: {
+                				top: -20,
+                				right: 0,
+                				left: -4,
+                				bottom: -4
+                			},
+                			strokeDashArray: 4,
+                		},
+                		xaxis: {
+                			labels: {
+                				padding: 0,
+                			},
+                			tooltip: {
+                				enabled: false
+                			},
+                			axisBorder: {
+                				show: false,
+                			},
+                			categories: legendaestado,
+                		},
+                		yaxis: {
+                			labels: {
+                				padding: 4
+                			},
+                		},
+                		colors: ["#4299f5"],
+                		legend: {
+                			show: false,
+                		},
+                	})).render();
+                });
+                // @formatter:on
             }
-          });  
+            
+            
+      
+    </script>
+    
+        </div>
+        
+        
+        
+        <div class="col-lg-6 col-xl-6">
+            <div class="card">
+                <div  class="card-header">
+                    <h3 class="card-title">OCORRÊNCIAS POR CIDADE</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-tasks"></div>
+                </div>
+            </div>
+
+            <script>
+            cidade();
+            function cidade(){
+            	var ocorrencias = [];
+
+                var legendaestado = [];
+                
+                var legendaids = [];
+                
+                var total = [];
+                
+                var nomess = [];
+                
+                var anos = [];
+                
+
+                $.ajax({
+                    type: 'GET',
+
+                   url: 'http://localhost:9090/apicidades',
+
+                     success: function (result){
+                     var result = JSON.parse(result);
+                     var s = '';
+                     var idd = '';
+
+                    for(var i=0; i< result.length; i++){
+
+                  	 s+= result[i].designacao+',';
+                  	  idd+= result[i].id+',';
+                  	  
+                    }
+
+                    var tirarVirgula = s.slice(0,-1);
+					var tirarVirgulaid = idd.slice(0,-1);
+                    
+                    legendaestado = tirarVirgula.split(',');
+                   legendaids = tirarVirgulaid.split(',');
+
+                  }
+                  });      
+
+                $.ajax({
+                	            type: 'GET',
+                	
+                	           url: 'http://localhost:9090/apiocorrenciascidades',
+                	
+                	           success: function (result){
+                	               var result = JSON.parse(result);
+                	               var s = '';
+                	               
+                	               for(var k=0; k<result.length; k++){
+                	            	   s+= result[k].cidade.id+',';
+                	            	   
+                	               }
+                	               
+                	              // alert(nomeee);
+                	               
+                	               var tirarVirgula = s.slice(0,-1);
+                	               
+                	               ocorrencias = tirarVirgula.split(',');
+                	               
+                	
+                	              for(var i=0; i< legendaids.length; i++){
+                	            		 var soma = 0;
+                	            	  
+                	            	 for(var j=0; j< ocorrencias.length; j++){
+                	            		 if(legendaids[i]==ocorrencias[j]){
+                	            			soma++;
+                	            			
+                	            			
+                	            		 }
+                	            	 	
+                	            	 }
+                	            	 total[i]=soma;
+                	            	 
+                	            	  
+                	              }
+                              
+                	            }
+                	          });  
                 
                 
                 document.addEventListener("DOMContentLoaded", function () {
-                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks-overview'), {
+                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks'), {
                 		chart: {
                 			type: "bar",
                 			fontFamily: 'inherit',
@@ -414,132 +748,6 @@
                 				show: false,
                 			},
                 			categories: legendaestado,
-                		},
-                		yaxis: {
-                			labels: {
-                				padding: 4
-                			},
-                		},
-                		colors: ["#206bc4"],
-                		legend: {
-                			show: false,
-                		},
-                	})).render();
-                });
-                // @formatter:on
-            }
-            
-            
-      
-    </script>
-    
-        </div>
-        
-        
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS INTERNO/EXTERNO</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-tasks"></div>
-                </div>
-            </div>
-
-            <script>
-            mes();
-            function mes(){
-            	// @formatter:off
-                
-                
-                var interno_externos = [];
-
-                var nomes = ["Interno","Externo"];
-
-                $.ajax({
-                    type: 'GET',
-
-                   url: 'http://localhost:9090/buscarocorrencias',
-
-                     success: function (result){
-                     var result = JSON.parse(result);
-                     var s = '';
-                     var interno = 0;
-                     var externo = 0;
-
-                    for(var i=0; i< result.length; i++){
-
-
-                        if(result[i].internoExterno == 'Interno'){
-                          interno ++;
-                        }else{
-                          externo ++;
-                        }
-
-                    }
-
-                  interno_externos = [interno, externo];
-
-
-                    var tirarVirgula = s.slice(0,-1);
-
-                    legendaestado = tirarVirgula.split(',');
-
-
-                 }
-              });
-                
-                
-                document.addEventListener("DOMContentLoaded", function () {
-                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks'), {
-                		chart: {
-                			type: "bar",
-                			fontFamily: 'inherit',
-                			height: 320,
-                			parentHeightOffset: 0,
-                			toolbar: {
-                				show: false,
-                			},
-                			animations: {
-                				enabled: false
-                			},
-                		},
-                		plotOptions: {
-                			bar: {
-                				columnWidth: '50%',
-                			}
-                		},
-                		dataLabels: {
-                			enabled: false,
-                		},
-                		fill: {
-                			opacity: 1,
-                		},
-                		series: [{
-                			name: "A",
-                			data: interno_externos
-                		}],
-                		grid: {
-                			padding: {
-                				top: -20,
-                				right: 0,
-                				left: -4,
-                				bottom: -4
-                			},
-                			strokeDashArray: 4,
-                		},
-                		xaxis: {
-                			labels: {
-                				padding: 0,
-                			},
-                			tooltip: {
-                				enabled: false
-                			},
-                			axisBorder: {
-                				show: false,
-                			},
-                			categories: nomes,
                 		},
                 		yaxis: {
                 			labels: {
@@ -640,127 +848,20 @@
     </script>
 
         </div>
+    
+    
+    
     </div>
     </div>
     </div>
     
-    
+     
 <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
 
 
-      <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">ENTIDADE</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-demo-pie3" style="height: 16rem"></div>
-                </div>
-            </div>
-
-<script>
-
-projEnt();
-
-function projEnt(){
-	
-	var entidade = [];
-
-    var nome = ["Projecto","Operação"];
-
-$.ajax({
-  type: 'GET',
-
- url: 'http://localhost:9090/apiocorrencias',
-
-   success: function (result1){
-   var result1 = JSON.parse(result1);
-   var si = '';
-   var projeto = 0;
-   var opera = 0;
-
-  for(var j=0; j< result1.length; j++){
-
-
-      if(result1[j].projectoOperacao == 'projecto'){
-        projeto ++;
-
-      }else if(result1[j].projectoOperacao == 'operacao'){
-        opera ++;
-      }
-
-  }
-
-entidade = [projeto, opera];
-
-
-  var tirarVirgula = s.slice(0,-1);
-
-  legendaestado = tirarVirgula.split(',');
-
-
-}
-});
-
-
-// @formatter:off
-document.addEventListener("DOMContentLoaded", function () {
-
-    window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie3'), {
-
-
-		chart: {
-			type: "donut",
-			fontFamily: 'inherit',
-			height: 240,
-			sparkline: {
-				enabled: true
-			},
-			animations: {
-				enabled: false
-			},
-		},
-		fill: {
-			opacity: 1,
-		},
-		series: entidade,
-		labels: nome,
-		grid: {
-			strokeDashArray: 5,
-		},
-		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
-		legend: {
-			show: true,
-			position: 'bottom',
-			offsetY: 12,
-			markers: {
-				width: 10,
-				height: 10,
-				radius: 100,
-			},
-			itemMargin: {
-				horizontal: 8,
-				vertical: 8
-			},
-		},
-		tooltip: {
-			fillSeriesColor: false
-		},
-	})).render();
-});
-	
-	
-}
-            
-    </script>
-    
-    
-
-
-
-        </div>
+      
 
 
 
@@ -872,175 +973,256 @@ document.addEventListener("DOMContentLoaded", function () {
         
         
         <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3>RECLAMAÇÕES POR ORIGEM</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-completion-tasks-3"></div>
-                </div>
-            </div>
-            <script>
-      // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-3'), {
-      		chart: {
-      			type: "area",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			parentHeightOffset: 0,
-      			toolbar: {
-      				show: false,
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: .16,
-      			type: 'solid'
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      			curve: "smooth",
-      		},
-      		series: [{
-      			name: "Tasks completion",
-      			data: [155, 65, 465, 265, 225, 325, 80]
-      		}],
-      		grid: {
-      			padding: {
-      				top: -20,
-      				right: 0,
-      				left: -4,
-      				bottom: -4
-      			},
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
-      		],
-      		colors: ["#206bc4"],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">ENTIDADE</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="entidade" style="height: 16rem"></div>
+                        </div>
+                    </div>
+
+                    <script>
+                    
+                    entidade();
+                    
+                    function entidade(){
+                    	var entidades = [];
+
+                        var nomes = ["Projecto","Operação"];
+
+                   $.ajax({
+                      type: 'GET',
+
+                     url: 'http://localhost:9090/buscarocoent',
+
+                       success: function (result){
+                       var result = JSON.parse(result);
+                       var s = '';
+                       var projecto = 0;
+                       var operacao = 0;
+
+                      for(var i=0; i< result.length; i++){
+
+
+                          if(result[i].projectoOperacao == 'projecto'){
+                        	  projecto ++;
+                          }else{
+                        	  operacao ++;
+                          }
+
+                      }
+
+                      entidades = [projecto, operacao];
+
+
+                      var tirarVirgula = s.slice(0,-1);
+
+                      legendaestado = tirarVirgula.split(',');
+
+
+                   }
+                });
+
+
+                  document.addEventListener("DOMContentLoaded", function () {
+
+                        window.ApexCharts && (new ApexCharts(document.getElementById('entidade'), {
+
+
+                  		chart: {
+                  			type: "donut",
+                  			fontFamily: 'inherit',
+                  			height: 240,
+                  			sparkline: {
+                  				enabled: true
+                  			},
+                  			animations: {
+                  				enabled: false
+                  			},
+                  		},
+                  		fill: {
+                  			opacity: 1,
+                  		},
+                  		series: entidades,
+                  		labels: nomes,
+                  		grid: {
+                  			strokeDashArray: 5,
+                  		},
+                  		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
+                  		legend: {
+                  			show: true,
+                  			position: 'bottom',
+                  			offsetY: 12,
+                  			markers: {
+                  				width: 10,
+                  				height: 10,
+                  				radius: 100,
+                  			},
+                  			itemMargin: {
+                  				horizontal: 8,
+                  				vertical: 8
+                  			},
+                  		},
+                  		tooltip: {
+                  			fillSeriesColor: false
+                  		},
+                  	})).render();
+                  });
+                    }
     </script>
-        </div>
+
+
+
+                </div>
     </div>
     
     </div>
     </div>
+    
+    
+    
     
     
     <div class="page-body">
           <div class="container-xl">
             <div class="row row-deck row-cards">
+    
     <div class="col-lg-12 col-xl-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">RÁCIO DE RECLAMAÇÕES POR CATEGÓRIA/ESTADO</h3>
+            <div class="card">
+                <div  class="card-header">
+                    <h3 class="card-title">OCORRÊNCIAS POR CANAL DE ENTRADA</h3>
+                </div>
+                <div class="card-body">
+                    <div id="chart-area-spline-stacked"></div>
+                </div>
             </div>
-            <div class="card-body">
-                <div id="chart-completion-tasks-9" style="height: 16rem"></div>
-            </div>
-        </div>
-        <script>
-      // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-completion-tasks-9'), {
-      		chart: {
-      			type: "bar",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			parentHeightOffset: 0,
-      			toolbar: {
-      				show: false,
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      			stacked: true,
-      		},
-      		plotOptions: {
-      			bar: {
-      				columnWidth: '50%',
-      			}
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: [{
-      			name: "",
-      			data: [155, 65, 465, 265, 225, 325, 80]
-      		},{
-      			name: "",
-      			data: [113, 42, 65, 54, 76, 65, 35]
-      		}],
-      		grid: {
-      			padding: {
-      				top: -20,
-      				right: 0,
-      				left: -4,
-      				bottom: -4
-      			},
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26'
-      		],
-      		colors: ["#206bc4", "#cd201f"],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
+
+            <script>
+            formacomu();
+            function formacomu(){
+            	// @formatter:off
+                
+                
+               var canais = [];
+
+               var nomes = ["Telefone","Formulário ", "Reuniões Comunitárias", "Grupos de Discussão", "Contacto Pessoal", "Outros"];
+                
+                
+
+                $.ajax({
+                	            type: 'GET',
+                	
+                	           url: 'http://localhost:9090/buscarocorrenciasforma',
+                	
+                	           success: function (result){
+                                   var result = JSON.parse(result);
+                                   var s = '';
+                                   var telefone = 0;
+                                   var formulario = 0;
+                                   var grupo = 0;
+                                   var reuniao = 0;
+                                   var contacto = 0;
+                                   var outro = 0;
+
+                                  for(var i=0; i< result.length; i++){
+
+
+                                      if(result[i].formaComunicacao == 'Telefone'){
+                                    	  telefone ++;
+                                      }else if(result[i].formaComunicacao == 'Formulário'){
+                                    	  formulario ++;
+                                      }else if(result[i].formaComunicacao == 'Reuniões Comunitárias'){
+                                    	  reuniao ++;
+                                      }else if(result[i].formaComunicacao == 'Grupos de Discussão'){
+                                    	  grupo ++;
+                                      }else if(result[i].formaComunicacao == 'Contacto Pessoal'){
+                                    	  contacto ++;
+                                      }else if(result[i].formaComunicacao == 'Outros'){
+                                    	  outro ++;
+                                      }
+
+                                  }
+                                  
+                                  canais  = [telefone,formulario,reuniao,grupo,contacto,outro];
+                	               
+                              
+                	            }
+                	          });  
+                
+                
+                // @formatter:off
+                document.addEventListener("DOMContentLoaded", function () {
+                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-area-spline-stacked'), {
+                		chart: {
+                			type: "area",
+                			fontFamily: 'inherit',
+                			height: 240,
+                			parentHeightOffset: 0,
+                			toolbar: {
+                				show: false,
+                			},
+                			animations: {
+                				enabled: false
+                			},
+                			stacked: true,
+                		},
+                		dataLabels: {
+                			enabled: false,
+                		},
+                		fill: {
+                			opacity: .16,
+                			type: 'solid'
+                		},
+                		stroke: {
+                			width: 2,
+                			lineCap: "round",
+                			curve: "smooth",
+                		},
+                		series: [{
+                			name: "OCORRÊNCIAS POR CANAL",
+                			data: canais
+                		}],
+                		grid: {
+                			padding: {
+                				top: -20,
+                				right: 0,
+                				left: -4,
+                				bottom: -4
+                			},
+                			strokeDashArray: 4,
+                		},
+                		xaxis: {
+                			labels: {
+                				padding: 0,
+                			},
+                			tooltip: {
+                				enabled: false
+                			},
+                			axisBorder: {
+                				show: false,
+                			},
+                			categories: nomes,
+                		},
+                		yaxis: {
+                			labels: {
+                				padding: 4
+                			},
+                		},
+                		colors: ["#206bc4", "#f66d9b"],
+                		legend: {
+                			show: false,
+                		},
+                	})).render();
+                });
+                // @formatter:on
+            }
+            
+            
+      
     </script>
-    </div>
+    
+        </div>
     </div>
     </div>
     </div>

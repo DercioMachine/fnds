@@ -55,10 +55,21 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     @Query(value="select count(*) from ocorrencia where tipo_ocorrencia_id=1 and procedencia='Sim' and resolucao = 'R' and year(created)= :ano", nativeQuery=true)
     public Object totalDeReclamacoesEmResolucao(@Param("ano") int ano);
 
-    @Query(value="select *, count(*) from ocorrencia  group by categoriaid", nativeQuery=true)
-    public List<Ocorrencia> busqueTudoAgrupadoPorCategoria();
+	/*
+	 * @Query(value="select *, count(*) from ocorrencia  group by categoriaid",
+	 * nativeQuery=true) public List<Ocorrencia> busqueTudoAgrupadoPorCategoria();
+	 */
     
-   
+    @Query(value="select * from ocorrencia where estado!='Temporario' and year(created)= :ano", nativeQuery=true)
+    public List<Ocorrencia> buscarOcorrenciasActuais(@Param("ano") int ano);
+    
+	/*
+	 * @Query(
+	 * value="select designacao,  count(*) from ocorrencia, projecto where ocorrencia.projecto_id=projecto.id and year(created)= :ano group by projecto_id"
+	 * , nativeQuery=true) public List<Ocorrencia>
+	 * buscarOcorrenciasporPro(@Param("ano") int ano);
+	 */
+    
     
 	/*
 	 * @Query(value="select date_format(created, '%Y/%m') mes\r\n" +
