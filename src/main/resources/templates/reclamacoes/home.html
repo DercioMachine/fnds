@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+<html lang="pt" layout:decorate="~{layout}" Xmlns:th="http://www.thymeleaf.org"
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 
 <head>
 
-<style type="text/css">
-		.h2{
-		margin-top: 0;
-   		margin-bottom: 0;
-		}
-		
+    <style type="text/css">
+.h2{
+margin-top: 0;
+margin-bottom: 0;
+}
+
 </style>
 
     <meta charset="UTF-8">
-     <link rel="icon" th:href="@{/image/log.png}" />
+    <link rel="icon" th:href="@{/image/log.png}" />
     <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
-    
-    
-    
-<!--     PERCENTAGEM POR OCORRÊNCIAS -->
-   
+
+
+
+    <!-- PERCENTAGEM POR OCORRÊNCIAS -->
+
     <script type="text/javascript">
-    	
-    
-    
+
+
+
     </script>
-    
-<!--     FIM -->
-    
+
+    <!-- FIM -->
+
 </head>
 <body>
-<div  layout:fragment="corpo">
+<div layout:fragment="corpo">
 
 
     <!-- Conteudo -->
@@ -40,1092 +40,917 @@
 
     <script type="text/javascript">
 
+function onChangeSemestre(){
+var estado = document.getElementById("radioSemestre");
 
 
-    </script>
-    
-    
+if(estado.value=="semestre"){
+document.getElementById("semestree").style.display="block";
+
+document.getElementById("trimestree").style.display="none";
+document.getElementById("mess").style.display="none";
+}
+}
+
+function onChangeTrimestre(){
+var estado = document.getElementById("radioTrimestre");
+
+
+if(estado.value=="trimestre"){
+document.getElementById("trimestree").style.display="block";
+
+document.getElementById("semestree").style.display="none";
+document.getElementById("mess").style.display="none";
+}
+}
+
+function onChangeMes(){
+var estado = document.getElementById("radioMes");
+
+
+if(estado.value=="mes"){
+document.getElementById("mess").style.display="block";
+
+document.getElementById("semestree").style.display="none";
+document.getElementById("trimestree").style.display="none";
+}
+}
+
+
+
+</script>
+
+
     <div class="page-body">
-          <div class="container-xl">
+        <div class="container-xl">
             <div class="row row-deck row-cards">
-    
-   		 	<div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="form-group">
-                        <label class="form-label">Ano</label>
-                        <select id="ano" onchange="onChangeStatus()" class="form-control custom-select">
-                            <option value="selecione">selecione</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                        </select>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Ano</label>
+                                <select id="ano" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              
-              
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="form-group">
-                        <label class="form-label">Semestre</label>
-                        <select id="semestre" onchange="onChangeStatus()" class="form-control custom-select">
-                            <option value="selecione">selecione</option>
-                            <option value="1° Semestre">1° Semestre</option>
-                            <option value="2° Semestre">2° Semestre</option>
-                        </select>
+
+                <div class="col-sm-6 col-lg-6">
+
+
+                    <div align="center" style="padding-top: 30px" class="card ">
+                        <div style="padding-top: 8px" class="card-body">
+
+                            <div class="form-check-inline ">
+                                <label class="form-check-label">
+                                    <input onchange="onChangeSemestre()" id="radioSemestre" value="semestre" name="filtro" class="form-check-input check" type="radio" checked> Semestre
+                                </label>
+                            </div>
+
+                            <div style="margin-left: 15%; margin-right: 15%;" class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="filtro" value="trimestre" class="form-check-input"> Trimestre
+                                </label>
+                            </div>
+
+
+
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input onchange="onChangeMes()" id="radioMes" type="radio" value="mes" name="filtro" class="form-check-input" > Mês
+                                </label>
+                            </div>
+
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              
-              
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="form-group">
-                        <label class="form-label">Trimestre</label>
-                        <select id="trimestre" onchange="onChangeStatus()" class="form-control custom-select">
-                            <option value="selecione">selecione</option>
-                            <option value="1° Trimestre">1° Trimestre</option>
-                            <option value="2° Trimestre">2° Trimestre</option>
-                            <option value="3° Trimestre">3° Trimestre</option>
-                            <option value="4° Trimestre">4° Trimestre</option>
-                        </select>
+
+
+                <div id="semestree" class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Semestre</label>
+                                <select id="semestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="1° Semestre">1° Semestre</option>
+                                    <option value="2° Semestre">2° Semestre</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="form-group">
-                        <label class="form-label">Mês</label>
-                        <select id="mes" onchange="onChangeStatus()" class="form-control custom-select">
-                            <option value="selecione">selecione</option>
-                            <option value="Janeiro">Janeiro</option>
-                            <option value="Fevereiro">Fevereiro</option>
-                            <option value="Março">Março</option>
-                            <option value="Abril">Abril</option>
-                            <option value="Maio ">Maio </option>
-                            <option value="Junho">Junho</option>
-                            <option value="Julho">Julho</option>
-                            <option value="Agosto">Agosto</option>
-                            <option value="Setembro">Setembro</option>
-                            <option value="Outubo">Outubo</option>
-                            <option value="Novembro">Novembro</option>
-                            <option value="Dezembro">Dezembro</option>
-                        </select>
+
+
+                <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Trimestre</label>
+                                <select id="trimestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="1° Trimestre">1° Trimestre</option>
+                                    <option value="2° Trimestre">2° Trimestre</option>
+                                    <option value="3° Trimestre">3° Trimestre</option>
+                                    <option value="4° Trimestre">4° Trimestre</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              
-              
-              </div>
+
+                <div style="display: none;" id="mess" class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Mês</label>
+                                <select id="mes" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="Janeiro">Janeiro</option>
+                                    <option value="Fevereiro">Fevereiro</option>
+                                    <option value="Março">Março</option>
+                                    <option value="Abril">Abril</option>
+                                    <option value="Maio ">Maio </option>
+                                    <option value="Junho">Junho</option>
+                                    <option value="Julho">Julho</option>
+                                    <option value="Agosto">Agosto</option>
+                                    <option value="Setembro">Setembro</option>
+                                    <option value="Outubo">Outubo</option>
+                                    <option value="Novembro">Novembro</option>
+                                    <option value="Dezembro">Dezembro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-    
+
+
+            </div>
+        </div>
+    </div>
+
     <div class="page-body">
-          <div class="container-xl">
-            <div class="row row-deck row-cards">
-    
-   		 	<div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Ocorrências</div>
-                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
-                    </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-list-alt"></i></span>
-                      
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Ocorrências Procedentes</div>
-                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
-                    </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-arrow-alt-circle-right"></i></span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Ocorrências Improcedentes</div>
-                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
-                    </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasImprocedentes}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
-                      
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Ocorrências Por Validar</div>
-                      <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                    <!-- <i style="align"  class="fe fe-home h1"></i> -->
-                    </div>
-                    <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasPorValidar}]]</span>
-                    <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0"  ><i class="fas fa-hourglass-half"></i></span>
-                      
-                  </div>
-                </div>
-              </div>
-              
-              
-              
-              </div>
-                </div>
-              </div>
-              
-              
-              
-              
-              
-      <div class="page-body">
-          <div class="container-xl">
-            <div class="row row-deck row-cards">
-            
-            
-            <div class="col-sm-6 col-lg-3">
-                <div style="background:#4299f5;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-archive"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-sm-6 col-lg-3">
-                <div style="background:#EF5350;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Consultas/Sugestões/Denúcias...</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-ban"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesNaoProcedentes}]]</span>
-                  </div>
-                </div>
-              </div>
-              
-            
-    		<div class="col-sm-6 col-lg-3">
-                <div style="background:#66BB6A;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações Resolvidas/Respodindas</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-check"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
-                    
-                  </div>
-                </div>
-              </div>
-              
-              
-              <div class="col-sm-6 col-lg-3">
-                <div style="background:#FFA726;" class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div style="color:rgb(255,255,255);" class="subheader">Reclamações em Andamento</div>
-                    </div>
-                    <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0"  ><i class="fa fa-calendar-alt"></i></span>
-                    <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmResolucao}]]</span>
-                  </div>
-                </div>
-              </div>
-              
-              
-              
-              </div>
-              </div>
-              </div>
-              
-              
-
-     <div class="page-body">
-          <div class="container-xl">
+        <div class="container-xl">
             <div class="row row-deck row-cards">
 
-
-     <canvas id="myChart" width="400" height="400"></canvas>
-     <script>
-
-           Teste();
-
-           function Teste(){
-
-           var ocorrencias = [];
-
-                var legendaestado = [];
-
-                var legendaids = [];
-
-                var total = [];
-
-                var nomess = [];
-
-                var anos = [];
-
-
-                $.ajax({
-                    type: 'GET',
-
-                   url: 'http://localhost:9090/buscarprojectos',
-
-                     success: function (result){
-                     var result = JSON.parse(result);
-                     var s = '';
-                     var idd = '';
-
-                    for(var i=0; i< result.length; i++){
-
-                  	 s+= result[i].designacao+',';
-                  	  idd+= result[i].id+',';
-
-                    }
-
-                    var tirarVirgula = s.slice(0,-1);
-					var tirarVirgulaid = idd.slice(0,-1);
-
-                    legendaestado = tirarVirgula.split(',');
-                   legendaids = tirarVirgulaid.split(',');
-
-                   alert(legendaestado);
-
-     new Chart("myChart", {
-              type: "bar",
-              data: {
-                labels: [legendaestado],
-                datasets: [{
-                  backgroundColor: barColors,
-                  data: total
-                }]
-              },
-              options: {
-                legend: {display: false},
-                title: {
-                  display: true,
-                  text: "World Wine Production 2018"
-                }
-              }
-            });
-
-           }
-
-                  }
-                  });
-
-                $.ajax({
-                	            type: 'GET',
-
-                	           url: 'http://localhost:9090/buscarocorrencias_teste',
-
-                	           success: function (result){
-                	               var result = JSON.parse(result);
-                	               var s = '';
-
-                	               for(var k=0; k<result.length; k++){
-                	            	   s+= result[k].projecto.id+',';
-
-                	               }
-
-                	              // alert(nomeee);
-
-                	               var tirarVirgula = s.slice(0,-1);
-
-                	               ocorrencias = tirarVirgula.split(',');
-
-
-                	              for(var i=0; i< legendaids.length; i++){
-                	            		 var soma = 0;
-
-                	            	 for(var j=0; j< ocorrencias.length; j++){
-                	            		 if(legendaids[i]==ocorrencias[j]){
-                	            			soma++;
-
-
-                	            		 }
-
-                	            	 }
-                	            	 total[i]=soma;
-
-
-                	              }
-
-                	            }
-                	          });
-
-                	          alert(total);
-
-
-
-
-
-
-
-
-  </script>
-
-
-                <canvas id="myChart1" width="400" height="400"></canvas>
-                <script>
-
-           Teste1();
-
-           function Teste1(){
-
-
-
-           var ocorrencias = [];
-
-                var legendaestado = [];
-
-                var legendaids = [];
-
-                var total = [];
-
-                var nomess = [];
-
-                var anos = [];
-
-
-                $.ajax({
-                    type: 'GET',
-
-                   url: 'http://localhost:9090/buscarprojectos',
-
-                     success: function (result){
-                     var result = JSON.parse(result);
-                     var s = '';
-                     var idd = '';
-
-                    for(var i=0; i< result.length; i++){
-
-                  	 s+= result[i].designacao+',';
-                  	  idd+= result[i].id+',';
-
-                    }
-
-                    var tirarVirgula = s.slice(0,-1);
-					var tirarVirgulaid = idd.slice(0,-1);
-
-                    legendaestado = tirarVirgula.split(',');
-                   legendaids = tirarVirgulaid.split(',');
-
-                  }
-                  });
-
-                $.ajax({
-                	            type: 'GET',
-
-                	           url: 'http://localhost:9090/buscarocorrencias_teste',
-
-                	           success: function (result){
-                	               var result = JSON.parse(result);
-                	               var s = '';
-
-                	               for(var k=0; k<result.length; k++){
-                	            	   s+= result[k].projecto.id+',';
-
-                	               }
-
-                	              // alert(nomeee);
-
-                	               var tirarVirgula = s.slice(0,-1);
-
-                	               ocorrencias = tirarVirgula.split(',');
-
-
-                	              for(var i=0; i< legendaids.length; i++){
-                	            		 var soma = 0;
-
-                	            	 for(var j=0; j< ocorrencias.length; j++){
-                	            		 if(legendaids[i]==ocorrencias[j]){
-                	            			soma++;
-
-
-                	            		 }
-
-                	            	 }
-                	            	 total[i]=soma;
-
-
-                	              }
-
-                	            }
-                	          });
-
-                	          alert(total);
-
-
-
-            const ctx = document.getElementById('myChart1').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 2)',
-                            'rgba(54, 162, 235, 2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 2)',
-                            'rgba(153, 102, 255, 2)',
-                            'rgba(255, 159, 64, 2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-
-           }
-
-
-
-  </script>
-
-
-
-
-
-
-
-
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS POR PROJECTO</h3>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências</div>
+                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                                <!-- <i style="align" class="fe fe-home h1"></i> -->
+                            </div>
+                            <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
+                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div id="ocorrencias_project"></div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Procedentes</div>
+                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                                <!-- <i style="align" class="fe fe-home h1"></i> -->
+                            </div>
+                            <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
+                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-arrow-alt-circle-right"></i></span>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Improcedentes</div>
+                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                                <!-- <i style="align" class="fe fe-home h1"></i> -->
+                            </div>
+                            <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasImprocedentes}]]</span>
+                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Por Validar</div>
+                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
+                                <!-- <i style="align" class="fe fe-home h1"></i> -->
+                            </div>
+                            <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasPorValidar}]]</span>
+                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-hourglass-half"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
-
-            <script>
-            projecto();
-            function projecto(){
-            	// @formatter:off
-                
-                
-                var ocorrencias = [];
-
-                var legendaestado = [];
-                
-                var legendaids = [];
-                
-                var total = [];
-                
-                var nomess = [];
-                
-                var anos = [];
-                
-                
-                $.ajax({
-                    type: 'GET',
-
-                   url: 'http://localhost:9090/buscarprojectos',
-
-                     success: function (result){
-                     var result = JSON.parse(result);
-                     var s = '';
-                     var idd = '';
-
-                    for(var i=0; i< result.length; i++){
-
-                  	 s+= result[i].designacao+',';
-                  	  idd+= result[i].id+',';
-                  	  
-                    }
-
-                    var tirarVirgula = s.slice(0,-1);
-					var tirarVirgulaid = idd.slice(0,-1);
-                    
-                    legendaestado = tirarVirgula.split(',');
-                   legendaids = tirarVirgulaid.split(',');
-
-                  }
-                  });      
-
-                $.ajax({
-                	            type: 'GET',
-                	
-                	           url: 'http://localhost:9090/buscarocorrencias_teste',
-                	
-                	           success: function (result){
-                	               var result = JSON.parse(result);
-                	               var s = '';
-                	               
-                	               for(var k=0; k<result.length; k++){
-                	            	   s+= result[k].projecto.id+',';
-                	            	   
-                	               }
-                	               
-                	              // alert(nomeee);
-                	               
-                	               var tirarVirgula = s.slice(0,-1);
-                	               
-                	               ocorrencias = tirarVirgula.split(',');
-                	               
-                	
-                	              for(var i=0; i< legendaids.length; i++){
-                	            		 var soma = 0;
-                	            	  
-                	            	 for(var j=0; j< ocorrencias.length; j++){
-                	            		 if(legendaids[i]==ocorrencias[j]){
-                	            			soma++;
-                	            			
-                	            			
-                	            		 }
-                	            	 	
-                	            	 }
-                	            	 total[i]=soma;
-                	            	 
-                	            	  
-                	              }
-                              
-                	            }
-                	          });  
-                
-                
-                document.addEventListener("DOMContentLoaded", function () {
-                	window.ApexCharts && (new ApexCharts(document.getElementById('ocorrencias_project'), {
-                		chart: {
-                			type: "bar",
-                			fontFamily: 'inherit',
-                			height: 320,
-                			parentHeightOffset: 0,
-                			toolbar: {
-                				show: false,
-                			},
-                			animations: {
-                				enabled: false
-                			},
-                		},
-                		plotOptions: {
-                			bar: {
-                				columnWidth: '50%',
-                			}
-                		},
-                		dataLabels: {
-                			enabled: false,
-                		},
-                		fill: {
-                			opacity: 1,
-                		},
-                		series: [{
-                			name: "OCORRÊNCIAS POR PROJECTO",
-                			data: total
-                		}],
-                		grid: {
-                			padding: {
-                				top: -20,
-                				right: 0,
-                				left: -4,
-                				bottom: -4
-                			},
-                			strokeDashArray: 4,
-                		},
-                		xaxis: {
-                			labels: {
-                				padding: 0,
-                			},
-                			tooltip: {
-                				enabled: false
-                			},
-                			axisBorder: {
-                				show: false,
-                			},
-                			categories: legendaestado,
-                		},
-                		yaxis: {
-                			labels: {
-                				padding: 4
-                			},
-                		},
-                		colors: ["#66BB6A"],
-                		legend: {
-                			show: false,
-                		},
-                	})).render();
-                });
-                // @formatter:on
-            }
-            
-            
-      
-    </script>
-    
         </div>
-        
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS POR CATEGORIA</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-combination"></div>
-                </div>
-            </div>
-
-            <script>
-            ococatega();
-            function ococatega(){
-            	// @formatter:off
-                
-                
-                var ocorrencias = [];
-
-                var legendaestado = [];
-                
-                var legendaids = [];
-                
-                var total = [];
-                
-                var nomess = [];
-                
-                var anos = [];
-                
-                
-                $.ajax({
-                    type: 'GET',
-
-                   url: 'http://localhost:9090/buscarcategorias',
-
-                     success: function (result){
-                     var result = JSON.parse(result);
-                     var s = '';
-                     var idd = '';
-
-                    for(var i=0; i< result.length; i++){
-
-                  	 s+= result[i].designacao+',';
-                  	  idd+= result[i].id+',';
-                  	  
-                    }
-
-                    var tirarVirgula = s.slice(0,-1);
-					var tirarVirgulaid = idd.slice(0,-1);
-                    
-                    legendaestado = tirarVirgula.split(',');
-                   legendaids = tirarVirgulaid.split(',');
-
-                  }
-                  });      
-
-                $.ajax({
-                	            type: 'GET',
-                	
-                	           url: 'http://localhost:9090/apiocorrencias',
-                	
-                	           success: function (result){
-                	               var result = JSON.parse(result);
-                	               var s = '';
-                	               
-                	               for(var k=0; k<result.length; k++){
-                	            	   s+= result[k].categoria.id+',';
-                	            	   
-                	               }
-                	               
-                	              // alert(nomeee);
-                	               
-                	               var tirarVirgula = s.slice(0,-1);
-                	               
-                	               ocorrencias = tirarVirgula.split(',');
-                	               
-                	
-                	              for(var i=0; i< legendaids.length; i++){
-                	            		 var soma = 0;
-                	            	  
-                	            	 for(var j=0; j< ocorrencias.length; j++){
-                	            		 if(legendaids[i]==ocorrencias[j]){
-                	            			soma++;
-                	            			
-                	            			
-                	            		 }
-                	            	 	
-                	            	 }
-                	            	 total[i]=soma;
-                	            	 
-                	            	  
-                	              }
-                              
-                	            }
-                	          });  
-                
-                
-                // @formatter:off
-                document.addEventListener("DOMContentLoaded", function () {
-                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
-                		chart: {
-                			type: "bar",
-                			fontFamily: 'inherit',
-                			height: 320,
-                			parentHeightOffset: 0,
-                			toolbar: {
-                				show: false,
-                			},
-                			animations: {
-                				enabled: false
-                			},
-                		},
-                		plotOptions: {
-                			bar: {
-                				columnWidth: '50%',
-                			}
-                		},
-                		dataLabels: {
-                			enabled: false,
-                		},
-                		fill: {
-                			opacity: 1,
-                		},
-                		series: [{
-                			name: "OCORRÊNCIAS POR CATEGORIA",
-                			data: total
-                		}],
-                		grid: {
-                			padding: {
-                				top: -20,
-                				right: 0,
-                				left: -4,
-                				bottom: -4
-                			},
-                			strokeDashArray: 4,
-                		},
-                		xaxis: {
-                			labels: {
-                				padding: 0,
-                			},
-                			tooltip: {
-                				enabled: false
-                			},
-                			axisBorder: {
-                				show: false,
-                			},
-                			categories: legendaestado,
-                		},
-                		yaxis: {
-                			labels: {
-                				padding: 4
-                			},
-                		},
-                		colors: ["#4299f5"],
-                		legend: {
-                			show: false,
-                		},
-                	})).render();
-                });
-                // @formatter:on
-            }
-            
-            
-      
-    </script>
-    
-        </div>
-        
-        
-        
-        <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS POR CIDADE</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-tasks"></div>
-                </div>
-            </div>
-
-            <script>
-            cidade();
-            function cidade(){
-            	var ocorrencias = [];
-
-                var legendaestado = [];
-                
-                var legendaids = [];
-                
-                var total = [];
-                
-                var nomess = [];
-                
-                var anos = [];
-                
-
-                $.ajax({
-                    type: 'GET',
-
-                   url: 'http://localhost:9090/apicidades',
-
-                     success: function (result){
-                     var result = JSON.parse(result);
-                     var s = '';
-                     var idd = '';
-
-                    for(var i=0; i< result.length; i++){
-
-                  	 s+= result[i].designacao+',';
-                  	  idd+= result[i].id+',';
-                  	  
-                    }
-
-                    var tirarVirgula = s.slice(0,-1);
-					var tirarVirgulaid = idd.slice(0,-1);
-                    
-                    legendaestado = tirarVirgula.split(',');
-                   legendaids = tirarVirgulaid.split(',');
-
-                  }
-                  });      
-
-                $.ajax({
-                	            type: 'GET',
-                	
-                	           url: 'http://localhost:9090/apiocorrenciascidades',
-                	
-                	           success: function (result){
-                	               var result = JSON.parse(result);
-                	               var s = '';
-                	               
-                	               for(var k=0; k<result.length; k++){
-                	            	   s+= result[k].cidade.id+',';
-                	            	   
-                	               }
-                	               
-                	              // alert(nomeee);
-                	               
-                	               var tirarVirgula = s.slice(0,-1);
-                	               
-                	               ocorrencias = tirarVirgula.split(',');
-                	               
-                	
-                	              for(var i=0; i< legendaids.length; i++){
-                	            		 var soma = 0;
-                	            	  
-                	            	 for(var j=0; j< ocorrencias.length; j++){
-                	            		 if(legendaids[i]==ocorrencias[j]){
-                	            			soma++;
-                	            			
-                	            			
-                	            		 }
-                	            	 	
-                	            	 }
-                	            	 total[i]=soma;
-                	            	 
-                	            	  
-                	              }
-                              
-                	            }
-                	          });  
-                
-                
-                document.addEventListener("DOMContentLoaded", function () {
-                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks'), {
-                		chart: {
-                			type: "bar",
-                			fontFamily: 'inherit',
-                			height: 320,
-                			parentHeightOffset: 0,
-                			toolbar: {
-                				show: false,
-                			},
-                			animations: {
-                				enabled: false
-                			},
-                		},
-                		plotOptions: {
-                			bar: {
-                				columnWidth: '50%',
-                			}
-                		},
-                		dataLabels: {
-                			enabled: false,
-                		},
-                		fill: {
-                			opacity: 1,
-                		},
-                		series: [{
-                			name: "A",
-                			data: total
-                		}],
-                		grid: {
-                			padding: {
-                				top: -20,
-                				right: 0,
-                				left: -4,
-                				bottom: -4
-                			},
-                			strokeDashArray: 4,
-                		},
-                		xaxis: {
-                			labels: {
-                				padding: 0,
-                			},
-                			tooltip: {
-                				enabled: false
-                			},
-                			axisBorder: {
-                				show: false,
-                			},
-                			categories: legendaestado,
-                		},
-                		yaxis: {
-                			labels: {
-                				padding: 4
-                			},
-                		},
-                		colors: ["#206bc4"],
-                		legend: {
-                			show: false,
-                		},
-                	})).render();
-                });
-                // @formatter:on
-            }
-            
-            
-      
-    </script>
-    
-        </div>
-        
-
-        <div class="col-lg-6 col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">PERCENTAGEM POR OCORRÊNCIAS</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-demo-pie" style="height: 16rem"></div>
-                </div>
-            </div>
-
-          <script th:inline="javascript">
-      // @formatter:off
-      var legendaestado = ['Resolvidas', 'Pendentes', 'Em andamento', 'outro', 'Ocorrências', 'Ocorrências Procedentes'];
-          
-      var totalDeReclamacoesProcedentes = /*[[${totalDeReclamacoesProcedentes}]]*/"";
-      var totalDeReclamacoesTerminadas = /*[[${totalDeReclamacoesTerminadas}]]*/"";
-      var totalDeReclamacoesEmResolucao = /*[[${totalDeReclamacoesEmResolucao}]]*/"";
-      var totalDeReclamacoesNaoProcedentes = /*[[${totalDeReclamacoesNaoProcedentes}]]*/"";
-      
-      var totalOcorrencias = /*[[${totalOcorrencias}]]*/"";
-      var totalDeOcorrenciasProcedentes = /*[[${totalDeOcorrenciasProcedentes}]]*/"";
-      
-      var reclamacoes = [totalDeReclamacoesProcedentes, totalDeReclamacoesTerminadas, totalDeReclamacoesEmResolucao, totalDeReclamacoesNaoProcedentes, totalOcorrencias, totalDeOcorrenciasProcedentes];
-      
-      var options = {
-  	          pieHole: 0.4,
-  	        };
-
-      
-      document.addEventListener("DOMContentLoaded", function () {
-      	
-    	  window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: reclamacoes,
-      		labels: legendaestado,
-      		
-      		
-      		
-      		grid: {
-      			strokeDashArray: 3,
-      		},
-      		colors: ["#66BB6A", "#EF5350", "#FFA726", "#4299f5"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-
-        </div>
-    
-    
-    
     </div>
-    </div>
-    </div>
-    
-     
-<div class="page-body">
-          <div class="container-xl">
+
+
+
+
+
+    <div class="page-body">
+        <div class="container-xl">
             <div class="row row-deck row-cards">
 
 
-      
+                <div class="col-sm-6 col-lg-3">
+                    <div style="background:#4299f5;" class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
+                            </div>
+                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-archive"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div style="background:#EF5350;" class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Consultas/Sugestões/Denúcias...</div>
+                            </div>
+                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesNaoProcedentes}]]</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6 col-lg-3">
+                    <div style="background:#66BB6A;" class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Reclamações Resolvidas/Respodindas</div>
+                            </div>
+                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-check"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6 col-lg-3">
+                    <div style="background:#FFA726;" class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Reclamações em Andamento</div>
+                            </div>
+                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmResolucao}]]</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Projecto</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="ocorrencias_project"></div>
+                        </div>
+                    </div>
+
+                    <script>
+projecto();
+function projecto(){
+// @formatter:off
+
+
+var ocorrencias = [];
+
+var legendaestado = [];
+
+var legendaids = [];
+
+var total = [];
+
+var nomess = [];
+
+var anos = [];
+
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/buscarprojectos',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var idd = '';
+
+for(var i=0; i< result.length; i++){
+
+s+= result[i].designacao+',';
+idd+= result[i].id+',';
+
+}
+
+var tirarVirgula = s.slice(0,-1);
+var tirarVirgulaid = idd.slice(0,-1);
+
+legendaestado = tirarVirgula.split(',');
+legendaids = tirarVirgulaid.split(',');
+
+}
+});
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/buscarocorrencias_teste',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+
+for(var k=0; k<result.length; k++){
+s+= result[k].projecto.id+',';
+
+}
+
+// alert(nomeee);
+
+var tirarVirgula = s.slice(0,-1);
+
+ocorrencias = tirarVirgula.split(',');
+
+
+for(var i=0; i< legendaids.length; i++){
+var soma = 0;
+
+for(var j=0; j< ocorrencias.length; j++){
+if(legendaids[i]==ocorrencias[j]){
+soma++;
+
+
+}
+
+}
+total[i]=soma;
+
+
+}
+
+}
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+window.ApexCharts && (new ApexCharts(document.getElementById('ocorrencias_project'), {
+chart: {
+type: "bar",
+fontFamily: 'inherit',
+height: 320,
+parentHeightOffset: 0,
+toolbar: {
+show: false,
+},
+animations: {
+enabled: false
+},
+},
+plotOptions: {
+bar: {
+columnWidth: '50%',
+}
+},
+dataLabels: {
+enabled: false,
+},
+fill: {
+opacity: 1,
+},
+series: [{
+name: "OCORRÊNCIAS POR PROJECTO",
+data: total
+}],
+grid: {
+padding: {
+top: -20,
+right: 0,
+left: -4,
+bottom: -4
+},
+strokeDashArray: 4,
+},
+xaxis: {
+labels: {
+padding: 0,
+},
+tooltip: {
+enabled: false
+},
+axisBorder: {
+show: false,
+},
+categories: legendaestado,
+},
+yaxis: {
+labels: {
+padding: 4
+},
+},
+colors: ["#66BB6A"],
+legend: {
+show: false,
+},
+})).render();
+});
+// @formatter:on
+}
+//x
+
+
+</script>
+
+                </div>
+
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 style="text-transform: capitalize; font-size: 12px;" class="card-title" >Ocorrências por Categoria</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-combination"></div>
+                        </div>
+
+                    </div>
+
+                    <script>
+ococatega();
+function ococatega(){
+// @formatter:off
+
+
+var ocorrencias = [];
+
+var legendaestado = [];
+
+var legendaids = [];
+
+var total = [];
+
+var nomess = [];
+
+var anos = [];
+
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/buscarcategorias',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var idd = '';
+
+for(var i=0; i< result.length; i++){
+
+s+= result[i].designacao+',';
+idd+= result[i].id+',';
+
+}
+
+var tirarVirgula = s.slice(0,-1);
+var tirarVirgulaid = idd.slice(0,-1);
+
+legendaestado = tirarVirgula.split(',');
+legendaids = tirarVirgulaid.split(',');
+
+}
+});
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/apiocorrencias',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+
+for(var k=0; k<result.length; k++){
+s+= result[k].categoria.id+',';
+
+}
+
+// alert(nomeee);
+
+var tirarVirgula = s.slice(0,-1);
+
+ocorrencias = tirarVirgula.split(',');
+
+
+for(var i=0; i< legendaids.length; i++){
+var soma = 0;
+
+for(var j=0; j< ocorrencias.length; j++){
+if(legendaids[i]==ocorrencias[j]){
+soma++;
+
+
+}
+
+}
+total[i]=soma;
+
+
+}
+
+}
+});
+
+
+// @formatter:off
+document.addEventListener("DOMContentLoaded", function () {
+window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
+chart: {
+type: "bar",
+fontFamily: 'inherit',
+height: 320,
+parentHeightOffset: 0,
+toolbar: {
+show: false,
+},
+animations: {
+enabled: false
+},
+},
+plotOptions: {
+bar: {
+columnWidth: '50%',
+}
+},
+dataLabels: {
+enabled: false,
+},
+fill: {
+opacity: 1,
+},
+series: [{
+name: "OCORRÊNCIAS POR CATEGORIA",
+data: total
+}],
+grid: {
+padding: {
+top: -20,
+right: 0,
+left: -4,
+bottom: -4
+},
+strokeDashArray: 4,
+},
+xaxis: {
+labels: {
+padding: 0,
+},
+tooltip: {
+enabled: false
+},
+axisBorder: {
+show: false,
+},
+categories: legendaestado,
+},
+yaxis: {
+labels: {
+padding: 4
+},
+},
+colors: ["#FFA726"],
+legend: {
+show: false,
+},
+})).render();
+});
+// @formatter:on
+}
+
+
+
+</script>
+
+                </div>
+
+
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Ocorrências por Cidade</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-tasks"></div>
+                        </div>
+                    </div>
+
+                    <script>
+cidade();
+function cidade(){
+var ocorrencias = [];
+
+var legendaestado = [];
+
+var legendaids = [];
+
+var total = [];
+
+var nomess = [];
+
+var anos = [];
+
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/apicidades',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var idd = '';
+
+for(var i=0; i< result.length; i++){
+
+s+= result[i].designacao+',';
+idd+= result[i].id+',';
+
+}
+
+var tirarVirgula = s.slice(0,-1);
+var tirarVirgulaid = idd.slice(0,-1);
+
+legendaestado = tirarVirgula.split(',');
+legendaids = tirarVirgulaid.split(',');
+
+}
+});
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/apiocorrenciascidades',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+
+for(var k=0; k<result.length; k++){
+s+= result[k].cidade.id+',';
+
+}
+
+// alert(nomeee);
+
+var tirarVirgula = s.slice(0,-1);
+
+ocorrencias = tirarVirgula.split(',');
+
+
+for(var i=0; i< legendaids.length; i++){
+var soma = 0;
+
+for(var j=0; j< ocorrencias.length; j++){
+if(legendaids[i]==ocorrencias[j]){
+soma++;
+
+
+}
+
+}
+total[i]=soma;
+
+
+}
+
+}
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks'), {
+chart: {
+type: "bar",
+fontFamily: 'inherit',
+height: 320,
+parentHeightOffset: 0,
+toolbar: {
+show: false,
+},
+animations: {
+enabled: false
+},
+},
+plotOptions: {
+bar: {
+columnWidth: '50%',
+}
+},
+dataLabels: {
+enabled: false,
+},
+fill: {
+opacity: 1,
+},
+series: [{
+name: "A",
+data: total
+}],
+grid: {
+padding: {
+top: -20,
+right: 0,
+left: -4,
+bottom: -4
+},
+strokeDashArray: 4,
+},
+xaxis: {
+labels: {
+padding: 0,
+},
+tooltip: {
+enabled: false
+},
+axisBorder: {
+show: false,
+},
+categories: legendaestado,
+},
+yaxis: {
+labels: {
+padding: 4
+},
+},
+colors: ["#206bc4"],
+legend: {
+show: false,
+},
+})).render();
+});
+// @formatter:on
+}
+
+
+
+</script>
+
+                </div>
+
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Ocorrências Por Processo</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="processo" style="height: 16rem"></div>
+                        </div>
+                    </div>
+
+                    <script>
+
+processo();
+
+function processo(){
+var processos = [];
+
+var nomes = ["Geral","Laboral", "SEA/SH/GBV"];
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/apiocorrenciasprocessos',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var Geral = 0;
+var Laboral = 0;
+var SEASHGBV = 0;
+
+for(var i=0; i< result.length; i++){
+
+
+if(result[i].tipoorigem.processo == 'Geral'){
+Geral ++;
+}else if(result[i].tipoorigem.processo == 'Laboral'){
+Laboral ++;
+}else if(result[i].tipoorigem.processo == 'SEA/SH/GBV'){
+SEASHGBV ++;
+}
+
+}
+
+processos = [Geral, Laboral, SEASHGBV];
+
+}
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+window.ApexCharts && (new ApexCharts(document.getElementById('processo'), {
+
+
+chart: {
+type: "donut",
+fontFamily: 'inherit',
+height: 240,
+sparkline: {
+enabled: true
+},
+animations: {
+enabled: false
+},
+},
+fill: {
+opacity: 1,
+},
+series: processos,
+labels: nomes,
+grid: {
+strokeDashArray: 5,
+},
+colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
+legend: {
+show: true,
+position: 'bottom',
+offsetY: 12,
+markers: {
+width: 10,
+height: 10,
+radius: 100,
+},
+itemMargin: {
+horizontal: 8,
+vertical: 8
+},
+},
+tooltip: {
+fillSeriesColor: false
+},
+})).render();
+});
+}
+</script>
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+
+
 
 
 
@@ -1133,7 +958,7 @@
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">INTERNO/EXTERNO</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Interno/Externo</h3>
                         </div>
                         <div class="card-body">
                             <div id="interno_externo" style="height: 16rem"></div>
@@ -1141,105 +966,105 @@
                     </div>
 
                     <script>
-                    
-                    entidad();
-                    
-                    function entidad(){
-                    	var interno_externos = [];
 
-                        var nomes = ["Interno","Externo"];
+entidad();
 
-                   $.ajax({
-                      type: 'GET',
+function entidad(){
+var interno_externos = [];
 
-                     url: 'http://localhost:9090/buscarocorrencias',
+var nomes = ["Interno","Externo"];
 
-                       success: function (result){
-                       var result = JSON.parse(result);
-                       var s = '';
-                       var interno = 0;
-                       var externo = 0;
+$.ajax({
+type: 'GET',
 
-                      for(var i=0; i< result.length; i++){
+url: 'http://portal.fipag.co.mz/grm/buscarocorrencias',
 
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var interno = 0;
+var externo = 0;
 
-                          if(result[i].internoExterno == 'Interno'){
-                            interno ++;
-                          }else{
-                            externo ++;
-                          }
-
-                      }
-
-                    interno_externos = [interno, externo];
+for(var i=0; i< result.length; i++){
 
 
-                      var tirarVirgula = s.slice(0,-1);
+if(result[i].internoExterno == 'Interno'){
+interno ++;
+}else{
+externo ++;
+}
 
-                      legendaestado = tirarVirgula.split(',');
+}
 
-
-                   }
-                });
-
-
-                  document.addEventListener("DOMContentLoaded", function () {
-
-                        window.ApexCharts && (new ApexCharts(document.getElementById('interno_externo'), {
+interno_externos = [interno, externo];
 
 
-                  		chart: {
-                  			type: "donut",
-                  			fontFamily: 'inherit',
-                  			height: 240,
-                  			sparkline: {
-                  				enabled: true
-                  			},
-                  			animations: {
-                  				enabled: false
-                  			},
-                  		},
-                  		fill: {
-                  			opacity: 1,
-                  		},
-                  		series: interno_externos,
-                  		labels: nomes,
-                  		grid: {
-                  			strokeDashArray: 5,
-                  		},
-                  		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
-                  		legend: {
-                  			show: true,
-                  			position: 'bottom',
-                  			offsetY: 12,
-                  			markers: {
-                  				width: 10,
-                  				height: 10,
-                  				radius: 100,
-                  			},
-                  			itemMargin: {
-                  				horizontal: 8,
-                  				vertical: 8
-                  			},
-                  		},
-                  		tooltip: {
-                  			fillSeriesColor: false
-                  		},
-                  	})).render();
-                  });
-                    }
-    </script>
+var tirarVirgula = s.slice(0,-1);
+
+legendaestado = tirarVirgula.split(',');
+
+
+}
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+window.ApexCharts && (new ApexCharts(document.getElementById('interno_externo'), {
+
+
+chart: {
+type: "donut",
+fontFamily: 'inherit',
+height: 240,
+sparkline: {
+enabled: true
+},
+animations: {
+enabled: false
+},
+},
+fill: {
+opacity: 1,
+},
+series: interno_externos,
+labels: nomes,
+grid: {
+strokeDashArray: 5,
+},
+colors: ["#66BB6A", "#EF5350", "#e9ecf1"],
+legend: {
+show: true,
+position: 'bottom',
+offsetY: 12,
+markers: {
+width: 10,
+height: 10,
+radius: 100,
+},
+itemMargin: {
+horizontal: 8,
+vertical: 8
+},
+},
+tooltip: {
+fillSeriesColor: false
+},
+})).render();
+});
+}
+</script>
 
 
 
                 </div>
-        
-        
-        
-        <div class="col-lg-6 col-xl-6">
+
+
+
+                <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">ENTIDADE</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Entidade</h3>
                         </div>
                         <div class="card-body">
                             <div id="entidade" style="height: 16rem"></div>
@@ -1247,339 +1072,339 @@
                     </div>
 
                     <script>
-                    
-                    entidade();
-                    
-                    function entidade(){
-                    	var entidades = [];
 
-                        var nomes = ["Projecto","Operação"];
+entidade();
 
-                   $.ajax({
-                      type: 'GET',
+function entidade(){
+var entidades = [];
 
-                     url: 'http://localhost:9090/buscarocoent',
+var nomes = ["Projecto","Operação"];
 
-                       success: function (result){
-                       var result = JSON.parse(result);
-                       var s = '';
-                       var projecto = 0;
-                       var operacao = 0;
+$.ajax({
+type: 'GET',
 
-                      for(var i=0; i< result.length; i++){
+url: 'http://portal.fipag.co.mz/grm/buscarocoent',
 
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var projecto = 0;
+var operacao = 0;
 
-                          if(result[i].projectoOperacao == 'projecto'){
-                        	  projecto ++;
-                          }else{
-                        	  operacao ++;
-                          }
-
-                      }
-
-                      entidades = [projecto, operacao];
+for(var i=0; i< result.length; i++){
 
 
-                      var tirarVirgula = s.slice(0,-1);
+if(result[i].projectoOperacao == 'projecto'){
+projecto ++;
+}else{
+operacao ++;
+}
 
-                      legendaestado = tirarVirgula.split(',');
+}
 
-
-                   }
-                });
-
-
-                  document.addEventListener("DOMContentLoaded", function () {
-
-                        window.ApexCharts && (new ApexCharts(document.getElementById('entidade'), {
+entidades = [projecto, operacao];
 
 
-                  		chart: {
-                  			type: "donut",
-                  			fontFamily: 'inherit',
-                  			height: 240,
-                  			sparkline: {
-                  				enabled: true
-                  			},
-                  			animations: {
-                  				enabled: false
-                  			},
-                  		},
-                  		fill: {
-                  			opacity: 1,
-                  		},
-                  		series: entidades,
-                  		labels: nomes,
-                  		grid: {
-                  			strokeDashArray: 5,
-                  		},
-                  		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
-                  		legend: {
-                  			show: true,
-                  			position: 'bottom',
-                  			offsetY: 12,
-                  			markers: {
-                  				width: 10,
-                  				height: 10,
-                  				radius: 100,
-                  			},
-                  			itemMargin: {
-                  				horizontal: 8,
-                  				vertical: 8
-                  			},
-                  		},
-                  		tooltip: {
-                  			fillSeriesColor: false
-                  		},
-                  	})).render();
-                  });
-                    }
-    </script>
+var tirarVirgula = s.slice(0,-1);
+
+legendaestado = tirarVirgula.split(',');
+
+
+}
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+window.ApexCharts && (new ApexCharts(document.getElementById('entidade'), {
+
+
+chart: {
+type: "donut",
+fontFamily: 'inherit',
+height: 240,
+sparkline: {
+enabled: true
+},
+animations: {
+enabled: false
+},
+},
+fill: {
+opacity: 1,
+},
+series: entidades,
+labels: nomes,
+grid: {
+strokeDashArray: 5,
+},
+colors: ["#d698d6", "#873e23"],
+legend: {
+show: true,
+position: 'bottom',
+offsetY: 12,
+markers: {
+width: 10,
+height: 10,
+radius: 100,
+},
+itemMargin: {
+horizontal: 8,
+vertical: 8
+},
+},
+tooltip: {
+fillSeriesColor: false
+},
+})).render();
+});
+}
+</script>
 
 
 
-                </div>
-    </div>
-    
-    </div>
-    </div>
-    
-    
-    
-    
-    
-    <div class="page-body">
-          <div class="container-xl">
-            <div class="row row-deck row-cards">
-    
-    <div class="col-lg-12 col-xl-12">
-            <div class="card">
-                <div  class="card-header">
-                    <h3 class="card-title">OCORRÊNCIAS POR CANAL DE ENTRADA</h3>
-                </div>
-                <div class="card-body">
-                    <div id="chart-area-spline-stacked"></div>
                 </div>
             </div>
 
-            <script>
-            formacomu();
-            function formacomu(){
-            	// @formatter:off
-                
-                
-               var canais = [];
-
-               var nomes = ["Telefone","Formulário ", "Reuniões Comunitárias", "Grupos de Discussão", "Contacto Pessoal", "Outros"];
-                
-                
-
-                $.ajax({
-                	            type: 'GET',
-                	
-                	           url: 'http://localhost:9090/buscarocorrenciasforma',
-                	
-                	           success: function (result){
-                                   var result = JSON.parse(result);
-                                   var s = '';
-                                   var telefone = 0;
-                                   var formulario = 0;
-                                   var grupo = 0;
-                                   var reuniao = 0;
-                                   var contacto = 0;
-                                   var outro = 0;
-
-                                  for(var i=0; i< result.length; i++){
-
-
-                                      if(result[i].formaComunicacao == 'Telefone'){
-                                    	  telefone ++;
-                                      }else if(result[i].formaComunicacao == 'Formulário'){
-                                    	  formulario ++;
-                                      }else if(result[i].formaComunicacao == 'Reuniões Comunitárias'){
-                                    	  reuniao ++;
-                                      }else if(result[i].formaComunicacao == 'Grupos de Discussão'){
-                                    	  grupo ++;
-                                      }else if(result[i].formaComunicacao == 'Contacto Pessoal'){
-                                    	  contacto ++;
-                                      }else if(result[i].formaComunicacao == 'Outros'){
-                                    	  outro ++;
-                                      }
-
-                                  }
-                                  
-                                  canais  = [telefone,formulario,reuniao,grupo,contacto,outro];
-                	               
-                              
-                	            }
-                	          });  
-                
-                
-                // @formatter:off
-                document.addEventListener("DOMContentLoaded", function () {
-                	window.ApexCharts && (new ApexCharts(document.getElementById('chart-area-spline-stacked'), {
-                		chart: {
-                			type: "area",
-                			fontFamily: 'inherit',
-                			height: 240,
-                			parentHeightOffset: 0,
-                			toolbar: {
-                				show: false,
-                			},
-                			animations: {
-                				enabled: false
-                			},
-                			stacked: true,
-                		},
-                		dataLabels: {
-                			enabled: false,
-                		},
-                		fill: {
-                			opacity: .16,
-                			type: 'solid'
-                		},
-                		stroke: {
-                			width: 2,
-                			lineCap: "round",
-                			curve: "smooth",
-                		},
-                		series: [{
-                			name: "OCORRÊNCIAS POR CANAL",
-                			data: canais
-                		}],
-                		grid: {
-                			padding: {
-                				top: -20,
-                				right: 0,
-                				left: -4,
-                				bottom: -4
-                			},
-                			strokeDashArray: 4,
-                		},
-                		xaxis: {
-                			labels: {
-                				padding: 0,
-                			},
-                			tooltip: {
-                				enabled: false
-                			},
-                			axisBorder: {
-                				show: false,
-                			},
-                			categories: nomes,
-                		},
-                		yaxis: {
-                			labels: {
-                				padding: 4
-                			},
-                		},
-                		colors: ["#206bc4", "#f66d9b"],
-                		legend: {
-                			show: false,
-                		},
-                	})).render();
-                });
-                // @formatter:on
-            }
-            
-            
-      
-    </script>
-    
         </div>
     </div>
-    </div>
-    </div>
-    
-    
-    
-    
-    		<!-- <div class="col-lg-12">
-                <div class="card">
-                  <div style="background:#E6FFFE;" class="card-header border-0">
-                    <div style="font-weight: bolder" class="card-title">MINHAS RECLAMAÇÕES EM ABERTO</div>
-                  </div>
-                  <div class="card-table table-responsive">
-                    <table class="table table-vcenter">
-                      <thead>
-                        <tr>
-                          <th>-</th>
-                          <th>Área operacional</th>
-                          <th>Data</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="w-1">
-                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
-                          </td>
-                          <td class="td-truncate">
-                            <div class="text-truncate">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                          </td>
-                          <td class="text-nowrap text-muted">28 Nov 2019</td>
-                        </tr>
-                        <tr>
-                          <td class="w-1">
-                            <span class="avatar avatar-sm">JL</span>
-                          </td>
-                          <td class="td-truncate">
-                            <div class="text-truncate">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                          </td>
-                          <td class="text-nowrap text-muted">27 Nov 2019</td>
-                        </tr>
-                        <tr>
-                          <td class="w-1">
-                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/002m.jpg)"></span>
-                          </td>
-                          <td class="td-truncate">
-                            <div class="text-truncate">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                          </td>
-                          <td class="text-nowrap text-muted">26 Nov 2019</td>
-                        </tr>
-                        <tr>
-                          <td class="w-1">
-                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/003m.jpg)"></span>
-                          </td>
-                          <td class="td-truncate">
-                            <div class="text-truncate">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                          </td>
-                          <td class="text-nowrap text-muted">26 Nov 2019</td>
-                        </tr>
-                        <tr>
-                          <td class="w-1">
-                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000f.jpg)"></span>
-                          </td>
-                          <td class="td-truncate">
-                            <div class="text-truncate">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                          </td>
-                          <td class="text-nowrap text-muted">25 Nov 2019</td>
-                        </tr>
-                        <tr>
-                          <td class="w-1">
-                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/001f.jpg)"></span>
-                          </td>
-                          <td class="td-truncate">
-                            <div class="text-truncate">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </div>
-                          </td>
-                          <td class="text-nowrap text-muted">24 Nov 2019</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+
+
+
+
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-lg-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Ocorrências por Canal de Entrada</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-area-spline-stacked"></div>
+                        </div>
+                    </div>
+
+                    <script>
+formacomu();
+function formacomu(){
+// @formatter:off
+
+
+var canais = [];
+
+var nomes = ["Telefone","Formulário ", "Reuniões Comunitárias", "Grupos de Discussão", "Contacto Pessoal", "Outros"];
+
+
+
+$.ajax({
+type: 'GET',
+
+url: 'http://portal.fipag.co.mz/grm/buscarocorrenciasforma',
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+var telefone = 0;
+var formulario = 0;
+var grupo = 0;
+var reuniao = 0;
+var contacto = 0;
+var outro = 0;
+
+for(var i=0; i< result.length; i++){
+
+
+if(result[i].formaComunicacao == 'Telefone'){
+telefone ++;
+}else if(result[i].formaComunicacao == 'Formulário'){
+formulario ++;
+}else if(result[i].formaComunicacao == 'Reuniões Comunitárias'){
+reuniao ++;
+}else if(result[i].formaComunicacao == 'Grupos de Discussão'){
+grupo ++;
+}else if(result[i].formaComunicacao == 'Contacto Pessoal'){
+contacto ++;
+}else if(result[i].formaComunicacao == 'Outros'){
+outro ++;
+}
+
+}
+
+canais = [telefone,formulario,reuniao,grupo,contacto,outro];
+
+
+}
+});
+
+
+// @formatter:off
+document.addEventListener("DOMContentLoaded", function () {
+window.ApexCharts && (new ApexCharts(document.getElementById('chart-area-spline-stacked'), {
+chart: {
+type: "area",
+fontFamily: 'inherit',
+height: 240,
+parentHeightOffset: 0,
+toolbar: {
+show: false,
+},
+animations: {
+enabled: false
+},
+stacked: true,
+},
+dataLabels: {
+enabled: false,
+},
+fill: {
+opacity: .16,
+type: 'solid'
+},
+stroke: {
+width: 2,
+lineCap: "round",
+curve: "smooth",
+},
+series: [{
+name: "OCORRÊNCIAS POR CANAL",
+data: canais
+}],
+grid: {
+padding: {
+top: -20,
+right: 0,
+left: -4,
+bottom: -4
+},
+strokeDashArray: 4,
+},
+xaxis: {
+labels: {
+padding: 0,
+},
+tooltip: {
+enabled: false
+},
+axisBorder: {
+show: false,
+},
+categories: nomes,
+},
+yaxis: {
+labels: {
+padding: 4
+},
+},
+colors: ["#206bc4", "#f66d9b"],
+legend: {
+show: false,
+},
+})).render();
+});
+// @formatter:on
+}
+
+
+
+</script>
+
                 </div>
-              </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- <div class="col-lg-12">
+    <div class="card">
+    <div style="background:#E6FFFE;" class="card-header border-0">
+    <div style="font-weight: bolder" class="card-title">MINHAS RECLAMAÇÕES EM ABERTO</div>
+    </div>
+    <div class="card-table table-responsive">
+    <table class="table table-vcenter">
+    <thead>
+    <tr>
+    <th>-</th>
+    <th>Área operacional</th>
+    <th>Data</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td class="w-1">
+    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+    </td>
+    <td class="td-truncate">
+    <div class="text-truncate">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    </td>
+    <td class="text-nowrap text-muted">28 Nov 2019</td>
+    </tr>
+    <tr>
+    <td class="w-1">
+    <span class="avatar avatar-sm">JL</span>
+    </td>
+    <td class="td-truncate">
+    <div class="text-truncate">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    </td>
+    <td class="text-nowrap text-muted">27 Nov 2019</td>
+    </tr>
+    <tr>
+    <td class="w-1">
+    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/002m.jpg)"></span>
+    </td>
+    <td class="td-truncate">
+    <div class="text-truncate">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    </td>
+    <td class="text-nowrap text-muted">26 Nov 2019</td>
+    </tr>
+    <tr>
+    <td class="w-1">
+    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/003m.jpg)"></span>
+    </td>
+    <td class="td-truncate">
+    <div class="text-truncate">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    </td>
+    <td class="text-nowrap text-muted">26 Nov 2019</td>
+    </tr>
+    <tr>
+    <td class="w-1">
+    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000f.jpg)"></span>
+    </td>
+    <td class="td-truncate">
+    <div class="text-truncate">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    </td>
+    <td class="text-nowrap text-muted">25 Nov 2019</td>
+    </tr>
+    <tr>
+    <td class="w-1">
+    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/001f.jpg)"></span>
+    </td>
+    <td class="td-truncate">
+    <div class="text-truncate">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    </td>
+    <td class="text-nowrap text-muted">24 Nov 2019</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div> -->
 
 
     <!-- Conteudo-->

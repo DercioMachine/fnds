@@ -40,7 +40,7 @@
   <script th:src="@{/assets/plugins/input-mask/plugin.js}"></script>
 </head>
 
-<body style="background: url(/image/fundoo.jpg) no-repeat center center fixed; overflow: hidden; background-color: #E5E6EA" class="corpo">
+<body style="background: url(/image/fundoo.jpg) no-repeat center center fixed; overflow: hidden; background-color: #E5E6EA"  class="corpo">
 
 <div class="page">
   <div class="page-single">
@@ -67,10 +67,12 @@
               <div class="form-group">
                 <label class="form-label">
                   Senha
-                  <a href="./forgot-password.html" class="float-right small">Esqueci a senha</a>
+
                 </label>
                 <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
               </div>
+
+              <a href="./forgot-password.html" class="float-right small">Esqueci a senha</a>
 
               <div class="form-group">
                 <div class="text-center" th:if="${param.error}">

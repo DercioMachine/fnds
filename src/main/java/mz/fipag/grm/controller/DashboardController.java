@@ -1,9 +1,10 @@
 package mz.fipag.grm.controller;
 
 import java.util.Calendar;
+import java.util.List;
 
+import mz.fipag.grm.domain.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,8 +15,9 @@ import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class DashboardController {
 	
 	@Autowired
@@ -35,14 +37,21 @@ public class DashboardController {
 	ProjectoService projectoService;
 	
 	int ano=Calendar.getInstance().get(Calendar.YEAR);
-	
-	@ResponseBody
+
+    /* @GetMapping("/buscarocorrencias")
+    public Iterable<Ocorrencia> buscarOcorrencias(){
+
+      //  Gson gson=new Gson();
+      //  return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
+
+        return  ocorrenciaRepository.buscarOcorrenciasActuais(ano);
+    }  */
+
     @GetMapping("/buscarocorrencias")
-    public String buscarOcorrencias(){
+    public List<Ocorrencia> buscarOcorrencias() {
 
-        Gson gson=new Gson();
+     return   ocorrenciaRepository.buscarOcorrenciasActuais(ano);
 
-        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
     }
 	
 	@ResponseBody

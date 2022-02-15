@@ -2,44 +2,44 @@
 
 
 
-<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+<html lang="pt" layout:decorate="~{layout}" Xmlns:th="http://www.thymeleaf.org"
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>FIPAG</title>
-    
+
     <style>
-    
-    /* jQuery loading autocomplete */
+
+/* jQuery loading autocomplete */
 .ui-autocomplete-loading {
-  background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
+background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
 }
 
 
 #tabela th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  font-size:12px;
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+font-size:12px;
 }
 
 
 #tabela tr {
-	background-color: #fff;
+background-color: #fff;
 }
 
 
 </style>
 
-<script>
+    <script>
 $(document).ready(function(){
-  $("#pesquisa").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+$("#pesquisa").on("keyup", function() {
+var value = $(this).val().toLowerCase();
+$("#myTable tr").filter(function() {
+$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+});
+});
 });
 </script>
 
@@ -56,16 +56,16 @@ $(document).ready(function(){
 
 
 
-<div  layout:fragment="corpo">
+<div layout:fragment="corpo">
     <!-- Conteudo -->
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
 
 
 
@@ -73,41 +73,42 @@ $(document).ready(function(){
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-primary btn-md" th:href="@{/registar/ocorrencia}" role="button">
-		            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		            <span>Nova Ocorrência</span>
-        		</a>
-                
+                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+                    <span>Nova Ocorrência</span>
+                </a>
+
             </div>
-            
+
             <div class="card-body border-bottom py-3">
-                    <div class="d-flex">
-                      <div class="text-muted">
+                <div class="d-flex">
+                    <div class="text-muted">
                         <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Ocorrências</h3>
-                      </div> 
-                      <div class="ms-auto text-muted">
+                    </div>
+                    <div class="ms-auto text-muted">
                         Procurar:
                         <div class="ms-2 d-inline-block">
-                          <input id="pesquisa" name="keyword"  type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                            <input id="pesquisa" name="keyword" type="text" class="form-control form-control-sm" aria-label="Search invoice">
                         </div>
-                      </div>
                     </div>
-                  </div>
-            
-            
-            
+                </div>
+            </div>
+
+
+
             <div class="table-responsive">
-              <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
-               <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
+                <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
+                    <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
                     <thead>
                     <tr style="color: rgb(65,105,225)">
                         <td class="w-4">Codigo</td>
-                         <td class="w-2">No.</td>
+                        <td class="w-2">No.</td>
                         <td >Província</td>
-                        <td >Distrito</td>
+                        <td >Cidade</td>
                         <td>Cadastro</td>
                         <td>Ocorrência</td>
                         <td>Tipo</td>
-                        <td>Natureza</td>
+                        <td>Entidade</td>
+                        <td>Definição</td>
                         <td>Procede?</td>
                         <td class="w-4">Assunto</td>
                         <td class="w-4">Estado</td>
@@ -115,268 +116,269 @@ $(document).ready(function(){
                     </tr>
                     </thead>
                     <tbody id="myTable">
-                     <tr th:each="p : ${pageOcorrencia.registros}">
-<!--                     <tr th:each="p : ${ocorrencias}"> -->
-                    <td style="background: #fff" th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
-                     <td style="background: #fff" th:text="${p.id}"><span class="text-muted">01401</span></td>
-                    <td style="background: #fff" th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
-                        <td style="background: #fff" th:text="${p.distrito.designacao}"><span class="text-muted">01401</span></td>
-                     <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
+                    <tr th:each="p : ${pageOcorrencia.registros}">
+                        <!-- <tr th:each="p : ${ocorrencias}"> -->
+                        <td style="background: #fff" th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.id}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.cidade.provincia.designacao}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.cidade.designacao}"><span class="text-muted">01401</span></td>
+                        <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.tipoOcorrencia.designacao}">Auxiliar Contábil</td>
                         <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td>
+                        <td th:text="${p.internoExterno}">Auxiliar Contábil</td>
                         <td th:text="${p.procedencia}">Auxiliar Contábil</td>
-                        
+
                         <td>
-		                   <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
-		                 </td>
-		                        
-		                        
-		                      <td>
-		                      	
-		                      	<button style="background: blue; color: #fff" th:if="${p.resolucao == 'V' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Validado 
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
-		                      	</button>
-		                      	
-		                      	<button style="background: #cc568b; color: #fff" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Em Resolução 
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-		                      	</button>
-		                      	
-		                      	<button style="background: orange; color: #fff" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Em Acompanhamento
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-		                      	</button>
-		                      	
-		                      	<button style="background: green; color: #fff" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Terminado 
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
-		                      	</button>
-		                      	
-		                      	<button style="background: red; color: #fff" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
-		                      	<span th:if="${p.estado == 'Temporario'}">Temporario</span>
-		                      	<span th:if="${p.estado == 'Registado'}">Pendente</span>
-		                      	  
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-		                      	</button>
-		                      	
-		                      	<!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
-		                      	Pendente 
-		                      	<i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-		                      	</button> -->
-					
-							</td>
-                        
-                         <td  align="center">
-                         
-                        
+                            <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
+                        </td>
+
+
+                        <td>
+
+                            <button style="background: blue; color: #fff" th:if="${p.resolucao == 'V' }" type="button" class="btn btn-sucess btn-sm">
+                                Validado
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
+                            </button>
+
+                            <button style="background: #cc568b; color: #fff" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
+                                Em Resolução
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                            </button>
+
+                            <button style="background: orange; color: #fff" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
+                                Em Acompanhamento
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                            </button>
+
+                            <button style="background: green; color: #fff" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
+                                Terminado
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
+                            </button>
+
+                            <button style="background: red; color: #fff" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+                                <span th:if="${p.estado == 'Temporario'}">Temporario</span>
+                                <span th:if="${p.estado == 'Registado'}">Pendente</span>
+
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                            </button>
+
+                            <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
+                            Pendente
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                            </button> -->
+
+                        </td>
+
+                        <td align="center">
+
+
                             <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
                                 <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                             </a>
-                            
-                           <!--  <a th:href="${'/ocorrencias/detalhar/'+p.id}">
-                                <i aria-hidden="true" class="fa fa-cog"></i>
+
+                            <!-- <a th:href="${'/ocorrencias/detalhar/'+p.id}">
+                            <i aria-hidden="true" class="fa fa-cog"></i>
                             </a> -->
 
-                             <a  th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
-                                 <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
-                             </a>
-                             
-                            <!--  <a  th:id="${'btn_ocorrencias/excluir/'+p.id}" th:if="${p.estado == 'Temporario' }"
-                             data-toggle="modal" data-target="#myModal">
-                                 <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-trash-alt"></i>
-                             </a> -->
+                            <a th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
+                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
+                            </a>
 
-                        </td> 
-                        
-                        
+                            <!-- <a th:id="${'btn_ocorrencias/excluir/'+p.id}" th:if="${p.estado == 'Temporario' }"
+                            data-toggle="modal" data-target="#myModal">
+                            <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-trash-alt"></i>
+                            </a> -->
+
+                        </td>
+
+
                     </tr>
 
 
-                    </tbody> 
+                    </tbody>
                 </table>
 
             </div>
 
         </div>
     </div>
-    
-    <div th:replace="fragmentos/modal :: modal"></div>
-    
-    <nav aria-label="Page navigation example">
-				  	<ul class="pagination justify-content-center">
-				  	
-				  	 <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link btn" th:href="@{/listar/ocorrencia(page=${1})}" tabindex="-1">Primeira</a>
-				    </li>
-				    
-				    <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina - 1})}" tabindex="-1">Anterior</a>
-				    </li>
-				    
-				    <li class="page-item">
-				    	<span class="page-link" th:text="|${pageOcorrencia.pagina} de ${pageOcorrencia.totalDePaginas}|"></span>
-				    </li>
-				    
-				    <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina + 1})}">Próxima</a>
-				    </li>
-				    
-				    <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.totalDePaginas})}" tabindex="-1">Última</a>
-				    </li>
-				    
-				  </ul>
-				</nav>
-				
-				
-				
-				<div class="modal modal-blur fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">nn</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn me-auto" data-bs-dismiss="modal">Fechar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    
-    <script>
-    $('#modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Botão que acionou o modal
-        var nrAcorrencia = button.data('whatever') // Extrai informação dos atributos data-*
-        var assunto = button.data('whatever-descricao')
-        // Se necessário, você pode iniciar uma requisição AJAX aqui e, então, fazer a atualização em um callback.
-        // Atualiza o conteúdo do modal. Nós vamos usar jQuery, aqui. No entanto, você poderia usar uma biblioteca de data binding ou outros métodos.
-        var modal = $(this)
 
-        modal.find('.modal-title').html(nrAcorrencia)
-         modal.find('.modal-body').html(assunto)
-    })
+    <div th:replace="fragmentos/modal :: modal"></div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link btn" th:href="@{/listar/ocorrencia(page=${1})}" tabindex="-1">Primeira</a>
+            </li>
+
+            <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina - 1})}" tabindex="-1">Anterior</a>
+            </li>
+
+            <li class="page-item">
+                <span class="page-link" th:text="|${pageOcorrencia.pagina} de ${pageOcorrencia.totalDePaginas}|"></span>
+            </li>
+
+            <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina + 1})}">Próxima</a>
+            </li>
+
+            <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.totalDePaginas})}" tabindex="-1">Última</a>
+            </li>
+
+        </ul>
+    </nav>
+
+
+
+    <div class="modal modal-blur fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">nn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+$('#modal').on('show.bs.modal', function (event) {
+var button = $(event.relatedTarget) // Botão que acionou o modal
+var nrAcorrencia = button.data('whatever') // Extrai informação dos atributos data-*
+var assunto = button.data('whatever-descricao')
+// Se necessário, você pode iniciar uma requisição AJAX aqui e, então, fazer a atualização em um callback.
+// Atualiza o conteúdo do modal. Nós vamos usar jQuery, aqui. No entanto, você poderia usar uma biblioteca de data binding ou outros métodos.
+var modal = $(this)
+
+modal.find('.modal-title').html("Ocorrência N° "+nrAcorrencia)
+modal.find('.modal-body').html(assunto)
+})
 </script>
- 
-    
-    
+
+
+
     <script type="text/javascript" th:inline="javascript">
 
 /*<![CDATA[*/
-	var ocorrencias = /*[[${ocorrencias}]]*/ ""; 
-	/*]]>*/
- 
-	$('#txtSearch').on('keyup',function(){
-		var value = $(this).val();
-		console.log('Value =' + value);
-		
-		var data = FilterFunction(value, ocorrencias);
-		
-		rebuildTable(data);
-	});
-		
-		function FilterFunction(value, data){
-			var filteredData = [];
-			
-			for(var i = 0; i<data.length; i++){
-				value.toLowerCase();
-				
-				var oprovincia = data[i].provincia.designacao.toLowerCase();
-				var odistrito = data[i].distrito.designacao.toLowerCase();
-				var otipoocorrencia = data[i].tipoOcorrencia.designacao.toLowerCase();
-				
-				if(oprovincia.includes(value) || odistrito.includes(value) || otipoocorrencia.includes(value)) {
-					filteredData.push(data[i]);
-				}
-			}
-			return filteredData;
-		}
-	
-	
-		
-		function rebuildTable(data){
-			var table = document.getElementById('tabela');
-			
-			
-			table.innerHTML=''
-			for(var i = 0; i<data.length; i++){
-				var row = `
-					<tr>
-						<td>${data[i].grmStamp}</td>
-						<td>${data[i].provincia.designacao}</td>
-						<td>${data[i].distrito.designacao}</td>
-						<td>${data[i].dataOcorrencia}</td>
-						<td>${data[i].created}</td>
-						<td>${data[i].tipoOcorrencia.designacao}</td>
-						
-						
-					</tr>`
-					table.innerHTML += row
-					
-					
-			}
-		}
-	
-		
-		
+var ocorrencias = /*[[${ocorrencias}]]*/ "";
+/*]]>*/
+
+$('#txtSearch').on('keyup',function(){
+var value = $(this).val();
+console.log('Value =' + value);
+
+var data = FilterFunction(value, ocorrencias);
+
+rebuildTable(data);
+});
+
+function FilterFunction(value, data){
+var filteredData = [];
+
+for(var i = 0; i<data.length; i++){
+value.toLowerCase();
+
+var oprovincia = data[i].provincia.designacao.toLowerCase();
+var odistrito = data[i].distrito.designacao.toLowerCase();
+var otipoocorrencia = data[i].tipoOcorrencia.designacao.toLowerCase();
+
+if(oprovincia.includes(value) || odistrito.includes(value) || otipoocorrencia.includes(value)) {
+filteredData.push(data[i]);
+}
+}
+return filteredData;
+}
+
+
+
+function rebuildTable(data){
+var table = document.getElementById('tabela');
+
+
+table.innerHTML=''
+for(var i = 0; i<data.length; i++){
+var row = `
+<tr>
+<td>${data[i].grmStamp}</td>
+<td>${data[i].provincia.designacao}</td>
+<td>${data[i].distrito.designacao}</td>
+<td>${data[i].dataOcorrencia}</td>
+<td>${data[i].created}</td>
+<td>${data[i].tipoOcorrencia.designacao}</td>
+
+
+</tr>`
+table.innerHTML += row
+
+
+}
+}
+
+
+
 
 </script>
 
-<!-- <script type="text/javascript">
-$(document).ready(function () {
-	moment.locale('pt-BR');
-	
-	 var table = $('#tabela').DataTable({
-		 searching: true,
-	    	
-	    	lengthMenu: [5, 10],
-	        processing: true,
-	        serverSide: true,
-	        responsive: true,
-	        
-	        ajax: {
-	            url: '/listar/ocorrencia',
-	            data: 'data'
-	        },
-	        columns: [  
-	        	 {data: 'id'},
-	        	 {data: 'provincia.designacao'},
-	        	 {data: 'distrito.designacao'},
-	        	 {data: 'dataOcorrencia'},
-	        	 {data: 'created'},
-	        	 {data: 'tipoOcorrencia.designacao'},
-	        	 {data: 'projectoOperacao'},
-	        	 {data: 'estado'},
-	        	 {orderable: false, 
-	        		 data: 'id',	
-	        		 "render": function(id) {
-	        			 return '<a class="btn btn-success btn-sm btn-block" href="/ocorrencias/editar/'+ 
-	                    	id +'" role="button"><i class="fa fa-edit"></i></a>';
-	        		 }
-	        	 },
-	        	 {orderable: false,
-	                 data: 'id',
-	                    "render": function(id) {
-	                        return '<a class="btn btn-danger btn-sm btn-block" href="/ocorrencias/detalhar/'+ 
-	                        	id +'" role="button"><i class="fa fa-cog"></i></a>';
-	                    }
-	        	 }
-	             ]
-	         });
-	     });    
+    <!-- <script type="text/javascript">
+    $(document).ready(function () {
+    moment.locale('pt-BR');
 
-</script> -->
+    var table = $('#tabela').DataTable({
+    searching: true,
+
+    lengthMenu: [5, 10],
+    processing: true,
+    serverSide: true,
+    responsive: true,
+
+    ajax: {
+    url: '/listar/ocorrencia',
+    data: 'data'
+    },
+    columns: [
+    {data: 'id'},
+    {data: 'provincia.designacao'},
+    {data: 'distrito.designacao'},
+    {data: 'dataOcorrencia'},
+    {data: 'created'},
+    {data: 'tipoOcorrencia.designacao'},
+    {data: 'projectoOperacao'},
+    {data: 'estado'},
+    {orderable: false,
+    data: 'id',
+    "render": function(id) {
+    return '<a class="btn btn-success btn-sm btn-block" href="/ocorrencias/editar/'+
+    id +'" role="button"><i class="fa fa-edit"></i></a>';
+    }
+    },
+    {orderable: false,
+    data: 'id',
+    "render": function(id) {
+    return '<a class="btn btn-danger btn-sm btn-block" href="/ocorrencias/detalhar/'+
+    id +'" role="button"><i class="fa fa-cog"></i></a>';
+    }
+    }
+    ]
+    });
+    });
+
+    </script> -->
 
 
 
     <!-- Conteudo-->
-    
+
 </div>
 </body>
 </html>
