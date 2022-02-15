@@ -360,8 +360,8 @@ select.list-dt:focus {
           $.ajax({
           type: 'GET',
         // url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-          url: 'http://localhost:9090/distrito/'+provinciaId,
-         // url: 'https://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+         // url: 'http://localhost:9090/distrito/'+provinciaId,
+          url: 'http://expediente.uem.mz:8080/grm/'+provinciaId,
            success: function (result){
            var result = JSON.parse(result);
            var s = '';
@@ -388,9 +388,9 @@ select.list-dt:focus {
 
           $.ajax({
           type: 'GET',
-         url: 'http://localhost:9090/posto/'+distritoId,
+        // url: 'http://localhost:9090/posto/'+distritoId,
          
-       // url: 'https://portal.fipag.co.mz/grm/posto/'+distritoId,
+        url: 'http://localhost:8080/posto/'+distritoId,
          // url: 'http://fipag.herokuapp.com/posto/'+distritoId,
           
            success: function (result){
@@ -677,7 +677,7 @@ return false;
 													<div class="row">
 														<div class="form-group col-6 col-sm-6">
 															<label for="comboboxProvincias" class="form-label">Empreiteiro</label>
-															<select id="empreiteiro" class="form-control custom-select form-select" th:field="*{empreiteiro}" >
+															<select  class="form-control custom-select form-select" th:field="*{empreiteiro}" >
 																<option value="">Selecione o Empreiteiro...</option>
 																<option th:each="p : ${empreiteiros}"
 																		th:value="${p.id}" th:text="${p.nome}">Maputo</option>
@@ -686,7 +686,7 @@ return false;
 														
 														<div class="form-group col-6 col-sm-6">
 															<label for="comboboxProvincias" class="form-label">Cidade</label>
-															<select id="empreiteiro" class="form-control custom-select form-select" th:field="*{cidade}" >
+															<select  class="form-control custom-select form-select" th:field="*{cidade}" >
 																<option value="">Selecione o Cidade...</option>
 																<option th:each="p : ${cidades}"
 																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -731,7 +731,7 @@ return false;
 														
 														<div class="form-group col-6 col-sm-6">
 															<label for="empreiteiro" class="form-label"> Tipo de Ocorrência</label>
-															<select id="empreiteiro" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
+															<select  class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
 																<option value="">Selecione o Tipo de Ocorrência...</option>
 																<option th:each="p : ${tipoDeOcorrencias}"
 																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>

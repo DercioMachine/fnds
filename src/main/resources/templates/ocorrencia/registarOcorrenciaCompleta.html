@@ -49,48 +49,48 @@ OrigemInternoExterno();
 
 
 
-function OrigemInternoExterno(){
+    function OrigemInternoExterno(){
 
-$.ajax({
-type: 'GET',
+    $.ajax({
+    type: 'GET',
 
-url: 'http://localhost:9090/origem/externo',
-//url: 'https://localhost:9090/origem/externo/',
+    //url: 'http://portal.fipag.co.mz/grm/origem/externo',
+    url: 'http://expediente.uem.mz:8080/grm/origem/externo/',
+    //url: 'http://localhost:9090/origem/externo',
+    // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
-// url: 'http://localhost:90902/origem/externo',
 
+    success: function (result){
+    var result = JSON.parse(result);
+    var s = '';
 
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
+    if(estadobotao == 1){
 
-if(estadobotao == 1){
+    for(var i=0; i< result.length; i++){
 
-for(var i=0; i< result.length; i++){
+    if(result[i].tipo=="Interno"){
+    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+    }
 
-if(result[i].tipo=="Interno"){
-s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
-}
+    }
+    }
 
-}
-}
+    if(estadobotao == 2){
 
-if(estadobotao == 2){
+    for(var i=0; i< result.length; i++){
 
-for(var i=0; i< result.length; i++){
+    if(result[i].tipo=="Externo"){
+    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+    }
 
-if(result[i].tipo=="Externo"){
-s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
-}
+    }
+    }
 
-}
-}
+    $('#comboboxOrigem').html(s);
+    }
+    });
 
-$('#comboboxOrigem').html(s);
-}
-});
-
-}
+    }
 
 
 
@@ -109,9 +109,9 @@ $.ajax({
 type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-url: 'http://localhost:9090/distrito/'+provinciaId,
-//url: 'https://localhost:9090/distrito/'+provinciaId,
-//url: 'http://localhost:90902/distrito/'+provinciaId,
+//url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+url: 'http://expediente.uem.mz:8080/grm/distrito/'+provinciaId,
+//url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
 success: function (result){
@@ -141,11 +141,11 @@ var distritoId = $(this).val();
 
 $.ajax({
 type: 'GET',
-url: 'http://localhost:9090/posto/'+distritoId,
+//url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-//url: 'https://localhost:9090/posto/'+distritoId,
+url: 'http://expediente.uem.mz:8080/grm/posto/'+distritoId,
 
-//url: 'http://localhost:90902/posto/'+distritoId,
+//url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
 success: function (result){
 var result = JSON.parse(result);
@@ -317,10 +317,11 @@ document.getElementById("cidadee").style.display="none";
 
                     </div>
 
+
                     <div class="col-md-6">
                         <div class="card ">
                             <div>
-                                <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Definição?</label>
+                                <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Definição da Reclamação</label>
                             </div>
 
 
@@ -368,7 +369,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Origem</label>
+                            <label class="form-label">Natureza da Reclamação</label>
                             <select id="comboboxOrigem" class="form-control custom-select" th:field="*{tipoorigem}" >
                                 <option value="">Selecione Origem...</option>
                             </select>
@@ -666,7 +667,6 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Anexo</label>
                             <div class="input-icon">
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>

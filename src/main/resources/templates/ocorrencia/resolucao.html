@@ -67,7 +67,59 @@
 		<span>Excluir Ocorrência</span>
 	</a>
 
+	<a class="btn btn-secondary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"  role="button">
+		<span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+		<i class="fa fa-print"></i>
+		<span>Imprimir</span>
+	</a>
+
     <div class="card">
+
+		<div th:if="${ocorrencia.procedencia =='Sim' }">
+			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral' }" >
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Geral</h2>
+			</div>
+			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo=='Laboral' }" >
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para os Trabalhadores </h2>
+			</div>
+			<div style="background: red; color: white" th:if="${ocorrencia.tipoorigem.processo =='SEA/SH/GBV' }" >
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para SEA/SH/GBV</h2>
+			</div>
+			<br>
+
+			<div class="card-body">
+				<div class="row" >
+
+					<div class="col-6 col-sm-6">
+						<div class="form-group">
+							<span style="font-weight: bolder;">Definição da Reclamação: </span>	<span th:text="${ocorrencia.tipoorigem.processo}" ></span>
+						</div>
+					</div>
+
+					<div class="col-6 col-sm-6">
+						<div class="form-group">
+							<span style="font-weight: bolder;">Natureza da Reclamação: </span>	<span  th:text="${ocorrencia.internoExterno}" > </span>
+						</div>
+					</div>
+
+					<div class="col-6 col-sm-6" >
+						<div class="form-group">
+							<span style="font-weight: bolder;">Estagio: </span> <span>Investigação </span>
+						</div>
+					</div>
+
+
+					<div class="col-6 col-sm-6">
+						<div class="form-group">
+							<span style="font-weight: bolder;">Dias Restantes : </span><span > 7 </span>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
 
 	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
 		 <div style="background: #0277BD; color: white">
@@ -153,53 +205,6 @@
 		  </div>
 	  </div>
 
-		<div th:if="${ocorrencia.procedencia =='Sim' }">
-			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral' }" >
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Geral</h2>
-			</div>
-			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo=='Laboral' }" >
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para os Trabalhadores </h2>
-			</div>
-			<div style="background: red; color: white" th:if="${ocorrencia.tipoorigem.processo =='SEA/SH/GBV' }" >
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para SEA/SH/GBV</h2>
-			</div>
-			<br>
-
-			<div class="card-body">
-				<div class="row" >
-
-					<div class="table-responsive">
-						<table  class="table card-table table-vcenter text-nowrap datatable">
-							<thead>
-							<tr style="color: rgb(65,105,225)">
-								<th class="w-1">No</th>
-								<th>Nome</th>
-								<th>Descrição</th>
-								<th>Responsavel</th>
-								<th>Tempo</th>
-							</tr>
-							</thead>
-							<tbody>
-							<!--  <tr th:each="p : ${categorias}"> -->
-							<tr th:each="r, index : ${processos}">
-								<div  >
-									<td th:text="${index.count}" ><span class="text-muted">01401</span></td>
-									<td th:text="${r.nome}" ><span class="text-muted">01401</span></td>
-									<td th:text="${r.descricao}" >Auxiliar Contábil</td>
-									<td th:text="${r.responsavel}" >Auxiliar Contábil</td>
-									<td th:text="${r.tempo}" ><span class="text-muted">01401</span></td>
-								</div>
-							</tr>
-
-
-
-							</tbody>
-						</table>
-					</div>
-
-				</div>
-			</div>
-		</div>
 
 
 	   <div th:if="${ocorrencia.estado =='Validado'}">
@@ -358,7 +363,7 @@
 							<td th:text="${a.fase}" >Auxiliar Contábil</td>
 							<td th:text="${#dates.format(a.created, 'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
 							<td>
-								<a class="icon" th:href="${'/download/ficheiro/'+a.id}">
+								<a class="icon" th:href="@{/download/ficheiro/{id} (id=${a.id})}" >
 									<i class="fa fa-file"></i>
 								</a>
 							</td>
@@ -428,13 +433,12 @@
 			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
-						<div class="modal-header" style="background: blue; color: white">
+						<div class="modal-header" style="background: #0277BD; color: white">
 							<h5 class="modal-title">Resolução</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 
-							<label class="form-label">Houve Concesso?</label>
 							<div class="form-selectgroup-boxes row mb-3">
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
@@ -445,7 +449,6 @@
                     </span>
                     <span class="form-selectgroup-label-content">
                       <span class="form-selectgroup-title strong mb-1">Não há Concesso</span>
-                      <span class="d-block text-muted">Na conversa que tivemos com nosso cliente não houve concesso</span>
                     </span>
                   </span>
 									</label>
@@ -458,8 +461,7 @@
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Houve Concesso</span>
-                      <span class="d-block text-muted">Na conversa que tivemos com nosso cliente houve concesso</span>
+                      <span class="form-selectgroup-title strong mb-1">Há Concesso</span>
                     </span>
                   </span>
 									</label>
@@ -533,13 +535,13 @@
 			<div class="modal modal-blur fade" id="modal-report1" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
-						<div class="modal-header" style="background: blue; color: white">
+						<div class="modal-header" style="background: #0277BD; color: white">
 							<h5 class="modal-title">Acompanhamento</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 
-							<label class="form-label">Fechado?</label>
+							<label class="form-label">Processo</label>
 							<div class="form-selectgroup-boxes row mb-3">
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
@@ -549,7 +551,7 @@
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Não Foi Fechado</span>
+                      <span class="form-selectgroup-title strong mb-1">Não Fechado</span>
                     </span>
                   </span>
 									</label>
@@ -562,7 +564,7 @@
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Foi Fechado</span>
+                      <span class="form-selectgroup-title strong mb-1">Fechado</span>
                     </span>
                   </span>
 									</label>
