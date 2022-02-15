@@ -236,6 +236,17 @@
                     </div>
                 </div>
 
+                <div style="display: none;"  class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label  class="form-label">Tipo Origem</label>
+                        <select  class="form-control custom-select form-select" th:field="*{tipoorigem}" >
+                            <option value="">Selecione o Empreiteiro...</option>
+                            <option th:each="p : ${empreiteiros}"
+                                    th:value="${p.id}" th:text="${p.nome}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="col-6 col-sm-4">
                     <div class="form-group">
                         <label for="comboboxProvincias" class="form-label">Província</label>
