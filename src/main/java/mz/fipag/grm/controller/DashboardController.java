@@ -47,14 +47,16 @@ public class DashboardController {
         return  ocorrenciaRepository.buscarOcorrenciasActuais(ano);
     }  */
 
+	@ResponseBody
     @GetMapping("/buscarocorrencias")
-    public List<Ocorrencia> buscarOcorrencias() {
+    public String buscarOcorrencias() {
 
-     return   ocorrenciaRepository.buscarOcorrenciasActuais(ano);
+    	Gson gson=new Gson();
+
+        return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
 
     }
 	
-	@ResponseBody
     @GetMapping("/apiocorrenciascidades")
     public String buscarOcorrenciasCidades(){
 
@@ -63,7 +65,6 @@ public class DashboardController {
         return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
     }
 	
-	@ResponseBody
     @GetMapping("/apicidades")
     public String apiCidades(){
 
@@ -72,7 +73,6 @@ public class DashboardController {
         return gson.toJson(cidadeService.buscarTodos());
     }
 	
-	@ResponseBody
     @GetMapping("/buscarocorrenciasforma")
     public String buscarOcorrenciasForma(){
 
@@ -82,7 +82,6 @@ public class DashboardController {
     }
 	
 	
-	@ResponseBody
     @GetMapping("/buscarocorrencias_teste")
     public String buscarOcorrenciasTeste(){
 
@@ -92,7 +91,6 @@ public class DashboardController {
     }
 	
 	
-	@ResponseBody
     @GetMapping("/buscarocoent")
     public String buscarEtnidade(){
 
@@ -101,7 +99,6 @@ public class DashboardController {
         return gson.toJson(ocorrenciaRepository.buscarOcorrenciasActuais(ano));
     }
 	
-	@ResponseBody
     @GetMapping("/buscarcategorias")
     public String buscarCategorias(){
 
@@ -111,7 +108,6 @@ public class DashboardController {
     }
 	
 	
-	@ResponseBody
     @GetMapping("/buscarprojectos")
     public String buscarProjectos(){
 
@@ -121,7 +117,6 @@ public class DashboardController {
     }
 	
 	
-	@ResponseBody
     @GetMapping("/apiocorrencias")
     public String buscarOcorrenciass(){
 

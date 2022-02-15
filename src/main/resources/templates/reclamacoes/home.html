@@ -368,7 +368,7 @@ var anos = [];
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/buscarprojectos',
+url: 'http://localhost:9090/buscarprojectos',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -394,7 +394,7 @@ legendaids = tirarVirgulaid.split(',');
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/buscarocorrencias_teste',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -536,7 +536,7 @@ var anos = [];
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/buscarcategorias',
+url: 'http://localhost:9090/buscarcategorias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -562,7 +562,7 @@ legendaids = tirarVirgulaid.split(',');
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/apiocorrencias',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -702,7 +702,7 @@ var anos = [];
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/apicidades',
+url: 'http://localhost:9090/apicidades',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -728,7 +728,7 @@ legendaids = tirarVirgulaid.split(',');
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/apiocorrenciascidades',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -859,7 +859,7 @@ var nomes = ["Geral","Laboral", "SEA/SH/GBV"];
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/apiocorrenciasprocessos',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -977,7 +977,7 @@ var nomes = ["Interno","Externo"];
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/buscarocorrencias',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -1083,7 +1083,7 @@ var nomes = ["Projecto","Operação"];
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/buscarocoent',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
@@ -1202,7 +1202,7 @@ var nomes = ["Telefone","Formulário ", "Reuniões Comunitárias", "Grupos de Di
 $.ajax({
 type: 'GET',
 
-url: 'http://portal.fipag.co.mz/grm/buscarocorrenciasforma',
+url: 'http://localhost:9090/buscarocorrencias',
 
 success: function (result){
 var result = JSON.parse(result);
