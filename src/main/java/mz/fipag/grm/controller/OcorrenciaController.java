@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
+import mz.fipag.grm.domain.*;
 import mz.fipag.grm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
-import mz.fipag.grm.domain.Categoria;
-import mz.fipag.grm.domain.Cidade;
-import mz.fipag.grm.domain.Distrito;
-import mz.fipag.grm.domain.Empreiteiro;
-import mz.fipag.grm.domain.Ocorrencia;
-import mz.fipag.grm.domain.PostoAdministrativo;
-import mz.fipag.grm.domain.Projecto;
-import mz.fipag.grm.domain.Provincia;
-import mz.fipag.grm.domain.Resolucao;
-import mz.fipag.grm.domain.TipoAlerta;
-import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
@@ -43,16 +34,13 @@ import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.ProvinciaService;
 import mz.fipag.grm.service.TipoAlertaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
-import mz.fipag.grm.service.reporteService;
 import mz.fipag.grm.util.PaginacaoUtil;
-import net.sf.jasperreports.engine.JRException;
+
 
 
 @Controller
 public class OcorrenciaController {
-	
-	@Autowired
-	private reporteService reportService;
+
 
     @Autowired
     private OcorrenciaService ocorrenciaService;
@@ -106,18 +94,46 @@ public class OcorrenciaController {
     private ProcessoRepository processoRepository ;
     
     @Autowired
-    private CategoriaService categoriaService; 
+    private CategoriaService categoriaService;
+
+    @Autowired
+    UserRepository userRepository;
     
     private long responsavel;
 
     @GetMapping("/listar/ocorrencia")
-    public String listarOcorrencia(ModelMap model, @RequestParam("page") Optional<Integer> page){
+    public String listarOcorrencia(ModelMap model, Authentication authentication, @RequestParam("page") Optional<Integer> page){
 
-    	int paginaActual = page.orElse(1);
-		PaginacaoUtil<Ocorrencia> pageOcorrencia = ocorrenciaService.buscaPorPagina(paginaActual);
+        authentication.getName();
 
-		model.addAttribute("pageOcorrencia", pageOcorrencia);
-        //model.addAttribute("ocorrencias", ocorrenciaService.buscarTodos());
+        List<Ocorrencia> ocorrencia = null;
+
+
+        System.out.println(authentication.getName());
+
+        User userlogado = userRepository.findByUsername(authentication.getName());
+
+        System.out.println(userlogado.getTipo());
+
+        System.out.println(userlogado.getCidade().getDesignacao());
+
+        System.out.println(userlogado.getCidade().getRegiao().getDesignacao());
+
+        if(userlogado.getTipo().equals("L")){
+
+            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosRegional(userlogado.getCidade().getId());
+
+        }else if(userlogado.getTipo().equals("R")){
+
+            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosZonas(userlogado.getCidade().getRegiao().getId());
+
+        }else if(userlogado.getTipo().equals("N") ){
+
+            ocorrencia = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+        }
+
+
+        model.addAttribute("pageOcorrencia", ocorrencia);
 
         return "ocorrencia/listarOcorrencia";
     }
@@ -260,12 +276,7 @@ public class OcorrenciaController {
     public String resolverOcorrencia(@PathVariable("id") Long id, ModelMap model) {
     	
     	Ocorrencia ocorrenciaProcesso = ocorrenciaService.buscarPorId(id);
-    	
-    	if(ocorrenciaProcesso.getTipoorigem() != null) {
-    		
-    		String processo = ocorrenciaService.buscarPorId(id).getTipoorigem().getProcesso();
-    		 model.addAttribute("processos", processoRepository.BuscarTodosPorProcessos(processo));	
-    	}
+
         
         model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
         model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
@@ -358,7 +369,6 @@ public class OcorrenciaController {
         return "redirect:/resolver/ocorrencia/"+ocorrencia2;
     }
 
-    
     @PostMapping("/ocorrencias/fase2")
     public String editarOcorrenciaFase2Vista(Ocorrencia ocorrencia) {
 
@@ -444,14 +454,6 @@ public class OcorrenciaController {
 		  return "redirect:/listar/ocorrencia"; 
 	  }
     
-
-    @GetMapping("/relatorio/{format}") 
-    public String gerarRelatorio(@PathVariable String format) throws FileNotFoundException, JRException {
-		
-    	return reportService.exportReport(format);
-    	
-    }
-
 
 
     @ModelAttribute("provincias")

@@ -83,10 +83,12 @@
           <tr style="color: rgb(65,105,225)">
             <td class="w-4">No</td>
             <td >Nome</td>
+            <td >User</td>
             <td >Tipo</td>
             <td >Telefone</td>
+            <td >SEA/SH/GBV</td>
             <td>Cidade/Regiao</td>
-            <td>Email</td>
+            <td>Perfils</td>
           </tr>
           </thead>
           <tbody>
@@ -94,19 +96,24 @@
             <!--                     <tr th:each="p : ${ocorrencias}"> -->
             <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
             <td style="background: #fff" th:text="${p.nome}"><span class="text-muted">01401</span></td>
+            <td style="background: #fff" th:text="${p.username}"><span class="text-muted">01401</span></td>
             <td style="background: #fff" th:if="${p.tipo =='L' }"  > Local </td>
             <td style="background: #fff" th:if="${p.tipo =='R' }"  > Regional </td>
             <td style="background: #fff" th:if="${p.tipo =='N' }"  > Nacional </td>
-            <td style="background: #fff" th:text="${p.telefone}">
-
-            </td>
+            <td style="background: #fff" th:text="${p.telefone}"> </td>
+            <td style="background: #fff" th:text="${p.tipogbv}"> </td>
             <td style="background: #fff" th:if="${p.tipo =='L' }"  >
               <span class="text-muted" th:text="${p.cidade.designacao}" >01401</span>
             </td>
             <td style="background: #fff" th:if="${p.tipo !='L' }"  >
               <span class="text-muted" th:text="${p.regiao.designacao}" >01401</span>
             </td>
-            <td th:text="${p.email}">Auxiliar Contábil</td>
+            <td >
+              <th:block  th:each="r, iter:${p.roles}">
+                <span th:text="${r.designacao}"></span>
+                <th:block th:if="${!iter.last}">, </th:block>
+              </th:block>
+            </td>
 
           </tr>
 

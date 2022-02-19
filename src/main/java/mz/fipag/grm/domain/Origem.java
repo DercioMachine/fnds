@@ -12,8 +12,9 @@ public class Origem extends AbstractEntity{
     @Column(name = "designacao", nullable = false,length=120)
     private String designacao;
 
-    @Column(name = "processo", nullable = false,length=120)
-    private String processo;
+    @ManyToOne
+    @JoinColumn(name="processo_id")
+    private Processo processo;
 
     @Column(name = "tipo", nullable = false,length=120)
     private String tipo;
@@ -42,11 +43,11 @@ public class Origem extends AbstractEntity{
         this.designacao = designacao;
     }
 
-    public String getProcesso() {
+    public Processo getProcesso() {
         return processo;
     }
 
-    public void setProcesso(String processo) {
+    public void setProcesso(Processo processo) {
         this.processo = processo;
     }
 }

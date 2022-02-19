@@ -84,7 +84,6 @@
             <td class="w-4">No</td>
             <td >Nome</td>
             <td >Descricao</td>
-            <td >Processo</td>
             <td >Tipo</td>
           </tr>
           </thead>
@@ -93,9 +92,7 @@
             <!--                     <tr th:each="p : ${ocorrencias}"> -->
             <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
             <td style="background: #fff" th:text="${p.nome}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.designacao}"  > Local </td>
-
-            <td style="background: #fff" th:text="${p.processo}"> </td>
+            <td style="background: #fff" th:text="${p.processo.nome}"  > Local </td>
             <td style="background: #fff" th:text="${p.tipo}"> </td>
 
           </tr>

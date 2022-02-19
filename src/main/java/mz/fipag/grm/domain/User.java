@@ -29,6 +29,9 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "tipo", nullable = true,length=120)
     private String tipo;  // L-local  R-regional  N-nacional
 
+    @Column(name = "tipogbv", nullable = true,length=120)
+    private String tipogbv="Não";  // Sim e Nao
+
     @ManyToOne
     @JoinColumn(name="cidade_id")
     private Cidade cidade;
@@ -40,13 +43,21 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "active", nullable = true)
     private boolean active=true;
 
-    @ManyToMany(cascade= CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns = @JoinColumn(
             name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
 
     private List<Role> roles;
+
+    public String getTipogbv() {
+        return tipogbv;
+    }
+
+    public void setTipogbv(String tipogbv) {
+        this.tipogbv = tipogbv;
+    }
 
     public String getTipo() {
         return tipo;

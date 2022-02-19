@@ -11,17 +11,20 @@ public class Processo extends AbstractEntity {
     @Column(name = "nome", nullable = false,length=120)
     private String nome;
 
-    @Column(name = "descricao", nullable = false,length=120)
-    private String descricao;
+    @Column(name = "tempotratamento", nullable = false)
+    private int tempotratamento;
 
-    @Column(name = "responsavel", nullable = false,length=120)
-    private String responsavel;
+    @Column(name = "tempoinvestigacao", nullable = false)
+    private int tempoinvestigacao;
 
-    @Column(name = "tempo", nullable = false,length=120)
-    private String tempo;
+    @Column(name = "temporesolucao", nullable = false)
+    private int temporesolucao;
 
-    @Column(name = "tipo", nullable = false,length=120)
-    private String tipo;
+    @Column(name = "temposign", nullable = false)
+    private int temposign;
+
+    @Column(name = "tempomonitoria", nullable = false)
+    private int tempomonitoria;
 
     public String getNome() {
         return nome;
@@ -31,35 +34,43 @@ public class Processo extends AbstractEntity {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public int getTempotratamento() {
+        return tempotratamento;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTempotratamento(int tempotratamento) {
+        this.tempotratamento = tempotratamento;
     }
 
-    public String getResponsavel() {
-        return responsavel;
+    public int getTempoinvestigacao() {
+        return tempoinvestigacao;
     }
 
-    public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
+    public void setTempoinvestigacao(int tempoinvestigacao) {
+        this.tempoinvestigacao = tempoinvestigacao;
     }
 
-    public String getTempo() {
-        return tempo;
+    public int getTemporesolucao() {
+        return temporesolucao;
     }
 
-    public void setTempo(String tempo) {
-        this.tempo = tempo;
+    public void setTemporesolucao(int temporesolucao) {
+        this.temporesolucao = temporesolucao;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getTemposign() {
+        return temposign;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTemposign(int temposign) {
+        this.temposign = temposign;
+    }
+
+    public int getTempomonitoria() {
+        return tempomonitoria;
+    }
+
+    public void setTempomonitoria(int tempomonitoria) {
+        this.tempomonitoria = tempomonitoria;
     }
 }

@@ -83,10 +83,11 @@
           <tr style="color: rgb(65,105,225)">
             <td class="w-4">No</td>
             <td >Nome</td>
-            <td >Descricao</td>
-            <td >Responsavel</td>
-            <td>Tempo</td>
-            <td>Tipo</td>
+            <td >Tempo Tratamento</td>
+            <td >Tempo de Investigacao</td>
+            <td>Tempo de Resolucao</td>
+            <td>Tempo de Sign-Off</td>
+            <td>Tempo de Monitoria</td>
           </tr>
           </thead>
           <tbody>
@@ -94,15 +95,16 @@
             <!--                     <tr th:each="p : ${ocorrencias}"> -->
             <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
             <td style="background: #fff" th:text="${p.nome}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.descricao}"  > Local </td>
+            <td style="background: #fff" th:text="${p.tempotratamento}"  > Local </td>
 
-            <td style="background: #fff" th:text="${p.responsavel}">
+            <td style="background: #fff" th:text="${p.tempoinvestigacao}">
 
             </td>
 
-            <td style="background: #fff" th:text="${p.tempo }"  >
+            <td style="background: #fff" th:text="${p.temporesolucao }"  >
             </td>
-            <td th:text="${p.tipo}">Auxiliar Contábil</td>
+            <td th:text="${p.temposign}">Auxiliar Contábil</td>
+            <td th:text="${p.tempomonitoria}">Auxiliar Contábil</td>
 
           </tr>
 

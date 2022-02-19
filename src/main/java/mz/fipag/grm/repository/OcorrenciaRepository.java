@@ -133,11 +133,13 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     
     
 	/*
-	 * @Query(value="select date_format(created, '%Y/%m') mes\r\n" +
-	 * ", count(*) \r\n" + "from ocorrencia\r\n" +
-	 * "where created > date_sub(now(), interval 6 month)\r\n" +
-	 * "group by date_format(created, '%Y/%m')\r\n" +
-	 * "order by date_format(created, '%Y/%m') desc;", nativeQuery=true) public
-	 * Object totalDeOcorrenciasPorMes();
+		Ocorrencias por User
 	 */
+	@Query(value="select * from ocorrencia, cidade  where ocorrencia.cidade_id = cidade.id and ocorrencia.cidade_id =:local", nativeQuery=true)
+	List<Ocorrencia> buscarOcorrenciasPorUsuariosRegional(@Param("local") long local);
+
+	@Query(value="select * from ocorrencia, cidade  where ocorrencia.cidade_id = cidade.id and cidade.regiao_id =:local", nativeQuery=true)
+	List<Ocorrencia> buscarOcorrenciasPorUsuariosZonas(@Param("local") long local);
+
+
 }
