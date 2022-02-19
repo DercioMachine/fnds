@@ -55,7 +55,7 @@ OrigemInternoExterno();
     type: 'GET',
 
     //url: 'http://portal.fipag.co.mz/grm/origem/externo',
-    url: 'http://expediente.uem.mz:8080/grm/origem/externo/',
+    url: 'http://localhost:9090/origem/externo/',
     //url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
@@ -110,7 +110,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://expediente.uem.mz:8080/grm/distrito/'+provinciaId,
+url: 'http://localhost:9090/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
@@ -143,7 +143,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://expediente.uem.mz:8080/grm/posto/'+distritoId,
+url: 'http://localhost:9090/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -462,9 +462,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Data da Ocorrência: </label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-calendar"></i>
-</span>
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
                                 <input type="date" th:field="*{dataOcorrencia}" class="form-control">
                             </div>
                         </div>
@@ -727,10 +727,6 @@ document.getElementById("cidadee").style.display="none";
             </tbody>
             </table>
             </div> -->
-
-
-
-
 
 
         </div>

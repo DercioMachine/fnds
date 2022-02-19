@@ -20,6 +20,7 @@ public class GrmApplication extends SpringBootServletInitializer{
 	@Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(GrmApplication.class);
+		
 	}
     /*
 	 * @Bean public FilterRegistrationBean<Filter> disableSpringBootErrorFilter

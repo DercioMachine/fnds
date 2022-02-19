@@ -62,6 +62,26 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     
     @Query(value="select * from ocorrencia where estado!='Temporario' and year(created)= :ano", nativeQuery=true)
     public List<Ocorrencia> buscarOcorrenciasActuais(@Param("ano") int ano);
+
+    @Query(value="select designacao,  count(*) from ocorrencia, projecto where ocorrencia.projecto_id=projecto.id group by projecto_id",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorProjecto();
+
+	@Query(value="select designacao, count(*) from ocorrencia, categoria where ocorrencia.categoriaid=categoria.id group by categoriaid",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCategoria();
+
+	@Query(value="select designacao, count(*) from ocorrencia, cidade where ocorrencia.cidade_id=cidade.id group by cidade_id",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCidade();
+
+	@Query(value="select processo, count(*) from ocorrencia, origem where ocorrencia.tipoorigem=origem.id group by processo",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorTipoOrigem();
+
+	@Query(value="select projecto_operacao, count(*) from ocorrencia group by projecto_operacao",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorEntidade();
+	
+	@Query(value="select interno_externo, count(*) from ocorrencia group by interno_externo;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorDefinicao();
+
+
     
 	/*
 	 * @Query(

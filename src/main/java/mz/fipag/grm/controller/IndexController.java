@@ -1,10 +1,16 @@
 package mz.fipag.grm.controller;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.Year;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -104,8 +110,11 @@ public class IndexController {
 	    @Autowired
 	    private CategoriaService categoriaService; 
 	    
-	    LocalDate currentdate = LocalDate.now();
-	    int currentYear = currentdate.getYear();
+		
+		 LocalDate currentdate = LocalDate.now();
+		 int currentYear = currentdate.getYear();
+	    
+	   int ano=Calendar.getInstance().get(Calendar.YEAR);
 	
 
     @GetMapping("/")
@@ -113,6 +122,138 @@ public class IndexController {
 
         return "publico/principal";
     }
+    
+    
+    /*****************************************GRAFICOS DE OCORRENCIAS****************************************/
+
+
+
+	public void projecto(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProjecto();
+
+
+		String[] legendaestado = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		int i=0;
+		for (Object[] ob : lista){
+
+			legendaestado[i] = (String) ob[0];
+			nrocorrencias[i] = (BigInteger) ob[1];
+
+			i++;
+		}
+
+
+		model.addAttribute("legendaestado",legendaestado);
+		model.addAttribute("ocorrencias", nrocorrencias);
+
+	}
+
+	public void categoria(Model model){
+
+		List<Object[]> listaOcorrenciaPorCategoria = ocorrenciaRepository.busqueTudoAgrupadoPorCategoria();
+
+		String[] legendaCategoria = new String[listaOcorrenciaPorCategoria.size()];
+		BigInteger[] nrocorrenciasCategoria = new BigInteger[listaOcorrenciaPorCategoria.size()];
+		int j=0;
+		for (Object[] ob : listaOcorrenciaPorCategoria){
+
+			legendaCategoria[j] = (String) ob[0];
+			nrocorrenciasCategoria[j] = (BigInteger) ob[1];
+
+			j++;
+		}
+
+		model.addAttribute("legendaCategoria",legendaCategoria);
+		model.addAttribute("nrocorrenciasCategoria", nrocorrenciasCategoria);
+
+	}
+
+	public void cidade(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCidade();
+
+
+		String[] nomes = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		int i=0;
+		for (Object[] ob : lista){
+
+			nomes[i] = (String) ob[0];
+			nrocorrencias[i] = (BigInteger) ob[1];
+
+			i++;
+		}
+
+
+		model.addAttribute("nomesCidades",nomes);
+		model.addAttribute("ocorrenciasCidade", nrocorrencias);
+
+	}
+
+	public void tipoOrigem(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorTipoOrigem();
+
+
+		String[] nomes = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		int i=0;
+		for (Object[] ob : lista){
+
+			nomes[i] = (String) ob[0];
+			nrocorrencias[i] = (BigInteger) ob[1];
+
+			i++;
+		}
+
+
+		model.addAttribute("nomesTipoOringes",nomes);
+		model.addAttribute("ocorrenciasOrigem", nrocorrencias);
+
+	}
+
+
+	public void entidade(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorEntidade();
+
+
+		String[] nomes = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		int i=0;
+		for (Object[] ob : lista){
+
+			nomes[i] = (String) ob[0];
+			nrocorrencias[i] = (BigInteger) ob[1];
+
+			i++;
+		}
+
+
+		model.addAttribute("nomesEntidade",nomes);
+		model.addAttribute("ocorrenciasEntidade", nrocorrencias);
+
+	}
+	
+	
+	public void definicao(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorDefinicao();
+
+
+		String[] nomes = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		int i=0;
+		for (Object[] ob : lista){
+
+			nomes[i] = (String) ob[0];
+			nrocorrencias[i] = (BigInteger) ob[1];
+
+			i++;
+		}
+
+
+		model.addAttribute("nomesDefinicao",nomes);
+		model.addAttribute("ocorrenciasDefinicao", nrocorrencias);
+
+	}
     
     
     @GetMapping("/estatistica")
@@ -137,11 +278,6 @@ public class IndexController {
 
     }
 
-	/*
-	 * @GetMapping("/login") public String homeIndex(){
-	 * 
-	 * return "login"; }
-	 */
 
 	@GetMapping("/dashboard")
 	public String estatisticateste(Model model){
@@ -157,34 +293,17 @@ public class IndexController {
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
 		
+		
+		projecto(model);
+		categoria(model);
+		cidade(model);
+		tipoOrigem(model);
+		entidade(model);
+		definicao(model);
+		
 		return "reclamacoes/home";
 	}
-    /*
-    @GetMapping("/dashboard")
-    public ModelAndView dashboard(Model model) {
-		
-		ModelAndView vm = new ModelAndView("reclamacoes/home");
-
-		String label[] = {"a","b","c","d","e","f","g"};
-
-		int point[] = {5,3,7,1,8,3,4,};
-		
-		vm.addObject("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias());
-		vm.addObject("totalDeSugestoes", ocorrenciaRepository.totalDeSugestoes());
-		vm.addObject("totalDeReclamacoes", ocorrenciaRepository.totalDeReclamacoes());
-
-		model.addAttribute("label",label);
-
-		model.addAttribute("point",point);
-		
-		//vm.addObject("totalDeOcorrenciasPorMes", ocorrenciaRepository.totalDeOcorrenciasPorMes());
-		
-		
-		
-		return vm;
-		
-	}  */
-    
+	
 
     @GetMapping("/home")
     public String home(ModelMap model){

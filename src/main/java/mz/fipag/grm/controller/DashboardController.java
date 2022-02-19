@@ -2,9 +2,11 @@ package mz.fipag.grm.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mz.fipag.grm.domain.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,6 +15,7 @@ import com.google.gson.Gson;
 import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
+import mz.fipag.grm.service.OcorrenciaService;
 import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +25,9 @@ public class DashboardController {
 	
 	@Autowired
 	private OcorrenciaRepository ocorrenciaRepository;
+	
+	@Autowired
+	private OcorrenciaService ocorrenciaService;
 	
 	@Autowired
 	TipoOcorrenciaService tipoOcorrenciaService;
@@ -145,4 +151,5 @@ public class DashboardController {
 
         return gson.toJson(tipoOcorrenciaService.buscarTodos());
     }
+	
 }
