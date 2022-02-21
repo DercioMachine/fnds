@@ -462,13 +462,24 @@ public class IndexController {
 		nrocorrenciasNT[i] = (BigInteger) ob[2];
 		nrocorrenciasI[i] = (BigInteger) ob[3];
 		
+		/*
+		  System.out.println("NOmes dos meses = "+nomes[i]);
+		  System.out.println("Terminados = "+nrocorrenciasT[i]);
+		  System.out.println("Nao terminados = "+nrocorrenciasNT[i]);
+		  System.out.println("Imporcidentes = "+nrocorrenciasI[i]);
+		 */
+		
 			i++;
+			
 		}
 		
-		System.out.println("NOmes dos meses = "+nomes);
-		System.out.println("Terminados = "+nrocorrenciasT);
-		System.out.println("Nao terminados = "+nrocorrenciasNT);
-		System.out.println("Imporcidentes = "+nrocorrenciasI);
+		model.addAttribute("nomesMeses",nomes);
+		model.addAttribute("nrocorrenciasMesT", nrocorrenciasT);
+		model.addAttribute("nrocorrenciasMesNT", nrocorrenciasNT);
+		model.addAttribute("nrocorrenciasMesI", nrocorrenciasI);
+		
+
+		
 		
 							//	model.addAttribute("nomesRegiao",nomes);
 						//	model.addAttribute("numeroocorenciaRegiao", nrocorrencias);
@@ -585,6 +596,7 @@ public class IndexController {
 		projecto(model);
 		tipoOcorrencia(model);
 		regiao(model);
+		
 		
 //		projecto(model);
 //		categoria(model);
