@@ -185,8 +185,8 @@
                             <label  class="form-label">Tipo Processo</label>
                             <select  class="form-control custom-select form-select" th:field="*{processo}" >
                                 <option value="Geral">Ocorrencia Geral</option>
-                                <option value="Laboral">Ocorrencia Laboral</option>
-                                <option value="SEA/SH/GBV">Ocorrencia SEA/SH/GBV</option>
+                                <option th:each="p : ${processos}"
+                                        th:value="${p.id}" th:text="${p.nome}">Maputo</option>
                             </select>
                         </div>
                     </div>

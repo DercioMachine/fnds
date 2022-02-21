@@ -65,6 +65,14 @@ public class UsuarioController {
     @PostMapping("/cadastrar/usuarios")
     public String cadastrarUsuarios(User user, @RequestParam("tipo") String tipo){
 
+        Regiao regiaonacional = regiaoRepository.findByDesignacao();
+
+        if(tipo.equals("N")){
+            user.setRegiao(regiaonacional);
+        }
+        if(user.getTipogbv()==null){
+            user.setTipogbv("Não");
+        }
         user.setTipo(tipo);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

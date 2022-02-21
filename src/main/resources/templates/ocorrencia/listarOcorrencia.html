@@ -122,7 +122,7 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     </tr>
                     </thead>
                     <tbody id="myTable">
-                    <tr th:each="p : ${pageOcorrencia.registros}">
+                    <tr th:each="p : ${pageOcorrencia}">
                         <!-- <tr th:each="p : ${ocorrencias}"> -->
                         <td style="background: #fff" th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
                         <td style="background: #fff" th:text="${p.id}"><span class="text-muted">01401</span></td>
@@ -213,32 +213,6 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     </div>
 
     <div th:replace="fragmentos/modal :: modal"></div>
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-
-            <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link btn" th:href="@{/listar/ocorrencia(page=${1})}" tabindex="-1">Primeira</a>
-            </li>
-
-            <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina - 1})}" tabindex="-1">Anterior</a>
-            </li>
-
-            <li class="page-item">
-                <span class="page-link" th:text="|${pageOcorrencia.pagina} de ${pageOcorrencia.totalDePaginas}|"></span>
-            </li>
-
-            <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina + 1})}">Próxima</a>
-            </li>
-
-            <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.totalDePaginas})}" tabindex="-1">Última</a>
-            </li>
-
-        </ul>
-    </nav>
 
 
 

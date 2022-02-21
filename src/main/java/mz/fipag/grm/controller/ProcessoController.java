@@ -63,6 +63,7 @@ public class ProcessoController {
     public String viewOrigem(ModelMap model){
 
         model.addAttribute("origem", new Origem());
+        model.addAttribute("processos", processoRepository.findAll());
 
         return "parametrizacao/origem/cadastrarOrigem";
     }

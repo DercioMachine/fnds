@@ -7,7 +7,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.twilio.Twilio;
+import com.twilio.exception.AuthenticationException;
+import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -110,13 +115,47 @@ public class IndexController {
 		 int currentYear = currentdate.getYear();
 	    
 	   int ano=Calendar.getInstance().get(Calendar.YEAR);
-	
+
+		@Autowired
+		private JavaMailSender javaMailSender;
+
+		public static final String ACCOUNT_SID = "AC210a20618423ed1ec9fabcd1a047dc9c";
+		public static final String AUTH_TOKEN = "627b5ac718dce7c7a69a95537fcc9f29";
+
 
     @GetMapping("/")
     public String index(){
 
+		//sendEmail();
+		//sendSMS();
+
         return "publico/principal";
     }
+
+	void sendEmail() {
+
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo("jacintomachava@gmail.com");
+
+		msg.setSubject("Testing from Spring Boot");
+		msg.setText("Hello World \n Spring Boot Email");
+
+		javaMailSender.send(msg);
+
+	}
+	void sendSMS() throws AuthenticationException {
+
+		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+
+		Message message = Message.creator(
+				new com.twilio.type.PhoneNumber("9107084699"), 		// To number
+				new com.twilio.type.PhoneNumber("9107084699"),		// From number
+				"Notificacao de Sistema de Ocorrencias da FIPAG") // SMS body
+				.create();
+
+		System.out.println(message.getSid());
+
+	}
     
     
     /*****************************************GRAFICOS DE OCORRENCIAS****************************************/

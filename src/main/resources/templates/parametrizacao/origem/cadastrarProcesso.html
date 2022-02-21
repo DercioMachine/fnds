@@ -146,64 +146,79 @@
 
                 <div class="row">
 
-                    <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                            <label class="form-label">Nome</label>
-                            <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                                <input type="text" th:field="*{nome}"  class="form-control" required placeholder="Digite o nome"  >
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Descricao</label>
-                            <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                                <input type="text" th:field="*{descricao}" class="form-control" required placeholder="Digite a Descricao"  >
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Responsavel</label>
-                            <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                                <input type="text" th:field="*{responsavel}" class="form-control" required placeholder="Digite o Responsavel"  >
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Tempo</label>
-                            <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                                <input type="text" th:field="*{tempo}" class="form-control" required placeholder="Digite o tempo numero de dias"  >
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
                             <label  class="form-label">Tipo</label>
-                            <select  class="form-control custom-select form-select" th:field="*{tipo}" >
+                            <select  class="form-control custom-select form-select" th:field="*{nome}" >
                                 <option value="Geral">Ocorrencia Geral</option>
                                 <option value="Laboral">Ocorrencia Laboral</option>
                                 <option value="SEA/SH/GBV">Ocorrencia SEA/SH/GBV</option>
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Tempo de Tratamento</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{tempotratamento}"  class="form-control" required placeholder="Digite o nome"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Tempo de Investigacao</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{tempoinvestigacao}"  class="form-control" required placeholder="Digite o nome"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Tempo de Resolucao</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{temporesolucao}"  class="form-control" required placeholder="Digite o nome"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Tempo de Sign-Off</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{temposign}"  class="form-control" required placeholder="Digite o nome"  >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Tempo de Monitoria</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{tempomonitoria}"  class="form-control" required placeholder="Digite o nome"  >
+                            </div>
+                        </div>
+                    </div>
+
+
+
 
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
