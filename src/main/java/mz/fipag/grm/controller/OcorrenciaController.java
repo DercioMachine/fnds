@@ -1,5 +1,6 @@
 package mz.fipag.grm.controller;
 
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -42,11 +43,16 @@ import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.ProvinciaService;
 import mz.fipag.grm.service.TipoAlertaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
+import mz.fipag.grm.service.reporteService;
 import mz.fipag.grm.util.PaginacaoUtil;
+import net.sf.jasperreports.engine.JRException;
 
 
 @Controller
 public class OcorrenciaController {
+	
+	@Autowired
+	private reporteService reportService;
 
     @Autowired
     private OcorrenciaService ocorrenciaService;
@@ -195,7 +201,7 @@ public class OcorrenciaController {
 
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) {
+	public String salvarOcorrencia(Ocorrencia ocorrencia, Cidade cidade, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) {
 
     	
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
@@ -206,7 +212,7 @@ public class OcorrenciaController {
     	
     	
     	
-    		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
+    		ocorrencia.setGrmStamp(cidade.getProvincia().getCodigo()+""+codigo+""+anooo);
     		ocorrencia.setRegistado(true);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.salvar(ocorrencia);
@@ -252,12 +258,16 @@ public class OcorrenciaController {
 
     @GetMapping("/resolver/ocorrencia/{id}")
     public String resolverOcorrencia(@PathVariable("id") Long id, ModelMap model) {
-
-        String processo = ocorrenciaService.buscarPorId(id).getTipoorigem().getProcesso();
-        System.out.println("Tipo de Processos: "+processo);
+    	
+    	Ocorrencia ocorrenciaProcesso = ocorrenciaService.buscarPorId(id);
+    	
+    	if(ocorrenciaProcesso.getTipoorigem() != null) {
+    		
+    		String processo = ocorrenciaService.buscarPorId(id).getTipoorigem().getProcesso();
+    		 model.addAttribute("processos", processoRepository.BuscarTodosPorProcessos(processo));	
+    	}
+        
         model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
-        model.addAttribute("processos", processoRepository.BuscarTodosPorProcessos(processo));
-        System.out.println("Processos: "+processoRepository.BuscarTodosPorProcessos(processo));
         model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
         model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(id));
         model.addAttribute("resolver", new Resolucao());
@@ -433,6 +443,14 @@ public class OcorrenciaController {
 		  ocorrenciaService.excluir(id); 
 		  return "redirect:/listar/ocorrencia"; 
 	  }
+    
+
+    @GetMapping("/relatorio/{format}") 
+    public String gerarRelatorio(@PathVariable String format) throws FileNotFoundException, JRException {
+		
+    	return reportService.exportReport(format);
+    	
+    }
 
 
 

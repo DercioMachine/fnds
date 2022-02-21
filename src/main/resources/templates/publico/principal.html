@@ -23,6 +23,9 @@
 	
 	<!-- jQueryUI (autocomplete) -->
 	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+	
+	
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
    <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
     <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
@@ -684,6 +687,33 @@ h3{
         </div>
     </div>
 </footer> 
+
+<div th:if="${success} != null">
+		<script th:inline="javascript">
+
+			/* swal("Parabens!","" + "<strong th:text='${success}'></strong>" +"", "success"); */
+			
+			
+			/*<![CDATA[*/
+			
+			var messagem = /*[[${ocorrenciaa.grmStamp}]]*/"";
+			
+			var sucesso = /*[[${success}]]*/"";
+			
+			/*]]>*/
+			
+			
+			Swal.fire({
+				  //text: 'Preocupacao submetida com sucesso',
+				  html: sucesso + " <br> "+" NOTA: Anote o seu código para o acompanhamento da sua ocorrência: <br>"+"<span style=color:red; font-weight:bolder>"+messagem+"</span>",
+				  icon: 'success',
+				  confirmButtonText: 'Ok'
+				})
+				
+
+	</script>
+	
+	</div>
     
    </body>
 

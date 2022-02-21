@@ -43,16 +43,16 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
    	public Object totalDeReclamacoesProcedentes(@Param("ano") int ano);
     
 
-    @Query(value="select count(*) from ocorrencia where tipo_ocorrencia_id!=1 and procedencia='Sim' and estado='Validado' and year(created)= :ano", nativeQuery=true)
+    @Query(value="select count(*) from ocorrencia where procedencia='Não' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeReclamacoesNaoProcedentes(@Param("ano") int ano);
     
     
     
-    @Query(value="select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and resolucao = 'T' and year(created)= :ano", nativeQuery=true)
+    @Query(value="select count(*) from ocorrencia where resolucao = 'T' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeReclamacoesTerminadas(@Param("ano") int ano);
     
     
-    @Query(value="select count(*) from ocorrencia where tipo_ocorrencia_id=1 and procedencia='Sim' and resolucao = 'R' and year(created)= :ano", nativeQuery=true)
+    @Query(value="select count(*) from ocorrencia where resolucao != 'T' and year(created)= :ano", nativeQuery=true)
     public Object totalDeReclamacoesEmResolucao(@Param("ano") int ano);
 
 	/*
@@ -80,6 +80,47 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	
 	@Query(value="select interno_externo, count(*) from ocorrencia group by interno_externo;",nativeQuery=true)
 	public List<Object[]> busqueTudoAgrupadoPorDefinicao();
+	
+	
+	@Query(value="select monthname(created) as 'mes',  \r\n"
+			+ "	(select count(*) from ocorrencia where resolucao = 'T' and procedencia = 'Sim' and estado='Validado' and estado!='Temporario') as 'Terminados',\r\n"
+			+ "    (select count(*) from ocorrencia where resolucao != 'T'and procedencia = 'Sim' and estado='Validado' and estado!='Temporario' ) as 'Nao Terminadas',\r\n"
+			+ "	(select count(*) from ocorrencia where procedencia != 'Não' and estado='Validado' and estado!='Temporario') as Improcedentes\r\n"
+			+ "from ocorrencia group by monthname(created) order by ocorrencia.id ;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorMes();
+	
+	@Query(value="select designacao,  \r\n"
+			+ "\r\n"
+			+ "(select count(*) from ocorrencia where resolucao = 'T' and procedencia = 'Sim' and estado='Validado' and estado!='Temporario') as Terminados,\r\n"
+			+ "(select count(*) from ocorrencia where resolucao != 'T' and procedencia = 'Sim' and estado='Validado' and estado!='Temporario' and resolucao='R') as NaoTerminada,\r\n"
+			+ "(select count(*) from ocorrencia where procedencia != 'Não' and estado='Validado' and estado!='Temporario') as Improcedentes\r\n"
+			+ "\r\n"
+			+ "from ocorrencia, cidade where ocorrencia.cidade_id=cidade.id group by cidade_id;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCidadeEstado();
+	
+	@Query(value="select p.designacao, \r\n"
+			+ "(select count(*) from ocorrencia where resolucao = 'T' and procedencia = 'Sim' and estado='Validado') as Terminados,\r\n"
+			+ "(select count(*) from ocorrencia where resolucao != 'T' and procedencia = 'Sim' and estado='Validado' and resolucao='R') as NaoTerminada,\r\n"
+			+ "(select count(*) from ocorrencia where procedencia != 'Não' and estado='Validado') as Improcedentes\r\n"
+			+ "from ocorrencia o join cidade c join provincia p where c.provincia_id = p.id group by p.designacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorProvinciaEstado();
+	
+	
+	@Query(value="select forma_comunicacao, count(*) from ocorrencia group by forma_comunicacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCanalDeEntrada();
+	
+	@Query(value="select tipo_ocorrencia.designacao, count(*) from ocorrencia, tipo_ocorrencia where ocorrencia.tipo_ocorrencia_id=tipo_ocorrencia.id group by tipo_ocorrencia_id;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorTipoDeOcorrencia();
+	
+	
+	
+
+	@Query(value="select regiao.designacao, count(*) from ocorrencia, cidade, regiao where ocorrencia.cidade_id = cidade.id and cidade.regiao_id = regiao.id group by regiao.designacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorRegiao();
+	
+	@Query(value="select monthname(created) as mes,cast(sum(if(resolucao='T',1,0))as signed) as terminado, cast(sum(if(resolucao!='T',1,0))as signed) as Nterminado,cast(sum(if(left(procedencia,1)='N',1,0))as signed) as Improcedente from ocorrencia group by month(created);",nativeQuery=true)
+	public List<Object[]> busqueTnTI();
+	
 
 
     

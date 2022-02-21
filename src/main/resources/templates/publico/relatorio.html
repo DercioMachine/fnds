@@ -1,0 +1,323 @@
+<!doctype html>
+
+<html lang="pt"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title> FIPAG </title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- CSS files -->
+    <link th:href="@{/dist/css/tabler.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-flags.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-payments.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/tabler-vendors.min.css}" rel="stylesheet"/>
+    <link th:href="@{/dist/css/demo.min.css}" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+    <!-- jQueryUI (autocomplete) -->
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/9.3.3/highcharts.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highchartTable/2.0.0/jquery.highchartTable.min.js"></script>
+    
+
+
+
+    
+    <!-- <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
+
+
+    <!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
+    <script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+    <!-- <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
+    <script th:src="@{/../assets/js/dashboard.js}"></script> -->
+
+    <!-- Libs JS -->
+    <script th:src="@{/dist/libs/apexcharts/dist/apexcharts.min.js}"></script>
+    <!-- Tabler Core -->
+    <script th:src="@{/dist/js/tabler.min.js}"></script>
+
+    <style type="text/css">
+.h2{
+margin-top: 0;
+margin-bottom: 0;
+}
+
+</style>
+
+</head>
+
+
+
+<!-- url(/image/fundoo.jpg) no-repeat center center fixed; -->
+
+
+<body style="background: #f4f5fa" class="antialiased wrapper">
+
+
+<!-- Fragmentos de header -->
+<header th:replace="/fragmentos/headerPublico"></header>
+<!-- Fim de frgmento de header-->
+
+<script type="text/javascript">
+function toggleMobileMenu(menu) {
+menu.classList.toggle('open');
+}
+</script>
+
+
+<div>
+
+
+    <!-- Conteudo -->
+
+
+    <script type="text/javascript">
+
+function onChangeSemestre(){
+var estado = document.getElementById("radioSemestre");
+
+
+if(estado.value=="semestre"){
+document.getElementById("semestree").style.display="block";
+
+document.getElementById("trimestree").style.display="none";
+document.getElementById("mess").style.display="none";
+}
+}
+
+function onChangeTrimestre(){
+var estado = document.getElementById("radioTrimestre");
+
+
+if(estado.value=="trimestre"){
+document.getElementById("trimestree").style.display="block";
+
+document.getElementById("semestree").style.display="none";
+document.getElementById("mess").style.display="none";
+}
+}
+
+function onChangeMes(){
+var estado = document.getElementById("radioMes");
+
+
+if(estado.value=="mes"){
+document.getElementById("mess").style.display="block";
+
+document.getElementById("semestree").style.display="none";
+document.getElementById("trimestree").style.display="none";
+}
+}
+
+
+
+</script>
+
+
+
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Ano</label>
+                                <select id="ano" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+
+
+                    <div align="center" style="padding-top: 30px" class="card ">
+                        <div style="padding-top: 8px" class="card-body">
+
+                            <div class="form-check-inline ">
+                                <label class="form-check-label">
+                                    <input onchange="onChangeSemestre()" id="radioSemestre" value="semestre" name="filtro" class="form-check-input check" type="radio" checked> Semestre
+                                </label>
+                            </div>
+
+                            <div style="margin-left: 15%; margin-right: 15%;" class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="filtro" value="trimestre" class="form-check-input"> Trimestre
+                                </label>
+                            </div>
+
+
+
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input onchange="onChangeMes()" id="radioMes" type="radio" value="mes" name="filtro" class="form-check-input" > Mês
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="semestree" class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Semestre</label>
+                                <select id="semestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="1° Semestre">1° Semestre</option>
+                                    <option value="2° Semestre">2° Semestre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Trimestre</label>
+                                <select id="trimestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="1° Trimestre">1° Trimestre</option>
+                                    <option value="2° Trimestre">2° Trimestre</option>
+                                    <option value="3° Trimestre">3° Trimestre</option>
+                                    <option value="4° Trimestre">4° Trimestre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: none;" id="mess" class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Mês</label>
+                                <select id="mes" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="selecione">selecione</option>
+                                    <option value="Janeiro">Janeiro</option>
+                                    <option value="Fevereiro">Fevereiro</option>
+                                    <option value="Março">Março</option>
+                                    <option value="Abril">Abril</option>
+                                    <option value="Maio ">Maio </option>
+                                    <option value="Junho">Junho</option>
+                                    <option value="Julho">Julho</option>
+                                    <option value="Agosto">Agosto</option>
+                                    <option value="Setembro">Setembro</option>
+                                    <option value="Outubo">Outubo</option>
+                                    <option value="Novembro">Novembro</option>
+                                    <option value="Dezembro">Dezembro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                        
+                        <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Resumo de Ocorrências</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="span-one-third">
+            <table class="highchart" data-graph-container-before="1" data-graph-type="column" style="margin-top:20px;">
+              <caption>Column + area example</caption>
+              <thead>
+                <tr>
+                  <th>Descricao</th>
+                  <th>contagem</th>
+                  <th data-graph-type="area">Benefits</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>[[${nomesCidades}]]</td>
+                  <td>[[${ocorrenciasCidade}]]</td>
+                  <td>2000</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <button class="btn danger" data-controls-modal="example3-code" data-backdrop="1">See the code</button>
+          </div>
+
+			
+
+            </div>
+            
+            </div>
+        </div>
+    </div>
+    
+
+
+
+<script>
+
+$('table.highchart').highchartTable();
+
+</script>
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+    <!-- Conteudo-->
+
+
+</body>
+
+</html>

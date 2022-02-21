@@ -75,8 +75,8 @@
 
     <div class="card">
 
-		<div th:if="${ocorrencia.procedencia =='Sim' }">
-			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral' }" >
+		<div th:if="${ocorrencia.procedencia =='Sim' && ocorrencia.tipoorigem != null}">
+			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral'}" >
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Geral</h2>
 			</div>
 			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo=='Laboral' }" >
@@ -90,7 +90,7 @@
 			<div class="card-body">
 				<div class="row" >
 
-					<div class="col-6 col-sm-6">
+					<div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}">
 						<div class="form-group">
 							<span style="font-weight: bolder;">Definição da Reclamação: </span>	<span th:text="${ocorrencia.tipoorigem.processo}" ></span>
 						</div>
@@ -190,7 +190,10 @@
 								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
 								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
 								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
-								<td th:text="${r.responsabilidade.responsavel}" ><span class="text-muted">01401</span></td>
+								<td>
+									<span th:if="${r != null && r.responsabilidade != null && r.responsabilidade.responsavel != null}" th:text="${r.responsabilidade.responsavel}"  class="text-muted">
+									</span>
+								</td>
 								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
 							</div>
 						  </tr>
@@ -223,7 +226,7 @@
 					   </div>
 				   </div>
 
-				   <div class="col-6 col-sm-6">
+				   <div class="col-6 col-sm-6"  th:if="${ocorrencia != null && ocorrencia.tipoOcorrencia != null && ocorrencia.tipoOcorrencia.designacao != null}">
 					   <div class="form-group">
 						   <span style="font-weight: bolder;">Tipo de Ocorrência: </span>	<span style="color: red;font-weight: bolder;" th:text="${ocorrencia.tipoOcorrencia.designacao}"></span>
 					   </div>
@@ -292,15 +295,9 @@
 				</div>
 			</div>
 
-			  <div class="col-6 col-sm-4">
+			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.cidade != null && ocorrencia.cidade.provincia != null && ocorrencia.cidade.provincia.designacao != null}">
 				  <div class="form-group">
-					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.provincia.designacao}"></span>
-				  </div>
-			  </div>
-
-			  <div class="col-6 col-sm-4">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
+					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.cidade.provincia.designacao}"></span>
 				  </div>
 			  </div>
 

@@ -1,7 +1,11 @@
 package mz.fipag.grm.domain;
 
 import javax.persistence.*;
-import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import java.util.Date;
 
 
 @SuppressWarnings("serial")
@@ -21,6 +25,7 @@ public class Resolucao extends AbstractEntity{
     @Column(name = "tipo")
     private String tipo;
 
+    @DateTimeFormat(iso = ISO.DATE)
     @Column(name = "dataresolucao")
     private Date dataResolucao;
 

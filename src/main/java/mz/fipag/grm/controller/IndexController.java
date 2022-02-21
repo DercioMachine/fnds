@@ -3,14 +3,9 @@ package mz.fipag.grm.controller;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -144,30 +139,12 @@ public class IndexController {
 		}
 
 
-		model.addAttribute("legendaestado",legendaestado);
-		model.addAttribute("ocorrencias", nrocorrencias);
+		model.addAttribute("nomesProjecto",legendaestado);
+		model.addAttribute("numeroocorenciaProjecto", nrocorrencias);
 
 	}
 
-	public void categoria(Model model){
-
-		List<Object[]> listaOcorrenciaPorCategoria = ocorrenciaRepository.busqueTudoAgrupadoPorCategoria();
-
-		String[] legendaCategoria = new String[listaOcorrenciaPorCategoria.size()];
-		BigInteger[] nrocorrenciasCategoria = new BigInteger[listaOcorrenciaPorCategoria.size()];
-		int j=0;
-		for (Object[] ob : listaOcorrenciaPorCategoria){
-
-			legendaCategoria[j] = (String) ob[0];
-			nrocorrenciasCategoria[j] = (BigInteger) ob[1];
-
-			j++;
-		}
-
-		model.addAttribute("legendaCategoria",legendaCategoria);
-		model.addAttribute("nrocorrenciasCategoria", nrocorrenciasCategoria);
-
-	}
+	
 
 	public void cidade(Model model){
 		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCidade();
@@ -254,9 +231,316 @@ public class IndexController {
 		model.addAttribute("ocorrenciasDefinicao", nrocorrencias);
 
 	}
+	
+	public void mes(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorMes();
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias1 = new BigInteger[lista.size()];
+		BigInteger[] nrocorrencias2 = new BigInteger[lista.size()];
+		BigInteger[] nrocorrencias3 = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias1[i] = (BigInteger) ob[1];
+		nrocorrencias2[i] = (BigInteger) ob[2];
+		nrocorrencias3[i] = (BigInteger) ob[3];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomesMes",nomes);
+		model.addAttribute("numeroocorencia1", nrocorrencias1);
+		model.addAttribute("numeroocorencia2", nrocorrencias2);
+		model.addAttribute("numeroocorencia3", nrocorrencias3);
+
+	}
+	
+	public void cidadeEstado(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCidadeEstado();
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias1 = new BigInteger[lista.size()];
+		BigInteger[] nrocorrencias2 = new BigInteger[lista.size()];
+		BigInteger[] nrocorrencias3 = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias1[i] = (BigInteger) ob[1];
+		nrocorrencias2[i] = (BigInteger) ob[2];
+		nrocorrencias3[i] = (BigInteger) ob[3];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomesCidades",nomes);
+		model.addAttribute("numeroocorencia1", nrocorrencias1);
+		model.addAttribute("numeroocorencia2", nrocorrencias2);
+		model.addAttribute("numeroocorencia3", nrocorrencias3);
+
+	}
+	
+	public void ProvinciaEstado(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProvinciaEstado();
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias1 = new BigInteger[lista.size()];
+		BigInteger[] nrocorrencias2 = new BigInteger[lista.size()];
+		BigInteger[] nrocorrencias3 = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias1[i] = (BigInteger) ob[1];
+		nrocorrencias2[i] = (BigInteger) ob[2];
+		nrocorrencias3[i] = (BigInteger) ob[3];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomesProvincias",nomes);
+		model.addAttribute("numeroocorencia1", nrocorrencias1);
+		model.addAttribute("numeroocorencia2", nrocorrencias2);
+		model.addAttribute("numeroocorencia3", nrocorrencias3);
+
+	}
+	
+	public void canaDeEntrada(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCanalDeEntrada();
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias[i] = (BigInteger) ob[1];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomesCanais",nomes);
+		model.addAttribute("numeroocorencia", nrocorrencias);
+
+	}
+	
+	public void categoria(Model model){
+
+	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCategoria();
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias[i] = (BigInteger) ob[1];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomesCategoria",nomes);
+		model.addAttribute("numeroocorenciaCategoria", nrocorrencias);
+
+	}
+	
+	
+	public void tipoOcorrencia(Model model){
+
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorTipoDeOcorrencia();
+			
+
+
+			String[] nomes = new String[lista.size()];
+			
+			BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+			
+			int i=0;
+			for (Object[] ob : lista){
+
+			nomes[i] = (String) ob[0];
+				
+			nrocorrencias[i] = (BigInteger) ob[1];
+				
+				
+				i++;
+			}
+
+
+			model.addAttribute("nomesTipoOcorrencias",nomes);
+			model.addAttribute("numeroocorenciaTipoOcorrencias", nrocorrencias);
+
+		}
+	
+	public void regiao(Model model){
+
+			List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorRegiao();
+				
+
+
+				String[] nomes = new String[lista.size()];
+				
+				BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+				
+				int i=0;
+				for (Object[] ob : lista){
+
+				nomes[i] = (String) ob[0];
+					
+				nrocorrencias[i] = (BigInteger) ob[1];
+					
+					
+					i++;
+				}
+				
+				
+
+
+				model.addAttribute("nomesRegiao",nomes);
+				model.addAttribute("numeroocorenciaRegiao", nrocorrencias);
+
+			}
+	
+	
+	public void busqueTnTI(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTnTI();
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		
+		
+		BigInteger[] nrocorrenciasT = new BigInteger[lista.size()];
+		BigInteger[] nrocorrenciasNT = new BigInteger[lista.size()];
+		BigInteger[] nrocorrenciasI = new BigInteger[lista.size()];
+		
+		int i=0;
+		
+		for (Object[] ob : lista){
+			
+		nomes[i] = (String) ob[0];
+		
+		nrocorrenciasT[i] = (BigInteger) ob[1];
+		nrocorrenciasNT[i] = (BigInteger) ob[2];
+		nrocorrenciasI[i] = (BigInteger) ob[3];
+		
+			i++;
+		}
+		
+		System.out.println("NOmes dos meses = "+nomes);
+		System.out.println("Terminados = "+nrocorrenciasT);
+		System.out.println("Nao terminados = "+nrocorrenciasNT);
+		System.out.println("Imporcidentes = "+nrocorrenciasI);
+		
+							//	model.addAttribute("nomesRegiao",nomes);
+						//	model.addAttribute("numeroocorenciaRegiao", nrocorrencias);
+	}
+
+	
+	
+	
+	
+	
+
+	
+	@GetMapping("/estatistica")
+	public String estatistica(Model model){
+		
+		model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear));
+		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
+		
+		
+		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
+		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
+		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
+		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
+		
+		
+		mes(model);
+		//cidadeEstado(model);
+		ProvinciaEstado(model);
+		cidade(model);
+		canaDeEntrada(model);
+		categoria(model);
+		projecto(model);
+		tipoOcorrencia(model);
+		regiao(model);
+		busqueTnTI(model);
+		
+		
+		return "publico/estastica";
+	}
+	
+	
+	
+	@GetMapping("/relatorio")
+	public String relatorio(Model model){
+		
+		model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear));
+		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
+		
+		
+		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
+		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
+		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
+		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
+		
+		
+		mes(model);
+		//cidadeEstado(model);
+		ProvinciaEstado(model);
+		cidade(model);
+		canaDeEntrada(model);
+		categoria(model);
+		projecto(model);
+		
+		return "publico/relatorio";
+	}
+	
     
-    
-    @GetMapping("/estatistica")
+    @GetMapping("/estatistic")
     public ModelAndView estatistica(){
     	
     	ModelAndView vm = new ModelAndView("publico/estastica");
@@ -270,7 +554,6 @@ public class IndexController {
 		vm.addObject("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
 		vm.addObject("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		vm.addObject("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
-		
 		
 		
 		
@@ -293,14 +576,23 @@ public class IndexController {
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
 		
-		
-		projecto(model);
-		categoria(model);
+		mes(model);
+		//cidadeEstado(model);
+		ProvinciaEstado(model);
 		cidade(model);
-		tipoOrigem(model);
-		entidade(model);
-		definicao(model);
+		canaDeEntrada(model);
+		categoria(model);
+		projecto(model);
+		tipoOcorrencia(model);
+		regiao(model);
 		
+//		projecto(model);
+//		categoria(model);
+//		cidade(model);
+//		tipoOrigem(model);
+//		entidade(model);
+//		definicao(model);
+//		
 		return "reclamacoes/home";
 	}
 	
@@ -344,8 +636,18 @@ public class IndexController {
     
     
     @PostMapping("/preCadastrar")
-	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, @RequestParam("descricao") String descricaoAnx, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
+	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Cidade cidade, @RequestParam("descricaoAnx") String descricaoAnx, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
 
+    	
+    	if (result.hasErrors()) {
+			System.out.println("Entra no if");
+    		return "apresentar/preocupacao";
+			
+		}else {
+			System.out.println("Nao Entra no if");
+			
+		}
+    	
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
     	int ano = Calendar.getInstance().get(Calendar.YEAR);
     	
@@ -354,17 +656,12 @@ public class IndexController {
     	
     	
     	
-    		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
+    		ocorrencia.setGrmStamp(cidade.getProvincia().getId()+""+codigo+""+anooo);
     		ocorrencia.setEstado("Temporario");
     	
     		ocorrencia.setTemporario(true);
     		
-    		
-    		if (result.hasErrors()) {
-    			return "apresentar/preocupacao";
-    		}
-    		
-    		
+    		System.out.println("Antes de salvar");
     		ocorrenciaService.salvar(ocorrencia);
     		
     		if(files!=null) {
@@ -375,7 +672,9 @@ public class IndexController {
     					docStorageService.saveFile(file, ocorrencia, descricaoAnx);
     				}
     	        }
+    			
     		}
+    		
     		
     	// model.addAttribute("ocorrenciaa", ocorrencia.getGrmStamp());
 
@@ -384,7 +683,7 @@ public class IndexController {
     	attr.addFlashAttribute("ocorrenciaa", ocorrenciaService.buscarPorId(ocorrencia.getId()));
     	
     	
-    	return "redirect:/apresentar/preocupacao";
+    	return "redirect:/";
 	}
     
     

@@ -55,6 +55,7 @@
 	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
 	<!-- jQueryUI (autocomplete) -->
 	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
     
    <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
     <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
@@ -66,11 +67,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
    <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
     <script th:src="@{/../assets/js/dashboard.js}"></script> -->
-    
-    
-    
-    
-    
     <style>
 
 * {
@@ -310,6 +306,27 @@ select.list-dt:focus {
     object-fit: cover
 }
 
+input[type="radio"]{
+      display: none;
+    }
+    input[type="radio"] + label span {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background: transparent;
+      vertical-align: middle;
+      border: 2px solid #f56;
+      border-radius: 100%;
+      padding: 2px;
+      margin:0 5px;
+    }
+    input[type="radio"]:checked + label span {
+      width: 20px;
+      height: 20px;
+      background: #f56;
+      background-clip: content-box;
+    }  
+
 </style>
     
     
@@ -522,69 +539,83 @@ return false;
     
 
 	<script type="text/javascript">
-      	function onChangeStatus(){
-      		var status = document.getElementById("origem");
-      		
-      		if(status.value=="individual"){
-      			
-      			document.getElementById("nome").style.display="block";
-      			document.getElementById("genero").style.display="block";
-      			document.getElementById("comunicacao").style.display="block";
-      			document.getElementById("contacto").style.display="block";
-      			document.getElementById("faixaEtaria").style.display="block";
-      			document.getElementById("endereco").style.display="block";
-      			document.getElementById("email").style.display="block";
-      			
-      			document.getElementById("nrHomens").style.display="none";
-      			document.getElementById("nrMulheres").style.display="none";
-      			document.getElementById("nomeGrupo").style.display="none";
-      			
-      			
-      			
-      			
-      		}else if(status.value=="grupo"){
-      			
-      			document.getElementById("nome").style.display="block";
-      			document.getElementById("comunicacao").style.display="block";
-      			document.getElementById("contacto").style.display="block";
-      			document.getElementById("endereco").style.display="block";
-      			document.getElementById("email").style.display="block";
-      			document.getElementById("nrHomens").style.display="block";
-      			document.getElementById("nrMulheres").style.display="block";
-      			document.getElementById("nomeGrupo").style.display="block";
-      			
-      			document.getElementById("faixaEtaria").style.display="none";
-      			document.getElementById("genero").style.display="none";
-      			
-      			
-      		}else if(status.value=="anonimo"){
-      			
-      			document.getElementById("genero").style.display="block";
-      			document.getElementById("comunicacao").style.display="block";
-      			document.getElementById("contacto").style.display="block";
-      			document.getElementById("faixaEtaria").style.display="block";
-      			document.getElementById("endereco").style.display="block";
-      			document.getElementById("email").style.display="block";
-      			
-      			document.getElementById("nrHomens").style.display="none";
-      			document.getElementById("nrMulheres").style.display="none";
-      			document.getElementById("nomeGrupo").style.display="none";
-      			document.getElementById("nome").style.display="none";
-      		}else{
-      			
-      			document.getElementById("nrHomens").style.display="none";
-      			document.getElementById("nrMulheres").style.display="none";
-      			document.getElementById("nomeGrupo").style.display="none";
-      			document.getElementById("nome").style.display="none";
-      			document.getElementById("genero").style.display="none";
-      			document.getElementById("comunicacao").style.display="none";
-      			document.getElementById("contacto").style.display="none";
-      			document.getElementById("faixaEtaria").style.display="none";
-      			document.getElementById("endereco").style.display="none";
-      			document.getElementById("email").style.display="none";
-      			
-      		}
-      	}
+	
+	
+	function onChangeIndividual(){
+		var estado = document.getElementById("individual");
+		
+		
+		if(estado.value=="Individual"){
+  			
+  			document.getElementById("nome").style.display="block";
+  			document.getElementById("faixaEtaria").style.display="block";
+  			document.getElementById("genero").style.display="block";
+  			
+  			document.getElementById("nomeGrupo").style.display="none";
+  			
+  		}
+	}
+	
+	function onChangeGrupo(){
+		var estado = document.getElementById("grupo");
+		
+		if(estado.value=="Grupo/Comunidade"){
+  			
+			document.getElementById("faixaEtaria").style.display="block";
+  			document.getElementById("nomeGrupo").style.display="block";
+  			document.getElementById("nome").style.display="block";
+  			document.getElementById("genero").style.display="block";
+  			
+  			
+  		}
+	}
+	
+	function onChangeAnonimo(){
+		
+		var estado = document.getElementById("anonimo");
+		
+		if(estado.value=="Anónimo"){
+  			
+  			document.getElementById("genero").style.display="block";
+  			document.getElementById("faixaEtaria").style.display="block";
+  			
+  			document.getElementById("nome").style.display="none";
+  			document.getElementById("nomeGrupo").style.display="none";
+  		}
+		
+	}
+	
+	
+function onChangeAnonimo(){
+		
+		var estado = document.getElementById("anonimo");
+		
+		if(estado.value=="Anónimo"){
+  			
+  			document.getElementById("genero").style.display="block";
+  			document.getElementById("faixaEtaria").style.display="block";
+  			
+  			document.getElementById("nome").style.display="none";
+  			document.getElementById("nomeGrupo").style.display="none";
+  		}
+		
+	}
+	
+	
+function onChangeNenhum(){
+		
+		var estado = document.getElementById("nenhum");
+		
+		if(estado.value=="Nenhum"){
+			document.getElementById("genero").style.display="none";
+  			document.getElementById("faixaEtaria").style.display="none";
+  			document.getElementById("nome").style.display="none";
+  			document.getElementById("nomeGrupo").style.display="none";
+  		}
+  		
+		
+	}
+	
       	
       	
       	function onChangeProjecto(){
@@ -620,6 +651,9 @@ return false;
       	}
       	
       </script>
+      
+      
+    
     <!-- Conteudo -->
     
     
@@ -638,12 +672,14 @@ return false;
 			
 			/*]]>*/
 			
+			/apresentar/publico/principal
+			
 			
 			Swal.fire({
 				  //text: 'Preocupacao submetida com sucesso',
 				  html: sucesso + " <br> "+" NOTA: Anote o seu código para o acompanhamento da sua ocorrência: <br>"+"<span style=color:red; font-weight:bolder>"+messagem+"</span>",
 				  icon: 'success',
-				  confirmButtonText: 'Ok'
+				  confirmButtonText: '<a href="publico/principal">Ok</a>'
 				})
 				
 
@@ -676,47 +712,43 @@ return false;
         
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                 <h2><strong>Registo de Ocorrências</strong></h2>
-                <p>Preeacha todos os campos do formulário para avancar para o próximo passo</p>
+                <p>Preeacha todos os campos do formulário e avance para o próximo passo</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
                     <form id="msform" th:action="@{/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
+                    
+                    
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Dados da Ocorrência</strong></li>
                                 <li id="personal"><strong>Dados do Utente</strong></li>
                                 <li id="payment"><strong>Dados dos Anexos</strong></li>
                                 <li id="confirm"><strong>Terminar</strong></li>
-                            </ul> <!-- fieldsets -->
+                            </ul>
+                            
+                            <div th:replace="/fragmentos/validacao  :: validacao"></div>
+                            
+                             
+                            <div class="card">
+                            	<div class="card-body">
+                                	<p>Os campos marcados com <strong style="color:red">*</strong> são de preenchimento obrigatório</p>
+                                </div>
+                            </div>
+                            <!-- fieldsets -->
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Dados da Ocorrência</h2> 
 									
 									
-										<div class="row">
-								            	<div id="projectoOperacao" class="col-6 col-sm-12">
-								                    <div class="form-group">
-								                        <label class="form-label">Projecto ou Operação?</label>
-								                        <select class="form-control custom-select" th:field="*{projectoOperacao}" >
-								                            <option value="Projecto">Projecto</option>
-								                            <option value="Operação">Operação</option>
-								                        </select>
-								                    </div>
-								                </div>
-										</div>
-										
 													
 													<div class="row">
-														<div class="form-group col-6 col-sm-6">
-															<label for="comboboxProvincias" class="form-label">Empreiteiro</label>
-															<select  class="form-control custom-select form-select" th:field="*{empreiteiro}" >
-																<option value="">Selecione o Empreiteiro...</option>
-																<option th:each="p : ${empreiteiros}"
-																		th:value="${p.id}" th:text="${p.nome}">Maputo</option>
-															</select>
-														</div>
+														<div class="col-6 col-sm-6">
+															<label class="form-label"> Data da Ocorrência <strong style="color:red">*</strong></label>
+															<input type="date" th:field="*{dataOcorrencia}" class="form-control">
+														</div>	
 														
 														<div class="form-group col-6 col-sm-6">
-															<label for="comboboxProvincias" class="form-label">Cidade</label>
+															<label for="comboboxProvincias" class="form-label">Cidade <strong style="color:red">*</strong></label>
 															<select  class="form-control custom-select form-select" th:field="*{cidade}" >
 																<option value="">Selecione o Cidade...</option>
 																<option th:each="p : ${cidades}"
@@ -729,92 +761,37 @@ return false;
 														
 														<div class="row">
 														
-														<div class="form-group col-6 col-sm-6">
-															<label for="comboboxProvincias" class="form-label">Província</label>
-                       	 										<select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
-																<option value="">Selecione a Província...</option>
-											                            <option th:each="p : ${provincias}"
-											                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
-														</div>
-														
-														<div class="form-group col-6 col-sm-6">
-															<label for="comoboxDistrito" class="form-label">Distrito</label>
-															<select id="comoboxDistrito" class="form-control custom-select form-select" th:field="*{distrito}" >
-																<option value="">Selecione o Distrito...</option>
-																<option th:each="p : ${distritos}"
-											                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
-														</div>
-														
-														</div>
-														
-														<div class="row">
-														
-														<div class="form-group col-6 col-sm-6">
-															<label for="comboboxPosto" class="form-label"> Posto Admnistrativo</label>
-															<select id="comboboxPosto" class="form-control custom-select form-select" th:field="*{postoAdministrativo}" >
-																<option value="">Selecione o Posto Admnistrativo...</option>
-																<option th:each="p : ${postos}"
-											                                    th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
-														</div>
-														
-														<div class="form-group col-6 col-sm-6">
-															<label for="empreiteiro" class="form-label"> Tipo de Ocorrência</label>
-															<select  class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
-																<option value="">Selecione o Tipo de Ocorrência...</option>
-																<option th:each="p : ${tipoDeOcorrencias}"
-																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
-														</div>
-														
-														</div>
+															<div  id="email" class="col-6 col-sm-6">
+											                    <div class="form-group">
+											                        <label class="form-label">Email</label>
+											                        <div class="input-icon">
+											                                    <span class="input-icon-addon">
+											                                      <i class="fe fe-edit-2"></i>
+											                                    </span>
+											                            <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Exemplo@exemplo.com...">
+											                        </div>
+											                    </div>
+											                </div>
+											                
+											                <div id="contacto" class="col-6 col-sm-6">
+											                    <div class="form-group">
+											                        <label class="form-label">Contacto</label>
+											                        <div class="input-icon">
+											                                    <span class="input-icon-addon">
+											                                      <i class="fe fe-edit-2"></i>
+											                                    </span>
+											                            <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
+											                        </div>
+											                    </div>
+											                </div>
+										                
+										                </div>
 													
 													<div class="row">
-													
-													
-													<div class="form-group col-6 col-sm-6">
-															<label for="empreiteiro" class="form-label"> Projecto</label>
-															<select id="empreiteiro" class="form-control custom-select form-select" th:field="*{projecto}" >
-																<option value="">Selecione o Projecto...</option>
-																<option th:each="p : ${projectos}"
-																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
+														<div class="col-6 col-sm-12">
+															<label class="form-label"> Assunto <strong style="color:red">*</strong></label>
+															<textarea id="" type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
 														</div>
-														
-														<div class="form-group col-6 col-sm-6">
-															<label for="categoria" class="form-label"> Tipo de Categoria</label>
-															<select id="categoria" class="form-control custom-select form-select" th:field="*{categoria}" >
-																<option value="">Selecione o Tipo de Categoria...</option>
-																<option th:each="p : ${categorias}"
-																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
-														</div>
-													
-													
-													</div>
-													
-													
-													
-													<div class="row">
-														<div class="col-6 col-sm-6">
-															<label class="form-label"> Data da Ocorrência:</label>
-															<input type="date" th:field="*{dataOcorrencia}" class="form-control">
-														</div>	
-														
-														<div class="col-6 col-sm-6">
-															<label class="form-label"> Comunidade</label>
-															<input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
-														</div>
-													
-													</div>
-													
-													<div class="row">
-													<div class="col-6 col-sm-12">
-													<label class="form-label"> Assunto</label>
-													<textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
-													</div>
 													</div>
 													
 													
@@ -822,7 +799,7 @@ return false;
 																					
 													
 									
-                                </div> <input type="button" name="next" class="next action-button" value="Proximo" />
+                                </div> <input type="button" name="next" class="next action-button" value="Próximo" />
                             </fieldset>
 							
 							
@@ -833,45 +810,34 @@ return false;
 									
 									
 									<div class="row">
-	                <div class="col-6 col-sm-6">
+	                <div class="col-6 col-sm-12">
                     <div class="form-group">
+                        
                         <label class="form-label">Origem da Ocorrência</label>
-                        <select id="origem" onchange="onChangeStatus()" class="form-control custom-select" th:field="*{nomeGrupo}" >
+                        
+                        <input  onclick="onChangeIndividual()" id="individual" type="radio" th:field="*{origem}" name="user" value="Individual">
+					    <label for="individual"><span></span>Individual</label>
+					
+					    <input onclick="onChangeGrupo()" id="grupo" type="radio" th:field="*{origem}" value="Grupo/Comunidade">
+					    <label for="grupo"><span></span>Grupo/Comunidade</label>
+					    
+					    <input onclick="onChangeAnonimo()" id="anonimo" type="radio" th:field="*{origem}" value="Anónimo">
+					    <label for="anonimo"><span></span>Anónimo</label>
+					    
+					    <input onclick="onChangeNenhum()" id="nenhum" type="radio" th:field="*{origem}" value="Nenhum">
+					    <label for="nenhum"><span></span>Nenhum</label>
+                        
+                        
+                        <!-- <select id="origem" onchange="onChangeStatus()" class="form-control custom-select" th:field="*{nomeGrupo}" >
                             <option value="selecione">Selecione Origem da Ocorrência...</option>
                             <option value="individual">Individual</option>
                             <option value="grupo">Grupo</option>
                             <option value="anonimo">Anonimo</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div style="display: none" id="nrHomens" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Nr. de Homens</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="number" th:field="*{numeroHomens}" class="form-control" placeholder="Designação...">
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="display: none" id="nrMulheres" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Nr. de Mulheres</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="number" th:field="*{numeroMulheres}" class="form-control" placeholder="Designação...">
-                        </div>
+                        </select>  -->
                     </div>
                 </div>
                 
                 
-
-
                 <div style="display: none" id="nome" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Nome</label>
@@ -898,8 +864,9 @@ return false;
 
                 <div  style="display: none" id="genero" class="col-6 col-sm-6">
                     <div class="form-group">
-                        <label class="form-label">Genero</label>
+                        <label class="form-label">Sexo</label>
                         <select class="form-control custom-select" th:field="*{sexo}" >
+                         <option value=" ">Selecione...</option>
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
                             <option value="Femenino">ND</option>
@@ -907,40 +874,11 @@ return false;
                     </div>
                 </div>
                 
-                
-                
-                <div  style="display: none" id="comunicacao" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Forma de Comunicação </label>
-                        <select class="form-control custom-select" th:field="*{formaComunicacao}" >
-                            <option value="Verbal">Verbal</option>
-                            <option value="Telemóvel">Telemóvel</option>
-                            <option value="Outro">ND</option>
-                        </select>
-                    </div>
-                </div>
-
-
-            
-
-                <div  style="display: none" id="contacto" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Contacto</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
-                        </div>
-                    </div>
-                </div>
-                
-                
-
                 <div style="display: none" id="faixaEtaria" class="col-6 col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Faixa Etária</label>
                         <select class="form-control custom-select" th:field="*{faixaEtaria}" >
+                            <option value=" ">Selecione...</option>
                             <option value="20 a 30">20 a 30</option>
                             <option value="30 a 40">31 a 60</option>
                             <option value="30 a 40">Outra</option>
@@ -949,42 +887,13 @@ return false;
                 </div>
                 
                 
-                
-                <div  style="display: none" id="endereco" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Endereço</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="text"  th:field="*{moradaUtente}" class="form-control" placeholder="Designação...">
-                        </div>
-                    </div>
                 </div>
-                
-                 
-                <div  style="display: none" id="email" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
-                        </div>
-                    </div>
-                </div>
-                
-                </div>
-									
-									
-									
 									
                                 </div> 
 								
 								
 								<input type="button" name="previous" class="previous action-button-previous" value="Anterior" /> 
-								<input type="button" name="next" class="next action-button" value="Proximo" />
+								<input type="button" name="next" class="next action-button" value="próximo" />
                             </fieldset>
 							
 							
@@ -1002,7 +911,7 @@ return false;
 																<span class="input-icon-addon">
 																  <i class="fe fe-calendar"></i>
 																</span>
-														<input style="display:none;" type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
+														<input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
 														<p id="num-of-files"></p>
 													</div>
 												</div>
@@ -1011,7 +920,7 @@ return false;
 											<div class="col-6 col-sm-6">
 											   <div class="form-group">
 												<div class="input-icon">
-													<input type="text" onchange="preview()" name="descricao" placeholder="Descricao de Anexos" class="form-control" >
+													<input type="text" onchange="preview()" name="descricaoAnx" placeholder="Descricao de Anexos" class="form-control" >
 												</div>
 											</div>
 											</div>
@@ -1019,7 +928,7 @@ return false;
 										</div>
                                     </div>
                                 <input type="button" name="Anterior" class="previous action-button-previous" value="Anterior" /> 
-								<input type="button" name="make_payment" class="next action-button" value="Proximo" />
+								<input type="button" name="make_payment" class="next action-button" value="próximo" />
                             </fieldset>
                             
                             <fieldset>
@@ -1033,7 +942,7 @@ return false;
                                     </div>
                                 </div>
 								<input type="button" name="Anterior" class="previous action-button-previous" value="Anterior" /> 
-								<input type="submit" name="make_payment" class="next action-button" value="Confirmar" />
+								<input type="submit" name="make_payment" class="next action-button" value="Submeter" />
                             </fieldset>
                             
                         </form>

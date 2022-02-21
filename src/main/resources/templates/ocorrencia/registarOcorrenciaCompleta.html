@@ -290,7 +290,7 @@ document.getElementById("cidadee").style.display="none";
                 <div style="margin-bottom: 10px" class="row">
 
 
-                    <div class="col-md-6 card">
+                    <!-- <div class="col-md-6 card">
                         <div>
                             <div>
                                 <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Entidade</label>
@@ -315,10 +315,10 @@ document.getElementById("cidadee").style.display="none";
 
                         </div>
 
-                    </div>
+                    </div> -->
 
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card ">
                             <div>
                                 <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Definição da Reclamação</label>
@@ -399,39 +399,6 @@ document.getElementById("cidadee").style.display="none";
                         </div>
                     </div>
 
-
-                    <div class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label for="comboboxProvincias" class="form-label">Província</label>
-                            <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
-                                <option value="">Selecione a Província...</option>
-                                <option th:each="p : ${provincias}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label class="form-label">Distrito</label>
-                            <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
-                                <option value="">Selecione o Distrito...</option>
-                                <option th:each="p : ${distritos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
-                            <select class="form-control custom-select form-select" id="comboboxPosto" th:field="*{postoAdministrativo}" >
-                                <option value="">Selecione o Postos Administrativos...</option>
-                                <option th:each="p : ${postos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
-                    </div>
 
 
                     <div class="col-6 col-sm-4">
@@ -593,7 +560,6 @@ document.getElementById("cidadee").style.display="none";
                                 <option value="Formulário">Formulário</option>
                                 <option value="Reuniões Comunitárias">Reuniões Comunitárias</option>
                                 <option value="Grupos de Discussão">Grupos de Discussão</option>
-                                <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Outros">Outros</option>
                             </select>
                         </div>

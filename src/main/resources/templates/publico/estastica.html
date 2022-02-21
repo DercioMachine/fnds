@@ -1,6 +1,8 @@
 <!doctype html>
 
-<html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
@@ -137,7 +139,7 @@ document.getElementById("trimestree").style.display="none";
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-lg-6">
+                <div class="col-sm-6 col-lg-4">
 
 
                     <div align="center" style="padding-top: 30px" class="card ">
@@ -149,7 +151,7 @@ document.getElementById("trimestree").style.display="none";
                                 </label>
                             </div>
 
-                            <div style="margin-left: 15%; margin-right: 15%;" class="form-check-inline">
+                            <div style="margin-left: 8%; margin-right: 8%;" class="form-check-inline">
                                 <label class="form-check-label">
                                     <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="filtro" value="trimestre" class="form-check-input"> Trimestre
                                 </label>
@@ -225,6 +227,21 @@ document.getElementById("trimestree").style.display="none";
                         </div>
                     </div>
                 </div>
+                
+                
+                <div id="botoes" class="col-sm-6 col-lg-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <a class="btn btn-outline-primary btn-md mt-2" role="button">
+                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+                                    <span style="align-content: center;">Filtrar</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
 
 
             </div>
@@ -366,849 +383,124 @@ document.getElementById("trimestree").style.display="none";
         </div>
     </div>
 
-
-
-    <div class="page-body">
+<div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Projecto</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="ocorrencias_project"></div>
-                        </div>
-                    </div>
-
-                    <script>
-projecto();
-function projecto(){
-// @formatter:off
-
-
-var ocorrencias = [];
-
-var legendaestado = [];
-
-var legendaids = [];
-
-var total = [];
-
-var nomess = [];
-
-var anos = [];
-
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarprojectos',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var idd = '';
-
-for(var i=0; i< result.length; i++){
-
-s+= result[i].designacao+',';
-idd+= result[i].id+',';
-
-}
-
-var tirarVirgula = s.slice(0,-1);
-var tirarVirgulaid = idd.slice(0,-1);
-
-legendaestado = tirarVirgula.split(',');
-legendaids = tirarVirgulaid.split(',');
-
-}
-});
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-
-for(var k=0; k<result.length; k++){
-s+= result[k].projecto.id+',';
-
-}
-
-// alert(nomeee);
-
-var tirarVirgula = s.slice(0,-1);
-
-ocorrencias = tirarVirgula.split(',');
-
-
-for(var i=0; i< legendaids.length; i++){
-var soma = 0;
-
-for(var j=0; j< ocorrencias.length; j++){
-if(legendaids[i]==ocorrencias[j]){
-soma++;
-
-
-}
-
-}
-total[i]=soma;
-
-
-}
-
-}
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-window.ApexCharts && (new ApexCharts(document.getElementById('ocorrencias_project'), {
-chart: {
-type: "bar",
-fontFamily: 'inherit',
-height: 320,
-parentHeightOffset: 0,
-toolbar: {
-show: false,
-},
-animations: {
-enabled: false
-},
-},
-plotOptions: {
-bar: {
-columnWidth: '50%',
-}
-},
-dataLabels: {
-enabled: false,
-},
-fill: {
-opacity: 1,
-},
-series: [{
-name: "OCORRÊNCIAS POR PROJECTO",
-data: total
-}],
-grid: {
-padding: {
-top: -20,
-right: 0,
-left: -4,
-bottom: -4
-},
-strokeDashArray: 4,
-},
-xaxis: {
-labels: {
-padding: 0,
-},
-tooltip: {
-enabled: false
-},
-axisBorder: {
-show: false,
-},
-categories: legendaestado,
-},
-yaxis: {
-labels: {
-padding: 4
-},
-},
-colors: ["#66BB6A"],
-legend: {
-show: false,
-},
-})).render();
-});
-// @formatter:on
-}
-//x
-
-
-</script>
-
-                </div>
-
-
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 style="text-transform: capitalize; font-size: 12px;" class="card-title" >Ocorrências por Categoria</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Mes</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-combination"></div>
                         </div>
-
                     </div>
 
-                    <script>
-ococatega();
-function ococatega(){
-// @formatter:off
 
-
-var ocorrencias = [];
-
-var legendaestado = [];
-
-var legendaids = [];
-
-var total = [];
-
-var nomess = [];
-
-var anos = [];
-
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarcategorias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var idd = '';
-
-for(var i=0; i< result.length; i++){
-
-s+= result[i].designacao+',';
-idd+= result[i].id+',';
-
-}
-
-var tirarVirgula = s.slice(0,-1);
-var tirarVirgulaid = idd.slice(0,-1);
-
-legendaestado = tirarVirgula.split(',');
-legendaids = tirarVirgulaid.split(',');
-
-}
-});
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-
-for(var k=0; k<result.length; k++){
-s+= result[k].categoria.id+',';
-
-}
-
-// alert(nomeee);
-
-var tirarVirgula = s.slice(0,-1);
-
-ocorrencias = tirarVirgula.split(',');
-
-
-for(var i=0; i< legendaids.length; i++){
-var soma = 0;
-
-for(var j=0; j< ocorrencias.length; j++){
-if(legendaids[i]==ocorrencias[j]){
-soma++;
-
-
-}
-
-}
-total[i]=soma;
-
-
-}
-
-}
-});
-
-
-// @formatter:off
-document.addEventListener("DOMContentLoaded", function () {
-window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
-chart: {
-type: "bar",
-fontFamily: 'inherit',
-height: 320,
-parentHeightOffset: 0,
-toolbar: {
-show: false,
-},
-animations: {
-enabled: false
-},
-},
-plotOptions: {
-bar: {
-columnWidth: '50%',
-}
-},
-dataLabels: {
-enabled: false,
-},
-fill: {
-opacity: 1,
-},
-series: [{
-name: "OCORRÊNCIAS POR CATEGORIA",
-data: total
-}],
-grid: {
-padding: {
-top: -20,
-right: 0,
-left: -4,
-bottom: -4
-},
-strokeDashArray: 4,
-},
-xaxis: {
-labels: {
-padding: 0,
-},
-tooltip: {
-enabled: false
-},
-axisBorder: {
-show: false,
-},
-categories: legendaestado,
-},
-yaxis: {
-labels: {
-padding: 4
-},
-},
-colors: ["#FFA726"],
-legend: {
-show: false,
-},
-})).render();
-});
-// @formatter:on
-}
-
-
-
-</script>
 
                 </div>
 
-
-
-                <div class="col-lg-6 col-xl-6">
+                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Ocorrências por Cidade</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Província</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-tasks"></div>
+                            <div id="chart-provincia"></div>
                         </div>
                     </div>
 
-                    <script>
-cidade();
-function cidade(){
-var ocorrencias = [];
 
-var legendaestado = [];
+                </div> 
 
-var legendaids = [];
-
-var total = [];
-
-var nomess = [];
-
-var anos = [];
-
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/apicidades',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var idd = '';
-
-for(var i=0; i< result.length; i++){
-
-s+= result[i].designacao+',';
-idd+= result[i].id+',';
-
-}
-
-var tirarVirgula = s.slice(0,-1);
-var tirarVirgulaid = idd.slice(0,-1);
-
-legendaestado = tirarVirgula.split(',');
-legendaids = tirarVirgulaid.split(',');
-
-}
-});
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-
-for(var k=0; k<result.length; k++){
-s+= result[k].cidade.id+',';
-
-}
-
-// alert(nomeee);
-
-var tirarVirgula = s.slice(0,-1);
-
-ocorrencias = tirarVirgula.split(',');
-
-
-for(var i=0; i< legendaids.length; i++){
-var soma = 0;
-
-for(var j=0; j< ocorrencias.length; j++){
-if(legendaids[i]==ocorrencias[j]){
-soma++;
-
-
-}
-
-}
-total[i]=soma;
-
-
-}
-
-}
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-window.ApexCharts && (new ApexCharts(document.getElementById('chart-tasks'), {
-chart: {
-type: "bar",
-fontFamily: 'inherit',
-height: 320,
-parentHeightOffset: 0,
-toolbar: {
-show: false,
-},
-animations: {
-enabled: false
-},
-},
-plotOptions: {
-bar: {
-columnWidth: '50%',
-}
-},
-dataLabels: {
-enabled: false,
-},
-fill: {
-opacity: 1,
-},
-series: [{
-name: "A",
-data: total
-}],
-grid: {
-padding: {
-top: -20,
-right: 0,
-left: -4,
-bottom: -4
-},
-strokeDashArray: 4,
-},
-xaxis: {
-labels: {
-padding: 0,
-},
-tooltip: {
-enabled: false
-},
-axisBorder: {
-show: false,
-},
-categories: legendaestado,
-},
-yaxis: {
-labels: {
-padding: 4
-},
-},
-colors: ["#206bc4"],
-legend: {
-show: false,
-},
-})).render();
-});
-// @formatter:on
-}
-
-
-
-</script>
-
-                </div>
-
-
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Ocorrências Por Processo</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="processo" style="height: 16rem"></div>
-                        </div>
-                    </div>
-
-                    <script>
-
-processo();
-
-function processo(){
-var processos = [];
-
-var nomes = ["Geral","Laboral", "SEA/SH/GBV"];
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var Geral = 0;
-var Laboral = 0;
-var SEASHGBV = 0;
-
-for(var i=0; i< result.length; i++){
-
-
-if(result[i].tipoorigem.processo == 'Geral'){
-Geral ++;
-}else if(result[i].tipoorigem.processo == 'Laboral'){
-Laboral ++;
-}else if(result[i].tipoorigem.processo == 'SEA/SH/GBV'){
-SEASHGBV ++;
-}
-
-}
-
-processos = [Geral, Laboral, SEASHGBV];
-
-}
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-
-window.ApexCharts && (new ApexCharts(document.getElementById('processo'), {
-
-
-chart: {
-type: "donut",
-fontFamily: 'inherit',
-height: 240,
-sparkline: {
-enabled: true
-},
-animations: {
-enabled: false
-},
-},
-fill: {
-opacity: 1,
-},
-series: processos,
-labels: nomes,
-grid: {
-strokeDashArray: 5,
-},
-colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350", "#e9ecf1"],
-legend: {
-show: true,
-position: 'bottom',
-offsetY: 12,
-markers: {
-width: 10,
-height: 10,
-radius: 100,
-},
-itemMargin: {
-horizontal: 8,
-vertical: 8
-},
-},
-tooltip: {
-fillSeriesColor: false
-},
-})).render();
-});
-}
-</script>
-
-
-
-                </div>
 
 
 
             </div>
         </div>
     </div>
-
-
+    
+    
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
-
-
-
-
-
-
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Interno/Externo</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Cidade</h3>
                         </div>
                         <div class="card-body">
-                            <div id="interno_externo" style="height: 16rem"></div>
+                            <div id="chart-cidade"></div>
                         </div>
                     </div>
 
-                    <script>
-
-entidad();
-
-function entidad(){
-var interno_externos = [];
-
-var nomes = ["Interno","Externo"];
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var interno = 0;
-var externo = 0;
-
-for(var i=0; i< result.length; i++){
 
 
-if(result[i].internoExterno == 'Interno'){
-interno ++;
-}else{
-externo ++;
-}
+                </div>
 
-}
-
-interno_externos = [interno, externo];
-
-
-var tirarVirgula = s.slice(0,-1);
-
-legendaestado = tirarVirgula.split(',');
-
-
-}
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-
-window.ApexCharts && (new ApexCharts(document.getElementById('interno_externo'), {
-
-
-chart: {
-type: "donut",
-fontFamily: 'inherit',
-height: 240,
-sparkline: {
-enabled: true
-},
-animations: {
-enabled: false
-},
-},
-fill: {
-opacity: 1,
-},
-series: interno_externos,
-labels: nomes,
-grid: {
-strokeDashArray: 5,
-},
-colors: ["#66BB6A", "#EF5350", "#e9ecf1"],
-legend: {
-show: true,
-position: 'bottom',
-offsetY: 12,
-markers: {
-width: 10,
-height: 10,
-radius: 100,
-},
-itemMargin: {
-horizontal: 8,
-vertical: 8
-},
-},
-tooltip: {
-fillSeriesColor: false
-},
-})).render();
-});
-}
-</script>
-
+                 <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Região</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-regiao"></div>
+                        </div>
+                    </div>
 
 
                 </div>
 
 
 
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Entidade</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="entidade" style="height: 16rem"></div>
-                        </div>
-                    </div>
 
-                    <script>
-
-entidade();
-
-function entidade(){
-var entidades = [];
-
-var nomes = ["Projecto","Operação"];
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var projecto = 0;
-var operacao = 0;
-
-for(var i=0; i< result.length; i++){
-
-
-if(result[i].projectoOperacao == 'projecto'){
-projecto ++;
-}else{
-operacao ++;
-}
-
-}
-
-entidades = [projecto, operacao];
-
-
-var tirarVirgula = s.slice(0,-1);
-
-legendaestado = tirarVirgula.split(',');
-
-
-}
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-
-window.ApexCharts && (new ApexCharts(document.getElementById('entidade'), {
-
-
-chart: {
-type: "donut",
-fontFamily: 'inherit',
-height: 240,
-sparkline: {
-enabled: true
-},
-animations: {
-enabled: false
-},
-},
-fill: {
-opacity: 1,
-},
-series: entidades,
-labels: nomes,
-grid: {
-strokeDashArray: 5,
-},
-colors: ["#d698d6", "#873e23"],
-legend: {
-show: true,
-position: 'bottom',
-offsetY: 12,
-markers: {
-width: 10,
-height: 10,
-radius: 100,
-},
-itemMargin: {
-horizontal: 8,
-vertical: 8
-},
-},
-tooltip: {
-fillSeriesColor: false
-},
-})).render();
-});
-}
-</script>
-
-
-
-                </div>
             </div>
-
         </div>
     </div>
+    
+    
+    
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Canal de Entrada</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-canal-entrada"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                 <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Categoria</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-categoria"></div>
+                        </div>
+                    </div>
+
+
+                </div> 
 
 
 
 
-
+            </div>
+        </div>
+    </div>
+    
+    
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -1216,235 +508,461 @@ fillSeriesColor: false
                 <div class="col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px" >Ocorrências por Canal de Entrada</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Projecto</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-area-spline-stacked"></div>
+                            <div id="chart-projecto"></div>
                         </div>
                     </div>
 
-                    <script>
-formacomu();
-function formacomu(){
-// @formatter:off
 
-
-var canais = [];
-
-var nomes = ["Telefone","Formulário ", "Reuniões Comunitárias", "Grupos de Discussão", "Contacto Pessoal", "Outros"];
-
-
-
-$.ajax({
-type: 'GET',
-
-url: 'http://localhost:9090/buscarocorrencias',
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-var telefone = 0;
-var formulario = 0;
-var grupo = 0;
-var reuniao = 0;
-var contacto = 0;
-var outro = 0;
-
-for(var i=0; i< result.length; i++){
-
-
-if(result[i].formaComunicacao == 'Telefone'){
-telefone ++;
-}else if(result[i].formaComunicacao == 'Formulário'){
-formulario ++;
-}else if(result[i].formaComunicacao == 'Reuniões Comunitárias'){
-reuniao ++;
-}else if(result[i].formaComunicacao == 'Grupos de Discussão'){
-grupo ++;
-}else if(result[i].formaComunicacao == 'Contacto Pessoal'){
-contacto ++;
-}else if(result[i].formaComunicacao == 'Outros'){
-outro ++;
-}
-
-}
-
-canais = [telefone,formulario,reuniao,grupo,contacto,outro];
-
-
-}
-});
-
-
-// @formatter:off
-document.addEventListener("DOMContentLoaded", function () {
-window.ApexCharts && (new ApexCharts(document.getElementById('chart-area-spline-stacked'), {
-chart: {
-type: "area",
-fontFamily: 'inherit',
-height: 240,
-parentHeightOffset: 0,
-toolbar: {
-show: false,
-},
-animations: {
-enabled: false
-},
-stacked: true,
-},
-dataLabels: {
-enabled: false,
-},
-fill: {
-opacity: .16,
-type: 'solid'
-},
-stroke: {
-width: 2,
-lineCap: "round",
-curve: "smooth",
-},
-series: [{
-name: "OCORRÊNCIAS POR CANAL",
-data: canais
-}],
-grid: {
-padding: {
-top: -20,
-right: 0,
-left: -4,
-bottom: -4
-},
-strokeDashArray: 4,
-},
-xaxis: {
-labels: {
-padding: 0,
-},
-tooltip: {
-enabled: false
-},
-axisBorder: {
-show: false,
-},
-categories: nomes,
-},
-yaxis: {
-labels: {
-padding: 4
-},
-},
-colors: ["#206bc4", "#f66d9b"],
-legend: {
-show: false,
-},
-})).render();
-});
-// @formatter:on
-}
-
-
-
-</script>
 
                 </div>
+
             </div>
         </div>
     </div>
+    
+    <script th:inline="javascript">
+    ocorrenciasPorMes();
+    ocorrenciasPorProvincia();
+    ocorrenciasPorCidade();
+    ocorrenciasPorRegiao();
+    ocorrenciasPorCanalEntrada();
+    ocorrenciasPorCategoria();
+    ocorrenciasPorProjecto();
+    
+    function ocorrenciasPorProjecto(){
+    	var nomes = /*[[${nomesProjecto}]]*/""
+       	var numeroocorencia= /*[[${numeroocorenciaProjecto}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+       	      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
+       	      		chart: {
+       	      			type: "area",
+       	      			fontFamily: 'inherit',
+       	      			height: 240,
+       	      			parentHeightOffset: 0,
+       	      			toolbar: {
+       	      				show: false,
+       	      			},
+       	      			animations: {
+       	      				enabled: false
+       	      			},
+       	      			stacked: true,
+       	      		},
+       	      		dataLabels: {
+       	      			enabled: false,
+       	      		},
+       	      		fill: {
+       	      			opacity: .16,
+       	      			type: 'solid'
+       	      		},
+       	      		stroke: {
+       	      			width: 2,
+       	      			lineCap: "round",
+       	      			curve: "smooth",
+       	      		},
+       	      		series: [{
+       	      			name: "Ocorrências por Projecto",
+       	      			data: numeroocorencia
+       	      		}],
+       	      		grid: {
+       	      			padding: {
+       	      				top: -20,
+       	      				right: 0,
+       	      				left: -4,
+       	      				bottom: -4
+       	      			},
+       	      			strokeDashArray: 4,
+       	      		},
+       	      		xaxis: {
+       	      			labels: {
+       	      				padding: 0,
+       	      			},
+       	      			tooltip: {
+       	      				enabled: false
+       	      			},
+       	      			axisBorder: {
+       	      				show: false,
+       	      			},
+       	      			categories: nomes,
+       	      		},
+       	      		yaxis: {
+       	      			labels: {
+       	      				padding: 4
+       	      			},
+       	      		},
+       	      		colors: ["#206bc4", "#f66d9b"],
+       	      		legend: {
+       	      			show: false,
+       	      		},
+       	      	})).render();
+       	      });
+           	
+    }
+    
+    function ocorrenciasPorCategoria(){
+    	var nomes = /*[[${nomesCategoria}]]*/""
+       	var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
+       	
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
+              		chart: {
+              			type: "pie",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    
+    }
+    
+    function ocorrenciasPorCanalEntrada(){
+    	var nomes = /*[[${nomesCanais}]]*/""
+       	var numeroocorencia= /*[[${numeroocorencia}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
+              		chart: {
+              			type: "donut",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    }
+    
+    function ocorrenciasPorRegiao(){
+    	var nomes = /*[[${nomesRegiao}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaRegiao}]]*/""
+        
+        	document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-regiao'), {
+              		chart: {
+              			type: "donut",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    }
+    
+    function ocorrenciasPorCidade(){
+    	
+    	var nomes = /*[[${nomesCidades}]]*/""
+        var numeroocorencia= /*[[${ocorrenciasCidade}]]*/""
+        
+        
+        	document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-cidade'), {
+              		chart: {
+              			type: "pie",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    	
+    }
+    
+    function ocorrenciasPorProvincia(){
+    	
+        var nomes = /*[[${nomesProvincias}]]*/""
+        var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
+        var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
+        var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+        
+        	
+        	document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-provincia'), {
+              		chart: {
+              			type: "bar",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			parentHeightOffset: 0,
+              			toolbar: {
+              				show: false,
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		plotOptions: {
+              			bar: {
+              				columnWidth: '50%',
+              				horizontal: true,
+              			}
+              		},
+              		dataLabels: {
+              			enabled: false,
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: [{
+              			name: "Resolvidas",
+              			data: numeroocorencia1
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia2
+              		},{
+              			name: "Improcedentes",
+              			data: numeroocorencia3
+              		}],
+              		grid: {
+              			padding: {
+              				top: -20,
+              				right: 0,
+              				left: 0,
+              				bottom: -4
+              			},
+              			strokeDashArray: 4,
+              		},
+              		xaxis: {
+              			labels: {
+              				padding: 0,
+              			},
+              			tooltip: {
+              				enabled: false
+              			},
+              			axisBorder: {
+              				show: false,
+              			},
+              			categories: nomes,
+              		},
+              		yaxis: {
+              			labels: {
+              				padding: 4
+              			},
+              		},
+              		colors: ["#5eba00", "#f66d9b", "#206bc4"],
+              		legend: {
+              			show: false,
+              		},
+              	})).render();
+              });
+        	
+        	
+        }
+    
+    
+    
+    function ocorrenciasPorMes(){
+    	
+    var nomesMes = /*[[${nomesMes}]]*/""
+    var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
+    var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
+    var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+    
+    	
+    	document.addEventListener("DOMContentLoaded", function () {
+          	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
+          		chart: {
+          			type: "bar",
+          			fontFamily: 'inherit',
+          			height: 240,
+          			parentHeightOffset: 0,
+          			toolbar: {
+          				show: false,
+          			},
+          			animations: {
+          				enabled: false
+          			},
+          		},
+          		plotOptions: {
+          			bar: {
+          				columnWidth: '50%',
+          			}
+          		},
+          		dataLabels: {
+          			enabled: false,
+          		},
+          		fill: {
+          			opacity: 1,
+          		},
+          		series: [{
+          			name: "Resolvidas",
+          			data: numeroocorencia1
+          		},{
+          			name: "Não Resolvidas",
+          			data: numeroocorencia2
+          		},{
+          			name: "Improcedentes",
+          			data: numeroocorencia3
+          		}],
+          		grid: {
+          			padding: {
+          				top: -20,
+          				right: 0,
+          				left: -4,
+          				bottom: -4
+          			},
+          			strokeDashArray: 4,
+          		},
+          		xaxis: {
+          			labels: {
+          				padding: 0,
+          			},
+          			tooltip: {
+          				enabled: false
+          			},
+          			axisBorder: {
+          				show: false,
+          			},
+          			categories: nomesMes,
+          		},
+          		yaxis: {
+          			labels: {
+          				padding: 4
+          			},
+          		},
+          		colors: ["#5eba00", "#f66d9b", "#206bc4"],
+          		legend: {
+          			show: false,
+          		},
+          	})).render();
+          });
+    	
+    	
+    }
+    
+    </script>
 
 
-
-
-    <!-- <div class="col-lg-12">
-    <div class="card">
-    <div style="background:#E6FFFE;" class="card-header border-0">
-    <div style="font-weight: bolder" class="card-title">MINHAS RECLAMAÇÕES EM ABERTO</div>
-    </div>
-    <div class="card-table table-responsive">
-    <table class="table table-vcenter">
-    <thead>
-    <tr>
-    <th>-</th>
-    <th>Área operacional</th>
-    <th>Data</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="w-1">
-    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
-    </td>
-    <td class="td-truncate">
-    <div class="text-truncate">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    </td>
-    <td class="text-nowrap text-muted">28 Nov 2019</td>
-    </tr>
-    <tr>
-    <td class="w-1">
-    <span class="avatar avatar-sm">JL</span>
-    </td>
-    <td class="td-truncate">
-    <div class="text-truncate">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    </td>
-    <td class="text-nowrap text-muted">27 Nov 2019</td>
-    </tr>
-    <tr>
-    <td class="w-1">
-    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/002m.jpg)"></span>
-    </td>
-    <td class="td-truncate">
-    <div class="text-truncate">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    </td>
-    <td class="text-nowrap text-muted">26 Nov 2019</td>
-    </tr>
-    <tr>
-    <td class="w-1">
-    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/003m.jpg)"></span>
-    </td>
-    <td class="td-truncate">
-    <div class="text-truncate">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    </td>
-    <td class="text-nowrap text-muted">26 Nov 2019</td>
-    </tr>
-    <tr>
-    <td class="w-1">
-    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000f.jpg)"></span>
-    </td>
-    <td class="td-truncate">
-    <div class="text-truncate">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    </td>
-    <td class="text-nowrap text-muted">25 Nov 2019</td>
-    </tr>
-    <tr>
-    <td class="w-1">
-    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/001f.jpg)"></span>
-    </td>
-    <td class="td-truncate">
-    <div class="text-truncate">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    </td>
-    <td class="text-nowrap text-muted">24 Nov 2019</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    </div> -->
 
 
     <!-- Conteudo-->
-</div>
+
 
 </body>
 

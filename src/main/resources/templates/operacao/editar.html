@@ -1,288 +1,284 @@
 <!DOCTYPE html>
-<html lang="pt" layout:decorate="~{layout}" Xmlns:th="http://www.thymeleaf.org"
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
       xmlns:Xmlns="http://www.w3.org/1999/xhtml"
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-
+      
+      
 <head>
     <meta charset="UTF-8">
     <title>FIPAG</title>
 </head>
 <body>
-<div layout:fragment="corpo">
+<div  layout:fragment="corpo">
 
+<script type="text/javascript">
+        let fileInput = document.getElementById("file");
+        let numOfFiles = document.getElementById("num-of-files");
+        let imageContainer = document.getElementById("images");
+
+        function preview(){
+
+           document.getElementById("num-of-files").innerHTML = "";
+
+           numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
+        }
+
+    </script>
+    
     <script type="text/javascript">
-let fileInput = document.getElementById("file");
-let numOfFiles = document.getElementById("num-of-files");
-let imageContainer = document.getElementById("images");
 
-function preview(){
+      var estadobotao = 0 ;
 
-document.getElementById("num-of-files").innerHTML = "";
+       function onChangeSimOrigem(){
+      		var estado = document.getElementById("radioSimOrigem");
 
-numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
-}
+      		if(estado.value=="Interno"){
+                estadobotao = 1 ;
+      		}
+      		OrigemInternoExterno();
+      	}
 
-</script>
+      	function onChangeNaoOrigem(){
+          		var estado = document.getElementById("radioNaoOrigem");
 
-    <script type="text/javascript">
+          		if(estado.value=="Externo"){
+          			estadobotao = 2 ;
+                }
+                OrigemInternoExterno();
+        }
 
-var estadobotao = 0 ;
+        function OrigemInternoExterno(){
 
-function onChangeSimOrigem(){
-var estado = document.getElementById("radioSimOrigem");
+                  $.ajax({
+          type: 'GET',
 
-if(estado.value=="Interno"){
-estadobotao = 1 ;
-}
-OrigemInternoExterno();
-}
+            url: 'http://localhost:9090/origem/externo',
+     //     url: 'http://localhost:9090/origem/externo/',
+           
+          // url:  'http://localhost:90902/origem/externo',
+          
 
-function onChangeNaoOrigem(){
-var estado = document.getElementById("radioNaoOrigem");
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
 
-if(estado.value=="Externo"){
-estadobotao = 2 ;
-}
-OrigemInternoExterno();
-}
+           if(estadobotao == 1){
 
+               for(var i=0; i< result.length; i++){
 
+            if(result[i].tipo=="Interno"){
+                s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+            }
 
-    function OrigemInternoExterno(){
+           }
+           }
 
-    $.ajax({
-    type: 'GET',
+            if(estadobotao == 2){
 
-    //url: 'http://portal.fipag.co.mz/grm/origem/externo',
-    url: 'http://localhost:9090/origem/externo/',
-    //url: 'http://localhost:9090/origem/externo',
-    // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
+               for(var i=0; i< result.length; i++){
 
+            if(result[i].tipo=="Externo"){
+                s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+            }
 
-    success: function (result){
-    var result = JSON.parse(result);
-    var s = '';
+          }
+          }
 
-    if(estadobotao == 1){
-
-    for(var i=0; i< result.length; i++){
-
-    if(result[i].tipo=="Interno"){
-    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
-    }
-
-    }
-    }
-
-    if(estadobotao == 2){
-
-    for(var i=0; i< result.length; i++){
-
-    if(result[i].tipo=="Externo"){
-    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
-    }
-
-    }
-    }
-
-    $('#comboboxOrigem').html(s);
-    }
+        $('#comboboxOrigem').html(s);
+       }
     });
 
+        }
+
+
+
+    </script>
+
+	<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#comboboxProvincias').on('change',function(){
+
+          var provinciaId = $(this).val();
+          
+        //  alert(provinciaId);
+
+          $.ajax({
+          type: 'GET',
+          
+         url: 'http://localhost:9090/distrito/'+provinciaId,
+      
+          
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comoboxDistrito').html(s);
     }
+});
 
-
-
-</script>
-
+        });
+    });
+    </script>
+    
     <script type="text/javascript">
 
-$(document).ready(function(){
-$('#comboboxProvincias').on('change',function(){
+    $(document).ready(function(){
+        $('#comoboxDistrito').on('change',function(){
 
-var provinciaId = $(this).val();
+          var distritoId = $(this).val();
 
-// alert(provinciaId);
+         // alert(distritoId);
 
-$.ajax({
-type: 'GET',
-
-//url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-//url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:9090/distrito/'+provinciaId,
-//url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
-
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-for(var i=0; i< result.length; i++){
-s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-}
-$('#comoboxDistrito').html(s);
-}
+          $.ajax({
+          type: 'GET',
+        	
+         url:  'http://localhost:9090/posto/'+distritoId,
+          
+           success: function (result){
+           var result = JSON.parse(result);
+           var s = '';
+          for(var i=0; i< result.length; i++){
+              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+          }
+        $('#comboboxPosto').html(s);
+    }
 });
 
-});
-});
-</script>
+          
+        });
+    });
+    </script>
+    
+    
 
-
-
-    <script type="text/javascript">
-
-$(document).ready(function(){
-$('#comoboxDistrito').on('change',function(){
-
-var distritoId = $(this).val();
-
-// alert(distritoId);
-
-$.ajax({
-type: 'GET',
-//url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
-//url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:9090/posto/'+distritoId,
-
-//url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-for(var i=0; i< result.length; i++){
-s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-}
-$('#comboboxPosto').html(s);
-}
-});
-
-
-});
-});
-</script>
-
-    <script type="text/javascript">
-function onChangeStatus(){
-var status = document.getElementById("origem");
-
-if(status.value=="individual"){
-
-document.getElementById("nome").style.display="block";
-document.getElementById("genero").style.display="block";
-document.getElementById("comunicacao").style.display="block";
-document.getElementById("contacto").style.display="block";
-document.getElementById("faixaEtaria").style.display="block";
-document.getElementById("endereco").style.display="block";
-document.getElementById("email").style.display="block";
-
-document.getElementById("nrHomens").style.display="none";
-document.getElementById("nrMulheres").style.display="none";
-document.getElementById("nomeGrupo").style.display="none";
-
-
-
-
-}else if(status.value=="grupo"){
-
-document.getElementById("nome").style.display="block";
-document.getElementById("comunicacao").style.display="block";
-document.getElementById("contacto").style.display="block";
-document.getElementById("endereco").style.display="block";
-document.getElementById("email").style.display="block";
-document.getElementById("nrHomens").style.display="block";
-document.getElementById("nrMulheres").style.display="block";
-document.getElementById("nomeGrupo").style.display="block";
-
-document.getElementById("faixaEtaria").style.display="none";
-document.getElementById("genero").style.display="none";
-
-
-}else if(status.value=="anonimo"){
-
-document.getElementById("genero").style.display="block";
-document.getElementById("comunicacao").style.display="block";
-document.getElementById("contacto").style.display="block";
-document.getElementById("faixaEtaria").style.display="block";
-document.getElementById("endereco").style.display="block";
-document.getElementById("email").style.display="block";
-
-document.getElementById("nrHomens").style.display="none";
-document.getElementById("nrMulheres").style.display="none";
-document.getElementById("nomeGrupo").style.display="none";
-document.getElementById("nome").style.display="none";
-}else{
-
-document.getElementById("nrHomens").style.display="none";
-document.getElementById("nrMulheres").style.display="none";
-document.getElementById("nomeGrupo").style.display="none";
-document.getElementById("nome").style.display="none";
-document.getElementById("genero").style.display="none";
-document.getElementById("comunicacao").style.display="none";
-document.getElementById("contacto").style.display="none";
-document.getElementById("faixaEtaria").style.display="none";
-document.getElementById("endereco").style.display="none";
-document.getElementById("email").style.display="none";
-
-}
-}
-
-
-function onChangeProjecto(){
-var estado = document.getElementById("radioProjecto");
-
-
-if(estado.value=="projecto"){
-document.getElementById("projectoo").style.display="block";
-document.getElementById("cidadee").style.display="block";
-document.getElementById("empreiteiroo").style.display="none";
-
-}else{
-document.getElementById("projectoo").style.display="none";
-document.getElementById("empreiteiroo").style.display="block";
-document.getElementById("cidadee").style.display="none";
-}
-}
-
-function onChangeOperacao(){
-var estado = document.getElementById("radioOperacao");
-
-
-if(estado.value=="operacao"){
-document.getElementById("empreiteiroo").style.display="block";
-document.getElementById("cidadee").style.display="block";
-document.getElementById("projectoo").style.display="block";
-}else{
-document.getElementById("empreiteiroo").style.display="none";
-document.getElementById("projectoo").style.display="block";
-document.getElementById("cidadee").style.display="none";
-}
-
-}
-
-</script>
+	<script type="text/javascript">
+      	function onChangeStatus(){
+      		var status = document.getElementById("origem");
+      		
+      		if(status.value=="individual"){
+      			
+      			document.getElementById("nome").style.display="block";
+      			document.getElementById("genero").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("faixaEtaria").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			
+      			
+      			
+      			
+      		}else if(status.value=="grupo"){
+      			
+      			document.getElementById("nome").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			document.getElementById("nrHomens").style.display="block";
+      			document.getElementById("nrMulheres").style.display="block";
+      			document.getElementById("nomeGrupo").style.display="block";
+      			
+      			document.getElementById("faixaEtaria").style.display="none";
+      			document.getElementById("genero").style.display="none";
+      			
+      			
+      		}else if(status.value=="anonimo"){
+      			
+      			document.getElementById("genero").style.display="block";
+      			document.getElementById("comunicacao").style.display="block";
+      			document.getElementById("contacto").style.display="block";
+      			document.getElementById("faixaEtaria").style.display="block";
+      			document.getElementById("endereco").style.display="block";
+      			document.getElementById("email").style.display="block";
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			document.getElementById("nome").style.display="none";
+      		}else{
+      			
+      			document.getElementById("nrHomens").style.display="none";
+      			document.getElementById("nrMulheres").style.display="none";
+      			document.getElementById("nomeGrupo").style.display="none";
+      			document.getElementById("nome").style.display="none";
+      			document.getElementById("genero").style.display="none";
+      			document.getElementById("comunicacao").style.display="none";
+      			document.getElementById("contacto").style.display="none";
+      			document.getElementById("faixaEtaria").style.display="none";
+      			document.getElementById("endereco").style.display="none";
+      			document.getElementById("email").style.display="none";
+      			
+      		}
+      	}
+      	
+      	
+      	function onChangeProjecto(){
+      		var estado = document.getElementById("radioProjecto");
+      		
+      		
+      		if(estado.value=="projecto"){
+      			document.getElementById("projectoo").style.display="block";
+      			document.getElementById("cidadee").style.display="block";
+      			document.getElementById("empreiteiroo").style.display="none";
+      			
+      		}else{
+      			document.getElementById("projectoo").style.display="none";
+      			document.getElementById("empreiteiroo").style.display="block";
+      			document.getElementById("cidadee").style.display="none";
+      		}
+      	}
+      		
+      		function onChangeOperacao(){
+          		var estado = document.getElementById("radioOperacao");
+          		
+          		
+          		if(estado.value=="operacao"){
+          			document.getElementById("empreiteiroo").style.display="block";
+          			document.getElementById("cidadee").style.display="block";
+          			document.getElementById("projectoo").style.display="none";
+          		}else{
+          			document.getElementById("empreiteiroo").style.display="none";
+          			document.getElementById("projectoo").style.display="block";
+          			document.getElementById("cidadee").style.display="none";
+          		}
+      		
+      	}
+      	
+      	
+      	
+      </script>
     <!-- Conteudo -->
 
-    <div align="right" class="col-12">
+	<div align="right" class="col-12">
         <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Listar Ocorrências</span>
-        </a>
+      	</a>
     </div>
-
+    
     <div class="card">
         <div  class="card-header">
-            <h3 style="font-weight: bolder;color: #0277BD; " class="card-title">EDITAR OCORRÊNCIA</h3>
+            <h3 style="font-weight: bolder;color: #0277BD; " class="card-title">Editar Operação</h3>
         </div>
-        <!-- <div th:replace="fragmentos/alert" class="card-body"> -->
-        <div class="card-body">
-            <form th:action="@{/ocorrencias/editar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
+       <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
+         <div class="card-body">
+		<form th:action="@{/operacao/editar}" th:object="${operacao}" method="POST">
 
-					<input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
-	        		<input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação..."> 
 
+			 <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
+	         <input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação..."> 
+	                  
+	                  
                 <div style="background: #0277BD; color: white">
-                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
+                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Operação</h2>
                 </div>
                 <br>
 
@@ -292,39 +288,10 @@ document.getElementById("cidadee").style.display="none";
 
                 <div style="margin-bottom: 10px" class="row">
 
-
-                    <!-- <div class="col-md-6 card">
-                        <div>
-                            <div>
-                                <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Entidade</label>
-                            </div>
-
-
-                            <div class="card-body border-bottom py-3">
-                                <div class="d-flex">
-                                    <div class="form-check-inline ">
-                                        <label class="form-check-label">
-                                            <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div> -->
-
-
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card ">
                             <div>
-                                <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Definição da Reclamação</label>
+                                <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Definição da Operação</label>
                             </div>
 
 
@@ -359,20 +326,10 @@ document.getElementById("cidadee").style.display="none";
 
                 <div class="row">
 
-                    <div id="projectoo" class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
-                                <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Natureza da Reclamação</label>
+                            <label class="form-label">Natureza da Operação</label>
                             <select id="comboboxOrigem" class="form-control custom-select" th:field="*{tipoorigem}" >
                                 <option value="">Selecione Origem...</option>
                             </select>
@@ -403,14 +360,13 @@ document.getElementById("cidadee").style.display="none";
                     </div>
 
 
-
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
                             <label class="form-label">Comunidade</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+									<i class="fe fe-edit-2"></i>
+								</span>
                                 <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
                             </div>
                         </div>
@@ -419,9 +375,9 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
+                            <label for="tipoOcorrencia" class="form-label">Tipo de Operação</label>
                             <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
-                                <option value="">Selecione o Tipo de Ocorrência...</option>
+                                <option value="">Selecione o Tipo de Operação...</option>
                                 <option th:each="p : ${tipoDeOcorrencias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                             </select>
@@ -430,7 +386,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Data da Ocorrência: </label>
+                            <label class="form-label">Data da Operação: </label>
                             <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
@@ -460,9 +416,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Assunto </label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+								<i class="fe fe-edit-2"></i>
+								</span>
                                 <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
                             </div>
                         </div>
@@ -480,7 +436,7 @@ document.getElementById("cidadee").style.display="none";
                 <div class="row">
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Origem da Ocorrência</label>
+                            <label class="form-label">Origem da Operação</label>
                             <select id="origem" onchange="onChangeStatus()" class="form-control custom-select" th:field="*{nomeGrupo}" >
                                 <option value="selecione">Selecione Origem da Ocorrência...</option>
                                 <option value="individual">Individual</option>
@@ -494,9 +450,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Nr. de Homens</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+								<i class="fe fe-edit-2"></i>
+								</span>
                                 <input type="number" th:field="*{numeroHomens}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -506,9 +462,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Nr. de Mulheres</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+								<i class="fe fe-edit-2"></i>
+								</span>
                                 <input type="number" th:field="*{numeroMulheres}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -521,9 +477,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Nome</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+								<i class="fe fe-edit-2"></i>
+								</span>
                                 <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -533,9 +489,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Nome Do Grupo</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+								<i class="fe fe-edit-2"></i>
+								</span>
                                 <input type="text" th:field="*{nomeDoRepresentanteDoGrupo}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -556,7 +512,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div style="display: none" id="comunicacao" class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Forma de Comunicação </label>
+                            <label class="form-label">Canal de Entrada </label>
                             <select class="form-control custom-select" th:field="*{formaComunicacao}" >
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Telefone">Telefone</option>
@@ -575,9 +531,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Contacto</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+							<span class="input-icon-addon">
+							<i class="fe fe-edit-2"></i>
+							</span>
                                 <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -602,9 +558,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Endereço</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+							<span class="input-icon-addon">
+							<i class="fe fe-edit-2"></i>
+							</span>
                                 <input type="text" th:field="*{moradaUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -615,9 +571,9 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Email</label>
                             <div class="input-icon">
-<span class="input-icon-addon">
-<i class="fe fe-edit-2"></i>
-</span>
+								<span class="input-icon-addon">
+									<i class="fe fe-edit-2"></i>
+								</span>
                                 <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
@@ -626,39 +582,6 @@ document.getElementById("cidadee").style.display="none";
                 </div>
 
                 <br>
-
-                <div style="background: #0277BD; color: white">
-                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
-                </div>
-                <br>
-
-                <div class="row">
-
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                                <input type="file" name="files" class="form-control" multiple>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <div class="input-icon">
-                                <input type="text" onchange="preview()" name="descricaoAnx" placeholder="Descricao de Anexos" class="form-control" >
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
 
 
                 <!-- <input type="file" name="files" multiple /> -->
@@ -669,40 +592,43 @@ document.getElementById("cidadee").style.display="none";
                     <button type="submit" class="btn btn-success">Editar </button>
                 </div>
             </form>
-
-            <!-- <form id="uploadFiles" name="uploadFiles" method="post", th:action="@{/upload/ficheiro}" enctype="multipart/form-data">
-            <input type="file" name="files" multiple required />
-            <button type="submit">Anexar</button>
-            </form>
-
-            <div style="background:#04AA6D;" class="card-header">
-            <h3 style="font-weight:bolder" class="card-title">Lista de Anexos</h3>
+          
+          <!-- <form id="uploadFiles" name="uploadFiles" method="post", th:action="@{/upload/ficheiro}" enctype="multipart/form-data">
+          	<input type="file" name="files" multiple required />
+          	<button type="submit">Anexar</button>
+          </form>
+          
+          <div style="background:#04AA6D;" class="card-header">
+                <h3 style="font-weight:bolder" class="card-title">Lista de Anexos</h3>
             </div>
             <div class="table-responsive">
-            <table class="table card-table table-vcenter text-nowrap">
-            <thead>
-            <tr>
-            <th class="w-1">No.</th>
-            <th>Nome</th>
-            <th>Link para download</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="doc:${docs}">
-            <td th:text="${doc.id}" />
-            <td th:text="${doc.docName}" />
-            <td><a th:href="@{'/download/ficheiro/'+${doc.id}}">Donwload</a></td>
-            </tr>
-            </tbody>
-            </table>
-            </div> -->
+          	<table class="table card-table table-vcenter text-nowrap">
+          		<thead>
+          			<tr>
+          				<th class="w-1">No.</th>
+          				<th>Nome</th>
+          				<th>Link para download</th>
+          			</tr>
+          		</thead>
+          		<tbody>
+          			<tr th:each="doc:${docs}">
+          				<td th:text="${doc.id}" />
+          				<td th:text="${doc.docName}" />
+          				<td><a th:href="@{'/download/ficheiro/'+${doc.id}}">Donwload</a></td>
+          			</tr>
+          		</tbody>
+          	</table>
+          </div> -->
+          
+
+
+
 
 
         </div>
-
+        
     </div>
     <!-- Conteudo-->
 </div>
-
 </body>
 </html>

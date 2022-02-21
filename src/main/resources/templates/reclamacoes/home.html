@@ -113,7 +113,7 @@ document.getElementById("trimestree").style.display="none";
                                 </label>
                             </div>
 
-                            <div style="margin-left: 10%; margin-right: 10%;" class="form-check-inline">
+                            <div style="margin-left: 8%; margin-right: 8%;" class="form-check-inline">
                                 <label class="form-check-label">
                                     <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="filtro" value="trimestre" class="form-check-input"> Trimestre
                                 </label>
@@ -195,16 +195,10 @@ document.getElementById("trimestree").style.display="none";
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <a class="btn btn-outline-primary btn-md mt-2" th:href="@{/login}" role="button">
+                                <a class="btn btn-outline-primary btn-md mt-2" role="button">
                                     <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <span>Filtrar</span>
+                                    <span style="align-content: center;">Filtrar</span>
                                 </a>
-
-                                <a class="btn btn-outline-primary btn-md mt-2" th:href="@{/login}" role="button">
-                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <span>Filtrar Por data</span>
-                                </a>
-
                             </div>
                         </div>
                     </div>
@@ -215,66 +209,6 @@ document.getElementById("trimestree").style.display="none";
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
-            
-            
-            		<div class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label class="form-label">Data Inicial: </label>
-                            <div class="input-icon">
-								<span class="input-icon-addon">
-								<i class="fe fe-calendar"></i>
-								</span>
-                                <input type="date" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label class="form-label">Data Final: </label>
-                            <div class="input-icon">
-								<span class="input-icon-addon">
-								<i class="fe fe-calendar"></i>
-								</span>
-                                <input type="date"  class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-6 col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div align="center" class="form-group">
-                                <a class="btn btn-outline-primary mt-2" role="button">
-                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <span>Filtrar</span>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-    
-    
-    
-    
-    
-    
     
     
     
@@ -422,17 +356,17 @@ document.getElementById("trimestree").style.display="none";
     
     
     
-     <div class="page-body">
+	<div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Projecto</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Mes</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-projecto"></div>
+                            <div id="chart-combination"></div>
                         </div>
                     </div>
 
@@ -440,18 +374,18 @@ document.getElementById("trimestree").style.display="none";
 
                 </div>
 
-                <div class="col-lg-6 col-xl-6">
+                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Categoria</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Província</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-categoria"></div>
+                            <div id="chart-provincia"></div>
                         </div>
                     </div>
 
 
-                </div>
+                </div> 
 
 
 
@@ -459,8 +393,8 @@ document.getElementById("trimestree").style.display="none";
             </div>
         </div>
     </div>
-
-
+    
+    
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -479,13 +413,13 @@ document.getElementById("trimestree").style.display="none";
 
                 </div>
 
-                <div class="col-lg-6 col-xl-6">
+                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Tipo de Origem</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Região</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-tipo-origem"></div>
+                            <div id="chart-regiao"></div>
                         </div>
                     </div>
 
@@ -498,9 +432,9 @@ document.getElementById("trimestree").style.display="none";
             </div>
         </div>
     </div>
-
-
-
+    
+    
+    
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -508,10 +442,10 @@ document.getElementById("trimestree").style.display="none";
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Entidade</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Canal de Entrada</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-entidade"></div>
+                            <div id="chart-canal-entrada"></div>
                         </div>
                     </div>
 
@@ -519,18 +453,18 @@ document.getElementById("trimestree").style.display="none";
 
                 </div>
 
-                <div class="col-lg-6 col-xl-6">
+                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Definição</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Categoria</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-tipo-definicao"></div>
+                            <div id="chart-categoria"></div>
                         </div>
                     </div>
 
 
-                </div>
+                </div> 
 
 
 
@@ -538,358 +472,466 @@ document.getElementById("trimestree").style.display="none";
             </div>
         </div>
     </div>
-
-
-
-    <script th:inline="javascript" >
-
-    projecto();
-    categoria();
-    cidade();
-    tipoOrigem();
-    entidade();
-    definicao();
     
     
-function definicao(){
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-lg-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Projecto</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-projecto"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script th:inline="javascript">
+    ocorrenciasPorMes();
+    ocorrenciasPorProvincia();
+    ocorrenciasPorCidade();
+    ocorrenciasPorRegiao();
+    ocorrenciasPorCanalEntrada();
+    ocorrenciasPorCategoria();
+    ocorrenciasPorProjecto();
+    
+    function ocorrenciasPorProjecto(){
+    	var nomes = /*[[${nomesProjecto}]]*/""
+       	var numeroocorencia= /*[[${numeroocorenciaProjecto}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+       	      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
+       	      		chart: {
+       	      			type: "area",
+       	      			fontFamily: 'inherit',
+       	      			height: 240,
+       	      			parentHeightOffset: 0,
+       	      			toolbar: {
+       	      				show: false,
+       	      			},
+       	      			animations: {
+       	      				enabled: false
+       	      			},
+       	      			stacked: true,
+       	      		},
+       	      		dataLabels: {
+       	      			enabled: false,
+       	      		},
+       	      		fill: {
+       	      			opacity: .16,
+       	      			type: 'solid'
+       	      		},
+       	      		stroke: {
+       	      			width: 2,
+       	      			lineCap: "round",
+       	      			curve: "smooth",
+       	      		},
+       	      		series: [{
+       	      			name: "Ocorrências por Projecto",
+       	      			data: numeroocorencia
+       	      		}],
+       	      		grid: {
+       	      			padding: {
+       	      				top: -20,
+       	      				right: 0,
+       	      				left: -4,
+       	      				bottom: -4
+       	      			},
+       	      			strokeDashArray: 4,
+       	      		},
+       	      		xaxis: {
+       	      			labels: {
+       	      				padding: 0,
+       	      			},
+       	      			tooltip: {
+       	      				enabled: false
+       	      			},
+       	      			axisBorder: {
+       	      				show: false,
+       	      			},
+       	      			categories: nomes,
+       	      		},
+       	      		yaxis: {
+       	      			labels: {
+       	      				padding: 4
+       	      			},
+       	      		},
+       	      		colors: ["#206bc4", "#f66d9b"],
+       	      		legend: {
+       	      			show: false,
+       	      		},
+       	      	})).render();
+       	      });
+           	
+    }
+    
+    function ocorrenciasPorCategoria(){
+    	var nomes = /*[[${nomesCategoria}]]*/""
+       	var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
+       	
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
+              		chart: {
+              			type: "pie",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    
+    }
+    
+    function ocorrenciasPorCanalEntrada(){
+    	var nomes = /*[[${nomesCanais}]]*/""
+       	var numeroocorencia= /*[[${numeroocorencia}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
+              		chart: {
+              			type: "donut",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    }
+    
+    function ocorrenciasPorRegiao(){
+    	var nomes = /*[[${nomesRegiao}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaRegiao}]]*/""
+        
+        	document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-regiao'), {
+              		chart: {
+              			type: "donut",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    }
+    
+    function ocorrenciasPorCidade(){
+    	
+    	var nomes = /*[[${nomesCidades}]]*/""
+        var numeroocorencia= /*[[${ocorrenciasCidade}]]*/""
+        
+        
+        	document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-cidade'), {
+              		chart: {
+              			type: "pie",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    	
+    }
+    
+    function ocorrenciasPorProvincia(){
+    	
+        var nomes = /*[[${nomesProvincias}]]*/""
+        var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
+        var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
+        var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+        
+        	
+        	document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-provincia'), {
+              		chart: {
+              			type: "bar",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			parentHeightOffset: 0,
+              			toolbar: {
+              				show: false,
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		plotOptions: {
+              			bar: {
+              				columnWidth: '50%',
+              				horizontal: true,
+              			}
+              		},
+              		dataLabels: {
+              			enabled: false,
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: [{
+              			name: "Resolvidas",
+              			data: numeroocorencia1
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia2
+              		},{
+              			name: "Improcedentes",
+              			data: numeroocorencia3
+              		}],
+              		grid: {
+              			padding: {
+              				top: -20,
+              				right: 0,
+              				left: 0,
+              				bottom: -4
+              			},
+              			strokeDashArray: 4,
+              		},
+              		xaxis: {
+              			labels: {
+              				padding: 0,
+              			},
+              			tooltip: {
+              				enabled: false
+              			},
+              			axisBorder: {
+              				show: false,
+              			},
+              			categories: nomes,
+              		},
+              		yaxis: {
+              			labels: {
+              				padding: 4
+              			},
+              		},
+              		colors: ["#5eba00", "#f66d9b", "#206bc4"],
+              		legend: {
+              			show: false,
+              		},
+              	})).render();
+              });
+        	
+        	
+        }
+    
+    
+    
+    function ocorrenciasPorMes(){
+    	
+    var nomesMes = /*[[${nomesMes}]]*/""
+    var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
+    var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
+    var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+    
+    	
+    	document.addEventListener("DOMContentLoaded", function () {
+          	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
+          		chart: {
+          			type: "bar",
+          			fontFamily: 'inherit',
+          			height: 240,
+          			parentHeightOffset: 0,
+          			toolbar: {
+          				show: false,
+          			},
+          			animations: {
+          				enabled: false
+          			},
+          		},
+          		plotOptions: {
+          			bar: {
+          				columnWidth: '50%',
+          			}
+          		},
+          		dataLabels: {
+          			enabled: false,
+          		},
+          		fill: {
+          			opacity: 1,
+          		},
+          		series: [{
+          			name: "Resolvidas",
+          			data: numeroocorencia1
+          		},{
+          			name: "Não Resolvidas",
+          			data: numeroocorencia2
+          		},{
+          			name: "Improcedentes",
+          			data: numeroocorencia3
+          		}],
+          		grid: {
+          			padding: {
+          				top: -20,
+          				right: 0,
+          				left: -4,
+          				bottom: -4
+          			},
+          			strokeDashArray: 4,
+          		},
+          		xaxis: {
+          			labels: {
+          				padding: 0,
+          			},
+          			tooltip: {
+          				enabled: false
+          			},
+          			axisBorder: {
+          				show: false,
+          			},
+          			categories: nomesMes,
+          		},
+          		yaxis: {
+          			labels: {
+          				padding: 4
+          			},
+          		},
+          		colors: ["#5eba00", "#f66d9b", "#206bc4"],
+          		legend: {
+          			show: false,
+          		},
+          	})).render();
+          });
     	
     	
-        var legendaestado = /*[[${nomesDefinicao}]]*/""
-    var numeroocorencia = /*[[${ocorrenciasDefinicao}]]*/""
-
-        document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-definicao'), {
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: numeroocorencia,
-      		labels: legendaestado,
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		colors: ["#FFA726", "#66BB6A", "#EF5350", "#EF5350"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
     }
+    
+    </script>
 
-    function entidade(){
-    	
-    	
-        var legendaestado = /*[[${nomesEntidade}]]*/""
-    var numeroocorencia = /*[[${ocorrenciasEntidade}]]*/""
-
-        document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-entidade'), {
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: numeroocorencia,
-      		labels: legendaestado,
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		colors: ["#FFA726", "#66BB6A", "#EF5350", "#EF5350"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
-    }
-
-
-    function tipoOrigem(){
-
-    var legendaestado = /*[[${nomesTipoOringes}]]*/""
-    var numeroocorencia = /*[[${ocorrenciasOrigem}]]*/""
-
-        document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-origem'), {
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: numeroocorencia,
-      		labels: legendaestado,
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		colors: ["#FFA726", "#66BB6A", "#EF5350", "#EF5350"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
-
-    }
-
-    function cidade(){
-
-    var legendaestado = /*[[${nomesCidades}]]*/""
-    var numeroocorencia = /*[[${ocorrenciasCidade}]]*/""
-
-        document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-cidade'), {
-      		chart: {
-      			type: "donut",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: numeroocorencia,
-      		labels: legendaestado,
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		colors: ["#FFA726", "#66BB6A", "#EF5350", "#EF5350"],
-      		legend: {
-      			show: true,
-      			position: 'bottom',
-      			offsetY: 12,
-      			markers: {
-      				width: 10,
-      				height: 10,
-      				radius: 100,
-      			},
-      			itemMargin: {
-      				horizontal: 8,
-      				vertical: 8
-      			},
-      		},
-      		tooltip: {
-      			fillSeriesColor: false
-      		},
-      	})).render();
-      });
-
-    }
-
-
-        function projecto(){
-            var legendaestado = /*[[${legendaestado}]]*/""
-                        var numeroocorencia = /*[[${ocorrencias}]]*/""
-
-                        // @formatter:off
-                        document.addEventListener("DOMContentLoaded", function () {
-                        window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
-                        chart: {
-                        type: "bar",
-                        fontFamily: 'inherit',
-                        height: 320,
-                        parentHeightOffset: 0,
-                        toolbar: {
-                        show: false,
-                        },
-                        animations: {
-                        enabled: false
-                        },
-                        },
-                        plotOptions: {
-                        bar: {
-                        columnWidth: '50%',
-                        }
-                        },
-                        dataLabels: {
-                        enabled: false,
-                        },
-                        fill: {
-                        opacity: 1,
-                        },
-                        series: [{
-                        name: "OCORRÊNCIAS POR CATEGORIA",
-                        data: numeroocorencia
-                        }],
-                        grid: {
-                        padding: {
-                        top: -20,
-                        right: 0,
-                        left: -4,
-                        bottom: -4
-                        },
-                        strokeDashArray: 4,
-                        },
-                        xaxis: {
-                        labels: {
-                        padding: 0,
-                        },
-                        tooltip: {
-                        enabled: false
-                        },
-                        axisBorder: {
-                        show: false,
-                        },
-                        categories: legendaestado,
-                        },
-                        yaxis: {
-                        labels: {
-                        padding: 4
-                        },
-                        },
-                        colors: ["#FFA726"],
-                        legend: {
-                        show: false,
-                        },
-                        })).render();
-                        });
-                        // @formatter:on
-                                }
-
-
-
-                        function categoria(){
-                            var legendaCategoria = /*[[${legendaCategoria}]]*/""
-                        var nrocorrenciasCategoria = /*[[${nrocorrenciasCategoria}]]*/""
-
-                        // @formatter:off
-                            document.addEventListener("DOMContentLoaded", function () {
-                            window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
-                            chart: {
-                            type: "bar",
-                            fontFamily: 'inherit',
-                            height: 320,
-                            parentHeightOffset: 0,
-                            toolbar: {
-                            show: false,
-                            },
-                            animations: {
-                            enabled: false
-                            },
-                            },
-                            plotOptions: {
-                            bar: {
-                            columnWidth: '50%',
-                            }
-                            },
-                            dataLabels: {
-                            enabled: false,
-                            },
-                            fill: {
-                            opacity: 1,
-                            },
-                            series: [{
-                            name: "OCORRÊNCIAS POR CATEGORIA",
-                            data: nrocorrenciasCategoria
-                            }],
-                            grid: {
-                            padding: {
-                            top: -20,
-                            right: 0,
-                            left: -4,
-                            bottom: -4
-                            },
-                            strokeDashArray: 4,
-                            },
-                            xaxis: {
-                            labels: {
-                            padding: 0,
-                            },
-                            tooltip: {
-                            enabled: false
-                            },
-                            axisBorder: {
-                            show: false,
-                            },
-                            categories: legendaCategoria,
-                            },
-                            yaxis: {
-                            labels: {
-                            padding: 4
-                            },
-                            },
-                            colors: ["#EF5350"],
-                            legend: {
-                            show: false,
-                            },
-                            })).render();
-                            });
-                            // @formatter:on
-                        }
-
-                    </script>
 
 
 

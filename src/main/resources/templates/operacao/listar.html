@@ -72,12 +72,12 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-primary btn-md" th:href="@{/registar/ocorrencia}" role="button">
+                <a class="btn btn-primary btn-md" th:href="@{/registar/operacao}" role="button">
                     <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                    <span>Nova Ocorrência</span>
+                    <span>Nova Operação</span>
                 </a>
 
-                <a style="margin-left: 20px ; margin-top:20px" class="btn btn-secondary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"  role="button">
+                <a style="margin-left: 20px ; margin-top:20px" class="btn btn-secondary btn-md mb-3" href="#"  role="button">
                     <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
                     <i class="fa fa-print"></i>
                     <span>Imprimir</span>
@@ -88,7 +88,7 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             <div class="card-body border-bottom py-3">
                 <div class="d-flex">
                     <div class="text-muted">
-                        <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Ocorrências</h3>
+                        <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Operações</h3>
                     </div>
                     <div class="ms-auto text-muted">
                         Procurar:
@@ -106,99 +106,47 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
                     <thead>
                     <tr style="color: rgb(65,105,225)">
-                        <td class="w-4">Codigo</td>
                         <td class="w-2">No.</td>
-                        <td >Província</td>
-                        <td >Cidade</td>
-                        <td>Cadastro</td>
-                        <td>Ocorrência</td>
-                        <td>Tipo</td>
-			<!--        <td>Entidade</td> -->
-                        <td>Definição</td>
-                        <td>Procede?</td>
-                        <td class="w-4">Assunto</td>
-                        <td class="w-4">Estado</td>
-                        <td class="w-3">Acção</td>
+                        <td>Nome</td>
+                        <td>Contacto</td>
+                        <td>Assunto</td>
+                        <td>Província</td>
+                        <td>Cidade</td>
                     </tr>
                     </thead>
                     <tbody id="myTable">
-                    <tr th:each="p : ${pageOcorrencia.registros}">
+                    <tr th:each="p : ${pageOperacao.registros}">
                         <!-- <tr th:each="p : ${ocorrencias}"> -->
-                        <td style="background: #fff" th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
-                        <td style="background: #fff" th:text="${p.id}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.nrCliente}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.nomeUtente}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.contactoUtente}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${p.assunto2.designacao}"><span class="text-muted">01401</span></td>
                         <td style="background: #fff" th:text="${p.cidade.provincia.designacao}"><span class="text-muted">01401</span></td>
                         <td style="background: #fff" th:text="${p.cidade.designacao}"><span class="text-muted">01401</span></td>
-                        <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td>
-                        <span th:if="${p != null && p.tipoOcorrencia != null && p.tipoOcorrencia.designacao != null}" th:text="${p.tipoOcorrencia.designacao}"></span>
-                        </td>
-                       <!--  <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td> -->
-                        <td th:text="${p.internoExterno}">Auxiliar Contábil</td>
-                        <td th:text="${p.procedencia}">Auxiliar Contábil</td>
-
-                        <td>
-                            <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
-                        </td>
+                        <!-- <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td> -->
 
 
-                        <td>
-
-                            <button style="background: blue; color: #fff" th:if="${p.resolucao == 'V' }" type="button" class="btn btn-sucess btn-sm">
-                                Validado
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
-                            </button>
-
-                            <button style="background: #cc568b; color: #fff" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
-                                Em Resolução
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button>
-
-                            <button style="background: orange; color: #fff" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
-                                Em Acompanhamento
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button>
-
-                            <button style="background: green; color: #fff" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
-                                Terminado
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
-                            </button>
-
-                            <button style="background: red; color: #fff" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
-                                <span th:if="${p.estado == 'Temporario'}">Temporario</span>
-                                <span th:if="${p.estado == 'Registado'}">Pendente</span>
-
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button>
-
-                            <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
-                            Pendente
-                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button> -->
-
-                        </td>
-
-                        <td align="center">
+<!--                         <td align="center"> -->
 
 
-                            <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
-                                <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
-                            </a>
+<!--                             <a th:if="${p.estado != 'Temporario'}" th:href="@{/operacoes/editar/{id} (id=${p.id})}"> -->
+<!--                                 <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i> -->
+<!--                             </a> -->
 
                             <!-- <a th:href="${'/ocorrencias/detalhar/'+p.id}">
                             <i aria-hidden="true" class="fa fa-cog"></i>
                             </a> -->
 
-                            <a th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
-                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
-                            </a>
+<!--                             <a th:href="@{/operacoes/detalhesOperacao/{id} (id=${p.id})}"> -->
+<!--                                 <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-eye"></i> -->
+<!--                             </a> -->
 
                             <!-- <a th:id="${'btn_ocorrencias/excluir/'+p.id}" th:if="${p.estado == 'Temporario' }"
                             data-toggle="modal" data-target="#myModal">
                             <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-trash-alt"></i>
                             </a> -->
 
-                        </td>
+<!--                         </td> -->
 
 
                     </tr>
@@ -217,24 +165,24 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
 
-            <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link btn" th:href="@{/listar/ocorrencia(page=${1})}" tabindex="-1">Primeira</a>
+            <li th:class="${pageOperacao.pagina == 1} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link btn" th:href="@{/listar/operacao(page=${1})}" tabindex="-1">Primeira</a>
             </li>
 
-            <li th:class="${pageOcorrencia.pagina == 1} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina - 1})}" tabindex="-1">Anterior</a>
+            <li th:class="${pageOperacao.pagina == 1} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/listar/operacao(page=${pageOperacao.pagina - 1})}" tabindex="-1">Anterior</a>
             </li>
 
             <li class="page-item">
-                <span class="page-link" th:text="|${pageOcorrencia.pagina} de ${pageOcorrencia.totalDePaginas}|"></span>
+                <span class="page-link" th:text="|${pageOperacao.pagina} de ${pageOperacao.totalDePaginas}|"></span>
             </li>
 
-            <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.pagina + 1})}">Próxima</a>
+            <li th:class="${pageOperacao.pagina == pageOperacao.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/listar/operacao(page=${pageOperacao.pagina + 1})}">Próxima</a>
             </li>
 
-            <li th:class="${pageOcorrencia.pagina == pageOcorrencia.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-                <a class="page-link" th:href="@{/listar/ocorrencia(page=${pageOcorrencia.totalDePaginas})}" tabindex="-1">Última</a>
+            <li th:class="${pageOperacao.pagina == pageOperacao.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/listar/operacao(page=${pageOperacao.totalDePaginas})}" tabindex="-1">Última</a>
             </li>
 
         </ul>
@@ -351,7 +299,7 @@ table.innerHTML += row
     responsive: true,
 
     ajax: {
-    url: '/listar/ocorrencia',
+    url: '/listar/operacao',
     data: 'data'
     },
     columns: [

@@ -480,6 +480,18 @@ select.list-dt:focus {
 				  </div>
 			  </div>
 			  
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Contacto do Utente: </span>	<span th:text="${ocorrencia.contactoUtente}"></span>
+				  </div>
+			  </div>
+			  
+			  <div class="col-6 col-sm-4">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Email do Utente: </span>	<span th:text="${ocorrencia.emailUtente}"></span>
+				  </div>
+			  </div>
+			  
 			  <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.categoria != null && ocorrencia.categoria.designacao != null}">
 					   <div class="form-group">
 						   <span style="font-weight: bolder;">Categoria: </span> <span th:text="${ocorrencia.categoria.designacao}"></span>
@@ -491,39 +503,51 @@ select.list-dt:focus {
 				  <span style="font-weight: bolder;">Data da Ocorrência: </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
 				</div>
 			</div>
-
-			  <div class="col-6 col-sm-4">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.provincia.designacao}"></span>
+			
+			<div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.cidade != null && ocorrencia.cidade.designacao != null}">
+				  <div class="form-group" >
+					  <span style="font-weight: bolder;">Cidade: </span><span th:text="${ocorrencia.cidade.designacao}"></span>
 				  </div>
 			  </div>
 
-			  <div class="col-6 col-sm-4">
+			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.cidade != null && ocorrencia.cidade.provincia != null && ocorrencia.cidade.provincia.designacao != null}">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.cidade.provincia.designacao}"></span>
+				  </div>
+			  </div>
+
+			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.distrito != null && ocorrencia.distrito.designacao != null}">
 				  <div class="form-group">
 					  <span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
 				  </div>
 			  </div>
 
-			  <div class="col-6 col-sm-4">
+			  <div class="col-6 col-sm-4" >
 				  <div class="form-group">
 					  <span style="font-weight: bolder;">Comunidade: </span>	<span th:text="${ocorrencia.comunidade}"></span>
 				  </div>
-			  </div>
+			  </div> 
 
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
-					  <span style="font-weight: bolder;">Genero: </span>	<span th:text="${ocorrencia.sexo}"></span>
+					  <span style="font-weight: bolder;">Sexo: </span>	<span th:text="${ocorrencia.sexo}"></span>
+				</div>
+			</div>
+			
+			<div class="col-6 col-sm-4">
+				<div class="form-group">
+					  <span style="font-weight: bolder;">Origem: </span>	<span th:text="${ocorrencia.origem}"></span>
 				</div>
 			</div>
 
 			  <div class="col-6 col-sm-4">
 				  <div class="form-group">
-					  <span style="font-weight: bolder;">Forma de Comunicação: </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
+					  <span style="font-weight: bolder;">Canal de Entrada: </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
 				  </div>
 			  </div>
 
 
-			  <div class="col-12 col-sm-4">
+			  <div class="col-12 col-sm-12">
 				  <div class="form-group">
 					  <span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
 				  </div>
@@ -650,7 +674,7 @@ select.list-dt:focus {
 
 								<div class="col-lg-6">
 									<div >
-										<label class="form-label">Data da Resolucao</label>
+										<label class="form-label">Data da Resolução</label>
 										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
 									</div>
 								</div>
@@ -664,7 +688,7 @@ select.list-dt:focus {
 
 								<div class="col-lg-12">
 									<div>
-										<label class="form-label">Comentario</label>
+										<label class="form-label">Comentário</label>
 										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
 									</div>
 								</div>

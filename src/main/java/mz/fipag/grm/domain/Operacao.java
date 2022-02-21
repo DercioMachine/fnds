@@ -14,11 +14,14 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "ocorrencia")
-public class Ocorrencia extends AbstractEntity{
+@Table(name = "operacao")
+public class Operacao extends AbstractEntity{
 
 	@Column(name = "grm_stamp")
 	private String grmStamp;
+	
+	@Column(name = "nr_cliente")
+	private String nrCliente;
 	
 	@Column(name = "numero")
 	private int numero;
@@ -163,6 +166,10 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
 	private Empreiteiro empreiteiro;
+	
+	@ManyToOne
+	@JoinColumn(name="assunto_id")
+	private Assunto assunto2;
 
 	public Origem getTipoorigem() {
 		return tipoorigem;
@@ -288,6 +295,14 @@ public class Ocorrencia extends AbstractEntity{
 
 	public Projecto getProjecto() {
 		return projecto;
+	}
+	
+	public String getNrCliente() {
+		return nrCliente;
+	}
+
+	public void setNrCliente(String nrCliente) {
+		this.nrCliente = nrCliente;
 	}
 
 	public Categoria getCategoria() {
@@ -512,4 +527,13 @@ public class Ocorrencia extends AbstractEntity{
 	public void setInternoExterno(String internoExterno) {
 		this.internoExterno = internoExterno;
 	}
+
+	public Assunto getAssunto2() {
+		return assunto2;
+	}
+
+	public void setAssunto2(Assunto assunto2) {
+		this.assunto2 = assunto2;
+	}
+	
 }
