@@ -1,13 +1,10 @@
 package mz.fipag.grm.controller;
 
-import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
-import mz.fipag.grm.domain.*;
-import mz.fipag.grm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,6 +20,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
+import mz.fipag.grm.domain.Categoria;
+import mz.fipag.grm.domain.Cidade;
+import mz.fipag.grm.domain.Distrito;
+import mz.fipag.grm.domain.Empreiteiro;
+import mz.fipag.grm.domain.Ocorrencia;
+import mz.fipag.grm.domain.PostoAdministrativo;
+import mz.fipag.grm.domain.Projecto;
+import mz.fipag.grm.domain.Provincia;
+import mz.fipag.grm.domain.Resolucao;
+import mz.fipag.grm.domain.TipoAlerta;
+import mz.fipag.grm.domain.TipoOcorrencia;
+import mz.fipag.grm.domain.User;
+import mz.fipag.grm.repository.DistritoRepository;
+import mz.fipag.grm.repository.DocsRepository;
+import mz.fipag.grm.repository.OcorrenciaRepository;
+import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.repository.ProcessoRepository;
+import mz.fipag.grm.repository.ResolucaoRepository;
+import mz.fipag.grm.repository.ResponsabilidadeRepository;
+import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;

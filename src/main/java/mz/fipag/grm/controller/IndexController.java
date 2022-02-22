@@ -3,6 +3,7 @@ package mz.fipag.grm.controller;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -738,6 +739,51 @@ public class IndexController {
 	}
     
     
+    public void cidadeFiltro(Model model, Date datainicial, Date datafinal, Long projecto){
+    	
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCidadeFiltro1(datainicial, datafinal, projecto);
+
+
+		String[] nomes = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		int i=0;
+		for (Object[] ob : lista){
+
+			nomes[i] = (String) ob[0];
+			nrocorrencias[i] = (BigInteger) ob[1];
+
+			i++;
+		}
+
+
+		model.addAttribute("nomesCidades",nomes);
+		model.addAttribute("ocorrenciasCidade", nrocorrencias);
+
+	}
+    
+    
+    @PostMapping("/filtrar1")
+	public String filtrar1(@RequestParam("datainicial") Date datainicial, 
+			@RequestParam("datafinal") Date datafinal, @RequestParam("projecto") Long projecto, Model model) {
+    		
+    	
+    	model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear));
+		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentes(currentYear));
+		model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
+		
+		
+		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
+		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
+		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
+		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
+		
+    	
+    		cidadeFiltro(model, datainicial, datafinal, projecto);
+    		
+			return "publico/estatistica";
+		
+	}
     
     
     @PostMapping("/autenticacao")

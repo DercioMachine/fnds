@@ -1,7 +1,7 @@
 package mz.fipag.grm.repository;
 
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -144,6 +144,14 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 
 	@Query(value="select * from ocorrencia, cidade  where ocorrencia.cidade_id = cidade.id and cidade.regiao_id =:local", nativeQuery=true)
 	List<Ocorrencia> buscarOcorrenciasPorUsuariosZonas(@Param("local") long local);
+	
+	
+/* FIM */
+	
+	@Query(value="select designacao, count(*) from ocorrencia, cidade where ocorrencia.cidade_id=cidade.id "
+			+ " and ocorrencia.created between =:datainicial and =:datafinal and ocorrencia.projecto_id=:projecto"
+			+ "group by cidade_id",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCidadeFiltro1(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") Long projecto);
 
 
 }

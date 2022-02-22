@@ -24,7 +24,6 @@ public abstract class AbstractEntity implements Serializable  {
 	private Long id;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso = ISO.DATE)
 	private Date created;
 
 	@Temporal(TemporalType.DATE)

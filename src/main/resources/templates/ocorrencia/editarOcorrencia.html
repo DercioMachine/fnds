@@ -53,9 +53,8 @@ OrigemInternoExterno();
 
     $.ajax({
     type: 'GET',
-
-    //url: 'http://portal.fipag.co.mz/grm/origem/externo',
-    url: 'http://localhost:9090/origem/externo/',
+    url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+  //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
@@ -96,71 +95,9 @@ OrigemInternoExterno();
 
 </script>
 
-    <script type="text/javascript">
-
-$(document).ready(function(){
-$('#comboboxProvincias').on('change',function(){
-
-var provinciaId = $(this).val();
-
-// alert(provinciaId);
-
-$.ajax({
-type: 'GET',
-
-//url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
-//url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:9090/distrito/'+provinciaId,
-//url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
-
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-for(var i=0; i< result.length; i++){
-s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-}
-$('#comoboxDistrito').html(s);
-}
-});
-
-});
-});
-</script>
 
 
 
-    <script type="text/javascript">
-
-$(document).ready(function(){
-$('#comoboxDistrito').on('change',function(){
-
-var distritoId = $(this).val();
-
-// alert(distritoId);
-
-$.ajax({
-type: 'GET',
-//url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
-//url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:9090/posto/'+distritoId,
-
-//url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-for(var i=0; i< result.length; i++){
-s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-}
-$('#comboboxPosto').html(s);
-}
-});
-
-
-});
-});
-</script>
 
     <script type="text/javascript">
 function onChangeStatus(){
@@ -291,34 +228,6 @@ document.getElementById("cidadee").style.display="none";
 
 
                 <div style="margin-bottom: 10px" class="row">
-
-
-                    <!-- <div class="col-md-6 card">
-                        <div>
-                            <div>
-                                <label style="margin-left: 10px" class="card-title pl-6 pt-2" > Entidade</label>
-                            </div>
-
-
-                            <div class="card-body border-bottom py-3">
-                                <div class="d-flex">
-                                    <div class="form-check-inline ">
-                                        <label class="form-check-label">
-                                            <input onchange="onChangeProjecto()" th:field="*{projectoOperacao}" id="radioProjecto" value="projecto" class="form-check-input check" type="radio" checked> Projecto
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input onchange="onChangeOperacao()" th:field="*{projectoOperacao}" id="radioOperacao" type="radio" value="operacao" class="form-check-input" > Operação
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div> -->
 
 
                     <div class="col-md-12">
@@ -656,47 +565,10 @@ document.getElementById("cidadee").style.display="none";
                 </div>
 
 
-
-
-
-
-
-                <!-- <input type="file" name="files" multiple /> -->
-
-
-
                 <div class="card-footer text-right">
                     <button type="submit" class="btn btn-success">Editar </button>
                 </div>
             </form>
-
-            <!-- <form id="uploadFiles" name="uploadFiles" method="post", th:action="@{/upload/ficheiro}" enctype="multipart/form-data">
-            <input type="file" name="files" multiple required />
-            <button type="submit">Anexar</button>
-            </form>
-
-            <div style="background:#04AA6D;" class="card-header">
-            <h3 style="font-weight:bolder" class="card-title">Lista de Anexos</h3>
-            </div>
-            <div class="table-responsive">
-            <table class="table card-table table-vcenter text-nowrap">
-            <thead>
-            <tr>
-            <th class="w-1">No.</th>
-            <th>Nome</th>
-            <th>Link para download</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="doc:${docs}">
-            <td th:text="${doc.id}" />
-            <td th:text="${doc.docName}" />
-            <td><a th:href="@{'/download/ficheiro/'+${doc.id}}">Donwload</a></td>
-            </tr>
-            </tbody>
-            </table>
-            </div> -->
-
 
         </div>
 

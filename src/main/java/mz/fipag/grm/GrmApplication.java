@@ -10,10 +10,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @SpringBootApplication
 public class GrmApplication extends SpringBootServletInitializer{
-//public class GrmApplication {
 
 	public static void main(String[] args)  {
 
@@ -46,12 +44,4 @@ public class GrmApplication extends SpringBootServletInitializer{
 		return mailSender;
 	}
 
-    /*
-	 * @Bean public FilterRegistrationBean<Filter> disableSpringBootErrorFilter
-	 * (ErrorPageFilter filter){ FilterRegistrationBean filterRegistrationBean = new
-	 * FilterRegistrationBean(); filterRegistrationBean.setFilter(filter);
-	 * filterRegistrationBean.setEnabled(false);
-	 * 
-	 * return filterRegistrationBean; }
-	 */
 }
