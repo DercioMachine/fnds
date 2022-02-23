@@ -123,7 +123,7 @@ public class IndexController {
     public String index() throws MessagingException {
 
 		//sendEmail();
-		sendSMS();
+		//sendSMS();
 
 		//emailService.enviarEmail("descricao","Jacinto Machava","jacintomachava@gmail.com","covid19");
 
