@@ -115,15 +115,15 @@ public class IndexController {
 		@Autowired
 		private JavaMailSender javaMailSender;
 
-		public static final String ACCOUNT_SID = "AC210a20618423ed1ec9fabcd1a047dc9c";
-		public static final String AUTH_TOKEN = "627b5ac718dce7c7a69a95537fcc9f29";
+		public static final String ACCOUNT_SID = "AC4496682b72c01c4ca07f35400642a526";
+		public static final String AUTH_TOKEN = "ae7fd2ea9996bffcbc84b3dc60ca3936";
 
 
     @GetMapping("/")
     public String index() throws MessagingException {
 
 		//sendEmail();
-		//sendSMS();
+		sendSMS();
 
 		//emailService.enviarEmail("descricao","Jacinto Machava","jacintomachava@gmail.com","covid19");
 
