@@ -16,6 +16,9 @@ public class Resolucao extends AbstractEntity{
     @Column(name = "designacao")
     private String designacao;
 
+    @Column(name = "motivo")
+    private String motivo;
+
     @Column(name = "descricao")
     private String descricao;
 
@@ -93,5 +96,11 @@ public class Resolucao extends AbstractEntity{
         this.descricao = descricao;
     }
 
+    public String getMotivo() {
+        return motivo;
+    }
 
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
 }

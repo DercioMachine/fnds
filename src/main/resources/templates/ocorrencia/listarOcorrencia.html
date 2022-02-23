@@ -72,7 +72,7 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-primary btn-md" th:href="@{/registar/ocorrencia}" role="button">
+                <a class="btn btn-success btn-md" th:href="@{/registar/ocorrencia}" role="button">
                     <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
                     <span>Nova Ocorrência</span>
                 </a>
@@ -108,13 +108,10 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     <tr style="color: rgb(65,105,225)">
                         <td class="w-4">Codigo</td>
                         <td class="w-2">No.</td>
-                        <td >Província</td>
-                        <td >Cidade</td>
                         <td>Cadastro</td>
                         <td>Ocorrência</td>
-                        <td>Tipo</td>
-			<!--        <td>Entidade</td> -->
-                        <td>Definição</td>
+                        <td>Projecto</td>
+			            <td>Canal de Entrada</td>
                         <td>Procede?</td>
                         <td class="w-4">Assunto</td>
                         <td class="w-4">Estado</td>
@@ -122,20 +119,17 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     </tr>
                     </thead>
                     <tbody id="myTable">
-                    <tr th:each="p : ${pageOcorrencia}">
+                    <tr th:each="p, index : ${pageOcorrencia}">
                         <!-- <tr th:each="p : ${ocorrencias}"> -->
                         <td style="background: #fff" th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
-                        <td style="background: #fff" th:text="${p.id}"><span class="text-muted">01401</span></td>
-                        <td style="background: #fff" th:text="${p.cidade.provincia.designacao}"><span class="text-muted">01401</span></td>
-                        <td style="background: #fff" th:text="${p.cidade.designacao}"><span class="text-muted">01401</span></td>
+                        <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
                         <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td>
-                        <span th:if="${p != null && p.tipoOcorrencia != null && p.tipoOcorrencia.designacao != null}" th:text="${p.tipoOcorrencia.designacao}"></span>
-                        </td>
-                       <!--  <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td> -->
-                        <td th:text="${p.internoExterno}">Auxiliar Contábil</td>
+                        <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
+                        <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
                         <td th:text="${p.procedencia}">Auxiliar Contábil</td>
+
+                        <td th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}" >Auxiliar Contábil</td>
 
                         <td>
                             <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>

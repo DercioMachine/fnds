@@ -35,29 +35,58 @@
 <body>
 <div  layout:fragment="corpo">
 
+
+	<script>
+
+		function onClickSim(){
+	var estado = document.getElementById("radioSim");
+
+
+	if(estado.value=="true"){
+
+	document.getElementById("comentario").style.display="block";
+	document.getElementById("motivo").style.display="none";
+
+
+	}
+
+	function onClickSim(){
+	var estado = document.getElementById("radioNao");
+
+
+	if(estado.value=="false"){
+
+	document.getElementById("comentario").style.display="none";
+	document.getElementById("motivo").style.display="block";
+
+
+	}
+
+	</script>
+
 <!-- <div align="right" class="col-12">
-        <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
+        <a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Listar Ocorrências</span>
       	</a>
     </div> -->
 
-	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report1" th:if="${ocorrencia.resolucao == 'A' }"  role="button">
+	<a class="btn btn-success btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report1" th:if="${ocorrencia.resolucao == 'A' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Acompanhar Ocorrência</span>
 	</a>
 
 	<!-- Conteudo -->
-	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'R' && ocorrencia.procedencia=='Sim'}"  role="button">
+	<a class="btn btn-success btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'R' && ocorrencia.procedencia=='Sim'}"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Resolver Ocorrência</span>
 	</a>
-	<a class="btn btn-primary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'V'  && ocorrencia.procedencia=='Sim'}"  role="button">
+	<a class="btn btn-success btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report" th:if="${ocorrencia.resolucao == 'V'  && ocorrencia.procedencia=='Sim'}"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Resolver Ocorrência</span>
 	</a>
 
-	<a class="btn btn-primary btn-md mb-3" th:href="@{/ocorrencias/validar/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.resolucao == 'P' }"  role="button">
+	<a class="btn btn-success btn-md mb-3" th:href="@{/ocorrencias/validar/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.resolucao == 'P' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Validar Ocorrência</span>
 	</a>
@@ -76,10 +105,10 @@
     <div class="card">
 
 		<div th:if="${ocorrencia.procedencia =='Sim' && ocorrencia.tipoorigem != null}">
-			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral'}" >
+			<div style="background: #60a18a; color: white" th:if="${ocorrencia.tipoorigem.processo =='Geral'}" >
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Geral</h2>
 			</div>
-			<div style="background: #0277BD; color: white" th:if="${ocorrencia.tipoorigem.processo=='Laboral' }" >
+			<div style="background: #60a18a; color: white" th:if="${ocorrencia.tipoorigem.processo=='Laboral' }" >
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Processo de Reclamação Para os Trabalhadores </h2>
 			</div>
 			<div style="background: red; color: white" th:if="${ocorrencia.tipoorigem.processo =='SEA/SH/GBV' }" >
@@ -122,7 +151,7 @@
 		</div>
 
 	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		 <div style="background: #0277BD; color: white">
+		 <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
 			</div>
 			<br>
@@ -163,7 +192,7 @@
 
 
 	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		  <div style="background: #0277BD; color: white">
+		  <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Resolução</h2>
 			</div>
 			<br>
@@ -212,7 +241,7 @@
 
 	   <div th:if="${ocorrencia.estado =='Validado'}">
 
-		   <div style="background: #0277BD; color: white">
+		   <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Validação</h2>
 			</div>
 			<br>
@@ -257,7 +286,7 @@
 	   </div>
 
 
-        <div style="background: #0277BD; color: white">
+        <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados do Registo</h2>
 			</div>
 			<br>
@@ -329,7 +358,7 @@
 		  </div>
 		</div>
 
-		<div style="background: #0277BD; color: white">
+		<div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
 			</div>
 			<br>
@@ -413,7 +442,7 @@
 
 						<div class="col-2 col-sm-2">
 							<label class="form-label">.</label>
-							<button type="submit" class="btn btn-primary">Adicionar </button>
+							<button type="submit" class="btn btn-success">Adicionar </button>
 						</div>
 
 					</div>
@@ -430,7 +459,7 @@
 			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
-						<div class="modal-header" style="background: #0277BD; color: white">
+						<div class="modal-header" style="background: #60a18a; color: white">
 							<h5 class="modal-title">Resolução</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
@@ -439,26 +468,26 @@
 							<div class="form-selectgroup-boxes row mb-3">
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
-										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
+										<input id="radioNao" type="radio" onclick="onClickNao()" name="report" value="false" class="form-selectgroup-input" checked>
 										<span class="form-selectgroup-label d-flex align-items-center p-3">
                     <span class="me-3">
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Não há Concesso</span>
+                      <span class="form-selectgroup-title strong mb-1">Não há houve Acordo</span>
                     </span>
                   </span>
 									</label>
 								</div>
 								<div class="col-lg-6">
 									<label class="form-selectgroup-item">
-										<input type="radio" name="report" value="true" class="form-selectgroup-input">
+										<input id="radioSim" onclick="onClickSim()" type="radio" name="report" value="true" class="form-selectgroup-input">
 										<span class="form-selectgroup-label d-flex align-items-center p-3">
                     <span class="me-3">
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Há Concesso</span>
+                      <span class="form-selectgroup-title strong mb-1">Houve Acordo</span>
                     </span>
                   </span>
 									</label>
@@ -503,10 +532,16 @@
 									</div>
 								</div>
 
-								<div class="col-lg-12">
+								<div style="display:none" id="comentario" class="col-lg-12">
 									<div>
-										<label class="form-label">Comentario</label>
+										<label class="form-label">Comentário</label>
 										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
+									</div>
+								</div>
+								<div id="motivo" class="col-lg-12">
+									<div>
+										<label class="form-label">Motivo</label>
+										<textarea class="form-control" th:field="*{motivo}" rows="3"></textarea>
 									</div>
 								</div>
 							</div>
@@ -518,7 +553,7 @@
 								Cancel
 							</a>
 
-							<button type="submit" class="btn btn-info" >Gravar</button>
+							<button type="submit" class="btn btn-success" >Gravar</button>
 
 						</div>
 
@@ -532,7 +567,7 @@
 			<div class="modal modal-blur fade" id="modal-report1" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
-						<div class="modal-header" style="background: #0277BD; color: white">
+						<div class="modal-header" style="background: #60a18a; color: white">
 							<h5 class="modal-title">Acompanhamento</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
@@ -624,7 +659,7 @@
 			<div class="modal modal-blur fade" id="modal-reportt" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 					<div class="modal-content">
-						<div class="modal-header" style="background: #0277BD; color: white">
+						<div class="modal-header" style="background: #60a18a; color: white">
 							<h5 class="modal-title">Exlcusão</h5><span th:text="${ocorrencia.id}"></span>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>

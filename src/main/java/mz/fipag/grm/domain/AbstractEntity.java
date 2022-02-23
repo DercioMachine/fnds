@@ -22,30 +22,30 @@ public abstract class AbstractEntity implements Serializable  {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date created;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "updated", nullable = false)
 	private Date updated;
-	
+
 	/*
 	 * private Long userCreated;
-	 * 
+	 *
 	 * private Long userUpdated;
 	 */
-	
+
 	public AbstractEntity() {
 		super();
 		created = updated=new Date();
 	}
-	
+
 	@PrePersist
 	public void onCreate(){
 		updated = created = new Date();
 	}
-	
+
 	@PreUpdate
 	public void onUpdate(){
 		updated = new Date();
@@ -58,7 +58,7 @@ public abstract class AbstractEntity implements Serializable  {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public boolean hasNotId() {
 		return id == null;
 	}
@@ -66,8 +66,8 @@ public abstract class AbstractEntity implements Serializable  {
 	public boolean hasId() {
 		return id != null;
 	}
-	
-	
+
+
 	public Date getCreated() {
 		return created;
 	}
@@ -86,12 +86,12 @@ public abstract class AbstractEntity implements Serializable  {
 
 	/*
 	 * public Long getUserCreated() { return userCreated; }
-	 * 
+	 *
 	 * public void setUserCreated(Long userCreated) { this.userCreated =
 	 * userCreated; }
-	 * 
+	 *
 	 * public Long getUserUpdated() { return userUpdated; }
-	 * 
+	 *
 	 * public void setUserUpdated(Long userUpdated) { this.userUpdated =
 	 * userUpdated; }
 	 */
@@ -124,5 +124,5 @@ public abstract class AbstractEntity implements Serializable  {
 	@Override
 	public String toString() {
 		return String.format("Entidade %s id: %s", this.getClass().getName(), getId());
-	}	
+	}
 }

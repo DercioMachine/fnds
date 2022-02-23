@@ -1,368 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt" Xmlns:th="http://www.thymeleaf.org"
-      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
-      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-      
-      <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta http-equiv="Content-Language" content="en" />
-  <meta name="msapplication-TileColor" content="#2d89ef">
-  <meta name="theme-color" content="#4188c9">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-  <!-- Generated: 2018-04-06 16:27:42 +0200 -->
-  <!-- <title>FIPAG – Fundo de Investimento e Património do Abastacimento de Água</title> -->
-  <title>FIPAG - Fundo de Investimento e Património do Abastacimento de Água</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-  <script src="./assets/js/require.min.js"></script>
-  <link rel="icon" th:href="@{/image/log.png}" />
-  <script>
-      requirejs.config({
-          baseUrl: '.'
-      });
-    </script>
-      
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml">
+
+
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title> FIPAG </title>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-   
-    
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"  />
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    
-    
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- CSS files -->
     <link th:href="@{/dist/css/tabler.min.css}" rel="stylesheet"/>
     <link th:href="@{/dist/css/tabler-flags.min.css}" rel="stylesheet"/>
     <link th:href="@{/dist/css/tabler-payments.min.css}" rel="stylesheet"/>
     <link th:href="@{/dist/css/tabler-vendors.min.css}" rel="stylesheet"/>
     <link th:href="@{/dist/css/demo.min.css}" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
-    <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
-	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
-	<!-- jQueryUI (autocomplete) -->
-	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
-    <script th:src="@{/js/jquery.validate.min.js}"></script>
-    
-   <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
-    <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
-    
-    
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+    <!-- jQueryUI (autocomplete) -->
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+
+    <link href="https://code.jquery.com/jquery-3.5.1.js" rel="stylesheet"/>
+
+    <link href="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"/>
+
+    <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"/>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
     <!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
     <script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
     <script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
-   <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
+    <!-- <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
     <script th:src="@{/../assets/js/dashboard.js}"></script> -->
-    <style>
 
-* {
-    margin: 0;
-    padding: 0
-}
-
-html {
-    height: 100%
-}
-
-#grad1 {
-    /* background-color: #9C27B0; */
-   /*  background-image: linear-gradient(120deg, #FF4081, #81D4FA) */
-}
-
-#msform {
-    text-align: center;
-    position: relative;
-    margin-top: 20px
-}
-
-#msform fieldset .form-card {
-    background: white;
-    border: 0 none;
-    border-radius: 0px;
-    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
-    padding: 20px 40px 30px 40px;
-    box-sizing: border-box;
-    width: 94%;
-    margin: 0 3% 20px 3%;
-    position: relative
-}
-
-#msform fieldset {
-    background: white;
-    border: 0 none;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-    width: 100%;
-    margin: 0;
-    padding-bottom: 20px;
-    position: relative
-}
-
-#msform fieldset:not(:first-of-type) {
-    display: none
-}
-
-#msform fieldset .form-card {
-    text-align: left;
-    color: #9E9E9E
-}
-
-#msform input,
-#msform textarea {
-    padding: 0px 8px 4px 8px;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0px;
-    margin-bottom: 25px;
-    margin-top: 2px;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: montserrat;
-    color: #2C3E50;
-    font-size: 16px;
-    letter-spacing: 1px
-}
-
-#msform input:focus,
-#msform textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: none;
-    font-weight: bold;
-    border-bottom: 2px solid skyblue;
-    outline-width: 0
-}
-
-#msform .action-button {
-    width: 100px;
-    background: skyblue;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 0px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px
-}
-
-#msform .action-button:hover,
-#msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue
-}
-
-#msform .action-button-previous {
-    width: 100px;
-    background: #616161;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 0px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px
-}
-
-#msform .action-button-previous:hover,
-#msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161
-}
-
-select.list-dt {
-    border: none;
-    outline: 0;
-    border-bottom: 1px solid #ccc;
-    padding: 2px 5px 3px 5px;
-    margin: 2px
-}
-
-select.list-dt:focus {
-    border-bottom: 2px solid skyblue
-}
-
-.card {
-    z-index: 0;
-    border: none;
-    border-radius: 0.5rem;
-    position: relative
-}
-
-.fs-title {
-    font-size: 25px;
-    color: #2C3E50;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-align: left
-}
-
-#progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: lightgrey
-}
-
-#progressbar .active {
-    color: #000000
-}
-
-#progressbar li {
-    list-style-type: none;
-    font-size: 12px;
-    width: 25%;
-    float: left;
-    position: relative
-}
-
-#progressbar #account:before {
-    font-family: FontAwesome;
-    content: "\f022"
-}
-
-#progressbar #personal:before {
-    font-family: FontAwesome;
-    content: "\f007"
-}
-
-#progressbar #payment:before {
-    font-family: FontAwesome;
-    content: "\f15b"
-}
-
-#progressbar #confirm:before {
-    font-family: FontAwesome;
-    content: "\f00c"
-}
-
-#progressbar li:before {
-    width: 50px;
-    height: 50px;
-    line-height: 45px;
-    display: block;
-    font-size: 18px;
-    color: #ffffff;
-    background: lightgray;
-    border-radius: 50%;
-    margin: 0 auto 10px auto;
-    padding: 2px
-}
-
-#progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: lightgray;
-    position: absolute;
-    left: 0;
-    top: 25px;
-    z-index: -1
-}
-
-#progressbar li.active:before,
-#progressbar li.active:after {
-    background: skyblue
-}
-
-.radio-group {
-    position: relative;
-    margin-bottom: 25px
-}
-
-.radio {
-    display: inline-block;
-    width: 204;
-    height: 104;
-    border-radius: 0;
-    background: lightblue;
-    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    cursor: pointer;
-    margin: 8px 2px
-}
-
-.radio:hover {
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3)
-}
-
-.radio.selected {
-    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)
-}
-
-.fit-image {
-    width: 100%;
-    object-fit: cover
-}
-
-input[type="radio"]{
-      display: none;
-    }
-    input[type="radio"] + label span {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      background: transparent;
-      vertical-align: middle;
-      border: 2px solid #f56;
-      border-radius: 100%;
-      padding: 2px;
-      margin:0 5px;
-    }
-    input[type="radio"]:checked + label span {
-      width: 20px;
-      height: 20px;
-      background: #f56;
-      background-clip: content-box;
-    }  
-
-</style>
-    
-    
 </head>
-<body style=" background: #f4f5fa;" class="antialiased wrapper">
+<body>
 
-<!-- Fragmentos de header -->
-    <header th:replace="/fragmentos/headerPublico"></header>
-    <!-- Fim de frgmento de header-->
-    
-
-<div style="margin-bottom: 100px">
-
-
-<script type="text/javascript">
-    function toggleMobileMenu(menu) {
-        menu.classList.toggle('open');
-    }
-    </script>
+<header th:replace="/fragmentos/headerPublico"></header>
+<div >
 
     <script type="text/javascript">
-        let fileInput = document.getElementById("file");
-        let numOfFiles = document.getElementById("num-of-files");
-        let imageContainer = document.getElementById("images");
+let fileInput = document.getElementById("file");
+let numOfFiles = document.getElementById("num-of-files");
+let imageContainer = document.getElementById("images");
 
-        function preview(){
+function preview(){
 
-           document.getElementById("num-of-files").innerHTML = "";
+document.getElementById("num-of-files").innerHTML = "";
 
-           numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
-        }
+numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
+}
 
-    </script>
+</script>
 
-    
-    
+    <script type="text/javascript">
+
+var estadobotao = 0 ;
+
+function onChangeSimOrigem(){
+var estado = document.getElementById("radioSimOrigem");
+
+if(estado.value=="Interno"){
+estadobotao = 1 ;
+}
+OrigemInternoExterno();
+}
+
+function onChangeNaoOrigem(){
+var estado = document.getElementById("radioNaoOrigem");
+
+if(estado.value=="Externo"){
+estadobotao = 2 ;
+}
+OrigemInternoExterno();
+}
+
+
+
+    function OrigemInternoExterno(){
+
+    $.ajax({
+    type: 'GET',
+
+    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+//  url: 'https://portal.fipag.co.mz/grm/origem/externo',
+    //url: 'http://localhost:9090/origem/externo/',
+    //url: 'http://localhost:9090/origem/externo',
+    // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
+
+
+    success: function (result){
+    var result = JSON.parse(result);
+    var s = '';
+
+    if(estadobotao == 1){
+
+    for(var i=0; i< result.length; i++){
+
+    if(result[i].tipo=="Interno"){
+    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+    }
+
+    }
+    }
+
+    if(estadobotao == 2){
+
+    for(var i=0; i< result.length; i++){
+
+    if(result[i].tipo=="Externo"){
+    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+    }
+
+    }
+    }
+
+    $('#comboboxOrigem').html(s);
+    }
+    });
+
+    }
+
+
+
+</script>
+
     <script type="text/javascript">
 
 $(document).ready(function(){
@@ -396,7 +174,7 @@ $('#comoboxDistrito').html(s);
 </script>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
 $(document).ready(function(){
 $('#comoboxDistrito').on('change',function(){
@@ -428,618 +206,273 @@ $('#comboboxPosto').html(s);
 });
 </script>
 
+
     <script type="text/javascript">
+function onChangeStatus(){
+var status = document.getElementById("origem");
 
-    $(document).ready(function(){
-        $('#comoboxDistrito').on('change',function(){
+if(status.value=="individual"){
 
-          var distritoId = $(this).val();
+document.getElementById("nome").style.display="block";
+document.getElementById("genero").style.display="block";
+document.getElementById("comunicacao").style.display="block";
+document.getElementById("contacto").style.display="block";
+document.getElementById("faixaEtaria").style.display="block";
+document.getElementById("endereco").style.display="block";
+document.getElementById("email").style.display="block";
 
-         // alert(distritoId);
+document.getElementById("nrHomens").style.display="none";
+document.getElementById("nrMulheres").style.display="none";
+document.getElementById("nomeGrupo").style.display="none";
 
-          $.ajax({
-          type: 'GET',
-        url: 'http://localhost:9090/posto/'+distritoId,
-          
-           success: function (result){
-           var result = JSON.parse(result);
-           var s = '';
-          for(var i=0; i< result.length; i++){
-              s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-          }
-        $('#comboboxPosto').html(s);
-    }
-});
 
-          
-        });
-    });
-    
-    
-    
-    
-    
-    
-    </script>
-    
-    
-    <script>
 
-$(document).ready(function(){
 
-var current_fs, next_fs, previous_fs; //fieldsets
-var opacity;
+}else if(status.value=="grupo"){
 
-$(".next").click(function(){
+document.getElementById("nome").style.display="block";
+document.getElementById("comunicacao").style.display="block";
+document.getElementById("contacto").style.display="block";
+document.getElementById("endereco").style.display="block";
+document.getElementById("email").style.display="block";
+document.getElementById("nrHomens").style.display="block";
+document.getElementById("nrMulheres").style.display="block";
+document.getElementById("nomeGrupo").style.display="block";
 
-current_fs = $(this).parent();
-next_fs = $(this).parent().next();
+document.getElementById("faixaEtaria").style.display="none";
+document.getElementById("genero").style.display="none";
 
-//Add Class Active
-$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
-//show the next fieldset
-next_fs.show();
-//hide the current fieldset with style
-current_fs.animate({opacity: 0}, {
-step: function(now) {
-// for making fielset appear animation
-opacity = 1 - now;
+}else if(status.value=="anonimo"){
 
-current_fs.css({
-'display': 'none',
-'position': 'relative'
-});
-next_fs.css({'opacity': opacity});
-},
-duration: 600
-});
-});
+document.getElementById("genero").style.display="block";
+document.getElementById("comunicacao").style.display="block";
+document.getElementById("contacto").style.display="block";
+document.getElementById("faixaEtaria").style.display="block";
+document.getElementById("endereco").style.display="block";
+document.getElementById("email").style.display="block";
 
-$(".previous").click(function(){
+document.getElementById("nrHomens").style.display="none";
+document.getElementById("nrMulheres").style.display="none";
+document.getElementById("nomeGrupo").style.display="none";
+document.getElementById("nome").style.display="none";
+}else{
 
-current_fs = $(this).parent();
-previous_fs = $(this).parent().prev();
+document.getElementById("nrHomens").style.display="none";
+document.getElementById("nrMulheres").style.display="none";
+document.getElementById("nomeGrupo").style.display="none";
+document.getElementById("nome").style.display="none";
+document.getElementById("genero").style.display="none";
+document.getElementById("comunicacao").style.display="none";
+document.getElementById("contacto").style.display="none";
+document.getElementById("faixaEtaria").style.display="none";
+document.getElementById("endereco").style.display="none";
+document.getElementById("email").style.display="none";
 
-//Remove class active
-$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+}
+}
 
-//show the previous fieldset
-previous_fs.show();
 
-//hide the current fieldset with style
-current_fs.animate({opacity: 0}, {
-step: function(now) {
-// for making fielset appear animation
-opacity = 1 - now;
+function onChangeProjecto(){
+var estado = document.getElementById("radioProjecto");
 
-current_fs.css({
-'display': 'none',
-'position': 'relative'
-});
-previous_fs.css({'opacity': opacity});
-},
-duration: 600
-});
-});
 
-$('.radio-group .radio').click(function(){
-$(this).parent().find('.radio').removeClass('selected');
-$(this).addClass('selected');
-});
+if(estado.value=="projecto"){
+document.getElementById("projectoo").style.display="block";
+document.getElementById("cidadee").style.display="block";
+document.getElementById("empreiteiroo").style.display="none";
 
-$(".submit").click(function(){
-return false;
-})
+}else{
+document.getElementById("projectoo").style.display="none";
+document.getElementById("empreiteiroo").style.display="block";
+document.getElementById("cidadee").style.display="none";
+}
+}
 
-});
+function onChangeOperacao(){
+var estado = document.getElementById("radioOperacao");
+
+
+if(estado.value=="operacao"){
+document.getElementById("empreiteiroo").style.display="block";
+document.getElementById("cidadee").style.display="block";
+document.getElementById("projectoo").style.display="block";
+}else{
+document.getElementById("empreiteiroo").style.display="none";
+document.getElementById("projectoo").style.display="block";
+document.getElementById("cidadee").style.display="none";
+}
+
+}
 
 </script>
-    
-    
-
-	<script type="text/javascript">
-	
-	
-	function onChangeIndividual(){
-		var estado = document.getElementById("individual");
-		
-		
-		if(estado.value=="Individual"){
-  			
-  			document.getElementById("nome").style.display="block";
-  			document.getElementById("faixaEtaria").style.display="block";
-  			document.getElementById("genero").style.display="block";
-  			
-  			document.getElementById("nomeGrupo").style.display="none";
-  			
-  		}
-	}
-	
-	function onChangeGrupo(){
-		var estado = document.getElementById("grupo");
-		
-		if(estado.value=="Grupo/Comunidade"){
-  			
-			document.getElementById("faixaEtaria").style.display="block";
-  			document.getElementById("nomeGrupo").style.display="block";
-  			document.getElementById("nome").style.display="block";
-  			document.getElementById("genero").style.display="block";
-  			
-  			
-  		}
-	}
-	
-	function onChangeAnonimo(){
-		
-		var estado = document.getElementById("anonimo");
-		
-		if(estado.value=="Anónimo"){
-  			
-  			document.getElementById("genero").style.display="block";
-  			document.getElementById("faixaEtaria").style.display="block";
-  			
-  			document.getElementById("nome").style.display="none";
-  			document.getElementById("nomeGrupo").style.display="none";
-  		}
-		
-	}
-	
-	
-function onChangeAnonimo(){
-		
-		var estado = document.getElementById("anonimo");
-		
-		if(estado.value=="Anónimo"){
-  			
-  			document.getElementById("genero").style.display="block";
-  			document.getElementById("faixaEtaria").style.display="block";
-  			
-  			document.getElementById("nome").style.display="none";
-  			document.getElementById("nomeGrupo").style.display="none";
-  		}
-		
-	}
-	
-	
-function onChangeNenhum(){
-		
-		var estado = document.getElementById("nenhum");
-		
-		if(estado.value=="Nenhum"){
-			document.getElementById("genero").style.display="none";
-  			document.getElementById("faixaEtaria").style.display="none";
-  			document.getElementById("nome").style.display="none";
-  			document.getElementById("nomeGrupo").style.display="none";
-  		}
-  		
-		
-	}
-	
-      	
-      	
-      	function onChangeProjecto(){
-      		var estado = document.getElementById("radioProjecto");
-      		
-      		
-      		if(estado.value=="projecto"){
-      			document.getElementById("projectoo").style.display="block";
-      			document.getElementById("cidadee").style.display="block";
-      			document.getElementById("empreiteiroo").style.display="none";
-      			
-      		}else{
-      			document.getElementById("projectoo").style.display="none";
-      			document.getElementById("empreiteiroo").style.display="block";
-      			document.getElementById("cidadee").style.display="none";
-      		}
-      	}
-      		
-      		function onChangeOperacao(){
-          		var estado = document.getElementById("radioOperacao");
-          		
-          		
-          		if(estado.value=="operacao"){
-          			document.getElementById("empreiteiroo").style.display="block";
-          			document.getElementById("cidadee").style.display="block";
-          			document.getElementById("projectoo").style.display="none";
-          		}else{
-          			document.getElementById("empreiteiroo").style.display="none";
-          			document.getElementById("projectoo").style.display="block";
-          			document.getElementById("cidadee").style.display="none";
-          		}
-      		
-      	}
-      	
-      </script>
-      
-      
-    
     <!-- Conteudo -->
-    
-    
-    
-    <div th:if="${success} != null">
-		<script th:inline="javascript">
-
-			/* swal("Parabens!","" + "<strong th:text='${success}'></strong>" +"", "success"); */
-			
-			
-			/*<![CDATA[*/
-			
-			var messagem = /*[[${ocorrenciaa.grmStamp}]]*/"";
-			
-			var sucesso = /*[[${success}]]*/"";
-			
-			/*]]>*/
-			
-			/apresentar/publico/principal
-			
-			
-			Swal.fire({
-				  //text: 'Preocupacao submetida com sucesso',
-				  html: sucesso + " <br> "+" NOTA: Anote o seu código para o acompanhamento da sua ocorrência: <br>"+"<span style=color:red; font-weight:bolder>"+messagem+"</span>",
-				  icon: 'success',
-				  confirmButtonText: '<a href="publico/principal">Ok</a>'
-				})
-				
-
-	</script>
-	
-	</div>
-	
-	<div th:if="${fail} != null">
-		<script type="text/javascript">
-
-		Swal.fire({
-			  title: 'Erro!',
-			  text: 'Houve um erro ao submeter a preocupacao',
-			  icon: 'error',
-			  confirmButtonText: 'Ok'
-			})
-
-	</script>
-	</div>
-	
-	
-	
-    
-    
-
-    <div class="container-fluid" id="grad1">
-    <div class="row justify-content-center mt-0">
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
-        
-        
-            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                <h2><strong>Registo de Ocorrências</strong></h2>
-                <p>Preeacha todos os campos do formulário e avance para o próximo passo</p>
-                <div class="row">
-                    <div class="col-md-12 mx-0">
-                    <form id="msform" th:action="@{/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
-                    
-                    
-                            <!-- progressbar -->
-                            <ul id="progressbar">
-                                <li class="active" id="account"><strong>Dados da Ocorrência</strong></li>
-                                <li id="personal"><strong>Dados do Utente</strong></li>
-                                <li id="payment"><strong>Dados dos Anexos</strong></li>
-                                <li id="confirm"><strong>Terminar</strong></li>
-                            </ul>
-                            
-                            <div th:replace="/fragmentos/validacao  :: validacao"></div>
-                            
-                             
-                            <div class="card">
-                            	<div class="card-body">
-                                	<p>Os campos marcados com <strong style="color:red">*</strong> são de preenchimento obrigatório</p>
-                                </div>
-                            </div>
-                            <!-- fieldsets -->
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Dados da Ocorrência</h2> 
-									
-									
-													
-													<div class="row">
-														<div class="col-6 col-sm-6">
-															<label class="form-label"> Data da Ocorrência <strong style="color:red">*</strong></label>
-															<input type="date" th:field="*{dataOcorrencia}" class="form-control">
-														</div>	
-														
-														<div class="form-group col-6 col-sm-6">
-															<label for="comboboxProvincias" class="form-label">Cidade <strong style="color:red">*</strong></label>
-															<select  class="form-control custom-select form-select" th:field="*{cidade}" >
-																<option value="">Selecione o Cidade...</option>
-																<option th:each="p : ${cidades}"
-																		th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-															</select>
-														</div>
-														
-
-														</div>
-														
-														<div class="row">
-														
-															<div  id="email" class="col-6 col-sm-6">
-											                    <div class="form-group">
-											                        <label class="form-label">Email</label>
-											                        <div class="input-icon">
-											                                    <span class="input-icon-addon">
-											                                      <i class="fe fe-edit-2"></i>
-											                                    </span>
-											                            <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Exemplo@exemplo.com...">
-											                        </div>
-											                    </div>
-											                </div>
-											                
-											                <div id="contacto" class="col-6 col-sm-6">
-											                    <div class="form-group">
-											                        <label class="form-label">Contacto</label>
-											                        <div class="input-icon">
-											                                    <span class="input-icon-addon">
-											                                      <i class="fe fe-edit-2"></i>
-											                                    </span>
-											                            <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
-											                        </div>
-											                    </div>
-											                </div>
-										                
-										                </div>
-													
-													<div class="row">
-														<div class="col-6 col-sm-12">
-															<label class="form-label"> Assunto <strong style="color:red">*</strong></label>
-															<textarea id="" type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
-														</div>
-													</div>
-													
-													
-													
-																					
-													
-									
-                                </div> <input type="button" name="next" class="next action-button" value="Próximo" />
-                            </fieldset>
-							
-							
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Dados do Utente</h2> 
-									
-									
-									
-									<div class="row">
-	                <div class="col-6 col-sm-12">
-                    <div class="form-group">
-                        
-                        <label class="form-label">Origem da Ocorrência</label>
-                        
-                        <input  onclick="onChangeIndividual()" id="individual" type="radio" th:field="*{origem}" name="user" value="Individual">
-					    <label for="individual"><span></span>Individual</label>
-					
-					    <input onclick="onChangeGrupo()" id="grupo" type="radio" th:field="*{origem}" value="Grupo/Comunidade">
-					    <label for="grupo"><span></span>Grupo/Comunidade</label>
-					    
-					    <input onclick="onChangeAnonimo()" id="anonimo" type="radio" th:field="*{origem}" value="Anónimo">
-					    <label for="anonimo"><span></span>Anónimo</label>
-					    
-					    <input onclick="onChangeNenhum()" id="nenhum" type="radio" th:field="*{origem}" value="Nenhum">
-					    <label for="nenhum"><span></span>Nenhum</label>
-                        
-                        
-                        <!-- <select id="origem" onchange="onChangeStatus()" class="form-control custom-select" th:field="*{nomeGrupo}" >
-                            <option value="selecione">Selecione Origem da Ocorrência...</option>
-                            <option value="individual">Individual</option>
-                            <option value="grupo">Grupo</option>
-                            <option value="anonimo">Anonimo</option>
-                        </select>  -->
-                    </div>
-                </div>
-                
-                
-                <div style="display: none" id="nome" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Nome</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Designação...">
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="display: none" id="nomeGrupo" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Nome Do Grupo</label>
-                        <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                      <i class="fe fe-edit-2"></i>
-                                    </span>
-                            <input type="text" th:field="*{nomeDoRepresentanteDoGrupo}" class="form-control" placeholder="Designação...">
-                        </div>
-                    </div>
-                </div>
-
-                <div  style="display: none" id="genero" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Sexo</label>
-                        <select class="form-control custom-select" th:field="*{sexo}" >
-                         <option value=" ">Selecione...</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Femenino">ND</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div style="display: none" id="faixaEtaria" class="col-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="form-label">Faixa Etária</label>
-                        <select class="form-control custom-select" th:field="*{faixaEtaria}" >
-                            <option value=" ">Selecione...</option>
-                            <option value="20 a 30">20 a 30</option>
-                            <option value="30 a 40">31 a 60</option>
-                            <option value="30 a 40">Outra</option>
-                        </select>
-                    </div>
-                </div>
-                
-                
-                </div>
-									
-                                </div> 
-								
-								
-								<input type="button" name="previous" class="previous action-button-previous" value="Anterior" /> 
-								<input type="button" name="next" class="next action-button" value="próximo" />
-                            </fieldset>
-							
-							
-							
-							
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title">Dados dos Anexos</h2>
-										<div class="row">
-				
-											<div class="col-6 col-sm-6">
-												<div class="form-group">
-													<label style="display:block; cursor:pointer" for="file" class="form-label btn btn-info">Anexar Ficheiro</label>
-													<div class="input-icon">
-																<span class="input-icon-addon">
-																  <i class="fe fe-calendar"></i>
-																</span>
-														<input type="file" onchange="preview()" name="files" id="file" class="form-control" multiple >
-														<p id="num-of-files"></p>
-													</div>
-												</div>
-											</div>
-
-											<div class="col-6 col-sm-6">
-											   <div class="form-group">
-												<div class="input-icon">
-													<input type="text" onchange="preview()" name="descricaoAnx" placeholder="Descricao de Anexos" class="form-control" >
-												</div>
-											</div>
-											</div>
-
-										</div>
-                                    </div>
-                                <input type="button" name="Anterior" class="previous action-button-previous" value="Anterior" /> 
-								<input type="button" name="make_payment" class="next action-button" value="próximo" />
-                            </fieldset>
-                            
-                            <fieldset>
-                                <div class="form-card">
-                                    <div class="row justify-content-center">
-                                        <div class="text-center">
-                                            <h3>Certifique o preenchimento dos campos antes  de Finalizar.</h3>
-                                            <h3>Após clicar em confirmar, não poderá alterar os dados</h3>
-                                            <h3>Guarde o código que lhe será fornecido, para a consulta da ocorrência após confirmar o registo</h3>
-                                        </div>
-                                    </div>
-                                </div>
-								<input type="button" name="Anterior" class="previous action-button-previous" value="Anterior" /> 
-								<input type="submit" name="make_payment" class="next action-button" value="Submeter" />
-                            </fieldset>
-                            
-                        </form>
-                    </div>
-                </div>
-                
-                
-                
-                
-               
-
-<!-- <form th:action="@{/pesquisar/ocorrencia}"  method="POST">
-			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header" style="background: blue; color: white">
-							<h5 class="modal-title">Pesquisar</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-
-							<div class="col-lg-12">
-									<div >
-										<label class="form-label">Codigo</label>
-										<input class="form-control" type="text" name="codigo" placeholder="Insira o seu Codigo"></input>
-									</div>
-								</div>
-
-						</div>
 
 
-						<div class="modal-footer">
-							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-								Cancel
-							</a>
 
-							<button type="submit" class="btn btn-info" >Gravar</button>
-
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-		</form> -->
-		
-		
-		
-                
-                
-            </div>
+    <div style="margin-left:10%; margin-right:10%;" class="card">
+        <div class="card-header">
+            <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">CADASTRO DE OCORRÊNCIA</h3>
         </div>
-    </div>
-    
-    
-    
-			
-			
-</div>
+        <!-- <div th:replace="fragmentos/alert" class="card-body"> -->
+        <div class="card-body">
+            <form th:action="@{/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
+
+                <div style="background: #60a18a; color: white">
+                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
+                </div>
+                <br>
+
+                <!-- <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> -->
+                <!-- enctype="multipart/form-data" -->
+
+
+
+                <div class="row">
+
+                    <div id="projectoo" class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label for="projecto" class="form-label">Projecto</label>
+                            <select id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
+                                <option value="">Selecione o Projecto...</option>
+                                <option th:each="p : ${projectos}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label for="comboboxProvincias" class="form-label">Província</label>
+                            <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
+                                <option value="">Selecione a Província...</option>
+                                <option th:each="p : ${provincias}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label class="form-label">Distrito</label>
+                            <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
+                                <option value="">Selecione o Distrito...</option>
+                                <option th:each="p : ${distritos}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
+                            <select class="form-control custom-select form-select" id="comboboxPosto" th:field="*{postoAdministrativo}" >
+                                <option value="">Selecione o Postos Administrativos...</option>
+                                <option th:each="p : ${postos}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label class="form-label">Comunidade</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                    <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label class="form-label">Data da Ocorrência: </label>
+                            <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                                <input type="date" th:field="*{dataOcorrencia}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div id="contacto" class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Contacto</label>
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                    <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="email" class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <div class="input-icon">
+                                <span class="input-icon-addon">
+                                <i class="fe fe-edit-2"></i>
+                                </span>
+                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-6 col-sm-12">
+                        <div class="form-group">
+                            <label class="form-label">Assunto </label>
+                            <div class="input-icon">
+                                <span class="input-icon-addon">
+                                <i class="fe fe-edit-2"></i>
+                                </span>
+                                <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <br>
+
+
+
+
+
+
+
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-success">Gravar </button>
+                </div>
+            </form>
+
+        </div>
+
+    </divs>
     <!-- Conteudo-->
 </div>
-
-<!-- <footer style="background: rgba(158,197,201,100);" class="footer footer-transparent d-print-none fixed-bottom">
-    <div class="container">
-        <div class="row text-center align-items-center flex-row-reverse">
-            <div class="col-lg-auto ms-lg-auto">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="./docs/index.html" class="link-secondary">Documentation</a></li>
-                    <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                    <li class="list-inline-item">
-                        <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
-                            Download SVG icon from http://tabler-icons.io/i/heart
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
-                            Sponsor
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div align="center" class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item">
-                        Copyright &copy; 2022
-                        <a href="https://infordata.co.mz/pt/" class="link-secondary">infordata</a>.
-                        Todos direitos reservados.
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="./changelog.html" class="link-secondary" rel="noopener">v1.0.0</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer> -->
-
-
-
 
 </body>
 </html>

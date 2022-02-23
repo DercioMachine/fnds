@@ -1,12 +1,13 @@
 package mz.fipag.grm.controller;
 
 import java.math.BigInteger;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -44,17 +45,8 @@ import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
-import mz.fipag.grm.service.CategoriaService;
-import mz.fipag.grm.service.CidadeService;
-import mz.fipag.grm.service.DistritoService;
-import mz.fipag.grm.service.DocStorageService;
-import mz.fipag.grm.service.EmpreiterioService;
-import mz.fipag.grm.service.OcorrenciaService;
-import mz.fipag.grm.service.PostoAdministrativoService;
-import mz.fipag.grm.service.ProjectoService;
-import mz.fipag.grm.service.ProvinciaService;
-import mz.fipag.grm.service.TipoAlertaService;
-import mz.fipag.grm.service.TipoOcorrenciaService;
+
+import javax.mail.MessagingException;
 
 @Controller
 public class IndexController {
@@ -109,7 +101,10 @@ public class IndexController {
 	    private CidadeService cidadeService;
 	    
 	    @Autowired
-	    private CategoriaService categoriaService; 
+	    private CategoriaService categoriaService;
+
+		@Autowired
+		private EmailService emailService;
 	    
 		
 		 LocalDate currentdate = LocalDate.now();
@@ -125,10 +120,12 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String index(){
+    public String index() throws MessagingException {
 
 		//sendEmail();
 		//sendSMS();
+
+		//emailService.enviarEmail("descricao","Jacinto Machava","jacintomachava@gmail.com","covid19");
 
         return "publico/principal";
     }
@@ -149,8 +146,8 @@ public class IndexController {
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 		Message message = Message.creator(
-				new com.twilio.type.PhoneNumber("9107084699"), 		// To number
-				new com.twilio.type.PhoneNumber("9107084699"),		// From number
+				new com.twilio.type.PhoneNumber("+258844870386"), 		// To number
+				new com.twilio.type.PhoneNumber("+258844870386"),		// From number
 				"Notificacao de Sistema de Ocorrencias da FIPAG") // SMS body
 				.create();
 
@@ -545,8 +542,9 @@ public class IndexController {
 		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
-		
-		
+
+		model.addAttribute("projetos", projectoService.buscarTodos());
+
 		mes(model);
 		//cidadeEstado(model);
 		ProvinciaEstado(model);
@@ -688,17 +686,8 @@ public class IndexController {
     
     
     @PostMapping("/preCadastrar")
-	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Cidade cidade, @RequestParam("descricaoAnx") String descricaoAnx, @RequestParam("files") MultipartFile[] files, BindingResult result, RedirectAttributes attr) {
+	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, RedirectAttributes attr) throws MessagingException {
 
-    	
-    	if (result.hasErrors()) {
-			System.out.println("Entra no if");
-    		return "apresentar/preocupacao";
-			
-		}else {
-			System.out.println("Nao Entra no if");
-			
-		}
     	
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
     	int ano = Calendar.getInstance().get(Calendar.YEAR);
@@ -708,26 +697,32 @@ public class IndexController {
     	
     	
     	
-    		ocorrencia.setGrmStamp(cidade.getProvincia().getId()+""+codigo+""+anooo);
+    		ocorrencia.setGrmStamp(provincia.getId()+""+codigo+""+anooo);
     		ocorrencia.setEstado("Temporario");
     	
     		ocorrencia.setTemporario(true);
     		
     		System.out.println("Antes de salvar");
     		ocorrenciaService.salvar(ocorrencia);
+
+    		String descricao ="Caro Utente, a Sua Ocorrência foi submetida com sucesso.\n" +
+					"NOTA: Anote o seu código para o acompanhamento da sua ocorrência \n"+provincia.getId()+""+codigo+""+anooo;
+
+    		String emaildestino = ocorrencia.getEmailUtente();
+
+    		String assunto = "Confirmação de código de acesso - FNDS";
+
+    		if(emaildestino!=null){
+				emailService.enviarEmail(descricao,"FNDS",emaildestino,assunto);
+			}
+
+    		if(ocorrencia.getContactoUtente()!=null){
+    			//Telefone Service
+			}
+
+
     		
-    		if(files!=null) {
-    			for(MultipartFile file: files) {
-    				
-    				if(!file.getOriginalFilename().isEmpty()) {
-    					
-    					docStorageService.saveFile(file, ocorrencia, descricaoAnx);
-    				}
-    	        }
-    			
-    		}
-    		
-    		
+
     	// model.addAttribute("ocorrenciaa", ocorrencia.getGrmStamp());
 
     	attr.addFlashAttribute("success", "Preocupação submetida com sucesso.");
@@ -739,9 +734,9 @@ public class IndexController {
 	}
     
     
-    public void cidadeFiltro(Model model, Date datainicial, Date datafinal, Long projecto){
+    public void cidadeFiltro(Model model,Date datainicial,Date datafinal){
     	
-		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCidadeFiltro1(datainicial, datafinal, projecto);
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCidadeFiltro1(datainicial, datafinal);
 
 
 		String[] nomes = new String[lista.size()];
@@ -763,8 +758,8 @@ public class IndexController {
     
     
     @PostMapping("/filtrar1")
-	public String filtrar1(@RequestParam("datainicial") Date datainicial, 
-			@RequestParam("datafinal") Date datafinal, @RequestParam("projecto") Long projecto, Model model) {
+	public String filtrar1(@RequestParam("datainicial") Date datainicial,
+			@RequestParam("datafinal") Date datafinal, Model model) {
     		
     	
     	model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear));
@@ -777,11 +772,10 @@ public class IndexController {
 		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
-		
     	
-    		cidadeFiltro(model, datainicial, datafinal, projecto);
-    		
-			return "publico/estatistica";
+		cidadeFiltro(model, datainicial, datafinal);
+
+		return "publico/estastica";
 		
 	}
     

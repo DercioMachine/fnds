@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title> FIPAG </title>
+    <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- CSS files -->
@@ -119,7 +119,21 @@ document.getElementById("trimestree").style.display="none";
 </script>
 
 
+
+
     <div class="page-body">
+
+        <a class="btn btn-danger btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"   role="button">
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span>Pesquisar Por A</span>
+        </a>
+
+        <a class="btn btn-secondary btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"  role="button">
+            <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+            <i class="fa fa-print"></i>
+            <span>Pesquisar por Data</span>
+        </a>
+
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
@@ -246,7 +260,7 @@ document.getElementById("trimestree").style.display="none";
                 </div>
                 
                 
-                <div id="botoes" class="col-sm-6 col-lg-2">
+                <div  class="col-sm-6 col-lg-2">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
@@ -310,14 +324,14 @@ document.getElementById("trimestree").style.display="none";
 
 
                 
-                <div id="projectoo" class="col-sm-6 col-lg-4">
+                <div  class="col-sm-6 col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
                             <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" name="projecto" class="form-control custom-select form-select" >
+                            <select  name="projecto" class="form-control custom-select form-select" >
                                 <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectos}"
+                                <option th:each="p : ${projetos}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                             </select>
                         </div>
@@ -1063,7 +1077,7 @@ document.getElementById("trimestree").style.display="none";
 
     <!-- Conteudo-->
 
-
 </body>
+
 
 </html>

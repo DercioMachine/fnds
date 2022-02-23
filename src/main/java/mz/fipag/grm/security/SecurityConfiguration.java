@@ -41,6 +41,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pesquisar/ocorrencia").permitAll()
                 .antMatchers("/ver/detalhe/{id}").permitAll()
                 .antMatchers("/filtrar1").permitAll()
+                .antMatchers("/distrito/{id}").permitAll()
+                .antMatchers("/posto/{id}").permitAll()
+
+
                 
                 
                 

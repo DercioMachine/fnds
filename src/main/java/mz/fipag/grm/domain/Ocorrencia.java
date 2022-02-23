@@ -151,6 +151,10 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="categoriaid")
 	private Categoria categoria;
+
+	@ManyToOne
+	@JoinColumn(name="subCategoria_id")
+	private SubCategoria subcategoria;
 	
 	@ManyToOne
 	@JoinColumn(name="tipoAlerta_id")
@@ -163,6 +167,10 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
 	private Empreiteiro empreiteiro;
+
+	@ManyToOne
+	@JoinColumn(name="processo_id")
+	private Processo processo;
 
 	public Origem getTipoorigem() {
 		return tipoorigem;
@@ -320,6 +328,14 @@ public class Ocorrencia extends AbstractEntity{
 
 	public void setNomeUtente(String nomeUtente) {
 		this.nomeUtente = nomeUtente;
+	}
+
+	public SubCategoria getSubcategoria() {
+		return subcategoria;
+	}
+
+	public void setSubcategoria(SubCategoria subcategoria) {
+		this.subcategoria = subcategoria;
 	}
 
 	public void setSexo(String sexo) {
@@ -511,5 +527,13 @@ public class Ocorrencia extends AbstractEntity{
 
 	public void setInternoExterno(String internoExterno) {
 		this.internoExterno = internoExterno;
+	}
+
+	public Processo getProcesso() {
+		return processo;
+	}
+
+	public void setProcesso(Processo processo) {
+		this.processo = processo;
 	}
 }

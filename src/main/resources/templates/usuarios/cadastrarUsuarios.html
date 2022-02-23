@@ -169,44 +169,22 @@
 					
                     <div class="row" >
 
-                        <div class="col-6 col-sm-6">
-
+                        <div style="display: block;" id="local" class="col-6 col-sm-6">
                             <div class="form-group">
-                              <label class="form-label">Local</label>
+                                <label for="local" class="form-label">Província</label>
+                                <select style="padding-bottom:5px"  class="form-control custom-select form-select" th:field="*{provincia}"  >
+                                    <option value="">Selecione a Província...</option>
+                                    <option th:each="p : ${provincias}"
+                                            th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+
+                                </select>
                             </div>
-
-                            <th:block>
-
-                                <div class="card mt-2">
-
-                                    <div  class="card-header">
-
-                                        <div class="form-check-inline ">
-                                            <label class="form-check-label">
-                                                <input onclick="onChangeSimLocal()"  type="radio" id="statuslocal" name="tipo" value="L" > Local
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check-inline" style="margin-left:20%; margin-right: 20%">
-                                            <label class="form-check-label">
-                                                <input onclick="onChangeSimRegional()" type="radio" id="statusregional" name="tipo" value="R"> Regional
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check-inline">
-                                            <label class="form-check-label">
-                                                <input onclick="onChangeSimNacional()" type="radio" id="statusnacional" name="tipo" value="N"> Nacional
-                                            </label>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </th:block>
                         </div>
-                        <div class="col-6 col-sm-6">
+
+
+                        <div class="col-6 col-sm-3">
                             <div class="form-group">
-                                <label class="form-label">Tipo GBA</label>
+                                <label class="form-label">Alertas GBV</label>
                             </div>
 
                             <th:block>
@@ -229,44 +207,33 @@
 
                         </div>
 
+                        <div class="col-6 col-sm-3">
+                            <div class="form-group">
+                                <label class="form-label">Alertas Urgentes</label>
+                            </div>
+
+                            <th:block>
+
+                                <div class="card mt-2">
+
+                                    <div  class="card-header">
+
+                                        <div class="form-check-inline" >
+                                            <label class="form-check-label">
+                                                <input  type="checkbox"  th:field="*{tipourgente}" value="Sim"> Sim
+                                            </label>
+                                        </div>
 
 
+                                    </div>
+                                </div>
 
-                    </div>
+                            </th:block>
 
-                    <div style="display: none;" id="local" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="local" class="form-label">Cidade</label>
-                            <select  class="form-control custom-select form-select" th:field="*{cidade}"  >
-                                <option value="">Selecione a Cidade...</option>
-                                <option th:each="p : ${cidades}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-
-                            </select>
                         </div>
+
+
                     </div>
-
-                    <div style="display: none;" id="regional" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="regional" class="form-label">Região</label>
-                            <select id="regionalestado" class="form-control custom-select form-select" th:field="*{regiao}"  >
-                                <option id="regionalnacional" value="">Selecione a Região...</option>
-                                <option th:each="p : ${regioes}" th:if="${p.designacao != 'Nacional'}"
-                                        th:value="${p.id}" th:text="${p.designacao}"  >Maputo</option>
-
-
-                            </select>
-                        </div>
-                    </div>
-
-                    <div style="display: none" id="nacional" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label for="nacional" class="form-label">Região (Nacional)</label>
-                            <input type="text" disabled class="form-control" value="Nacional"  >
-                        </div>
-                    </div>
-
-                 <br><br>
 
 
                  <div class="row" >

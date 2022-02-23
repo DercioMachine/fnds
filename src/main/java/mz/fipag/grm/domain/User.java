@@ -26,19 +26,17 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "email", nullable = true,length=120,unique=true)
     private String email;
 
-    @Column(name = "tipo", nullable = true,length=120)
-    private String tipo;  // L-local  R-regional  N-nacional
-
     @Column(name = "tipogbv", nullable = true,length=120)
     private String tipogbv="Não";  // Sim e Nao
 
-    @ManyToOne
-    @JoinColumn(name="cidade_id")
-    private Cidade cidade;
+    @Column(name = "tipourgente", nullable = true,length=120)
+    private String tipourgente="Não";  // Sim e Nao
 
     @ManyToOne
-    @JoinColumn(name="regiao")
-    private Regiao regiao;
+    @JoinColumn(name="provincia_id")
+    private Provincia provincia;
+
+
 
     @Column(name = "active", nullable = true)
     private boolean active=true;
@@ -59,21 +57,6 @@ public class User extends AbstractEntity implements UserDetails {
         this.tipogbv = tipogbv;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Regiao getRegiao() {
-        return regiao;
-    }
-
-    public void setRegiao(Regiao regiao) {
-        this.regiao = regiao;
-    }
 
     public String getEmail() {
         return email;
@@ -131,12 +114,20 @@ public class User extends AbstractEntity implements UserDetails {
         this.telefone = telefone;
     }
 
-    public Cidade getCidade() {
-        return cidade;
+    public String getTipourgente() {
+        return tipourgente;
     }
 
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
+    public void setTipourgente(String tipourgente) {
+        this.tipourgente = tipourgente;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
     @Override

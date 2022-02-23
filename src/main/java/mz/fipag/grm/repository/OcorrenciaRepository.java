@@ -149,9 +149,12 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 /* FIM */
 	
 	@Query(value="select designacao, count(*) from ocorrencia, cidade where ocorrencia.cidade_id=cidade.id "
-			+ " and ocorrencia.created between =:datainicial and =:datafinal and ocorrencia.projecto_id=:projecto"
+			+ "and ocorrencia.created between (:datainicial) and (:datafinal) "
 			+ "group by cidade_id",nativeQuery=true)
-	public List<Object[]> busqueTudoAgrupadoPorCidadeFiltro1(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") Long projecto);
+	public List<Object[]> busqueTudoAgrupadoPorCidadeFiltro1(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal);
 
+
+	@Query(value="select * from ocorrencia, provincia  where ocorrencia.provincia_id = provincia.id and ocorrencia.provincia_id =:provincial order by ocorrencia.id desc", nativeQuery=true)
+	List<Ocorrencia> buscarOcorrenciasPorUsuariosProvincia(@Param("provincial") long provincial);
 
 }

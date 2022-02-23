@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
+import mz.fipag.grm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -32,14 +33,6 @@ import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.domain.User;
-import mz.fipag.grm.repository.DistritoRepository;
-import mz.fipag.grm.repository.DocsRepository;
-import mz.fipag.grm.repository.OcorrenciaRepository;
-import mz.fipag.grm.repository.PostoAdminitrativoRepository;
-import mz.fipag.grm.repository.ProcessoRepository;
-import mz.fipag.grm.repository.ResolucaoRepository;
-import mz.fipag.grm.repository.ResponsabilidadeRepository;
-import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
@@ -67,6 +60,9 @@ public class OcorrenciaController {
     
     @Autowired
     private DistritoRepository distritoRepository;
+
+    @Autowired
+    private SubCategoriaRepository subCategoriaRepository;
 
     @Autowired
     private DocsRepository docsRepository;
@@ -130,24 +126,10 @@ public class OcorrenciaController {
 
         User userlogado = userRepository.findByUsername(authentication.getName());
 
-        System.out.println(userlogado.getTipo());
+        System.out.println(userlogado.getProvincia().getDesignacao());
 
-        System.out.println(userlogado.getCidade().getDesignacao());
+            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosProvincia(userlogado.getProvincia().getId());
 
-        System.out.println(userlogado.getCidade().getRegiao().getDesignacao());
-
-        if(userlogado.getTipo().equals("L")){
-
-            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosRegional(userlogado.getCidade().getId());
-
-        }else if(userlogado.getTipo().equals("R")){
-
-            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosZonas(userlogado.getCidade().getRegiao().getId());
-
-        }else if(userlogado.getTipo().equals("N") ){
-
-            ocorrencia = (List<Ocorrencia>) ocorrenciaRepository.findAll();
-        }
 
 
         model.addAttribute("pageOcorrencia", ocorrencia);
@@ -210,6 +192,15 @@ public class OcorrenciaController {
         Gson gson=new Gson();
 
         return gson.toJson(distritoRepository.findAllById(id));
+    }
+
+    @ResponseBody
+    @GetMapping("/subcategoria/{id}")
+    public String listarSubcategorias(@PathVariable("id") Long id){
+
+        Gson gson=new Gson();
+
+        return gson.toJson(subCategoriaRepository.buscarPorId(id));
     }
 
 

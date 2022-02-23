@@ -7,6 +7,7 @@ import mz.fipag.grm.repository.RegiaoRepository;
 import mz.fipag.grm.repository.RoleRepository;
 import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CidadeService;
+import mz.fipag.grm.service.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class UsuarioController {
     private CidadeService cidadeService;
 
     @Autowired
+    private ProvinciaService provinciaService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -41,7 +45,7 @@ public class UsuarioController {
 
         model.addAttribute("user", new User());
         model.addAttribute("perfils", roleRepository.findAll());
-        model.addAttribute("regioes", regiaoRepository.findAll());
+        model.addAttribute("provincias", provinciaService.buscarTodos());
 
         return "usuarios/cadastrarUsuarios";
     }
@@ -63,17 +67,17 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrar/usuarios")
-    public String cadastrarUsuarios(User user, @RequestParam("tipo") String tipo){
+    public String cadastrarUsuarios(User user){
 
         Regiao regiaonacional = regiaoRepository.findByDesignacao();
 
-        if(tipo.equals("N")){
-            user.setRegiao(regiaonacional);
+        if(user.getTipourgente()==null){
+            user.setTipogbv("Não");
         }
+
         if(user.getTipogbv()==null){
             user.setTipogbv("Não");
         }
-        user.setTipo(tipo);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
