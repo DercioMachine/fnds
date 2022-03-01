@@ -83,79 +83,179 @@ numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
 
 </script>
 
+
+
+
+<script type="text/javascript">
+
+var estadobotao = 0 ;
+
+function onChangeSimOrigem(){
+var estado = document.getElementById("radioSimOrigem");
+
+if(estado.value=="Interno"){
+estadobotao = 1 ;
+}
+OrigemInternoExterno();
+}
+
+function onChangeNaoOrigem(){
+var estado = document.getElementById("radioNaoOrigem");
+
+if(estado.value=="Externo"){
+estadobotao = 2 ;
+}
+OrigemInternoExterno();
+}
+
+
+
+    function OrigemInternoExterno(){
+
+    $.ajax({
+    type: 'GET',
+    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+    	url: 'http://localhost:9090/origem/externo',
+    //url: 'http://localhost:9090/origem/externo',
+    // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
+
+
+    success: function (result){
+    var result = JSON.parse(result);
+    var s = '';
+
+    if(estadobotao == 1){
+
+    for(var i=0; i< result.length; i++){
+
+    if(result[i].tipo=="Interno"){
+    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+    }
+
+    }
+    }
+
+    if(estadobotao == 2){
+
+    for(var i=0; i< result.length; i++){
+
+    if(result[i].tipo=="Externo"){
+    s+='<option value="'+result[i].id+'">'+result[i].nome+'</option>';
+    }
+
+    }
+    }
+
+    $('#comboboxOrigem').html(s);
+    }
+    });
+
+    }
+
+
+
+</script>
+
+
     <script type="text/javascript">
+function onChangeStatus(){
+var status = document.getElementById("origem");
+
+if(status.value=="individual"){
+
+document.getElementById("nome").style.display="block";
+document.getElementById("genero").style.display="block";
+document.getElementById("comunicacao").style.display="block";
+document.getElementById("contacto").style.display="block";
+document.getElementById("faixaEtaria").style.display="block";
+document.getElementById("endereco").style.display="block";
+document.getElementById("email").style.display="block";
+
+document.getElementById("nrHomens").style.display="none";
+document.getElementById("nrMulheres").style.display="none";
+document.getElementById("nomeGrupo").style.display="none";
 
 
-	function onChangeIndividual(){
-		var estado = document.getElementById("individual");
 
 
-		if(estado.value=="Individual"){
+}else if(status.value=="grupo"){
 
-  			document.getElementById("nome").style.display="block";
-  			document.getElementById("faixaEtaria").style.display="block";
-  			document.getElementById("genero").style.display="block";
-  			document.getElementById("endereco").style.display="block";
-  			document.getElementById("contacto").style.display="block";
-  			document.getElementById("email").style.display="block";
+document.getElementById("nome").style.display="block";
+document.getElementById("comunicacao").style.display="block";
+document.getElementById("contacto").style.display="block";
+document.getElementById("endereco").style.display="block";
+document.getElementById("email").style.display="block";
+document.getElementById("nrHomens").style.display="block";
+document.getElementById("nrMulheres").style.display="block";
+document.getElementById("nomeGrupo").style.display="block";
 
-  			document.getElementById("nomeGrupo").style.display="none";
-
-  		}
-	}
-
-	function onChangeGrupo(){
-		var estado = document.getElementById("grupo");
-
-		if(estado.value=="Grupo/Comunidade"){
-
-			document.getElementById("nome").style.display="block";
-  			document.getElementById("faixaEtaria").style.display="block";
-  			document.getElementById("genero").style.display="block";
-  			document.getElementById("endereco").style.display="block";
-  			document.getElementById("contacto").style.display="block";
-  			document.getElementById("email").style.display="block";
-  			document.getElementById("nomeGrupo").style.display="block";
+document.getElementById("faixaEtaria").style.display="none";
+document.getElementById("genero").style.display="none";
 
 
-  		}
-	}
+}else if(status.value=="anonimo"){
 
-	function onChangeAnonimo(){
+document.getElementById("genero").style.display="block";
+document.getElementById("comunicacao").style.display="block";
+document.getElementById("contacto").style.display="block";
+document.getElementById("faixaEtaria").style.display="block";
+document.getElementById("endereco").style.display="block";
+document.getElementById("email").style.display="block";
 
-		var estado = document.getElementById("anonimo");
+document.getElementById("nrHomens").style.display="none";
+document.getElementById("nrMulheres").style.display="none";
+document.getElementById("nomeGrupo").style.display="none";
+document.getElementById("nome").style.display="none";
+}else{
 
-		if(estado.value=="Anónimo"){
+document.getElementById("nrHomens").style.display="none";
+document.getElementById("nrMulheres").style.display="none";
+document.getElementById("nomeGrupo").style.display="none";
+document.getElementById("nome").style.display="none";
+document.getElementById("genero").style.display="none";
+document.getElementById("comunicacao").style.display="none";
+document.getElementById("contacto").style.display="none";
+document.getElementById("faixaEtaria").style.display="none";
+document.getElementById("endereco").style.display="none";
+document.getElementById("email").style.display="none";
 
-  			document.getElementById("genero").style.display="block";
-  			document.getElementById("faixaEtaria").style.display="block";
-
-  			document.getElementById("nome").style.display="none";
-  			document.getElementById("nomeGrupo").style.display="none";
-  			document.getElementById("endereco").style.display="none";
-  			document.getElementById("contacto").style.display="none";
-  			document.getElementById("email").style.display="none";
-  		}
-
-	}
-
-
-function onChangeNenhum(){
-
-		var estado = document.getElementById("nenhum");
-
-		if(estado.value=="Nenhum"){
-			document.getElementById("genero").style.display="none";
-  			document.getElementById("faixaEtaria").style.display="none";
-  			document.getElementById("nome").style.display="none";
-  			document.getElementById("nomeGrupo").style.display="none";
-  		}
+}
+}
 
 
-	}
+function onChangeProjecto(){
+var estado = document.getElementById("radioProjecto");
 
 
-    </script>
+if(estado.value=="projecto"){
+document.getElementById("projectoo").style.display="block";
+document.getElementById("cidadee").style.display="block";
+document.getElementById("empreiteiroo").style.display="none";
+
+}else{
+document.getElementById("projectoo").style.display="none";
+document.getElementById("empreiteiroo").style.display="block";
+document.getElementById("cidadee").style.display="none";
+}
+}
+
+function onChangeOperacao(){
+var estado = document.getElementById("radioOperacao");
+
+
+if(estado.value=="operacao"){
+document.getElementById("empreiteiroo").style.display="block";
+document.getElementById("cidadee").style.display="block";
+document.getElementById("projectoo").style.display="block";
+}else{
+document.getElementById("empreiteiroo").style.display="none";
+document.getElementById("projectoo").style.display="block";
+document.getElementById("cidadee").style.display="none";
+}
+
+}
+
+</script>
 
     <script type="text/javascript">
 
@@ -190,7 +290,7 @@ OrigemInternoExterno();
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo/',
     //url: 'http://localhost:9090/origem/externo',
-     url: 'http://localhost:8080/origem/externo',
+     url: 'http://localhost:9090/origem/externo',
 
 
     success: function (result){
@@ -243,7 +343,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:8080/distrito/'+provinciaId,
+url: 'http://localhost:9090/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 

@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title> FIPAG </title>
+    <title> FNDS </title>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- CSS files -->
@@ -53,7 +53,8 @@
 <body>
 
 <header th:replace="/fragmentos/headerPublico"></header>
-<div >
+
+<div>
 
     <script type="text/javascript">
 let fileInput = document.getElementById("file");
@@ -101,7 +102,7 @@ OrigemInternoExterno();
     //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo/',
-    url: 'http://localhost:8080/origem/externo',
+    url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -155,7 +156,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:8080/distrito/'+provinciaId,
+url: 'http://localhost:9090/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
@@ -187,7 +188,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:8080/posto/'+distritoId,
+url: 'http://localhost:9090/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -470,7 +471,7 @@ document.getElementById("cidadee").style.display="none";
 
         </div>
 
-    </divs>
+    </div>
     <!-- Conteudo-->
 </div>
 
