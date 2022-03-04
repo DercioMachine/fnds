@@ -4,7 +4,6 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>FIPAG</title>
     
      <style>
     
@@ -37,29 +36,32 @@
 
 
 	<script>
-
-		function onClickSim(){
+	
+	function onClickSim(){
 	var estado = document.getElementById("radioSim");
-
 
 	if(estado.value=="true"){
 
-	document.getElementById("comentario").style.display="block";
+	document.getElementById("observacao").style.display="block";
 	document.getElementById("motivo").style.display="none";
+	document.getElementById("responsavel").style.display="none";
 
 
 	}
+	}
 
-	function onClickSim(){
+	function onClickNao(){
 	var estado = document.getElementById("radioNao");
 
-
+	
 	if(estado.value=="false"){
 
-	document.getElementById("comentario").style.display="none";
+	document.getElementById("observacao").style.display="none";
 	document.getElementById("motivo").style.display="block";
+	document.getElementById("responsavel").style.display="block";
 
 
+	}
 	}
 
 	</script>
@@ -474,7 +476,7 @@
                       <span class="form-selectgroup-check"></span>
                     </span>
                     <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Não há houve Acordo</span>
+                      <span class="form-selectgroup-title strong mb-1">Não houve Acordo</span>
                     </span>
                   </span>
 									</label>
@@ -496,11 +498,11 @@
 							<div class="row">
 
 
-								<div class="col-12 col-sm-12">
+								<div id="responsavel" class="col-12 col-sm-12">
 									<div class="form-group">
 										<label  class="form-label">Responsabilidade</label>
 										<select  class="form-control custom-select form-select" th:field="*{responsabilidade}" >
-											<option value="">Selecione a Responsavel...</option>
+											<option value="">Selecione a Responsável...</option>
 											<option th:each="p : ${responsaveis}"
 													th:value="${p.id}" th:text="${p.responsavel}">Maputo</option>
 										</select>
@@ -520,7 +522,7 @@
 
 								<div class="col-lg-6">
 									<div >
-										<label class="form-label">Data da Resolucao</label>
+										<label class="form-label">Data da Resolução</label>
 										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
 									</div>
 								</div>
@@ -532,15 +534,11 @@
 									</div>
 								</div>
 
-								<div style="display:none" id="comentario" class="col-lg-12">
+								
+								<div class="col-lg-12">
 									<div>
-										<label class="form-label">Comentário</label>
-										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
-									</div>
-								</div>
-								<div id="motivo" class="col-lg-12">
-									<div>
-										<label class="form-label">Motivo</label>
+										<label style="display: none" id="motivo" class="form-label">Motivo</label>
+										<label id="observacao" class="form-label">Observação</label>
 										<textarea class="form-control" th:field="*{motivo}" rows="3"></textarea>
 									</div>
 								</div>
@@ -624,7 +622,7 @@
 
 								<div class="col-lg-12">
 									<div >
-										<label class="form-label">Data da Resolucao</label>
+										<label class="form-label">Data da Resolução</label>
 										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
 									</div>
 								</div>
@@ -632,7 +630,7 @@
 
 								<div class="col-lg-12">
 									<div>
-										<label class="form-label">Comentario</label>
+										<label class="form-label">Comentário</label>
 										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
 									</div>
 								</div>

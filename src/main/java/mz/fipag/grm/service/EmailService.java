@@ -26,7 +26,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "UTF-8");
 
         Context context = new Context();
-        context.setVariable("titulo", "Bem vindo a FIPAG");
+        context.setVariable("titulo", "Bem vindo a FNDS");
         context.setVariable("texto", descricao);
         context.setVariable("nome",nome);
 

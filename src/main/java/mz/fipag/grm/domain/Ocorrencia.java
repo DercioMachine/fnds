@@ -76,10 +76,10 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "faixa_etaria")
 	private String faixaEtaria;
 	
-	@Column(name = "contacto_utente")
+	@Column(name = "contacto_utente", nullable = true)
 	private String contactoUtente;
 	
-	@Column(name = "email_utente")
+	@Column(name = "email_utente", nullable = true)
 	private String emailUtente;
 	
 	@Column(name = "morada_utente")
@@ -89,7 +89,7 @@ public class Ocorrencia extends AbstractEntity{
 	private String nomeGrupo;
 	
 	@Column(name = "forma_comunicacao")
-	private String formaComunicacao;
+	private String formaComunicacao="Plataforma";
 	
 	@Column(name = "numero_homens")
 	private int numeroHomens;

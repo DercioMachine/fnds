@@ -7,7 +7,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title> FNDS </title>
+    <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
+    <link rel="icon" th:href="@{/image/lagoa.png}" />
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- CSS files -->
@@ -31,7 +32,6 @@
     <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
     <!-- jQueryUI (autocomplete) -->
     <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
-
     <link href="https://code.jquery.com/jquery-3.5.1.js" rel="stylesheet"/>
 
     <link href="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"/>
@@ -39,6 +39,8 @@
     <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"/>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script th:src="@{/dist/js/tabler.min.js}"></script>
 
 
 
@@ -99,7 +101,7 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
 
-    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo/',
     url: 'http://localhost:9090/origem/externo',
@@ -333,8 +335,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div id="projectoo" class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
+                            <label for="projecto" class="form-label">Projecto <strong style="color:red">*</strong></label>
+                            <select required="required" id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
                                 <option value="">Selecione o Projecto...</option>
                                 <option th:each="p : ${projectos}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -345,8 +347,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="comboboxProvincias" class="form-label">Província</label>
-                            <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
+                            <label for="comboboxProvincias" class="form-label">Província <strong style="color:red">*</strong></label>
+                            <select required="required" id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
                                 <option value="">Selecione a Província...</option>
                                 <option th:each="p : ${provincias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -391,50 +393,58 @@ document.getElementById("cidadee").style.display="none";
                     </div>
 
 
-
-
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Data da Ocorrência: </label>
+                            <label class="form-label">Data da Ocorrência: <strong style="color:red">*</strong></label>
                             <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input type="date" th:field="*{dataOcorrencia}" class="form-control">
+                                <input required="required" type="date" th:field="*{dataOcorrencia}" class="form-control">
                             </div>
                         </div>
                     </div>
 
 
 
-                    <div id="contacto" class="col-6 col-sm-6">
+                    <div id="contacto" class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Contacto</label>
+                            <label class="form-label">Telefone</label>
                             <div class="input-icon">
                                     <span class="input-icon-addon">
                                     <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
+                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Telefone...">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="email" class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label class="form-label">Nome</label>
+                            <div class="input-icon">
+                                <span class="input-icon-addon">
+                                <i class="fe fe-edit-2"></i>
+                                </span>
+                                <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Nome...">
                             </div>
                         </div>
                     </div>
 
-                    <div id="email" class="col-6 col-sm-6">
+                    <div id="email" class="col-6 col-sm-4">
                         <div class="form-group">
                             <label class="form-label">Email</label>
                             <div class="input-icon">
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
                                 </span>
-                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
+                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Email...">
                             </div>
                         </div>
                     </div>
-
-
-
-
-
+                
+                
                 </div>
 
 
@@ -442,30 +452,24 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label">Assunto </label>
+                            <label class="form-label">Assunto <strong style="color:red">*</strong></label>
                             <div class="input-icon">
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
                                 </span>
-                                <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
+                                <textarea required="required" type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-
-
                 <br>
 
 
 
-
-
-
-
-                <div class="card-footer text-right">
-                    <button type="submit" class="btn btn-success">Gravar </button>
+                <div class="card-footer text-center">
+                    <button style="background: #60a18a; color: #fff" type="submit" class="btn">Submeter </button>
                 </div>
             </form>
 

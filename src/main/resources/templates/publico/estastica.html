@@ -7,7 +7,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
+   <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
+    <link rel="icon" th:href="@{/image/lagoa.png}" />
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- CSS files -->
@@ -82,7 +83,7 @@ function onChangeSemestre(){
 var estado = document.getElementById("radioSemestre");
 
 
-if(estado.value=="semestre"){
+if(estado.value=="S"){
 document.getElementById("semestree").style.display="block";
 
 document.getElementById("trimestree").style.display="none";
@@ -94,7 +95,7 @@ function onChangeTrimestre(){
 var estado = document.getElementById("radioTrimestre");
 
 
-if(estado.value=="trimestre"){
+if(estado.value=="T"){
 document.getElementById("trimestree").style.display="block";
 
 document.getElementById("semestree").style.display="none";
@@ -106,7 +107,7 @@ function onChangeMes(){
 var estado = document.getElementById("radioMes");
 
 
-if(estado.value=="mes"){
+if(estado.value=="M"){
 document.getElementById("mess").style.display="block";
 
 document.getElementById("semestree").style.display="none";
@@ -115,15 +116,78 @@ document.getElementById("trimestree").style.display="none";
 }
 
 
+function onChangePorData(){
+	var estado = document.getElementById("radioData");
+
+
+	if(estado.value=="data"){
+	document.getElementById("divdata").style.display="block";
+	document.getElementById("divano").style.display="none";
+
+	
+	}
+	}
+	
+	
+function onChangePorAno(){
+	var estado = document.getElementById("radioAno");
+
+
+	if(estado.value=="ano"){
+	document.getElementById("divdata").style.display="none";
+	document.getElementById("divano").style.display="block";
+
+	
+	}
+	}
+
+
+
+
 
 </script>
 
 
+<div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="col-sm-6 col-lg-12">
+                    <div align="left" style="padding-top: 5px" class="card ">
+                        <div class="card-body">
+                        
+                        <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input onclick="onChangePorData()" id="radioData" value="data" type="radio" name="filtros" class="form-check-input" checked="checked"> Filtro por Período
+                                </label>
+                            </div>
+
+                            <div class="form-check-inline ">
+                                <label class="form-check-label">
+                                    <input onclick="onChangePorAno()" id="radioAno" value="ano" name="filtros" class="form-check-input check" type="radio"> Filtro por Ano
+                                </label>
+                            </div>
+                            
+                            
+                            <div style="margin-left: 280px" class="form-check-inline ">
+                              <div style="font-weight: bolder" th:text="${dados1}" th:if="${dados1} != null"></div>
+                              <div style="font-weight: bolder" th:text="${dados}" th:if="${dados} != null"></div> 
+							</div>
+                            
+                            
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-    <div class="page-body">
 
-
+    <div style="display: none" id="divano" class="page-body">
+    
+    <form th:action="@{/filter}" method="POST">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
@@ -132,11 +196,11 @@ document.getElementById("trimestree").style.display="none";
                         <div class="card-body">
                             <div class="form-group">
                                 <label class="form-label">Ano</label>
-                                <select id="ano" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="selecione">selecione</option>
+                                <select id="ano" name="ano" onchange="onChangeStatus()" class="form-control custom-select">
+                                     <option value="2022">2022</option>
                                     <option value="2020">2020</option>
                                     <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
+                                   
                                 </select>
                             </div>
                         </div>
@@ -151,13 +215,13 @@ document.getElementById("trimestree").style.display="none";
 
                             <div class="form-check-inline ">
                                 <label class="form-check-label">
-                                    <input onchange="onChangeSemestre()" id="radioSemestre" value="semestre" name="filtro" class="form-check-input check" type="radio" checked> Semestre
+                                    <input onchange="onChangeSemestre()" id="radioSemestre" value="S" name="radioButton" class="form-check-input check" type="radio" checked> Semestre
                                 </label>
                             </div>
 
                             <div style="margin-left: 8%; margin-right: 8%;" class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="filtro" value="trimestre" class="form-check-input"> Trimestre
+                                    <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="radioButton" value="T" class="form-check-input"> Trimestre
                                 </label>
                             </div>
 
@@ -165,10 +229,10 @@ document.getElementById("trimestree").style.display="none";
 
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input onchange="onChangeMes()" id="radioMes" type="radio" value="mes" name="filtro" class="form-check-input" > Mês
+                                    <input onchange="onChangeMes()" id="radioMes" type="radio" value="M" name="radioButton" class="form-check-input" > Mês
                                 </label>
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>
@@ -179,85 +243,78 @@ document.getElementById("trimestree").style.display="none";
                         <div class="card-body">
                             <div class="form-group">
                                 <label class="form-label">Semestre</label>
-                                <select id="semestre" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="selecione">selecione</option>
-                                    <option value="1° Semestre">1° Semestre</option>
-                                    <option value="2° Semestre">2° Semestre</option>
+                                <select id="semestre" name="codSelectedSemestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="1">1° Semestre</option>
+                                    <option value="2">2° Semestre</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
                 
+                
+                <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Trimestre</label>
+                                <select id="trimestre" name="codSelectedTrimestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="1">1° Trimestre</option>
+                                    <option value="2">2° Trimestre</option>
+                                    <option value="3">3° Trimestre</option>
+                                    <option value="4">4° Trimestre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: none;" id="mess" class="col-sm-6 col-lg-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">Mês</label>
+                                <select id="mes" name="codSelectedMes" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <option value="1">Janeiro</option>
+                                    <option value="2">Fevereiro</option>
+                                    <option value="3">Março</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5 ">Maio </option>
+                                    <option value="6">Junho</option>
+                                    <option value="7">Julho</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Setembro</option>
+                                    <option value="10">Outubo</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div id="projectoo" class="col-sm-6 col-lg-2">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
                             <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" class="form-control custom-select form-select">
+                            <select id="projecto" name="projecto" class="form-control custom-select form-select">
                                 <option value="">Selecione o Projecto...</option>
                                 <option th:each="p : ${projectos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
                             </select>
                         </div>
                         </div>
                     </div>
                 </div>
                 
-
-
-                <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Trimestre</label>
-                                <select id="trimestre" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="selecione">selecione</option>
-                                    <option value="1° Trimestre">1° Trimestre</option>
-                                    <option value="2° Trimestre">2° Trimestre</option>
-                                    <option value="3° Trimestre">3° Trimestre</option>
-                                    <option value="4° Trimestre">4° Trimestre</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="display: none;" id="mess" class="col-sm-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Mês</label>
-                                <select id="mes" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="selecione">selecione</option>
-                                    <option value="Janeiro">Janeiro</option>
-                                    <option value="Fevereiro">Fevereiro</option>
-                                    <option value="Março">Março</option>
-                                    <option value="Abril">Abril</option>
-                                    <option value="Maio ">Maio </option>
-                                    <option value="Junho">Junho</option>
-                                    <option value="Julho">Julho</option>
-                                    <option value="Agosto">Agosto</option>
-                                    <option value="Setembro">Setembro</option>
-                                    <option value="Outubo">Outubo</option>
-                                    <option value="Novembro">Novembro</option>
-                                    <option value="Dezembro">Dezembro</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 
-                
-                <div  class="col-sm-6 col-lg-2">
+                <div id="botoes1" class="col-sm-6 col-lg-2">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <a class="btn btn-outline-primary btn-md mt-2" role="button">
                                     <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <span style="align-content: center;">Filtrar</span>
-                                </a>
+                                    <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
                             </div>
                         </div>
                     </div>
@@ -267,9 +324,12 @@ document.getElementById("trimestree").style.display="none";
 
             </div>
         </div>
+        
+        </form>
+        
     </div>
     
-    <form th:action="@{/filtrar1}" method="POST">
+    <form id="divdata" th:action="@{/filter1}" method="POST">
     
     <div class="page-body">
         <div class="container-xl">
@@ -284,12 +344,12 @@ document.getElementById("trimestree").style.display="none";
                             <div class="row">
                        <div class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Data da Inical: </label>
+                            <label class="form-label">Data Inical: </label>
                             <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input name="datainicial" type="date" class="form-control">
+                                <input required="required" value="" name="datainicial" type="date" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -297,12 +357,12 @@ document.getElementById("trimestree").style.display="none";
                     
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Data da Final: </label>
+                            <label class="form-label">Data Final: </label>
                             <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input name="datafinal" type="date" class="form-control">
+                                <input required="required" value="" name="datafinal" type="date" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -314,21 +374,21 @@ document.getElementById("trimestree").style.display="none";
 
 
                 
-                <div  class="col-sm-6 col-lg-4">
+                 <div id="projectoo" class="col-sm-6 col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
                             <label for="projecto" class="form-label">Projecto</label>
-                            <select  name="projecto" class="form-control custom-select form-select" >
+                            <select id="projecto" name="projecto" class="form-control custom-select form-select" >
                                 <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projetos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                <option th:each="p : ${projectos}"
+                                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
                             </select>
                         </div>
                         </div>
                     </div>
                 </div>
-                
+               
 
 
 
@@ -338,7 +398,8 @@ document.getElementById("trimestree").style.display="none";
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">Filtrar </button>
+                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+                                    <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
                             </div>
                         </div>
                     </div>
@@ -352,7 +413,7 @@ document.getElementById("trimestree").style.display="none";
     </form>
     
 
-    <div class="page-body">
+     <!-- <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
@@ -361,26 +422,23 @@ document.getElementById("trimestree").style.display="none";
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências</div>
-                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                                <!-- <i style="align" class="fe fe-home h1"></i> -->
                             </div>
-                            <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
-                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
+                            <span style="color:rgba(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
+                            <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
 
                         </div>
                     </div>
-                </div>
+                </div> 
 
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Procedentes</div>
-                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                                <!-- <i style="align" class="fe fe-home h1"></i> -->
+                               
                             </div>
                             <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
-                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-arrow-alt-circle-right"></i></span>
+                            <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-arrow-alt-circle-right"></i></span>
                         </div>
                     </div>
                 </div>
@@ -390,11 +448,9 @@ document.getElementById("trimestree").style.display="none";
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Improcedentes</div>
-                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                                <!-- <i style="align" class="fe fe-home h1"></i> -->
                             </div>
                             <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasImprocedentes}]]</span>
-                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+                            <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
 
                         </div>
                     </div>
@@ -405,11 +461,9 @@ document.getElementById("trimestree").style.display="none";
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Por Validar</div>
-                                <!-- <img style="margin-left:30px; width:60px; height:100px" src="image/membro.svg" class="header-brand-img" alt="tabler logo"></img> -->
-                                <!-- <i style="align" class="fe fe-home h1"></i> -->
                             </div>
                             <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasPorValidar}]]</span>
-                            <span style="font-size:60px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-hourglass-half"></i></span>
+                            <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-hourglass-half"></i></span>
 
                         </div>
                     </div>
@@ -419,37 +473,37 @@ document.getElementById("trimestree").style.display="none";
 
             </div>
         </div>
-    </div>
+    </div>  -->
 
 
 
 
 
-    <div class="page-body">
+    <div style="margin:0; padding:0;" class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
-
+            
 
                 <div class="col-sm-6 col-lg-3">
                     <div style="background:#4299f5;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Ocorrências</div>
                             </div>
-                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-archive"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-archive"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6 col-lg-3">
-                    <div style="background:#EF5350;" class="card">
+                    <div style="background:#f66d9b;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Consultas/Sugestões/Denúcias...</div>
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
                             </div>
-                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesNaoProcedentes}]]</span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
                         </div>
                     </div>
                 </div>
@@ -459,9 +513,9 @@ document.getElementById("trimestree").style.display="none";
                     <div style="background:#66BB6A;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Reclamações Resolvidas/Respodindas</div>
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Resolvidas</div>
                             </div>
-                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-check"></i></span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-check"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
 
                         </div>
@@ -473,10 +527,10 @@ document.getElementById("trimestree").style.display="none";
                     <div style="background:#FFA726;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Reclamações em Andamento</div>
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Consultas/Sugestões...</div>
                             </div>
-                            <span style="font-size:60px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmResolucao}]]</span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoReclamacoes}]]</span>
                         </div>
                     </div>
                 </div>
@@ -533,7 +587,7 @@ document.getElementById("trimestree").style.display="none";
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Cidade</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Província</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-cidade"></div>
@@ -547,7 +601,7 @@ document.getElementById("trimestree").style.display="none";
                  <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Região</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Projecto</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-regiao"></div>
@@ -573,7 +627,7 @@ document.getElementById("trimestree").style.display="none";
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Canal de Entrada</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Canal de Entrada</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-canal-entrada"></div>
@@ -587,7 +641,7 @@ document.getElementById("trimestree").style.display="none";
                  <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Categoria</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Categoria</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-categoria"></div>
@@ -612,7 +666,7 @@ document.getElementById("trimestree").style.display="none";
                 <div class="col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Projecto</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Projecto</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-projecto"></div>
@@ -638,71 +692,78 @@ document.getElementById("trimestree").style.display="none";
     
     function ocorrenciasPorProjecto(){
     	var nomes = /*[[${nomesProjecto}]]*/""
-       	var numeroocorencia= /*[[${numeroocorenciaProjecto}]]*/""
+       	var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
+       	var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
+       	var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
        	
        		document.addEventListener("DOMContentLoaded", function () {
-       	      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
-       	      		chart: {
-       	      			type: "area",
-       	      			fontFamily: 'inherit',
-       	      			height: 240,
-       	      			parentHeightOffset: 0,
-       	      			toolbar: {
-       	      				show: false,
-       	      			},
-       	      			animations: {
-       	      				enabled: false
-       	      			},
-       	      			stacked: true,
-       	      		},
-       	      		dataLabels: {
-       	      			enabled: false,
-       	      		},
-       	      		fill: {
-       	      			opacity: .16,
-       	      			type: 'solid'
-       	      		},
-       	      		stroke: {
-       	      			width: 2,
-       	      			lineCap: "round",
-       	      			curve: "smooth",
-       	      		},
-       	      		series: [{
-       	      			name: "Ocorrências por Projecto",
-       	      			data: numeroocorencia
-       	      		}],
-       	      		grid: {
-       	      			padding: {
-       	      				top: -20,
-       	      				right: 0,
-       	      				left: -4,
-       	      				bottom: -4
-       	      			},
-       	      			strokeDashArray: 4,
-       	      		},
-       	      		xaxis: {
-       	      			labels: {
-       	      				padding: 0,
-       	      			},
-       	      			tooltip: {
-       	      				enabled: false
-       	      			},
-       	      			axisBorder: {
-       	      				show: false,
-       	      			},
-       	      			categories: nomes,
-       	      		},
-       	      		yaxis: {
-       	      			labels: {
-       	      				padding: 4
-       	      			},
-       	      		},
-       	      		colors: ["#206bc4", "#f66d9b"],
-       	      		legend: {
-       	      			show: false,
-       	      		},
-       	      	})).render();
-       	      });
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
+              		chart: {
+              			type: "bar",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			parentHeightOffset: 0,
+              			toolbar: {
+              				show: false,
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		plotOptions: {
+              			bar: {
+              				columnWidth: '50%',
+              				horizontal: false,
+              			}
+              		},
+              		dataLabels: {
+              			enabled: false,
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: [{
+              			name: "Resolvidas",
+              			data: numeroocorencia1
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia2
+              		},{
+              			name: "Improcedentes",
+              			data: numeroocorencia3
+              		}],
+              		grid: {
+              			padding: {
+              				top: -20,
+              				right: 0,
+              				left: 0,
+              				bottom: -4
+              			},
+              			strokeDashArray: 4,
+              		},
+              		xaxis: {
+              			labels: {
+              				padding: 0,
+              			},
+              			tooltip: {
+              				enabled: false
+              			},
+              			axisBorder: {
+              				show: false,
+              			},
+              			categories: nomes,
+              		},
+              		yaxis: {
+              			labels: {
+              				padding: 4
+              			},
+              		},
+              		colors: ["#5eba00", "#f66d9b", "#FFA726"],
+              		legend: {
+              			show: false,
+              		},
+              	})).render();
+              });
            	
     }
     
@@ -827,7 +888,7 @@ document.getElementById("trimestree").style.display="none";
               		grid: {
               			strokeDashArray: 4,
               		},
-              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
               		legend: {
               			show: true,
               			position: 'bottom',
@@ -875,8 +936,9 @@ document.getElementById("trimestree").style.display="none";
               		labels: nomes,
               		grid: {
               			strokeDashArray: 4,
+              			
               		},
-              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
               		legend: {
               			show: true,
               			position: 'bottom',
@@ -969,7 +1031,7 @@ document.getElementById("trimestree").style.display="none";
               				padding: 4
               			},
               		},
-              		colors: ["#5eba00", "#f66d9b", "#206bc4"],
+              		colors: ["#5eba00", "#f66d9b", "#FFA726"],
               		legend: {
               			show: false,
               		},
@@ -988,7 +1050,6 @@ document.getElementById("trimestree").style.display="none";
     var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
     var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
     
-    	
     	document.addEventListener("DOMContentLoaded", function () {
           	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
           		chart: {
@@ -1018,10 +1079,10 @@ document.getElementById("trimestree").style.display="none";
           			name: "Resolvidas",
           			data: numeroocorencia1
           		},{
-          			name: "Não Resolvidas",
+          			name: "Reclamações",
           			data: numeroocorencia2
           		},{
-          			name: "Improcedentes",
+          			name: "Consultas/Sugestões...",
           			data: numeroocorencia3
           		}],
           		grid: {
@@ -1050,7 +1111,7 @@ document.getElementById("trimestree").style.display="none";
           				padding: 4
           			},
           		},
-          		colors: ["#5eba00", "#f66d9b", "#206bc4"],
+          		colors: ["#5eba00", "#f66d9b", "#FFA726"],
           		legend: {
           			show: false,
           		},
@@ -1061,9 +1122,6 @@ document.getElementById("trimestree").style.display="none";
     }
     
     </script>
-
-
-
 
     <!-- Conteudo-->
 

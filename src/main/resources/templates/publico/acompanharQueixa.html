@@ -5,7 +5,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title> FIPAG </title>
+    <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
+    <link rel="icon" th:href="@{/image/lagoa.png}" />
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- CSS files -->
@@ -33,7 +34,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
    <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
     <script th:src="@{/../assets/js/dashboard.js}"></script> -->
-    
+    <script th:src="@{/dist/js/tabler.min.js}"></script>
     
     
     
@@ -68,9 +69,11 @@
 
 							<div class="col-lg-12">
 									<div >
-										<label class="form-label">Codigo</label>
-										<input style="border-radius: 50px" class="form-control" type="text" name="codigo" placeholder="Insira o seu Codigo"></input>
+										<label class="form-label">Código</label>
+										<input required="required" style="border-radius: 50px" class="form-control" type="number" name="codigo" placeholder="Insira o seu Codigo"></input>
 									</div>
+									<br>
+					                 <div th:text="${error}" style="color: red;" th:if="${error} != null"></div>
 								</div>
 
 						</div>

@@ -32,8 +32,8 @@ public class GrmApplication extends SpringBootServletInitializer{
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
-		mailSender.setUsername("perdidoseachadosmoz@gmail.com");
-		mailSender.setPassword("Machava@2020");
+		mailSender.setUsername("fnds.mdr@gmail.com");
+		mailSender.setPassword("Fnds2022#");
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");

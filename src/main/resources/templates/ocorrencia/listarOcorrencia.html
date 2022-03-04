@@ -7,7 +7,6 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>FIPAG</title>
 
     <style>
 
@@ -111,7 +110,8 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         <td>Cadastro</td>
                         <td>Ocorrência</td>
                         <td>Projecto</td>
-			            <td>Canal de Entrada</td>
+			            <td>Canal Utilizado</td>
+			            <td>Tempo</td>
                         <td>Procede?</td>
                         <td class="w-4">Assunto</td>
                         <td class="w-4">Estado</td>
@@ -127,6 +127,32 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
                         <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
+                        
+                        
+                        <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
+                         
+                         
+                         <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 5) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+                         
+                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.estado!='Validado' && p.tipoAlerta!='Normal'}">
+                          <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+                         
+                         
+                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) <= 5) && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+                         
+                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) <= 1) && p.tipoAlerta!='Normal'}">
+                          <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+                         
+                         </td>
+                        
+                        
+                        
                         <td th:text="${p.procedencia}">Auxiliar Contábil</td>
 
                         <td th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}" >Auxiliar Contábil</td>

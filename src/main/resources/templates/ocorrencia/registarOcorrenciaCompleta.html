@@ -6,7 +6,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>FIPAG</title>
 
     <style>
 
@@ -114,7 +113,7 @@ OrigemInternoExterno();
 
     $.ajax({
     type: 'GET',
-    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
     	url: 'http://localhost:9090/origem/externo',
     //url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
@@ -286,7 +285,7 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
 
-    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo/',
     //url: 'http://localhost:9090/origem/externo',
@@ -531,7 +530,7 @@ document.getElementById("cidadee").style.display="none";
 
     <div align="right" class="col-12">
         <a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
-            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></Canalspan>
             <span>Listar Ocorrências</span>
         </a>
     </div>
@@ -555,6 +554,16 @@ document.getElementById("cidadee").style.display="none";
 
 
                 <div class="row">
+                
+                <div class="col-6 col-sm-4">
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Alerta</label>
+                            <select class="form-control custom-select form-select" th:field="*{tipoAlerta}" >
+                                <option th:each="p : ${tipoAlertas}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div id="projectoo" class="col-6 col-sm-4">
                         <div class="form-group">
@@ -646,6 +655,7 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Canal Utilizado </label>
                             <select class="form-control custom-select" th:field="*{formaComunicacao}" >
+                             	<option value="Plataforma">Plataforma</option>
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Telefone">Telefone</option>
                                 <option value="Formulário">Formulário</option>

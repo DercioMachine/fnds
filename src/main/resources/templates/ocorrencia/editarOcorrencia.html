@@ -5,8 +5,6 @@
 
 
 <head>
-    <meta charset="UTF-8">
-    <title>FIPAG</title>
 
     <style>
 
@@ -114,7 +112,7 @@ OrigemInternoExterno();
 
     $.ajax({
     type: 'GET',
-    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
     	url: 'http://localhost:9090/origem/externo',
     //url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
@@ -286,7 +284,7 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
 
-    //url: 'http://expediente.uem.mz:8080/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo/',
     //url: 'http://localhost:9090/origem/externo',
@@ -532,27 +530,27 @@ document.getElementById("cidadee").style.display="none";
     <div align="right" class="col-12">
         <a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-            <span>Listar OcorrÃªncias</span>
+            <span>Listar Ocorrências</span>
         </a>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">EDITAR DE OCORRÃŠNCIA</h3>
+            <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">EDITAR DE OCORRÊNCIA</h3>
         </div>
         <!-- <div th:replace="fragmentos/alert" class="card-body"> -->
         <div class="card-body">
             <form th:action="@{/ocorrencias/editar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 
-					<input type="hidden" th:field="*{id}" class="form-control" placeholder="DesignaÃ§Ã£o..."> 
-	        		<input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="DesignaÃ§Ã£o..."> 
+					<input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> 
+	        		<input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação..."> 
 
                 <div style="background: #60a18a; color: white">
-                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da OcorrÃªncia</h2>
+                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
                 </div>
                 <br>
 
-                <!-- <input type="hidden" th:field="*{id}" class="form-control" placeholder="DesignaÃ§Ã£o..."> -->
+                <!-- <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> -->
                 <!-- enctype="multipart/form-data" -->
 
 
@@ -573,9 +571,9 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="comboboxProvincias" class="form-label">ProvÃ­ncia</label>
+                            <label for="comboboxProvincias" class="form-label">Província</label>
                             <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
-                                <option value="">Selecione a ProvÃ­ncia...</option>
+                                <option value="">Selecione a Província...</option>
                                 <option th:each="p : ${provincias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                             </select>
@@ -631,7 +629,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Data da OcorrÃªncia: </label>
+                            <label class="form-label">Data da Ocorrência: </label>
                             <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
@@ -651,9 +649,9 @@ document.getElementById("cidadee").style.display="none";
                             <select class="form-control custom-select" th:field="*{formaComunicacao}" >
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Telefone">Telefone</option>
-                                <option value="FormulÃ¡rio">FormulÃ¡rio</option>
-                                <option value="ReuniÃµes ComunitÃ¡rias">ReuniÃµes ComunitÃ¡rias</option>
-                                <option value="Grupos de DiscussÃ£o">Grupos de DiscussÃ£o</option>
+                                <option value="Formulário">Formulário</option>
+                                <option value="Reuniões Comunitárias">Reuniões Comunitárias</option>
+                                <option value="Grupos de Discussão">Grupos de Discussão</option>
                                 <option value="Outros">Outros</option>
                             </select>
                         </div>
@@ -661,9 +659,9 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="tipoOcorrencia" class="form-label">Tipo de OcorrÃªncia</label>
+                            <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
                             <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
-                                <option value="">Selecione o Tipo de OcorrÃªncia...</option>
+                                <option value="">Selecione o Tipo de Ocorrência...</option>
                                 <option th:each="p : ${tipoDeOcorrencias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                             </select>
@@ -694,7 +692,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label">DescriÃ§Ã£o do Problema </label>
+                            <label class="form-label">Descrição do Problema </label>
                             <div class="input-icon">
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
@@ -716,7 +714,7 @@ document.getElementById("cidadee").style.display="none";
                 </div>
                 <br>
 
-                <label class="form-label">Origem da OcorrÃªncia</label>
+                <label class="form-label">Origem da Ocorrência</label>
 
                 <input  onclick="onChangeIndividual()" id="individual" type="radio" th:field="*{origem}" value="Individual">
                 <label for="individual"><span></span>Individual</label>
@@ -724,8 +722,8 @@ document.getElementById("cidadee").style.display="none";
                 <input onclick="onChangeGrupo()" id="grupo" type="radio" th:field="*{origem}" value="Grupo/Comunidade">
                 <label for="grupo"><span></span>Grupo/Comunidade</label>
 
-                <input onclick="onChangeAnonimo()" id="anonimo" type="radio" th:field="*{origem}" value="AnÃ³nimo">
-                <label for="anonimo"><span></span>AnÃ³nimo</label>
+                <input onclick="onChangeAnonimo()" id="anonimo" type="radio" th:field="*{origem}" value="Anónimo">
+                <label for="anonimo"><span></span>Anónimo</label>
 
                 <input onclick="onChangeNenhum()" id="nenhum" type="radio" th:field="*{origem}" value="Nenhum">
                 <label for="nenhum"><span></span>Nenhum</label>
@@ -742,7 +740,7 @@ document.getElementById("cidadee").style.display="none";
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="DesignaÃ§Ã£o...">
+                                <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
                     </div>
@@ -754,7 +752,7 @@ document.getElementById("cidadee").style.display="none";
                                     <span class="input-icon-addon">
                                     <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="DesignaÃ§Ã£o...">
+                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
                     </div>
@@ -766,7 +764,7 @@ document.getElementById("cidadee").style.display="none";
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
                                 </span>
-                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="DesignaÃ§Ã£o...">
+                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
                     </div>
@@ -778,7 +776,7 @@ document.getElementById("cidadee").style.display="none";
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{nomeDoRepresentanteDoGrupo}" class="form-control" placeholder="DesignaÃ§Ã£o...">
+                                <input type="text" th:field="*{nomeDoRepresentanteDoGrupo}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
                     </div>
@@ -790,7 +788,7 @@ document.getElementById("cidadee").style.display="none";
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{moradaUtente}" class="form-control" placeholder="DesignaÃ§Ã£o...">
+                                <input type="text" th:field="*{moradaUtente}" class="form-control" placeholder="Designação...">
                             </div>
                         </div>
                     </div>
@@ -809,7 +807,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div style="display: none" id="faixaEtaria" class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Faixa EtÃ¡ria</label>
+                            <label class="form-label">Faixa Etária</label>
                             <select class="form-control custom-select" th:field="*{faixaEtaria}" >
                                 <option value=" ">Selecione...</option>
                                 <option value="20 a 30">20 a 30</option>

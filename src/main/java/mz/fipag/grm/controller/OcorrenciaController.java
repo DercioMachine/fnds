@@ -1,11 +1,14 @@
 package mz.fipag.grm.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
-import mz.fipag.grm.repository.*;
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -33,15 +36,26 @@ import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.domain.User;
+import mz.fipag.grm.repository.DistritoRepository;
+import mz.fipag.grm.repository.DocsRepository;
+import mz.fipag.grm.repository.OcorrenciaRepository;
+import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.repository.ProcessoRepository;
+import mz.fipag.grm.repository.ResolucaoRepository;
+import mz.fipag.grm.repository.ResponsabilidadeRepository;
+import mz.fipag.grm.repository.SubCategoriaRepository;
+import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
+import mz.fipag.grm.service.EmailService;
 import mz.fipag.grm.service.EmpreiterioService;
 import mz.fipag.grm.service.OcorrenciaService;
 import mz.fipag.grm.service.PostoAdministrativoService;
 import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.ProvinciaService;
+import mz.fipag.grm.service.SMSService;
 import mz.fipag.grm.service.TipoAlertaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
 import mz.fipag.grm.util.PaginacaoUtil;
@@ -51,7 +65,13 @@ import mz.fipag.grm.util.PaginacaoUtil;
 @Controller
 public class OcorrenciaController {
 
+	@Autowired
+	private SMSService smsService;
 
+	
+	@Autowired
+	private EmailService emailService;
+	
     @Autowired
     private OcorrenciaService ocorrenciaService;
     
@@ -133,6 +153,8 @@ public class OcorrenciaController {
 
 
         model.addAttribute("pageOcorrencia", ocorrencia);
+        
+       // enviarSMSAlerta();
 
         return "ocorrencia/listarOcorrencia";
     }
@@ -223,9 +245,71 @@ public class OcorrenciaController {
     }
 
 
+    
+    public void enviarSMSAlerta() {
+    	 List<User> listaUser = (List<User>) userRepository.findAll();
+    	 List<Ocorrencia> listaOcorencia = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+    	 
+    	 
+    	 
+    	 Date agora = new Date();
+    	 
+    	 TimeUnit time = TimeUnit.DAYS;
+    	 
+    	 
+    	 
+    	 
+    	 for (int i=0;i<listaOcorencia.size();i++) {
+        	 
+    		 
+    		 Date criacao = listaOcorencia.get(i).getCreated();
+    		 
+    		 long resultado = agora.getTime() - criacao.getTime();
+    		 
+    		 long diferenca = time.convert(resultado, TimeUnit.MILLISECONDS);
+    		 
+    		// System.out.println("Duracao " +diferenca);
+    		 
+        
+        	 if (diferenca>5 && listaOcorencia.get(i).getEstado()!="Validado" && listaOcorencia.get(i).getTipoAlerta().getDesignacao().equals("Normal")) {
+        		 
+	        		 for (int j=0;j<listaUser.size();j++) {
+	                	 
+	                	 String smsNormal = "Sr(a) "+listaUser.get(j).getNome()+", A ocorrência de código : "+listaOcorencia.get(i).getGrmStamp() +" passou do tempo.";
+	              
+	                	 
+	               if(listaUser.get(j).getTipourgente().equals("Sim") && listaOcorencia.get(i).getProvincia().getDesignacao().equals(listaUser.get(j).getProvincia().getDesignacao())) {
+	            	   smsService.sendSMS("+258"+listaUser.get(j).getTelefone(),smsNormal);
+	               }
+	         	}
+        		 
+        		 
+        	 }else if(diferenca>1 && listaOcorencia.get(i).getEstado()!="Validado" && listaOcorencia.get(i).getTipoAlerta().getDesignacao()!="Normal") {
+        		 
+        	 
+        		 for (int k=0;k<listaUser.size();k++) {
+                	 
+        			 String smsUrgente = "Sr(a) "+listaUser.get(k).getNome()+", A ocorrência de código : "+listaOcorencia.get(i).getGrmStamp() +" passou do tempo.";
+   	              
+                	 
+  	               if(listaUser.get(k).getTipourgente().equals("Sim") && listaOcorencia.get(i).getProvincia().getDesignacao().equals(listaUser.get(k).getProvincia().getDesignacao())) {
+  	            	   smsService.sendSMS("+258"+listaUser.get(k).getTelefone(),smsUrgente);
+  	               }
+         		
+         	}
+        	 
+        	 }
+    		 
+    		 
+        	 
+ 	}
+    	 
+    	 
+    }
+    
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, Cidade cidade, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) {
+	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
 
     	
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
@@ -236,7 +320,7 @@ public class OcorrenciaController {
     	
     	
     	
-    		ocorrencia.setGrmStamp(cidade.getProvincia().getCodigo()+""+codigo+""+anooo);
+    		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
     		ocorrencia.setRegistado(true);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.salvar(ocorrencia);
@@ -247,6 +331,29 @@ public class OcorrenciaController {
 				docStorageService.saveFile(file, ocorrencia, descricaoNexo);
 			}
         }
+    	
+    	
+    	 List<User> lista = (List<User>) userRepository.findAll();
+
+     	String localprovincia = ocorrencia.getProvincia().getDesignacao();
+
+     	
+     	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente")) {
+     		
+     		 for (int i=0;i<lista.size();i++) {
+            	 
+            	 String smsurgente = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência urgente com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+            	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência GBV com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+            	 
+           if(lista.get(i).getTipourgente().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+        	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
+           }else if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+        	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
+           }
+     		
+     	}
+    	
+     	}
 
     	return "redirect:/listar/ocorrencia";
 	}
@@ -427,8 +534,8 @@ public class OcorrenciaController {
     
 
     @PostMapping("/ocorrencias/validar")
-    public String validacaoVista(Ocorrencia ocorrencia,  RedirectAttributes redirAttrs,
-    		@RequestParam String procedencia, @RequestParam("descricao") String descricaoAnexo, @RequestParam("files") MultipartFile[] files) {
+    public String validacaoVista(Ocorrencia ocorrencia, RedirectAttributes redirAttrs,
+    		@RequestParam String procedencia, @RequestParam("descricao") String descricaoAnexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
     		
     		ocorrencia.setProcedencia(procedencia);
     		ocorrencia.setValidado(true);
@@ -442,8 +549,56 @@ public class OcorrenciaController {
     				docStorageService.saveFileValidacao(file, ocorrencia, descricaoAnexo);
     			}
             }
+            
+            
+            
+            
+            if(procedencia.equals("Não")){
 
-            return "redirect:/resolver/ocorrencia/"+ocorrencia.getId();
+                if(ocorrencia.getContactoUtente()!=null) {
+
+                    String smsNaoprocede = "Caro Utente a sua ocorrência não procede, veja os motivos  pesquisando com o seu código: "+ocorrencia.getGrmStamp();
+                    smsService.sendSMS("+258" + ocorrencia.getContactoUtente(), smsNaoprocede);
+
+                }
+                if(ocorrencia.getEmailUtente()!=null) {
+
+                    String descricao = "A sua Ocorrência com o codigo: "+ocorrencia.getGrmStamp()+" não procede. MOTIVO: "+ocorrencia.getObservacao();
+                    String nome = "A sua Ocorrência não procede";
+                    String destino = ocorrencia.getEmailUtente();
+                    String assunto = "Resultado da validação da Ocorrência";
+
+                    emailService.enviarEmail(descricao,nome,destino,assunto);
+                }
+            }
+            
+            
+            
+            List<User> lista = (List<User>) userRepository.findAll();
+
+         	String localprovincia = ocorrencia.getProvincia().getDesignacao();
+
+         	
+         	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente") || ocorrencia.getTipoAlerta().getDesignacao().equals("GBV")) {
+         		
+         		 for (int i=0;i<lista.size();i++) {
+                	 
+                	 String smsurgente = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência urgente com o código : "+ocorrencia.getGrmStamp();
+                	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência GBV com o código : "+ocorrencia.getGrmStamp();
+                	 
+               if(lista.get(i).getTipourgente().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
+               }else if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
+               }
+         		
+         	}
+        	
+         	}
+         	
+
+            //return "redirect:/resolver/ocorrencia/"+ocorrencia.getId();
+         	return "redirect:/listar/ocorrencia";
 
     }
 
