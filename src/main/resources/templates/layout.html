@@ -27,16 +27,26 @@ Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
 <!-- jQueryUI (autocomplete) -->
 <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
 
 <link href="https://code.jquery.com/jquery-3.5.1.js" rel="stylesheet"/>
 
-<link href="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
-<link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"/>
+<script>
+		  $(document).ready(function() {
+    $('#example').DataTable( {
+        "language": {
+        	"url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+        		
+        }
+    } );
+} );
+		  
+</script>
+
 
 
 

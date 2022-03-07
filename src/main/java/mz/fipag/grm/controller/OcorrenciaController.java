@@ -1,5 +1,6 @@
 package mz.fipag.grm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +11,10 @@ import java.util.concurrent.TimeUnit;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -160,12 +163,10 @@ public class OcorrenciaController {
     }
 
     @GetMapping("/ocorrencia/observador")
-    public String listarOcorrenciaObservador(ModelMap model, @RequestParam("page") Optional<Integer> page){
+    public String listarOcorrenciaObservador(ModelMap model){
 
-        int paginaActual = page.orElse(1);
-        PaginacaoUtil<Ocorrencia> pageOcorrencia = ocorrenciaService.buscaPorPagina(paginaActual);
 
-        model.addAttribute("pageOcorrencia", pageOcorrencia);
+        model.addAttribute("pageOcorrencia", ocorrenciaRepository.findAll());
 
         return "ocorrencia/listarOcorrenciaObservador";
     }
@@ -617,7 +618,46 @@ public class OcorrenciaController {
 		  return "redirect:/listar/ocorrencia"; 
 	  }
     
+    
+    
+    
+    @PostMapping("/busca")
+    public String filter1(@RequestParam("projecto") String projecto,
+    						@RequestParam(name="datainicial", required = false) 
+    						@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datainicial,
+    						@RequestParam(name="datafinal", required = false) 
+    						@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datafinal,
+    						
+    						Model model) {
 
+    	String stringDatIncial="";
+    	String stringDatFinal="";
+    	
+    	String projecto1="";
+    	if(projecto!="") {
+			projecto1="- "+projecto;
+		}
+    	 //System.out.println("ddddddddddddddddddddddddddddddddddddd = "+datainicial);
+    	// System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv = "+datafinal);
+    	// System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv = "+projecto);
+    	
+    	SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+    	
+    	
+    	
+    	if(datainicial!=null && datafinal!=null) {
+    		stringDatIncial= DateFor.format(datainicial);
+    		stringDatFinal= DateFor.format(datafinal);
+    		
+    	}
+		
+		model.addAttribute("pageOcorrencia", ocorrenciaRepository.totalDeOcorrenciasPorDataseProjecto(datainicial, datafinal, projecto));
+		model.addAttribute("dados1", "De "+ stringDatIncial+" a "+stringDatFinal + " "+ projecto1);
+
+    		 return "ocorrencia/listarOcorrencia";
+    	
+    }
+    
 
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {

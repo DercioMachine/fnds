@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     
-                    <li class="nav-item " sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN')" >
+                    <!-- <li class="nav-item " sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN')" >
                         <a class="nav-link"   th:href="@{/listar/ocorrencia}" >
 
                              <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -29,7 +29,39 @@
                                 Ocorrências
                             </span>
                         </a>
+                    </li> -->
+                    
+                    
+                    
+                    <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_VALIDADOR')">
+                        <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+
+                     <span class="nav-link-icon d-md-none d-lg-inline-block">
+								<i style="font-size: 15pt; color: #60a18a" class="fad fa-user-cog"></i>
+                            </span>
+                            <span class="nav-link-title">
+                      Ocorrências
+                    </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <!--  <a class="dropdown-item" th:href="@{/listar/posto}" >
+                                 Posto Administrativo
+                             </a> -->
+
+                            <a class="dropdown-item" th:href="@{/listar/ocorrencia}" >
+                                Minhas Ocorrências
+                            </a>
+
+                            <a class="dropdown-item" th:href="@{/ocorrencia/observador}" >
+                                Visualizar todas Ocorrências
+                            </a>
+
+                        </div>
                     </li>
+                    
+                    
+                    
+                    
                     
                     
                     <li class="nav-item " sec:authorize="hasAnyAuthority('ROLE_OBSERVADOR')" >

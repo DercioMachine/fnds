@@ -1384,7 +1384,9 @@ String periodo="";
     	String anoo = String.valueOf(ano);
     	String anooo= anoo.substring(2, 4);
     	
-    	
+    	String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
+    	String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
+
     	
     	
     		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
@@ -1402,12 +1404,12 @@ String periodo="";
 
     		String assunto = "Confirmação de código de acesso - FNDS";
 
-    		if(!(emaildestino.equals(""))){
+    		if(email!=null){
     			emailService.enviarEmail(descricao,"FNDS",emaildestino,assunto);
     		}
 
 
-        	if(!(ocorrencia.getContactoUtente().equals(""))){
+        	if(contacto!=null){
 
         		String mensagem = "A sua Ocorrência foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
     			smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);

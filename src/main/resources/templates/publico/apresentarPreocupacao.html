@@ -41,7 +41,17 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script th:src="@{/dist/js/tabler.min.js}"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet"/>
+    <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
+
+<script type="text/javascript">
+      $(".date").datepicker({
+        format: "dd-mm-yyyy",
+      });
+    </script>
 
 
     <!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
@@ -309,6 +319,27 @@ document.getElementById("cidadee").style.display="none";
 }
 
 </script>
+
+ <script>
+	
+      $(function(){
+    	    var dtToday = new Date();
+    	    
+    	    var month = dtToday.getMonth() + 1;
+    	    var day = dtToday.getDate();
+    	    var year = dtToday.getFullYear();
+    	    if(month < 10)
+    	        month = '0' + month.toString();
+    	    if(day < 10)
+    	        day = '0' + day.toString();
+    	    
+    	    var maxDate= year + '-' + month + '-' + day;
+    	    
+    	    $('#txtDate').attr('max', maxDate);
+    	});
+	</script>
+
+
     <!-- Conteudo -->
 
 
@@ -400,7 +431,7 @@ document.getElementById("cidadee").style.display="none";
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input required="required" type="date" th:field="*{dataOcorrencia}" class="form-control">
+                                <input id="txtDate" required="required" type="date" th:field="*{dataOcorrencia}" class="date form-control">
                             </div>
                         </div>
                     </div>

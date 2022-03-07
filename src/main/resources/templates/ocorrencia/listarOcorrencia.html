@@ -7,66 +7,13 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-
-    <style>
-
-/* jQuery loading autocomplete */
-.ui-autocomplete-loading {
-background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
-}
-
-
-#tabela th {
-padding-top: 12px;
-padding-bottom: 12px;
-text-align: left;
-font-size:12px;
-}
-
-
-#tabela tr {
-background-color: #fff;
-}
-
-
-</style>
-
-    <script>
-$(document).ready(function(){
-$("#pesquisa").on("keyup", function() {
-var value = $(this).val().toLowerCase();
-$("#myTable tr").filter(function() {
-$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-});
-});
-});
-</script>
-
-
 </head>
-
-
-
-
 
 <body>
 
 
-
-
-
 <div layout:fragment="corpo">
     <!-- Conteudo -->
-
-
-
-
-
-
-
-
-
-
 
     <div class="col-12">
         <div class="card">
@@ -81,50 +28,138 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     <i class="fa fa-print"></i>
                     <span>Imprimir</span>
                 </a>
+                
+                
+
+            <div style="margin-left: 280px; margin-top: 20px" class="form-check-inline ">
+            	<div style="font-weight: bolder" th:text="${dados1}" th:if="${dados1} != null"></div>
+             	<div style="font-weight: bolder" th:text="${dados}" th:if="${dados} != null"></div> 
+				</div>
 
             </div>
+            
+            <form id="divdata" th:action="@{/busca}" method="POST">
+    
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards card-header">
 
-            <div class="card-body border-bottom py-3">
-                <div class="d-flex">
-                    <div class="text-muted">
-                        <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Ocorrências</h3>
+
+                <div class="col-sm-6 col-lg-6">
+
+
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="row">
+                       <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Data Inical: </label>
+                            <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                                <input id="txtDate" value="" name="datainicial" type="date" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                    <div class="ms-auto text-muted">
-                        Procurar:
-                        <div class="ms-2 d-inline-block">
-                            <input id="pesquisa" name="keyword" type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                    
+                    
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Data Final: </label>
+                            <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                               <input id="txtDate2" value="" name="datafinal" type="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                            
+                        </div>
                         </div>
                     </div>
                 </div>
+
+
+                
+                 <div id="projectoo" class="col-sm-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                            <label for="projecto" class="form-label">Projecto</label>
+                            <select id="projecto" name="projecto" class="form-control custom-select form-select" >
+                                <option value="">Selecione o Projecto...</option>
+                                <option th:each="p : ${projectos}"
+                                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+
+
+                
+                
+                <div id="botoes" class="col-sm-6 col-lg-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+                                    <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
             </div>
+        </div>
+    </div>
+    </form>
 
 
+				<br>
 
-            <div class="table-responsive">
-                <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
-                    <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
+             <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+               <table id="example" class="display">
                     <thead>
                     <tr style="color: rgb(65,105,225)">
+                        <td class="w-2">#</td>
                         <td class="w-4">Codigo</td>
-                        <td class="w-2">No.</td>
                         <td>Cadastro</td>
                         <td>Ocorrência</td>
+                       <td>Província</td>
                         <td>Projecto</td>
-			            <td>Canal Utilizado</td>
-			            <td>Tempo</td>
-                        <td>Procede?</td>
+			            <td>Canal</td>
+			            <td>
+                        	<span>
+                        		<i style="font-size: 15pt; color: #0277BD" class="fas fa-clock"></i>
+                        	</span>
+                        </td>
                         <td class="w-4">Assunto</td>
                         <td class="w-4">Estado</td>
                         <td class="w-3">Acção</td>
                     </tr>
                     </thead>
-                    <tbody id="myTable">
+                    <tbody>
                     <tr th:each="p, index : ${pageOcorrencia}">
                         <!-- <tr th:each="p : ${ocorrencias}"> -->
-                        <td style="background: #fff" th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
-                        <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
+                        <td th:text="${index.count}"><span class="text-muted">01401</span></td>
+                        <td>
+                        	<span sec:authorize="hasAnyAuthority('ROLE_GBV')" th:if="${p.tipoAlerta.designacao=='GBV'}"  th:text="${p.grmStamp}" class="text-muted">
+                        	</span>
+                        	
+                        	<span sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_VALIDADOR')"  th:if="${p.tipoAlerta.designacao!='GBV'}"th:text="${p.grmStamp}" class="text-muted">
+                        	</span>
+                        	
+                        </td>
                         <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
+                        <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
                         <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
                         <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
                         
@@ -133,7 +168,7 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                          
                          
                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 5) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
-                          <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-clock"></i>
+                          <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
                          
                           <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.estado!='Validado' && p.tipoAlerta!='Normal'}">
@@ -148,12 +183,8 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                           <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) <= 1) && p.tipoAlerta!='Normal'}">
                           <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
-                         
                          </td>
                         
-                        
-                        
-                        <td th:text="${p.procedencia}">Auxiliar Contábil</td>
 
                         <td th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}" >Auxiliar Contábil</td>
 
@@ -162,29 +193,34 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         </td>
 
 
-                        <td>
+                        <td align="left" style="text-align: left;">
 
-                            <button style="background: blue; color: #fff" th:if="${p.resolucao == 'V' }" type="button" class="btn btn-sucess btn-sm">
-                                Validado
+                            <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
+                                Procedente 
                                 <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
                             </button>
+                            
+                            <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
+                                Improcedente 
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
+                            </button>
 
-                            <button style="background: #cc568b; color: #fff" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
-                                Em Resolução
+                            <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
+                                Resolvendo 
                                 <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
                             </button>
 
-                            <button style="background: orange; color: #fff" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
-                                Em Acompanhamento
+                            <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
+                                Acompanhando 
                                 <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
                             </button>
 
-                            <button style="background: green; color: #fff" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
-                                Terminado
+                            <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
+                                Resolvido
                                 <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
                             </button>
 
-                            <button style="background: red; color: #fff" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+                            <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
                                 <span th:if="${p.estado == 'Temporario'}">Temporario</span>
                                 <span th:if="${p.estado == 'Registado'}">Pendente</span>
 
@@ -199,26 +235,42 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         </td>
 
                         <td align="center">
-
-
+                        
+                        <span sec:authorize="hasAnyAuthority('ROLE_GBV')" th:if="${p.tipoAlerta.designacao=='GBV'}">
+                        
+                        
                             <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
                                 <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                             </a>
 
-                            <!-- <a th:href="${'/ocorrencias/detalhar/'+p.id}">
-                            <i aria-hidden="true" class="fa fa-cog"></i>
-                            </a> -->
 
                             <a th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
                                 <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
                             </a>
 
-                            <!-- <a th:id="${'btn_ocorrencias/excluir/'+p.id}" th:if="${p.estado == 'Temporario' }"
-                            data-toggle="modal" data-target="#myModal">
-                            <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-trash-alt"></i>
-                            </a> -->
+						</span>
+						
+						
+						<span sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_VALIDADOR')" th:if="${p.tipoAlerta.designacao!='GBV'}">
+                        
+                        
+                            <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
+                                <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
+                            </a>
 
+
+                            <a th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
+                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
+                            </a>
+
+
+						</span>
+						
+						
+						
                         </td>
+                        
+                        
 
 
                     </tr>
