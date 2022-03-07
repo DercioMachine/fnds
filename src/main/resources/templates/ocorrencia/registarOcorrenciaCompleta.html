@@ -113,9 +113,9 @@ OrigemInternoExterno();
 
     $.ajax({
     type: 'GET',
-    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
-    	url: 'http://localhost:9090/origem/externo',
-    //url: 'http://localhost:9090/origem/externo',
+    //url: 'http://expediente.uem.mz:8080/fnds/grm/origem/externo',
+    	url: 'http://localhost:8080/fnds/origem/externo',
+    //url: 'http://localhost:8080/fnds/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -285,11 +285,11 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
 
-    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:8080/fnds/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
-    //url: 'http://localhost:9090/origem/externo/',
-    //url: 'http://localhost:9090/origem/externo',
-     url: 'http://localhost:9090/origem/externo',
+    //url: 'http://localhost:8080/fnds/origem/externo/',
+    //url: 'http://localhost:8080/fnds/origem/externo',
+     url: 'http://localhost:8080/fnds/origem/externo',
 
 
     success: function (result){
@@ -342,7 +342,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:9090/distrito/'+provinciaId,
+url: 'http://localhost:8080/fnds/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
@@ -374,7 +374,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:9090/subcategoria/'+categoriaId,
+url: 'http://localhost:8080/fnds/subcategoria/'+categoriaId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -407,7 +407,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:9090/posto/'+distritoId,
+url: 'http://localhost:8080/fnds/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -526,6 +526,65 @@ document.getElementById("cidadee").style.display="none";
 }
 
 </script>
+
+
+
+<script type="text/javascript">
+	
+	
+	function onChangeIndividual(){
+		var estado = document.getElementById("individual");
+		
+		
+		if(estado.value=="Individual"){
+  			
+  			document.getElementById("nome").style.display="block";
+  			document.getElementById("faixaEtaria").style.display="block";
+  			document.getElementById("genero").style.display="block";
+  			
+  			document.getElementById("nomeGrupo").style.display="none";
+  			
+  			document.getElementById("nomereplabel").style.display="none";
+  			document.getElementById("nomelabel").style.display="block";
+  			
+  		}
+	}
+	
+	function onChangeGrupo(){
+		var estado = document.getElementById("grupo");
+		
+		if(estado.value=="Grupo/Comunidade"){
+  			
+			document.getElementById("faixaEtaria").style.display="block";
+  			document.getElementById("nomeGrupo").style.display="block";
+  			document.getElementById("nome").style.display="block";
+  			document.getElementById("genero").style.display="block";
+  			
+  			document.getElementById("nomelabel").style.display="none";
+  			document.getElementById("nomereplabel").style.display="block";
+  			
+  			
+  		}
+	}
+	
+	function onChangeAnonimo(){
+		
+		var estado = document.getElementById("anonimo");
+		
+		if(estado.value=="Anónimo"){
+  			
+  			document.getElementById("genero").style.display="block";
+  			document.getElementById("faixaEtaria").style.display="block";
+  			
+  			document.getElementById("nome").style.display="none";
+  			document.getElementById("nomeGrupo").style.display="none";
+  		}
+		
+	}
+</script>
+
+
+
     <!-- Conteudo -->
 
     <div align="right" class="col-12">
@@ -567,8 +626,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div id="projectoo" class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
+                            <label for="projecto" class="form-label">Projecto <strong style="color:red">*</strong></label>
+                            <select id="projecto" required class="form-control custom-select form-select" th:field="*{projecto}" >
                                 <option value="">Selecione o Projecto...</option>
                                 <option th:each="p : ${projectos}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -579,8 +638,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="comboboxProvincias" class="form-label">Província</label>
-                            <select id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
+                            <label for="comboboxProvincias" class="form-label">Província <strong style="color:red">*</strong></label>
+                            <select id="comboboxProvincias" required class="form-control custom-select form-select" th:field="*{provincia}" >
                                 <option value="">Selecione a Província...</option>
                                 <option th:each="p : ${provincias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -612,8 +671,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="categoria" class="form-label">Categoria</label>
-                            <select id="categoria" class="form-control custom-select form-select" th:field="*{categoria}" >
+                            <label for="categoria" class="form-label">Categoria <strong style="color:red">*</strong></label>
+                            <select id="categoria" required class="form-control custom-select form-select" th:field="*{categoria}" >
                                 <option value="">Selecione a Categoria...</option>
                                 <option th:each="p : ${categorias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -637,12 +696,12 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Data da Ocorrência: </label>
+                            <label class="form-label">Data da Ocorrência <strong style="color:red">*</strong></label>
                             <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input type="date" th:field="*{dataOcorrencia}" class="form-control">
+                                <input id="txtDate" required type="date" th:field="*{dataOcorrencia}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -654,7 +713,7 @@ document.getElementById("cidadee").style.display="none";
                     <div style="display: block" id="comunicacao" class="col-6 col-sm-4">
                         <div class="form-group">
                             <label class="form-label">Canal Utilizado </label>
-                            <select class="form-control custom-select" th:field="*{formaComunicacao}" >
+                            <select required class="form-control custom-select" th:field="*{formaComunicacao}" >
                              	<option value="Plataforma">Plataforma</option>
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Telefone">Telefone</option>
@@ -668,8 +727,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência</label>
-                            <select id="tipoOcorrencia" class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
+                            <label for="tipoOcorrencia" class="form-label">Tipo de Ocorrência <strong style="color:red">*</strong></label>
+                            <select id="tipoOcorrencia" required class="form-control custom-select form-select" th:field="*{tipoOcorrencia}" >
                                 <option value="">Selecione o Tipo de Ocorrência...</option>
                                 <option th:each="p : ${tipoDeOcorrencias}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -701,12 +760,12 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label">Descrição do Problema </label>
+                            <label class="form-label">Descrição do Problema <strong style="color:red">*</strong></label>
                             <div class="input-icon">
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
                                 </span>
-                                <textarea type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
+                                <textarea required type="text" th:field="*{descricao}" data-bs-toggle="autosize" class="form-control" placeholder="Descreva o Assunto..."></textarea>
                             </div>
                         </div>
                     </div>
@@ -733,11 +792,6 @@ document.getElementById("cidadee").style.display="none";
 
                 <input onclick="onChangeAnonimo()" id="anonimo" type="radio" th:field="*{origem}" value="Anónimo">
                 <label for="anonimo"><span></span>Anónimo</label>
-
-                <input onclick="onChangeNenhum()" id="nenhum" type="radio" th:field="*{origem}" value="Nenhum">
-                <label for="nenhum"><span></span>Nenhum</label>
-
-
 
                 <br>
 
