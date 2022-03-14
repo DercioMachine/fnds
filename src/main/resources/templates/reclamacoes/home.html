@@ -48,6 +48,7 @@ document.getElementById("semestree").style.display="block";
 
 document.getElementById("trimestree").style.display="none";
 document.getElementById("mess").style.display="none";
+document.getElementById("semestre").disabled = false;
 }
 }
 
@@ -75,6 +76,20 @@ document.getElementById("trimestree").style.display="none";
 }
 }
 
+function onChangeAnoActual(){
+var estado = document.getElementById("radioAnoActual");
+
+
+if(estado.value=="A"){
+
+  document.getElementById("semestree").style.display="block";
+  document.getElementById("trimestree").style.display="none";
+  document.getElementById("mess").style.display="none";
+  document.getElementById("semestre").disabled = true;
+
+}
+}
+
 
 function onChangePorData(){
 	var estado = document.getElementById("radioData");
@@ -84,11 +99,11 @@ function onChangePorData(){
 	document.getElementById("divdata").style.display="block";
 	document.getElementById("divano").style.display="none";
 
-	
+
 	}
 	}
-	
-	
+
+
 function onChangePorAno(){
 	var estado = document.getElementById("radioAno");
 
@@ -97,7 +112,7 @@ function onChangePorAno(){
 	document.getElementById("divdata").style.display="none";
 	document.getElementById("divano").style.display="block";
 
-	
+
 	}
 	}
 
@@ -107,23 +122,23 @@ function onChangePorAno(){
 
 </script>
 
-
 <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
                 <div class="col-sm-6 col-lg-12">
                     <div align="left" style="padding-top: 5px" class="card ">
                         <div class="card-body">
-                        
-                        <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input onclick="onChangePorData()" id="radioData" value="data" type="radio" name="filtros" class="form-check-input" checked="checked"> Filtro por Período
-                                </label>
-                            </div>
+
 
                             <div class="form-check-inline ">
                                 <label class="form-check-label">
-                                    <input onclick="onChangePorAno()" id="radioAno" value="ano" name="filtros" class="form-check-input check" type="radio"> Filtro por Ano
+                                    <input onclick="onChangePorAno()" id="radioAno" value="ano" name="filtros" class="form-check-input check" type="radio" checked="checked"> Filtro por Período
+                                </label>
+                            </div>
+
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input onclick="onChangePorData()" id="radioData" value="data" type="radio" name="filtros" class="form-check-input" > Filtro por intervalo de datas
                                 </label>
                             </div>
                             
@@ -145,231 +160,240 @@ function onChangePorAno(){
 
 
 
-    <div style="display: none" id="divano" class="page-body">
-    
-    <form th:action="@{/filtrar}" method="POST">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
+    <div  id="divano" class="page-body">
 
-                <div class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Ano</label>
-                                <select id="ano" name="ano" onchange="onChangeStatus()" class="form-control custom-select">
-                                     <option value="2022">2022</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                   
-                                </select>
+        <form th:action="@{/filter}" method="POST">
+            <div class="container-xl">
+                <div class="row row-deck row-cards">
+
+                    <div class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Ano</label>
+                                    <select id="ano" name="ano" onchange="onChangeStatus()" class="form-control custom-select">
+                                        <option value="2022">2022</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-6 col-lg-4">
-
-
-                    <div align="center" style="padding-top: 30px" class="card ">
-                        <div style="padding-top: 8px" class="card-body">
-
-                            <div class="form-check-inline ">
-                                <label class="form-check-label">
-                                    <input onchange="onChangeSemestre()" id="radioSemestre" value="S" name="radioButton" class="form-check-input check" type="radio" checked> Semestre
-                                </label>
-                            </div>
-
-                            <div style="margin-left: 8%; margin-right: 8%;" class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="radioButton" value="T" class="form-check-input"> Trimestre
-                                </label>
-                            </div>
+                    <div class="col-sm-6 col-lg-5">
 
 
+                        <div align="center" style="padding-top: 30px" class="card ">
+                            <div style="padding-top: 8px" class="card-body">
 
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input onchange="onChangeMes()" id="radioMes" type="radio" value="M" name="radioButton" class="form-check-input" > Mês
-                                </label>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+                                <div class="form-check-inline ">
+                                    <label class="form-check-label">
+                                        <input onchange="onChangeAnoActual()" id="radioAnoActual" value="A" name="radioButton" class="form-check-input check" type="radio" checked> Ano
+                                    </label>
+                                </div>
+
+                                <div class="form-check-inline ">
+                                    <label class="form-check-label">
+                                        <input onchange="onChangeSemestre()" id="radioSemestre" value="S" name="radioButton" class="form-check-input check" type="radio" > Semestre
+                                    </label>
+                                </div>
+
+                                <div style="margin-left: 8%; margin-right: 8%;" class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="radioButton" value="T" class="form-check-input"> Trimestre
+                                    </label>
+                                </div>
 
 
-                <div id="semestree" class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Semestre</label>
-                                <select id="semestre" name="codSelectedSemestre" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="1">1° Semestre</option>
-                                    <option value="2">2° Semestre</option>
-                                </select>
+
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input onchange="onChangeMes()" id="radioMes" type="radio" value="M" name="radioButton" class="form-check-input" > Mês
+                                    </label>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                
-                <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Trimestre</label>
-                                <select id="trimestre" name="codSelectedTrimestre" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="1">1° Trimestre</option>
-                                    <option value="2">2° Trimestre</option>
-                                    <option value="3">3° Trimestre</option>
-                                    <option value="4">4° Trimestre</option>
-                                </select>
+
+
+                    <div id="semestree" class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Semestre</label>
+                                    <select id="semestre" disabled name="codSelectedSemestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                        <option value="1">Seleciona o Semestre</option>
+                                        <option value="1">1° Semestre</option>
+                                        <option value="2">2° Semestre</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div style="display: none;" id="mess" class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Mês</label>
-                                <select id="mes" name="codSelectedMes" onchange="onChangeStatus()" class="form-control custom-select">
-                                    <option value="1">Janeiro</option>
-                                    <option value="2">Fevereiro</option>
-                                    <option value="3">Março</option>
-                                    <option value="4">Abril</option>
-                                    <option value="5 ">Maio </option>
-                                    <option value="6">Junho</option>
-                                    <option value="7">Julho</option>
-                                    <option value="8">Agosto</option>
-                                    <option value="9">Setembro</option>
-                                    <option value="10">Outubo</option>
-                                    <option value="11">Novembro</option>
-                                    <option value="12">Dezembro</option>
-                                </select>
+
+
+
+                    <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Trimestre</label>
+                                    <select id="trimestre" name="codSelected" onchange="onChangeStatus()" class="form-control custom-select">
+                                        <option value="1">1° Trimestre</option>
+                                        <option value="2">2° Trimestre</option>
+                                        <option value="3">3° Trimestre</option>
+                                        <option value="4">4° Trimestre</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div id="projectoo" class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                            <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" name="projecto" class="form-control custom-select form-select">
-                                <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectos}"
-                                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div id="botoes1" class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
+
+                    <div style="display: none;" id="mess" class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Mês</label>
+                                    <select id="mes" name="codSelected" onchange="onChangeStatus()" class="form-control custom-select">
+                                        <option value="1">Janeiro</option>
+                                        <option value="2">Fevereiro</option>
+                                        <option value="3">Março</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5 ">Maio </option>
+                                        <option value="6">Junho</option>
+                                        <option value="7">Julho</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Setembro</option>
+                                        <option value="10">Outubo</option>
+                                        <option value="11">Novembro</option>
+                                        <option value="12">Dezembro</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div  class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="projecto" class="form-label">Projecto</label>
+                                    <select id="projecto" name="projecto" class="form-control custom-select form-select">
+                                        <option value="">Selecione o Projecto...</option>
+                                        <option th:each="p : ${projectos}"
+                                                th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="botoes1" class="col-sm-1 col-lg-1">
+                        <div class="card">
+                            <br>
+                            <button class="btn btn-default" type="submit" style="margin-top:6px;border:none ; " >
+                                <i style="font-size: 20pt; color: #0277BD" class="far fa-rotate"></i>
+                                <i style="font-size: 20pt; color: #0277BD" class="fa-solid fa-rotate"></i>
+                                <i style="font-size: 20pt; color: #0277BD"  class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+
                 </div>
-                
-
-
             </div>
-        </div>
-        
+
         </form>
-        
+
     </div>
-    
-    <form id="divdata" th:action="@{/filtrar1}" method="POST">
-    
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
+
+    <form style="display: none" id="divdata" th:action="@{/filter1}" method="POST">
+
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="row row-deck row-cards">
 
 
-                <div class="col-sm-6 col-lg-6">
+                    <div class="col-sm-6 col-lg-6">
 
 
-                    <div class="card ">
-                        <div class="card-body">
-                            <div class="row">
-                       <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Data Inical: </label>
-                            <div class="input-icon">
+                        <div class="card ">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Data Inical: </label>
+                                            <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input required="required" value="" name="datainicial" type="date" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Data Final: </label>
-                            <div class="input-icon">
+                                                <input value="" name="datainicial" type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Data Final: </label>
+                                            <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input required="required" value="" name="datafinal" type="date" class="form-control">
+                                                <input value="" name="datafinal" type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                            
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                
-                 <div id="projectoo" class="col-sm-6 col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                            <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" name="projecto" class="form-control custom-select form-select" >
-                                <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectos}"
-                                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-               
 
 
 
-                
-                
-                <div id="botoes" class="col-sm-6 col-lg-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
+                    <div id="projectoo" class="col-sm-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label  class="form-label">Projecto</label>
+                                    <select  name="projecto" class="form-control custom-select form-select" >
+                                        <option value="">Selecione o Projecto...</option>
+                                        <option th:each="p : ${projectos}"
+                                                th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+                    <div id="botoes" class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <br>
+                            <button class="btn btn-default" type="submit" style="margin-top:6px;border:none ; " >
+                                <i style="font-size: 20pt; color: #0277BD" class="far fa-rotate"></i>
+                                <i style="font-size: 20pt; color: #0277BD" class="fa-solid fa-rotate"></i>
+                                <i style="font-size: 20pt; color: #0277BD"  class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+
                 </div>
-                
-
-
             </div>
         </div>
-    </div>
     </form>
     
 

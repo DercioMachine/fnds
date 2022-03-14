@@ -17,11 +17,11 @@
   <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
   <!-- Generated: 2018-04-06 16:27:42 +0200 -->
   <!-- <title>FIPAG – Fundo de Investimento e Património do Abastacimento de Água</title> -->
-  <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
+ <title>FNDS - Fundo Nacional de Desenvolvimento Sustentável</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
   <script src="./assets/js/require.min.js"></script>
-  <link rel="icon" th:href="@{/image/lagoa.png}" />
+  <link rel="icon" th:href="@{/image/logoa.png}" />
   <script>
       requirejs.config({
           baseUrl: '.'
@@ -38,9 +38,6 @@
   <script th:src="@{/assets/plugins/maps-google/plugin.js}"></script>
   <!-- Input Mask Plugin -->
   <script th:src="@{/assets/plugins/input-mask/plugin.js}"></script>
-
-  <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
   <style type="text/css">
   .fechar:hover{
@@ -48,13 +45,13 @@
   }
   
   </style>
-  
-  
 </head>
+
+
 
 <body style=" background-color: #E5E6EA"  class="corpo">
 
-<div class="page" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div class="page" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
   <div class="page-single">
     <div class="container">
       <div class="row">
@@ -63,45 +60,49 @@
             <img src="./assets/brand/tabler.svg" class="h-6" alt="">
           </div>
 
-          <form style="background: rgba(96, 161, 138, 0.3);" class="card" th:action="@{/login}" method="post">
+          <form class="card" th:action="@{/recuperar/password}" method="post">
+			
+                <a style="font-size: 15px; text-align: right; padding-right: 15px; padding-top: 7px; cursor: pointer; text-decoration: none" th:href="@{/login}" class=" btn-block fechar">x</a>
 
-              <a style="font-size: 15px; text-align: right; padding-right: 15px; padding-top: 7px; cursor: pointer; text-decoration: none" th:href="@{/}" class=" btn-block fechar">x</a>
             <div class="card-body p-6">
-              <img align="middle" class="mb-4  ml-6" th:src="@{/image/fnds-logo.png}" width="200px"  >
-              <!--               <div class="card-title">Login to your account</div> -->
+
               <div class="form-group">
-                <label class="form-label">Utilizador</label>
-                <input type="text" class="form-control" name="username" placeholder="Enter email">
+                <label class="form-label">
+                  Digite o numero de telefone ou email fornacedo durante a criuacao de utilizador
+                </label>
+              </div>
+
+
+              <div class="form-group">
+                <label class="form-label">Telefone</label>
+                <input type="number" class="form-control" name="telefone" placeholder="Digite o numero de telefone">
               </div>
 
               <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
               <div class="form-group">
-                <label class="form-label">
-                  Senha
-
+                <label class="form-label" >
+                 <center>OU</center>
                 </label>
-                <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
               </div>
 
               <div class="form-group">
-                <div class="text-center" th:if="${param.error}">
-                  <b style="color:red">Utilizador ou Senha Errada</b>
+                <label class="form-label">
+                  Email
+                </label>
+                <input type="text" class="form-control" name="email"  placeholder="Email">
+              </div>
+
+              <div class="form-group">
+                <div class="text-center" th:if="${error}">
+                  <b style="color:red" th:text="${error}" ></b>
                   <br><br>
                 </div>
               </div>
 
 
-              <div class="form-group">
-                <label class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" />
-                  <span class="custom-control-label">Lembrar</span>
-                </label>
-                <a style="font-size: 15px; text-align: right; padding-right: 15px; padding-top: 7px; cursor: pointer; text-decoration: none" th:href="@{/recuperar/senha}" class=" btn-block fechar">Esqueci a senha</a>
-              </div>
-
               <div class="form-footer">
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <button type="submit" class="btn btn-primary btn-block">Recuperar Senha</button>
               </div>
             </div>
           </form>
@@ -114,32 +115,6 @@
   </div>
 </div>
 
-<div th:if="${success} != null">
-  <script th:inline="javascript">
-
-			/* swal("Parabens!","" + "<strong th:text='${success}'></strong>" +"", "success"); */
-
-
-			/*<![CDATA[*/
-
-
-
-			var sucesso = /*[[${success}]]*/"";
-
-			/*]]>*/
-
-
-			Swal.fire({
-				  //text: 'Preocupacao submetida com sucesso',
-				  html: sucesso,
-				  icon: 'success',
-				  confirmButtonText: 'Ok'
-				})
-
-
-	</script>
-
-</div>
 
 
 </body>

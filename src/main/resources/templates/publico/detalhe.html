@@ -318,530 +318,140 @@ select.list-dt:focus {
 <!-- Fragmentos de header -->
     <header th:replace="/fragmentos/headerPublico"></header>
     <!-- Fim de frgmento de header-->
-<div style="margin-left: 15%; margin-right: 15%">
-
-
-    <div class="card">
-
-	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		 <div style="background: #60a18a; color: white">
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
-			</div>
-			<br>
-
-		 <div class="card-body">
-			 <div class="row" >
-
-				 <div class="table-responsive">
-					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
-						<thead>
-						 <tr style="color: rgb(65,105,225)">
-							 <th class="w-1">Nivel</th>
-							 <th>Designação</th>
-							 <th>Data Resolução</th>
-							 <!--  <th></th> -->
-						 </tr>
-						 </thead>
-						 <tbody>
-
-						 <!--  <tr th:each="p : ${categorias}"> -->
-						 <tr th:each="r, stat : ${resolucoes}">
-							 <div th:if="${r.tipo =='A' }">
-								 <td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
-								 <td th:text="${r.designacao}" >Auxiliar Contábil</td>
-								 <td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
-							 </div>
-						 </tr>
-
-
-						 </tbody>
-					 </table>
-				 </div>
-
-			 </div>
-		 </div>
-
-	 </div>
-
-
-	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		  <div style="background: #60a18a; color: white">
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Resolução</h2>
-			</div>
-			<br>
-
-		  <div class="card-body">
-			  <div class="row" >
-
-				  <div class="table-responsive">
-					 <table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
-						  <thead>
-						   <tr style="color: rgb(65,105,225)">
-							  <th class="w-1">Nivel</th>
-							  <th>Designação</th>
-							  <th>Mediador</th>
-							  <th>Responsabilidade</th>
-							  <th>Data Resolução</th>
-							  <!--  <th></th> -->
-						  </tr>
-						  </thead>
-						  <tbody>
-						  <!--  <tr th:each="p : ${categorias}"> -->
-						  <tr th:each="r : ${resolucoes}">
-							<div th:if="${r.tipo =='R' }">
-								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
-								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
-								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
-								<td th:text="${r.responsabilidade.responsavel}" ><span class="text-muted">01401</span></td>
-								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
-							</div>
-						  </tr>
-						  
-
-
-						  </tbody>
-					  </table>
-				  </div>
-
-			  </div>
-		  </div>
-	  </div>
-
-
-	   <div th:if="${ocorrencia.estado =='Validado'}">
-
-		   <div style="background: #60a18a; color: white">
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Validação</h2>
-			</div>
-			<br>
-
-		   <div class="card-body">
-			   <div class="row" >
-
-				   <div class="col-6 col-sm-6">
-					   <div class="form-group">
-						   <span style="font-weight: bolder;">Data de Validação: </span>	<span  th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
-					   </div>
-				   </div>
-
-				   <div class="col-6 col-sm-6">
-					   <div class="form-group">
-						   <span style="font-weight: bolder;">Tipo de Ocorrência: </span>	<span style="color: red;font-weight: bolder;" th:text="${ocorrencia.tipoOcorrencia.designacao}"></span>
-					   </div>
-				   </div>
-
-				   <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.tipoAlerta != null && ocorrencia.tipoAlerta.designacao != null}">
-					   <div class="form-group">
-						   <span style="font-weight: bolder;">Tipo de Alerta: </span> <span th:text="${ocorrencia.tipoAlerta.designacao}"></span>
-					   </div>
-				   </div>
-				   
-				   <div class="col-6 col-sm-6">
-					   <div class="form-group">
-						   <span style="font-weight: bolder;">Estado da Ocorrência: </span><span th:text="${ocorrencia.estado}"></span>
-					   </div>
-				   </div>
-
-				   <div class="col-12 col-sm-6">
-					   <div class="form-group">
-						   <span style="font-weight: bolder;">Observação: </span><span th:text="${ocorrencia.observacao}"></span>
-					   </div>
-				   </div>
-
-			   </div>
-		   </div>
-
-	   </div>
-
-
-        <div style="background: #60a18a; color: white">
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados do Registo</h2>
-			</div>
-			<br>
-
-		<div class="card-body">
-		  <div class="row" >
-		  
-		  <div class="col-6 col-sm-4">
-				<div class="form-group">
-					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.id}"></span>
-				 </div>
-			</div>
-		  
-			<div class="col-6 col-sm-4">
+    <!-- Conteudo-->
+    
+    
+    <div class="row">
+	
+	
+	<div class="col-3">
+	
+	</div>
+		
+    <div style="margin-bottom: 5px" class="card col-6">
+        
+        <div style="background: #60a18a;" class="row card-body">
+        
+        <div class="col-12 col-sm-12">
+        <h3 style="font-weight: bolder;color: #fff; background: #60a18a;" class="card-title">Estágio da Preocupação</h3>
+        </div>
+        
+        <div class="col-6 col-sm-4">
 				<div class="form-group">
 					  <span style="font-weight: bolder;">Código de registo: </span>	<span th:text="${ocorrencia.grmStamp}"></span>
 				 </div>
 			</div>
-
-			  <div class="col-6 col-sm-4">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Nome do Utente: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
-				  </div>
-			  </div>
-			  
-			  <div class="col-6 col-sm-4">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Contacto do Utente: </span>	<span th:text="${ocorrencia.contactoUtente}"></span>
-				  </div>
-			  </div>
-			  
-			  <div class="col-6 col-sm-4">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Email do Utente: </span>	<span th:text="${ocorrencia.emailUtente}"></span>
-				  </div>
-			  </div>
-			  
-			  <div class="col-6 col-sm-6" th:if="${ocorrencia != null && ocorrencia.categoria != null && ocorrencia.categoria.designacao != null}">
-					   <div class="form-group">
-						   <span style="font-weight: bolder;">Categoria: </span> <span th:text="${ocorrencia.categoria.designacao}"></span>
-					   </div>
-				   </div>
-
+			
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
 				  <span style="font-weight: bolder;">Data da Ocorrência: </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
 				</div>
 			</div>
 			
-			<div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.cidade != null && ocorrencia.cidade.designacao != null}">
-				  <div class="form-group" >
-					  <span style="font-weight: bolder;">Cidade: </span><span th:text="${ocorrencia.cidade.designacao}"></span>
-				  </div>
-			  </div>
-
-			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.cidade != null && ocorrencia.cidade.provincia != null && ocorrencia.cidade.provincia.designacao != null}">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.cidade.provincia.designacao}"></span>
-				  </div>
-			  </div>
-
-			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.distrito != null && ocorrencia.distrito.designacao != null}">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Distrito: </span>	<span th:text="${ocorrencia.distrito.designacao}"></span>
-				  </div>
-			  </div>
-
-			  <div class="col-6 col-sm-4" >
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Comunidade: </span>	<span th:text="${ocorrencia.comunidade}"></span>
-				  </div>
-			  </div> 
-
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
-					  <span style="font-weight: bolder;">Sexo: </span>	<span th:text="${ocorrencia.sexo}"></span>
+				  <span style="font-weight: bolder;">Dias Restantes: </span> <span th:text="${ocorrencia.id}"></span>
 				</div>
 			</div>
 			
-			<div class="col-6 col-sm-4">
-				<div class="form-group">
-					  <span style="font-weight: bolder;">Origem: </span>	<span th:text="${ocorrencia.origem}"></span>
-				</div>
 			</div>
+			
+			
 
-			  <div class="col-6 col-sm-4">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Canal de Entrada: </span>	<span th:text="${ocorrencia.formaComunicacao}"></span>
-				  </div>
-			  </div>
-
-
-			  <div class="col-12 col-sm-12">
-				  <div class="form-group">
-					  <span style="font-weight: bolder;">Assunto: </span>	<span th:text="${ocorrencia.descricao}"></span>
-				  </div>
-			  </div>
-
-		  </div>
-		</div>
-
-		<div style="background: #60a18a; color: white">
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados dos Anexos</h2>
-			</div>
-			<br>
-
-		<div class="card-body">
-
-			<div class="row">
-
-				<div class="table-responsive">
-					<table id="tabela"  class="table card-table table-vcenter text-nowrap datatable">
-						<thead>
-						 <tr style="color: rgb(65,105,225)">
-							<th class="w-1">#</th>
-							<th>Designação</th>
-							<th>Descrição</th>
-							<th>Momento</th>
-							<th>Data</th>
-							<th>Ver</th>
-							<!--  <th></th> -->
-						</tr>
-						</thead>
-						<tbody>
-						<!--  <tr th:each="p : ${categorias}"> -->
-						<tr th:each="a, stat : ${anexos}">
-							<td th:text="${stat.index + 1}" ><span class="text-muted">01401</span></td>
-							<td th:text="${a.docName}" >Auxiliar Contábil</td>
-							<td th:text="${a.descricao}" >Auxiliar Contábil</td>
-							<td th:text="${a.fase}" >Auxiliar Contábil</td>
-							<td th:text="${#dates.format(a.created, 'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
-							<td>
-								<a class="icon" th:href="${'/download/ficheiro/'+a.id}">
-									<i class="fa fa-file"></i>
-								</a>
-							</td>
-
-						</tr>
-
-
-						</tbody>
-					</table>
-				</div>
-
-
-			</div>
-		</div>
-
-
-
-
-	<form th:action="@{/cadastrar/resolucao}"	 th:object="${resolver}"  method="POST">
-			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header" style="background: blue; color: white">
-							<h5 class="modal-title">Resolução</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-
-							<label class="form-label">Houve Concesso?</label>
-							<div class="form-selectgroup-boxes row mb-3">
-								<div class="col-lg-6">
-									<label class="form-selectgroup-item">
-										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
-										<span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Não há Concesso</span>
-                      <span class="d-block text-muted">Na conversa que tivemos com nosso cliente não houve concesso</span>
-                    </span>
-                  </span>
-									</label>
-								</div>
-								<div class="col-lg-6">
-									<label class="form-selectgroup-item">
-										<input type="radio" name="report" value="true" class="form-selectgroup-input">
-										<span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Houve Concesso</span>
-                      <span class="d-block text-muted">Na conversa que tivemos com nosso cliente houve concesso</span>
-                    </span>
-                  </span>
-									</label>
-								</div>
-							</div>
-							<div class="row">
-
-
-								<div class="col-12 col-sm-12">
-									<div class="form-group">
-										<label  class="form-label">Responsabilidade</label>
-										<select  class="form-control custom-select form-select" th:field="*{responsabilidade}" >
-											<option value="">Selecione a Responsavel...</option>
-											<option th:each="p : ${responsaveis}"
-													th:value="${p.id}" th:text="${p.responsavel}">Maputo</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-
-								<div class="col-lg-12">
-									<div   >
-										<label class="form-label"></label>
-										<input class="form-control" name="ocorrencia2" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
-									</div>
-								</div>
-
-								<div class="col-lg-6">
-									<div >
-										<label class="form-label">Data da Resolução</label>
-										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
-									</div>
-								</div>
-
-								<div class="col-lg-6">
-									<div   >
-										<label class="form-label">Mediador </label>
-										<input class="form-control" type="text"  th:field="*{mediador}" ></input>
-									</div>
-								</div>
-
-								<div class="col-lg-12">
-									<div>
-										<label class="form-label">Comentário</label>
-										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="modal-footer">
-							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-								Cancel
-							</a>
-
-							<button type="submit" class="btn btn-info" >Gravar</button>
-
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-	</form>
-
-		<form th:action="@{/cadastrar/acompanhamento}"	 th:object="${resolver}"  method="POST">
-			<div class="modal modal-blur fade" id="modal-report1" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header" style="background: blue; color: white">
-							<h5 class="modal-title">Acompanhamento</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-
-							<label class="form-label">Fechado?</label>
-							<div class="form-selectgroup-boxes row mb-3">
-								<div class="col-lg-6">
-									<label class="form-selectgroup-item">
-										<input type="radio" name="report" value="false" class="form-selectgroup-input" checked>
-										<span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Não Foi Fechado</span>
-                    </span>
-                  </span>
-									</label>
-								</div>
-								<div class="col-lg-6">
-									<label class="form-selectgroup-item">
-										<input type="radio" name="report" value="true"  class="form-selectgroup-input">
-										<span class="form-selectgroup-label d-flex align-items-center p-3">
-                    <span class="me-3">
-                      <span class="form-selectgroup-check"></span>
-                    </span>
-                    <span class="form-selectgroup-label-content">
-                      <span class="form-selectgroup-title strong mb-1">Foi Fechado</span>
-                    </span>
-                  </span>
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-
-								<div class="col-12 col-sm-12">
-									<div class="form-group">
-										<select hidden class="form-control custom-select form-select" th:field="*{responsabilidade}" >
-											<option th:each="p : ${responsaveis}"
-													th:value="3" th:text="${p.responsavel}">Maputo</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-lg-12">
-									<div   >
-										<label class="form-label"></label>
-										<input class="form-control" name="ocorrencia2" type="hidden" th:value="${ocorrencia.id}" rows="3"></input>
-									</div>
-								</div>
-
-								<div class="col-lg-12">
-									<div >
-										<label class="form-label">Data da Resolucao</label>
-										<input class="form-control" type="date" th:field="*{dataResolucao}" ></input>
-									</div>
-								</div>
-
-
-								<div class="col-lg-12">
-									<div>
-										<label class="form-label">Comentario</label>
-										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="modal-footer">
-							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-								Cancel
-							</a>
-
-							<button type="submit" class="btn btn-info" >Gravar</button>
-
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-		</form>
-		
-		
-			<div class="modal modal-blur fade" id="modal-reportt" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header" style="background: #0277BD; color: white">
-							<h5 class="modal-title">Exlcusão</h5><span th:text="${ocorrencia.id}"></span>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<p><strong>Deseja Excluir a Ocorrência?</strong></p>
-							<p>Uma vez excluída não poderá ser recuperada</p>
-							
-						</div>
-
-
-						<div class="modal-footer">
-							<a href="#" class="btn btn-info btn-md mb-3" data-bs-dismiss="modal">
-								<span>Não</span>
-							</a>
-							
-							<a class="btn btn-danger btn-md mb-3" th:href="@{/ocorrencias/excluir/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.estado == 'Temporario' }"  role="button">
-								
-								<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-								<span>Sim</span>
-							</a>
-
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-
-
-
-
-        </div>
+        <br>
         
+        <div class="row">
+        
+        <div class="col-6 col-sm-12">
+        	<span class="nav-link-icon d-md-none d-lg-inline-block">
+				<i style="font-size: 15pt; color: green" class="far fa-check-square"></i>
+            </span>
+            <span style="font-weight: bolder; margin-bottom: 2px"> Submetida</span>
+					  
+		</div>
+		
+		<div th:if="${ocorrencia.resolucao=='P'}" class="col-6 col-sm-12">
+            <span style="margin-bottom: 2px;">Caro, utente, a sua preocupação fui submetida com sucesso, dentro de 10 dias terá uma resposta...</span>
+					  
+		</div>
+		
+		</div>
+		
+		
+		<div class="row">
+        
+        <div th:if="${ocorrencia.procedencia=='Não'}" class="col-6 col-sm-12">
+        	<span class="nav-link-icon d-md-none d-lg-inline-block">
+				<i style="font-size: 15pt; color: red" aria-hidden="true" class="fa fa-ban"></i>
+            </span>
+            <span style="font-weight: bolder; margin-bottom: 2px">Improcedente</span>
+					  
+		</div>
+		
+		<div th:if="${ocorrencia.procedencia=='Sim'}" class="col-6 col-sm-12">
+        	<span class="nav-link-icon d-md-none d-lg-inline-block">
+				<i style="font-size: 15pt; color: blue" aria-hidden="true" class="far fa-check-square"></i>
+            </span>
+            <span style="font-weight: bolder; margin-bottom: 2px">Procedente</span>
+					  
+		</div>
+		
+		
+		<div th:if="${ocorrencia.procedencia=='Sim' && ocorrencia.resolucao=='V'}" class="col-6 col-sm-12">
+            <span style="margin-bottom: 2px;">Caro, utente, a sua preocupação procede com sucesso, dentro de 10 dias terá uma resposta...</span>
+					  
+		</div>
+		
+		
+		
+		
+		<div class="col-12 col-sm-12">
+            <span th:text="${ocorrencia.observacao}"></span>
+		</div>
+		
+		</div>
+		
+		<div class="row">
+        <div th:if="${ocorrencia.resolucao == 'R'}" class="col-6 col-sm-12">
+        	<span class="nav-link-icon d-md-none d-lg-inline-block">
+				<i style="font-size: 15pt; color: #cc568b" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+            </span>
+            <span style="font-weight: bolder; margin-bottom: 2px">Resolvendo</span><br>
+            <span style="margin-bottom: 2px;">Caro, utente, a sua preocupação está sendo resolvida, dentro de 10 dias terá uma resposta...</span>
+					  
+		</div>
+		</div>
+		
+		<div class="row">
+        <div th:if="${ocorrencia.resolucao == 'A'}" class="col-6 col-sm-12">
+        	<span class="nav-link-icon d-md-none d-lg-inline-block">
+				<i style="font-size: 15pt; color: #3e8fa3" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+            </span>
+            <span style="font-weight: bolder; margin-bottom: 2px">Acompanhando</span><br>
+            <span style="margin-bottom: 2px;">Caro, utente, a sua preocupação foi remetida a outras instâncias, e está em acompanhamento, dentro de 10 dias terá uma resposta...</span>
+		</div>
+		</div>
+		
+		<div class="row">
+        <div th:if="${ocorrencia.resolucao == 'T'}" class="col-6 col-sm-12">
+        	<span class="nav-link-icon d-md-none d-lg-inline-block">
+				<i style="font-size: 15pt; color: #3e8fa3" aria-hidden="true" class="fa fa-check-double"></i>
+            </span>
+            <span style="font-weight: bolder; margin-bottom: 2px">Resolvida</span>
+					  
+		</div>
+		</div>
+		
+
+	</div>
+		
+		<div class="col-3">
+	
+	</div>
+	
     </div>
+    
+    
     <!-- Conteudo-->
 
 </body>

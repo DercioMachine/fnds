@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -123,6 +124,9 @@ public class IndexController {
 	    
 		@Autowired
 		private EmailService emailService;
+
+		@Autowired
+		private PasswordEncoder passwordEncoder;
 	    
 		
 		 LocalDate currentdate = LocalDate.now();
@@ -147,8 +151,69 @@ public class IndexController {
 
         return "publico/principal";
     }
-    
-    
+
+	@GetMapping("/recuperar/senha")
+	public String RecuperarSenha(){
+
+		return "publico/recuperarSenha";
+	}
+
+	@PostMapping("/recuperar/password")
+	public String recuperarPassword(User user, @RequestParam String telefone,@RequestParam String email, ModelMap model, RedirectAttributes attr ) throws MessagingException {
+
+		user = userRepository.pesquisarPorTelefoneOuEmail(telefone,email);
+
+		System.out.println("User "+user);
+
+		if(user==null) {
+
+			String telefone1="";
+			String email1="";
+
+			if(telefone!=null){
+				telefone1 = "telefone: "+telefone;}
+
+			if(email!=null){
+				email1 = "email: "+email;}
+
+			model.addAttribute("error", "Não existe nenhum utilizador com "+telefone1+" "+email1);
+
+			return "publico/recuperarSenha";
+		}
+		int codigo = ThreadLocalRandom.current().nextInt(99999, 1000000);
+		String novasenha = ""+codigo;
+
+		user.setPassword(passwordEncoder.encode(novasenha));
+		userRepository.save(user);
+
+		String contacto = telefone.isEmpty() ? null : telefone;
+		String emaill = email.isEmpty() ? null : email;
+
+
+		if(contacto!=null){
+
+			String mensagem = "A sua Senha Foi recuperada com sucesso, a sua nova senha é: "+novasenha;
+			smsService.sendSMS("+258"+user.getTelefone(),mensagem);
+
+		}
+		if(emaill!=null){
+
+			String descricao = "A sua Senha foi recuperada com sucesso, a sua nova senha é: "+novasenha;
+			String nome = "A sua Senha foi recuperada com sucesso";
+			String destino = user.getEmail();
+			String assunto = "Recuperação da Senha";
+
+			emailService.enviarEmail(descricao,nome,destino,assunto);
+
+		}
+
+
+		//attr.addFlashAttribute("success", "Recuperação efectuado com sucesso, verifique o teu telefone/email");
+
+		model.addAttribute("success", "Recuperação efectuado com sucesso, verifique o teu telefone/email");
+
+		return "publico/login";
+	}
 
 	void sendEmail() {
 
@@ -508,13 +573,9 @@ public class IndexController {
 	
 	public void busqueTnTI(Model model){
 		List<Object[]> lista = ocorrenciaRepository.busqueTnTI();
-		
-
 
 		String[] nomes = new String[lista.size()];
-		
-		
-		
+
 		BigInteger[] nrocorrenciasT = new BigInteger[lista.size()];
 		BigInteger[] nrocorrenciasNT = new BigInteger[lista.size()];
 		BigInteger[] nrocorrenciasI = new BigInteger[lista.size()];

@@ -113,9 +113,9 @@ OrigemInternoExterno();
 
     $.ajax({
     type: 'GET',
-    //url: 'http://expediente.uem.mz:8080/fnds/grm/origem/externo',
-    	url: 'http://localhost:8080/fnds/origem/externo',
-    //url: 'http://localhost:8080/fnds/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
+    	url: 'http://localhost:8080/origem/externo',
+    //url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -285,11 +285,11 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
 
-    //url: 'http://expediente.uem.mz:8080/fnds/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
-    //url: 'http://localhost:8080/fnds/origem/externo/',
-    //url: 'http://localhost:8080/fnds/origem/externo',
-     url: 'http://localhost:8080/fnds/origem/externo',
+    //url: 'http://localhost:9090/origem/externo/',
+    //url: 'http://localhost:9090/origem/externo',
+     url: 'http://localhost:8080/origem/externo',
 
 
     success: function (result){
@@ -342,7 +342,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:8080/fnds/distrito/'+provinciaId,
+url: 'http://localhost:8080/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
@@ -374,7 +374,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:8080/fnds/subcategoria/'+categoriaId,
+url: 'http://localhost:8080/subcategoria/'+categoriaId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -407,7 +407,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:8080/fnds/posto/'+distritoId,
+url: 'http://localhost:8080/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -589,12 +589,12 @@ document.getElementById("cidadee").style.display="none";
 
     <div align="right" class="col-12">
         <a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
-            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></Canalspan>
+            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
             <span>Listar Ocorrências</span>
         </a>
     </div>
 
-    <div class="card">
+    <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="card-header">
             <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">CADASTRO DE OCORRÊNCIA</h3>
         </div>

@@ -15,7 +15,7 @@
 <div layout:fragment="corpo">
     <!-- Conteudo -->
 
-    <div class="col-12">
+    <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-success btn-md" th:href="@{/registar/ocorrencia}" role="button">
@@ -39,11 +39,11 @@
             </div>
             
             <form id="divdata" th:action="@{/busca}" method="POST">
-    
+
     <div class="page-body">
         <div class="container-xl">
-            <div class="row row-deck row-cards card-header">
 
+            <div class="row">
 
                 <div class="col-sm-6 col-lg-6">
 
@@ -51,72 +51,73 @@
                     <div class="card ">
                         <div class="card-body">
                             <div class="row">
-                       <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Data Inical: </label>
-                            <div class="input-icon">
+                                <div class="col-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Data Inical: </label>
+                                        <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                <input id="txtDate" value="" name="datainicial" type="date" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Data Final: </label>
-                            <div class="input-icon">
+                                            <input id="txtDate" value="" name="datainicial" type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Data Final: </label>
+                                        <div class="input-icon">
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                               <input id="txtDate2" value="" name="datafinal" type="date" class="form-control">
+                                            <input id="txtDate2" value="" name="datafinal" type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
-                            
-                        </div>
                         </div>
                     </div>
                 </div>
 
 
-                
-                 <div id="projectoo" class="col-sm-6 col-lg-4">
+
+                <div id="projectoo" class="col-sm-6 col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                            <label for="projecto" class="form-label">Projecto</label>
-                            <select id="projecto" name="projecto" class="form-control custom-select form-select" >
-                                <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectos}"
-                                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
-                            </select>
-                        </div>
+                                <label for="projecto" class="form-label">Projecto</label>
+                                <select id="projecto" name="projecto" class="form-control custom-select form-select" >
+                                    <option value="">Selecione o Projecto...</option>
+                                    <option th:each="p : ${projectos}"
+                                            th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
-               
 
 
 
-                
-                
+
+
+
                 <div id="botoes" class="col-sm-6 col-lg-2">
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
-                                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-                                    <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
+                                <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+                                <button class="btn btn-outline-info btn-lg mt-2 ml-auto" type="submit" style="align-content: center;">Filtrar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
 
 
             </div>
+
         </div>
     </div>
     </form>

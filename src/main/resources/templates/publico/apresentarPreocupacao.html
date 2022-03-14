@@ -111,10 +111,10 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
 
-    //url: 'http://expediente.uem.mz:8080/fnds/grm/origem/externo',
+    //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
-    //url: 'http://localhost:8080/fnds/origem/externo/',
-    url: 'http://localhost:8080/fnds/origem/externo',
+    url: 'http://localhost:8080/origem/externo/',
+    url: 'http://localhost/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -168,7 +168,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://localhost:8080/fnds/distrito/'+provinciaId,
+url: 'http://localhost:8080/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
@@ -200,7 +200,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:8080/fnds/posto/'+distritoId,
+url: 'http://localhost:8080/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -342,41 +342,71 @@ document.getElementById("cidadee").style.display="none";
 
     <!-- Conteudo -->
 
+	<div class="row"  >
+	
+	
+	<div class="col-3">
+	
+	</div>
 
-
-    <div style="margin-left:10%; margin-right:10%;" class="card">
-        <div class="card-header">
-            <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">CADASTRO DE OCORRÊNCIA</h3>
+    <div class="card col-6" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+        <div style="background: #60a18a; height: 35px" class="card-header">
+            <h3 style="font-weight: bolder;color: #fff; background: #60a18a;" class="card-title">Apresentar Preocupação</h3>
         </div>
         <!-- <div th:replace="fragmentos/alert" class="card-body"> -->
         <div class="card-body">
             <form th:action="@{/preCadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 
-                <div style="background: #60a18a; color: white">
-                    <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
-                </div>
-                <br>
-
                 <!-- <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> -->
                 <!-- enctype="multipart/form-data" -->
 
 
-
-                <div class="row">
-
-                    <div id="projectoo" class="col-6 col-sm-4">
+                    
+                  <div style="background: #60a18a; color: white">
+                    <!-- <h3 style=" padding: 2px; margin: 0px;" class="card-title" >Dados do Projecto</h3> -->
+                </div>
+                     <div class="row">
+                    <div id="projectoo" class="col-6 col-sm-6">
                         <div class="form-group">
                             <label for="projecto" class="form-label">Projecto <strong style="color:red">*</strong></label>
                             <select required="required" id="projecto" class="form-control custom-select form-select" th:field="*{projecto}" >
                                 <option value="">Selecione o Projecto...</option>
+                                <option value="Não Conheço">Não Conheço</option>
                                 <option th:each="p : ${projectos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                        th:value=c th:text="${p.designacao}">Maputo</option>
                             </select>
                         </div>
                     </div>
 
+                         <div class="col-6 col-sm-6">
+                             <div class="form-group">
+                                 <label class="form-label">Data da Ocorrência: <strong style="color:red">*</strong></label>
+                                 <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                                     <input id="txtDate" required="required" type="date" th:field="*{dataOcorrencia}" class="date form-control">
+                                 </div>
+                             </div>
+                         </div>
+                    
+                    <div th:each= "tp: ${tipoAlertas}">
+                    
+                    	<input th:if="${tp.designacao=='Normal'}" type="text" th:field="*{tipoAlerta}" th:value="${tp.id}" class="date form-control">
+                    </div>
 
-                    <div class="col-6 col-sm-4">
+                    </div>
+                    
+                 <br>
+                  <div style="background: #60a18a; color: white">
+                    <!-- <h3 style=" padding: 2px; margin: 0px;" class="card-title" >Dados do Local</h3> -->
+                     <h3 style=" padding: 2px; margin: 0px;" class="card-title" ></h3>
+                </div>
+                <br>
+                
+                 <div class="row">
+
+                    <div class="col-6 col-sm-6">
                         <div class="form-group">
                             <label for="comboboxProvincias" class="form-label">Província <strong style="color:red">*</strong></label>
                             <select required="required" id="comboboxProvincias" class="form-control custom-select form-select" th:field="*{provincia}" >
@@ -387,7 +417,7 @@ document.getElementById("cidadee").style.display="none";
                         </div>
                     </div>
 
-                    <div class="col-6 col-sm-4">
+                    <div class="col-6 col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Distrito</label>
                             <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
@@ -397,8 +427,12 @@ document.getElementById("cidadee").style.display="none";
                             </select>
                         </div>
                     </div>
+                    </div>
+                    <br>
+                    
+                     <div class="row">
 
-                    <div class="col-6 col-sm-4">
+                    <div class="col-6 col-sm-6">
                         <div class="form-group">
                             <label for="comboboxPosto" class="form-label">Posto Administrativo</label>
                             <select class="form-control custom-select form-select" id="comboboxPosto" th:field="*{postoAdministrativo}" >
@@ -411,34 +445,49 @@ document.getElementById("cidadee").style.display="none";
 
 
 
-                    <div class="col-6 col-sm-4">
+                    <div class="col-6 col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Comunidade</label>
                             <div class="input-icon">
                                     <span class="input-icon-addon">
                                     <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
+                                <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Não Obrigatório...">
                             </div>
                         </div>
                     </div>
+                    
+                    </div>
+                    
+                    
+                    <br>
+                    
+                  <div style="background: #60a18a; color: white">
+                    <!-- <h3 style=" padding: 2px; margin: 0px;" class="card-title" >Dados Pessoais</h3> -->
+                    <h3 style=" padding: 2px; margin: 0px;" class="card-title" ></h3>
+                </div>
+                <br>
+                
+                 <div class="row">
 
-
-                    <div class="col-6 col-sm-4">
+                    <div id="email" class="col-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label">Data da Ocorrência: <strong style="color:red">*</strong></label>
+                            <label class="form-label">Nome</label>
                             <div class="input-icon">
-							<span class="input-icon-addon">
-							<i class="fe fe-calendar"></i>
-							</span>
-                                <input id="txtDate" required="required" type="date" th:field="*{dataOcorrencia}" class="date form-control">
+                                <span class="input-icon-addon">
+                                <i class="fe fe-edit-2"></i>
+                                </span>
+                                <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Não Obrigatório...">
                             </div>
                         </div>
                     </div>
-
-
-
-                    <div id="contacto" class="col-6 col-sm-4">
+                    
+                    </div>
+                    <br>
+                    
+                     <div class="row">
+                    
+                    <div id="contacto" class="col-6 col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Telefone</label>
                             <div class="input-icon">
@@ -449,34 +498,27 @@ document.getElementById("cidadee").style.display="none";
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    <div id="email" class="col-6 col-sm-4">
-                        <div class="form-group">
-                            <label class="form-label">Nome</label>
-                            <div class="input-icon">
-                                <span class="input-icon-addon">
-                                <i class="fe fe-edit-2"></i>
-                                </span>
-                                <input type="text" th:field="*{nomeUtente}" class="form-control" placeholder="Nome...">
-                            </div>
-                        </div>
-                    </div>
 
-                    <div id="email" class="col-6 col-sm-4">
+                    <div id="email" class="col-6 col-sm-6">
                         <div class="form-group">
                             <label class="form-label">Email</label>
                             <div class="input-icon">
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
                                 </span>
-                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Email...">
+                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Não Obrigatório...">
                             </div>
                         </div>
                     </div>
                 
                 
                 </div>
+                
+                <br>
+                  <div style="background: #60a18a; color: white">
+                    <h3 style=" padding: 2px; margin: 0px;" class="card-title" ></h3>
+                </div>
+                <br>
 
 
                 <div class="row">
@@ -492,12 +534,37 @@ document.getElementById("cidadee").style.display="none";
                             </div>
                         </div>
                     </div>
+                    
+                    </div>
+                    
+                    <br>
 
-                </div>
+                
+				<div class="row">
 
-                <br>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                                <input type="file" name="files" class="form-control" multiple>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <input type="text" onchange="preview()" name="descricaoAnx" placeholder="Descricao de Anexos" class="form-control" >
+                            </div>
+                        </div>
+                    </div>
 
 
+				</div>
+				<br>
 
                 <div class="card-footer text-center">
                     <button style="background: #60a18a; color: #fff" type="submit" class="btn">Submeter </button>
@@ -505,7 +572,12 @@ document.getElementById("cidadee").style.display="none";
             </form>
 
         </div>
-
+		</div>
+		
+		<div class="col-3">
+	
+	</div>
+	
     </div>
     <!-- Conteudo-->
 </div>

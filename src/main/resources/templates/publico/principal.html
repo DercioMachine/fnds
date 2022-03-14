@@ -17,31 +17,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.min.js"></script>
     <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-	<link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
-	
-	<script th:src="@{/dist/js/tabler.min.js}"></script>
-	<!-- jQueryUI (autocomplete) -->
-	<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
-	
-	
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-   <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
-    <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
-    
-    
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" rel="stylesheet"/>
+
+    <script th:src="@{/dist/js/tabler.min.js}"></script>
+    <!-- jQueryUI (autocomplete) -->
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--  <link th:href="@{/../assets/plugins/charts-c3/plugin.css}" rel="stylesheet" />
+     <script th:src="@{/../assets/plugins/charts-c3/plugin.js}"></script> -->
+
+
     <!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
     <script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
     <script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
-   <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
-    <script th:src="@{/../assets/js/dashboard.js}"></script> -->
-    
-    
-    
+    <!--  <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
+     <script th:src="@{/../assets/js/dashboard.js}"></script> -->
+
+
+
     <style type="text/css">
-    
+
     .caixa{
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -152,9 +152,9 @@ h3{
 
 
 
-    
+
     </style>
-    
+
 </head>
 
 
@@ -166,92 +166,130 @@ h3{
 
 
 <!-- Fragmentos de header -->
-    <header th:replace="/fragmentos/headerPublico"></header>
-    <!-- Fim de frgmento de header-->
-    
-    <script type="text/javascript">
+<header th:replace="/fragmentos/headerPublico"></header>
+<!-- Fim de frgmento de header-->
+
+<script type="text/javascript">
     function toggleMobileMenu(menu) {
         menu.classList.toggle('open');
     }
     </script>
-    
-    <section id="servicos" class="caixa">
-      <div class="container">
 
-      <div style="background: #fff" class="row">
 
-          <div class="col-md-6">
-              <div class="row albuns">
-                <div class="col-md-12">
-                  <img style=" border-radius: 8px; max-width: 100%;  height: auto;" th:src="@{/image/fn.jpeg}" class="img-fluid">
+
+<section id="servicos" class="caixa"  >
+    <div class="container">
+
+        <div style="background: #fff; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" class="row">
+
+
+            <div class="col-md-6">
+                <div class="row albuns">
+                    <div class="col-md-12">
+                        <img style=" border-radius: 8px; max-width: 100%; max-height: 100%;" th:src="@{/image/imagem.png}" class="img-fluid">
+                    </div>
                 </div>
-              </div>
-          </div>
+            </div>
 
-          <div class="col-md-6">
-            <!-- <h2>O que o Spotify tem?</h2> -->
-            <div  class="card-header">
-       	 			<h2 style="color: #60a18a; font-family: Century Gothic; font-weight: bolder;" class="card-title">O que é?</h2>
-       	 	</div>
+            <div class="col-md-6">
+                <!-- <h2>O que o Spotify tem?</h2> -->
+                <div  class="card-header">
+       	 			 <span style="font-size: 17pt; color: #60a18a; font-weight: bolder; padding-top: 5px; text-decoration: none;" >
+                      Mecanismo de Diálogo e Reclamações (MDR)
+                     </span>
+                </div>
 
-            <div class="card-header">
-            	<p style="text-align: justify; font-family: Century Gothic; font-size: 12pt">Este é um canal online do MDR do FNDS, que tem como finalidade facilitar a comunicação com o público em geral (incluíndo partes interessadas ou afectadas). É o meio adequado para registar quaisquer manifestações e denúncias de condutas anti-éticas.
+                <div class="card-header">
+                    <p style="text-align: justify; font-family: Century Gothic; font-size: 12pt">O Mecanismo de Diálogo e Reclamação
+                        (MDR) é um sistema criado para
+                        responder a perguntas, esclarecer
+                        questões, e resolver problemas de
+                        implementação e reclamações de
+                        indivíduos ou grupos de indivíduos
+                        afectados pela implementação de
+                        actividades das iniciativas REDD+
+                        e projectos do portfólio de Gestão
+                        Integrada de Paisagem (MozFIP, MozBio,
+                        MozDGM e Sustenta).</p>
+                </div>
 
-                    As Informações aqui registradas são tratadas por uma equipa especializada do FNDS, assegurando o sigilo absoluto e o tratamento adequado.</p>
-			</div>
+
+                <div  class="card-header">
+                    <h2 style="color: #60a18a; font-family: Century Gothic; margin: 0; padding: 0;font-weight: bolder;" class="card-title">Contactos</h2>
+                </div>
+                <div class="row card-header">
 
 
-			<div  class="card-header">
-       	 		<h2 style="color: #60a18a; font-family: Century Gothic; margin: 0; padding: 0;font-weight: bolder;" class="card-title">Contactos</h2>
-       	 	</div>
-			<div class="row card-header">
 
-			<ul style="color: black;" class="navbar-nav">
-
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="#" >
-
-                            <span class="nav-link-title">
-                                <strong>Endereço:</strong> Av. Acordos de Lusaka-Praça dos Heróis Moçambicanos l Edifício do Ministério da Agricultura e Desenvolvimento Rural - Bloco A - R/C
+                    <div class="col-md-4">
+                        <ul style="color: black;" class="navbar-nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" >
+                            <span style="font-size: 14pt;"  class="nav-link-title">
+                              <strong>Norte</strong> <br>21 327200
                             </span>
-                        </a>
-                    </li> -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
-
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#" >
-
-                            <span style="font-size: 15pt;" class="nav-link-title">
-                              <strong>Telefone:</strong> (+258) 21 327200
+                    <div class="col-md-4">
+                        <ul style="color: black;" class="navbar-nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" >
+                            <span style="font-size: 14pt;" class="nav-link-title">
+                              <strong>Centro</strong> <br>21 327200
                             </span>
-                        </a>
-                    </li>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#" >
-
-                            <span style="font-size: 15pt;" class="nav-link-title">
-                               <strong>Email: </strong>fnds@fnds.gov.mz
+                    <div class="col-md-4">
+                        <ul style="color: black;" class="navbar-nav">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" >
+                            <span style="font-size: 14pt;" class="nav-link-title">
+                              <strong>Sul</strong> <br>21 327200
                             </span>
-                        </a>
-                    </li>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-md-12">
+
+                        <ul style="color: black;" class="navbar-nav">
+
+
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" >
+
+	                            <span style="font-size: 15pt;" class="nav-link-title">
+	                               <strong>Email: </strong>mdr@fnds.gov.mz
+	                            </span>
+                                </a>
+                            </li>
 
 
 
-                </ul>
+                        </ul>
 
-			</div>
+                    </div>
 
+                </div>
+
+            </div>
         </div>
-      </div>
-      </div>
+    </div>
 
 
 
 
-    </section>
+</section>
 
-    <footer style="background: #fff; height: 50px" class="footer footer-transparent d-print-none">
+<footer style="background: #fff; height: 50px" class="footer footer-transparent d-print-none">
     <div class="container">
         <div class="row text-center align-items-center flex-row-reverse">
             <div align="center" class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
@@ -271,7 +309,7 @@ h3{
 </footer>
 
 <div th:if="${success} != null">
-		<script th:inline="javascript">
+    <script th:inline="javascript">
 
 			/* swal("Parabens!","" + "<strong th:text='${success}'></strong>" +"", "success"); */
 
@@ -295,8 +333,8 @@ h3{
 
 	</script>
 
-	</div>
+</div>
 
-   </body>
+</body>
 
 </html>

@@ -50,7 +50,7 @@
 
 
 
-  <div class="col-12">
+  <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
     <div class="card">
       <div class="card-header">
         <a class="btn btn-primary btn-md" th:href="@{/registar/usuarios}" role="button">
@@ -84,7 +84,7 @@
             <td class="w-4">No</td>
             <td >Nome</td>
             <td >User</td>
-            <td >Província</td>
+            <td >Área de Gestão</td>
             <td >Telefone</td>
             <td >Alerta GBV</td>
             <td >Alerta Urgente</td>
@@ -97,7 +97,10 @@
             <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
             <td style="background: #fff" th:text="${p.nome}"><span class="text-muted">01401</span></td>
             <td style="background: #fff" th:text="${p.username}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+            <td style="background: #fff"  >
+              <span  th:if="${p.provincia!=null }" th:text="${p.provincia.designacao}" >01401</span>
+              <span  th:if="${p.provincia==null }"  >Nacional</span>
+            </td>
             <td style="background: #fff" th:text="${p.telefone}"> </td>
             <td style="background: #fff" th:text="${p.tipogbv}"> </td>
             <td style="background: #fff" th:text="${p.tipourgente}"> </td>

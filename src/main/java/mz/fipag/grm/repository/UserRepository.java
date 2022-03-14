@@ -13,4 +13,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
 
+    @Query(value="select * from user where telefone=:telefone or email=:email", nativeQuery=true)
+    User pesquisarPorTelefoneOuEmail(String telefone,String email);
+
 }
