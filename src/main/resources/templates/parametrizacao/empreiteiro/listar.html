@@ -5,33 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>FIPAG</title>
-    
-    <style>
-#categorias {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#categorias td, #categorias th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#categorias tr:nth-child(even){background-color: #f2f2f2;}
-
-#categorias tr:hover {background-color: #ddd;}
-
-#categorias th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #a7ebaa;
-  color: white;
-}
-</style>
-    
-    
 </head>
 <body>
 <div  layout:fragment="corpo">
@@ -39,19 +12,21 @@
     
     	
 
-    <div class="col-12">
+    <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     
-    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/empreiteiro}" role="button">
-		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		     <span>Novo Empreiteiro</span>
-		</a> 
+     
     
         <div class="card">
-            <div style="background:#04AA6D;" class="card-header">
-                <h3 style="font-weight:bolder" class="card-title">EMPREITEIROS</h3>
-            </div>
-            <div class="table-responsive">
-                <table id="categorias" class="table card-table table-vcenter text-nowrap">
+         <div class="card-header">
+        <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/empreiteiro}" role="button">
+		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		     <span>Novo Empreiteiro</span>
+		</a>
+		</div>
+        
+            <br>
+             <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+               <table id="example" class="display">
                     <thead>
                     <tr>
                         <th class="w-1">No.</th>
@@ -73,8 +48,9 @@
                          <td th:text="${p.morada}">Auxiliar Contábil</td>
                          
                         <td>
-                            <a class="icon" th:href="${'/empreiteiros/editar/'+p.id}">
-                                <i class="fe fe-edit"></i>
+                            
+                            <a th:href="@{/empreiteiros/editar/{id} (id=${p.id})}">
+                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-edit"></i>
                             </a>
                         </td>
                         
@@ -92,31 +68,6 @@
         </div>
     </div>
     
-    <nav aria-label="Page navigation example">
-				  	<ul class="pagination justify-content-center">
-				  	
-				  	 <li th:class="${pageEmpreiteiro.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/empreiteiro(page=${1})}" tabindex="-1">Primeira</a>
-				    </li>
-				    
-				    <li th:class="${pageEmpreiteiro.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/empreiteiro(page=${pageEmpreiteiro.pagina - 1})}" tabindex="-1">Anterior</a>
-				    </li>
-				    
-				    <li class="page-item">
-				    	<span class="page-link" th:text="|${pageEmpreiteiro.pagina} de ${pageEmpreiteiro.totalDePaginas}|"></span>
-				    </li>
-				    
-				    <li th:class="${pageEmpreiteiro.pagina == pageEmpreiteiro.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/empreiteiro(page=${pageEmpreiteiro.pagina + 1})}">Próxima</a>
-				    </li>
-				    
-				    <li th:class="${pageEmpreiteiro.pagina == pageEmpreiteiro.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/empreiteiro(page=${pageEmpreiteiro.totalDePaginas})}" tabindex="-1">Última</a>
-				    </li>
-				    
-				  </ul>
-				</nav>
 
     <!-- Conteudo-->
 </div>

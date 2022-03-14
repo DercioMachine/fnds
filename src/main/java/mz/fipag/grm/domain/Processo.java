@@ -7,24 +7,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "processo")
 public class Processo extends AbstractEntity {
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "nome", nullable = false,length=120)
+	@Column(name = "nome")
     private String nome;
 
-    @Column(name = "tempotratamento", nullable = false)
+    @Column(name = "tempotratamento")
     private int tempotratamento;
 
-    @Column(name = "tempoinvestigacao", nullable = false)
-    private int tempoinvestigacao;
-
-    @Column(name = "temporesolucao", nullable = false)
-    private int temporesolucao;
-
-    @Column(name = "temposign", nullable = false)
-    private int temposign;
-
-    @Column(name = "tempomonitoria", nullable = false)
-    private int tempomonitoria;
 
     public String getNome() {
         return nome;
@@ -42,35 +32,4 @@ public class Processo extends AbstractEntity {
         this.tempotratamento = tempotratamento;
     }
 
-    public int getTempoinvestigacao() {
-        return tempoinvestigacao;
-    }
-
-    public void setTempoinvestigacao(int tempoinvestigacao) {
-        this.tempoinvestigacao = tempoinvestigacao;
-    }
-
-    public int getTemporesolucao() {
-        return temporesolucao;
-    }
-
-    public void setTemporesolucao(int temporesolucao) {
-        this.temporesolucao = temporesolucao;
-    }
-
-    public int getTemposign() {
-        return temposign;
-    }
-
-    public void setTemposign(int temposign) {
-        this.temposign = temposign;
-    }
-
-    public int getTempomonitoria() {
-        return tempomonitoria;
-    }
-
-    public void setTempomonitoria(int tempomonitoria) {
-        this.tempomonitoria = tempomonitoria;
-    }
 }

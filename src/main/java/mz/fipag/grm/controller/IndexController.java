@@ -919,7 +919,7 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 
 
 
-
+// CHAMA METODO INTERNO
 
 @PostMapping("/filtrar1")
 	public String filtrar1(@RequestParam("datainicial") Date datainicial,
@@ -965,6 +965,7 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 	}
 
 
+// CHAMA EXTERNO
 
 @PostMapping("/filter1")
 public String filter1(@RequestParam("datainicial") Date datainicial,
@@ -1200,16 +1201,16 @@ public void projectoTnTIFiltro2(Model model, int ano, String radioButton, int co
 
 }
 
-
+// FILTRAR INTERNO
 
 @PostMapping("/filtrar")
 public String filtrar(@RequestParam("ano") int ano,
-						@RequestParam("radioButton") String radioButton,
-						@RequestParam("codSelectedSemestre") int codSelectedSemestre,
-						@RequestParam("codSelectedTrimestre") int codSelectedTrimestre,
-						@RequestParam("codSelectedMes") int codSelectedMes,
-						@RequestParam("projecto") String projecto,
-						Model model) {
+		@RequestParam("radioButton") String radioButton,
+		@RequestParam(name="codSelectedSemestre", required = false, defaultValue = "0") int codSelectedSemestre,
+		@RequestParam(name="codSelectedTrimestre", required = false, defaultValue = "0" ) int codSelectedTrimestre,
+		@RequestParam(name="codSelectedMes", required = false, defaultValue = "0") int codSelectedMes,
+		@RequestParam(name="projecto", required = false) String projecto,
+		Model model) {
 	
 	int codSelected=0;
 	
@@ -1299,14 +1300,14 @@ public String filtrar(@RequestParam("ano") int ano,
 	
 }
 
-
+// CHAMA EXTERNO
 @PostMapping("/filter")
 public String filter(@RequestParam("ano") int ano,
 		@RequestParam("radioButton") String radioButton,
-		@RequestParam("codSelectedSemestre") int codSelectedSemestre,
-		@RequestParam("codSelectedTrimestre") int codSelectedTrimestre,
-		@RequestParam("codSelectedMes") int codSelectedMes,
-		@RequestParam("projecto") String projecto,
+		@RequestParam(name="codSelectedSemestre", required = false, defaultValue = "0") int codSelectedSemestre,
+		@RequestParam(name="codSelectedTrimestre", required = false, defaultValue = "0" ) int codSelectedTrimestre,
+		@RequestParam(name="codSelectedMes", required = false, defaultValue = "0") int codSelectedMes,
+		@RequestParam(name="projecto", required = false) String projecto,
 		Model model) {
 
 	
@@ -1324,6 +1325,8 @@ int codSelected=0;
 		codSelected=codSelectedMes;
 	}
 	
+	System.out.println("sssssssssssssssssssssssssssssssssssss "+ano);
+	System.out.println("sssssssssssssssssssssssssssssssssssss "+radioButton);
 	
 	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro2(radioButton, codSelected, projecto, ano));

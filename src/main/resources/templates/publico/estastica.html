@@ -178,6 +178,7 @@ function onChangePorAno(){
     	    var maxDate= year + '-' + month + '-' + day;
     	    
     	    $('#txtDate').attr('max', maxDate);
+    	    $('#txtDate2').attr('max', maxDate);
     	});
 	</script>
 
@@ -221,7 +222,7 @@ function onChangePorAno(){
 
     <div  id="divano" class="page-body">
 
-        <form th:action="@{/filtrar}" method="POST">
+        <form th:action="@{/filter}" method="POST">
             <div class="container-xl">
                 <div class="row row-deck row-cards">
 
@@ -374,7 +375,7 @@ function onChangePorAno(){
 
     </div>
 
-    <form style="display: none"  id="divdata" th:action="@{/filtrar1}" method="POST">
+    <form style="display: none"  id="divdata" th:action="@{/filter1}" method="POST">
 
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
@@ -396,7 +397,7 @@ function onChangePorAno(){
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                                <input required="required" value="" name="datainicial" type="date" class="form-control">
+                                                <input id="txtDate" required="required" value="" name="datainicial" type="date" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +410,7 @@ function onChangePorAno(){
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                                                <input required="required" value="" name="datafinal" type="date" class="form-control">
+                                                <input id="txtDate2" required="required" value="" name="datafinal" type="date" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -545,8 +546,8 @@ function onChangePorAno(){
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-lg-3">
-                    <div style="background:#f66d9b;" class="card">
+                <div class="col-sm-6 col-lg-2">
+                    <div style="background:#EF5350;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
@@ -558,7 +559,7 @@ function onChangePorAno(){
                 </div>
 
 
-                <div class="col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-2">
                     <div style="background:#66BB6A;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -572,8 +573,20 @@ function onChangePorAno(){
                 </div>
 
 
-                <div class="col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-2">
                     <div style="background:#FFA726;" class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Não Resolvidas</div>
+                            </div>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}-${totalDeReclamacoesTerminadas}]]</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 col-lg-3">
+                    <div style="background:#686669;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Consultas/Sugestões...</div>
@@ -597,7 +610,7 @@ function onChangePorAno(){
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Mes</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Mes</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-combination"></div>
@@ -607,19 +620,22 @@ function onChangePorAno(){
 
 
                 </div>
-
-                 <div class="col-lg-6 col-xl-6">
+                
+                <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Ocorrências por Província</h3>
+                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Projecto</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-provincia"></div>
+                            <div id="chart-regiao"></div>
                         </div>
                     </div>
 
 
-                </div> 
+                </div>
+                
+
+                 
 
 
 
@@ -633,34 +649,19 @@ function onChangePorAno(){
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
-                <div class="col-lg-6 col-xl-6">
+                 
+				<div class="col-lg-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Província</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-cidade"></div>
+                            <div id="chart-provincia"></div>
                         </div>
                     </div>
 
 
-
-                </div>
-
-                 <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Projecto</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-regiao"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
+                </div> 
 
 
             </div>
@@ -733,7 +734,7 @@ function onChangePorAno(){
     <script th:inline="javascript">
     ocorrenciasPorMes();
     ocorrenciasPorProvincia();
-    ocorrenciasPorCidade();
+  //  ocorrenciasPorCidade();
     ocorrenciasPorRegiao();
     ocorrenciasPorCanalEntrada();
     ocorrenciasPorCategoria();
@@ -772,11 +773,11 @@ function onChangePorAno(){
               			opacity: 1,
               		},
               		series: [{
-              			name: "Resolvidas",
-              			data: numeroocorencia1
-              		},{
               			name: "Não Resolvidas",
               			data: numeroocorencia2
+              		},{
+              			name: "Resolvidas",
+              			data: numeroocorencia1
               		},{
               			name: "Improcedentes",
               			data: numeroocorencia3
@@ -807,7 +808,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#5eba00", "#f66d9b", "#FFA726"],
+              		colors: ["#EF5350", "#5eba00", "#FFA726"],
               		legend: {
               			show: false,
               		},
@@ -872,7 +873,7 @@ function onChangePorAno(){
        		document.addEventListener("DOMContentLoaded", function () {
               	window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
               		chart: {
-              			type: "donut",
+              			type: "pie",
               			fontFamily: 'inherit',
               			height: 240,
               			sparkline: {
@@ -919,7 +920,7 @@ function onChangePorAno(){
         	document.addEventListener("DOMContentLoaded", function () {
               	window.ApexCharts && (new ApexCharts(document.getElementById('chart-regiao'), {
               		chart: {
-              			type: "donut",
+              			type: "pie",
               			fontFamily: 'inherit',
               			height: 240,
               			sparkline: {
@@ -1035,7 +1036,6 @@ function onChangePorAno(){
               		plotOptions: {
               			bar: {
               				columnWidth: '50%',
-              				horizontal: true,
               			}
               		},
               		dataLabels: {
@@ -1044,12 +1044,13 @@ function onChangePorAno(){
               		fill: {
               			opacity: 1,
               		},
-              		series: [{
+              		series: [
+              			{
+                  			name: "Não Resolvidas",
+                  			data: numeroocorencia2
+                  		},{
               			name: "Resolvidas",
               			data: numeroocorencia1
-              		},{
-              			name: "Não Resolvidas",
-              			data: numeroocorencia2
               		},{
               			name: "Improcedentes",
               			data: numeroocorencia3
@@ -1080,7 +1081,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#5eba00", "#f66d9b", "#FFA726"],
+              		colors: ["#EF5350", "#5eba00", "#FFA726"],
               		legend: {
               			show: false,
               		},
@@ -1124,12 +1125,13 @@ function onChangePorAno(){
           		fill: {
           			opacity: 1,
           		},
-          		series: [{
+          		series: [
+          			{
+              			name: "Reclamações",
+              			data: numeroocorencia2
+              		},{
           			name: "Resolvidas",
           			data: numeroocorencia1
-          		},{
-          			name: "Reclamações",
-          			data: numeroocorencia2
           		},{
           			name: "Consultas/Sugestões...",
           			data: numeroocorencia3
@@ -1160,7 +1162,7 @@ function onChangePorAno(){
           				padding: 4
           			},
           		},
-          		colors: ["#5eba00", "#f66d9b", "#FFA726"],
+          		colors: ["#EF5350", "#5eba00", "#FFA726"],
           		legend: {
           			show: false,
           		},

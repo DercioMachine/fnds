@@ -52,7 +52,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "CASE\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
-    		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
+    		+ "    WHEN (:radioButton) = 'M' THEN month(ocorrencia.created)=:codSelected\r\n"
     		+ "END);", nativeQuery=true)
     
    	public Object totalDeOcorrenciasProcedentesFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("ano") int ano);

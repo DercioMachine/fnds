@@ -4,7 +4,6 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>FIPAG</title>
 </head>
 <body>
 <div  layout:fragment="corpo">
@@ -12,19 +11,20 @@
     
     	
 
-    <div class="col-12">
+   <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     
-    <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/projecto}" role="button">
+        <div class="card">
+        	 <div class="card-header">
+        <a class="btn btn-primary btn-md mb-3 ml-3" th:href="@{/registar/projecto}" role="button">
 		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		     <span>Novo Projecto</span>
 		</a> 
-    
-        <div class="card">
-            <div style="background:#04AA6D;" class="card-header">
-                <h3 style="font-weight:bolder" class="card-title">PROJECTOS</h3>
-            </div>
-            <div class="table-responsive">
-                <table id="tabela" class="table card-table table-vcenter text-nowrap">
+		</div>
+        
+        
+            <br>
+             <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+               <table id="example" class="display">
                     <thead>
                     <tr>
                         <th class="w-1">No.</th>
@@ -39,9 +39,10 @@
                         <td th:text="${p.codigo}"><span class="text-muted">01401</span></td>
                          <td th:text="${p.designacao}">Auxiliar Contábil</td>
                         <td>
-                            <a class="icon" th:href="${'/projectos/editar/'+p.id}">
-                                <i class="fe fe-edit"></i>
+                            <a th:href="@{/projectos/editar/{id} (id=${p.id})}">
+                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-edit"></i>
                             </a>
+                            
                         </td>
                         
                         <!-- <td>
@@ -58,31 +59,6 @@
         </div>
     </div>
     
-    <nav aria-label="Page navigation example">
-				  	<ul class="pagination justify-content-center">
-				  	
-				  	 <li th:class="${pageProjecto.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${1})}" tabindex="-1">Primeira</a>
-				    </li>
-				    
-				    <li th:class="${pageProjecto.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.pagina - 1})}" tabindex="-1">Anterior</a>
-				    </li>
-				    
-				    <li class="page-item">
-				    	<span class="page-link" th:text="|${pageProjecto.pagina} de ${pageProjecto.totalDePaginas}|"></span>
-				    </li>
-				    
-				    <li th:class="${pageProjecto.pagina == pageProjecto.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.pagina + 1})}">Próxima</a>
-				    </li>
-				    
-				    <li th:class="${pageProjecto.pagina == pageProjecto.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/projecto(page=${pageProjecto.totalDePaginas})}" tabindex="-1">Última</a>
-				    </li>
-				    
-				  </ul>
-				</nav>
 
     <!-- Conteudo-->
 </div>

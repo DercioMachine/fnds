@@ -4,7 +4,6 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>FIPAG</title>
 </head>
 <body>
 <div  layout:fragment="corpo">
@@ -12,23 +11,22 @@
     
     
 
-    <div class="col-12">
-	    <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/tipoAlerta}" role="button">
+    <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+     <div class="card">
+     <div class="card-header">
+	    <!-- <a class="btn btn-primary btn-md mb-3" th:href="@{/registar/tipoAlerta}" role="button">
 		 	<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		     <span>Novo Tipo de Alerta</span>
-		</a>
-    
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">TIPOS DE ALERTA</h3>
-            </div>
-            <div class="table-responsive">
-                <table class="table card-table table-vcenter text-nowrap">
+		</a> -->
+		</div>
+    		<br>
+             <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+               <table id="example" class="display">
                     <thead>
                     <tr>
                         <th class="w-1">No.</th>
                         <th>Designação</th>
-                        <th></th>
+                        <!-- <th></th> -->
                        <!--  <th></th> -->
                     </tr>
                     </thead>
@@ -37,11 +35,12 @@
                     <tr th:each="p : ${pageTipoAlerta.registros}">
                         <td th:text="${p.id}"><span class="text-muted">01401</span></td>
                          <td th:text="${p.designacao}">Auxiliar Contábil</td>
-                        <td>
-                            <a class="icon" th:href="${'/tipoAlertas/editar/'+p.id}">
-                                <i class="fe fe-edit"></i>
+                        <!-- <td>
+                            
+                            <a th:href="@{/tipoAlertas/editar/{id} (id=${p.id})}">
+                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-edit"></i>
                             </a>
-                        </td>
+                        </td> -->
                         
                         <!-- <td>
                             <a class="icon" th:href="${'/tipoAlertas/excluir/'+p.id}">
@@ -58,31 +57,6 @@
 				  
         </div>
     </div>
-    			<nav aria-label="Page navigation example">
-				  	<ul class="pagination justify-content-center">
-				  	
-				  	 <li th:class="${pageTipoAlerta.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/tipoAlerta(page=${1})}" tabindex="-1">Primeira</a>
-				    </li>
-				    
-				    <li th:class="${pageTipoAlerta.pagina == 1} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/tipoAlerta(page=${pageTipoAlerta.pagina - 1})}" tabindex="-1">Anterior</a>
-				    </li>
-				    
-				    <li class="page-item">
-				    	<span class="page-link" th:text="|${pageTipoAlerta.pagina} de ${pageTipoAlerta.totalDePaginas}|"></span>
-				    </li>
-				    
-				    <li th:class="${pageTipoAlerta.pagina == pageTipoAlerta.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/tipoAlerta(page=${pageTipoAlerta.pagina + 1})}">Próxima</a>
-				    </li>
-				    
-				    <li th:class="${pageTipoAlerta.pagina == pageTipoAlerta.totalDePaginas} ? 'page-item disabled' : 'page-item'">
-				      <a class="page-link" th:href="@{/listar/tipoAlerta(page=${pageTipoAlerta.totalDePaginas})}" tabindex="-1">Última</a>
-				    </li>
-				    
-				  </ul>
-				</nav>
 
     <!-- Conteudo-->
 </div>

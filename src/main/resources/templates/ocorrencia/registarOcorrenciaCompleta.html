@@ -114,7 +114,7 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
     //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
-    	url: 'http://196.22.53.245:8080/fnds/origem/externo',
+    	url: 'http://localhost:8080/fnds/origem/externo',
     //url: 'http://localhost:9090/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
@@ -289,7 +289,7 @@ OrigemInternoExterno();
 //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
     //url: 'http://localhost:9090/origem/externo/',
     //url: 'http://localhost:9090/origem/externo',
-     url: 'http://196.22.53.245:8080/fnds/origem/externo',
+     url: 'http://localhost:8080/fnds/origem/externo',
 
 
     success: function (result){
@@ -342,7 +342,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://196.22.53.245:8080/fnds/distrito/'+provinciaId,
+url: 'http://localhost:8080/fnds/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
 
 
@@ -374,7 +374,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://196.22.53.245:8080/fnds/subcategoria/'+categoriaId,
+url: 'http://localhost:8080/fnds/subcategoria/'+categoriaId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -407,7 +407,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://196.22.53.245:8080/fnds/posto/'+distritoId,
+url: 'http://localhost:8080/fnds/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
 
@@ -714,7 +714,7 @@ document.getElementById("cidadee").style.display="none";
                         <div class="form-group">
                             <label class="form-label">Canal Utilizado </label>
                             <select required class="form-control custom-select" th:field="*{formaComunicacao}" >
-                             	<option value="Plataforma">Plataforma</option>
+                             	<option value="">Selecione o Canal...</option>
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Telefone">Telefone</option>
                                 <option value="Formulário">Formulário</option>

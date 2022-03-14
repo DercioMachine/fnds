@@ -9,103 +9,41 @@
   <meta charset="UTF-8">
   <title>FIPAG</title>
 
-  <style>
-
-    /* jQuery loading autocomplete */
-.ui-autocomplete-loading {
-  background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
-}
-
-
-#tabela th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  font-size:12px;
-}
-
-
-#tabela tr {
-	background-color: #fff;
-}
-
-
-</style>
-
-
 </head>
 
-
-
-
-
 <body>
-
-
-
-
 
 <div  layout:fragment="corpo">
   <!-- Conteudo -->
 
 
 
-  <div class="col-12">
+  <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="card">
       <div class="card-header">
-        <a class="btn btn-primary btn-md" th:href="@{/registar/processos}" role="button">
+        <!-- <a class="btn btn-primary btn-md" th:href="@{/registar/processos}" role="button">
           <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-          <span>Novo Processo</span>
-        </a>
+          <span>Novo Tempo de Tratamento</span>
+        </a> -->
 
       </div>
 
-      <div class="card-body border-bottom py-3">
-        <div class="d-flex">
-          <div class="text-muted">
-            <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Processos</h3>
-          </div>
-          <div class="ms-auto text-muted">
-            Procurar:
-            <div class="ms-2 d-inline-block">
-              <input id="txtSearch" name="keyword"  type="text" class="form-control form-control-sm" aria-label="Search invoice">
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="table-responsive">
-        <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
-          <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
+		<br>
+             <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+               <table id="example" class="display">
           <thead>
           <tr style="color: rgb(65,105,225)">
             <td class="w-4">No</td>
             <td >Nome</td>
-            <td >Tempo Tratamento</td>
-            <td >Tempo de Investigacao</td>
-            <td>Tempo de Resolucao</td>
-            <td>Tempo de Sign-Off</td>
-            <td>Tempo de Monitoria</td>
+            <td >Tempo</td>
           </tr>
           </thead>
           <tbody>
           <tr th:each="p, index : ${processos}">
             <!--                     <tr th:each="p : ${ocorrencias}"> -->
-            <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.nome}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.tempotratamento}"  > Local </td>
-
-            <td style="background: #fff" th:text="${p.tempoinvestigacao}">
-
-            </td>
-
-            <td style="background: #fff" th:text="${p.temporesolucao }"  >
-            </td>
-            <td th:text="${p.temposign}">Auxiliar Contábil</td>
-            <td th:text="${p.tempomonitoria}">Auxiliar Contábil</td>
-
+            <td th:text="${index.count}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.nome}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.tempotratamento}"  > Local </td>
           </tr>
 
 
