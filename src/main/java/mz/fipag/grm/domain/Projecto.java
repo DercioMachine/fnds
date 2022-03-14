@@ -9,11 +9,11 @@ import javax.persistence.Table;
 @Table(name = "projecto")
 public class Projecto extends AbstractEntity{
 
-	@Column(name = "codigo", nullable = false,length=120,unique=true)
+	@Column(name = "codigo")
 	private String codigo;
 	
 	
-	@Column(name = "designacao", nullable = false,length=120,unique=true)
+	@Column(name = "designacao")
 	private String designacao;
 	
 
