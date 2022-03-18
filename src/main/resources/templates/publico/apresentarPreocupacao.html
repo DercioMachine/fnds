@@ -375,7 +375,7 @@ document.getElementById("cidadee").style.display="none";
                                 <option value="">Selecione o Projecto...</option>
                                 <option value="Não Conheço">Não Conheço</option>
                                 <option th:each="p : ${projectos}"
-                                        th:value=c th:text="${p.designacao}">Maputo</option>
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
                             </select>
                         </div>
                     </div>

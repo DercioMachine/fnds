@@ -1497,11 +1497,10 @@ String periodo="";
          		 for (int i=0;i<lista.size();i++) {
          			String descric = "Sr(a). "+lista.get(i).getNome()+ ". Há uma  Ocorrência Temporária de CODIGO: "+provincia.getCodigo()+""+codigo+""+anooo; 
                 	 
-               if(localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
-            	   emailService.enviarEmail(descric,"FNDS", emaildest, assun);
-               }
-         		
-         	}
+				   if(localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+					   emailService.enviarEmail(descric,"FNDS", emaildest, assun);
+				   }
+         		}
         	
          	}
 
