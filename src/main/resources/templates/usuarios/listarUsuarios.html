@@ -54,30 +54,14 @@
       <div class="card-header">
         <a class="btn btn-primary btn-md" th:href="@{/registar/usuarios}" role="button">
           <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-          <span>Nova Usuario</span>
+          <span>Nova Utilizador</span>
         </a>
 
       </div>
+      <br>
 
-      <div class="card-body border-bottom py-3">
-        <div class="d-flex">
-          <div class="text-muted">
-            <h3 style="font-weight:bolder; padding: 0px; margin: 0px;" class="card-title">Usuarios</h3>
-          </div>
-          <div class="ms-auto text-muted">
-            Procurar:
-            <div class="ms-2 d-inline-block">
-              <input id="txtSearch" name="keyword"  type="text" class="form-control form-control-sm" aria-label="Search invoice">
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="table-responsive">
-        <table id="tabela" class="table card-table table-vcenter text-nowrap datatable">
-          <!-- <table id="tabela" class="table table-sm table-striped table-bordered nowrap" style="width:100%"> -->
+      <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+        <table id="example" class="display">
           <thead>
           <tr style="color: rgb(65,105,225)">
             <td class="w-4">No</td>
@@ -88,26 +72,34 @@
             <td >Alerta GBV</td>
             <td >Alerta Urgente</td>
             <td>Perfils</td>
+            <td class="w-3">Acção</td>
           </tr>
           </thead>
           <tbody>
           <tr th:each="p, index : ${usuarios}">
             <!--                     <tr th:each="p : ${ocorrencias}"> -->
-            <td style="background: #fff" th:text="${index.count}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.nome}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff" th:text="${p.username}"><span class="text-muted">01401</span></td>
-            <td style="background: #fff"  >
+            <td th:text="${index.count}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.nome}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.username}"><span class="text-muted">01401</span></td>
+            <td>
               <span  th:if="${p.provincia!=null }" th:text="${p.provincia.designacao}" >01401</span>
               <span  th:if="${p.provincia==null }"  >Nacional</span>
             </td>
-            <td style="background: #fff" th:text="${p.telefone}"> </td>
-            <td style="background: #fff" th:text="${p.tipogbv}"> </td>
-            <td style="background: #fff" th:text="${p.tipourgente}"> </td>
+            <td th:text="${p.telefone}"> </td>
+            <td th:text="${p.tipogbv}"> </td>
+            <td th:text="${p.tipourgente}"> </td>
             <td >
               <th:block  th:each="r, iter:${p.roles}">
                 <span th:text="${r.designacao}"></span>
                 <th:block th:if="${!iter.last}">, </th:block>
               </th:block>
+            </td>
+
+            <td>
+              <a th:href="@{/usuarios/editar/{id} (id=${p.id})}">
+                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fa fa-edit"></i>
+              </a>
+
             </td>
 
           </tr>

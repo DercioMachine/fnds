@@ -27,6 +27,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
     		+ "IF(:radioButton='',1=1,\r\n"
     		+ "CASE\r\n"
+			+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -53,6 +54,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    WHEN (:radioButton) = 'M' THEN month(ocorrencia.created)=:codSelected\r\n"
+			+ "    WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "END);", nativeQuery=true)
     
    	public Object totalDeOcorrenciasProcedentesFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("ano") int ano);
@@ -60,12 +62,13 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     @Query(value="select count(*) from Ocorrencia where procedencia='Não' and estado='Validado' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrenciasImprocedentes(@Param("ano") int ano);
     
-    
+
     @Query(value="Select count(*) from ocorrencia, projecto\r\n"
     		+ "where ocorrencia.projecto_id=projecto.id and  procedencia='Não' and estado='Validado' and year(ocorrencia.created)=(:ano) and\r\n"
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
     		+ "IF(:radioButton='',1=1,\r\n"
     		+ "CASE\r\n"
+			+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -88,6 +91,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
     		+ "IF(:radioButton='',1=1,\r\n"
     		+ "CASE\r\n"
+			+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -119,6 +123,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
     		+ "IF(:radioButton='',1=1,\r\n"
     		+ "CASE\r\n"
+			+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -135,6 +140,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
     		+ "IF(:radioButton='',1=1,\r\n"
     		+ "CASE\r\n"
+			+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -158,6 +164,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
     		+ "IF(:radioButton='',1=1,\r\n"
     		+ "CASE\r\n"
+			+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
     		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
     		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
     		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -179,19 +186,19 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     public List<Ocorrencia> buscarOcorrenciasActuais(@Param("ano") int ano);
 
     @Query(value="select projecto.designacao as mes,\r\n"
-    		+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(created)),\r\n"
-    		+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)),\r\n"
-    		+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created))\r\n"
-    		+ "from ocorrencia, projecto where ocorrencia.projecto_id=projecto.id  group by projecto.designacao;",nativeQuery=true)
-	public List<Object[]> busqueTudoAgrupadoPorProjecto();
+    		+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(created)= :ano),\r\n"
+    		+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)= :ano),\r\n"
+    		+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created)= :ano)\r\n"
+    		+ "from ocorrencia, projecto where year(ocorrencia.created)= :ano and ocorrencia.projecto_id=projecto.id  group by projecto.designacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorProjecto(@Param("ano") int ano);
 
-	@Query(value="select designacao, count(*) from ocorrencia, categoria where tipo_ocorrencia_id=1 and procedencia='Sim' and ocorrencia.categoriaid=categoria.id group by categoriaid",nativeQuery=true)
-	public List<Object[]> busqueTudoAgrupadoPorCategoria();
+	@Query(value="select designacao, count(*) from ocorrencia, categoria where tipo_ocorrencia_id=1 and procedencia='Sim' and ocorrencia.categoriaid=categoria.id and year(ocorrencia.created)= :ano group by categoriaid",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCategoria(@Param("ano") int ano);
 	
 	
 	
-	@Query(value="select forma_comunicacao, count(*) from ocorrencia where tipo_ocorrencia_id=1 and procedencia='Sim' group by forma_comunicacao;",nativeQuery=true)
-	public List<Object[]> busqueTudoAgrupadoPorCanalDeEntrada();
+	@Query(value="select forma_comunicacao, count(*) from ocorrencia where tipo_ocorrencia_id=1 and procedencia='Sim' and year(created)= :ano group by forma_comunicacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorCanalDeEntrada(@Param("ano") int ano);
 	
 
 	@Query(value="select designacao, count(*) from ocorrencia, provincia where tipo_ocorrencia_id=1 and procedencia='Sim' and ocorrencia.provincia_id=provincia.id group by provincia_id",nativeQuery=true)
@@ -224,11 +231,11 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	public List<Object[]> busqueTudoAgrupadoPorCidadeEstado();
 	
 	@Query(value="select provincia.designacao as mes,\r\n"
-			+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(created)),\r\n"
-			+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)),\r\n"
-			+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created))\r\n"
-			+ "from ocorrencia, provincia where ocorrencia.provincia_id=provincia.id group by provincia.designacao;",nativeQuery=true)
-	public List<Object[]> busqueTudoAgrupadoPorProvinciaEstado();
+			+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(ocorrencia.created)= :ano),\r\n"
+			+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(ocorrencia.created)= :ano),\r\n"
+			+ "(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(ocorrencia.created)= :ano)\r\n"
+			+ "from ocorrencia, provincia where ocorrencia.provincia_id=provincia.id and year(ocorrencia.created)= :ano group by provincia.designacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorProvinciaEstado(@Param("ano") int ano);
 	
 	
 	
@@ -246,19 +253,19 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 			+ "cast(sum(if(resolucao='T',1,0))as unsigned) as terminado, \r\n"
 			+ "cast(sum(if(resolucao!='T',1,0))as unsigned) as Nterminado,\r\n"
 			+ "cast(sum(if(left(procedencia,1)='N',1,0))as unsigned) as Improcedente \r\n"
-			+ "from ocorrencia group by month(created)",nativeQuery=true)
+			+ "from ocorrencia group bfy month(created)",nativeQuery=true)
 	public List<Object[]> busqueTnTI();*/
 	
 
-	@Query(value="select projecto.designacao, count(*) from ocorrencia, projecto where tipo_ocorrencia_id=1 and procedencia='Sim' and ocorrencia.projecto_id = projecto.id group by projecto.designacao",nativeQuery=true)
-	public List<Object[]> busqueTudoAgrupadoPorRegiao();
+	@Query(value="select projecto.designacao, count(*) from ocorrencia, projecto where tipo_ocorrencia_id=1 and procedencia='Sim' and ocorrencia.projecto_id = projecto.id and year(ocorrencia.created)= :ano group by projecto.designacao",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorRegiao(@Param("ano") int ano);
 	
 	@Query(value="select monthname(created) as mes,\r\n"
-			+ "	(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(created)),\r\n"
-			+ "	(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)),\r\n"
-			+ "	(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created))\r\n"
-			+ "	from ocorrencia group by month(created);",nativeQuery=true)
-	public List<Object[]> busqueTnTI();
+			+ "	(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(created)= :ano),\r\n"
+			+ "	(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)= :ano),\r\n"
+			+ "	(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created)= :ano)\r\n"
+			+ "	from ocorrencia where year(created)= :ano  group by month(created);",nativeQuery=true)
+	public List<Object[]> busqueTnTI(@Param("ano") int ano);
 	
 	
     
@@ -284,6 +291,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
 	    		+ "IF(:radioButton='',1=1,\r\n"
 	    		+ "CASE\r\n"
+			 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
 	    		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -297,6 +305,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
 	    		+ "IF(:radioButton='',1=1,\r\n"
 	    		+ "CASE\r\n"
+			 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
 	    		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -312,6 +321,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
 	    		+ "IF(:radioButton='',1=1,\r\n"
 	    		+ "CASE\r\n"
+			 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
 	    		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -325,6 +335,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and\r\n"
 	    		+ "IF(:radioButton='',1=1,\r\n"
 	    		+ "CASE\r\n"
+			 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
 	    		+ "    ELSE month(ocorrencia.created)=:codSelected\r\n"
@@ -362,7 +373,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 
 	
 	@Query(value="select count(*) from ocorrencia, projecto where procedencia='Sim' and ocorrencia.projecto_id=projecto.id and "
-			+ " if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, "
+			+ " if (:projecto=null, 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)=null and (:datafinal)=null,1=1, "
 			+ " ocorrencia.created between (:datainicial) and (:datafinal))", nativeQuery=true)
    	public Object totalDeOcorrenciasProcedentesFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
 	
@@ -397,6 +408,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	 		+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 	 		+ "and IF(:radioButton='',1=1,\r\n"
 	 		+ "CASE\r\n"
+			+ "	   WHEN :radioButton = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 	 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
@@ -405,6 +417,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	 		+ "(select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 	 		+ "and IF(:radioButton='',1=1,\r\n"
 	 		+ "CASE\r\n"
+			+ " WHEN :radioButton = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 	 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
@@ -413,11 +426,12 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	 		+ "(select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 	 		+ "and IF(:radioButton='',1=1,\r\n"
 	 		+ "CASE\r\n"
+			+ "	   WHEN :radioButton = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 	 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 	 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 	 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
 	 		+ "END))\r\n"
-	 		+ "from ocorrencia, projecto group by month(ocorrencia.created);", nativeQuery=true)
+	 		+ "from ocorrencia, projecto where year(ocorrencia.created)=(:ano) group by month(ocorrencia.created);", nativeQuery=true)
 	    
 	 public List<Object[]> busqueTudoAgrupadoPorMesFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("ano") int ano);
 	
@@ -426,6 +440,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 		 		+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 		 		+ "and IF(:radioButton='',1=1,\r\n"
 		 		+ "CASE\r\n"
+			    + "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 		 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 		 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 		 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
@@ -434,6 +449,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 		 		+ "(select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 		 		+ "and IF(:radioButton='',1=1,\r\n"
 		 		+ "CASE\r\n"
+			    + "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 		 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 		 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 		 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
@@ -442,11 +458,12 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 		 		+ "(select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 		 		+ "and IF(:radioButton='',1=1,\r\n"
 		 		+ "CASE\r\n"
+			 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 		 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 		 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 		 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
 		 		+ "END))\r\n"
-		 		+ "from ocorrencia, projecto,  provincia where ocorrencia.provincia_id=provincia.id group by provincia.designacao;", nativeQuery=true)
+		 		+ "from ocorrencia, projecto, provincia where year(ocorrencia.created)=(:ano) and ocorrencia.provincia_id=provincia.id group by provincia.designacao;", nativeQuery=true)
 		    
 		 public List<Object[]> busqueTudoAgrupadoPorProvinciaFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("ano") int ano);
 		
@@ -457,6 +474,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 			 		+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 			 		+ "and IF(:radioButton='',1=1,\r\n"
 			 		+ "CASE\r\n"
+				 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 			 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 			 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 			 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
@@ -465,6 +483,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 			 		+ "(select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 			 		+ "and IF(:radioButton='',1=1,\r\n"
 			 		+ "CASE\r\n"
+				 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 			 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 			 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 			 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
@@ -473,11 +492,12 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 			 		+ "(select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
 			 		+ "and IF(:radioButton='',1=1,\r\n"
 			 		+ "CASE\r\n"
+				 	+ "	   WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
 			 		+ "    WHEN :radioButton = 'S' THEN if(1=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
 			 		+ "    WHEN :radioButton = 'T' THEN quarter(ocorrencia.created)=(:codSelected)\r\n"
 			 		+ "    ELSE month(ocorrencia.created)=(:codSelected)\r\n"
 			 		+ "END))\r\n"
-			 		+ "from ocorrencia, projecto group by projecto.designacao;", nativeQuery=true)
+			 		+ "from ocorrencia, projecto where year(ocorrencia.created)=(:ano) group by projecto.designacao;", nativeQuery=true)
 			    
 			 public List<Object[]> busqueTudoAgrupadoPorProjectoFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("ano") int ano);
 			

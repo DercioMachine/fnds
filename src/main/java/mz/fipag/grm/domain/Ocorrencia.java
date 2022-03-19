@@ -19,19 +19,13 @@ public class Ocorrencia extends AbstractEntity{
 
 	@Column(name = "grm_stamp")
 	private String grmStamp;
-	
-	@Column(name = "numero")
-	private int numero;
-	
+
 	@Column(name = "data_grm")
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dataOcorrencia;
 	
 	@Column(name = "comunidade")
 	private String comunidade;
-	
-	@Column(name = "projecto_operacao")
-	private String projectoOperacao;
 
 	@Column(name = "interno_externo")
 	private String internoExterno;
@@ -41,8 +35,7 @@ public class Ocorrencia extends AbstractEntity{
 	
 	@Column(name = "temporario")
 	private boolean temporario;
-	
-	
+
 	@Column(name = "estado")
 	private String estado;
 	
@@ -96,30 +89,13 @@ public class Ocorrencia extends AbstractEntity{
 	
 	@Column(name = "numero_mulheres")
 	private int numeroMulheres;
-	
-	@Column(name = "numero_mdias_registo")
-	private int numeroDiasRegisto;
 
 	@Column(name = "origem")
 	private String origem;
-	
-	@Column(name = "data_classificacao")
-	private Date dataClassificacao;
-	
+
 	@Column(name = "procedencia")
 	private String procedencia;
-	
-	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name = "data_resposta", columnDefinition = "DATE")
-	private LocalDate dataResposta;
-	
-	@Column(name = "forma_resposta")
-	private String formaResposta;
-	
-	@Column(name = "resposta")
-	private String resposta;
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name="distrito_id")
 	private Distrito distrito;
@@ -200,9 +176,7 @@ public class Ocorrencia extends AbstractEntity{
 		return grmStamp;
 	}
 
-	public int getNumero() {
-		return numero;
-	}
+
 
 	public Date getDataOcorrencia() {
 		return dataOcorrencia;
@@ -261,25 +235,9 @@ public class Ocorrencia extends AbstractEntity{
 		return numeroMulheres;
 	}
 
-	public int getNumeroDiasRegisto() {
-		return numeroDiasRegisto;
-	}
 
 	public String getOrigem() {
 		return origem;
-	}
-
-	public Date getDataClassificacao() {
-		return dataClassificacao;
-	}
-
-
-	public String getFormaResposta() {
-		return formaResposta;
-	}
-
-	public String getResposta() {
-		return resposta;
 	}
 
 	public Distrito getDistrito() {
@@ -304,10 +262,6 @@ public class Ocorrencia extends AbstractEntity{
 
 	public void setGrmStamp(String grmStamp) {
 		this.grmStamp = grmStamp;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
 	}
 
 	public void setDataOcorrencia(Date dataOcorrencia) {
@@ -374,24 +328,10 @@ public class Ocorrencia extends AbstractEntity{
 		this.numeroMulheres = numeroMulheres;
 	}
 
-	public void setNumeroDiasRegisto(int numeroDiasRegisto) {
-		this.numeroDiasRegisto = numeroDiasRegisto;
-	}
-
 	public void setOrigem(String origem) {
 		this.origem = origem;
 	}
 
-	public void setDataClassificacao(Date dataClassificacao) {
-		this.dataClassificacao = dataClassificacao;
-	}
-
-
-	public LocalDate getDataResposta() {
-		return dataResposta;
-	}
-	
-	
 	public String getProcedencia() {
 		return procedencia;
 	}
@@ -407,28 +347,7 @@ public class Ocorrencia extends AbstractEntity{
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
-	public void setDataResposta(LocalDate dataResposta) {
-		this.dataResposta = dataResposta;
-	}
-
-	public void setFormaResposta(String formaResposta) {
-		this.formaResposta = formaResposta;
-	}
-
-	public void setResposta(String resposta) {
-		this.resposta = resposta;
-	}
 	
-
-	public String getProjectoOperacao() {
-		return projectoOperacao;
-	}
-
-	public void setProjectoOperacao(String projectoOperacao) {
-		this.projectoOperacao = projectoOperacao;
-	}
-
 	public String getNomeDoRepresentanteDoGrupo() {
 		return nomeDoRepresentanteDoGrupo;
 	}

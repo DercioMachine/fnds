@@ -1,7 +1,7 @@
 package mz.fipag.grm.controller;
 
 import java.math.BigInteger;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -11,6 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -246,7 +247,7 @@ public class IndexController {
 
 
 	public void projecto(Model model){
-		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProjecto();
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProjecto(currentYear);
 
 
 		String[] legendaestado = new String[lista.size()];
@@ -429,7 +430,7 @@ public class IndexController {
 	}
 	
 	public void ProvinciaEstado(Model model){
-		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProvinciaEstado();
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProvinciaEstado(currentYear);
 		
 
 
@@ -461,7 +462,7 @@ public class IndexController {
 	}
 	
 	public void canaDeEntrada(Model model){
-		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCanalDeEntrada();
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCanalDeEntrada(currentYear);
 		
 
 
@@ -488,7 +489,7 @@ public class IndexController {
 	
 	public void categoria(Model model){
 
-	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCategoria();
+	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCategoria(currentYear);
 		
 
 
@@ -543,7 +544,7 @@ public class IndexController {
 	
 	public void regiao(Model model){
 
-			List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorRegiao();
+			List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorRegiao(currentYear);
 				
 
 
@@ -572,7 +573,7 @@ public class IndexController {
 	
 	
 	public void busqueTnTI(Model model){
-		List<Object[]> lista = ocorrenciaRepository.busqueTnTI();
+		List<Object[]> lista = ocorrenciaRepository.busqueTnTI(currentYear);
 
 		String[] nomes = new String[lista.size()];
 
@@ -968,12 +969,15 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 // CHAMA EXTERNO
 
 @PostMapping("/filter1")
-public String filter1(@RequestParam("datainicial") Date datainicial,
-						@RequestParam("datafinal") Date datafinal,
-						@RequestParam("projecto") String projecto,
+public String filter1(@RequestParam(name = "datainicial", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datainicial,
+						@RequestParam(name = "datafinal", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datafinal,
+						@RequestParam("projecto")  String projecto,
 						Model model) {
 
-	
+		System.out.println("DAADTTAAAIII = "+ datainicial);
+	System.out.println("DAADTTAAAffFFFF= "+ datafinal);
+	System.out.println("PPPPROOOOOJJJEEECCCCTTTOOOOO= "+ projecto);
+
 	
 	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro(datainicial, datafinal, projecto));
@@ -1304,10 +1308,10 @@ public String filtrar(@RequestParam("ano") int ano,
 @PostMapping("/filter")
 public String filter(@RequestParam("ano") int ano,
 		@RequestParam("radioButton") String radioButton,
-		@RequestParam(name="codSelectedSemestre", required = false, defaultValue = "0") int codSelectedSemestre,
-		@RequestParam(name="codSelectedTrimestre", required = false, defaultValue = "0" ) int codSelectedTrimestre,
-		@RequestParam(name="codSelectedMes", required = false, defaultValue = "0") int codSelectedMes,
-		@RequestParam(name="projecto", required = false) String projecto,
+		@RequestParam(name="codSelectedSemestre") int codSelectedSemestre,
+		@RequestParam(name="codSelectedTrimestre") int codSelectedTrimestre,
+		@RequestParam(name="codSelectedMes") int codSelectedMes,
+		@RequestParam(name="projecto") String projecto,
 		Model model) {
 
 	

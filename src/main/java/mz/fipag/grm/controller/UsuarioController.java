@@ -1,5 +1,6 @@
 package mz.fipag.grm.controller;
 
+import mz.fipag.grm.domain.Categoria;
 import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Regiao;
 import mz.fipag.grm.domain.User;
@@ -12,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -87,6 +86,26 @@ public class UsuarioController {
     @ModelAttribute("cidades")
     public List<Cidade> listaDeCidades(){
         return cidadeService.buscarTodos();
+    }
+
+    @GetMapping("/usuarios/editar/{id}")
+    public String vistaEditarUsuario(@PathVariable("id") Long id, ModelMap model) {
+
+        model.addAttribute("user", userRepository.findById(id));
+        model.addAttribute("perfils", roleRepository.findAll());
+        model.addAttribute("provincias", provinciaService.buscarTodos());
+
+        return "usuarios/editarUsuarios";
+    }
+
+    @PostMapping("/editar/usuarios")
+    public String editarUsuario(User user, RedirectAttributes attr) {
+
+        userRepository.save(user);
+
+       // attr.addFlashAttribute("success","Categoria editada com sucesso.");
+
+        return "redirect:/listar/usuarios";
     }
 
 }
