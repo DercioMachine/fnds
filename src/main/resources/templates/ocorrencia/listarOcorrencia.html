@@ -169,22 +169,27 @@
                         <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
                          
                          
-                         <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 5) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
+                         <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
                           <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
+
+                            <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
+                            <span th:if="${p.resolucao=='T' || (days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: green;" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
                          
-                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.estado!='Validado' && p.tipoAlerta!='Normal'}">
+                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.resolucao!='T' &&  p.tipoAlerta!='Normal'}">
                           <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
-                         
-                         
-                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) <= 5) && p.tipoAlerta=='Normal'}">
+
+                            <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 1) && p.tipoAlerta!='Normal' && p.resolucao!='T'}">
                           <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
-                         
-                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) <= 1) && p.tipoAlerta!='Normal'}">
-                          <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
-                         </span>
+
                          </td>
                         
 

@@ -326,9 +326,9 @@
 				</div>
 			</div>
 
-			  <div class="col-6 col-sm-4" th:if="${ocorrencia != null && ocorrencia.cidade != null && ocorrencia.cidade.provincia != null && ocorrencia.cidade.provincia.designacao != null}">
+			  <div class="col-6 col-sm-4" th:if="${ocorrencia.provincia != null}">
 				  <div class="form-group">
-					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.cidade.provincia.designacao}"></span>
+					  <span style="font-weight: bolder;">Província: </span><span th:text="${ocorrencia.provincia.designacao}"></span>
 				  </div>
 			  </div>
 

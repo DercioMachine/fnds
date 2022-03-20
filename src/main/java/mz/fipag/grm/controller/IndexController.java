@@ -31,7 +31,6 @@ import com.twilio.exception.AuthenticationException;
 import com.twilio.rest.api.v2010.account.Message;
 
 import mz.fipag.grm.domain.Categoria;
-import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Empreiteiro;
 import mz.fipag.grm.domain.Ocorrencia;
@@ -50,7 +49,6 @@ import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CategoriaService;
-import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
 import mz.fipag.grm.service.EmailService;
@@ -114,9 +112,7 @@ public class IndexController {
 	    @Autowired
 	    private EmpreiterioService empreiteiroService;
 	    
-	    @Autowired
-	    private CidadeService cidadeService;
-	    
+
 	    @Autowired
 	    private CategoriaService categoriaService;
 
@@ -1451,45 +1447,47 @@ String periodo="";
     	
     	String anoo = String.valueOf(ano);
     	String anooo= anoo.substring(2, 4);
-    	
-    	String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
-    	String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
 
-    	
     	
     		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
     		ocorrencia.setEstado("Temporario");
     	
     		ocorrencia.setTemporario(true);
-    		
-    		System.out.println("Antes de salvar");
+
     		ocorrenciaRepository.save(ocorrencia);
 
-    		String descricao ="Caro Utente, a Sua Ocorrência foi submetida com sucesso.\n" +
-    				"NOTA: Anote o seu código para o acompanhamento da sua ocorrência \n"+provincia.getCodigo()+""+codigo+""+anooo;
 
-    		String emaildestino = ocorrencia.getEmailUtente();
 
-    		String assunto = "Confirmação de código de acesso - FNDS";
+		String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
+		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
+
+
+		if(contacto!=null){
+
+			String mensagem = "A sua Ocorrência foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
+			smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
+
+		}
 
     		if(email!=null){
-    			emailService.enviarEmail(descricao,"FNDS",emaildestino,assunto);
+
+				String descricao ="Caro Utente, a Sua Ocorrência foi submetida com sucesso.\n" +
+						"NOTA: Anote o seu código para o acompanhamento da sua ocorrência \n"+provincia.getCodigo()+""+codigo+""+anooo;
+
+				String emaildestino = ocorrencia.getEmailUtente();
+				String nome = "A sua Ocorrência foi submetido com sucesso";
+
+				String assunto = "Confirmação de código de acesso - FNDS";
+
+    			emailService.enviarEmail(descricao,nome,emaildestino,assunto);
     		}
 
 
-        	if(contacto!=null){
 
-        		String mensagem = "A sua Ocorrência foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
-    			smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
-
-    		}
         	
         	
         	List<User> lista = (List<User>) userRepository.findAll();
 
-        	
-
-    		String emaildest = ocorrencia.getEmailUtente();
 
     		String assun = "Ocorrência Temporária - FNDS";
 
@@ -1499,6 +1497,8 @@ String periodo="";
          		
          		
          		 for (int i=0;i<lista.size();i++) {
+
+					 String emaildest = lista.get(i).getEmail();
          			String descric = "Sr(a). "+lista.get(i).getNome()+ ". Há uma  Ocorrência Temporária de CODIGO: "+provincia.getCodigo()+""+codigo+""+anooo; 
                 	 
 				   if(localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
@@ -1626,11 +1626,6 @@ String periodo="";
     @ModelAttribute("empreiteiros")
 	public List<Empreiteiro> listaDeEmpreiteiros(){
 		return empreiteiroService.buscarTodos();
-}
-    
-    @ModelAttribute("cidades")
-	public List<Cidade> listaDeCidades(){
-	return cidadeService.buscarTodos();
 }
 
 	@ModelAttribute("projectos")

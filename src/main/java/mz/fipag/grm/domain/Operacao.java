@@ -158,10 +158,7 @@ public class Operacao extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="tipoAlerta_id")
 	private TipoAlerta tipoAlerta;
-	
-	@ManyToOne
-	@JoinColumn(name="cidade_id")
-	private Cidade cidade;
+
 	
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
@@ -502,14 +499,6 @@ public class Operacao extends AbstractEntity{
 
 	public void setRegistado(boolean registado) {
 		this.registado = registado;
-	}
-
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
 	}
 
 	public Empreiteiro getEmpreiteiro() {

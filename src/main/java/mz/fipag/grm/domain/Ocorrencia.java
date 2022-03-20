@@ -135,11 +135,7 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="tipoAlerta_id")
 	private TipoAlerta tipoAlerta;
-	
-	@ManyToOne
-	@JoinColumn(name="cidade_id")
-	private Cidade cidade;
-	
+
 	@ManyToOne
 	@JoinColumn(name="empreiteiro_id")
 	private Empreiteiro empreiteiro;
@@ -424,13 +420,7 @@ public class Ocorrencia extends AbstractEntity{
 		this.registado = registado;
 	}
 
-	public Cidade getCidade() {
-		return cidade;
-	}
 
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
 
 	public Empreiteiro getEmpreiteiro() {
 		return empreiteiro;

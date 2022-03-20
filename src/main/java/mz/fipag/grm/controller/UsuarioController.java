@@ -1,13 +1,10 @@
 package mz.fipag.grm.controller;
 
-import mz.fipag.grm.domain.Categoria;
-import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Regiao;
 import mz.fipag.grm.domain.User;
 import mz.fipag.grm.repository.RegiaoRepository;
 import mz.fipag.grm.repository.RoleRepository;
 import mz.fipag.grm.repository.UserRepository;
-import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,9 +23,6 @@ public class UsuarioController {
 
     @Autowired
     RoleRepository roleRepository;
-
-    @Autowired
-    private CidadeService cidadeService;
 
     @Autowired
     private ProvinciaService provinciaService;
@@ -82,7 +76,7 @@ public class UsuarioController {
 
         return "redirect:/listar/usuarios";
     }
-
+/*
     @ModelAttribute("cidades")
     public List<Cidade> listaDeCidades(){
         return cidadeService.buscarTodos();
@@ -96,7 +90,7 @@ public class UsuarioController {
         model.addAttribute("provincias", provinciaService.buscarTodos());
 
         return "usuarios/editarUsuarios";
-    }
+    }*/
 
     @PostMapping("/editar/usuarios")
     public String editarUsuario(User user, RedirectAttributes attr) {

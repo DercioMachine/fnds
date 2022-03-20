@@ -1,9 +1,7 @@
 package mz.fipag.grm.controller;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import mz.fipag.grm.domain.Assunto;
 import mz.fipag.grm.domain.Categoria;
-import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Empreiteiro;
 import mz.fipag.grm.domain.Operacao;
@@ -34,7 +31,6 @@ import mz.fipag.grm.repository.ProcessoRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.service.CategoriaService;
-import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
 import mz.fipag.grm.service.EmpreiterioService;
@@ -97,9 +93,6 @@ public class OperacaoController {
     private EmpreiterioService empreiteiroService;
     
     @Autowired
-    private CidadeService cidadeService;
-    
-    @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
 
     @Autowired
@@ -147,7 +140,7 @@ public class OperacaoController {
     }
 
 
-    @PostMapping("/operacao/cadastrar")
+   /* @PostMapping("/operacao/cadastrar")
 	public String salvarOperacao(Operacao operacao, Provincia provincia, Cidade cidade) {
 
     	
@@ -160,7 +153,7 @@ public class OperacaoController {
     	operacaoService.salvar(operacao);
 
     	return "redirect:/listar/operacao";
-	}
+	}*/
     
 
     @PostMapping("/operacoes/editar") 
@@ -233,11 +226,6 @@ public class OperacaoController {
     @ModelAttribute("empreiteiros")
 	public List<Empreiteiro> listaDeEmpreiteiros(){
 		return empreiteiroService.buscarTodos();
-}
-    
-    @ModelAttribute("cidades")
-	public List<Cidade> listaDeCidades(){
-	return cidadeService.buscarTodos();
 }
 
 	@ModelAttribute("projectos")

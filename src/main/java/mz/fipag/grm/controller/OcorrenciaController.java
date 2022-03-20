@@ -28,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import mz.fipag.grm.domain.Categoria;
-import mz.fipag.grm.domain.Cidade;
 import mz.fipag.grm.domain.Distrito;
 import mz.fipag.grm.domain.Empreiteiro;
 import mz.fipag.grm.domain.Ocorrencia;
@@ -49,7 +48,6 @@ import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.repository.SubCategoriaRepository;
 import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.CategoriaService;
-import mz.fipag.grm.service.CidadeService;
 import mz.fipag.grm.service.DistritoService;
 import mz.fipag.grm.service.DocStorageService;
 import mz.fipag.grm.service.EmailService;
@@ -61,8 +59,6 @@ import mz.fipag.grm.service.ProvinciaService;
 import mz.fipag.grm.service.SMSService;
 import mz.fipag.grm.service.TipoAlertaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
-import mz.fipag.grm.util.PaginacaoUtil;
-
 
 
 @Controller
@@ -120,9 +116,7 @@ public class OcorrenciaController {
     @Autowired
     private EmpreiterioService empreiteiroService;
     
-    @Autowired
-    private CidadeService cidadeService;
-    
+
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
 
@@ -689,11 +683,6 @@ public class OcorrenciaController {
     @ModelAttribute("empreiteiros")
 	public List<Empreiteiro> listaDeEmpreiteiros(){
 		return empreiteiroService.buscarTodos();
-}
-    
-    @ModelAttribute("cidades")
-	public List<Cidade> listaDeCidades(){
-	return cidadeService.buscarTodos();
 }
 
 	@ModelAttribute("projectos")
