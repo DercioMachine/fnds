@@ -598,6 +598,39 @@ public class IndexController {
 		
 
 	}
+	
+	public void busqueProjectoLinha(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProjectoLinha(currentYear);
+
+		String[] nomeProjecto = new String[lista.size()];
+		String[] periodo = new String[lista.size()];
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		
+		int i=0;
+		
+		for (Object[] ob : lista){
+			
+		nomeProjecto[i] = (String) ob[0];
+		periodo[i] = (String) ob[1];
+		nrocorrencias[i] = (BigInteger) ob[2];
+		
+		
+		System.out.println("PPPPPRROOOOJJJECCTOOO: "+nomeProjecto[i]);
+		System.out.println("PPPPPEEERRIIIOOOOODDDOOOOO: "+periodo[i]);
+		System.out.println("NNRR OCORRENCIAS : "+nrocorrencias[i]);
+		
+			i++;
+			
+			
+			
+		}
+		
+		model.addAttribute("nomeProjecto",nomeProjecto);
+		model.addAttribute("periodo", periodo);
+		model.addAttribute("nrocorrencias", nrocorrencias);
+		
+
+	}
 
 
 	@GetMapping("/estatistica")
@@ -624,6 +657,8 @@ public class IndexController {
 		tipoOcorrencia(model);
 		regiao(model);
 		busqueTnTI(model);
+		busqueProjectoLinha(model);
+		
 		
 		
 		return "publico/estastica";

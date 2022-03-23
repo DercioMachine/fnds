@@ -738,6 +738,74 @@ function onChangePorAno(){
     ocorrenciasPorCanalEntrada();
     ocorrenciasPorCategoria();
     ocorrenciasPorProjecto();
+    ocorrenciasPorProjectoLinha();
+    
+    
+    function ocorrenciasPorProjectoLinha(){
+    	var nomeProjecto = /*[[${nomeProjecto}]]*/""
+       	var periodo= /*[[${periodo}]]*/""
+       	var nrocorrencias= /*[[${nrocorrencias}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+       	      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projectol'), {
+       	      		chart: {
+       	      			type: "line",
+       	      			fontFamily: 'inherit',
+       	      			height: 240,
+       	      			parentHeightOffset: 0,
+       	      			toolbar: {
+       	      				show: false,
+       	      			},
+       	      			animations: {
+       	      				enabled: false
+       	      			},
+       	      		},
+       	      		fill: {
+       	      			opacity: 1,
+       	      		},
+       	      		stroke: {
+       	      			width: 2,
+       	      			lineCap: "round",
+       	      			curve: "straight",
+       	      		},
+       	      		series: [{
+       	      			name: nomeProjecto,
+       	      			data: nrocorrencias
+       	      		}],
+       	      		grid: {
+       	      			padding: {
+       	      				top: -20,
+       	      				right: 0,
+       	      				left: -4,
+       	      				bottom: -4
+       	      			},
+       	      			strokeDashArray: 4,
+       	      		},
+       	      		xaxis: {
+       	      			labels: {
+       	      				padding: 0,
+       	      			},
+       	      			tooltip: {
+       	      				enabled: false
+       	      			},
+       	      			categories: periodo,
+       	      		},
+       	      		yaxis: {
+       	      			labels: {
+       	      				padding: 4
+       	      			},
+       	      		},
+       	      		colors: ["#ff922b", "#206bc4", "#5eba00"],
+       	      		legend: {
+       	      			show: false,
+       	      		},
+       	      	})).render();
+       	      });
+       	
+           	
+    }
+    
+    
     
     function ocorrenciasPorProjecto(){
     	var nomes = /*[[${nomesProjecto}]]*/""

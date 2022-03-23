@@ -468,7 +468,8 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 		 public List<Object[]> busqueTudoAgrupadoPorProvinciaFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("ano") int ano);
 		
 	
-		 
+		 @Query(value="SELECT projecto.designacao,CONCAT(left(ltrim(rtrim(monthname(ocorrencia.created))),3),'/',RIGHT(year(ocorrencia.created),2)) as periodo, count(ocorrencia.id) as contado FROM ocorrencia INNER JOIN projecto ON ocorrencia.projecto_id = projecto.id WHERE year(ocorrencia.created)= :ano GROUP BY projecto.designacao order by ocorrencia.created",nativeQuery=true)
+			public List<Object[]> busqueTudoAgrupadoPorProjectoLinha(@Param("ano") int ano);
 		 
 		 @Query(value="Select projecto.designacao,\r\n"
 			 		+ "(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and year(ocorrencia.created)=(:ano) and ocorrencia.projecto_id=projecto.id and if(:projecto='',1=1,projecto.designacao=(:projecto)) \r\n"
