@@ -361,7 +361,43 @@ $('#comoboxDistrito').html(s);
 </script>
 
 
+    
+
+
     <script type="text/javascript">
+
+$(document).ready(function(){
+$('#comoboxDistrito').on('change',function(){
+
+var distritoId = $(this).val();
+
+// alert(distritoId);
+
+$.ajax({
+type: 'GET',
+//url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
+//url: 'http://fipag.herokuapp.com/posto/'+distritoId,
+url: 'http://localhost:8080/fnds/posto/'+distritoId,
+
+//url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
+
+success: function (result){
+var result = JSON.parse(result);
+var s = '';
+for(var i=0; i< result.length; i++){
+s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+}
+$('#comboboxPosto').html(s);
+}
+});
+
+
+});
+});
+</script>
+
+
+<script type="text/javascript">
 
 $(document).ready(function(){
 $('#categoria').on('change',function(){
@@ -385,39 +421,6 @@ for(var i=0; i< result.length; i++){
 s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
 }
 $('#subcategoria').html(s);
-}
-});
-
-
-});
-});
-</script>
-
-
-    <script type="text/javascript">
-
-$(document).ready(function(){
-$('#comoboxDistrito').on('change',function(){
-
-var distritoId = $(this).val();
-
-// alert(distritoId);
-
-$.ajax({
-type: 'GET',
-//url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
-//url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://localhost:8080/fnds/fnds/posto/'+distritoId,
-
-//url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-for(var i=0; i< result.length; i++){
-s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-}
-$('#comboboxPosto').html(s);
 }
 });
 
@@ -587,10 +590,10 @@ document.getElementById("cidadee").style.display="none";
 
     <!-- Conteudo -->
 
-    <div align="right" class="col-12">
+    <div align="left" class="col-12">
         <a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}" role="button">
             <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-            <span>Listar Ocorrências</span>
+            <span>Voltar</span>
         </a>
     </div>
 
@@ -712,7 +715,7 @@ document.getElementById("cidadee").style.display="none";
 
                     <div style="display: block" id="comunicacao" class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Canal Utilizado </label>
+                            <label class="form-label">Canal Utilizado<strong style="color:red">*</strong></label>
                             <select required class="form-control custom-select" th:field="*{formaComunicacao}" >
                              	<option value="">Selecione o Canal...</option>
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
@@ -735,9 +738,6 @@ document.getElementById("cidadee").style.display="none";
                             </select>
                         </div>
                     </div>
-
-
-
 
 
                 </div>

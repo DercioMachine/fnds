@@ -919,10 +919,10 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 // CHAMA METODO INTERNO
 
 @PostMapping("/filtrar1")
-	public String filtrar1(@RequestParam("datainicial") Date datainicial,
-							@RequestParam("datafinal") Date datafinal,
-							@RequestParam("projecto") String projecto,
-							Model model) {
+	public String filtrar1(@RequestParam(name = "datainicial", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datainicial,
+			@RequestParam(name = "datafinal", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datafinal,
+			@RequestParam("projecto")  String projecto,
+			Model model) {
 
 		
 		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto));
@@ -933,7 +933,7 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 		String projecto1="";
 		
 		if(projecto!="") {
-			projecto1=" do Projecto "+projecto;
+			projecto1=" - "+projecto;
 		}
 		
 		
@@ -970,11 +970,6 @@ public String filter1(@RequestParam(name = "datainicial", required = false) @Dat
 						@RequestParam("projecto")  String projecto,
 						Model model) {
 
-		System.out.println("DAADTTAAAIII = "+ datainicial);
-	System.out.println("DAADTTAAAffFFFF= "+ datafinal);
-	System.out.println("PPPPROOOOOJJJEEECCCCTTTOOOOO= "+ projecto);
-
-	
 	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro(datainicial, datafinal, projecto));
@@ -983,6 +978,13 @@ public String filter1(@RequestParam(name = "datainicial", required = false) @Dat
 	model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentesFiltro1(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidarFiltro1(datainicial, datafinal, projecto));
 	
+	
+	
+	String projecto1="";
+	
+	if(projecto!="") {
+		projecto1=" - "+projecto;
+	}
 
 		cidadeFiltro(model, datainicial, datafinal, projecto);
 		regiaoFiltro(model, datainicial, datafinal, projecto);
@@ -993,6 +995,12 @@ public String filter1(@RequestParam(name = "datainicial", required = false) @Dat
 		mesTnTIFiltro(model, datainicial, datafinal, projecto);
 		provinciaTnTIFiltro(model, datainicial, datafinal, projecto);
 		projectoTnTIFiltro(model, datainicial, datafinal, projecto);
+		
+		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+		String stringDatIncial= DateFor.format(datainicial);
+		String stringDatFinal= DateFor.format(datafinal);
+		
+		model.addAttribute("dados1", "De "+ stringDatIncial+" a "+stringDatFinal + " "+ projecto1);
 		
 		return "publico/estastica";
 	
@@ -1325,8 +1333,6 @@ int codSelected=0;
 		codSelected=codSelectedMes;
 	}
 	
-	System.out.println("sssssssssssssssssssssssssssssssssssss "+ano);
-	System.out.println("sssssssssssssssssssssssssssssssssssss "+radioButton);
 	
 	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro2(radioButton, codSelected, projecto, ano));

@@ -1,17 +1,14 @@
 package mz.fipag.grm;
 
+import java.util.Properties;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.support.ErrorPageFilter;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import javax.servlet.Filter;
-import java.util.Properties;
 
 @SpringBootApplication
 public class GrmApplication extends SpringBootServletInitializer{
@@ -48,7 +45,7 @@ public class GrmApplication extends SpringBootServletInitializer{
 	}
 
 
-	@Bean
+	/*@Bean
 	public ErrorPageFilter errorPageFilter() {
 		return new ErrorPageFilter();
 	}
@@ -60,6 +57,6 @@ public class GrmApplication extends SpringBootServletInitializer{
 		filterRegistrationBean.setEnabled(false);
 
 		return filterRegistrationBean;
-	}
+	}*/
 
 }

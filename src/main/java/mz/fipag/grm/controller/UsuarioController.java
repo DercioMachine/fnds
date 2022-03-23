@@ -76,11 +76,11 @@ public class UsuarioController {
 
         return "redirect:/listar/usuarios";
     }
-/*
-    @ModelAttribute("cidades")
-    public List<Cidade> listaDeCidades(){
-        return cidadeService.buscarTodos();
-    }
+
+	/*
+	 * @ModelAttribute("cidades") public List<Cidade> listaDeCidades(){ return
+	 * cidadeService.buscarTodos(); }
+	 */
 
     @GetMapping("/usuarios/editar/{id}")
     public String vistaEditarUsuario(@PathVariable("id") Long id, ModelMap model) {
@@ -90,7 +90,7 @@ public class UsuarioController {
         model.addAttribute("provincias", provinciaService.buscarTodos());
 
         return "usuarios/editarUsuarios";
-    }*/
+    }
 
     @PostMapping("/editar/usuarios")
     public String editarUsuario(User user, RedirectAttributes attr) {

@@ -35,6 +35,7 @@ import mz.fipag.grm.domain.PostoAdministrativo;
 import mz.fipag.grm.domain.Projecto;
 import mz.fipag.grm.domain.Provincia;
 import mz.fipag.grm.domain.Resolucao;
+import mz.fipag.grm.domain.SubCategoria;
 import mz.fipag.grm.domain.TipoAlerta;
 import mz.fipag.grm.domain.TipoOcorrencia;
 import mz.fipag.grm.domain.User;
@@ -538,7 +539,8 @@ public class OcorrenciaController {
     		ocorrencia.setValidado(true);
         	ocorrencia.setEstado("Validado");
         	ocorrencia.setResolucao("V");
-            ocorrenciaService.editar(ocorrencia);
+           // ocorrenciaService.editar(ocorrencia);
+            ocorrenciaRepository.save(ocorrencia);
             
             for(MultipartFile file: files) {
         		if(!file.getOriginalFilename().isEmpty()) {
@@ -693,6 +695,11 @@ public class OcorrenciaController {
 	@ModelAttribute("categorias")
 	public List<Categoria> listaDeCategorias(){
 		return categoriaService.buscarTodos();
+	}
+	
+	@ModelAttribute("subcategorias")
+	public List<SubCategoria> listaDesubCategorias(){
+		return (List<SubCategoria>) subCategoriaRepository.findAll();
 	}
 
 
