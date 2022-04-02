@@ -95,6 +95,7 @@ public class UsuarioController {
     @PostMapping("/editar/usuarios")
     public String editarUsuario(User user, RedirectAttributes attr) {
 
+    	user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
        // attr.addFlashAttribute("success","Categoria editada com sucesso.");
