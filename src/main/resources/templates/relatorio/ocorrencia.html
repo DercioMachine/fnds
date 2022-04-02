@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+
+
+<html lang="pt" layout:decorate="~{layout}" Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8"/>
+</head>
+
+<body>
+
+<div layout:fragment="corpo">
+  <!-- Conteudo -->
+
+  <script type="text/javascript">
+
+$(document).ready(function(){
+$('#cbxRegiao').on('change',function(){
+
+var regiaoId = $(this).val();
+
+ alert(regiaoId);
+
+$.ajax({
+type: 'GET',
+
+//url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
+//url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
+url: 'http://localhost:8080/fnds/regiao/'+regiaoId,
+//url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
+
+
+success: function (result){
+var result = JSON.parse(result);
+
+var s = '';
+for(var i=0; i< result.length; i++){
+s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+alert(s);
+}
+$('#cbxCidade').html(s);
+}
+});
+
+});
+});
+</script>
+
+
+
+  <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="card">
+    <div class="card-header">
+      <h3 class="card-title">Filtro</h3>
+    </div>
+    <div class="card-body">
+      <form id="divdata" th:action="@{/ocorrencia/filtrar}" method="POST">
+        <div class="row">
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="form-group">
+              <label class="form-label">Data Inical: </label>
+              <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                <input required="required" id="txtDate" value="" name="datainicial" type="date" class="form-control">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="form-group">
+              <label class="form-label">Data Final: </label>
+              <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                <input  required="required" id="txtDate2" value="" name="datafinal" type="date" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="form-group">
+              <label  class="form-label">Tipo de Ocorrência</label>
+              <select  name="tipoOcorrencia" class="form-control custom-select form-select" >
+                <option value="">Selecione o Tipo de Ocorrência...</option>
+                <option th:each="p : ${tipoOcorrencias}"
+                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+
+        <br>
+
+
+        <div class="row">
+
+          <div class="col-sm-6 col-lg-4">
+            <div class="form-group">
+              <label class="form-label">Estado</label>
+              <select name="estado" class="form-control custom-select form-select" >
+                <option value="">Selecione o Estado...</option>
+                <option value="T">Resolvido(s)</option>
+                <option value="R">Em Resolução</option>
+                <option value="A">Em Acopanhamento</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="projectoo" class="col-sm-6 col-lg-4">
+            <div class="form-group">
+              <label for="projecto" class="form-label">Projecto</label>
+              <select id="projecto" name="projecto" class="form-control custom-select form-select" >
+                <option value="">Selecione o Projecto...</option>
+                <option th:each="p : ${projectos}"
+                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div id="cidadee" class="col-sm-6 col-lg-4">
+            <div class="form-group">
+              <label for="cbxCidade" class="form-label">Cidade</label>
+              <select id="cbxCidade" name="provincia" class="form-control custom-select form-select" >
+                <option value="">Selecione a Cidade...</option>
+                <option th:each="p : ${provincias}"
+                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+
+        <br style="border: 1px solid grey">
+
+        <div style="display: inline;" class="row">
+
+                <span>
+                              <button class="btn btn-info " type="submit" >
+                              <i class="fa fa-search mr-2"></i>
+                              Pesquisar
+                              </button>
+                              </span>
+          <span>
+                  <a target="_blank" class="btn btn-secondary" th:href="@{/relatorio/pdf}"  role="button">
+                    <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+                    <i class="fa fa-print mr-2"></i>
+                     Imprimir
+                </a>
+                </span>
+
+        </div>
+      </form>
+
+      <br>
+
+
+    </div>
+
+  </div>
+
+  <br>
+
+  <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="card">
+
+      <br>
+
+      <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+        <table id="example" class="display">
+          <thead>
+          <tr style="color: rgb(65,105,225)">
+            <td class="w-2">#</td>
+            <td class="w-4">Código</td>
+            <td >Provincias</td>
+            <td>Ocorrência</td>
+            <td>Cadastro</td>
+            <td>Projecto</td>
+            <td>Tipo</td>
+            <td class="w-4">Assunto</td>
+            <td class="w-4">Estado</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="p, index : ${ocorrencia}">
+            <!-- <tr th:each="p : ${ocorrencias}"> -->
+            <!-- <td th:text="${index.size-(index.count)}"><span class="text-muted">01401</span></td> -->
+            <td th:text="${index.count}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+            <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
+            <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
+            <!-- <td th:text="${p.projecto.designacao}"><span class="text-muted">01401</span></td> -->
+
+            <td>
+              <span th:if="${p.projecto != null}" th:text="${p.projecto.designacao}"></span>
+            </td>
+            <td>
+              <span th:if="${p != null && p.tipoOcorrencia != null && p.tipoOcorrencia.designacao != null}" th:text="${p.tipoOcorrencia.designacao}"></span>
+            </td>
+            <!--  <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td> -->
+            <!--  <td th:text="${p.internoExterno}">Auxiliar Contábil</td> -->
+            <!-- <td th:text="${p.procedencia}">Auxiliar Contábil</td> -->
+
+
+
+
+            <td>
+              <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
+            </td>
+
+            <td align="left" style="text-align: left;">
+
+              <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
+                Procedente
+                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
+              </button>
+
+              <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
+                Improcedente
+                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
+              </button>
+
+              <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
+                Resolvendo
+                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+              </button>
+
+              <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
+                Acompanhando
+                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+              </button>
+
+              <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
+                Resolvido
+                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
+              </button>
+
+              <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+                <span th:if="${p.estado == 'Temporario'}">Temporario</span>
+                <span th:if="${p.estado == 'Registado'}">Pendente</span>
+
+                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+              </button>
+
+              <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
+              Pendente
+              <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+              </button> -->
+
+            </td>
+
+
+
+
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div th:replace="fragmentos/modal :: modal"></div>
+
+
+
+  <div class="modal modal-blur fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">nn</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+$('#modal').on('show.bs.modal', function (event) {
+var button = $(event.relatedTarget) // Botão que acionou o modal
+var nrAcorrencia = button.data('whatever') // Extrai informação dos atributos data-*
+var assunto = button.data('whatever-descricao')
+// Se necessário, você pode iniciar uma requisição AJAX aqui e, então, fazer a atualização em um callback.
+// Atualiza o conteúdo do modal. Nós vamos usar jQuery, aqui. No entanto, você poderia usar uma biblioteca de data binding ou outros métodos.
+var modal = $(this)
+
+modal.find('.modal-title').html("Ocorrência N° "+nrAcorrencia)
+modal.find('.modal-body').html(assunto)
+})
+</script>
+
+  <!-- Conteudo-->
+
+</div>
+</body>
+</html>

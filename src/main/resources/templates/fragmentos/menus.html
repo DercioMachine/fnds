@@ -17,19 +17,7 @@
                             </span>
                         </a>
                     </li>
-                    
-                    <!-- <li class="nav-item " sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN')" >
-                        <a class="nav-link"   th:href="@{/listar/ocorrencia}" >
 
-                             <span class="nav-link-icon d-md-none d-lg-inline-block">
-								<i style="font-size: 15pt; color: #60a18a" class="far fa-comments"></i>
-                            </span>
-
-                            <span class="nav-link-title">
-                                Ocorrências
-                            </span>
-                        </a>
-                    </li> -->
                     
                     
                     
@@ -57,6 +45,22 @@
                             </a>
 
                         </div>
+                    </li>
+
+
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_OBSERVADOR','ROLE_REGISTADOR','ROLE_VALIDADOR')" >
+                        <a class="nav-link" th:href="@{/relatorio/ocorrencia}" >
+
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            	<i style="font-size: 15pt; color: #60a18a" class="fas fa-file-chart-line"></i>
+
+
+                            </span>
+
+                            <span class="nav-link-title">
+                                Relatórios
+                            </span>
+                        </a>
                     </li>
                     
                     

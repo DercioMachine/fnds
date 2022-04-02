@@ -610,7 +610,15 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 				+ " and IF((:datainicial)=NULL and (:datafinal)=NULL,1=1, ocorrencia.created between (:datainicial) and (:datafinal))",nativeQuery=true)
 	  public List<Ocorrencia>  totalDeOcorrenciasPorDataseProjecto(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
 
-	
+	@Query(value="select * from ocorrencia where estado='Validado' and year(created)= :ano", nativeQuery=true)
+	public List<Ocorrencia> ocorrenciasCorrentes(@Param("ano") int ano);
+
+	@Query(value="select *,c.designacao as provincia from ocorrencia o "
+			+ " inner join projecto p "
+			+ " inner join provincia c "
+			+ " inner join tipo_ocorrencia t "
+			+ " where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id and o.estado='Validado' and o.created between (:datainicial) and (:datafinal) and if (:projecto='', 1=1,p.designacao =(:projecto)) and if (:provincia='',1=1,c.designacao=(:provincia)) and if (:tipoOcorrencia='',1=1,t.designacao=(:tipoOcorrencia)) and if (:estado='',1=1,o.resolucao=(:estado))",nativeQuery=true)
+	public List<Ocorrencia>  totalDeOcorrenciasPorDataseProjectoRelatorio(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("estado") String estado, @Param("tipoOcorrencia") String tipoOcorrencia);
 	
 /* FIM */
 	

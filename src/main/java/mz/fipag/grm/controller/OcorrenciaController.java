@@ -1,5 +1,6 @@
 package mz.fipag.grm.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,9 +10,12 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 
+import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,18 +52,6 @@ import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.repository.SubCategoriaRepository;
 import mz.fipag.grm.repository.UserRepository;
-import mz.fipag.grm.service.CategoriaService;
-import mz.fipag.grm.service.DistritoService;
-import mz.fipag.grm.service.DocStorageService;
-import mz.fipag.grm.service.EmailService;
-import mz.fipag.grm.service.EmpreiterioService;
-import mz.fipag.grm.service.OcorrenciaService;
-import mz.fipag.grm.service.PostoAdministrativoService;
-import mz.fipag.grm.service.ProjectoService;
-import mz.fipag.grm.service.ProvinciaService;
-import mz.fipag.grm.service.SMSService;
-import mz.fipag.grm.service.TipoAlertaService;
-import mz.fipag.grm.service.TipoOcorrenciaService;
 
 
 @Controller
@@ -116,7 +108,9 @@ public class OcorrenciaController {
     
     @Autowired
     private EmpreiterioService empreiteiroService;
-    
+
+    @Autowired
+    private JasperService service;
 
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
@@ -179,7 +173,18 @@ public class OcorrenciaController {
 
         return "ocorrencia/observadorDetalheOcorrencia";
     }
-    
+
+    @GetMapping("/relatorio/pdf")
+    public void exibirRelatorio09(
+            HttpServletResponse response) throws IOException {
+        String code = "-8";
+        service.addParams("logo", "logoa.PNG");
+        //service.addParams("projecto", null);
+        byte[] bytes = service.exportarPDF(code);
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        response.setHeader("Content-disposition", "inline; filename=relatorio"+ code + ".pdf" );
+        response.getOutputStream().write(bytes);
+    }
     
     @GetMapping("/listar/teste")
     public String litarTeste(ModelMap model){
