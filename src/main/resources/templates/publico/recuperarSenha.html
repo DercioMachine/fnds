@@ -68,30 +68,26 @@
 
               <div class="form-group">
                 <label class="form-label">
-                  Digite o numero de telefone ou email fornacedo durante a criuacao de utilizador
+                  Digite o número de telefone ou email fornecido durante a criação de utilizador.
                 </label>
               </div>
+              
+                            <div class="form-group">
+                                <label class="form-label">Selecione a forma de Recuperação de Senha</label>
+                                <select name="forma"  class="form-control custom-select form-select">
+                                    <option value="contacto">Nr de Telefone</option>
+                                    <option value="email">Email</option>
+                                </select>
+                            </div>
+              
 
-
-              <div class="form-group">
-                <label class="form-label">Telefone</label>
-                <input type="number" class="form-control" name="telefone" placeholder="Digite o numero de telefone">
+              <div id="telefone" class="form-group">
+                <label class="form-label">Digite aqui</label>
+                <input type="text" class="form-control" name="telefoneEmail" placeholder="Digite aqui... ">
               </div>
 
               <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-              <div class="form-group">
-                <label class="form-label" >
-                 <center>OU</center>
-                </label>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">
-                  Email
-                </label>
-                <input type="text" class="form-control" name="email"  placeholder="Email">
-              </div>
 
               <div class="form-group">
                 <div class="text-center" th:if="${error}">

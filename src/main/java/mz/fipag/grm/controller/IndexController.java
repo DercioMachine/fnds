@@ -1,5 +1,6 @@
 package mz.fipag.grm.controller;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -156,60 +157,61 @@ public class IndexController {
 	}
 
 	@PostMapping("/recuperar/password")
-	public String recuperarPassword(User user, @RequestParam String telefone,@RequestParam String email, ModelMap model, RedirectAttributes attr ) throws MessagingException {
+	public String recuperarPassword(User user, @RequestParam String forma,@RequestParam String telefoneEmail, ModelMap model, RedirectAttributes attr ) throws MessagingException {
 
-		user = userRepository.pesquisarPorTelefoneOuEmail(telefone,email);
-
-		System.out.println("User "+user);
-
-		if(user==null) {
-
-			String telefone1="";
-			String email1="";
-
-			if(telefone!=null){
-				telefone1 = "telefone: "+telefone;}
-
-			if(email!=null){
-				email1 = "email: "+email;}
-
-			model.addAttribute("error", "Não existe nenhum utilizador com "+telefone1+" "+email1);
-
-			return "publico/recuperarSenha";
-		}
 		int codigo = ThreadLocalRandom.current().nextInt(99999, 1000000);
 		String novasenha = ""+codigo;
+		
+		if (forma.equals("contacto")){
+			user = userRepository.pesquisarPorTelefone(telefoneEmail);
+			
+			if(user==null) { 
+				
+				model.addAttribute("error", "Não existe nenhum utilizador com "+telefoneEmail+".");
+				return "publico/recuperarSenha";
+				
+			}else {
+				user.setPassword(passwordEncoder.encode(novasenha));
+				userRepository.save(user);
+				
+				String mensagem = "A sua Senha Foi recuperada com sucesso, a sua nova senha é: "+novasenha;
+				smsService.sendSMS("+258"+user.getTelefone(),mensagem);
+				
+				model.addAttribute("success", "Recuperação efectuado com sucesso, verifique o teu telefone.");
 
-		user.setPassword(passwordEncoder.encode(novasenha));
-		userRepository.save(user);
+				return "publico/login";
+				
+			}
+			
+		}else {
+			
+			user = userRepository.pesquisarPorEmail(telefoneEmail);
+			
+				if(user==null) { 
+				
+				model.addAttribute("error", "Não existe nenhum utilizador com "+telefoneEmail+".");
+				return "publico/recuperarSenha";
+				
+			}else {
+				user.setPassword(passwordEncoder.encode(novasenha));
+				userRepository.save(user);
+				
+				String descricao = "A sua Senha foi recuperada com sucesso, a sua nova senha é: "+novasenha;
+				String nome = "A sua Senha foi recuperada com sucesso";
+				String destino = user.getEmail();
+				String assunto = "Recuperação da Senha";
 
-		String contacto = telefone.isEmpty() ? null : telefone;
-		String emaill = email.isEmpty() ? null : email;
+				emailService.enviarEmail(descricao,nome,destino,assunto);
+				
+				model.addAttribute("success", "Recuperação efectuado com sucesso, verifique o teu email");
 
-
-		if(contacto!=null){
-
-			String mensagem = "A sua Senha Foi recuperada com sucesso, a sua nova senha é: "+novasenha;
-			smsService.sendSMS("+258"+user.getTelefone(),mensagem);
-
+				return "publico/login";
+				
+			}	
+			
 		}
-		if(emaill!=null){
-
-			String descricao = "A sua Senha foi recuperada com sucesso, a sua nova senha é: "+novasenha;
-			String nome = "A sua Senha foi recuperada com sucesso";
-			String destino = user.getEmail();
-			String assunto = "Recuperação da Senha";
-
-			emailService.enviarEmail(descricao,nome,destino,assunto);
-
-		}
-
-
-		//attr.addFlashAttribute("success", "Recuperação efectuado com sucesso, verifique o teu telefone/email");
-
-		model.addAttribute("success", "Recuperação efectuado com sucesso, verifique o teu telefone/email");
-
-		return "publico/login";
+		
+		
 	}
 
 	void sendEmail() {
@@ -643,6 +645,7 @@ public class IndexController {
 		
 		
 		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
+		model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamento(currentYear));
 		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
@@ -677,6 +680,7 @@ public class IndexController {
 		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentes(currentYear));
 		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadas(currentYear));
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
+		model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamento(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
 		model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoes(currentYear));
 
@@ -820,9 +824,9 @@ public void mesTnTIFiltro(Model model, Date datainicial, Date datafinal, String 
 				
 				
 				
-				BigInteger[] nrocorrenciasT = new BigInteger[lista.size()];
-				BigInteger[] nrocorrenciasNT = new BigInteger[lista.size()];
-				BigInteger[] nrocorrenciasI = new BigInteger[lista.size()];
+				BigDecimal[] nrocorrenciasT = new BigDecimal[lista.size()];
+				BigDecimal[] nrocorrenciasNT = new BigDecimal[lista.size()];
+				BigDecimal[] nrocorrenciasI = new BigDecimal[lista.size()];
 				
 				int i=0;
 				
@@ -833,9 +837,9 @@ public void mesTnTIFiltro(Model model, Date datainicial, Date datafinal, String 
 					
 				nomes[i] = (String) ob[0];
 				
-				nrocorrenciasT[i] = (BigInteger) ob[1];
-				nrocorrenciasNT[i] = (BigInteger) ob[2];
-				nrocorrenciasI[i] = (BigInteger) ob[3];
+				nrocorrenciasT[i] = (BigDecimal) ob[1];
+				nrocorrenciasNT[i] = (BigDecimal) ob[2];
+				nrocorrenciasI[i] = (BigDecimal) ob[3];
 				
 				i++;
 				 
@@ -964,6 +968,7 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro(datainicial, datafinal, projecto));
 		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro(datainicial, datafinal, projecto));
 		model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoesFiltro(datainicial, datafinal, projecto));
+		model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro(datainicial, datafinal, projecto));
 		
 		String projecto1="";
 		
@@ -1008,6 +1013,7 @@ public String filter1(@RequestParam(name = "datainicial", required = false) @Dat
 	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro(datainicial, datafinal, projecto));
+	model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrenciasFiltro1(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentesFiltro1(datainicial, datafinal, projecto));
@@ -1253,6 +1259,7 @@ public String filtrar(@RequestParam("ano") int ano,
 		@RequestParam(name="codSelectedTrimestre", required = false, defaultValue = "0" ) int codSelectedTrimestre,
 		@RequestParam(name="codSelectedMes", required = false, defaultValue = "0") int codSelectedMes,
 		@RequestParam(name="projecto", required = false) String projecto,
+		@RequestParam(name="provincia", required = false) String provincia,
 		Model model) {
 	
 	int codSelected=0;
@@ -1268,11 +1275,11 @@ public String filtrar(@RequestParam("ano") int ano,
 	}
 	
 	
-	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro2(radioButton, codSelected, projecto, ano));
+	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro2(radioButton, codSelected, projecto, provincia, ano));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoesFiltro2(radioButton, codSelected, projecto, ano));
-	
+	model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro2(radioButton, codSelected, projecto, ano));
 	
 	cidadeFiltro2(model, ano, radioButton, codSelected, projecto);
 	mesTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
@@ -1351,6 +1358,7 @@ public String filter(@RequestParam("ano") int ano,
 		@RequestParam(name="codSelectedTrimestre") int codSelectedTrimestre,
 		@RequestParam(name="codSelectedMes") int codSelectedMes,
 		@RequestParam(name="projecto") String projecto,
+		@RequestParam(name="provincia") String provincia,
 		Model model) {
 
 	
@@ -1369,14 +1377,14 @@ int codSelected=0;
 	}
 	
 	
-	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro2(radioButton, codSelected, projecto, ano));
+	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro2(radioButton, codSelected, projecto,provincia, ano));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoesFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrenciasFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentesFiltro2(radioButton, codSelected, projecto, ano));
 	model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidarFiltro2(radioButton, codSelected, projecto, ano));
-	
+	model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro2(radioButton, codSelected, projecto, ano));
 	
 	cidadeFiltro2(model, ano, radioButton, codSelected, projecto);
 	mesTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
@@ -1642,7 +1650,12 @@ String periodo="";
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {
 		return provinciaService.buscarTodos();
-	}	
+	}
+    
+	@ModelAttribute("ocorrenciasAno")
+   	public List<Object[]> listaDeOcorrenciaAno() {
+   		return  ocorrenciaRepository.findAnos();
+   	}
     
     @ModelAttribute("distritos")
 	public List<Distrito> listaDeDistritos() {
@@ -1672,6 +1685,11 @@ String periodo="";
 	@ModelAttribute("projectos")
 	public List<Projecto> listaDeDeProjectos(){
 		return projectoService.buscarTodos();
+	}
+	
+	@ModelAttribute("provincias")
+	public List<Provincia> listaDeDeProvincias(){
+		return provinciaService.buscarTodos();
 	}
 	
 	@ModelAttribute("categorias")
