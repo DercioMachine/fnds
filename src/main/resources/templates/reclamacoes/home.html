@@ -416,7 +416,7 @@ function onChangePorAno(){
     </form>
     
 
-     <!-- <div class="page-body">
+     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
@@ -477,7 +477,7 @@ function onChangePorAno(){
             </div>
         </div>
     </div> 
- -->
+ 
 
 
 
@@ -488,7 +488,7 @@ function onChangePorAno(){
             
 
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:#4299f5; border: 1px solid grey" class="card">
+                    <div style="background:#4299f5;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Ocorrências</div>
@@ -505,7 +505,7 @@ function onChangePorAno(){
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
                             </div>
-                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
                         </div>
                     </div>
@@ -526,7 +526,7 @@ function onChangePorAno(){
                 </div>
                 
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:#C3f1cc;" class="card">
+                    <div style="background:rgba(0,47,167,0.8);" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Em Andamento</div>
@@ -545,7 +545,7 @@ function onChangePorAno(){
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Não Resolvidas</div>
                             </div>
-                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}-${totalDeReclamacoesTerminadas}]]</span>
                         </div>
                     </div>
@@ -712,6 +712,7 @@ function onChangePorAno(){
        	var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
        	var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
        	var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
+       	var numeroocorencia4= /*[[${numeroocorenciaProjecto4}]]*/""
        	
        		document.addEventListener("DOMContentLoaded", function () {
               	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
@@ -739,16 +740,22 @@ function onChangePorAno(){
               		fill: {
               			opacity: 1,
               		},
-              		series: [{
-              			name: "Não Resolvidas",
+              		series: [
+              			{
+                  			name: "Reclamações",
+                  			data: numeroocorencia1
+                  		},{
+              			name: "Resolvidas",
               			data: numeroocorencia2
               		},{
-              			name: "Resolvidas",
-              			data: numeroocorencia1
-              		},{
-              			name: "Improcedentes",
+              			name: "Em Andamento",
               			data: numeroocorencia3
-              		}],
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia4
+              		}
+              		
+              		],
               		grid: {
               			padding: {
               				top: -20,
@@ -775,7 +782,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#EF5350", "#5eba00", "#FFA726"],
+              		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
               		legend: {
               			show: false,
               		},
@@ -984,6 +991,7 @@ function onChangePorAno(){
         var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
         var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
         var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+        var numeroocorencia4= /*[[${numeroocorencia4}]]*/""
         
         	
         	document.addEventListener("DOMContentLoaded", function () {
@@ -1013,15 +1021,20 @@ function onChangePorAno(){
               		},
               		series: [
               			{
-                  			name: "Não Resolvidas",
-                  			data: numeroocorencia2
+                  			name: "Reclamações",
+                  			data: numeroocorencia1
                   		},{
               			name: "Resolvidas",
-              			data: numeroocorencia1
+              			data: numeroocorencia2
               		},{
-              			name: "Improcedentes",
+              			name: "Em Andamento",
               			data: numeroocorencia3
-              		}],
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia4
+              		}
+              		
+              		],
               		grid: {
               			padding: {
               				top: -20,
@@ -1048,7 +1061,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#EF5350", "#5eba00", "#FFA726"],
+              		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
               		legend: {
               			show: false,
               		},
@@ -1066,6 +1079,7 @@ function onChangePorAno(){
     var numeroocorencia1= /*[[${nrocorrenciasMesT}]]*/""
     var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
     var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
+   	var numeroocorencia4= /*[[${nrocorrenciasMesRN}]]*/""
     
     	document.addEventListener("DOMContentLoaded", function () {
           	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
@@ -1095,14 +1109,19 @@ function onChangePorAno(){
           		series: [
           			{
               			name: "Reclamações",
-              			data: numeroocorencia2
+              			data: numeroocorencia1
               		},{
           			name: "Resolvidas",
-          			data: numeroocorencia1
+          			data: numeroocorencia2
           		},{
-          			name: "Consultas/Sugestões...",
+          			name: "Em Andamento",
           			data: numeroocorencia3
-          		}],
+          		},{
+          			name: "Não Resolvidas",
+          			data: numeroocorencia4
+          		}
+          		
+          		],
           		grid: {
           			padding: {
           				top: -20,
@@ -1129,7 +1148,7 @@ function onChangePorAno(){
           				padding: 4
           			},
           		},
-          		colors: ["#EF5350", "#5eba00", "#FFA726"],
+          		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
           		legend: {
           			show: false,
           		},
