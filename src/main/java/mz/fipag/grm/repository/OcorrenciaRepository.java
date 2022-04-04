@@ -63,6 +63,52 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     
    	public Object totalDeOcorrenciasProcedentesFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("ano") int ano);
     
+    
+    @Query(value="Select count(*) from ocorrencia, projecto, provincia "
+    		+ "where ocorrencia.projecto_id=projecto.id and ocorrencia.provincia_id=provincia.id and procedencia='Não' and estado='Validado' and year(ocorrencia.created)=(:ano) and\r\n"
+    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and "
+    		+ "if(:provincia='',1=1,provincia.designacao=(:provincia)) and "
+    		+ "IF(:radioButton='',1=1,\r\n"
+    		+ "CASE\r\n"
+    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
+    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
+    		+ "    WHEN (:radioButton) = 'M' THEN month(ocorrencia.created)=:codSelected\r\n"
+			+ "    WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
+    		+ "END);", nativeQuery=true)
+    
+   	public Object totalDeOcorrenciasImprocedentesFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("ano") int ano);
+    
+    @Query(value="Select count(*) from ocorrencia, projecto, provincia "
+    		+ "where ocorrencia.projecto_id=projecto.id and ocorrencia.provincia_id=provincia.id and estado='Registado' and year(ocorrencia.created)=(:ano) and\r\n"
+    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and "
+    		+ "if(:provincia='',1=1,provincia.designacao=(:provincia)) and "
+    		+ "IF(:radioButton='',1=1,\r\n"
+    		+ "CASE\r\n"
+    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
+    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
+    		+ "    WHEN (:radioButton) = 'M' THEN month(ocorrencia.created)=:codSelected\r\n"
+			+ "    WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
+    		+ "END);", nativeQuery=true)
+    
+   	public Object totalDeOcorrenciasPorValidarFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("ano") int ano);
+    
+    
+    @Query(value="Select count(*) from ocorrencia, projecto, provincia "
+    		+ "where ocorrencia.projecto_id=projecto.id and ocorrencia.provincia_id=provincia.id and estado!='Temporario' and year(ocorrencia.created)=(:ano) and\r\n"
+    		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and "
+    		+ "if(:provincia='',1=1,provincia.designacao=(:provincia)) and "
+    		+ "IF(:radioButton='',1=1,\r\n"
+    		+ "CASE\r\n"
+    		+ "    WHEN (:radioButton) = 'S' THEN if(:codSelected=1,month(ocorrencia.created)<=6,month(ocorrencia.created)>6)\r\n"
+    		+ "    WHEN (:radioButton) = 'T' THEN quarter(ocorrencia.created)=:codSelected\r\n"
+    		+ "    WHEN (:radioButton) = 'M' THEN month(ocorrencia.created)=:codSelected\r\n"
+			+ "    WHEN (:radioButton) = 'A' THEN year(ocorrencia.created)=(:ano)\r\n"
+    		+ "END);", nativeQuery=true)
+        
+   	public Object totalDeOcorrenciasFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("ano") int ano);
+    
+    
+    
     @Query(value="select count(*) from Ocorrencia where procedencia='Não' and estado='Validado' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrenciasImprocedentes(@Param("ano") int ano);
     
