@@ -978,10 +978,32 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 	public String filtrar1(@RequestParam(name = "datainicial", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datainicial,
 			@RequestParam(name = "datafinal", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datafinal,
 			@RequestParam("projecto")  String projecto,
+			@RequestParam("provincia")  String provincia,
 			Model model) {
+	
+	
+
+	/****************************************** CARDS PRETO BRANCO ************************************************/
+	
+	
+	/*model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentes(currentYear));
+	model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
+	*/
+	
+	//model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentes(currentYear));
+	
+	//model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidar(currentYear));
+	
+	model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeOcorrenciasPorValidarFiltro(datainicial, datafinal, projecto, provincia));
+	model.addAttribute("totalDeOcorrenciasImprocedentes", ocorrenciaRepository.totalDeOcorrenciasImprocedentesFiltro(datainicial, datafinal, projecto, provincia));
+	/******************************************FIM CARDS PRTO BRANCO ************************************************/
+
+	//model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalDeOcorrencias(currentYear)); // TA EM AMBOS
+	
+	model.addAttribute("totalOcorrencias", ocorrenciaRepository.totalOcorrenciasFiltro(datainicial, datafinal, projecto, provincia));
 
 		
-		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto));
+		model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto, provincia));
 		model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro(datainicial, datafinal, projecto));
 		model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro(datainicial, datafinal, projecto));
 		model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoesFiltro(datainicial, datafinal, projecto));
@@ -992,9 +1014,6 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 		if(projecto!="") {
 			projecto1=" - "+projecto;
 		}
-		
-		
-		
 		
 
 			cidadeFiltro(model, datainicial, datafinal, projecto);
@@ -1025,9 +1044,10 @@ public void categoriaFiltro(Model model, Date datainicial, Date datafinal, Strin
 public String filter1(@RequestParam(name = "datainicial", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datainicial,
 						@RequestParam(name = "datafinal", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datafinal,
 						@RequestParam("projecto")  String projecto,
+						@RequestParam("provincia")  String provincia,
 						Model model) {
 
-	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto));
+	model.addAttribute("totalDeOcorrenciasProcedentes", ocorrenciaRepository.totalDeOcorrenciasProcedentesFiltro(datainicial, datafinal, projecto, provincia));
 	model.addAttribute("totalDeReclamacoesProcedentes", ocorrenciaRepository.totalDeReclamacoesProcedentesFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesTerminadas", ocorrenciaRepository.totalDeReclamacoesTerminadasFiltro(datainicial, datafinal, projecto));
 	model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro(datainicial, datafinal, projecto));
@@ -1157,112 +1177,113 @@ public void canalCategoriaFiltro2(Model model, int ano, String radioButton, int 
 }
 
 
-public void mesTnTIFiltro2(Model model, int ano, String radioButton, int codSelected, String projecto){
+public void mesTnTIFiltro2(Model model, int ano, String radioButton, int codSelected, String projecto, String provincia){
 	
-	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorMesFiltro2(radioButton, codSelected, projecto, ano);
+	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorMesFiltro2(radioButton, codSelected, projecto, provincia, ano);
 
 
 	String[] nomes = new String[lista.size()];
-			
-			BigInteger[] nrocorrenciasT = new BigInteger[lista.size()];
-			BigInteger[] nrocorrenciasNT = new BigInteger[lista.size()];
-			BigInteger[] nrocorrenciasI = new BigInteger[lista.size()];
-			
-			int i=0;
-			
-			
-			
-			
-			for (Object[] ob : lista){
-				
-			nomes[i] = (String) ob[0];
-			
-			nrocorrenciasT[i] = (BigInteger) ob[1];
-			nrocorrenciasNT[i] = (BigInteger) ob[2];
-			nrocorrenciasI[i] = (BigInteger) ob[3];
-			
-			i++;
-			}
-			
-			model.addAttribute("nomesMeses",nomes);
-			model.addAttribute("nrocorrenciasMesT", nrocorrenciasT);
-			model.addAttribute("nrocorrenciasMesNT", nrocorrenciasNT);
-			model.addAttribute("nrocorrenciasMesI", nrocorrenciasI);
+
+	BigDecimal[] nrocorrenciasT = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrenciasNT = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrenciasI = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrenciasRN = new BigDecimal[lista.size()];
+	
+	int i=0;
+	
+	for (Object[] ob : lista){
+		
+	nomes[i] = (String) ob[0];
+	
+	nrocorrenciasT[i] = (BigDecimal) ob[1];
+	nrocorrenciasNT[i] = (BigDecimal) ob[2];
+	nrocorrenciasI[i] = (BigDecimal) ob[3];
+	nrocorrenciasRN[i] = (BigDecimal) ob[4];
+	
+		i++;
+		
+	}
+	
+	model.addAttribute("nomesMeses",nomes);
+	model.addAttribute("nrocorrenciasMesT", nrocorrenciasT);
+	model.addAttribute("nrocorrenciasMesNT", nrocorrenciasNT);
+	model.addAttribute("nrocorrenciasMesI", nrocorrenciasI);
+	model.addAttribute("nrocorrenciasMesRN", nrocorrenciasRN);
 			
 
 }
 
 
 
-public void provinciaTnTIFiltro2(Model model, int ano, String radioButton, int codSelected, String projecto){
+public void provinciaTnTIFiltro2(Model model, int ano, String radioButton, int codSelected, String projecto, String provincia){
 	
-	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProvinciaFiltro2(radioButton, codSelected, projecto, ano);
+	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProvinciaFiltro2(radioButton, codSelected, projecto, provincia, ano);
 
 
 	String[] nomes = new String[lista.size()];
-			
-			BigInteger[] nrocorrenciasT = new BigInteger[lista.size()];
-			BigInteger[] nrocorrenciasNT = new BigInteger[lista.size()];
-			BigInteger[] nrocorrenciasI = new BigInteger[lista.size()];
-			
-			int i=0;
-			
-			
-			
-			
-			for (Object[] ob : lista){
-				
-			nomes[i] = (String) ob[0];
-			
-			nrocorrenciasT[i] = (BigInteger) ob[1];
-			nrocorrenciasNT[i] = (BigInteger) ob[2];
-			nrocorrenciasI[i] = (BigInteger) ob[3];
-			
-				
-			i++;
-			}
-			
-			model.addAttribute("nomesProvincias",nomes);
-			model.addAttribute("numeroocorencia1", nrocorrenciasT);
-			model.addAttribute("numeroocorencia2", nrocorrenciasNT);
-			model.addAttribute("numeroocorencia3", nrocorrenciasI);
+	
+	BigDecimal[] nrocorrencias1 = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrencias2 = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrencias3 = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrencias4 = new BigDecimal[lista.size()];
+	
+	int i=0;
+	for (Object[] ob : lista){
+
+	nomes[i] = (String) ob[0];
+		
+	nrocorrencias1[i] = (BigDecimal) ob[1];
+	nrocorrencias2[i] = (BigDecimal) ob[2];
+	nrocorrencias3[i] = (BigDecimal) ob[3];
+	nrocorrencias4[i] = (BigDecimal) ob[4];
+		
+		
+		i++;
+	}
+
+
+	model.addAttribute("nomesProvincias",nomes);
+	model.addAttribute("numeroocorencia1", nrocorrencias1);
+	model.addAttribute("numeroocorencia2", nrocorrencias2);
+	model.addAttribute("numeroocorencia3", nrocorrencias3);
+	model.addAttribute("numeroocorencia4", nrocorrencias4);
 			
 
 }
 
 
-public void projectoTnTIFiltro2(Model model, int ano, String radioButton, int codSelected, String projecto){
+public void projectoTnTIFiltro2(Model model, int ano, String radioButton, int codSelected, String projecto, String provincia){
 	
-	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProjectoFiltro2(radioButton, codSelected, projecto, ano);
+	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorProjectoFiltro2(radioButton, codSelected, projecto, provincia, ano);
 
 
-	String[] nomes = new String[lista.size()];
-			
-			BigInteger[] nrocorrenciasT = new BigInteger[lista.size()];
-			BigInteger[] nrocorrenciasNT = new BigInteger[lista.size()];
-			BigInteger[] nrocorrenciasI = new BigInteger[lista.size()];
-			
-			int i=0;
-			
-			
-			
-			
-			for (Object[] ob : lista){
-				
-			nomes[i] = (String) ob[0];
-			
-			nrocorrenciasT[i] = (BigInteger) ob[1];
-			nrocorrenciasNT[i] = (BigInteger) ob[2];
-			nrocorrenciasI[i] = (BigInteger) ob[3];
-			
-				
-			i++;
-			}
-			
-			model.addAttribute("nomesProjecto",nomes);
-			model.addAttribute("numeroocorenciaProjecto", nrocorrenciasT);
-			model.addAttribute("numeroocorenciaProjecto2", nrocorrenciasNT);
-			model.addAttribute("numeroocorenciaProjecto3", nrocorrenciasI);
+	String[] legendaestado = new String[lista.size()];
+	BigDecimal[] nrocorrencias = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrencias2 = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrencias3 = new BigDecimal[lista.size()];
+	BigDecimal[] nrocorrencias4 = new BigDecimal[lista.size()];
+	
+	
+	int i=0;
+	for (Object[] ob : lista){
+
+		legendaestado[i] = (String) ob[0];
+		nrocorrencias[i] = (BigDecimal) ob[1];
+		nrocorrencias2[i] = (BigDecimal) ob[2];
+		nrocorrencias3[i] = (BigDecimal) ob[3];
+		nrocorrencias4[i] = (BigDecimal) ob[4];
+		
+
+		i++;
+	}
+
+
+	model.addAttribute("nomesProjecto",legendaestado);
+	model.addAttribute("numeroocorenciaProjecto", nrocorrencias);
+	model.addAttribute("numeroocorenciaProjecto2", nrocorrencias2);
+	model.addAttribute("numeroocorenciaProjecto3", nrocorrencias3);
+	model.addAttribute("numeroocorenciaProjecto4", nrocorrencias4);
+	
 			
 
 }
@@ -1309,9 +1330,9 @@ public String filtrar(@RequestParam("ano") int ano,
 	model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro2(radioButton, codSelected, projecto,provincia, ano));
 	
 	cidadeFiltro2(model, ano, radioButton, codSelected, projecto);
-	mesTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
-	provinciaTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
-	projectoTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
+	mesTnTIFiltro2(model, ano, radioButton, codSelected, projecto,provincia);
+	provinciaTnTIFiltro2(model, ano, radioButton, codSelected, projecto, provincia);
+	projectoTnTIFiltro2(model, ano, radioButton, codSelected, projecto, provincia);
 	regiaoFiltro2(model, ano, radioButton, codSelected, projecto);
 	canalEntradaFiltro2(model, ano, radioButton, codSelected, projecto);
 	canalCategoriaFiltro2(model, ano, radioButton, codSelected, projecto);
@@ -1423,9 +1444,9 @@ int codSelected=0;
 	model.addAttribute("totalDeReclamacoesEmAndamento", ocorrenciaRepository.totalDeReclamacoesEmAndamentoFiltro2(radioButton, codSelected, projecto,provincia, ano));
 	
 	cidadeFiltro2(model, ano, radioButton, codSelected, projecto);
-	mesTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
-	provinciaTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
-	projectoTnTIFiltro2(model, ano, radioButton, codSelected, projecto);
+	mesTnTIFiltro2(model, ano, radioButton, codSelected, projecto,provincia);
+	provinciaTnTIFiltro2(model, ano, radioButton, codSelected, projecto, provincia);
+	projectoTnTIFiltro2(model, ano, radioButton, codSelected, projecto, provincia);
 	regiaoFiltro2(model, ano, radioButton, codSelected, projecto);
 	canalEntradaFiltro2(model, ano, radioButton, codSelected, projecto);
 	canalCategoriaFiltro2(model, ano, radioButton, codSelected, projecto);
