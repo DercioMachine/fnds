@@ -140,7 +140,7 @@ public class OcorrenciaController {
 
         System.out.println(userlogado.getProvincia().getDesignacao());
 
-        if(userlogado.getProvincia()!=null){
+        if(!userlogado.getProvincia().getDesignacao().equals("Nacional")){
             ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosProvincia(userlogado.getProvincia().getId());
         }else{
             ocorrencia = (List<Ocorrencia>) ocorrenciaRepository.findAll();

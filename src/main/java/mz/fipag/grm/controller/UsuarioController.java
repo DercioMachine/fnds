@@ -7,6 +7,7 @@ import mz.fipag.grm.repository.RoleRepository;
 import mz.fipag.grm.repository.UserRepository;
 import mz.fipag.grm.service.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -51,12 +52,45 @@ public class UsuarioController {
         return "usuarios/listarUsuarios";
     }
 
+    @GetMapping("/perfil/usuarios")
+    public String perfilUsuarios(ModelMap model, Authentication authentication){
+
+        User userlogado = userRepository.findByUsername(authentication.getName());
+
+        model.addAttribute("usuario", userlogado);
+
+        return "usuarios/perfilUsuarios";
+    }
+
+    @GetMapping("/alterar/usuarios")
+    public String alterarUsuarios(ModelMap model, Authentication authentication){
+
+        User userlogado = userRepository.findByUsername(authentication.getName());
+
+        model.addAttribute("user", userlogado);
+
+        return "usuarios/altearUsuarios";
+    }
+
     @GetMapping("/listar/perfils")
     public String listarPerfils(ModelMap model){
 
         model.addAttribute("perfils", roleRepository.findAll());
 
         return "usuarios/listarRoles";
+    }
+
+    @PostMapping("/alterar/senha")
+    public String alterarSenha(User user,Authentication authentication, ModelMap model, @RequestParam("novaSenha") String novaSenha){
+
+        User userlogado = userRepository.findByUsername(authentication.getName());
+
+
+            user.setPassword(passwordEncoder.encode(novaSenha));
+            userRepository.save(user);
+            model.addAttribute("success", "success");
+
+        return "usuarios/altearUsuarios";
     }
 
     @PostMapping("/cadastrar/usuarios")

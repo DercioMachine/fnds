@@ -226,7 +226,6 @@ function onChangePorAno(){
             <div class="container-xl">
                 <div class="row row-deck row-cards">
 
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
                     <div class="col-sm-2 col-lg-2">
                         <div class="card">
@@ -376,7 +375,6 @@ function onChangePorAno(){
 
     <form style="display: none"  id="divdata" th:action="@{/filter1}" method="POST">
 
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
         <div class="page-body">
             <div class="container-xl">

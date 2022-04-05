@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div  layout:fragment="corpo">
+
+
+  <script>
+
+        function myFunction() {
+          var csenha = document.getElementById("confirm_password").value;
+          var senha = document.getElementById("password").value;
+
+          if(csenha==senha){
+            document.getElementById("demo").innerHTML = "";
+          }else{
+            document.getElementById("demo").innerHTML = "As senhas não coincidem";
+          }
+
+
+        }
+    </script>
+
+  <!-- Conteudo -->
+
+  <div align="right" class="col-12">
+    <a class="btn btn-primary btn-md mb-3" th:href="@{/listar/usuarios}" role="button">
+      <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+      <span>Listar Usuarios</span>
+    </a>
+  </div>
+
+  <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+    <div  class="card-header">
+      <h3 style="font-weight: bolder;color: #0277BD; " class="card-title">Alterar Senha</h3>
+    </div>
+    <!--  <div th:replace="fragmentos/alert" class="card-body"> -->
+    <div class="card-body">
+
+      <form  role="c_usuario" id="c_usuario" th:object="${user}"  th:action="@{/alterar/senha}"  method="post" >
+
+        <input type="text" hidden th:field="*{id}"  class="form-control" required placeholder="Digite o nome"  >
+
+        <!--
+                <div class="row" hidden  >
+
+          <div class="col-12 col-sm-12">
+            <div class="form-group">
+              <label class="form-label">Antiga Senha</label>
+              <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                <input type="password" name="antigaSenha" value="123"  class="form-control" required placeholder=""  >
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        -->
+
+
+
+        <div class="row">
+
+          <div class="col-6 col-sm-6">
+              <div class="form-group">
+                  <label class="form-label">Nova Senha</label>
+                  <div class="input-icon">
+                      <span class="input-icon-addon">
+                        <i class="fe fe-edit-2"></i>
+                      </span>
+                      <input type="password" name="novaSenha" id="password" class="form-control" required >
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-6 col-sm-6">
+              <div class="form-group">
+                  <label class="form-label">Confirmar Nova Senha</label>
+                  <div class="input-icon">
+                          <span class="input-icon-addon">
+                            <i class="fe fe-edit-2"></i>
+                          </span>
+                      <input type="password" oninput="myFunction()" required id="confirm_password"  class="form-control" >
+                      <p id="demo" style="color:red"></p>
+                  </div>
+              </div>
+          </div>
+
+        </div>
+
+        <div class="card-footer text-right">
+          <button type="submit" class="btn btn-info">Alterar Senha </button>
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+  </div>
+
+
+  <div th:if="${erro} != null">
+    <script th:inline="javascript">
+
+			/*<![CDATA[*/
+
+			var sucesso = /*[[${erro}]]*/"";
+
+			/*]]>*/
+
+
+			Swal.fire({
+				  //text: 'Senha Alterada Com Sucesso',
+				  html: sucesso,
+				  icon: 'error',
+				  confirmButtonText: 'Ok'
+				})
+
+
+	</script>
+
+  </div>
+
+
+  <div th:if="${success} != null">
+    <script th:inline="javascript">
+
+			/*<![CDATA[*/
+
+			var sucesso = /*[[${success}]]*/"";
+
+			/*]]>*/
+
+
+			Swal.fire({
+				  //text: 'Senha Alterada Com Sucesso',
+				  html: sucesso,
+				  icon: 'success',
+				  confirmButtonText: 'Ok'
+				})
+
+
+	</script>
+
+  </div>
+
+
+
+
+  <!-- Conteudo-->
+</div>
+
+</body>
+</html>

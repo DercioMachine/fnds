@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt" layout:decorate="~{layout}"  Xmlns:th="http://www.thymeleaf.org"
+      xmlns:Xmlns="http://www.w3.org/1999/xhtml"
+      Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+
+  <style>
+
+    /* jQuery loading autocomplete */
+.ui-autocomplete-loading {
+  background: white url("/image/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+
+
+#tabela th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  font-size:10px;
+  color: rgb(65,105,225);
+}
+
+
+#tabela tr {
+	background-color: #fff;
+}
+
+
+</style>
+
+
+</head>
+<body>
+<div  layout:fragment="corpo">
+
+
+  <div class="card">
+
+
+    <div style="background: #60a18a; color: white">
+      <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Perfil de utilizador</h2>
+    </div>
+    <br>
+
+    <div class="card-body">
+      <div class="row" >
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Nome </span>	<span th:text="${usuario.nome}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Telefone: </span>	<span th:text="${usuario.telefone}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Email: </span>	<span th:text="${usuario.email}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4" >
+          <div class="form-group">
+            <span style="font-weight: bolder;">Username: </span> <span th:text="${usuario.username}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Data do Registo: </span> <span th:text="${#dates.format(usuario.created, 'dd-MMM-yyyy')}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4" >
+          <div class="form-group">
+            <span style="font-weight: bolder;">Recebe Notificações Tipo GBV: </span><span th:text="${usuario.tipogbv}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Recebe Notificações Tipo Urgente: </span>	<span th:text="${usuario.tipourgente}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Províncias: </span>	<span th:text="${usuario.provincia.designacao}"></span>
+          </div>
+        </div>
+
+        <div class="col-6 col-sm-4">
+          <div class="form-group">
+            <span style="font-weight: bolder;">Permissões: </span>
+
+            <span >
+              <th:block  th:each="r, iter:${usuario.roles}">
+                <span th:text="${r.designacao}"></span>
+                <th:block th:if="${!iter.last}">, </th:block>
+              </th:block>
+            </span>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+<!-- Conteudo-->
+
+</body>
+</html>
