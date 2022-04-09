@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,6 +69,13 @@ public class HomeController {
         model.addAttribute("provincias", provinciaRepository.findAll());
         model.addAttribute("projectos", projectoService.buscarTodos());
         model.addAttribute("tipoOcorrencias", tpService.buscarTodos());
+
+        //LocalDate data1= 2016-01-01;
+        Date date2 = new Date();
+        Date date1 = new Date(2016,01,01);
+
+        service.addParams("data1", date1);
+        service.addParams("data2", date2);
 
         return "relatorio/ocorrencia";
     }

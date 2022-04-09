@@ -47,24 +47,230 @@
 
         <input type="text" hidden th:field="*{id}"  class="form-control" required placeholder="Digite o nome"  >
 
-        <!--
-                <div class="row" hidden  >
+        <div style="display: none;">
 
-          <div class="col-12 col-sm-12">
-            <div class="form-group">
-              <label class="form-label">Antiga Senha</label>
-              <div class="input-icon">
+            <div class="row">
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Nome</label>
+                        <div class="input-icon">
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                <input type="password" name="antigaSenha" value="123"  class="form-control" required placeholder=""  >
-              </div>
+                            <input type="text" th:field="*{nome}"  class="form-control" required placeholder="Digite o nome"  >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Telefone</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{telefone}" class="form-control" required placeholder="Digite o numero de telefone"  >
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </div>
+
+            <div class="row">
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Utilizador</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{username}" class="form-control" required placeholder="Digite o nome"  >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                      <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{email}" class="form-control" required placeholder="Digite o numero de telefone"  >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <!--<div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Senha</label>
+                        <div class="input-icon">
+                            <span class="input-icon-addon">
+                              <i class="fe fe-edit-2"></i>
+                            </span>
+                            <input type="password" th:field="*{password}" id="password" class="form-control" required >
+                        </div>
+                    </div>
+                </div>-->
+
+                <!--<div class="col-6 col-sm-6">
+                    <div class="form-group">
+                        <label class="form-label">Confirmar Senha</label>
+                        <div class="input-icon">
+                                <span class="input-icon-addon">
+                                  <i class="fe fe-edit-2"></i>
+                                </span>
+                            <input type="password" oninput="myFunction()" required id="confirm_password"  class="form-control" >
+                            <p id="demo" style="color:red"></p>
+                        </div>
+                    </div>
+                </div>-->
+
+
+
+
+            </div>
+
+            <br style="margin-top: 30">
+
+            <div class="row" >
+
+                <div class="col-6 col-sm-6">
+
+                    <div class="form-group">
+                        <label class="form-label">Área de Gestão</label>
+                    </div>
+
+                    <div style="display: none;" id="local" class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="local" class="form-label">Província</label>
+                            <select style="padding-bottom:5px"  class="form-control custom-select form-select" th:field="*{provincia}"  >
+                                <option value="">Selecione a Província...</option>
+                                <option th:each="p : ${provincias}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-label">Alertas GBV</label>
+                    </div>
+
+                    <th:block>
+
+                        <div class="card mt-2">
+
+                            <div  class="card-header">
+
+                                <div class="form-check-inline" >
+                                    <label class="form-check-label">
+                                        <input  type="checkbox"  th:field="*{tipogbv}" value="Sim"> Sim
+                                    </label>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </th:block>
+
+                </div>
+
+                <div class="col-6 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-label">Alertas Urgentes</label>
+                    </div>
+
+                    <th:block>
+
+                        <div class="card mt-2">
+
+                            <div  class="card-header">
+
+                                <div class="form-check-inline" >
+                                    <label class="form-check-label">
+                                        <input  type="checkbox"  th:field="*{tipourgente}" value="Sim"> Sim
+                                    </label>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </th:block>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row" >
+
+                <div class="col-8 col-sm-8">
+                    <div class="form-group">
+                        <label class="form-label">Perfils</label>
+                    </div>
+
+                    <th:block>
+
+                        <div class="card mt-2">
+
+                            <div  class="card-header" >
+
+                                <div class="form-check-inline" th:each="role1: ${perfils}" >
+                                    <label class="form-check-label">
+                                        <input required  th:if="${role1.designacao!='Validador'}" type="radio" th:field="*{roles}" multiple="true" th:value="${role1.id}"  />
+                                        <span th:if="${role1.designacao!='Validador'}" th:text="${role1.designacao}"></span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </th:block>
+
+                </div>
+
+                <div class="col-4 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label" style="color:white">.</label>
+                    </div>
+
+                    <th:block>
+
+                        <div class="card mt-2">
+
+                            <div  class="card-header" >
+
+                                <div class="form-check-inline" th:each="role1: ${perfils}" style="padding-left: 0%" >
+                                    <label class="form-check-label" style="padding-left: 0%">
+                                        <input type="checkbox" th:if="${role1.designacao=='Validador'}"  th:field="*{roles}" multiple="true" th:value="${role1.id}"  />
+                                        <span  th:if="${role1.designacao=='Validador'}" >Acesso a validar registo</span>
+                                    </label>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </th:block>
+
+                </div>
+
+            </div>
 
         </div>
-
-        -->
 
 
 
@@ -121,7 +327,7 @@
 
 
 			Swal.fire({
-				  //text: 'Senha Alterada Com Sucesso',
+				  text: 'Senha Alterada Com Sucesso',
 				  html: sucesso,
 				  icon: 'error',
 				  confirmButtonText: 'Ok'
@@ -144,7 +350,7 @@
 
 
 			Swal.fire({
-				  //text: 'Senha Alterada Com Sucesso',
+				  text: 'Senha Alterada Com Sucesso',
 				  html: sucesso,
 				  icon: 'success',
 				  confirmButtonText: 'Ok'

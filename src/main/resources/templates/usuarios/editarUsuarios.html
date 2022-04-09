@@ -238,29 +238,16 @@
                                 <label class="form-label">Área de Gestão</label>
                             </div>
 
-                            <th:block>
+                            <div  id="local" class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <select style="padding-bottom:5px"  class="form-control custom-select form-select" th:field="*{provincia}"  >
+                                        <option value="">Selecione a Província...</option>
+                                        <option th:each="p : ${provincias}"
+                                                th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
 
-                                <div class="card mt-2">
-
-                                    <div  class="card-header">
-
-                                        <div class="form-check-inline ">
-                                            <label class="form-check-label">
-                                                <input onclick="onChangeSimLocal()" required   type="radio" id="statuslocal" name="tipo" value="L" > Província
-                                            </label>
-                                        </div>
-
-
-                                        <div class="form-check-inline">
-                                            <label class="form-check-label">
-                                                <input onclick="onChangeSimNacional()" required  type="radio" id="statusnacional" name="tipo" value="N"> Nacional
-                                            </label>
-                                        </div>
-
-                                    </div>
+                                    </select>
                                 </div>
-
-                            </th:block>
+                            </div>
                         </div>
 
 
@@ -316,27 +303,6 @@
 
 
                     </div>
-
-                 <div class="row" >
-                     <div style="display: none;" id="local" class="col-6 col-sm-6">
-                         <div class="form-group">
-                             <label for="local" class="form-label">Província</label>
-                             <select style="padding-bottom:5px"  class="form-control custom-select form-select" th:field="*{provincia}"  >
-                                 <option value="">Selecione a Província...</option>
-                                 <option th:each="p : ${provincias}"
-                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
-
-                             </select>
-                         </div>
-                     </div>
-
-                     <div style="display: none" id="nacional" class="col-6 col-sm-6">
-                         <div class="form-group">
-                             <label for="nacional" class="form-label">Nacional</label>
-                             <input type="text" disabled class="form-control" value="Nacional"  >
-                         </div>
-                     </div>
-                 </div>
 
 
                  <div class="row" >

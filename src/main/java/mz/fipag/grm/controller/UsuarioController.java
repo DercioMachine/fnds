@@ -68,6 +68,8 @@ public class UsuarioController {
         User userlogado = userRepository.findByUsername(authentication.getName());
 
         model.addAttribute("user", userlogado);
+        model.addAttribute("perfils", roleRepository.findAll());
+        model.addAttribute("provincias", provinciaService.buscarTodos());
 
         return "usuarios/altearUsuarios";
     }
@@ -84,7 +86,6 @@ public class UsuarioController {
     public String alterarSenha(User user,Authentication authentication, ModelMap model, @RequestParam("novaSenha") String novaSenha){
 
         User userlogado = userRepository.findByUsername(authentication.getName());
-
 
             user.setPassword(passwordEncoder.encode(novaSenha));
             userRepository.save(user);
