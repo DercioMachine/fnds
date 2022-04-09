@@ -234,8 +234,10 @@ function onChangePorAno(){
                                     <label class="form-label">Ano</label>
                                     <select id="ano" name="ano" onchange="onChangeStatus()" class="form-control custom-select">
                                         <option value="2022">2022</option>
-                                        <option value="2020">2020</option>
                                         <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
 
                                     </select>
                                 </div>
@@ -243,7 +245,7 @@ function onChangePorAno(){
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-5">
+                    <div class="col-sm-6 col-lg-3">
 
 
                         <div align="center" style="padding-top: 30px" class="card ">
@@ -261,7 +263,7 @@ function onChangePorAno(){
                                     </label>
                                 </div>
 
-                                <div style="margin-left: 8%; margin-right: 8%;" class="form-check-inline">
+                                <div class="form-check-inline">
                                     <label class="form-check-label">
                                         <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="radioButton" value="T" class="form-check-input"> Trimestre
                                     </label>
@@ -349,6 +351,21 @@ function onChangePorAno(){
                             </div>
                         </div>
                     </div>
+                    
+                    <div  class="col-sm-6 col-lg-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="provincia" class="form-label">Província </label>
+                                    <select id="provincia" name="provincia" class="form-control custom-select form-select">
+                                        <option value="">Selecione a Província...</option>
+                                        <option th:each="p : ${provincias}"
+                                                th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div id="botoes1" class="col-sm-1 col-lg-1">
@@ -381,7 +398,7 @@ function onChangePorAno(){
                 <div class="row row-deck row-cards">
 
 
-                    <div class="col-sm-6 col-lg-6">
+                    <div class="col-sm-6 col-lg-5">
 
 
                         <div class="card ">
@@ -419,14 +436,29 @@ function onChangePorAno(){
 
 
 
-                    <div id="projectoo" class="col-sm-6 col-lg-4">
+                    <div id="projectoo" class="col-sm-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="projecto" class="form-label">Projecto</label>
-                                    <select id="projecto" name="projecto" class="form-control custom-select form-select" >
+                                    <label  class="form-label">Projecto</label>
+                                    <select  name="projecto" class="form-control custom-select form-select" >
                                         <option value="">Selecione o Projecto...</option>
                                         <option th:each="p : ${projectos}"
+                                                th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div  class="col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="provincia" class="form-label">Província </label>
+                                    <select id="provincia" name="provincia" class="form-control custom-select form-select">
+                                        <option value="">Selecione a Província...</option>
+                                        <option th:each="p : ${provincias}"
                                                 th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
                                     </select>
                                 </div>
@@ -439,16 +471,14 @@ function onChangePorAno(){
 
 
 
-                    <div id="botoes" class="col-sm-6 col-lg-2">
+                    <div id="botoes" class="col-sm-6 col-lg-1">
                         <div class="card">
-
                             <br>
                             <button class="btn btn-default" type="submit" style="margin-top:6px;border:none ; " >
                                 <i style="font-size: 20pt; color: #0277BD" class="far fa-rotate"></i>
                                 <i style="font-size: 20pt; color: #0277BD" class="fa-solid fa-rotate"></i>
                                 <i style="font-size: 20pt; color: #0277BD"  class="fas fa-sync-alt"></i>
                             </button>
-
                         </div>
                     </div>
 
@@ -532,7 +562,7 @@ function onChangePorAno(){
             
 
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:#4299f5; border: 1px solid grey" class="card">
+                    <div style="background:#4299f5;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Ocorrências</div>
@@ -549,7 +579,7 @@ function onChangePorAno(){
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
                             </div>
-                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
                         </div>
                     </div>
@@ -570,7 +600,7 @@ function onChangePorAno(){
                 </div>
                 
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:#C3f1cc;" class="card">
+                    <div style="background:rgba(0,47,167,0.8);" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Em Andamento</div>
@@ -589,8 +619,8 @@ function onChangePorAno(){
                             <div class="d-flex align-items-center">
                                 <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Não Resolvidas</div>
                             </div>
-                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}-${totalDeReclamacoesTerminadas}]]</span>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoResolvidas}]]</span>
                         </div>
                     </div>
                 </div>
@@ -653,6 +683,7 @@ function onChangePorAno(){
             </div>
         </div>
     </div>
+    
     
     
     <div class="page-body">
@@ -749,80 +780,13 @@ function onChangePorAno(){
     ocorrenciasPorCanalEntrada();
     ocorrenciasPorCategoria();
     ocorrenciasPorProjecto();
-    ocorrenciasPorProjectoLinha();
-    
-    
-    function ocorrenciasPorProjectoLinha(){
-    	var nomeProjecto = /*[[${nomeProjecto}]]*/""
-       	var periodo= /*[[${periodo}]]*/""
-       	var nrocorrencias= /*[[${nrocorrencias}]]*/""
-       	
-       		document.addEventListener("DOMContentLoaded", function () {
-       	      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projectol'), {
-       	      		chart: {
-       	      			type: "line",
-       	      			fontFamily: 'inherit',
-       	      			height: 240,
-       	      			parentHeightOffset: 0,
-       	      			toolbar: {
-       	      				show: false,
-       	      			},
-       	      			animations: {
-       	      				enabled: false
-       	      			},
-       	      		},
-       	      		fill: {
-       	      			opacity: 1,
-       	      		},
-       	      		stroke: {
-       	      			width: 2,
-       	      			lineCap: "round",
-       	      			curve: "straight",
-       	      		},
-       	      		series: [{
-       	      			name: nomeProjecto,
-       	      			data: nrocorrencias
-       	      		}],
-       	      		grid: {
-       	      			padding: {
-       	      				top: -20,
-       	      				right: 0,
-       	      				left: -4,
-       	      				bottom: -4
-       	      			},
-       	      			strokeDashArray: 4,
-       	      		},
-       	      		xaxis: {
-       	      			labels: {
-       	      				padding: 0,
-       	      			},
-       	      			tooltip: {
-       	      				enabled: false
-       	      			},
-       	      			categories: periodo,
-       	      		},
-       	      		yaxis: {
-       	      			labels: {
-       	      				padding: 4
-       	      			},
-       	      		},
-       	      		colors: ["#ff922b", "#206bc4", "#5eba00"],
-       	      		legend: {
-       	      			show: false,
-       	      		},
-       	      	})).render();
-       	      });
-       	
-           	
-    }
-    
-    
     
     function ocorrenciasPorProjecto(){
     	var nomes = /*[[${nomesProjecto}]]*/""
        	var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
        	var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
        	var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
+       	var numeroocorencia4= /*[[${numeroocorenciaProjecto4}]]*/""
        	
        		document.addEventListener("DOMContentLoaded", function () {
               	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
@@ -850,16 +814,22 @@ function onChangePorAno(){
               		fill: {
               			opacity: 1,
               		},
-              		series: [{
-              			name: "Não Resolvidas",
+              		series: [
+              			{
+                  			name: "Reclamações",
+                  			data: numeroocorencia1
+                  		},{
+              			name: "Resolvidas",
               			data: numeroocorencia2
               		},{
-              			name: "Resolvidas",
-              			data: numeroocorencia1
-              		},{
-              			name: "Improcedentes",
+              			name: "Em Andamento",
               			data: numeroocorencia3
-              		}],
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia4
+              		}
+              		
+              		],
               		grid: {
               			padding: {
               				top: -20,
@@ -886,7 +856,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#EF5350", "#5eba00", "#FFA726"],
+              		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
               		legend: {
               			show: false,
               		},
@@ -1095,6 +1065,7 @@ function onChangePorAno(){
         var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
         var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
         var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+        var numeroocorencia4= /*[[${numeroocorencia4}]]*/""
         
         	
         	document.addEventListener("DOMContentLoaded", function () {
@@ -1124,15 +1095,20 @@ function onChangePorAno(){
               		},
               		series: [
               			{
-                  			name: "Não Resolvidas",
-                  			data: numeroocorencia2
+                  			name: "Reclamações",
+                  			data: numeroocorencia1
                   		},{
               			name: "Resolvidas",
-              			data: numeroocorencia1
+              			data: numeroocorencia2
               		},{
-              			name: "Improcedentes",
+              			name: "Em Andamento",
               			data: numeroocorencia3
-              		}],
+              		},{
+              			name: "Não Resolvidas",
+              			data: numeroocorencia4
+              		}
+              		
+              		],
               		grid: {
               			padding: {
               				top: -20,
@@ -1159,7 +1135,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#EF5350", "#5eba00", "#FFA726"],
+              		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
               		legend: {
               			show: false,
               		},
@@ -1177,6 +1153,7 @@ function onChangePorAno(){
     var numeroocorencia1= /*[[${nrocorrenciasMesT}]]*/""
     var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
     var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
+   	var numeroocorencia4= /*[[${nrocorrenciasMesRN}]]*/""
     
     	document.addEventListener("DOMContentLoaded", function () {
           	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
@@ -1206,14 +1183,19 @@ function onChangePorAno(){
           		series: [
           			{
               			name: "Reclamações",
-              			data: numeroocorencia2
+              			data: numeroocorencia1
               		},{
           			name: "Resolvidas",
-          			data: numeroocorencia1
+          			data: numeroocorencia2
           		},{
-          			name: "Consultas/Sugestões...",
+          			name: "Em Andamento",
           			data: numeroocorencia3
-          		}],
+          		},{
+          			name: "Não Resolvidas",
+          			data: numeroocorencia4
+          		}
+          		
+          		],
           		grid: {
           			padding: {
           				top: -20,
@@ -1240,7 +1222,7 @@ function onChangePorAno(){
           				padding: 4
           			},
           		},
-          		colors: ["#EF5350", "#5eba00", "#FFA726"],
+          		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
           		legend: {
           			show: false,
           		},
@@ -1251,6 +1233,7 @@ function onChangePorAno(){
     }
     
     </script>
+
 
     <!-- Conteudo-->
 

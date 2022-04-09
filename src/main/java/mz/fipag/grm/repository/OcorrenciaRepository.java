@@ -202,6 +202,12 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     @Query(value="select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created)= :ano", nativeQuery=true)
    	public Object totalDeOcorrenciasNaoReclamacoes(@Param("ano") int ano);
     
+    
+    @Query(value="select count(*) from Ocorrencia where procedencia='Sim' and resolucao = 'V' and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
+   	public Object totalDeOcorrenciasNaoReSolvidas(@Param("ano") int ano);
+    
+    
+    
     @Query(value="Select count(*) from ocorrencia, projecto, provincia "
     		+ "where ocorrencia.projecto_id=projecto.id and ocorrencia.provincia_id=provincia.id and procedencia='Sim' and tipo_ocorrencia_id!=1 and year(ocorrencia.created)=(:ano) and\r\n"
     		+ "if(:projecto='',1=1,projecto.designacao=(:projecto)) and "
@@ -246,7 +252,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
     @Query(value="select count(*) from ocorrencia where resolucao != 'T' and year(created)= :ano", nativeQuery=true)
     public Object totalDeReclamacoesEmResolucao(@Param("ano") int ano);
     
-    @Query(value="select count(*) from ocorrencia where (resolucao = 'R' OR resolucao = 'A') and year(created)= :ano", nativeQuery=true)
+    @Query(value="select count(*) from ocorrencia where procedencia='Sim' and resolucao IN ('R','A') and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
     public Object totalDeReclamacoesEmAndamento(@Param("ano") int ano);
 
 	/*
@@ -373,7 +379,6 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	 * + "	from ocorrencia where year(created)= :ano  group by month(created);"
 	 * ,nativeQuery=true) public List<Object[]> busqueTnTI(@Param("ano") int ano);
 	 */
-	
 	@Query(value="Select IF(nrmes=1,'Janeiro',if(nrmes=2,'Fevereiro',if(nrmes=3,'Março',if(nrmes=4,'Abril',if(nrmes=5,'Maio',if(nrmes=6,'Junho',\r\n"
 			+ "if(nrmes=7,'Julho',if(nrmes=8,'Agosto',if(nrmes=9,'Setembro',if(nrmes=10,'Outubro',if(nrmes=11,'Novembro','Dezembro'))))))))))) as mes,t.RS,t.RT,t.RA,t.RN from  (\r\n"
 			+ "SELECT\r\n"
@@ -519,15 +524,19 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
    	public Object totalDeOcorrenciasPorValidarFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
 	
-	@Query(value="select count(*) from ocorrencia, projecto where procedencia='Sim' and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and "
-			+ " if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, "
-			+ " ocorrencia.created between (:datainicial) and (:datafinal))", nativeQuery=true)
-   	public Object totalDeReclamacoesProcedentesFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
+	@Query(value="select count(*) from ocorrencia inner join projecto on ocorrencia.projecto_id=projecto.id inner join provincia on ocorrencia.provincia_id=provincia.id\r\n"
+			+ "where procedencia='Sim' and\r\n"
+			+ "if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF (:provincia='', 1=1,provincia.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "ocorrencia.created between (:datainicial) and (:datafinal));", nativeQuery=true)
+   	public Object totalDeReclamacoesProcedentesFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
-	@Query(value="select count(*) from ocorrencia, projecto where resolucao = 'T' and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and "
-			+ " if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, "
-			+ " ocorrencia.created between (:datainicial) and (:datafinal))", nativeQuery=true)
-   	public Object totalDeReclamacoesTerminadasFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
+	
+	
+	@Query(value="select count(*) from ocorrencia inner join projecto on ocorrencia.projecto_id=projecto.id inner join provincia on ocorrencia.provincia_id=provincia.id\r\n"
+			+ "where resolucao = 'T' and\r\n"
+			+ "if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF (:provincia='', 1=1,provincia.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "ocorrencia.created between (:datainicial) and (:datafinal));", nativeQuery=true)
+   	public Object totalDeReclamacoesTerminadasFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
 	
 	@Query(value="select count(*) from ocorrencia, projecto where (resolucao = 'R' or resolucao = 'A') and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and "
@@ -536,41 +545,36 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
    	public Object totalDeReclamacoesEmAndamentoFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
 	
 	
-	@Query(value="select count(*) from ocorrencia, projecto where procedencia='Sim' and tipo_ocorrencia_id!=1 and ocorrencia.projecto_id=projecto.id and "
-			+ " if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, "
-			+ " ocorrencia.created between (:datainicial) and (:datafinal))", nativeQuery=true)
-   	public Object totalDeOcorrenciasNaoReclamacoesFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
+	@Query(value="select count(*) from ocorrencia inner join projecto on ocorrencia.projecto_id=projecto.id inner join provincia on ocorrencia.provincia_id=provincia.id\r\n"
+			+ "where (resolucao = 'R' or resolucao = 'A') and tipo_ocorrencia_id=1 and\r\n"
+			+ "if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF (:provincia='', 1=1,provincia.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "ocorrencia.created between (:datainicial) and (:datafinal));", nativeQuery=true)
+   	public Object totalDeReclamacoesEmAndamentoFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
 	
-	@Query(value="Select IF(nrmes=1,'Janeiro',if(nrmes=2,'Fevereiro',if(nrmes=3,'Março',if(nrmes=4,'Abril',if(nrmes=5,'Maio',if(nrmes=6,'Junho',\r\n"
-			+ "if(nrmes=7,'Julho',if(nrmes=8,'Agosto',if(nrmes=9,'Setembro',if(nrmes=10,'Outubro',if(nrmes=11,'Novembro','Dezembro'))))))))))) as mes,t.R,t.Q,t.Z  from  (\r\n"
-			+ "SELECT "
-			+ "    SUM(\r\n"
-			+ "        CASE\r\n"
-			+ "            WHEN O.resolucao = 'T' and O.tipo_ocorrencia_id=1\r\n"
-			+ "            THEN 1\r\n"
-			+ "            ELSE 0\r\n"
-			+ "        END\r\n"
-			+ "    ) AS 'R',\r\n"
-			+ "    SUM(\r\n"
-			+ "        CASE\r\n"
-			+ "            WHEN O.procedencia='Sim' and O.tipo_ocorrencia_id=1\r\n"
-			+ "            THEN 1\r\n"
-			+ "            ELSE 0\r\n"
-			+ "        END\r\n"
-			+ "    ) AS 'Q',\r\n"
-			+ "    SUM(\r\n"
-			+ "        CASE\r\n"
-			+ "            WHEN O.procedencia='Sim' and O.tipo_ocorrencia_id!=1\r\n"
-			+ "            THEN 1\r\n"
-			+ "            ELSE 0\r\n"
-			+ "        END\r\n"
-			+ "    ) AS 'Z', month(O.created) as nrmes "
-			+ "FROM  ocorrencia O inner join projecto P on O.projecto_id=P.id\r\n"
-			+ "    where if (:projecto='', 1=1,P.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, O.created between (:datainicial) and (:datafinal))\r\n"
-			+ "GROUP BY monthname(O.created) "
+	@Query(value="select count(*) from ocorrencia inner join projecto on ocorrencia.projecto_id=projecto.id inner join provincia on ocorrencia.provincia_id=provincia.id\r\n"
+			+ "where procedencia='Sim' and tipo_ocorrencia_id!=1 and\r\n"
+			+ "if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF (:provincia='', 1=1,provincia.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "ocorrencia.created between (:datainicial) and (:datafinal));", nativeQuery=true)
+   	public Object totalDeOcorrenciasNaoReclamacoesFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
+	
+	
+	
+	
+	@Query(value="\r\n"
+			+ "Select IF(nrmes=1,'Janeiro',if(nrmes=2,'Fevereiro',if(nrmes=3,'Março',if(nrmes=4,'Abril',if(nrmes=5,'Maio',if(nrmes=6,'Junho',\r\n"
+			+ "if(nrmes=7,'Julho',if(nrmes=8,'Agosto',if(nrmes=9,'Setembro',if(nrmes=10,'Outubro',if(nrmes=11,'Novembro','Dezembro'))))))))))) as mes,t.RS,t.RT,t.RA,t.RN from  (\r\n"
+			+ "SELECT\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RS',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'T' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RT',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao IN ('R','A') and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RA',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'V' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RN',\r\n"
+			+ "   month(O.created) as nrmes\r\n"
+			+ "FROM  ocorrencia O inner join projecto P on O.projecto_id=P.id inner join provincia Pr on O.provincia_id=Pr.id\r\n"
+			+ "   where if (:projecto='', 1=1,P.designacao =(:projecto)) and IF (:provincia='', 1=1,Pr.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "O.created between (:datainicial) and (:datafinal)) GROUP BY monthname(O.created)\r\n"
 			+ ")t order by nrmes;",nativeQuery=true)
-	public List<Object[]> busqueTnTIFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
+	public List<Object[]> busqueTnTIFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
 	
 	
@@ -636,24 +640,30 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 			
 		 
 		 
-	@Query(value="select provincia.designacao as pronvincia,\r\n"
-			+ "	(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal))),"
-			+ "	(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal))),"
-			+ " (select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and ocorrencia.projecto_id=projecto.id and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal))) "
-			+ " from ocorrencia, projecto, provincia where ocorrencia.provincia_id=provincia.id group by provincia.designacao;",nativeQuery=true)
-	public List<Object[]> busqueProvinciaTnTPFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
+	@Query(value="\r\n"
+			+ "SELECT Pr.designacao, "
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RS',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'T' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RT',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao IN ('R','A') and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RA',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'V' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RN',\r\n"
+			+ "   month(O.created) as nrmes\r\n"
+			+ "FROM  ocorrencia O inner join projecto P on O.projecto_id=P.id inner join provincia Pr on O.provincia_id=Pr.id\r\n"
+			+ "   where if (:projecto='', 1=1,P.designacao =(:projecto)) and IF (:provincia='', 1=1,Pr.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "O.created between (:datainicial) and (:datafinal)) GROUP BY Pr.designacao;",nativeQuery=true)
+	public List<Object[]> busqueProvinciaTnTPFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
-	@Query(value="select projecto.designacao as pronvincia,\r\n"
-			+ "	(select count(*) from ocorrencia where resolucao = 'T' and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal))),"
-			+ "	(select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and ocorrencia.projecto_id=projecto.id and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal))),"
-			+ " (select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and ocorrencia.projecto_id=projecto.id and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal))) "
-			+ " from ocorrencia, projecto, provincia where ocorrencia.provincia_id=provincia.id group by projecto.designacao;",nativeQuery=true)
-	public List<Object[]> busqueProjectoTnTPFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto);
+	@Query(value="\r\n"
+			+ "SELECT P.designacao, "
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RS',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'T' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RT',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao IN ('R','A') and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RA',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'V' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RN',\r\n"
+			+ "   month(O.created) as nrmes\r\n"
+			+ "FROM  ocorrencia O inner join projecto P on O.projecto_id=P.id inner join provincia Pr on O.provincia_id=Pr.id\r\n"
+			+ "   where if (:projecto='', 1=1,P.designacao =(:projecto)) and IF (:provincia='', 1=1,Pr.designacao =(:provincia)) and IF((:datainicial)='' and (:datafinal)='',1=1,\r\n"
+			+ "O.created between (:datainicial) and (:datafinal)) GROUP BY Pr.designacao;",nativeQuery=true)
+	public List<Object[]> busqueProjectoTnTPFiltro(@Param("datainicial") Date datainicial, @Param("datafinal") Date datafinal, @Param("projecto") String projecto, @Param("provincia") String provincia);
 	
-	
-	
-
-
     
 	/*
 	 * @Query(
