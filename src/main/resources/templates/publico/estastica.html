@@ -498,7 +498,7 @@ function onChangePorAno(){
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências</div>
+                                <div class="subheader" style="  font-size: 12px" >Ocorrências</div>
                             </div>
                             <span style="color:rgba(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalOcorrencias}]]</span>
                             <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
@@ -511,7 +511,7 @@ function onChangePorAno(){
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Procedentes</div>
+                                <div class="subheader" style="  font-size: 12px" >Ocorrências Procedentes</div>
                                
                             </div>
                             <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
@@ -524,7 +524,7 @@ function onChangePorAno(){
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Improcedentes</div>
+                                <div class="subheader" style="  font-size: 12px" >Ocorrências Improcedentes</div>
                             </div>
                             <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasImprocedentes}]]</span>
                             <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
@@ -537,7 +537,7 @@ function onChangePorAno(){
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="subheader" style="text-transform: capitalize; font-size: 12px" >Ocorrências Por Validar</div>
+                                <div class="subheader" style="  font-size: 12px" >Ocorrências Por Validar</div>
                             </div>
                             <span style="color:rgb(0,0,0,0.5);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasPorValidar}]]</span>
                             <span style="font-size:30px; padding-left:80px; color: rgba(0,0,0);margin-top:0; margin-bottom: 0" ><i class="fas fa-hourglass-half"></i></span>
@@ -562,22 +562,34 @@ function onChangePorAno(){
             
 
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:#4299f5;" class="card">
+                    <div style="background:#686669;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Ocorrências</div>
+                                <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader" >Ocorrências</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-archive"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:#FFA726;" class="card">
+                    <div style="background:rgba(128,0,128,0.8);" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
+                                <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Consultas/Sugestões...</div>
+                            </div>
+                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoReclamacoes}]]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-2">
+                    <div style="background:rgba(0,47,167,0.8);" class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
@@ -590,7 +602,7 @@ function onChangePorAno(){
                     <div style="background:#66BB6A;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Resolvidas</div>
+                                <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Resolvidas</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-check"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
@@ -600,10 +612,10 @@ function onChangePorAno(){
                 </div>
                 
                 <div class="col-sm-6 col-lg-2">
-                    <div style="background:rgba(0,47,167,0.8);" class="card">
+                    <div style="background: #FFA726" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Em Andamento</div>
+                                <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Em atendimento</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-recycle"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmAndamento}]]</span>
@@ -617,7 +629,7 @@ function onChangePorAno(){
                     <div style="background:#EF5350;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Não Resolvidas</div>
+                                <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Não resolvidas</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
                             <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoResolvidas}]]</span>
@@ -625,17 +637,7 @@ function onChangePorAno(){
                     </div>
                 </div>
                 
-                <div class="col-sm-6 col-lg-2">
-                    <div style="background:#686669;" class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div style="color:rgb(255,255,255);text-transform: capitalize; font-size: 12px;" class="subheader">Consultas/Sugestões...</div>
-                            </div>
-                            <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoReclamacoes}]]</span>
-                        </div>
-                    </div>
-                </div>
+                
 
 
 
@@ -650,13 +652,12 @@ function onChangePorAno(){
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Mes</h3>
+                            <h3 class="card-title" style="font-size: 12px;" >Nível de resolução das reclamações</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-combination"></div>
+                            <div id="chart-projecto"></div>
                         </div>
                     </div>
-
 
 
                 </div>
@@ -664,7 +665,7 @@ function onChangePorAno(){
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Projecto</h3>
+                            <h3 class="card-title" style="font-size: 12px;" >Reclamações por projecto</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-regiao"></div>
@@ -691,10 +692,10 @@ function onChangePorAno(){
             <div class="row row-deck row-cards">
 
                  
-				<div class="col-lg-12 col-xl-12">
+				<div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Província</h3>
+                            <h3 class="card-title" style=" font-size: 12px;" >Reclamações por província</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-provincia"></div>
@@ -703,7 +704,21 @@ function onChangePorAno(){
 
 
                 </div> 
+                
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="font-size: 12px;" >Reclamações por mes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-combination"></div>
+                        </div>
+                    </div>
 
+
+
+                </div>
+                
 
             </div>
         </div>
@@ -718,7 +733,7 @@ function onChangePorAno(){
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Canal de Entrada</h3>
+                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-canal-entrada"></div>
@@ -732,7 +747,7 @@ function onChangePorAno(){
                  <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Categoria</h3>
+                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
                         <div class="card-body">
                             <div id="chart-categoria"></div>
@@ -750,27 +765,6 @@ function onChangePorAno(){
     </div>
     
     
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
-
-                <div class="col-lg-12 col-xl-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="text-transform: capitalize; font-size: 12px;" >Reclamações por Projecto</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-projecto"></div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
     
     <script th:inline="javascript">
     ocorrenciasPorMes();
@@ -816,6 +810,7 @@ function onChangePorAno(){
               		},
               		series: [
               			{
+              				
                   			name: "Reclamações",
                   			data: numeroocorencia1
                   		},{

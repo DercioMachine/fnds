@@ -659,7 +659,7 @@ public class IndexController {
 		model.addAttribute("totalDeReclamacoesEmResolucao", ocorrenciaRepository.totalDeReclamacoesEmResolucao(currentYear));
 		model.addAttribute("totalDeReclamacoesNaoProcedentes", ocorrenciaRepository.totalDeReclamacoesNaoProcedentes(currentYear));
 		model.addAttribute("totalDeOcorrenciasNaoReclamacoes", ocorrenciaRepository.totalDeOcorrenciasNaoReclamacoes(currentYear));
-
+		model.addAttribute("totalDeOcorrenciasNaoResolvidas", ocorrenciaRepository.totalDeOcorrenciasNaoReSolvidas(currentYear));
 
 		ProvinciaEstado(model);
 		cidade(model);
