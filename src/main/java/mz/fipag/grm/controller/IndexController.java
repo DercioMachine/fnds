@@ -491,6 +491,38 @@ public class IndexController {
 
 	}
 	
+	public void teste(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCanalDeEntrada(currentYear);
+		
+		String vetor = "";
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+			
+			
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias[i] = (BigInteger) ob[1];
+			vetor=vetor+"['"+nomes[i]+"',"+nrocorrencias[i]+"],";
+			
+			i++;
+		}
+
+		System.out.println(vetor);
+
+		model.addAttribute("vetor",vetor);
+		//model.addAttribute("numeroocorencia", nrocorrencias);
+
+	}
+	
+	
 	public void categoria(Model model){
 
 	List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorCategoria(currentYear);
@@ -711,6 +743,7 @@ public class IndexController {
 		tipoOcorrencia(model);
 		regiao(model);
 		busqueTnTI(model);
+		teste(model);
 		
 		
 		return "reclamacoes/home";
@@ -1598,18 +1631,18 @@ String periodo="";
 
 		if(contacto!=null){
 
-			String mensagem = "A sua Ocorrência foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
+			String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
 			smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
 
 		}
 
     		if(email!=null){
 
-				String descricao ="Caro Utente, a Sua Ocorrência foi submetida com sucesso.\n" +
-						"NOTA: Anote o seu código para o acompanhamento da sua ocorrência \n"+provincia.getCodigo()+""+codigo+""+anooo;
+				String descricao ="Caro Utente, a sua preocupação foi submetida com sucesso.\n" +
+						"NOTA: Anote o seu código para o acompanhamento\n"+provincia.getCodigo()+""+codigo+""+anooo;
 
 				String emaildestino = ocorrencia.getEmailUtente();
-				String nome = "A sua Ocorrência foi submetido com sucesso";
+				String nome = "A sua preocupação foi submetido com sucesso";
 
 				String assunto = "Confirmação de código de acesso - FNDS";
 
@@ -1633,7 +1666,7 @@ String periodo="";
          		 for (int i=0;i<lista.size();i++) {
 
 					 String emaildest = lista.get(i).getEmail();
-         			String descric = "Sr(a). "+lista.get(i).getNome()+ ". Há uma  Ocorrência Temporária de CODIGO: "+provincia.getCodigo()+""+codigo+""+anooo; 
+         			String descric = "Sr(a). "+lista.get(i).getNome()+ ". Há uma  preocupação Temporária de CODIGO: "+provincia.getCodigo()+""+codigo+""+anooo; 
                 	 
 				   if(localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
 					   emailService.enviarEmail(descric,"FNDS", emaildest, assun);

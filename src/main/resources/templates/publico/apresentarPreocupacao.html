@@ -355,7 +355,7 @@ document.getElementById("cidadee").style.display="none";
        					 <div align="center" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="card mt-2">
 				      			<div class="card-body">
                     				<div class="row">
-					                  <label style="color:black; font-size:15px; padding-left:5px; padding-right:5px">Os Campos marcados com <span style="color:red; font-size:20px; padding-left:5px; padding-right:5px">*</span> são de preenchimento obrigatório</label>
+					                  <label style="color:black; font-size:11px; padding-left:5px; padding-right:5px">Os campos marcados com <span style="color:red; padding-left:5px; padding-right:5px; font-size: 12px">*</span> são de preenchimento obrigatório</label>
 				                	</div>
 				                </div>
 				                </div>
@@ -438,8 +438,8 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Distrito</label>
-                            <select class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
+                            <label class="form-label">Distrito <strong style="color:red">*</strong></label>
+                            <select required="required" class="form-control custom-select form-select" id="comoboxDistrito" th:field="*{distrito}" >
                                 <option value="">Selecione o Distrito...</option>
                                 <option th:each="p : ${distritos}"
                                         th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
@@ -466,12 +466,12 @@ document.getElementById("cidadee").style.display="none";
 
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Comunidade</label>
+                            <label class="form-label">Comunidade <strong style="color:red">*</strong></label>
                             <div class="input-icon">
                                     <span class="input-icon-addon">
                                     <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Não Obrigatório...">
+                                <input required="required" type="text" th:field="*{comunidade}" class="form-control" placeholder="Não Obrigatório...">
                             </div>
                         </div>
                     </div>

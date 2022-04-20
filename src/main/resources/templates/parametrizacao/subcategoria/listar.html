@@ -33,8 +33,8 @@
                     </thead>
                     <tbody>
                    <!--  <tr th:each="p : ${categorias}"> -->
-                   <tr th:each="a : ${subcategorias}">
-                   	     <td th:text="${a.id}"><span class="text-muted">01401</span></td>
+                   <tr th:each="a, index : ${subcategorias}">
+                   	     <td th:text="${index.count}"><span class="text-muted">01401</span></td>
                          <td th:text="${a.designacao}">Auxiliar Contábil</td>
                         <td th:text="${a.categoria.designacao}">Auxiliar Contábil</td>
                          <td>

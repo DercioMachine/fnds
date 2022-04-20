@@ -104,7 +104,7 @@ $('#cbxCidade').html(s);
 
           <div class="col-sm-6 col-lg-4">
             <div class="form-group">
-              <label class="form-label">Estado</label>
+              <label class="form-label">Nível de Resolução</label>
               <select name="estado" class="form-control custom-select form-select" >
                 <option value="">Selecione o Estado...</option>
                 <option value="T">Resolvido(s)</option>
@@ -128,9 +128,9 @@ $('#cbxCidade').html(s);
 
           <div id="cidadee" class="col-sm-6 col-lg-4">
             <div class="form-group">
-              <label for="cbxCidade" class="form-label">Cidade</label>
+              <label for="cbxCidade" class="form-label">Província</label>
               <select id="cbxCidade" name="provincia" class="form-control custom-select form-select" >
-                <option value="">Selecione a Cidade...</option>
+                <option value="">Selecione a Província...</option>
                 <option th:each="p : ${provincias}"
                         th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
               </select>

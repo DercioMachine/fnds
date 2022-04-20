@@ -34,7 +34,8 @@
                    <!--  <tr th:each="p : ${tipoAlertas}"> -->
                     <tr th:each="p : ${pageTipoAlerta.registros}">
                         <td th:text="${p.id}"><span class="text-muted">01401</span></td>
-                         <td th:text="${p.designacao}">Auxiliar Contábil</td>
+                         <td th:if="${p.designacao} == 'GBV'">Violência baseada no género</td>
+                         <td th:if="${p.designacao} != 'GBV'" th:text="${p.designacao}">Auxiliar Contábil</td>
                         <!-- <td>
                             
                             <a th:href="@{/tipoAlertas/editar/{id} (id=${p.id})}">

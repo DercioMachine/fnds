@@ -29,9 +29,9 @@ public class SubCategoriaController {
     public String sucategorias(ModelMap model, @RequestParam("page") Optional<Integer> page){
 		
 		int paginaActual = page.orElse(1);
-		PaginacaoUtil<Categoria> pageCategoria = categoriaService.buscaPorPagina(paginaActual);
+		//PaginacaoUtil<Categoria> pageCategoria = categoriaService.buscaPorPagina(paginaActual);
 		
-		model.addAttribute("subcategorias", subCategoriaRepository.findAll());
+		model.addAttribute("subcategorias", subCategoriaRepository.buscarTodoAgrupoPorCategoria());
 		
 		//model.addAttribute("pageCategoria", pageCategoria);
 		
