@@ -740,27 +740,29 @@ function onChangePorAno(){
     teste();
     
     function teste(){
-    	var vetor = /*[[${vetor}]]*/""
-    	var vet = vetor.slice(1, -1);
+    	var vetor = /*[[${vetor}]]*/'noValue';
     	
-    	google.charts.load('current', {'packages':['corechart']});
+    	google.charts.load('current', {
+                packages : [ 'corechart', 'pie' ]
+            });
         google.charts.setOnLoadCallback(drawChart);
         
-        alert(vet);
-        
-        var vett = vet;
+        alert(vetor);
 
         function drawChart() {
 
-          var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            vet
-           
-          ]);
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Year');
+          data.addColumn('number', 'Views');
+
+          Object.keys(vetor).forEach(function(key) {
+                data.addRow([ key, vetor[key] ]);
+          });
 
           var options = {
             title: 'My Daily Activities'
           };
+
 
           var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 

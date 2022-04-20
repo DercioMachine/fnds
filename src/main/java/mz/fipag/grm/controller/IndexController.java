@@ -2,11 +2,9 @@ package mz.fipag.grm.controller;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.mail.MessagingException;
@@ -501,23 +499,26 @@ public class IndexController {
 		String[] nomes = new String[lista.size()];
 		
 		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+
+		Map<String, BigInteger> graphData = new TreeMap<>();
+
 		
 		int i=0;
 		for (Object[] ob : lista){
-			
-			
 
 		nomes[i] = (String) ob[0];
 			
 		nrocorrencias[i] = (BigInteger) ob[1];
-			vetor=vetor+"['"+nomes[i]+"',"+nrocorrencias[i]+"],";
-			
+
+			graphData.put(nomes[i], nrocorrencias[i]);
+
+			System.out.println(graphData.put(nomes[i], nrocorrencias[i]));
 			i++;
 		}
 
-		System.out.println(vetor);
 
-		model.addAttribute("vetor",vetor);
+
+		model.addAttribute("vetor",graphData);
 		//model.addAttribute("numeroocorencia", nrocorrencias);
 
 	}
