@@ -247,10 +247,11 @@ public class IndexController {
 
 
 		String[] legendaestado = new String[lista.size()];
+		
 		BigDecimal[] nrocorrencias = new BigDecimal[lista.size()];
 		BigDecimal[] nrocorrencias2 = new BigDecimal[lista.size()];
 		BigDecimal[] nrocorrencias3 = new BigDecimal[lista.size()];
-		BigDecimal[] nrocorrencias4 = new BigDecimal[lista.size()];
+		
 		
 		
 		int i=0;
@@ -260,7 +261,7 @@ public class IndexController {
 			nrocorrencias[i] = (BigDecimal) ob[1];
 			nrocorrencias2[i] = (BigDecimal) ob[2];
 			nrocorrencias3[i] = (BigDecimal) ob[3];
-			nrocorrencias4[i] = (BigDecimal) ob[4];
+			
 			
 
 			i++;
@@ -271,7 +272,7 @@ public class IndexController {
 		model.addAttribute("numeroocorenciaProjecto", nrocorrencias);
 		model.addAttribute("numeroocorenciaProjecto2", nrocorrencias2);
 		model.addAttribute("numeroocorenciaProjecto3", nrocorrencias3);
-		model.addAttribute("numeroocorenciaProjecto4", nrocorrencias4);
+		
 		
 
 	}
@@ -438,7 +439,7 @@ public class IndexController {
 		BigDecimal[] nrocorrencias1 = new BigDecimal[lista.size()];
 		BigDecimal[] nrocorrencias2 = new BigDecimal[lista.size()];
 		BigDecimal[] nrocorrencias3 = new BigDecimal[lista.size()];
-		BigDecimal[] nrocorrencias4 = new BigDecimal[lista.size()];
+		
 		
 		int i=0;
 		for (Object[] ob : lista){
@@ -448,7 +449,7 @@ public class IndexController {
 		nrocorrencias1[i] = (BigDecimal) ob[1];
 		nrocorrencias2[i] = (BigDecimal) ob[2];
 		nrocorrencias3[i] = (BigDecimal) ob[3];
-		nrocorrencias4[i] = (BigDecimal) ob[4];
+		
 			
 			
 			i++;
@@ -459,7 +460,7 @@ public class IndexController {
 		model.addAttribute("numeroocorencia1", nrocorrencias1);
 		model.addAttribute("numeroocorencia2", nrocorrencias2);
 		model.addAttribute("numeroocorencia3", nrocorrencias3);
-		model.addAttribute("numeroocorencia4", nrocorrencias4);
+		
 
 	}
 	
@@ -486,6 +487,59 @@ public class IndexController {
 
 		model.addAttribute("nomesCanais",nomes);
 		model.addAttribute("numeroocorencia", nrocorrencias);
+
+	}
+	
+	
+	public void sexo(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoPorSexo(currentYear);
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias[i] = (BigInteger) ob[1];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomeSexo",nomes);
+		model.addAttribute("numeroocorenciaSexo", nrocorrencias);
+
+	}
+	
+	public void tipoPreocupacao(Model model){
+		List<Object[]> lista = ocorrenciaRepository.busqueTudoAgrupadoTipoDePreocupacao(currentYear);
+		
+
+
+		String[] nomes = new String[lista.size()];
+		
+		BigInteger[] nrocorrencias = new BigInteger[lista.size()];
+		
+		int i=0;
+		for (Object[] ob : lista){
+
+		nomes[i] = (String) ob[0];
+			
+		nrocorrencias[i] = (BigInteger) ob[1];
+			
+			
+			i++;
+		}
+
+
+		model.addAttribute("nomeTipoPreocupacao",nomes);
+		model.addAttribute("numeroocorenciaTipoPreocupacao", nrocorrencias);
 
 	}
 	
@@ -617,7 +671,6 @@ public class IndexController {
 		BigDecimal[] nrocorrenciasT = new BigDecimal[lista.size()];
 		BigDecimal[] nrocorrenciasNT = new BigDecimal[lista.size()];
 		BigDecimal[] nrocorrenciasI = new BigDecimal[lista.size()];
-		BigDecimal[] nrocorrenciasRN = new BigDecimal[lista.size()];
 		
 		int i=0;
 		
@@ -628,7 +681,6 @@ public class IndexController {
 		nrocorrenciasT[i] = (BigDecimal) ob[1];
 		nrocorrenciasNT[i] = (BigDecimal) ob[2];
 		nrocorrenciasI[i] = (BigDecimal) ob[3];
-		nrocorrenciasRN[i] = (BigDecimal) ob[4];
 		
 			i++;
 			
@@ -638,7 +690,6 @@ public class IndexController {
 		model.addAttribute("nrocorrenciasMesT", nrocorrenciasT);
 		model.addAttribute("nrocorrenciasMesNT", nrocorrenciasNT);
 		model.addAttribute("nrocorrenciasMesI", nrocorrenciasI);
-		model.addAttribute("nrocorrenciasMesRN", nrocorrenciasRN);
 		
 
 	}
@@ -745,6 +796,8 @@ public class IndexController {
 		regiao(model);
 		busqueTnTI(model);
 		teste(model);
+		sexo(model);
+		tipoPreocupacao(model);
 		
 		
 		return "reclamacoes/home";
@@ -1402,15 +1455,17 @@ public String filtrar(@RequestParam("ano") int ano,
 	
 	String provincia1="";
 	
+	String mess="";
+	
 	
 	
 	
 	if(projecto!="") {
-		projecto1="- "+projecto;
+		projecto1=" - Projecto: "+projecto;
 	}
 	
 	if(provincia!="") {
-		provincia1="- "+provincia;
+		provincia1=" - Província: "+provincia;
 	}
 	
 	
@@ -1422,34 +1477,36 @@ public String filtrar(@RequestParam("ano") int ano,
 		
 	}else if(radioButton.equals("M")) {
 		if(codSelected==1) {
-			periodo="Janeiro";
+			mess="Janeiro";
 		}else if(codSelected==2){
-			periodo="Fevereiro";
+			mess="Fevereiro";
 		}else if(codSelected==3){
-			periodo="Março";
+			mess="Março";
 		}else if(codSelected==4){
-			periodo="Abril";
+			mess="Abril";
 		}else if(codSelected==5){
-			periodo="Maio";
+			mess="Maio";
 		}else if(codSelected==6){
-			periodo="Junho";
+			mess="Junho";
 		}else if(codSelected==7){
-			periodo="Julho";
+			mess="Julho";
 		}else if(codSelected==8){
-			periodo="Agosto";
+			mess="Agosto";
 		}else if(codSelected==9){
-			periodo="Setembro";
+			mess="Setembro";
 		}else if(codSelected==10){
-			periodo="Outubro";
+			mess="Outubro";
 		}else if(codSelected==11){
-			periodo="Novembro";
+			mess="Novembro";
 		}else if(codSelected==12){
-			periodo="Dezembro";
+			mess="Dezembro";
 		}
+		
+		 periodo = " - Mês: "+mess;
 	}
 	
 	
-	model.addAttribute("dados", "Filtro: "+ ano+" "+periodo+" "+projecto1+" "+provincia1);
+	model.addAttribute("dados", "Ano: "+ano+" "+periodo+" "+projecto1+" "+provincia1);
 	
 	
 	

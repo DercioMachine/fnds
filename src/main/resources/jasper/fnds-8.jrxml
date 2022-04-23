@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rubricaUEM" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d057964-0193-46a7-b7f9-9ddd524a738a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="projecto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cidade" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="regiao" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="estado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipoOcorrencia" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="provincia" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="categoria" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *,c.designacao as provincia, r.designacao as categoria from ocorrencia o
+inner join projecto p
+inner join provincia c
+inner join categoria r
+inner join tipo_ocorrencia t
+where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id and o.categoriaid=r.id and  o.estado='Validado' and o.created between $P{data1} and $P{data2} and if($P{projecto}='',1=1,p.designacao=$P{projecto}) and if($P{categoria}='',1=1,r.designacao=$P{categoria}) and if($P{provincia}='',1=1,c.designacao=$P{provincia}) and if($P{tipoOcorrencia}='',1=1,t.designacao=$P{tipoOcorrencia}) and if($P{estado}='',1=1,o.resolucao=$P{estado})]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="assunto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comunidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contacto_utente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="data_grm" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email_utente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="faixa_etaria" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="forma_comunicacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="forma_resposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grm_stamp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="interno_externo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="morada_utente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_representante_grupo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_grupo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_utente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_mdias_registo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_homens" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_mulheres" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="origem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="procedencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="projecto_operacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="registado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="resolucao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="resposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="temporario" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="validado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="categoriaid" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="distrito_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="posto_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="processo_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="projecto_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="provincia_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_categoria_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_alerta_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_ocorrencia_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empreiteiro_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="queixa_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoorigem" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="designacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="situacao" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="153" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="89" width="553" height="20" uuid="29ff1039-8ccd-42e4-91e6-941c436aa189"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FNDS - FUNDO NACIONAL DE DESENVOLVIMENTO SUSTENTÁVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="109" width="553" height="18" backcolor="#000000" uuid="e12aa4d8-db88-4193-a2a0-74b5077adebc"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MDR - MENCANISCO DE DIALOGO E RECLAMAÇÕES]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="132" width="554" height="1" uuid="581209e8-f42a-4da2-baed-d4e5a11037a5"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#666666"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="132" width="553" height="18" backcolor="#000000" uuid="4b620804-082b-4fd9-9ddd-fb7b1cef786b"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Ocorrências]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="238" y="21" width="82" height="50" uuid="07291f14-1a2f-4131-83ee-f0a5e5d111c3"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="554" height="1" uuid="977cf460-38f5-4ad3-8631-44555eaaba7c"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#666666"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="5" width="554" height="13" backcolor="#CCCCCC" uuid="d2bbb3d6-58c4-42ff-a6a0-bc97ba9239be"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#999999"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="5" width="53" height="15" uuid="86bc12af-1c67-495b-b221-4bba9e260f20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="5" width="50" height="15" uuid="50ec8754-d3e1-4264-a8d8-11506191a539"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Cadastro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="5" width="115" height="15" uuid="59950ede-7d60-4e2f-bfef-86f9e859fa1e"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Canal de Entrada]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" uuid="72e62656-822c-4c0e-b5d8-dcdbdd4ec3dd"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#666666"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="119" y="5" width="71" height="15" uuid="73990ca5-eb0a-4f87-b5ab-4a0294ad899e"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Ocorrência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="5" width="99" height="15" uuid="b35ccecc-8aad-4384-9b7b-e4883758e847"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Projecto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="5" width="53" height="15" uuid="c4453e13-a9ad-4846-a65e-7a3ce66c3b33"/>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="5" width="69" height="15" uuid="9c40fd08-5990-46a5-9a61-eecf7fa3f73b"/>
+				<text><![CDATA[Província]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField pattern="###0.00">
+				<reportElement x="1" y="0" width="53" height="16" uuid="68749f7d-9411-4941-9176-2c1b620bc621"/>
+				<textFieldExpression><![CDATA[$F{grm_stamp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="61" y="0" width="50" height="16" uuid="b3cd3a53-a33c-4621-a59b-06bb82c19134"/>
+				<textFieldExpression><![CDATA[$F{created}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="119" y="0" width="71" height="16" uuid="b8751edb-7add-48ad-9021-a5d38c1ea7a8"/>
+				<textFieldExpression><![CDATA[$F{data_grm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="198" y="0" width="115" height="16" uuid="c114898b-65f5-4501-8792-10f91ae21774"/>
+				<textFieldExpression><![CDATA[$F{forma_comunicacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="99" height="16" uuid="ec528710-43e1-4329-b96f-3a4233cce17d"/>
+				<textFieldExpression><![CDATA[$F{designacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="69" height="16" uuid="6d1b8560-b1be-4496-852e-3785ddbfdeaa"/>
+				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="66" height="16" uuid="8b068d95-78e9-4133-8854-ff1bf107de98"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="238" height="10" uuid="afbf652f-e1e1-4e50-8329-5be626499d06"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Contactos: Telefone: (+258) 21 308840 / (+258) 823025430, email : fipag@fipag.co.mz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="226" height="8" uuid="818fcfaf-9d59-4e6f-86d3-a90335309765"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Produzido por FIPAG]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="533" y="20" width="21" height="18" uuid="37843778-ee5f-41e9-aac9-38675c84b6c4"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="18" width="555" height="1" uuid="39e0a72c-e69b-4af1-9909-64f467a08f27"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#666666"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="25" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="36">
+			<staticText>
+				<reportElement x="2" y="0" width="552" height="36" forecolor="#FF0000" uuid="7d11ae92-fd99-40fc-9d04-4390abff907c"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Sem dados]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

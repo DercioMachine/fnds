@@ -142,15 +142,6 @@ function onChangePorAno(){
                                 </label>
                             </div>
                             
-                            
-                            <div style="margin-left: 280px" class="form-check-inline ">
-                              <div style="font-weight: bolder" th:text="${dados1}" th:if="${dados1} != null"></div>
-                              <div style="font-weight: bolder" th:text="${dados}" th:if="${dados} != null"></div> 
-							</div>
-                            
-                            
-
-                            
                         </div>
                     </div>
                 </div>
@@ -492,7 +483,7 @@ function onChangePorAno(){
             </div>
         </div>
     </div> 
- 
+    
 
 
 
@@ -585,10 +576,34 @@ function onChangePorAno(){
             </div>
         </div>
     </div>
+    
+    
+	<div class="page-body">
+	        <div class="container-xl">
+	            <div class="row row-deck row-cards">
+            
+           <div  th:if="${dados} != null OR ${dados1} != null" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="card">
+    <div class="card-header">
+      <h3 class="card-title">Dados da pesquisa</h3>
+    </div>
+    <div class="card-body">
+    
+    <div class="row">
 
-<div class="page-body">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
+         <div class="form-check-inline ">
+           <div style="font-weight: bolder" th:text="${dados1}" th:if="${dados1} != null"></div>
+           <div style="font-weight: bolder" th:text="${dados}" th:if="${dados} != null"></div> 
+		</div>
+          
+      
+
+
+    </div>
+
+  </div>
+  
+  </div> 
+            
 
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
@@ -712,6 +727,45 @@ function onChangePorAno(){
 
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-sexo"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                 <div class="col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="  font-size: 12px;" >Tipo de Preocupação</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-tipo-preocupacao"></div>
+                        </div>
+                    </div>
+
+
+                </div> 
+
+
+
+
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+
+                <div class="col-lg-6 col-xl-6">
+                    <div class="card">
                     <div id="piechart" style="width: 900px; height: 500px;"></div>
                     </div>
 
@@ -725,7 +779,7 @@ function onChangePorAno(){
 
             </div>
         </div>
-    </div>
+    </div> -->
     
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     
@@ -737,7 +791,9 @@ function onChangePorAno(){
     ocorrenciasPorCanalEntrada();
     ocorrenciasPorCategoria();
     ocorrenciasPorProjecto();
-    teste();
+    ocorrenciasPorTipoPreocupacao();
+    ocorrenciasPorSexo();
+    //teste();
     
     function teste(){
     	var vetor = /*[[${vetor}]]*/'noValue';
@@ -779,7 +835,7 @@ function onChangePorAno(){
        	var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
        	var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
        	var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
-       	var numeroocorencia4= /*[[${numeroocorenciaProjecto4}]]*/""
+      
        	
        		document.addEventListener("DOMContentLoaded", function () {
               	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
@@ -809,17 +865,14 @@ function onChangePorAno(){
               		},
               		series: [
               			{
-                  			name: "Reclamações",
+                  			name: "Resolvidas",
                   			data: numeroocorencia1
                   		},{
-              			name: "Resolvidas",
+              			name: "Em Atendimento",
               			data: numeroocorencia2
               		},{
-              			name: "Em Andamento",
-              			data: numeroocorencia3
-              		},{
               			name: "Não Resolvidas",
-              			data: numeroocorencia4
+              			data: numeroocorencia3
               		}
               		
               		],
@@ -849,7 +902,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
+              		colors: ["#66BB6A", "#FFA726", "#EF5350"],
               		legend: {
               			show: false,
               		},
@@ -932,7 +985,102 @@ function onChangePorAno(){
               		grid: {
               			strokeDashArray: 4,
               		},
-              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              		colors: ["#800080", "#4299f5","#FFA726", "#66BB6A"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    }
+    
+    
+    function ocorrenciasPorSexo(){
+    	var nomes = /*[[${nomeSexo}]]*/""
+       	var numeroocorencia= /*[[${numeroocorenciaSexo}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-sexo'), {
+              		chart: {
+              			type: "pie",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#eb6eb9", "#96a11b"],
+              		legend: {
+              			show: true,
+              			position: 'bottom',
+              			offsetY: 12,
+              			markers: {
+              				width: 10,
+              				height: 10,
+              				radius: 100,
+              			},
+              			itemMargin: {
+              				horizontal: 8,
+              				vertical: 8
+              			},
+              		},
+              		tooltip: {
+              			fillSeriesColor: false
+              		},
+              	})).render();
+              });
+    }
+    
+    function ocorrenciasPorTipoPreocupacao(){
+    	var nomes = /*[[${nomeTipoPreocupacao}]]*/""
+       	var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
+       	
+       		document.addEventListener("DOMContentLoaded", function () {
+              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-preocupacao'), {
+              		chart: {
+              			type: "pie",
+              			fontFamily: 'inherit',
+              			height: 240,
+              			sparkline: {
+              				enabled: true
+              			},
+              			animations: {
+              				enabled: false
+              			},
+              		},
+              		fill: {
+              			opacity: 1,
+              		},
+              		series: numeroocorencia,
+              		labels: nomes,
+              		grid: {
+              			strokeDashArray: 4,
+              		},
+              		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
               		legend: {
               			show: true,
               			position: 'bottom',
@@ -1058,7 +1206,6 @@ function onChangePorAno(){
         var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
         var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
         var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
-        var numeroocorencia4= /*[[${numeroocorencia4}]]*/""
         
         	
         	document.addEventListener("DOMContentLoaded", function () {
@@ -1088,17 +1235,14 @@ function onChangePorAno(){
               		},
               		series: [
               			{
-                  			name: "Reclamações",
+                  			name: "Resolvidas",
                   			data: numeroocorencia1
                   		},{
-              			name: "Resolvidas",
+              			name: "Em Atendimento",
               			data: numeroocorencia2
               		},{
-              			name: "Em Andamento",
-              			data: numeroocorencia3
-              		},{
               			name: "Não Resolvidas",
-              			data: numeroocorencia4
+              			data: numeroocorencia3
               		}
               		
               		],
@@ -1128,7 +1272,7 @@ function onChangePorAno(){
               				padding: 4
               			},
               		},
-              		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
+              		colors: ["#66BB6A", "#FFA726", "#EF5350"],
               		legend: {
               			show: false,
               		},
@@ -1146,7 +1290,6 @@ function onChangePorAno(){
     var numeroocorencia1= /*[[${nrocorrenciasMesT}]]*/""
     var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
     var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
-   	var numeroocorencia4= /*[[${nrocorrenciasMesRN}]]*/""
     
     	document.addEventListener("DOMContentLoaded", function () {
           	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
@@ -1175,17 +1318,14 @@ function onChangePorAno(){
           		},
           		series: [
           			{
-              			name: "Reclamações",
+              			name: "Resolvidas",
               			data: numeroocorencia1
               		},{
-          			name: "Resolvidas",
+          			name: "Em Atendimento",
           			data: numeroocorencia2
           		},{
-          			name: "Em Andamento",
-          			data: numeroocorencia3
-          		},{
           			name: "Não Resolvidas",
-          			data: numeroocorencia4
+          			data: numeroocorencia3
           		}
           		
           		],
@@ -1215,7 +1355,7 @@ function onChangePorAno(){
           				padding: 4
           			},
           		},
-          		colors: ["#FFA726", "#66BB6A", "rgba(0,47,167,0.8)", "#EF5350"],
+          		colors: ["#66BB6A", "#FFA726", "#EF5350"],
           		legend: {
           			show: false,
           		},

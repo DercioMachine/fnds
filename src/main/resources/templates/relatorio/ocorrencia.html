@@ -102,11 +102,11 @@ $('#cbxCidade').html(s);
 
         <div class="row">
 
-          <div class="col-sm-6 col-lg-4">
+          <div class="col-sm-6 col-lg-3">
             <div class="form-group">
               <label class="form-label">Nível de Resolução</label>
               <select name="estado" class="form-control custom-select form-select" >
-                <option value="">Selecione o Estado...</option>
+                <option value="">Selecione o Nível de Resolução...</option>
                 <option value="T">Resolvido(s)</option>
                 <option value="R">Em Resolução</option>
                 <option value="A">Em Acopanhamento</option>
@@ -114,7 +114,7 @@ $('#cbxCidade').html(s);
             </div>
           </div>
 
-          <div id="projectoo" class="col-sm-6 col-lg-4">
+          <div id="projectoo" class="col-sm-6 col-lg-3">
             <div class="form-group">
               <label for="projecto" class="form-label">Projecto</label>
               <select id="projecto" name="projecto" class="form-control custom-select form-select" >
@@ -126,12 +126,23 @@ $('#cbxCidade').html(s);
           </div>
 
 
-          <div id="cidadee" class="col-sm-6 col-lg-4">
+          <div id="cidadee" class="col-sm-6 col-lg-3">
             <div class="form-group">
               <label for="cbxCidade" class="form-label">Província</label>
               <select id="cbxCidade" name="provincia" class="form-control custom-select form-select" >
                 <option value="">Selecione a Província...</option>
                 <option th:each="p : ${provincias}"
+                        th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+              </select>
+            </div>
+          </div>
+          
+          <div id="categoriaa" class="col-sm-6 col-lg-3">
+            <div class="form-group">
+              <label for="cbxCategoria" class="form-label">Categoria</label>
+              <select id="cbxCategoria" name="categoria" class="form-control custom-select form-select" >
+                <option value="">Selecione a Categoria...</option>
+                <option th:each="p : ${categorias}"
                         th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
               </select>
             </div>
@@ -168,6 +179,30 @@ $('#cbxCidade').html(s);
 
   </div>
 
+  <br>
+  
+  <div  th:if="${dados} != null" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="card">
+    <div class="card-header">
+      <h3 class="card-title">Dados da pesquisa</h3>
+    </div>
+    <div class="card-body">
+    
+    <div class="row">
+
+          <div class="form-check-inline ">
+            <div style="font-weight: bolder" th:text="${dados}"></div> 
+		</div>
+          
+      
+
+
+    </div>
+
+  </div>
+  
+  </div>
+  
+  
   <br>
 
   <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">

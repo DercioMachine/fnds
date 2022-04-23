@@ -18,7 +18,7 @@ import java.util.Map;
 public class JasperService {
 
     private static final String JASPER_DIRECTORIO = "classpath:jasper/";
-    private static final String JASPER_PREFIXO = "fipag";
+    private static final String JASPER_PREFIXO = "fnds";
     private static final String JASPER_SUFIXO = ".jasper";
 
     @Autowired
