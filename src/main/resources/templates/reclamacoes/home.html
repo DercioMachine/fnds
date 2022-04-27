@@ -15,7 +15,7 @@ margin-bottom: 0;
 </style>
 
     <meta charset="UTF-8">
-    
+
 
 
 
@@ -92,37 +92,35 @@ if(estado.value=="A"){
 
 
 function onChangePorData(){
-	var estado = document.getElementById("radioData");
+var estado = document.getElementById("radioData");
 
 
-	if(estado.value=="data"){
-	document.getElementById("divdata").style.display="block";
-	document.getElementById("divano").style.display="none";
+if(estado.value=="data"){
+document.getElementById("divdata").style.display="block";
+document.getElementById("divano").style.display="none";
 
 
-	}
-	}
+}
+}
 
 
 function onChangePorAno(){
-	var estado = document.getElementById("radioAno");
+var estado = document.getElementById("radioAno");
 
 
-	if(estado.value=="ano"){
-	document.getElementById("divdata").style.display="none";
-	document.getElementById("divano").style.display="block";
+if(estado.value=="ano"){
+document.getElementById("divdata").style.display="none";
+document.getElementById("divano").style.display="block";
 
 
-	}
-	}
-
-
+}
+}
 
 
 
 </script>
 
-<div class="page-body">
+    <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
                 <div class="col-sm-6 col-lg-12">
@@ -141,7 +139,7 @@ function onChangePorAno(){
                                     <input onclick="onChangePorData()" id="radioData" value="data" type="radio" name="filtros" class="form-check-input" > Filtro por intervalo de datas
                                 </label>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -168,11 +166,11 @@ function onChangePorAno(){
                                         <option value="2020">2020</option>
                                         <option value="2019">2019</option>
                                         <option value="2018">2018</option>
-                                        
-                                        
+
+
 
                                     </select>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -198,17 +196,19 @@ function onChangePorAno(){
 
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
+                                        <input onchange="onChangeMes()" id="radioMes" type="radio" value="M" name="radioButton" class="form-check-input" > Mês
+                                    </label>
+                                </div>
+
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
                                         <input onchange="onChangeTrimestre()" id="radioTrimestre" type="radio" name="radioButton" value="T" class="form-check-input"> Trimestre
                                     </label>
                                 </div>
 
 
 
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input onchange="onChangeMes()" id="radioMes" type="radio" value="M" name="radioButton" class="form-check-input" > Mês
-                                    </label>
-                                </div>
+
 
                             </div>
                         </div>
@@ -286,7 +286,7 @@ function onChangePorAno(){
                             </div>
                         </div>
                     </div>
-                    
+
                     <div  class="col-sm-6 col-lg-2">
                         <div class="card">
                             <div class="card-body">
@@ -301,7 +301,7 @@ function onChangePorAno(){
                             </div>
                         </div>
                     </div>
- 
+
 
                     <div id="botoes1" class="col-sm-1 col-lg-1">
                         <div class="card">
@@ -340,9 +340,9 @@ function onChangePorAno(){
                                         <div class="form-group">
                                             <label class="form-label">Data Inical: </label>
                                             <div class="input-icon">
-							<span class="input-icon-addon">
-							<i class="fe fe-calendar"></i>
-							</span>
+<span class="input-icon-addon">
+<i class="fe fe-calendar"></i>
+</span>
                                                 <input id="txtDate" required="required" value="" name="datainicial" type="date" class="form-control">
                                             </div>
                                         </div>
@@ -353,9 +353,9 @@ function onChangePorAno(){
                                         <div class="form-group">
                                             <label class="form-label">Data Final: </label>
                                             <div class="input-icon">
-							<span class="input-icon-addon">
-							<i class="fe fe-calendar"></i>
-							</span>
+<span class="input-icon-addon">
+<i class="fe fe-calendar"></i>
+</span>
                                                 <input id="txtDate2" required="required" value="" name="datafinal" type="date" class="form-control">
                                             </div>
                                         </div>
@@ -382,13 +382,13 @@ function onChangePorAno(){
                             </div>
                         </div>
                     </div>
-                    
+
                     <div  class="col-sm-6 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="provincia" class="form-label">Província </label>
-                                    <select id="provincia" name="provincia" class="form-control custom-select form-select">
+                                    <select id="provincia1" name="provincia" class="form-control custom-select form-select">
                                         <option value="">Selecione a Província...</option>
                                         <option th:each="p : ${provincias}"
                                                 th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
@@ -420,9 +420,29 @@ function onChangePorAno(){
             </div>
         </div>
     </form>
-    
 
-     <div class="page-body">
+    <div class="page-body" th:if="${dados} != null">
+        <div class="container-xl">
+            <div class="row row-deck row-cards">
+                <div class="col-sm-12 col-lg-12">
+                    <div style="padding-top: 5px" class="card ">
+                        <div class="card-body">
+
+                            <div class="form-check-inline ">
+                                <center th:if="${dados}!= null" >
+                                    <b>Critério de Pesquisa: <span th:text="${dados}"></span></b>
+                                </center>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
@@ -437,14 +457,14 @@ function onChangePorAno(){
 
                         </div>
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-sm-6 col-md-3 col-lg-3">
                     <div style="background: #60a18a; height: 80%;" class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="subheader" style=" text-transform: capitalize; font-size: 12px;color: rgba(255,255,255);" >Ocorrências Procedentes</div>
-                               
+
                             </div>
                             <span style="color:rgba(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
                             <span style="font-size:30px; padding-left:80px; color: rgb(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-arrow-alt-circle-right"></i></span>
@@ -482,8 +502,8 @@ function onChangePorAno(){
 
             </div>
         </div>
-    </div> 
-    
+    </div>
+
 
 
 
@@ -491,7 +511,7 @@ function onChangePorAno(){
     <div style="margin-top:-3%" class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
-            
+
 
                 <div class="col-sm-6 col-lg-2">
                     <div style="background:#686669;" class="card">
@@ -504,7 +524,7 @@ function onChangePorAno(){
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-6 col-lg-2">
                     <div style="background:rgba(128,0,128,0.8);" class="card">
                         <div class="card-body">
@@ -542,7 +562,7 @@ function onChangePorAno(){
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-6 col-lg-2">
                     <div style="background: #FFA726" class="card">
                         <div class="card-body">
@@ -568,71 +588,7 @@ function onChangePorAno(){
                         </div>
                     </div>
                 </div>
-                
-                
 
-
-
-            </div>
-        </div>
-    </div>
-    
-    
-	<div class="page-body">
-	        <div class="container-xl">
-	            <div class="row row-deck row-cards">
-            
-           <div  th:if="${dados} != null OR ${dados1} != null" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="card">
-    <div class="card-header">
-      <h3 class="card-title">Dados da pesquisa</h3>
-    </div>
-    <div class="card-body">
-    
-    <div class="row">
-
-         <div class="form-check-inline ">
-           <div style="font-weight: bolder" th:text="${dados1}" th:if="${dados1} != null"></div>
-           <div style="font-weight: bolder" th:text="${dados}" th:if="${dados} != null"></div> 
-		</div>
-          
-      
-
-
-    </div>
-
-  </div>
-  
-  </div> 
-            
-
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="  font-size: 12px;" >Nível de resolução das reclamações</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-projecto"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-                
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por projecto</h3>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-regiao"></div>
-                        </div>
-                    </div>
-
-
-                </div>
-                
-
-                 
 
 
 
@@ -640,15 +596,15 @@ function onChangePorAno(){
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
-                 
-				<div class="col-lg-6 col-xl-6">
+
+                <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por província</h3>
@@ -659,8 +615,8 @@ function onChangePorAno(){
                     </div>
 
 
-                </div> 
-                
+                </div>
+
                 <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
@@ -674,14 +630,14 @@ function onChangePorAno(){
 
 
                 </div>
-                
+
 
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -700,7 +656,7 @@ function onChangePorAno(){
 
                 </div>
 
-                 <div class="col-lg-6 col-xl-6">
+                <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
@@ -711,7 +667,7 @@ function onChangePorAno(){
                     </div>
 
 
-                </div> 
+                </div>
 
 
 
@@ -719,8 +675,8 @@ function onChangePorAno(){
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -739,7 +695,7 @@ function onChangePorAno(){
 
                 </div>
 
-                 <div class="col-lg-6 col-xl-6">
+                <div class="col-lg-6 col-xl-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Tipo de Preocupação</h3>
@@ -750,7 +706,7 @@ function onChangePorAno(){
                     </div>
 
 
-                </div> 
+                </div>
 
 
 
@@ -758,8 +714,8 @@ function onChangePorAno(){
             </div>
         </div>
     </div>
-    
-    
+
+
     <!-- <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
@@ -780,9 +736,9 @@ function onChangePorAno(){
             </div>
         </div>
     </div> -->
-    
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
+
     <script th:inline="javascript">
     ocorrenciasPorMes();
     ocorrenciasPorProvincia();
@@ -794,15 +750,15 @@ function onChangePorAno(){
     ocorrenciasPorTipoPreocupacao();
     ocorrenciasPorSexo();
     //teste();
-    
+
     function teste(){
-    	var vetor = /*[[${vetor}]]*/'noValue';
-    	
-    	google.charts.load('current', {
+    var vetor = /*[[${vetor}]]*/'noValue';
+
+    google.charts.load('current', {
                 packages : [ 'corechart', 'pie' ]
             });
         google.charts.setOnLoadCallback(drawChart);
-        
+
         alert(vetor);
 
         function drawChart() {
@@ -825,546 +781,546 @@ function onChangePorAno(){
           chart.draw(data, options);
         }
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     function ocorrenciasPorProjecto(){
-    	var nomes = /*[[${nomesProjecto}]]*/""
-       	var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
-       	var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
-       	var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
-      
-       	
-       		document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
-              		chart: {
-              			type: "bar",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			parentHeightOffset: 0,
-              			toolbar: {
-              				show: false,
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		plotOptions: {
-              			bar: {
-              				columnWidth: '50%',
-              				horizontal: false,
-              			}
-              		},
-              		dataLabels: {
-              			enabled: false,
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: [
-              			{
-                  			name: "Resolvidas",
-                  			data: numeroocorencia1
-                  		},{
-              			name: "Em Atendimento",
-              			data: numeroocorencia2
-              		},{
-              			name: "Não Resolvidas",
-              			data: numeroocorencia3
-              		}
-              		
-              		],
-              		grid: {
-              			padding: {
-              				top: -20,
-              				right: 0,
-              				left: 0,
-              				bottom: -4
-              			},
-              			strokeDashArray: 4,
-              		},
-              		xaxis: {
-              			labels: {
-              				padding: 0,
-              			},
-              			tooltip: {
-              				enabled: false
-              			},
-              			axisBorder: {
-              				show: false,
-              			},
-              			categories: nomes,
-              		},
-              		yaxis: {
-              			labels: {
-              				padding: 4
-              			},
-              		},
-              		colors: ["#66BB6A", "#FFA726", "#EF5350"],
-              		legend: {
-              			show: false,
-              		},
-              	})).render();
+    var nomes = /*[[${nomesProjecto}]]*/""
+        var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
+        var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
+        var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
+              chart: {
+              type: "bar",
+              fontFamily: 'inherit',
+              height: 240,
+              parentHeightOffset: 0,
+              toolbar: {
+              show: false,
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              plotOptions: {
+              bar: {
+              columnWidth: '50%',
+              horizontal: false,
+              }
+              },
+              dataLabels: {
+              enabled: false,
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: [
+              {
+                  name: "Resolvidas",
+                  data: numeroocorencia1
+                  },{
+              name: "Em Atendimento",
+              data: numeroocorencia2
+              },{
+              name: "Não Resolvidas",
+              data: numeroocorencia3
+              }
+
+              ],
+              grid: {
+              padding: {
+              top: -20,
+              right: 0,
+              left: 0,
+              bottom: -4
+              },
+              strokeDashArray: 4,
+              },
+              xaxis: {
+              labels: {
+              padding: 0,
+              },
+              tooltip: {
+              enabled: false
+              },
+              axisBorder: {
+              show: false,
+              },
+              categories: nomes,
+              },
+              yaxis: {
+              labels: {
+              padding: 4
+              },
+              },
+              colors: ["#66BB6A", "#FFA726", "#EF5350"],
+              legend: {
+              show: false,
+              },
+              })).render();
               });
-           	
+
     }
-    
+
     function ocorrenciasPorCategoria(){
-    	var nomes = /*[[${nomesCategoria}]]*/""
-       	var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
-       	
-       	
-       		document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
-              		chart: {
-              			type: "pie",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			sparkline: {
-              				enabled: true
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: numeroocorencia,
-              		labels: nomes,
-              		grid: {
-              			strokeDashArray: 4,
-              		},
-              		colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
-              		legend: {
-              			show: true,
-              			position: 'bottom',
-              			offsetY: 12,
-              			markers: {
-              				width: 10,
-              				height: 10,
-              				radius: 100,
-              			},
-              			itemMargin: {
-              				horizontal: 8,
-              				vertical: 8
-              			},
-              		},
-              		tooltip: {
-              			fillSeriesColor: false
-              		},
-              	})).render();
+    var nomes = /*[[${nomesCategoria}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+              },
+              colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
               });
-    
+
     }
-    
+
     function ocorrenciasPorCanalEntrada(){
-    	var nomes = /*[[${nomesCanais}]]*/""
-       	var numeroocorencia= /*[[${numeroocorencia}]]*/""
-       	
-       		document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
-              		chart: {
-              			type: "pie",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			sparkline: {
-              				enabled: true
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: numeroocorencia,
-              		labels: nomes,
-              		grid: {
-              			strokeDashArray: 4,
-              		},
-              		colors: ["#800080", "#4299f5","#FFA726", "#66BB6A"],
-              		legend: {
-              			show: true,
-              			position: 'bottom',
-              			offsetY: 12,
-              			markers: {
-              				width: 10,
-              				height: 10,
-              				radius: 100,
-              			},
-              			itemMargin: {
-              				horizontal: 8,
-              				vertical: 8
-              			},
-              		},
-              		tooltip: {
-              			fillSeriesColor: false
-              		},
-              	})).render();
+    var nomes = /*[[${nomesCanais}]]*/""
+        var numeroocorencia= /*[[${numeroocorencia}]]*/""
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+              },
+              colors: ["#800080", "#4299f5","#FFA726", "#66BB6A"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
               });
     }
-    
-    
+
+
     function ocorrenciasPorSexo(){
-    	var nomes = /*[[${nomeSexo}]]*/""
-       	var numeroocorencia= /*[[${numeroocorenciaSexo}]]*/""
-       	
-       		document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-sexo'), {
-              		chart: {
-              			type: "pie",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			sparkline: {
-              				enabled: true
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: numeroocorencia,
-              		labels: nomes,
-              		grid: {
-              			strokeDashArray: 4,
-              		},
-              		colors: ["#eb6eb9", "#96a11b"],
-              		legend: {
-              			show: true,
-              			position: 'bottom',
-              			offsetY: 12,
-              			markers: {
-              				width: 10,
-              				height: 10,
-              				radius: 100,
-              			},
-              			itemMargin: {
-              				horizontal: 8,
-              				vertical: 8
-              			},
-              		},
-              		tooltip: {
-              			fillSeriesColor: false
-              		},
-              	})).render();
+    var nomes = /*[[${nomeSexo}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaSexo}]]*/""
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-sexo'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+              },
+              colors: ["#eb6eb9", "#96a11b"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
               });
     }
-    
+
     function ocorrenciasPorTipoPreocupacao(){
-    	var nomes = /*[[${nomeTipoPreocupacao}]]*/""
-       	var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
-       	
-       		document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-preocupacao'), {
-              		chart: {
-              			type: "pie",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			sparkline: {
-              				enabled: true
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: numeroocorencia,
-              		labels: nomes,
-              		grid: {
-              			strokeDashArray: 4,
-              		},
-              		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
-              		legend: {
-              			show: true,
-              			position: 'bottom',
-              			offsetY: 12,
-              			markers: {
-              				width: 10,
-              				height: 10,
-              				radius: 100,
-              			},
-              			itemMargin: {
-              				horizontal: 8,
-              				vertical: 8
-              			},
-              		},
-              		tooltip: {
-              			fillSeriesColor: false
-              		},
-              	})).render();
+    var nomes = /*[[${nomeTipoPreocupacao}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-preocupacao'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+              },
+              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
               });
     }
-    
+
     function ocorrenciasPorRegiao(){
-    	var nomes = /*[[${nomesRegiao}]]*/""
+    var nomes = /*[[${nomesRegiao}]]*/""
         var numeroocorencia= /*[[${numeroocorenciaRegiao}]]*/""
-        
-        	document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-regiao'), {
-              		chart: {
-              			type: "pie",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			sparkline: {
-              				enabled: true
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: numeroocorencia,
-              		labels: nomes,
-              		grid: {
-              			strokeDashArray: 4,
-              		},
-              		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
-              		legend: {
-              			show: true,
-              			position: 'bottom',
-              			offsetY: 12,
-              			markers: {
-              				width: 10,
-              				height: 10,
-              				radius: 100,
-              			},
-              			itemMargin: {
-              				horizontal: 8,
-              				vertical: 8
-              			},
-              		},
-              		tooltip: {
-              			fillSeriesColor: false
-              		},
-              	})).render();
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-regiao'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+              },
+              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
               });
     }
-    
+
     function ocorrenciasPorCidade(){
-    	
-    	var nomes = /*[[${nomesCidades}]]*/""
+
+    var nomes = /*[[${nomesCidades}]]*/""
         var numeroocorencia= /*[[${ocorrenciasCidade}]]*/""
-        
-        
-        	document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-cidade'), {
-              		chart: {
-              			type: "pie",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			sparkline: {
-              				enabled: true
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: numeroocorencia,
-              		labels: nomes,
-              		grid: {
-              			strokeDashArray: 4,
-              			
-              		},
-              		colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
-              		legend: {
-              			show: true,
-              			position: 'bottom',
-              			offsetY: 12,
-              			markers: {
-              				width: 10,
-              				height: 10,
-              				radius: 100,
-              			},
-              			itemMargin: {
-              				horizontal: 8,
-              				vertical: 8
-              			},
-              		},
-              		tooltip: {
-              			fillSeriesColor: false
-              		},
-              	})).render();
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-cidade'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+
+              },
+              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
               });
-    	
+
     }
-    
+
     function ocorrenciasPorProvincia(){
-    	
+
         var nomes = /*[[${nomesProvincias}]]*/""
         var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
         var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
         var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
-        
-        	
-        	document.addEventListener("DOMContentLoaded", function () {
-              	window.ApexCharts && (new ApexCharts(document.getElementById('chart-provincia'), {
-              		chart: {
-              			type: "bar",
-              			fontFamily: 'inherit',
-              			height: 240,
-              			parentHeightOffset: 0,
-              			toolbar: {
-              				show: false,
-              			},
-              			animations: {
-              				enabled: false
-              			},
-              		},
-              		plotOptions: {
-              			bar: {
-              				columnWidth: '50%',
-              			}
-              		},
-              		dataLabels: {
-              			enabled: false,
-              		},
-              		fill: {
-              			opacity: 1,
-              		},
-              		series: [
-              			{
-                  			name: "Resolvidas",
-                  			data: numeroocorencia1
-                  		},{
-              			name: "Em Atendimento",
-              			data: numeroocorencia2
-              		},{
-              			name: "Não Resolvidas",
-              			data: numeroocorencia3
-              		}
-              		
-              		],
-              		grid: {
-              			padding: {
-              				top: -20,
-              				right: 0,
-              				left: 0,
-              				bottom: -4
-              			},
-              			strokeDashArray: 4,
-              		},
-              		xaxis: {
-              			labels: {
-              				padding: 0,
-              			},
-              			tooltip: {
-              				enabled: false
-              			},
-              			axisBorder: {
-              				show: false,
-              			},
-              			categories: nomes,
-              		},
-              		yaxis: {
-              			labels: {
-              				padding: 4
-              			},
-              		},
-              		colors: ["#66BB6A", "#FFA726", "#EF5350"],
-              		legend: {
-              			show: false,
-              		},
-              	})).render();
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-provincia'), {
+              chart: {
+              type: "bar",
+              fontFamily: 'inherit',
+              height: 240,
+              parentHeightOffset: 0,
+              toolbar: {
+              show: false,
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              plotOptions: {
+              bar: {
+              columnWidth: '50%',
+              }
+              },
+              dataLabels: {
+              enabled: false,
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: [
+              {
+                  name: "Resolvidas",
+                  data: numeroocorencia1
+                  },{
+              name: "Em Atendimento",
+              data: numeroocorencia2
+              },{
+              name: "Não Resolvidas",
+              data: numeroocorencia3
+              }
+
+              ],
+              grid: {
+              padding: {
+              top: -20,
+              right: 0,
+              left: 0,
+              bottom: -4
+              },
+              strokeDashArray: 4,
+              },
+              xaxis: {
+              labels: {
+              padding: 0,
+              },
+              tooltip: {
+              enabled: false
+              },
+              axisBorder: {
+              show: false,
+              },
+              categories: nomes,
+              },
+              yaxis: {
+              labels: {
+              padding: 4
+              },
+              },
+              colors: ["#66BB6A", "#FFA726", "#EF5350"],
+              legend: {
+              show: false,
+              },
+              })).render();
               });
-        	
-        	
+
+
         }
-    
-    
-    
+
+
+
     function ocorrenciasPorMes(){
-    	
+
     var nomesMes = /*[[${nomesMeses}]]*/""
     var numeroocorencia1= /*[[${nrocorrenciasMesT}]]*/""
     var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
     var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
-    
-    	document.addEventListener("DOMContentLoaded", function () {
-          	window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
-          		chart: {
-          			type: "bar",
-          			fontFamily: 'inherit',
-          			height: 240,
-          			parentHeightOffset: 0,
-          			toolbar: {
-          				show: false,
-          			},
-          			animations: {
-          				enabled: false
-          			},
-          		},
-          		plotOptions: {
-          			bar: {
-          				columnWidth: '50%',
-          			}
-          		},
-          		dataLabels: {
-          			enabled: false,
-          		},
-          		fill: {
-          			opacity: 1,
-          		},
-          		series: [
-          			{
-              			name: "Resolvidas",
-              			data: numeroocorencia1
-              		},{
-          			name: "Em Atendimento",
-          			data: numeroocorencia2
-          		},{
-          			name: "Não Resolvidas",
-          			data: numeroocorencia3
-          		}
-          		
-          		],
-          		grid: {
-          			padding: {
-          				top: -20,
-          				right: 0,
-          				left: -4,
-          				bottom: -4
-          			},
-          			strokeDashArray: 4,
-          		},
-          		xaxis: {
-          			labels: {
-          				padding: 0,
-          			},
-          			tooltip: {
-          				enabled: false
-          			},
-          			axisBorder: {
-          				show: false,
-          			},
-          			categories: nomesMes,
-          		},
-          		yaxis: {
-          			labels: {
-          				padding: 4
-          			},
-          		},
-          		colors: ["#66BB6A", "#FFA726", "#EF5350"],
-          		legend: {
-          			show: false,
-          		},
-          	})).render();
+
+    document.addEventListener("DOMContentLoaded", function () {
+          window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
+          chart: {
+          type: "bar",
+          fontFamily: 'inherit',
+          height: 240,
+          parentHeightOffset: 0,
+          toolbar: {
+          show: false,
+          },
+          animations: {
+          enabled: false
+          },
+          },
+          plotOptions: {
+          bar: {
+          columnWidth: '50%',
+          }
+          },
+          dataLabels: {
+          enabled: false,
+          },
+          fill: {
+          opacity: 1,
+          },
+          series: [
+          {
+              name: "Resolvidas",
+              data: numeroocorencia1
+              },{
+          name: "Em Atendimento",
+          data: numeroocorencia2
+          },{
+          name: "Não Resolvidas",
+          data: numeroocorencia3
+          }
+
+          ],
+          grid: {
+          padding: {
+          top: -20,
+          right: 0,
+          left: -4,
+          bottom: -4
+          },
+          strokeDashArray: 4,
+          },
+          xaxis: {
+          labels: {
+          padding: 0,
+          },
+          tooltip: {
+          enabled: false
+          },
+          axisBorder: {
+          show: false,
+          },
+          categories: nomesMes,
+          },
+          yaxis: {
+          labels: {
+          padding: 4
+          },
+          },
+          colors: ["#66BB6A", "#FFA726", "#EF5350"],
+          legend: {
+          show: false,
+          },
+          })).render();
           });
-    	
-    	
+
+
     }
-    
+
     </script>
 
 

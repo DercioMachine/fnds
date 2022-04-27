@@ -5,6 +5,7 @@ import mz.fipag.grm.domain.User;
 import mz.fipag.grm.repository.RegiaoRepository;
 import mz.fipag.grm.repository.RoleRepository;
 import mz.fipag.grm.repository.UserRepository;
+import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,9 @@ public class UsuarioController {
     private ProvinciaService provinciaService;
 
     @Autowired
+    private ProjectoService projectoService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -40,6 +44,7 @@ public class UsuarioController {
         model.addAttribute("user", new User());
         model.addAttribute("perfils", roleRepository.findAll());
         model.addAttribute("provincias", provinciaService.buscarTodos());
+        model.addAttribute("projectos", projectoService.buscarTodos());
 
         return "usuarios/cadastrarUsuarios";
     }

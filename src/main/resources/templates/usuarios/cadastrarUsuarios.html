@@ -305,6 +305,37 @@
                     </div>
 
 
+                 <div class="row" >
+
+                     <div class="col-12 col-sm-12">
+                         <div class="form-group">
+                             <label class="form-label">Projectos</label>
+                         </div>
+
+                         <th:block>
+
+                             <div class="card mt-2">
+
+                                 <div  class="card-header" >
+
+                                     <div class="form-check-inline" th:each="projecto: ${projectos}" >
+                                         <label class="form-check-label">
+                                             <input required   type="ch" th:field="*{roles}" multiple="true" th:value="${projecto.id}"  />
+                                             <span  th:text="${projecto.designacao}"></span>
+                                         </label>
+                                     </div>
+
+                                 </div>
+                             </div>
+
+                         </th:block>
+
+                     </div>
+
+
+                 </div>
+
+
 
                  <div class="row" >
 
