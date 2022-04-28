@@ -143,7 +143,7 @@ public class OcorrenciaController {
         if(!userlogado.getProvincia().getDesignacao().equals("Nacional")){
             ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosProvincia(userlogado.getProvincia().getId());
         }else{
-            ocorrencia = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+            ocorrencia = (List<Ocorrencia>) ocorrenciaRepository.findAllOrdenarPorNUmeroOrdem();
         }
 
         model.addAttribute("pageOcorrencia", ocorrencia);
@@ -312,9 +312,13 @@ public class OcorrenciaController {
     
 
     @PostMapping("/ocorrencias/cadastrar")
-	public String salvarOcorrencia(Ocorrencia ocorrencia, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
+	public String salvarOcorrencia(Ocorrencia ocorrencia,Authentication authentication, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
 
-    	
+
+        User userlogado = userRepository.findByUsername(authentication.getName());
+
+
+
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
     	int ano = Calendar.getInstance().get(Calendar.YEAR);
     	
@@ -325,8 +329,11 @@ public class OcorrenciaController {
     	
     		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
     		ocorrencia.setRegistado(true);
+    		ocorrencia.setNumeroordem(0);
+    		ocorrencia.setResponsavel(userlogado);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.salvar(ocorrencia);
+
 
     	for(MultipartFile file: files) {
     		if(!file.getOriginalFilename().isEmpty()) {
@@ -538,10 +545,19 @@ public class OcorrenciaController {
 
     @PostMapping("/ocorrencias/validar")
     public String validacaoVista(Ocorrencia ocorrencia, RedirectAttributes redirAttrs,
-    		@RequestParam String procedencia, @RequestParam("descricao") String descricaoAnexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
-    		
+    		@RequestParam String procedencia, @RequestParam("descricao") String descricaoAnexo, Authentication authentication, @RequestParam("files") MultipartFile[] files) throws MessagingException {
+
+
+        int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+        Integer numeroDeOrdem = numeroOrdem;
+
+        User userlogado = userRepository.findByUsername(authentication.getName());
+        numeroDeOrdem++;
+
     		ocorrencia.setProcedencia(procedencia);
     		ocorrencia.setValidado(true);
+    		ocorrencia.setNumeroordem(numeroDeOrdem);
+    		ocorrencia.setResponsavel(userlogado);
         	ocorrencia.setEstado("Validado");
         	ocorrencia.setResolucao("V");
            // ocorrenciaService.editar(ocorrencia);
@@ -640,9 +656,7 @@ public class OcorrenciaController {
     	if(projecto!="") {
 			projecto1="- "+projecto;
 		}
-    	 //System.out.println("ddddddddddddddddddddddddddddddddddddd = "+datainicial);
-    	// System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv = "+datafinal);
-    	// System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv = "+projecto);
+
     	
     	SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
     	

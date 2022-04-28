@@ -86,6 +86,9 @@ public class Ocorrencia extends AbstractEntity{
 	
 	@Column(name = "numero_homens")
 	private int numeroHomens;
+
+	@Column(name = "numero_ordem")
+	private int numeroordem=0;
 	
 	@Column(name = "numero_mulheres")
 	private int numeroMulheres;
@@ -143,6 +146,10 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="processo_id")
 	private Processo processo;
+
+	@ManyToOne
+	@JoinColumn(name="responsavel_id")
+	private User responsavel;
 
 	public Origem getTipoorigem() {
 		return tipoorigem;
@@ -444,5 +451,21 @@ public class Ocorrencia extends AbstractEntity{
 
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
+	}
+
+	public int getNumeroordem() {
+		return numeroordem;
+	}
+
+	public void setNumeroordem(int numeroordem) {
+		this.numeroordem = numeroordem;
+	}
+
+	public User getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(User responsavel) {
+		this.responsavel = responsavel;
 	}
 }

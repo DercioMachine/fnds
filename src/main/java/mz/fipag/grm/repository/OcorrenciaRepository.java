@@ -694,7 +694,7 @@ public List<Object[]> busqueTnTI();*/
 	List<Ocorrencia> buscarOcorrenciasPorUsuariosZonas(@Param("local") long local);
 
 
-	@Query(value="select * from ocorrencia, provincia  where ocorrencia.provincia_id = provincia.id and ocorrencia.provincia_id =:provincial order by ocorrencia.id desc", nativeQuery=true)
+	@Query(value="select * from ocorrencia, provincia  where ocorrencia.provincia_id = provincia.id and ocorrencia.provincia_id =:provincial order by ocorrencia.numero_ordem desc", nativeQuery=true)
 	List<Ocorrencia> buscarOcorrenciasPorUsuariosProvincia(@Param("provincial") long provincial);
 
 
@@ -769,6 +769,12 @@ public List<Object[]> busqueTnTI();*/
 			+ " where tipo_ocorrencia_id=1 and procedencia='Sim' and ocorrencia.provincia_id=provincia.id and ocorrencia.projecto_id=projecto.id and if (:provincia='', 1=1,provincia.designacao =(:provincia)) and if (:projecto='', 1=1,projecto.designacao =(:projecto))\r\n"
 			+ " and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal)) group by sexo",nativeQuery=true)
 	List<Object[]> busqueTudoAgrupadoPorSexo1(Date datainicial, Date datafinal, String projecto, String provincia);
+
+	@Query(value="select Max(numero_ordem) from ocorrencia where estado!='Temporario' ", nativeQuery=true)
+	Object BuscarUltimoNumero();
+
+	@Query(value="select * from ocorrencia order by ocorrencia.numero_ordem desc", nativeQuery=true)
+	public List<Ocorrencia> findAllOrdenarPorNUmeroOrdem();
 
 
 	/* FIM */

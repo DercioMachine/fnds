@@ -304,6 +304,12 @@
 		<div class="card-body">
 		  <div class="row" >
 
+			  <div class="col-6 col-sm-6">
+				  <div class="form-group">
+					  <span style="font-weight: bolder;">Responsável: </span>	<span th:if="${ocorrencia.responsavel != null}"  th:text="${ocorrencia.responsavel.nome}"></span>
+				  </div>
+			  </div>
+
 		  <div class="col-6 col-sm-4">
 				<div class="form-group">
 					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.id}"></span>
@@ -318,7 +324,7 @@
 
 			  <div class="col-6 col-sm-4">
 				  <div class="form-group">
-					  <span style="font-weight: bolder;">Responsável: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
+					  <span style="font-weight: bolder;">Nome: </span>	<span th:text="${ocorrencia.nomeUtente}"></span>
 				  </div>
 			  </div>
 

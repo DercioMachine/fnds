@@ -7,6 +7,7 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+
 </head>
 
 <body>
@@ -129,41 +130,36 @@
                <table id="example" class="display">
                     <thead>
                     <tr style="color: rgb(65,105,225)">
-                        <td class="w-2">#</td>
-                        <td class="w-4">Codigo</td>
+                        <td class="w-2 sorting"  ></td>
                         <td>Cadastro</td>
                         <td>Ocorrência</td>
                        <td>Província</td>
                         <td>Projecto</td>
 			            <td>Canal</td>
+			            <td>Responsável</td>
 			            <td>
                         	<span>
                         		<i style="font-size: 15pt; color: #0277BD" class="fas fa-clock"></i>
                         	</span>
                         </td>
                         <td class="w-4">Assunto</td>
-                        <td class="w-4">Estado</td>
+                        <td class="w-4">Nível de Resolução</td>
                         <td class="w-3">Acção</td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="p, index : ${pageOcorrencia}">
                         <!-- <tr th:each="p : ${ocorrencias}"> -->
-                        <td th:text="${index.count}"><span class="text-muted">01401</span></td>
-                        <td>
-                        	<span sec:authorize="hasAnyAuthority('ROLE_GBV')" th:if="${p.tipoAlerta.designacao=='GBV'}"  th:text="${p.grmStamp}" class="text-muted">
-                        	</span>
-                        	
-                        	<span sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_VALIDADOR')"  th:if="${p.tipoAlerta.designacao!='GBV'}"th:text="${p.grmStamp}" class="text-muted">
-                        	</span>
-                        	
-                        </td>
+                        <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
                         <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
                         <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
                         <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
                         <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
-                        
+
+                        <td th:if="${p.responsavel != null }" th:text="${p.responsavel.nome}">Auxiliar Contábil</td>
+                        <td th:if="${p.responsavel == null }" >Sem Responsável</td>
+
                         
                         <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
                          
