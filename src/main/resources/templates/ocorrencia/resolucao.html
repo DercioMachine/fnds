@@ -73,6 +73,11 @@
       	</a>
     </div> -->
 
+	<a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}"  role="button">
+		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+		<span>Voltar</span>
+	</a>
+
 	<a class="btn btn-success btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-report1" th:if="${ocorrencia.resolucao == 'A' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Acompanhar Ocorrência</span>
@@ -89,18 +94,6 @@
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Resolver Ocorrência</span>
 	</a>
-
-
-
-	<a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}" th:if="${ocorrencia.resolucao == 'V'  && ocorrencia.procedencia=='Sim'}"  role="button">
-		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		<span>Voltar</span>
-	</a>
-
-        <a class="btn btn-success btn-md mb-3" th:href="@{/listar/ocorrencia}"  th:if="${ocorrencia.resolucao == 'P' }" role="button">
-            <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-            <span>Voltar</span>
-        </a>
 
 	<a class="btn btn-success btn-md mb-3" th:href="@{/ocorrencias/validar/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.resolucao == 'P' }"  role="button">
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
@@ -304,7 +297,7 @@
 		<div class="card-body">
 		  <div class="row" >
 
-			  <div class="col-6 col-sm-6">
+			  <div class="col-6 col-sm-4">
 				  <div class="form-group">
 					  <span style="font-weight: bolder;">Responsável: </span>	<span th:if="${ocorrencia.responsavel != null}"  th:text="${ocorrencia.responsavel.nome}"></span>
 				  </div>
@@ -312,7 +305,7 @@
 
 		  <div class="col-6 col-sm-4">
 				<div class="form-group">
-					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.id}"></span>
+					  <span style="font-weight: bolder;">Número de registo: </span>	<span th:text="${ocorrencia.numeroordem}"></span>
 				 </div>
 			</div>
 

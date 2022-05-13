@@ -324,11 +324,11 @@ select.list-dt:focus {
     <div class="row">
 	
 	
-	<div class="col-3">
+	<div class="col-2">
 	
 	</div>
 		
-    <div style="margin-bottom: 5px" class="card col-6" th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
+    <div style="margin-bottom: 5px" class="card col-8" th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
         
         <div style="background: #60a18a;" class="row card-body">
         
@@ -352,8 +352,8 @@ select.list-dt:focus {
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
 				  <span style="font-weight: bolder;">Dias Restantes: </span>
-                    <span style="color:red" th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) < 0)}" th:text="${days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis)}"></span>
-                    <span th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) >= 0)}" th:text="${days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis)}"></span>
+                    <span style="color:red" th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) < 0)}" th:text="${10-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
+                    <span th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) >= 0)}" th:text="${10-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
 				</div>
 			</div>
 			
@@ -375,7 +375,7 @@ select.list-dt:focus {
 		
 		<div th:if="${ocorrencia.resolucao=='P'}" class="col-6 col-sm-12">
             <span style="margin-bottom: 2px;">Caro utente, a sua preocupação fui submetida com sucesso. No prazo de
-                 <span th:text="${days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis)}"></span>
+                 <span th:text="${10-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
                 dias terá uma resposta.
             </span>
 					  
@@ -451,7 +451,7 @@ select.list-dt:focus {
 
 	</div>
 		
-		<div class="col-3">
+		<div class="col-2">
 	
 	</div>
 	

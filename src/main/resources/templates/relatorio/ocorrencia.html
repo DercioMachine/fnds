@@ -215,7 +215,6 @@ $('#cbxCidade').html(s);
           <thead>
           <tr style="color: rgb(65,105,225)">
             <td class="w-2">#</td>
-            <td class="w-4">Código</td>
             <td >Provincias</td>
             <td>Ocorrência</td>
             <td>Cadastro</td>
@@ -230,7 +229,6 @@ $('#cbxCidade').html(s);
             <!-- <tr th:each="p : ${ocorrencias}"> th:text="${p.numeroordem}" -->
             <!-- <td th:text="${index.size-(index.count)}"><span class="text-muted">01401</span></td> -->
             <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
-            <td th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
             <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
             <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
             <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>

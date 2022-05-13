@@ -34,8 +34,27 @@ Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+<link type="text/css" href="https://www.botecodigital.dev.br/exemplos/datapicker/css/custom-theme/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
+<script src="https://www.botecodigital.dev.br/exemplos/datapicker/js/jquery-1.7.2.min.js"></script>
+<script src="https://www.botecodigital.dev.br/exemplos/datapicker/js/jquery-ui-1.8.20.custom.min.js"></script>
+
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+			$(document).ready(function(){
+				 	$("#data").datepicker({
+						dateFormat: 'dd/mm/yy',
+						dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+						dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+						dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+						monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+						monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+						nextText: 'Próximo',
+						prevText: 'Anterior'
+					});
+			});
+		</script>
 
 <script>
 $(document).ready(function() {

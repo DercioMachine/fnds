@@ -358,6 +358,19 @@ public class OcorrenciaController {
 
         }
 
+        if(ocorrencia.getEmailUtente()!=null){
+
+            String descricao ="Caro Utente, a sua preocupação foi submetida com sucesso.\n" +
+                    "NOTA: Anote o seu código para o acompanhamento\n"+provincia.getCodigo()+""+codigo+""+anooo;
+
+            String emaildestino = ocorrencia.getEmailUtente();
+            String nome = "A sua preocupação foi submetido com sucesso";
+
+            String assunto = "Confirmação de código de acesso - FNDS";
+
+            emailService.enviarEmail(descricao,nome,emaildestino,assunto);
+        }
+
      	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente")) {
      		
      		 for (int i=0;i<lista.size();i++) {
