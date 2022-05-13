@@ -227,9 +227,9 @@ $('#cbxCidade').html(s);
           </thead>
           <tbody>
           <tr th:each="p, index : ${ocorrencia}">
-            <!-- <tr th:each="p : ${ocorrencias}"> -->
+            <!-- <tr th:each="p : ${ocorrencias}"> th:text="${p.numeroordem}" -->
             <!-- <td th:text="${index.size-(index.count)}"><span class="text-muted">01401</span></td> -->
-            <td th:text="${index.count}"><span class="text-muted">01401</span></td>
+            <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
             <td th:text="${p.grmStamp}"><span class="text-muted">01401</span></td>
             <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
             <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>

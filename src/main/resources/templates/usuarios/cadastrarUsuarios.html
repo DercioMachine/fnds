@@ -320,7 +320,7 @@
 
                                      <div class="form-check-inline" th:each="projecto: ${projectos}" >
                                          <label class="form-check-label">
-                                             <input required   type="ch" th:field="*{roles}" multiple="true" th:value="${projecto.id}"  />
+                                             <input  type="checkbox" name="projectos" multiple="true" th:value="${projecto.id}"  />
                                              <span  th:text="${projecto.designacao}"></span>
                                          </label>
                                      </div>
@@ -339,7 +339,7 @@
 
                  <div class="row" >
 
-                     <div class="col-8 col-sm-8">
+                     <div class="col-6 col-sm-6">
                          <div class="form-group">
                              <label class="form-label">Perfils</label>
                          </div>
@@ -352,8 +352,8 @@
 
                                      <div class="form-check-inline" th:each="role1: ${perfils}" >
                                          <label class="form-check-label">
-                                             <input required  th:if="${role1.designacao!='Validador'}" type="radio" th:field="*{roles}" multiple="true" th:value="${role1.id}"  />
-                                             <span th:if="${role1.designacao!='Validador'}" th:text="${role1.designacao}"></span>
+                                             <input required  th:if="${role1.designacao!='Validador' && role1.designacao!='Administrador' }" type="radio" th:field="*{roles}" multiple="true" th:value="${role1.id}"  />
+                                             <span th:if="${role1.designacao!='Validador' && role1.designacao!='Administrador'}" th:text="${role1.designacao}"></span>
                                          </label>
                                      </div>
 
@@ -364,7 +364,34 @@
 
                      </div>
 
-                     <div class="col-4 col-sm-4">
+                     <div class="col-3 col-sm-3">
+                         <div class="form-group">
+                             <label class="form-label" style="color:white">.</label>
+                         </div>
+
+                         <th:block>
+
+                             <div class="card mt-2">
+
+                                 <div  class="card-header" >
+
+                                     <div class="form-check-inline" th:each="role1: ${perfils}" style="padding-left: 0%" >
+                                         <label class="form-check-label" style="padding-left: 0%">
+                                             <input type="checkbox" th:if="${role1.designacao=='Administrador'}"  th:field="*{roles}" multiple="true" th:value="${role1.id}"  />
+                                             <span  th:if="${role1.designacao=='Administrador'}" >Administrador</span>
+                                         </label>
+                                     </div>
+
+
+                                 </div>
+                             </div>
+
+                         </th:block>
+
+                     </div>
+
+
+                     <div class="col-3 col-sm-3">
                          <div class="form-group">
                              <label class="form-label" style="color:white">.</label>
                          </div>
@@ -378,7 +405,7 @@
                                      <div class="form-check-inline" th:each="role1: ${perfils}" style="padding-left: 0%" >
                                          <label class="form-check-label" style="padding-left: 0%">
                                              <input type="checkbox" th:if="${role1.designacao=='Validador'}"  th:field="*{roles}" multiple="true" th:value="${role1.id}"  />
-                                             <span  th:if="${role1.designacao=='Validador'}" >Acesso a validar registo</span>
+                                             <span  th:if="${role1.designacao=='Validador'}" >Validar registo</span>
                                          </label>
                                      </div>
 

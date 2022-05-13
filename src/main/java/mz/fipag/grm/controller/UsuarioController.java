@@ -1,7 +1,10 @@
 package mz.fipag.grm.controller;
 
+import mz.fipag.grm.domain.ProjectoUser;
+import mz.fipag.grm.domain.Projecto;
 import mz.fipag.grm.domain.Regiao;
 import mz.fipag.grm.domain.User;
+import mz.fipag.grm.repository.ProjectoUserRepository;
 import mz.fipag.grm.repository.RegiaoRepository;
 import mz.fipag.grm.repository.RoleRepository;
 import mz.fipag.grm.repository.UserRepository;
@@ -13,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -31,6 +35,9 @@ public class UsuarioController {
 
     @Autowired
     private ProjectoService projectoService;
+
+    @Autowired
+    private ProjectoUserRepository projectoUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -100,7 +107,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrar/usuarios")
-    public String cadastrarUsuarios(User user){
+    public String cadastrarUsuarios(User user, ProjectoUser projectoUser, @RequestParam("projectos") long projectos[]){
 
         Regiao regiaonacional = regiaoRepository.findByDesignacao();
 
@@ -114,6 +121,17 @@ public class UsuarioController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
+
+        for(long projecto: projectos) {
+
+                Projecto projecto1 = projectoService.buscarPorId(projecto);
+
+                projectoUser.setProjecto(projecto1);
+                projectoUser.setUser(user);
+                projectoUserRepository.save(projectoUser);
+
+        }
+
         return "redirect:/listar/usuarios";
     }
 
@@ -126,17 +144,29 @@ public class UsuarioController {
     public String vistaEditarUsuario(@PathVariable("id") Long id, ModelMap model) {
 
         model.addAttribute("user", userRepository.findById(id));
+        model.addAttribute("userProjectos",projectoUserRepository.buscarPorUser(id));
         model.addAttribute("perfils", roleRepository.findAll());
         model.addAttribute("provincias", provinciaService.buscarTodos());
+        model.addAttribute("projectos", projectoService.buscarTodos());
 
         return "usuarios/editarUsuarios";
     }
 
     @PostMapping("/editar/usuarios")
-    public String editarUsuario(User user, RedirectAttributes attr) {
+    public String editarUsuario(User user, ProjectoUser projectoUser, @RequestParam("projectos") long projectos[], RedirectAttributes attr) {
 
     	user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+
+        for(long projecto: projectos) {
+
+            Projecto projecto1 = projectoService.buscarPorId(projecto);
+
+            projectoUser.setProjecto(projecto1);
+            projectoUser.setUser(user);
+            projectoUserRepository.save(projectoUser);
+
+        }
 
        // attr.addFlashAttribute("success","Categoria editada com sucesso.");
 

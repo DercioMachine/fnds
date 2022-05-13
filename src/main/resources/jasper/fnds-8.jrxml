@@ -168,6 +168,12 @@ where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id a
 	<field name="tipoorigem" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="numero_ordem" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="responsavel_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="codigo" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -235,13 +241,6 @@ where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id a
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="1" y="5" width="53" height="15" uuid="86bc12af-1c67-495b-b221-4bba9e260f20"/>
-				<textElement>
-					<font fontName="SansSerif"/>
-				</textElement>
-				<text><![CDATA[Código]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="61" y="5" width="50" height="15" uuid="50ec8754-d3e1-4264-a8d8-11506191a539"/>
 				<textElement>
 					<font fontName="SansSerif"/>
@@ -283,14 +282,14 @@ where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id a
 				<reportElement x="485" y="5" width="69" height="15" uuid="9c40fd08-5990-46a5-9a61-eecf7fa3f73b"/>
 				<text><![CDATA[Província]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="2" y="4" width="59" height="15" uuid="105c5c25-6ea1-4eee-9b22-bb68bf7bb36c"/>
+				<text><![CDATA[Número]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="16" splitType="Stretch">
-			<textField pattern="###0.00">
-				<reportElement x="1" y="0" width="53" height="16" uuid="68749f7d-9411-4941-9176-2c1b620bc621"/>
-				<textFieldExpression><![CDATA[$F{grm_stamp}]]></textFieldExpression>
-			</textField>
 			<textField pattern="dd-MMM-yy">
 				<reportElement x="61" y="0" width="50" height="16" uuid="b3cd3a53-a33c-4621-a59b-06bb82c19134"/>
 				<textFieldExpression><![CDATA[$F{created}]]></textFieldExpression>
@@ -314,6 +313,11 @@ where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id a
 			<textField>
 				<reportElement x="419" y="0" width="66" height="16" uuid="8b068d95-78e9-4133-8854-ff1bf107de98"/>
 				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="61" height="14" uuid="d7ef7b79-c2d8-4bbe-9bd4-5c7b82265c2d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{numero_ordem}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

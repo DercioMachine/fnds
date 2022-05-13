@@ -114,8 +114,8 @@ OrigemInternoExterno();
     $.ajax({
     type: 'GET',
     //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
-    	//url: 'http://localhost:8080/fnds/origem/externo',
     url: 'http://196.22.53.245:8080/fnds/origem/externo',
+    //url: 'http://196.22.53.245:8080/fnds/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -286,9 +286,9 @@ OrigemInternoExterno();
     type: 'GET',
 
     //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
-//  url: 'https://portal.fipag.co.mz/grm/origem/externo',
-    //url: 'http://localhost:9090/origem/externo/',
-    url: 'http://196.22.53.245:8080/fnds/origem/externo',
+   //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
+    url: 'http://196.22.53.245:8080/fnds/origem/externo/',
+    //url: 'http://196.22.53.245:8080/fnds/origem/externo',
      //url: 'http://localhost:8080/fnds/origem/externo',
 
 
@@ -859,8 +859,7 @@ document.getElementById("cidadee").style.display="none";
                             <select class="form-control custom-select" th:field="*{sexo}" >
                                 <option value=" ">Selecione...</option>
                                 <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Femenino">ND</option>
+                                <option value="Femenino">Feminino</option>
                             </select>
                         </div>
                     </div>

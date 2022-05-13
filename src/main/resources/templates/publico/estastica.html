@@ -711,7 +711,7 @@ function onChangePorAno(){
     </div>
 
 
-    <!-- <div class="page-body">
+     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
@@ -725,26 +725,23 @@ function onChangePorAno(){
                 </div>
 
 
-
-
-
             </div>
         </div>
-    </div> -->
+    </div>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script th:inline="javascript">
     ocorrenciasPorMes();
     ocorrenciasPorProvincia();
-  //  ocorrenciasPorCidade();
+    //ocorrenciasPorCidade();
     ocorrenciasPorRegiao();
     ocorrenciasPorCanalEntrada();
     ocorrenciasPorCategoria();
     ocorrenciasPorProjecto();
     ocorrenciasPorTipoPreocupacao();
     ocorrenciasPorSexo();
-    //teste();
+    teste();
 
     function teste(){
     var vetor = /*[[${vetor}]]*/'noValue';
@@ -984,7 +981,7 @@ function onChangePorAno(){
               grid: {
               strokeDashArray: 4,
               },
-              colors: ["#eb6eb9", "#96a11b"],
+              colors: ["#3903fc", "#fc035a"],
               legend: {
               show: true,
               position: 'bottom',

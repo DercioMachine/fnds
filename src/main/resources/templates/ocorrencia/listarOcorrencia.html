@@ -150,112 +150,98 @@
                     <tbody>
                     <tr th:each="p, index : ${pageOcorrencia}">
                         <!-- <tr th:each="p : ${ocorrencias}"> -->
-                        <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
-                        <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
-                        <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
-                        <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
-                        <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
+                      <div th:if="${p.tipoAlerta.designacao=='GBV' && userlogado.tipogbv =='Sim'}" >
+                          <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
+                          <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
+                          <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
+                          <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+                          <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
+                          <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
 
-                        <td th:if="${p.responsavel != null }" th:text="${p.responsavel.nome}">Auxiliar Contábil</td>
-                        <td th:if="${p.responsavel == null }" >Sem Responsável</td>
+                          <td th:if="${p.responsavel != null }" th:text="${p.responsavel.nome}">Auxiliar Contábil</td>
+                          <td th:if="${p.responsavel == null }" >Sem Responsável</td>
 
-                        
-                        <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
-                         
-                         
+
+                          <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
+
+
                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
                           <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
 
-                            <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
+                              <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
                           <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
 
-                            <span th:if="${p.resolucao=='T' || (days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
+                              <span th:if="${p.resolucao=='T' || (days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
                           <i style="font-size: 15pt; color: green;" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
 
-                         
-                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.resolucao!='T' &&  p.tipoAlerta!='Normal'}">
+
+                              <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.resolucao!='T' &&  p.tipoAlerta!='Normal'}">
                           <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
 
-                            <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 1) && p.tipoAlerta!='Normal' && p.resolucao!='T'}">
+                              <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 1) && p.tipoAlerta!='Normal' && p.resolucao!='T'}">
                           <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
                          </span>
 
-                         </td>
-                        
-
-                        <td th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}" >Auxiliar Contábil</td>
-
-                        <td>
-                            <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
-                        </td>
+                          </td>
 
 
-                        <td align="left" style="text-align: left;">
+                          <td th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}" >Auxiliar Contábil</td>
 
-                            <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
-                                Procedente 
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
-                            </button>
-                            
-                            <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
-                                Improcedente 
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
-                            </button>
-
-                            <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
-                                Resolvendo 
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button>
-
-                            <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
-                                Acompanhando 
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button>
-
-                            <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
-                                Resolvido
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
-                            </button>
-
-                            <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
-                                <span th:if="${p.estado == 'Temporario'}">Temporario</span>
-                                <span th:if="${p.estado == 'Registado'}">Pendente</span>
-
-                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button>
-
-                            <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
-                            Pendente
-                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-                            </button> -->
-
-                        </td>
-
-                        <td align="center">
-                        
-                        <span sec:authorize="hasAnyAuthority('ROLE_GBV')" th:if="${p.tipoAlerta.designacao=='GBV'}">
-                        
-                        
-                            <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
-                                <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
-                            </a>
+                          <td>
+                              <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
+                          </td>
 
 
-                            <a th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
-                                <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
-                            </a>
+                          <td align="left" style="text-align: left;">
 
-						</span>
-						
-						
-						<span sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_VALIDADOR')" th:if="${p.tipoAlerta.designacao!='GBV'}">
-                        
-                        
+                              <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
+                                  Procedente
+                                  <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
+                              </button>
+
+                              <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
+                                  Improcedente
+                                  <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
+                              </button>
+
+                              <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
+                                  Resolvendo
+                                  <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                              </button>
+
+                              <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
+                                  Acompanhando
+                                  <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                              </button>
+
+                              <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
+                                  Resolvido
+                                  <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
+                              </button>
+
+                              <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+                                  <span th:if="${p.estado == 'Temporario'}">Temporario</span>
+                                  <span th:if="${p.estado == 'Registado'}">Pendente</span>
+
+                                  <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                              </button>
+
+                              <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
+                              Pendente
+                              <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                              </button> -->
+
+                          </td>
+
+                          <td align="center">
+
+
+
+
                             <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
                                 <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                             </a>
@@ -267,13 +253,120 @@
 
 
 						</span>
-						
-						
-						
-                        </td>
-                        
-                        
 
+
+
+                          </td>
+                      </div>
+
+                        <div th:if="${p.tipoAlerta.designacao!='GBV'}" >
+                            <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
+                            <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
+                            <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
+                            <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+                            <td th:text="${p.projecto.designacao}">Auxiliar Contábil</td>
+                            <td th:text="${p.formaComunicacao}">Auxiliar Contábil</td>
+
+                            <td th:if="${p.responsavel != null }" th:text="${p.responsavel.nome}">Auxiliar Contábil</td>
+                            <td th:if="${p.responsavel == null }" >Sem Responsável</td>
+
+
+                            <td th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
+
+
+                         <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
+                                <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
+                                <span th:if="${p.resolucao=='T' || (days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
+                          <i style="font-size: 15pt; color: green;" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
+
+                                <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 1) && p.resolucao!='T' &&  p.tipoAlerta!='Normal'}">
+                          <i style="font-size: 15pt; color: red" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
+                                <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) < 1) && p.tipoAlerta!='Normal' && p.resolucao!='T'}">
+                          <i style="font-size: 15pt; color: green" aria-hidden="true" class="fas fa-clock"></i>
+                         </span>
+
+                            </td>
+
+
+                            <td th:if="${ocorrencia != null && ocorrencia.tipoorigem != null}" >Auxiliar Contábil</td>
+
+                            <td>
+                                <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
+                            </td>
+
+
+                            <td align="left" style="text-align: left;">
+
+                                <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
+                                    Procedente
+                                    <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
+                                </button>
+
+                                <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
+                                    Improcedente
+                                    <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
+                                </button>
+
+                                <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
+                                    Resolvendo
+                                    <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                                </button>
+
+                                <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
+                                    Acompanhando
+                                    <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                                </button>
+
+                                <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
+                                    Resolvido
+                                    <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
+                                </button>
+
+                                <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+                                    <span th:if="${p.estado == 'Temporario'}">Temporario</span>
+                                    <span th:if="${p.estado == 'Registado'}">Pendente</span>
+
+                                    <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                                </button>
+
+                                <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
+                                Pendente
+                                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                                </button> -->
+
+                            </td>
+
+                            <td align="center">
+
+
+
+
+                                <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
+                                    <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
+                                </a>
+
+
+                                <a th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
+                                    <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
+                                </a>
+
+
+                                </span>
+
+
+
+                            </td>
+                        </div>
 
                     </tr>
 

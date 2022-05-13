@@ -36,8 +36,6 @@ public class User extends AbstractEntity implements UserDetails {
     @JoinColumn(name="provincia_id")
     private Provincia provincia;
 
-
-
     @Column(name = "active", nullable = true)
     private boolean active=true;
 
@@ -46,8 +44,8 @@ public class User extends AbstractEntity implements UserDetails {
             name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-
     private List<Role> roles;
+
 
     public String getTipogbv() {
         return tipogbv;

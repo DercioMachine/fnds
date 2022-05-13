@@ -19,6 +19,12 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	@Query(value="select * from Ocorrencia where grm_stamp=:codigo", nativeQuery=true)
 	public Ocorrencia findAllByCodigo(@Param("codigo") Long codigo);
 
+	@Query(value="select * from Ocorrencia order by numero_ordem desc", nativeQuery=true)
+	public List<Ocorrencia> BuscarOrdemDecrecente();
+
+	@Query(value="select * from Ocorrencia, projectouser where ocorrencia.projecto_id=projectouser.projecto_id and ocorrencia.provincia_id=:id and projectouser.user_id=:id1", nativeQuery=true)
+	List<Ocorrencia> buscarOcorrenciasPorUsuariosProvinciaProjecto(Long id, Long id1);
+
 	/* QUERIES DAS PRIMEIRAS CARDS */
 	@Query(value="select count(*) from ocorrencia where estado!='Temporario' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrencias(@Param("ano") int ano);
@@ -775,6 +781,8 @@ public List<Object[]> busqueTnTI();*/
 
 	@Query(value="select * from ocorrencia order by ocorrencia.numero_ordem desc", nativeQuery=true)
 	public List<Ocorrencia> findAllOrdenarPorNUmeroOrdem();
+
+
 
 
 	/* FIM */

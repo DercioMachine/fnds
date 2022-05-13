@@ -328,7 +328,7 @@ select.list-dt:focus {
 	
 	</div>
 		
-    <div style="margin-bottom: 5px" class="card col-6">
+    <div style="margin-bottom: 5px" class="card col-6" th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}">
         
         <div style="background: #60a18a;" class="row card-body">
         
@@ -344,13 +344,16 @@ select.list-dt:focus {
 			
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
-				  <span style="font-weight: bolder;">Data da Ocorrência: </span> <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
+				  <span style="font-weight: bolder;">Data da Ocorrência: </span>
+                    <span th:text="${#dates.format(ocorrencia.dataOcorrencia, 'dd-MMM-yyyy')}"></span>
 				</div>
 			</div>
 			
 			<div class="col-6 col-sm-4">
 				<div class="form-group">
-				  <span style="font-weight: bolder;">Dias Restantes: </span> <span th:text="${ocorrencia.id}"></span>
+				  <span style="font-weight: bolder;">Dias Restantes: </span>
+                    <span style="color:red" th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) < 0)}" th:text="${days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis)}"></span>
+                    <span th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) >= 0)}" th:text="${days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis)}"></span>
 				</div>
 			</div>
 			
@@ -371,7 +374,10 @@ select.list-dt:focus {
 		</div>
 		
 		<div th:if="${ocorrencia.resolucao=='P'}" class="col-6 col-sm-12">
-            <span style="margin-bottom: 2px;">Caro, utente, a sua preocupação fui submetida com sucesso, dentro de 10 dias terá uma resposta...</span>
+            <span style="margin-bottom: 2px;">Caro utente, a sua preocupação fui submetida com sucesso. No prazo de
+                 <span th:text="${days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis)}"></span>
+                dias terá uma resposta.
+            </span>
 					  
 		</div>
 		

@@ -141,23 +141,24 @@ public class OcorrenciaController {
         System.out.println(userlogado.getProvincia().getDesignacao());
 
         if(!userlogado.getProvincia().getDesignacao().equals("Nacional")){
-            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosProvincia(userlogado.getProvincia().getId());
+            ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosProvinciaProjecto(userlogado.getProvincia().getId(),userlogado.getId());
         }else{
             ocorrencia = (List<Ocorrencia>) ocorrenciaRepository.findAllOrdenarPorNUmeroOrdem();
         }
 
         model.addAttribute("pageOcorrencia", ocorrencia);
-        
-       // enviarSMSAlerta();
+        model.addAttribute("userlogado", userlogado);
 
         return "ocorrencia/listarOcorrencia";
     }
 
     @GetMapping("/ocorrencia/observador")
-    public String listarOcorrenciaObservador(ModelMap model){
+    public String listarOcorrenciaObservador(ModelMap model, Authentication authentication){
 
+        User userlogado = userRepository.findByUsername(authentication.getName());
 
-        model.addAttribute("pageOcorrencia", ocorrenciaRepository.findAll());
+        model.addAttribute("pageOcorrencia", ocorrenciaRepository.BuscarOrdemDecrecente());
+        model.addAttribute("userlogado", userlogado);
 
         return "ocorrencia/listarOcorrenciaObservador";
     }
@@ -317,7 +318,10 @@ public class OcorrenciaController {
 
         User userlogado = userRepository.findByUsername(authentication.getName());
 
+        int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+        Integer numeroDeOrdem = numeroOrdem;
 
+        numeroDeOrdem++;
 
     	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
     	int ano = Calendar.getInstance().get(Calendar.YEAR);
@@ -329,7 +333,7 @@ public class OcorrenciaController {
     	
     		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
     		ocorrencia.setRegistado(true);
-    		ocorrencia.setNumeroordem(0);
+    		ocorrencia.setNumeroordem(numeroDeOrdem);
     		ocorrencia.setResponsavel(userlogado);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.salvar(ocorrencia);
@@ -347,7 +351,13 @@ public class OcorrenciaController {
 
      	String localprovincia = ocorrencia.getProvincia().getDesignacao();
 
-     	
+        if(ocorrencia.getContactoUtente()!=null){
+
+            String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
+            smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
+
+        }
+
      	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente")) {
      		
      		 for (int i=0;i<lista.size();i++) {
@@ -548,15 +558,12 @@ public class OcorrenciaController {
     		@RequestParam String procedencia, @RequestParam("descricao") String descricaoAnexo, Authentication authentication, @RequestParam("files") MultipartFile[] files) throws MessagingException {
 
 
-        int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
-        Integer numeroDeOrdem = numeroOrdem;
-
         User userlogado = userRepository.findByUsername(authentication.getName());
-        numeroDeOrdem++;
+
 
     		ocorrencia.setProcedencia(procedencia);
     		ocorrencia.setValidado(true);
-    		ocorrencia.setNumeroordem(numeroDeOrdem);
+    		//ocorrencia.setNumeroordem(numeroDeOrdem);
     		ocorrencia.setResponsavel(userlogado);
         	ocorrencia.setEstado("Validado");
         	ocorrencia.setResolucao("V");

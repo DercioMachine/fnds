@@ -1,10 +1,13 @@
 package mz.fipag.grm.repository;
 
+import mz.fipag.grm.domain.Projecto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import mz.fipag.grm.domain.User;
+
+import java.util.List;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -17,4 +20,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value="select * from user where email=:email", nativeQuery=true)
     User pesquisarPorEmail(String email);
 
+    @Query(value="select * from user, projectouser where user.id=projectouser.user_id and projectouser.projecto_id=:projecto", nativeQuery=true)
+    public List<User> BuscarUserPorProjecto(Projecto projecto);
+
+    @Query(value="select * from user, projectouser where user.id=projectouser.user_id and user.id=:id", nativeQuery=true)
+    User buscarTodosPorId(Long id);
 }

@@ -2,7 +2,9 @@ package mz.fipag.grm.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @SuppressWarnings("serial")
 @Entity
@@ -11,12 +13,9 @@ public class Projecto extends AbstractEntity{
 
 	@Column(name = "codigo")
 	private String codigo;
-	
-	
+
 	@Column(name = "designacao")
 	private String designacao;
-	
-
 
 	public String getDesignacao() {
 		return designacao;

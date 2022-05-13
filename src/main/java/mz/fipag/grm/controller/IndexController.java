@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -755,6 +756,7 @@ public class IndexController {
 		busqueTnTI(model);
 		busqueProjectoLinha(model);
 		sexo(model);
+		teste(model);
 		tipoPreocupacao(model);
 
 
@@ -1783,6 +1785,10 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 	@PostMapping("/preCadastrar")
 	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, RedirectAttributes attr) throws MessagingException {
 
+        int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+        Integer numeroDeOrdem = numeroOrdem;
+
+        numeroDeOrdem++;
 
 		int codigo = ThreadLocalRandom.current().nextInt(9, 100);
 		int ano = Calendar.getInstance().get(Calendar.YEAR);
@@ -1793,7 +1799,7 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 
 		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
 		ocorrencia.setEstado("Temporario");
-
+        ocorrencia.setNumeroordem(numeroDeOrdem);
 		ocorrencia.setTemporario(true);
 
 		ocorrenciaRepository.save(ocorrencia);
@@ -1825,10 +1831,7 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 		}
 
 
-
-
-
-		List<User> lista = (List<User>) userRepository.findAll();
+		List<User> lista = (List<User>) userRepository.BuscarUserPorProjecto(ocorrencia.getProjecto());
 
 
 		String assun = "Ocorrência Temporária - FNDS";
