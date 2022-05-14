@@ -348,17 +348,19 @@ public class OcorrenciaController {
     	
     	
     	 List<User> lista = (List<User>) userRepository.findAll();
+    	 String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
+ 		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
 
      	String localprovincia = ocorrencia.getProvincia().getDesignacao();
 
-        if(ocorrencia.getContactoUtente()!=null){
+        if(contacto!=null){
 
             String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
             smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
 
         }
 
-        if(ocorrencia.getEmailUtente()!=null){
+        if(email!=null){
 
             String descricao ="Caro Utente, a sua preocupação foi submetida com sucesso.\n" +
                     "NOTA: Anote o seu código para o acompanhamento\n"+provincia.getCodigo()+""+codigo+""+anooo;

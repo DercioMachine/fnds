@@ -776,7 +776,7 @@ public List<Object[]> busqueTnTI();*/
 			+ " and IF((:datainicial)='' and (:datafinal)='',1=1, ocorrencia.created between (:datainicial) and (:datafinal)) group by sexo",nativeQuery=true)
 	List<Object[]> busqueTudoAgrupadoPorSexo1(Date datainicial, Date datafinal, String projecto, String provincia);
 
-	@Query(value="select Max(numero_ordem) from ocorrencia where estado!='Temporario' ", nativeQuery=true)
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
 	Object BuscarUltimoNumero();
 
 	@Query(value="select * from ocorrencia order by ocorrencia.numero_ordem desc", nativeQuery=true)

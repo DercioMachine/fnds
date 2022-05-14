@@ -350,10 +350,22 @@ select.list-dt:focus {
 			</div>
 			
 			<div class="col-6 col-sm-4">
-				<div class="form-group">
+				<div th:if="${ocorrencia.tipoAlerta.designacao=='Normal'}" class="form-group">
 				  <span style="font-weight: bolder;">Dias Restantes: </span>
                     <span style="color:red" th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) < 0)}" th:text="${10-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
                     <span th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) >= 0)}" th:text="${10-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
+				</div>
+				
+				<div th:if="${ocorrencia.tipoAlerta.designacao=='GBV'}" class="form-group">
+				  <span style="font-weight: bolder;">Dias Restantes: </span>
+                    <span style="color:red" th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) < 0)}" th:text="${1-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
+                    <span th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) >= 0)}" th:text="${1-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
+				</div>
+				
+				<div th:if="${ocorrencia.tipoAlerta.designacao=='Urgente'}" class="form-group">
+				  <span style="font-weight: bolder;">Dias Restantes: </span>
+                    <span style="color:red" th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) < 0)}" th:text="${1-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
+                    <span th:if="${(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis) >= 0)}" th:text="${1-(days.convert(#dates.createNow().getTime() - ocorrencia.created.getTime(), millis))}"></span>
 				</div>
 			</div>
 			
