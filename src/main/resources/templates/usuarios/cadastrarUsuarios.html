@@ -335,6 +335,17 @@
 
                  </div>
 
+                 <div class="row">
+                     <div  class="col-6 col-sm-6">
+                         <div class="form-group">
+                             <label for="local" class="form-label">Nivel de Responsabilidade</label>
+                             <select  class="form-control custom-select form-select" th:field="*{nivel}" >
+                                 <option th:each="p : ${niveis}" th:value="${p.id}" th:text="${p.responsavel}">Maputo</option>
+                             </select>
+                         </div>
+                     </div>
+                 </div>
+
 
 
                  <div class="row" >
