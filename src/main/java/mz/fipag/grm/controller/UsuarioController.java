@@ -4,10 +4,7 @@ import mz.fipag.grm.domain.ProjectoUser;
 import mz.fipag.grm.domain.Projecto;
 import mz.fipag.grm.domain.Regiao;
 import mz.fipag.grm.domain.User;
-import mz.fipag.grm.repository.ProjectoUserRepository;
-import mz.fipag.grm.repository.RegiaoRepository;
-import mz.fipag.grm.repository.RoleRepository;
-import mz.fipag.grm.repository.UserRepository;
+import mz.fipag.grm.repository.*;
 import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +40,9 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    ResponsabilidadeRepository responsabilidadeRepository;
+
+    @Autowired
     private RegiaoRepository regiaoRepository;
 
     @GetMapping("/registar/usuarios")
@@ -52,6 +52,8 @@ public class UsuarioController {
         model.addAttribute("perfils", roleRepository.findAll());
         model.addAttribute("provincias", provinciaService.buscarTodos());
         model.addAttribute("projectos", projectoService.buscarTodos());
+        model.addAttribute("projectos", projectoService.buscarTodos());
+        model.addAttribute("niveis", responsabilidadeRepository.findAll());
 
         return "usuarios/cadastrarUsuarios";
     }
@@ -148,6 +150,7 @@ public class UsuarioController {
         model.addAttribute("perfils", roleRepository.findAll());
         model.addAttribute("provincias", provinciaService.buscarTodos());
         model.addAttribute("projectos", projectoService.buscarTodos());
+        model.addAttribute("niveis", responsabilidadeRepository.findAll());
 
         return "usuarios/editarUsuarios";
     }
