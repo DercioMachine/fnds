@@ -43,13 +43,22 @@ public class DocController {
 		return "redirect:/listar/ficheiro";
 	}
 	
-	//@GetMapping("/downloadFile/{fileId}")
-	@GetMapping("/download/ficheiro/{fileId}")
+/*	@GetMapping("/download/ficheiro/{fileId}")
 	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long fileId){
 		Doc doc = docStorageService.getFile(fileId).get();
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(doc.getDocType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\""+doc.getDocName()+"\"")
+				.body(new ByteArrayResource(doc.getData()));
+		
+	}*/
+	
+	@GetMapping("/download/ficheiro/{fileId}")
+	public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable Long fileId){
+		Doc doc = docStorageService.getFile(fileId).get();
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType(doc.getDocType()))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "inline;attachment:filename=\""+doc.getDocName()+"\"")
 				.body(new ByteArrayResource(doc.getData()));
 		
 	}

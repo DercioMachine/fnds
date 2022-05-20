@@ -768,7 +768,10 @@ document.getElementById("cidadee").style.display="none";
                                     <span class="input-icon-addon">
                                     <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Telefone...">
+                                <input pattern="[0-9]{9}" type="text" 
+                                		oninvalid="this.setCustomValidity('Conctacto inválido.')" 
+										onchange="this.setCustomValidity('')"   
+                                th:field="*{contactoUtente}" class="form-control" placeholder="Telefone...">
                             </div>
                         </div>
                     </div>
@@ -780,7 +783,10 @@ document.getElementById("cidadee").style.display="none";
                                 <span class="input-icon-addon">
                                 <i class="fe fe-edit-2"></i>
                                 </span>
-                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Não Obrigatório...">
+                                <input type="email" 
+                                	oninvalid="this.setCustomValidity('Email inválido')" 
+									onchange="this.setCustomValidity('')" 
+                                th:field="*{emailUtente}" class="form-control" placeholder="Não Obrigatório...">
                             </div>
                         </div>
                     </div>

@@ -253,7 +253,10 @@ $('#subcategoria').html(s);
                             <label class="form-label">Tipo de Alerta</label>
                             <select class="form-control custom-select form-select" th:field="*{tipoAlerta}" >
                                 <option th:each="p : ${tipoAlertas}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                        th:value="${p.id}" th:if="${p.designacao=='GBV'}" >Violência baseada no gênero</option>
+                                
+                                <option th:each="p : ${tipoAlertas}"
+                                        th:value="${p.id}" th:text="${p.designacao}" th:if="${p.designacao!='GBV'}"></option>
                             </select>
                         </div>
                     </div>

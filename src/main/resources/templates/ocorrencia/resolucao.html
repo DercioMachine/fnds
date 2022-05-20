@@ -153,7 +153,7 @@
 			</div>
 		</div>
 
-	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+	 <div  th:if="${ocorrencia.resolucao =='A' && ocorrencia.resolucao =='T' }">
 		 <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
 			</div>
@@ -398,7 +398,7 @@
 							<td th:text="${a.fase}" >Auxiliar Contábil</td>
 							<td th:text="${#dates.format(a.created, 'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
 							<td>
-								<a class="icon" th:href="@{/download/ficheiro/{id} (id=${a.id})}" >
+								<a class="icon" target="_blank" th:href="@{/download/ficheiro/{id} (id=${a.id})}" >
 									<i class="fa fa-file"></i>
 								</a>
 							</td>
@@ -507,8 +507,8 @@
 
 								<div id="responsavel" class="col-12 col-sm-12">
 									<div class="form-group">
-										<label  class="form-label">Responsabilidade</label>
-										<select  class="form-control custom-select form-select" th:field="*{responsabilidade}" >
+										<label  class="form-label">Responsabilidade <strong style="color:red">*</strong></label>
+										<select required="required"  class="form-control custom-select form-select" th:field="*{responsabilidade}" >
 											<option value="">Selecione a Responsável...</option>
 											<option th:each="p : ${responsaveis}"
 													th:value="${p.id}" th:text="${p.responsavel}">Maputo</option>
@@ -529,8 +529,8 @@
 
 								<div class="col-lg-6">
 									<div >
-										<label class="form-label">Data da Resolução</label>
-										<input  id="txtDate2" class="form-control" type="date" th:field="*{dataResolucao}" ></input>
+										<label class="form-label">Data da Resolução <strong style="color:red">*</strong></label>
+										<input required="required"  id="txtDate2" class="form-control" type="date" th:field="*{dataResolucao}" ></input>
 									</div>
 								</div>
 
@@ -544,9 +544,9 @@
 
 								<div class="col-lg-12">
 									<div>
-										<label style="display: none" id="motivo" class="form-label">Motivo</label>
-										<label id="observacao" class="form-label">Observação</label>
-										<textarea class="form-control" th:field="*{motivo}" rows="3"></textarea>
+										<label id="motivo" class="form-label">Motivo <strong style="color:red">*</strong></label>
+										<label style="display: none" id="observacao" class="form-label">Observação <strong style="color:red">*</strong></label>
+										<textarea required="required" class="form-control" th:field="*{motivo}" rows="3"></textarea>
 									</div>
 								</div>
 							</div>
@@ -629,8 +629,8 @@
 
 								<div class="col-lg-12">
 									<div >
-										<label class="form-label">Data da Resolução</label>
-										<input  id="txtDate" class="form-control" type="date" th:field="*{dataResolucao}" ></input>
+										<label class="form-label">Data <strong style="color:red">*</strong></label>
+										<input required="required" id="txtDate" class="form-control" type="date" th:field="*{dataResolucao}" ></input>
 									</div>
 								</div>
 
