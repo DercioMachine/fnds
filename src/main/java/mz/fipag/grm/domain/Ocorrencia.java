@@ -99,6 +99,9 @@ public class Ocorrencia extends AbstractEntity{
 	@Column(name = "procedencia")
 	private String procedencia;
 
+	@Column(name = "nivel")
+	private long nivelresolucao=1;
+
 	@ManyToOne
 	@JoinColumn(name="distrito_id")
 	private Distrito distrito;
@@ -150,6 +153,14 @@ public class Ocorrencia extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name="responsavel_id")
 	private User responsavel;
+
+	public long getNivelresolucao() {
+		return nivelresolucao;
+	}
+
+	public void setNivelresolucao(long nivelresolucao) {
+		this.nivelresolucao = nivelresolucao;
+	}
 
 	public Origem getTipoorigem() {
 		return tipoorigem;

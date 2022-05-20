@@ -39,6 +39,9 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "active", nullable = true)
     private boolean active=true;
 
+    @Column(name = "nivel")
+    private long nivel=1;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns = @JoinColumn(
             name = "user_id", referencedColumnName = "id"),
@@ -46,6 +49,13 @@ public class User extends AbstractEntity implements UserDetails {
                     name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 
+    public long getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(long nivel) {
+        this.nivel = nivel;
+    }
 
     public String getTipogbv() {
         return tipogbv;
