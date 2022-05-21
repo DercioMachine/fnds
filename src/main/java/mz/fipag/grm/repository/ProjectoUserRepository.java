@@ -13,4 +13,7 @@ public interface ProjectoUserRepository extends CrudRepository<ProjectoUser, Lon
 
     @Query(value="select * from projectouser where user_id=:id", nativeQuery=true)
     List<ProjectoUser> buscarPorUser(Long id);
+
+    @Query(value="select * from projectouser where id=:id", nativeQuery=true)
+    ProjectoUser buscarPoriD(Long id);
 }

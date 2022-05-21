@@ -25,4 +25,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query(value="select * from user, projectouser where user.id=projectouser.user_id and user.id=:id", nativeQuery=true)
     User buscarTodosPorId(Long id);
+
+    @Query(value="select * from user where id=:iduser", nativeQuery=true)
+    User buscarPorIdUser(long iduser);
 }
