@@ -156,7 +156,9 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{telefone}" class="form-control" required placeholder="Digite o numero de telefone"  >
+                                <input type="text" pattern="[0-9]{9}" type="text"
+                                       oninvalid="this.setCustomValidity('Conctacto inválido.')"
+                                       onchange="this.setCustomValidity('')"   th:field="*{telefone}" class="form-control" required placeholder="Digite o numero de telefone"  >
                             </div>
                         </div>
                     </div>
@@ -184,7 +186,8 @@
                                     <span class="input-icon-addon">
                                       <i class="fe fe-edit-2"></i>
                                     </span>
-                                    <input type="text" th:field="*{email}" class="form-control" required placeholder="Digite o numero de telefone"  >
+                                    <input type="email" oninvalid="this.setCustomValidity('Email inválido')"
+                                           onchange="this.setCustomValidity('')"  th:field="*{email}" class="form-control" required placeholder="Digite o numero de telefone"  >
                                 </div>
                             </div>
                         </div>

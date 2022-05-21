@@ -42,6 +42,9 @@
     <!-- Tabler Core -->
     <script th:src="@{/dist/js/tabler.min.js}"></script>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style type="text/css">
 .h2{
 margin-top: 0;
@@ -643,7 +646,7 @@ function onChangePorAno(){
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-canal-entrada"></div>
+                            <canvas id="chart-canal-entrada" height="200" ></canvas>
                         </div>
                     </div>
 
@@ -657,7 +660,7 @@ function onChangePorAno(){
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-categoria"></div>
+                            <canvas id="chart-categoria" height="200" ></canvas>
                         </div>
                     </div>
 
@@ -682,7 +685,7 @@ function onChangePorAno(){
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-sexo"></div>
+                            <canvas id="chart-sexo" height="200" ></canvas>
                         </div>
                     </div>
 
@@ -696,7 +699,7 @@ function onChangePorAno(){
                             <h3 class="card-title" style="  font-size: 12px;" >Tipo de Ocorrências</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-tipo-preocupacao"></div>
+                            <canvas id="chart-tipo-preocupacao" height="200" ></canvas>
                         </div>
                     </div>
 
@@ -704,25 +707,6 @@ function onChangePorAno(){
                 </div>
 
 
-
-
-            </div>
-        </div>
-    </div>
-
-
-     <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
-
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                    <div id="piechart" style="width: 900px; height: 500px;"></div>
-                    </div>
-
-
-
-                </div>
 
 
             </div>
@@ -773,9 +757,6 @@ function onChangePorAno(){
           chart.draw(data, options);
         }
     }
-
-
-
 
 
     function ocorrenciasPorProjecto(){
@@ -863,48 +844,49 @@ function onChangePorAno(){
     var nomes = /*[[${nomesCategoria}]]*/""
         var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
 
+                        // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              'rgba(255, 26, 104, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+          }]
+        };
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+        // config
+        const config = {
+          type: 'pie',
+          data,
+          options: {
+
+          },
+          plugins:[ChartDataLabels]
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-categoria'),
+          config
+        );
 
     }
 
@@ -912,47 +894,50 @@ function onChangePorAno(){
     var nomes = /*[[${nomesCanais}]]*/""
         var numeroocorencia= /*[[${numeroocorencia}]]*/""
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#800080", "#4299f5","#FFA726", "#66BB6A"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+                // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              'rgba(255, 26, 104, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // config
+        const config = {
+          type: 'pie',
+          data,
+          options: {
+
+          },
+          plugins:[ChartDataLabels]
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-canal-entrada'),
+          config
+        );
+
     }
 
 
@@ -960,94 +945,99 @@ function onChangePorAno(){
     var nomes = /*[[${nomeSexo}]]*/""
         var numeroocorencia= /*[[${numeroocorenciaSexo}]]*/""
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-sexo'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#3903fc", "#fc035a"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+        // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              'rgba(255, 26, 104, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // config
+        const config = {
+          type: 'pie',
+          data,
+          options: {
+
+          },
+          plugins:[ChartDataLabels]
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-sexo'),
+          config
+        );
     }
 
     function ocorrenciasPorTipoPreocupacao(){
     var nomes = /*[[${nomeTipoPreocupacao}]]*/""
         var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-preocupacao'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+                // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              'rgba(255, 26, 104, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(0, 0, 0, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(0, 0, 0, 1)'
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // config
+        const config = {
+          type: 'pie',
+          data,
+          options: {
+
+          },
+          plugins:[ChartDataLabels]
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-tipo-preocupacao'),
+          config
+        );
+
     }
 
     function ocorrenciasPorRegiao(){
@@ -1184,15 +1174,12 @@ function onChangePorAno(){
               series: [
               {
                   name: "Resolvidas",
-                  label: 'Weekly Sales',
                   data: numeroocorencia1
                   },{
               name: "Em Atendimento",
-              label: 'Weekly Sales',
               data: numeroocorencia2
               },{
               name: "Não Resolvidas",
-              label: 'Weekly Sales',
               data: numeroocorencia3
               }
 
@@ -1225,7 +1212,8 @@ function onChangePorAno(){
               },
               colors: ["#66BB6A", "#FFA726", "#EF5350"],
               legend: {
-              show: false,
+              show: true,
+               position: "top",
               },
               })).render();
               });
@@ -1308,7 +1296,8 @@ function onChangePorAno(){
           },
           colors: ["#66BB6A", "#FFA726", "#EF5350"],
           legend: {
-          show: false,
+          show: true,
+          position: "top",
           },
           })).render();
           });
