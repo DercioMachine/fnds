@@ -203,6 +203,18 @@ public class OcorrenciaController {
         response.setHeader("Content-disposition", "inline; filename=relatorio"+ code + ".pdf" );
         response.getOutputStream().write(bytes);
     }
+
+    @GetMapping("/relatorio/grafico")
+    public void imprimirRelatorio09(
+            HttpServletResponse response) throws IOException {
+        String code = "-9";
+        service.addParams("logo", "logoa.PNG");
+        //service.addParams("projecto", null);
+        byte[] bytes = service.exportarPDF(code);
+        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        response.setHeader("Content-disposition", "inline; filename=relatorio"+ code + ".pdf" );
+        response.getOutputStream().write(bytes);
+    }
     
     @GetMapping("/listar/teste")
     public String litarTeste(ModelMap model){

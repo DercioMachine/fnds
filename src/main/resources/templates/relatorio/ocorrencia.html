@@ -7,6 +7,10 @@
       Xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="utf-8"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 
 <body>
@@ -167,6 +171,12 @@ $('#cbxCidade').html(s);
                     <i class="fa fa-print mr-2"></i>
                      Imprimir
                 </a>
+
+               <a target="_blank" class="btn btn-secondary" th:href="@{/relatorio/grafico}"  role="button">
+                    <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+                    <i class="fa fa-print mr-2"></i>
+                     Imprimir Graficos
+                </a>
                 </span>
 
         </div>
@@ -178,6 +188,8 @@ $('#cbxCidade').html(s);
     </div>
 
   </div>
+
+
 
   <br>
   
@@ -205,109 +217,258 @@ $('#cbxCidade').html(s);
   
   <br>
 
-  <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <div class="col-12">
     <div class="card">
+      <ul class="nav nav-tabs nav-tabs-alt" data-bs-toggle="tabs">
+        <li class="nav-item">
+          <a href="#tabs-home-10" class="nav-link active" data-bs-toggle="tab">Tabela</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tabs-profile-10" class="nav-link" data-bs-toggle="tab">Graficos</a>
+        </li>
+        <li class="nav-item ms-auto">
+          <a href="#tabs-settings-10" class="nav-link" title="Settings" data-bs-toggle="tab">
+            <!-- Download SVG icon from http://tabler-icons.io/i/settings -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><circle cx="12" cy="12" r="3" /></svg>
+          </a>
+        </li>
+      </ul>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tabs-home-10">
+            <div>
+              <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="card">
 
-      <br>
+                  <br>
 
-      <div style="padding-right:12px; padding-left:12px" class="table-responsive">
-        <table id="example" class="display">
-          <thead>
-          <tr style="color: rgb(65,105,225)">
-            <td class="w-2">#</td>
-            <td >Provincias</td>
-            <td>Ocorrência</td>
-            <td>Cadastro</td>
-            <td>Projecto</td>
-            <td>Tipo</td>
-            <td class="w-4">Assunto</td>
-            <td class="w-4">Estado</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="p, index : ${ocorrencia}">
-            <!-- <tr th:each="p : ${ocorrencias}"> th:text="${p.numeroordem}" -->
-            <!-- <td th:text="${index.size-(index.count)}"><span class="text-muted">01401</span></td> -->
-            <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
-            <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
-            <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
-            <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
-            <!-- <td th:text="${p.projecto.designacao}"><span class="text-muted">01401</span></td> -->
+                  <div style="padding-right:12px; padding-left:12px" class="table-responsive">
+                    <table id="example" class="display">
+                      <thead>
+                      <tr style="color: rgb(65,105,225)">
+                        <td class="w-2">#</td>
+                        <td >Provincias</td>
+                        <td>Ocorrência</td>
+                        <td>Cadastro</td>
+                        <td>Projecto</td>
+                        <td>Tipo</td>
+                        <td class="w-4">Assunto</td>
+                        <td class="w-4">Estado</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="p, index : ${ocorrencia}">
+                        <!-- <tr th:each="p : ${ocorrencias}"> th:text="${p.numeroordem}" -->
+                        <!-- <td th:text="${index.size-(index.count)}"><span class="text-muted">01401</span></td> -->
+                        <td th:text="${p.numeroordem}"><span class="text-muted">01401</span></td>
+                        <td th:text="${p.provincia.designacao}"><span class="text-muted">01401</span></td>
+                        <td th:text="${#dates.format(p.dataOcorrencia, 'dd/MM/yyyy')}">02/03/2015</td>
+                        <td th:text="${#dates.format(p.created, 'dd/MM/yyyy')}">02/03/2015</td>
+                        <!-- <td th:text="${p.projecto.designacao}"><span class="text-muted">01401</span></td> -->
 
-            <td>
-              <span th:if="${p.projecto != null}" th:text="${p.projecto.designacao}"></span>
-            </td>
-            <td>
-              <span th:if="${p != null && p.tipoOcorrencia != null && p.tipoOcorrencia.designacao != null}" th:text="${p.tipoOcorrencia.designacao}"></span>
-            </td>
-            <!--  <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td> -->
-            <!--  <td th:text="${p.internoExterno}">Auxiliar Contábil</td> -->
-            <!-- <td th:text="${p.procedencia}">Auxiliar Contábil</td> -->
-
-
-
-
-            <td>
-              <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
-            </td>
-
-            <td align="left" style="text-align: left;">
-
-              <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
-                Procedente
-                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
-              </button>
-
-              <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
-                Improcedente
-                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
-              </button>
-
-              <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
-                Resolvendo
-                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-              </button>
-
-              <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
-                Acompanhando
-                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-              </button>
-
-              <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
-                Resolvido
-                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
-              </button>
-
-              <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
-                <span th:if="${p.estado == 'Temporario'}">Temporario</span>
-                <span th:if="${p.estado == 'Registado'}">Pendente</span>
-
-                <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-              </button>
-
-              <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
-              Pendente
-              <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
-              </button> -->
-
-            </td>
+                        <td>
+                          <span th:if="${p.projecto != null}" th:text="${p.projecto.designacao}"></span>
+                        </td>
+                        <td>
+                          <span th:if="${p != null && p.tipoOcorrencia != null && p.tipoOcorrencia.designacao != null}" th:text="${p.tipoOcorrencia.designacao}"></span>
+                        </td>
+                        <!--  <td th:text="${p.projectoOperacao}">Auxiliar Contábil</td> -->
+                        <!--  <td th:text="${p.internoExterno}">Auxiliar Contábil</td> -->
+                        <!-- <td th:text="${p.procedencia}">Auxiliar Contábil</td> -->
 
 
 
 
-          </tr>
+                        <td>
+                          <a href="#" th:data-whatever="${p.id}" th:data-whatever-descricao="${p.descricao}" data-bs-toggle="modal" data-bs-target="#modal">Detalhes</a>
+                        </td>
+
+                        <td align="left" style="text-align: left;">
+
+                          <button style="background: blue; text-align: left; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Sim'}" type="button" class="btn btn-sucess btn-sm">
+                            Procedente
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check"></i>
+                          </button>
+
+                          <button style="background: red; color: #fff; width: 120px;" th:if="${p.resolucao == 'V' && p.procedencia=='Não'}" type="button" class="btn btn-sucess btn-sm">
+                            Improcedente
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-ban"></i>
+                          </button>
+
+                          <button style="background: #cc568b; color: #fff; width: 120px;" th:if="${p.resolucao == 'R' }" type="button" class="btn btn-sucess btn-sm">
+                            Resolvendo
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                          </button>
+
+                          <button style="background: #3e8fa3; color: #fff; width: 120px;" th:if="${p.resolucao == 'A' }" type="button" class="btn btn-sucess btn-sm">
+                            Acompanhando
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                          </button>
+
+                          <button style="background: green; color: #fff; width: 120px;" th:if="${p.resolucao == 'T' }" type="button" class="btn btn-sucess btn-sm">
+                            Resolvido
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-check-double"></i>
+                          </button>
+
+                          <button style="background: orange; color: #fff; width: 120px;" th:if="${p.resolucao == 'P'}" type="button" class="btn btn-sucess btn-sm">
+                            <span th:if="${p.estado == 'Temporario'}">Temporario</span>
+                            <span th:if="${p.estado == 'Registado'}">Pendente</span>
+
+                            <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                          </button>
+
+                          <!-- <button style="background: red; color: #fff" th:if="${p.resolucao == 'P' }" type="button" class="btn btn-sucess btn-sm">
+                          Pendente
+                          <i style="font-size: 15pt;" aria-hidden="true" class="fa fa-spinner fa-spin"></i>
+                          </button> -->
+
+                        </td>
+
+                      </tr>
 
 
-          </tbody>
-        </table>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tabs-profile-10">
+            <div>
+              <div class="page-body">
+                <div class="container-xl">
+                  <div class="row row-deck row-cards">
+
+
+                    <div class="col-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por província</h3>
+                        </div>
+                        <div class="card-body">
+                          <canvas id="chart-provincia" height="200" ></canvas>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                    <div class="col-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por mes</h3>
+                        </div>
+                        <div class="card-body">
+                          <canvas id="chart-combination" height="200" ></canvas>
+
+                        </div>
+                      </div>
+
+
+
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="page-body">
+                <div class="container-xl">
+                  <div class="row row-deck row-cards">
+
+                    <div class="col-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
+                        </div>
+                        <div class="card-body" >
+                          <canvas id="chart-canal-entrada" height="300" width="300" style=" height: 300px; width: 300px;" ></canvas>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+
+                    <div class="col-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
+                        </div>
+                        <div class="card-body" >
+                          <canvas id="chart-categoria"  height="200" width="200" ></canvas>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="page-body">
+                <div class="container">
+                  <div class="row row-deck row-cards">
+
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
+                        </div>
+                        <div class="card-body" style="height:300" >
+                          <canvas id="chart-sexo" width=326 height=240 style='width:326px;height:240px' ></canvas>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="card" >
+                        <div class="card-header" >
+                          <h3 class="card-title" style="  font-size: 12px;" >Tipo de Ocorrências</h3>
+                        </div>
+                        <div class="card-body" >
+                          <canvas id="chart-tipo-preocupacao" width=326 height=240 style='width:326px;height:240px' ></canvas>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane" id="tabs-settings-10">
+            <div>
+
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
   </div>
 
+
+
   <div th:replace="fragmentos/modal :: modal"></div>
-
-
 
   <div class="modal modal-blur fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -327,19 +488,609 @@ $('#cbxCidade').html(s);
   </div>
 
 
-  <script>
-$('#modal').on('show.bs.modal', function (event) {
-var button = $(event.relatedTarget) // Botão que acionou o modal
-var nrAcorrencia = button.data('whatever') // Extrai informação dos atributos data-*
-var assunto = button.data('whatever-descricao')
-// Se necessário, você pode iniciar uma requisição AJAX aqui e, então, fazer a atualização em um callback.
-// Atualiza o conteúdo do modal. Nós vamos usar jQuery, aqui. No entanto, você poderia usar uma biblioteca de data binding ou outros métodos.
-var modal = $(this)
 
-modal.find('.modal-title').html("Ocorrência N° "+nrAcorrencia)
-modal.find('.modal-body').html(assunto)
-})
-</script>
+
+  <script th:inline="javascript">
+    ocorrenciasPorMes();
+    ocorrenciasPorProvincia();
+    //ocorrenciasPorCidade();
+    ocorrenciasPorRegiao();
+    ocorrenciasPorCanalEntrada();
+    ocorrenciasPorCategoria();
+    ocorrenciasPorProjecto();
+    ocorrenciasPorTipoPreocupacao();
+    ocorrenciasPorSexo();
+    //teste();
+
+    function teste(){
+    var vetor = /*[[${vetor}]]*/'noValue';
+
+    google.charts.load('current', {
+                packages : [ 'corechart', 'pie' ]
+            });
+        google.charts.setOnLoadCallback(drawChart);
+
+        alert(vetor);
+
+        function drawChart() {
+
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Year');
+          data.addColumn('number', 'Views');
+
+          Object.keys(vetor).forEach(function(key) {
+                data.addRow([ key, vetor[key] ]);
+          });
+
+          var options = {
+            title: 'My Daily Activities'
+          };
+
+
+          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+          chart.draw(data, options);
+        }
+    }
+
+
+    function ocorrenciasPorProjecto(){
+    var nomes = /*[[${nomesProjecto}]]*/""
+        var numeroocorencia1= /*[[${numeroocorenciaProjecto}]]*/""
+        var numeroocorencia2= /*[[${numeroocorenciaProjecto2}]]*/""
+        var numeroocorencia3= /*[[${numeroocorenciaProjecto3}]]*/""
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-projecto'), {
+              chart: {
+              type: "bar",
+              fontFamily: 'inherit',
+              height: 240,
+              parentHeightOffset: 0,
+              toolbar: {
+              show: false,
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              plotOptions: {
+              bar: {
+              columnWidth: '50%',
+              horizontal: false,
+              }
+              },
+              dataLabels: {
+              enabled: false,
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: [
+              {
+                  name: "Resolvidas",
+                  data: numeroocorencia1
+                  },{
+              name: "Em Atendimento",
+              data: numeroocorencia2
+              },{
+              name: "Não Resolvidas",
+              data: numeroocorencia3
+              }
+
+              ],
+              grid: {
+              padding: {
+              top: -20,
+              right: 0,
+              left: 0,
+              bottom: -4
+              },
+              strokeDashArray: 4,
+              },
+              xaxis: {
+              labels: {
+              padding: 0,
+              },
+              tooltip: {
+              enabled: false
+              },
+              axisBorder: {
+              show: false,
+              },
+              categories: nomes,
+              },
+              yaxis: {
+              labels: {
+              padding: 4
+              },
+              },
+              colors: ["#66BB6A", "#FFA726", "#EF5350"],
+              legend: {
+              show: false,
+              },
+              })).render();
+              });
+
+    }
+
+    function ocorrenciasPorCategoria(){
+    var nomes = /*[[${nomesCategoria}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
+
+                        // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              '#FFA726',
+              '#66BB6A',
+              '#EF5350',
+              '#4299f5'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // config
+        const config = {
+          type: 'pie',
+          data,
+                  options: {
+                plugins: {
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+          plugins:[ChartDataLabels]
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-categoria'),
+          config
+        );
+
+    }
+
+    function ocorrenciasPorCanalEntrada(){
+    var nomes = /*[[${nomesCanais}]]*/""
+        var numeroocorencia= /*[[${numeroocorencia}]]*/""
+
+        // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              '#800080',
+              '#4299f5',
+              '#FFA726',
+              '#66BB6A'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // config
+        const config = {
+          type: 'pie',
+          data,
+            options: {
+                plugins: {
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+          plugins:[ChartDataLabels]
+
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-canal-entrada'),
+          config
+        );
+
+    }
+
+
+    function ocorrenciasPorSexo(){
+    var nomes = /*[[${nomeSexo}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaSexo}]]*/""
+
+         const ctx = document.getElementById('chart-sexo');
+
+    const myChart = new Chart(ctx, {
+    type: 'pie',
+    height: 240,
+    data: {
+        labels: nomes,
+        datasets: [{
+            label: '# of Votes',
+            data: numeroocorencia,
+            backgroundColor: [
+              'rgb(57, 3, 252)',
+              'rgb(252, 3, 90)',
+              '#96a99b',
+
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    plugins: [ChartDataLabels],
+                     options: {
+                plugins: {
+
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+       });
+
+    }
+
+    function ocorrenciasPorTipoPreocupacao(){
+    var nomes = /*[[${nomeTipoPreocupacao}]]*/""
+    var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
+
+    const ctx = document.getElementById('chart-tipo-preocupacao');
+
+    const myChart = new Chart(ctx, {
+    type: 'pie',
+    height: 240,
+    data: {
+        labels: nomes,
+        datasets: [{
+            label: '# of Votes',
+            data: numeroocorencia,
+            backgroundColor: [
+              '#4299f5',
+              '#FFA726',
+              '#66BB6A',
+              '#EF5350',
+
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    plugins: [ChartDataLabels],
+                     options: {
+                plugins: {
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+    });
+
+    }
+
+    function ocorrenciasPorRegiao(){
+    var nomes = /*[[${nomesRegiao}]]*/""
+        var numeroocorencia= /*[[${numeroocorenciaRegiao}]]*/""
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-regiao'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+              },
+              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
+              });
+    }
+
+    function ocorrenciasPorCidade(){
+
+    var nomes = /*[[${nomesCidades}]]*/""
+        var numeroocorencia= /*[[${ocorrenciasCidade}]]*/""
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+              window.ApexCharts && (new ApexCharts(document.getElementById('chart-cidade'), {
+              chart: {
+              type: "pie",
+              fontFamily: 'inherit',
+              height: 240,
+              sparkline: {
+              enabled: true
+              },
+              animations: {
+              enabled: false
+              },
+              },
+              fill: {
+              opacity: 1,
+              },
+              series: numeroocorencia,
+              labels: nomes,
+              grid: {
+              strokeDashArray: 4,
+
+              },
+              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
+              legend: {
+              show: true,
+              position: 'bottom',
+              offsetY: 12,
+              markers: {
+              width: 10,
+              height: 10,
+              radius: 100,
+              },
+              itemMargin: {
+              horizontal: 8,
+              vertical: 8
+              },
+              },
+              tooltip: {
+              fillSeriesColor: false
+              },
+              })).render();
+              });
+
+    }
+
+    function ocorrenciasPorProvincia(){
+
+        var nomes = /*[[${nomesProvincias}]]*/""
+        var numeroocorencia1= /*[[${numeroocorencia1}]]*/""
+        var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
+        var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
+
+    const ctx = document.getElementById('chart-provincia');
+
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nomes,
+            datasets: [{
+                label: 'Resolvidas',
+                data: numeroocorencia1,
+                backgroundColor: [
+                     '#66BB6A',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Em Atendimento',
+                data: numeroocorencia2,
+                backgroundColor: [
+                     '#FFA726',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Não Resolvidas',
+                data: numeroocorencia3,
+                backgroundColor: [
+                    '#EF5350',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }
+            ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+           plugins: {
+                  datalabels: {
+                    color: function(context) {
+                      var index = context.dataIndex;
+                      var value = context.dataset.data[index];
+                      return value > 0 ? 'blue' :  // draw negative values in red
+                        value = 0 ? 'white' :      // else, alternate values in blue and green
+                        'white';
+                    },
+                    anchor: 'end',
+                    align: 'end',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 16,
+                        }
+                      }
+                    }
+                  }
+                },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }
+        }
+    });
+
+
+
+
+        }
+
+
+
+    function ocorrenciasPorMes(){
+
+    var nomesMes = /*[[${nomesMeses}]]*/""
+    var numeroocorencia1= /*[[${nrocorrenciasMesT}]]*/""
+    var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
+    var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
+
+    const ctx = document.getElementById('chart-combination');
+
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nomesMes,
+            datasets: [{
+                label: 'Resolvidas',
+                data: numeroocorencia1,
+                backgroundColor: [
+                     '#66BB6A',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Em Atendimento',
+                data: numeroocorencia2,
+                backgroundColor: [
+                     '#FFA726',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Não Resolvidas',
+                data: numeroocorencia3,
+                backgroundColor: [
+                    '#EF5350',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }
+            ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+           plugins: {
+                  datalabels: {
+                    color: function(context) {
+                      var index = context.dataIndex;
+                      var value = context.dataset.data[index];
+                      return value > 0 ? 'blue' :  // draw negative values in red
+                        value = 0 ? 'white' :      // else, alternate values in blue and green
+                        'white';
+                    },
+                    anchor: 'end',
+                    align: 'end',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 16,
+                        }
+                      }
+                    }
+                  }
+                },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }
+        }
+    });
+
+    }
+
+    </script>
+
+
 
   <!-- Conteudo-->
 

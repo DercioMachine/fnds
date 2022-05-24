@@ -598,32 +598,32 @@ document.getElementById("divano").style.display="block";
     </div>
 
 
-
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
 
-                <div class="col-lg-6 col-xl-6">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por província</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-provincia"></div>
+                            <canvas id="chart-provincia" height="200" ></canvas>
                         </div>
                     </div>
 
 
                 </div>
 
-                <div class="col-lg-6 col-xl-6">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por mes</h3>
                         </div>
                         <div class="card-body">
-                            <div id="chart-combination"></div>
+                            <canvas id="chart-combination" height="200" ></canvas>
+
                         </div>
                     </div>
 
@@ -642,13 +642,13 @@ document.getElementById("divano").style.display="block";
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
-                <div class="col-lg-6 col-xl-6">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
-                        <div class="card-body">
-                            <div id="chart-canal-entrada"></div>
+                        <div class="card-body" >
+                            <canvas id="chart-canal-entrada" height="300" width="300" style=" height: 300px; width: 300px;" ></canvas>
                         </div>
                     </div>
 
@@ -656,13 +656,13 @@ document.getElementById("divano").style.display="block";
 
                 </div>
 
-                <div class="col-lg-6 col-xl-6">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
-                        <div class="card-body">
-                            <div id="chart-categoria"></div>
+                        <div class="card-body" >
+                            <canvas id="chart-categoria"  height="200" width="200" ></canvas>
                         </div>
                     </div>
 
@@ -678,16 +678,16 @@ document.getElementById("divano").style.display="block";
 
 
     <div class="page-body">
-        <div class="container-xl">
+        <div class="container">
             <div class="row row-deck row-cards">
 
-                <div class="col-lg-6 col-xl-6">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
                         </div>
-                        <div class="card-body">
-                            <div id="chart-sexo"></div>
+                        <div class="card-body" style="height:300" >
+                            <canvas id="chart-sexo" width=326 height=240 style='width:326px;height:240px' ></canvas>
                         </div>
                     </div>
 
@@ -695,13 +695,13 @@ document.getElementById("divano").style.display="block";
 
                 </div>
 
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" style="  font-size: 12px;" >Tipo de Preocupação</h3>
+                <div class="col-md-6">
+                    <div class="card" >
+                        <div class="card-header" >
+                            <h3 class="card-title" style="  font-size: 12px;" >Tipo de Ocorrências</h3>
                         </div>
-                        <div class="card-body">
-                            <div id="chart-tipo-preocupacao"></div>
+                        <div class="card-body" >
+                            <canvas id="chart-tipo-preocupacao" width=326 height=240 style='width:326px;height:240px' ></canvas>
                         </div>
                     </div>
 
@@ -716,33 +716,11 @@ document.getElementById("divano").style.display="block";
     </div>
 
 
-    <!-- <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-deck row-cards">
-
-                <div class="col-lg-6 col-xl-6">
-                    <div class="card">
-                    <div id="piechart" style="width: 900px; height: 500px;"></div>
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-            </div>
-        </div>
-    </div> -->
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script th:inline="javascript">
     ocorrenciasPorMes();
     ocorrenciasPorProvincia();
-  //  ocorrenciasPorCidade();
+    //ocorrenciasPorCidade();
     ocorrenciasPorRegiao();
     ocorrenciasPorCanalEntrada();
     ocorrenciasPorCategoria();
@@ -781,9 +759,6 @@ document.getElementById("divano").style.display="block";
           chart.draw(data, options);
         }
     }
-
-
-
 
 
     function ocorrenciasPorProjecto(){
@@ -860,8 +835,7 @@ document.getElementById("divano").style.display="block";
               },
               colors: ["#66BB6A", "#FFA726", "#EF5350"],
               legend: {
-              show: true,
-              position: "top",
+              show: false,
               },
               })).render();
               });
@@ -872,48 +846,52 @@ document.getElementById("divano").style.display="block";
     var nomes = /*[[${nomesCategoria}]]*/""
         var numeroocorencia= /*[[${numeroocorenciaCategoria}]]*/""
 
+                        // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              '#FFA726',
+              '#66BB6A',
+              '#EF5350',
+              '#4299f5'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+            ],
+            borderWidth: 1
+          }]
+        };
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-categoria'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
+        // config
+        const config = {
+          type: 'pie',
+          data,
+                  options: {
+                plugins: {
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
               },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#FFA726", "#66BB6A", "#EF5350", "#4299f5"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+          plugins:[ChartDataLabels]
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-categoria'),
+          config
+        );
 
     }
 
@@ -921,47 +899,54 @@ document.getElementById("divano").style.display="block";
     var nomes = /*[[${nomesCanais}]]*/""
         var numeroocorencia= /*[[${numeroocorencia}]]*/""
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-canal-entrada'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
+        // setup
+        const data = {
+          labels: nomes,
+          datasets: [{
+            label: 'abc',
+            data: numeroocorencia,
+            backgroundColor: [
+              '#800080',
+              '#4299f5',
+              '#FFA726',
+              '#66BB6A'
+            ],
+            borderColor: [
+              'rgba(255, 26, 104, 1)',
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        // config
+        const config = {
+          type: 'pie',
+          data,
+            options: {
+                plugins: {
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
               },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#800080", "#4299f5","#FFA726", "#66BB6A"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+          plugins:[ChartDataLabels]
+
+        };
+
+        // render init block
+        const myChart = new Chart(
+          document.getElementById('chart-canal-entrada'),
+          config
+        );
+
     }
 
 
@@ -969,94 +954,94 @@ document.getElementById("divano").style.display="block";
     var nomes = /*[[${nomeSexo}]]*/""
         var numeroocorencia= /*[[${numeroocorenciaSexo}]]*/""
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-sexo'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#eb6eb9", "#96a11b"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+         const ctx = document.getElementById('chart-sexo');
+
+    const myChart = new Chart(ctx, {
+    type: 'pie',
+    height: 240,
+    data: {
+        labels: nomes,
+        datasets: [{
+            label: '# of Votes',
+            data: numeroocorencia,
+            backgroundColor: [
+              'rgb(57, 3, 252)',
+              'rgb(252, 3, 90)',
+              '#96a99b',
+
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    plugins: [ChartDataLabels],
+                     options: {
+                plugins: {
+
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+       });
+
     }
 
     function ocorrenciasPorTipoPreocupacao(){
     var nomes = /*[[${nomeTipoPreocupacao}]]*/""
-        var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
+    var numeroocorencia= /*[[${numeroocorenciaTipoPreocupacao}]]*/""
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-tipo-preocupacao'), {
-              chart: {
-              type: "pie",
-              fontFamily: 'inherit',
-              height: 240,
-              sparkline: {
-              enabled: true
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: numeroocorencia,
-              labels: nomes,
-              grid: {
-              strokeDashArray: 4,
-              },
-              colors: ["#4299f5", "#FFA726", "#66BB6A", "#EF5350"],
-              legend: {
-              show: true,
-              position: 'bottom',
-              offsetY: 12,
-              markers: {
-              width: 10,
-              height: 10,
-              radius: 100,
-              },
-              itemMargin: {
-              horizontal: 8,
-              vertical: 8
-              },
-              },
-              tooltip: {
-              fillSeriesColor: false
-              },
-              })).render();
-              });
+    const ctx = document.getElementById('chart-tipo-preocupacao');
+
+    const myChart = new Chart(ctx, {
+    type: 'pie',
+    height: 240,
+    data: {
+        labels: nomes,
+        datasets: [{
+            label: '# of Votes',
+            data: numeroocorencia,
+            backgroundColor: [
+              '#4299f5',
+              '#FFA726',
+              '#66BB6A',
+              '#EF5350',
+
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    plugins: [ChartDataLabels],
+                     options: {
+                plugins: {
+                  datalabels: {
+                    color: 'white',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 30,
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+    });
+
     }
 
     function ocorrenciasPorRegiao(){
@@ -1164,77 +1149,80 @@ document.getElementById("divano").style.display="block";
         var numeroocorencia2= /*[[${numeroocorencia2}]]*/""
         var numeroocorencia3= /*[[${numeroocorencia3}]]*/""
 
+    const ctx = document.getElementById('chart-provincia');
 
-        document.addEventListener("DOMContentLoaded", function () {
-              window.ApexCharts && (new ApexCharts(document.getElementById('chart-provincia'), {
-              chart: {
-              type: "bar",
-              fontFamily: 'inherit',
-              height: 240,
-              parentHeightOffset: 0,
-              toolbar: {
-              show: false,
-              },
-              animations: {
-              enabled: false
-              },
-              },
-              plotOptions: {
-              bar: {
-              columnWidth: '50%',
-              }
-              },
-              dataLabels: {
-              enabled: false,
-              },
-              fill: {
-              opacity: 1,
-              },
-              series: [
-              {
-                  name: "Resolvidas",
-                  data: numeroocorencia1
-                  },{
-              name: "Em Atendimento",
-              data: numeroocorencia2
-              },{
-              name: "Não Resolvidas",
-              data: numeroocorencia3
-              }
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nomes,
+            datasets: [{
+                label: 'Resolvidas',
+                data: numeroocorencia1,
+                backgroundColor: [
+                     '#66BB6A',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Em Atendimento',
+                data: numeroocorencia2,
+                backgroundColor: [
+                     '#FFA726',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Não Resolvidas',
+                data: numeroocorencia3,
+                backgroundColor: [
+                    '#EF5350',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }
+            ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+           plugins: {
+                  datalabels: {
+                    color: function(context) {
+                      var index = context.dataIndex;
+                      var value = context.dataset.data[index];
+                      return value > 0 ? 'blue' :  // draw negative values in red
+                        value = 0 ? 'white' :      // else, alternate values in blue and green
+                        'white';
+                    },
+                    anchor: 'end',
+                    align: 'end',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 16,
+                        }
+                      }
+                    }
+                  }
+                },
 
-              ],
-              grid: {
-              padding: {
-              top: -20,
-              right: 0,
-              left: 0,
-              bottom: -4
-              },
-              strokeDashArray: 4,
-              },
-              xaxis: {
-              labels: {
-              padding: 0,
-              },
-              tooltip: {
-              enabled: false
-              },
-              axisBorder: {
-              show: false,
-              },
-              categories: nomes,
-              },
-              yaxis: {
-              labels: {
-              padding: 4
-              },
-              },
-              colors: ["#66BB6A", "#FFA726", "#EF5350"],
-              legend: {
-              show: false,
-              },
-              })).render();
-              });
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
 
 
         }
@@ -1248,83 +1236,82 @@ document.getElementById("divano").style.display="block";
     var numeroocorencia2= /*[[${nrocorrenciasMesNT}]]*/""
     var numeroocorencia3= /*[[${nrocorrenciasMesI}]]*/""
 
-    document.addEventListener("DOMContentLoaded", function () {
-          window.ApexCharts && (new ApexCharts(document.getElementById('chart-combination'), {
-          chart: {
-          type: "bar",
-          fontFamily: 'inherit',
-          height: 240,
-          parentHeightOffset: 0,
-          toolbar: {
-          show: false,
-          },
-          animations: {
-          enabled: false
-          },
-          },
-          plotOptions: {
-          bar: {
-          columnWidth: '50%',
-          }
-          },
-          dataLabels: {
-          enabled: false,
-          },
-          fill: {
-          opacity: 1,
-          },
-          series: [
-          {
-              name: "Resolvidas",
-              data: numeroocorencia1
-              },{
-          name: "Em Atendimento",
-          data: numeroocorencia2
-          },{
-          name: "Não Resolvidas",
-          data: numeroocorencia3
-          }
+    const ctx = document.getElementById('chart-combination');
 
-          ],
-          grid: {
-          padding: {
-          top: -20,
-          right: 0,
-          left: -4,
-          bottom: -4
-          },
-          strokeDashArray: 4,
-          },
-          xaxis: {
-          labels: {
-          padding: 0,
-          },
-          tooltip: {
-          enabled: false
-          },
-          axisBorder: {
-          show: false,
-          },
-          categories: nomesMes,
-          },
-          yaxis: {
-          labels: {
-          padding: 4
-          },
-          },
-          colors: ["#66BB6A", "#FFA726", "#EF5350"],
-          legend: {
-              show: true,
-              position: "top",
-          },
-          })).render();
-          });
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nomesMes,
+            datasets: [{
+                label: 'Resolvidas',
+                data: numeroocorencia1,
+                backgroundColor: [
+                     '#66BB6A',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Em Atendimento',
+                data: numeroocorencia2,
+                backgroundColor: [
+                     '#FFA726',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Não Resolvidas',
+                data: numeroocorencia3,
+                backgroundColor: [
+                    '#EF5350',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }
+            ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+           plugins: {
+                  datalabels: {
+                    color: function(context) {
+                      var index = context.dataIndex;
+                      var value = context.dataset.data[index];
+                      return value > 0 ? 'blue' :  // draw negative values in red
+                        value = 0 ? 'white' :      // else, alternate values in blue and green
+                        'white';
+                    },
+                    anchor: 'end',
+                    align: 'end',
+                    labels: {
+                      title: {
+                        font: {
+                          weight: 'bold',
+                          size: 16,
+                        }
+                      }
+                    }
+                  }
+                },
 
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
     }
 
     </script>
-
 
 
     <!-- Conteudo-->

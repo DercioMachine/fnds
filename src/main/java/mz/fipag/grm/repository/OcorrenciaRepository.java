@@ -782,6 +782,24 @@ public List<Object[]> busqueTnTI();*/
 	@Query(value="select * from ocorrencia order by ocorrencia.numero_ordem desc", nativeQuery=true)
 	public List<Ocorrencia> findAllOrdenarPorNUmeroOrdem();
 
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+    List<Object[]> busqueTudoAgrupadoPorProvinciaEstadoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	List<Object[]> busqueTudoAgrupadoPorCanalDeEntradaPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	List<Object[]> busqueTudoAgrupadoPorPeSexoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	List<Object[]> busqueTudoAgrupadoTipoDePreocupacaoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	List<Object[]> busqueTudoAgrupadoPorCategoriaPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
+	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	List<Object[]> busqueTnTIPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
 
 
 
