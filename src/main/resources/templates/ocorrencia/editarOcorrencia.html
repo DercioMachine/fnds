@@ -85,7 +85,7 @@ numOfFiles.textContent = '${fileInput.files.length} Anexos Selecionados';
 
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
 var estadobotao = 0 ;
 
@@ -113,9 +113,9 @@ OrigemInternoExterno();
 
     $.ajax({
     type: 'GET',
-    url: 'http://196.22.53.245:8080/fnds/origem/externo',
-    //	url: 'http://localhost:8080/fnds/origem/externo',
-    //url: 'http://localhost:9090/origem/externo',
+    url: 'http://localhost:8080/origem/externo',
+   // url: 'http://196.22.53.245:8080/fnds/origem/externo',
+    //url: 'http://196.22.53.245:8080/fnds/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -286,10 +286,10 @@ OrigemInternoExterno();
     type: 'GET',
 
     //url: 'http://expediente.uem.mz:9090/grm/origem/externo',
-//  url: 'https://portal.fipag.co.mz/grm/origem/externo',
-    //url: 'http://localhost:9090/origem/externo/',
-    //url: 'http://localhost:9090/origem/externo',
-     url: 'http://196.22.53.245:8080/fnds/origem/externo',
+   //  url: 'https://portal.fipag.co.mz/grm/origem/externo',
+   // url: 'http://196.22.53.245:8080/fnds/origem/externo/',
+    //url: 'http://196.22.53.245:8080/fnds/origem/externo',
+     url: 'http://localhost:8080/origem/externo',
 
 
     success: function (result){
@@ -342,16 +342,21 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
-url: 'http://196.22.53.245:8080/fnds/distrito/'+provinciaId,
-//url: 'http://portal.fipag.co.mz/grm2/distrito/'+provinciaId,
+ //url: 'http://196.22.53.245:8080/fnds/distrito/'+provinciaId,
+url: 'http://localhost:8080/distrito/'+provinciaId,
+
 
 
 success: function (result){
 var result = JSON.parse(result);
-var s = '';
+var s = "<option value=''>Selecione o Distrito... </option>";
 for(var i=0; i< result.length; i++){
 s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
 }
+
+var s1 = "<option value=''>Selecione o Posto Administrativo... </option>";
+$('#comboboxPosto').html(s1);
+
 $('#comoboxDistrito').html(s);
 }
 });
@@ -361,37 +366,6 @@ $('#comoboxDistrito').html(s);
 </script>
 
 
-    <script type="text/javascript">
-
-$(document).ready(function(){
-$('#categoria').on('change',function(){
-
-var categoriaId = $(this).val();
-
-// alert(distritoId);
-
-$.ajax({
-type: 'GET',
-//url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
-//url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://196.22.53.245:8080/fnds/subcategoria/'+categoriaId,
-
-//url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
-
-success: function (result){
-var result = JSON.parse(result);
-var s = '';
-for(var i=0; i< result.length; i++){
-s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
-}
-$('#subcategoria').html(s);
-}
-});
-
-
-});
-});
-</script>
 
 
     <script type="text/javascript">
@@ -407,9 +381,40 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'http://196.22.53.245:8080/fnds/posto/'+distritoId,
+//url: 'http://196.22.53.245:8080/fnds/posto/'+distritoId,
+url: 'http://localhost:8080/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
+
+success: function (result){
+var result = JSON.parse(result);
+var s = "<option value=''>Selecione o Posto Administrativo...</option>";
+for(var i=0; i< result.length; i++){
+s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
+}
+$('#comboboxPosto').html(s);
+}
+});
+
+
+});
+});
+</script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+$('#categoria').on('change',function(){
+
+var categoriaId = $(this).val();
+
+// alert(distritoId);
+
+$.ajax({
+type: 'GET',
+//url: 'http://196.22.53.245:8080/fnds/subcategoria/'+categoriaId,
+url: 'http://localhost/subcategoria/'+categoriaId,
 
 success: function (result){
 var result = JSON.parse(result);
@@ -417,7 +422,7 @@ var s = '';
 for(var i=0; i< result.length; i++){
 s+='<option value="'+result[i].id+'">'+result[i].designacao+'</option>';
 }
-$('#comboboxPosto').html(s);
+$('#subcategoria').html(s);
 }
 });
 
@@ -529,57 +534,57 @@ document.getElementById("cidadee").style.display="none";
 
 
 
-    <script type="text/javascript">
-
-
+<script type="text/javascript">
+	
+	
 	function onChangeIndividual(){
 		var estado = document.getElementById("individual");
-
-
+		
+		
 		if(estado.value=="Individual"){
-
+  			
   			document.getElementById("nome").style.display="block";
   			document.getElementById("faixaEtaria").style.display="block";
   			document.getElementById("genero").style.display="block";
-
+  			
   			document.getElementById("nomeGrupo").style.display="none";
-
+  			
   			document.getElementById("nomereplabel").style.display="none";
   			document.getElementById("nomelabel").style.display="block";
-
+  			
   		}
 	}
-
+	
 	function onChangeGrupo(){
 		var estado = document.getElementById("grupo");
-
+		
 		if(estado.value=="Grupo/Comunidade"){
-
+  			
 			document.getElementById("faixaEtaria").style.display="block";
   			document.getElementById("nomeGrupo").style.display="block";
   			document.getElementById("nome").style.display="block";
   			document.getElementById("genero").style.display="block";
-
+  			
   			document.getElementById("nomelabel").style.display="none";
   			document.getElementById("nomereplabel").style.display="block";
-
-
+  			
+  			
   		}
 	}
-
+	
 	function onChangeAnonimo(){
-
+		
 		var estado = document.getElementById("anonimo");
-
+		
 		if(estado.value=="Anónimo"){
-
+  			
   			document.getElementById("genero").style.display="block";
   			document.getElementById("faixaEtaria").style.display="block";
-
+  			
   			document.getElementById("nome").style.display="none";
   			document.getElementById("nomeGrupo").style.display="none";
   		}
-
+		
 	}
 </script>
 
@@ -593,33 +598,45 @@ document.getElementById("cidadee").style.display="none";
             <span>Voltar</span>
         </a>
     </div>
+    
+    <div align="center" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="card mt-2 mb-2">
+				      			<div class="card-body">
+                    				<div class="row">
+					                  <label style="color:black; font-size:15px; padding-left:5px; padding-right:5px">Os Campos marcados com <span style="color:red; font-size:20px; padding-left:5px; padding-right:5px">*</span> são de preenchimento obrigatório</label>
+				                	</div>
+				                </div>
+				                </div>
 
     <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="card-header">
-            <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">EDITAR OCORRÊNCIA</h3>
+            <h3 style="font-weight: bolder;color: #60a18a; " class="card-title">EDITAR DE OCORRÊNCIA</h3>
         </div>
         <!-- <div th:replace="fragmentos/alert" class="card-body"> -->
         <div class="card-body">
-            <form th:action="@{/ocorrencias/cadastrar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
+            <form th:action="@{/ocorrencias/editar}" th:object="${ocorrencia}" method="POST" enctype="multipart/form-data">
 
                 <div style="background: #60a18a; color: white">
                     <h2 style=" padding: 10px; margin: 0px;" class="card-title" >Dados da Ocorrência</h2>
                 </div>
+                
+                <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
+                
+                <input type="hidden" th:field="*{numeroordem}" class="form-control" placeholder="Designação...">
                 <br>
 
-                <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
+                <!-- <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação..."> -->
                 <!-- enctype="multipart/form-data" -->
 
 
 
                 <div class="row">
-
-                    <div class="col-6 col-sm-4">
+                
+                <div class="col-6 col-sm-4">
                         <div class="form-group">
                             <label class="form-label">Tipo de Alerta</label>
                             <select class="form-control custom-select form-select" th:field="*{tipoAlerta}" >
-                                <option th:each="p : ${tipoAlertas}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                <option th:each="p : ${tipoAlertas}"  th:value="${p.id}" th:if="${p.designacao!='GBV'}" th:text="${p.designacao}">Maputo</option>
+                                <option th:each="p : ${tipoAlertas}"  th:value="${p.id}" th:if="${p.designacao=='GBV'}">Violência baseada no género</option>
                             </select>
                         </div>
                     </div>
@@ -668,14 +685,26 @@ document.getElementById("cidadee").style.display="none";
                             </select>
                         </div>
                     </div>
+                    
+                    <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label class="form-label">Comunidade</label>
+                        <div class="input-icon">
+                                    <span class="input-icon-addon">
+                                    <i class="fe fe-edit-2"></i>
+                                    </span>
+                            <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
+                        </div>
+                    </div>
+                </div>
 
                     <div class="col-6 col-sm-4">
                         <div class="form-group">
                             <label for="categoria" class="form-label">Categoria <strong style="color:red">*</strong></label>
                             <select id="categoria" required class="form-control custom-select form-select" th:field="*{categoria}" >
                                 <option value="">Selecione a Categoria...</option>
-                                <option th:each="p : ${categorias}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                <option th:each="p : ${categorias}" th:if="${p.designacao!='GBV'}" th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                <option th:each="p : ${categorias}" th:if="${p.designacao=='GBV'}" th:value="${p.id}" >Violência Baseada no Género</option>
                             </select>
                         </div>
                     </div>
@@ -712,9 +741,9 @@ document.getElementById("cidadee").style.display="none";
 
                     <div style="display: block" id="comunicacao" class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Canal Utilizado </label>
+                            <label class="form-label">Canal Utilizado<strong style="color:red">*</strong></label>
                             <select required class="form-control custom-select" th:field="*{formaComunicacao}" >
-                                <option value="">Selecione o Canal...</option>
+                             	<option value="">Selecione o Canal...</option>
                                 <option value="Contacto Pessoal">Contacto Pessoal</option>
                                 <option value="Telefone">Telefone</option>
                                 <option value="Formulário">Formulário</option>
@@ -736,24 +765,39 @@ document.getElementById("cidadee").style.display="none";
                         </div>
                     </div>
 
-
-
-
-
-                </div>
-                <div class="row">
-                    <div class="col-12 col-sm-12">
+                    <div id="contacto" class="col-6 col-sm-4">
                         <div class="form-group">
-                            <label class="form-label">Comunidade</label>
+                            <label class="form-label">Telefone</label>
                             <div class="input-icon">
                                     <span class="input-icon-addon">
                                     <i class="fe fe-edit-2"></i>
                                     </span>
-                                <input type="text" th:field="*{comunidade}" class="form-control" placeholder="Escreva a Comunidade...">
+                                <input pattern="[0-9]{9}" type="text" 
+                                		oninvalid="this.setCustomValidity('Conctacto inválido.')" 
+										onchange="this.setCustomValidity('')"   
+                                th:field="*{contactoUtente}" class="form-control" placeholder="Telefone...">
                             </div>
                         </div>
                     </div>
+
+                    <div  class="col-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <div class="input-icon">
+                                <span class="input-icon-addon">
+                                <i class="fe fe-edit-2"></i>
+                                </span>
+                                <input type="email" 
+                                	oninvalid="this.setCustomValidity('Email inválido')" 
+									onchange="this.setCustomValidity('')" 
+                                th:field="*{emailUtente}" class="form-control" placeholder="Não Obrigatório...">
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+                
 
 
                 <div class="row">
@@ -808,29 +852,7 @@ document.getElementById("cidadee").style.display="none";
                         </div>
                     </div>
 
-                    <div style="display: none" id="contacto" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Contacto</label>
-                            <div class="input-icon">
-                                    <span class="input-icon-addon">
-                                    <i class="fe fe-edit-2"></i>
-                                    </span>
-                                <input type="text" th:field="*{contactoUtente}" class="form-control" placeholder="Designação...">
-                            </div>
-                        </div>
-                    </div>
 
-                    <div style="display: none" id="email" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <div class="input-icon">
-                                <span class="input-icon-addon">
-                                <i class="fe fe-edit-2"></i>
-                                </span>
-                                <input type="text" th:field="*{emailUtente}" class="form-control" placeholder="Designação...">
-                            </div>
-                        </div>
-                    </div>
 
                     <div style="display: none" id="nomeGrupo" class="col-6 col-sm-6">
                         <div class="form-group">
@@ -862,8 +884,7 @@ document.getElementById("cidadee").style.display="none";
                             <select class="form-control custom-select" th:field="*{sexo}" >
                                 <option value=" ">Selecione...</option>
                                 <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Femenino">ND</option>
+                                <option value="Femenino">Feminino</option>
                             </select>
                         </div>
                     </div>
@@ -892,6 +913,8 @@ document.getElementById("cidadee").style.display="none";
                 <br>
 
                 <div class="row">
+                
+                <label class="form-label">Adicionar documentos ou fotos</label>
 
                     <div class="col-6 col-sm-6">
                         <div class="form-group">
@@ -922,7 +945,7 @@ document.getElementById("cidadee").style.display="none";
 
 
                 <div class="card-footer text-right">
-                    <button type="submit" class="btn btn-info">Editar </button>
+                    <button type="submit" class="btn btn-success">Editar </button>
                 </div>
             </form>
 

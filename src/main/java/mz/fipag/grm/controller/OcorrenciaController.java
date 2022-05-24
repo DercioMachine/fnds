@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 
-import mz.fipag.grm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -37,6 +36,7 @@ import mz.fipag.grm.domain.Empreiteiro;
 import mz.fipag.grm.domain.Ocorrencia;
 import mz.fipag.grm.domain.PostoAdministrativo;
 import mz.fipag.grm.domain.Projecto;
+import mz.fipag.grm.domain.ProjectoUser;
 import mz.fipag.grm.domain.Provincia;
 import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.SubCategoria;
@@ -48,10 +48,24 @@ import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ProcessoRepository;
+import mz.fipag.grm.repository.ProjectoUserRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.repository.SubCategoriaRepository;
 import mz.fipag.grm.repository.UserRepository;
+import mz.fipag.grm.service.CategoriaService;
+import mz.fipag.grm.service.DistritoService;
+import mz.fipag.grm.service.DocStorageService;
+import mz.fipag.grm.service.EmailService;
+import mz.fipag.grm.service.EmpreiterioService;
+import mz.fipag.grm.service.JasperService;
+import mz.fipag.grm.service.OcorrenciaService;
+import mz.fipag.grm.service.PostoAdministrativoService;
+import mz.fipag.grm.service.ProjectoService;
+import mz.fipag.grm.service.ProvinciaService;
+import mz.fipag.grm.service.SMSService;
+import mz.fipag.grm.service.TipoAlertaService;
+import mz.fipag.grm.service.TipoOcorrenciaService;
 
 
 @Controller
@@ -120,6 +134,9 @@ public class OcorrenciaController {
     
     @Autowired
     private CategoriaService categoriaService;
+    
+    @Autowired
+    private ProjectoUserRepository projectoUserRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -204,7 +221,15 @@ public class OcorrenciaController {
     }
     
     @GetMapping("/registar/ocorrencia")
-    public String novaOcorrencia(ModelMap model){
+    public String novaOcorrencia(ModelMap model,  Authentication authentication){
+    	
+    	User userlogado = userRepository.findByUsername(authentication.getName());
+    	
+    	List<ProjectoUser> projectoUser = null;
+    	
+    	projectoUser = projectoUserRepository.buscarPorProjecto(userlogado.getId());
+    	
+    	model.addAttribute("projectoUsers", projectoUser);
 
         model.addAttribute("ocorrencia",new Ocorrencia());
 
@@ -409,7 +434,7 @@ public class OcorrenciaController {
 
                String assunto = "Confirmação de submissão - FNDS";
            	 
-           	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência GBV com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+           	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi submetida uma ocorrência GBV com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
            	 
            	 
           if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
@@ -459,9 +484,11 @@ public class OcorrenciaController {
    	}
 
     @PostMapping("/ocorrencias/editar") 
-	  public String editarCategoria(Ocorrencia ocorrencia) {
+	  public String editarCategoria(Ocorrencia ocorrencia,Authentication authentication) {
     	
-	  
+    	User userlogado = userRepository.findByUsername(authentication.getName());
+    	
+    		ocorrencia.setResponsavel(userlogado);
     		ocorrencia.setRegistado(true);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.editar(ocorrencia);
@@ -651,14 +678,18 @@ public class OcorrenciaController {
             
             
             if(procedencia.equals("Não")){
+            	
+            	
+            	String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
+         		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
 
-                if(ocorrencia.getContactoUtente()!=null) {
+                if(contacto!=null) {
 
-                    String smsNaoprocede = "Caro Utente a sua ocorrência não procede, veja os motivos  pesquisando com o seu código: "+ocorrencia.getGrmStamp();
+                    String smsNaoprocede = "Caro Utente a sua ocorrência não procede, veja os motivos pesquisando com o seu código: "+ocorrencia.getGrmStamp();
                     smsService.sendSMS("+258" + ocorrencia.getContactoUtente(), smsNaoprocede);
 
                 }
-                if(ocorrencia.getEmailUtente()!=null) {
+                if(email!=null) {
 
                     String descricao = "A sua Ocorrência com o codigo: "+ocorrencia.getGrmStamp()+" não procede. MOTIVO: "+ocorrencia.getObservacao();
                     String nome = "A sua Ocorrência não procede";
@@ -676,22 +707,34 @@ public class OcorrenciaController {
          	String localprovincia = ocorrencia.getProvincia().getDesignacao();
 
          	
+         	 if(procedencia.equals("Sim")){
+         	
          	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente") || ocorrencia.getTipoAlerta().getDesignacao().equals("GBV")) {
+         		
+         		String nome = "Preocupação submetida com sucesso";
+
+                String assunto = "Confirmação de submissão - FNDS";
          		
          		 for (int i=0;i<lista.size();i++) {
                 	 
-                	 String smsurgente = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência urgente com o código : "+ocorrencia.getGrmStamp();
-                	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência GBV com o código : "+ocorrencia.getGrmStamp();
+                	 String smsurgente = "A ocorrência urgente com o código "+ocorrencia.getGrmStamp() +" está validado e é procedente!";
+                	 String smsgbv = "A ocorrência GBV com o código "+ocorrencia.getGrmStamp() +" está validado e é procedente!";
                 	 
                if(lista.get(i).getTipourgente().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
+            	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
+            	   
                }else if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
+            	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
                }
          		
          	}
         	
          	}
+         	 }
+         	
+         	
          	
 
             //return "redirect:/resolver/ocorrencia/"+ocorrencia.getId();

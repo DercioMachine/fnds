@@ -632,7 +632,7 @@ document.getElementById("cidadee").style.display="none";
                             <label class="form-label">Tipo de Alerta</label>
                             <select class="form-control custom-select form-select" th:field="*{tipoAlerta}" >
                                 <option th:each="p : ${tipoAlertas}"  th:value="${p.id}" th:if="${p.designacao!='GBV'}" th:text="${p.designacao}">Maputo</option>
-                                <option th:each="p : ${tipoAlertas}"  th:value="${p.id}" th:if="${p.designacao=='GBV'}">Violência Baseada no Género</option>
+                                <option th:each="p : ${tipoAlertas}"  th:value="${p.id}" th:if="${p.designacao=='GBV'}">Violência baseada no género</option>
                             </select>
                         </div>
                     </div>
@@ -642,8 +642,8 @@ document.getElementById("cidadee").style.display="none";
                             <label for="projecto" class="form-label">Projecto <strong style="color:red">*</strong></label>
                             <select id="projecto" required class="form-control custom-select form-select" th:field="*{projecto}" >
                                 <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectos}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                <option th:each="p : ${projectoUsers}"
+                                        th:value="${p.projectoUser.id}" th:text="${p.projectoUser.designacao}">Maputo</option>
                             </select>
                         </div>
                     </div>
