@@ -164,20 +164,8 @@ $('#cbxCidade').html(s);
                               <i class="fa fa-search mr-2"></i>
                               Pesquisar
                               </button>
-                              </span>
-          <span>
-                  <a target="_blank" class="btn btn-secondary" th:href="@{/relatorio/pdf}"  role="button">
-                    <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
-                    <i class="fa fa-print mr-2"></i>
-                     Imprimir
-                </a>
+                 </span>
 
-               <a target="_blank" class="btn btn-secondary" th:href="@{/relatorio/grafico}"  role="button">
-                    <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
-                    <i class="fa fa-print mr-2"></i>
-                     Imprimir Graficos
-                </a>
-                </span>
 
         </div>
       </form>
@@ -237,10 +225,18 @@ $('#cbxCidade').html(s);
         <div class="tab-content">
           <div class="tab-pane active show" id="tabs-home-10">
             <div>
-              <div class="col-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              <a target="_blank" class="btn btn-secondary" th:href="@{/relatorio/pdf}"  role="button">
+                <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+                <i class="fa fa-print mr-2"></i>
+                Imprimir
+              </a>
+
+              <div class="col-12" >
                 <div class="card">
 
                   <br>
+
+
 
                   <div style="padding-right:12px; padding-left:12px" class="table-responsive">
                     <table id="example" class="display">
@@ -337,6 +333,13 @@ $('#cbxCidade').html(s);
           </div>
           <div class="tab-pane" id="tabs-profile-10">
             <div>
+
+              <a target="_blank" class="btn btn-secondary" th:href="@{/relatorio/grafico}"  role="button">
+                <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+                <i class="fa fa-print mr-2"></i>
+                Imprimir Graficos
+              </a>
+
               <div class="page-body">
                 <div class="container-xl">
                   <div class="row row-deck row-cards">
@@ -344,11 +347,11 @@ $('#cbxCidade').html(s);
 
                     <div class="col-6">
                       <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" >
                           <h3 class="card-title" style="  font-size: 12px;" >Reclamações por província</h3>
                         </div>
-                        <div class="card-body">
-                          <canvas id="chart-provincia" height="200" ></canvas>
+                        <div class="card-body" >
+                          <canvas id="chart-provincia" height="200"   ></canvas>
                         </div>
                       </div>
 
@@ -381,28 +384,34 @@ $('#cbxCidade').html(s);
                 <div class="container-xl">
                   <div class="row row-deck row-cards">
 
-                    <div  style="height:13vh; width:26vw; margin: auto;" class="col-6">
+                    <div class="col-6" style=" height:400px; " >
                       <div class="card">
                         <div class="card-header">
                           <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
-                        <div class="card-body">
-                          <canvas id="chart-canal-entrada"></canvas>
-                        </div>
+                        <center>
+                          <div class="card-body" style="position: relative; height:20vh; width:24vw">
+                            <canvas id="chart-canal-entrada"  ></canvas>
+                          </div>
+                        </center>
                       </div>
 
 
 
                     </div>
 
-                    <div  style="height:13vh; width:26vw; margin: auto;" class="col-6">
+                    <div class="col-6" style="height:400px;">
                       <div class="card">
                         <div class="card-header">
                           <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
-                        <div class="card-body" align="center">
-                          <canvas id="chart-categoria"></canvas>
-                        </div>
+                        <center>
+                          <div class="card-body" style="position: relative; height:20vh; width:23vw" >
+
+                            <canvas id="chart-categoria"  ></canvas>
+
+                          </div>
+                        </center>
                       </div>
 
 
@@ -415,33 +424,38 @@ $('#cbxCidade').html(s);
                 </div>
               </div>
 
-
               <div class="page-body">
-                <div class="container">
+                <div class="container-xl">
                   <div class="row row-deck row-cards">
 
-                    <div class="col-md-6">
+                    <div class="col-6" style=" height:400px; " >
                       <div class="card">
                         <div class="card-header">
-                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
-                        <div class="card-body" style="height:300" >
-                          <canvas id="chart-sexo" width=326 height=240 style='width:326px;height:240px' ></canvas>
-                        </div>
+                        <center>
+                          <div class="card-body" style="position: relative; height:20vh; width:24vw">
+                            <canvas id="chart-sexo"  ></canvas>
+                          </div>
+                        </center>
                       </div>
 
 
 
                     </div>
 
-                    <div class="col-md-6">
-                      <div class="card" >
-                        <div class="card-header" >
-                          <h3 class="card-title" style="  font-size: 12px;" >Tipo de Ocorrências</h3>
+                    <div class="col-6" style="height:400px;">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
-                        <div class="card-body" >
-                          <canvas id="chart-tipo-preocupacao" width=326 height=240 style='width:326px;height:240px' ></canvas>
-                        </div>
+                        <center>
+                          <div class="card-body" style="position: relative; height:20vh; width:23vw" >
+
+                            <canvas id="chart-tipo-preocupacao"  ></canvas>
+
+                          </div>
+                        </center>
                       </div>
 
 
@@ -486,7 +500,6 @@ $('#cbxCidade').html(s);
       </div>
     </div>
   </div>
-
 
 
 
@@ -751,6 +764,7 @@ $('#cbxCidade').html(s);
     },
     plugins: [ChartDataLabels],
                      options: {
+
                 plugins: {
 
                   datalabels: {
@@ -798,7 +812,7 @@ $('#cbxCidade').html(s);
         }]
     },
     plugins: [ChartDataLabels],
-                     options: {
+              options: {
                 plugins: {
                   datalabels: {
                     color: 'white',
@@ -966,6 +980,11 @@ $('#cbxCidade').html(s);
         plugins: [ChartDataLabels],
         options: {
            plugins: {
+               legend: {
+                    display: true,
+                    position:'top',
+                    padding: 30,
+                  },
                   datalabels: {
                     color: function(context) {
                       var index = context.dataIndex;
@@ -1089,8 +1108,6 @@ $('#cbxCidade').html(s);
     }
 
     </script>
-
-
 
   <!-- Conteudo-->
 

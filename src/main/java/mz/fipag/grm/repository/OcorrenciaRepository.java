@@ -782,7 +782,14 @@ public List<Object[]> busqueTnTI();*/
 	@Query(value="select * from ocorrencia order by ocorrencia.numero_ordem desc", nativeQuery=true)
 	public List<Ocorrencia> findAllOrdenarPorNUmeroOrdem();
 
-	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	@Query(value="select *,c.designacao as provincia, r.designacao as categoria from ocorrencia o"
+			+ " inner join projecto p "
+			+ " inner join provincia c "
+			+ " inner join categoria r"
+			+ " inner join tipo_ocorrencia t "
+			+ " where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id and o.categoriaid=r.id and o.estado='Validado' "
+			+ " and o.created between (:datainicial) and (:datafinal) and if (:projecto='', 1=1,p.designacao =(:projecto)) and if (:categoria='', 1=1,r.designacao =(:categoria)) "
+			+ " and if (:provincia='',1=1,c.designacao=(:provincia)) and if (:tipoOcorrencia='',1=1,t.designacao=(:tipoOcorrencia)) and if (:estado='',1=1,o.resolucao=(:estado))",nativeQuery=true)
     List<Object[]> busqueTudoAgrupadoPorProvinciaEstadoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
 	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)

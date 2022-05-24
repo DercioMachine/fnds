@@ -605,11 +605,11 @@ document.getElementById("divano").style.display="block";
 
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" >
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por província</h3>
                         </div>
-                        <div class="card-body">
-                            <canvas id="chart-provincia" height="200" ></canvas>
+                        <div class="card-body" >
+                            <canvas id="chart-provincia" height="200"   ></canvas>
                         </div>
                     </div>
 
@@ -642,28 +642,34 @@ document.getElementById("divano").style.display="block";
         <div class="container-xl">
             <div class="row row-deck row-cards">
 
-                <div class="col-6">
+                <div class="col-6" style=" height:400px; " >
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
-                        <div class="card-body" >
-                            <canvas id="chart-canal-entrada" height="300" width="300" style=" height: 300px; width: 300px;" ></canvas>
-                        </div>
+                        <center>
+                            <div class="card-body" style="position: relative; height:20vh; width:24vw">
+                                <canvas id="chart-canal-entrada"  ></canvas>
+                            </div>
+                        </center>
                     </div>
 
 
 
                 </div>
 
-                <div class="col-6">
+                <div class="col-6" style="height:400px;">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
-                        <div class="card-body" >
-                            <canvas id="chart-categoria"  height="200" width="200" ></canvas>
-                        </div>
+                        <center>
+                            <div class="card-body" style="position: relative; height:20vh; width:23vw" >
+
+                                <canvas id="chart-categoria"  ></canvas>
+
+                            </div>
+                        </center>
                     </div>
 
 
@@ -675,34 +681,39 @@ document.getElementById("divano").style.display="block";
             </div>
         </div>
     </div>
-
 
     <div class="page-body">
-        <div class="container">
+        <div class="container-xl">
             <div class="row row-deck row-cards">
 
-                <div class="col-md-6">
+                <div class="col-6" style=" height:400px; " >
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
+                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por canal de entrada</h3>
                         </div>
-                        <div class="card-body" style="height:300" >
-                            <canvas id="chart-sexo" width=326 height=240 style='width:326px;height:240px' ></canvas>
-                        </div>
+                        <center>
+                            <div class="card-body" style="position: relative; height:20vh; width:24vw">
+                                <canvas id="chart-sexo"  ></canvas>
+                            </div>
+                        </center>
                     </div>
 
 
 
                 </div>
 
-                <div class="col-md-6">
-                    <div class="card" >
-                        <div class="card-header" >
-                            <h3 class="card-title" style="  font-size: 12px;" >Tipo de Ocorrências</h3>
+                <div class="col-6" style="height:400px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por categoria</h3>
                         </div>
-                        <div class="card-body" >
-                            <canvas id="chart-tipo-preocupacao" width=326 height=240 style='width:326px;height:240px' ></canvas>
-                        </div>
+                        <center>
+                            <div class="card-body" style="position: relative; height:20vh; width:23vw" >
+
+                                <canvas id="chart-tipo-preocupacao"  ></canvas>
+
+                            </div>
+                        </center>
                     </div>
 
 
@@ -714,8 +725,6 @@ document.getElementById("divano").style.display="block";
             </div>
         </div>
     </div>
-
-
 
     <script th:inline="javascript">
     ocorrenciasPorMes();
@@ -978,6 +987,7 @@ document.getElementById("divano").style.display="block";
     },
     plugins: [ChartDataLabels],
                      options: {
+
                 plugins: {
 
                   datalabels: {
@@ -1025,7 +1035,7 @@ document.getElementById("divano").style.display="block";
         }]
     },
     plugins: [ChartDataLabels],
-                     options: {
+              options: {
                 plugins: {
                   datalabels: {
                     color: 'white',
@@ -1193,6 +1203,11 @@ document.getElementById("divano").style.display="block";
         plugins: [ChartDataLabels],
         options: {
            plugins: {
+               legend: {
+                    display: true,
+                    position:'top',
+                    padding: 30,
+                  },
                   datalabels: {
                     color: function(context) {
                       var index = context.dataIndex;
@@ -1216,7 +1231,9 @@ document.getElementById("divano").style.display="block";
 
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 10
                 }
             }
         }
@@ -1303,7 +1320,9 @@ document.getElementById("divano").style.display="block";
 
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    suggestedMin: 0,
+                    suggestedMax: 10
                 }
             }
         }
@@ -1312,6 +1331,7 @@ document.getElementById("divano").style.display="block";
     }
 
     </script>
+
 
 
     <!-- Conteudo-->

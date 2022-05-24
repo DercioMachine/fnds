@@ -515,8 +515,6 @@ public class HomeController {
             i++;
         }
 
-
-
         model.addAttribute("vetor",graphData);
         //model.addAttribute("numeroocorencia", nrocorrencias);
 
@@ -570,7 +568,6 @@ public class HomeController {
 
             i++;
         }
-
 
         model.addAttribute("nomesCategoria",nomes);
         model.addAttribute("numeroocorenciaCategoria", nrocorrencias);
@@ -788,12 +785,12 @@ public class HomeController {
 		String stringDatFinal= DateFor.format(datafinal);
 
 
-        ProvinciaEstadoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
-        busqueTnTIPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
-        canaDeEntradaPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
-        categoriaPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
-        sexoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
-        tipoPreocupacaoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //ProvinciaEstadoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //busqueTnTIPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //canaDeEntradaPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //categoriaPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //sexoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //tipoPreocupacaoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
 		
 		String projecto1="";
 		String categoria1="";
