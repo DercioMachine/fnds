@@ -282,7 +282,7 @@ document.getElementById("nacional").style.display="block";
 
                 <div class="row" >
 
-                    <div class="col-12 col-sm-12">
+                    <div class="col-12 col-sm-12" th:if="${!projectos.isEmpty}">
                         <div class="form-group">
                             <label class="form-label">
 
@@ -302,17 +302,24 @@ document.getElementById("nacional").style.display="block";
                             <thead>
                             <tr style="color: rgb(65,105,225)">
                                 <td>Designação</td>
-                                <td>Remover</td>
+                                <td width="1"></td>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="projecto: ${projectosusers}">
                                 <td th:text="${projecto.projecto.designacao}"><span class="text-muted">01401</span></td>
                                 <td >
-                                    <a style="background: red;color: white" th:href="@{/usuarios/apagar/{id} (id=${projecto.id})}">
-                                        <i aria-hidden="true" class="fa fa-trash"></i>
-                                        Apagar
+                                
+                                <span>
+                                    <a  th:href="@{/usuarios/apagar/{id} (id=${projecto.id})}" class="btn btn-danger" role="button">
+                                    	<span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
+                                        <i class="fad fa-trash-alt"></i>
+                                          remover
                                     </a>
+					                
+					              </span>
+                                    
+                                    
                                 </td>
                             </tr>
 

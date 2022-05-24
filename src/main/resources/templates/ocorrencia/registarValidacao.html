@@ -136,6 +136,9 @@ var estado = document.getElementById("radioSim");
 
 if(estado.value=="Sim"){
 
+document.getElementById("comentario").style.display="block";
+document.getElementById("motivo").style.display="none";
+
 document.getElementById("dataresposta").style.display="none";
 document.getElementById("canalresposta").style.display="none";
 
@@ -148,6 +151,9 @@ var estado = document.getElementById("radioNao");
 
 
 if(estado.value=="Não"){
+document.getElementById("comentario").style.display="none";
+document.getElementById("motivo").style.display="block";
+	
 document.getElementById("dataresposta").style.display="block";
 document.getElementById("canalresposta").style.display="block";
 
@@ -507,9 +513,10 @@ $('#subcategoria').html(s);
                     </div>
                     
                     
-                    <div id="comentario" class="col-6 col-sm-12">
+                    <div class="col-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label">Comentário/Motivo</label>
+                            <label style="display: none" id="motivo" class="form-label">Motivo <strong style="color:red">*</strong></label>
+                            <label id="comentario" class="form-label">Comentário <strong style="color:red">*</strong></label>
                             <div class="input-icon">
 								<span class="input-icon-addon">
 								<i class="fe fe-edit-2"></i>

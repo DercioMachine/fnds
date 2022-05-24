@@ -1,16 +1,16 @@
 package mz.fipag.grm.repository;
 
-import mz.fipag.grm.domain.Provincia;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import mz.fipag.grm.domain.Provincia;
 
 @Repository
 public interface ProvinciaRepository extends CrudRepository<Provincia, Long> {
 
-    // @Query(value="select distinct p from Provincia p join p.distritos d where d.id=:id")
-   // public List<Provincia> findAllById(@Param("id") Long id);
+    @Query(value="select * from provincia order by id asc", nativeQuery=true)
+   public List<Provincia> findAllOrderById();
 }

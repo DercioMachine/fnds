@@ -49,6 +49,7 @@ import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.repository.ProvinciaRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.repository.UserRepository;
@@ -70,6 +71,9 @@ public class IndexController {
 
 	@Autowired
 	private SMSService smsService;
+	
+	@Autowired
+    private ProvinciaRepository provinciaRepository;
 
 	@Autowired
 	private OcorrenciaService ocorrenciaService;
@@ -1954,11 +1958,6 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 	}
 
 
-	@ModelAttribute("provincias")
-	public List<Provincia> listaDeDePronvicias() {
-		return provinciaService.buscarTodos();
-	}
-
 	@ModelAttribute("ocorrenciasAno")
 	public List<Object[]> listaDeOcorrenciaAno() {
 		return  ocorrenciaRepository.findAnos();
@@ -1996,7 +1995,7 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 
 	@ModelAttribute("provincias")
 	public List<Provincia> listaDeDeProvincias(){
-		return provinciaService.buscarTodos();
+		return provinciaRepository.findAllOrderById();
 	}
 
 	@ModelAttribute("categorias")

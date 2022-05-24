@@ -16,5 +16,9 @@ public interface ProjectoRepository  extends CrudRepository<Projecto, Long> {
 
     @Query(value="select * from projecto WHERE id NOT IN (SELECT projectouser.projecto_id FROM projectouser WHERE projectouser.user_id=:id) ", nativeQuery=true)
     List<Projecto> buscarTodosSemSelecao(Long id);
+    
+    
+    @Query(value="select * from projecto WHERE id IN (SELECT projectouser.projecto_id FROM projectouser WHERE projectouser.user_id=:id) ", nativeQuery=true)
+    List<Projecto> buscarTodosComSelecao(Long id);
 
 }

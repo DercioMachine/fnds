@@ -642,8 +642,8 @@ document.getElementById("cidadee").style.display="none";
                             <label for="projecto" class="form-label">Projecto <strong style="color:red">*</strong></label>
                             <select id="projecto" required class="form-control custom-select form-select" th:field="*{projecto}" >
                                 <option value="">Selecione o Projecto...</option>
-                                <option th:each="p : ${projectoUsers}"
-                                        th:value="${p.projectoUser.id}" th:text="${p.projectoUser.designacao}">Maputo</option>
+                                <option th:each="projecto : ${projectos}"
+                                        th:value="${projecto.id}" th:text="${projecto.designacao}">Maputo</option>
                             </select>
                         </div>
                     </div>
@@ -655,7 +655,7 @@ document.getElementById("cidadee").style.display="none";
                             <select id="comboboxProvincias" required class="form-control custom-select form-select" th:field="*{provincia}" >
                                 <option value="">Selecione a Província...</option>
                                 <option th:each="p : ${provincias}"
-                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                                        th:value="${p.id}" th:text="${p.designacao}" th:if="${p.designacao!='Nacional'}">Maputo</option>
                             </select>
                         </div>
                     </div>

@@ -48,7 +48,9 @@ import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
 import mz.fipag.grm.repository.ProcessoRepository;
+import mz.fipag.grm.repository.ProjectoRepository;
 import mz.fipag.grm.repository.ProjectoUserRepository;
+import mz.fipag.grm.repository.ProvinciaRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
 import mz.fipag.grm.repository.SubCategoriaRepository;
@@ -74,6 +76,8 @@ public class OcorrenciaController {
 	@Autowired
 	private SMSService smsService;
 
+	 @Autowired
+	    ProjectoRepository projectoRepository;
 	
 	@Autowired
 	private EmailService emailService;
@@ -83,6 +87,9 @@ public class OcorrenciaController {
     
     @Autowired
     private ProvinciaService provinciaService;
+    
+    @Autowired
+    private ProvinciaRepository provinciaRepository;
     
     @Autowired
     private DistritoRepository distritoRepository;
@@ -237,11 +244,12 @@ public class OcorrenciaController {
     	
     	User userlogado = userRepository.findByUsername(authentication.getName());
     	
-    	List<ProjectoUser> projectoUser = null;
+    	List<Projecto> projecto = null;
     	
-    	projectoUser = projectoUserRepository.buscarPorProjecto(userlogado.getId());
+    	projecto = projectoRepository.buscarTodosComSelecao(userlogado.getId());
     	
-    	model.addAttribute("projectoUsers", projectoUser);
+    	
+    	model.addAttribute("projectos", projecto);
 
         model.addAttribute("ocorrencia",new Ocorrencia());
 
@@ -576,6 +584,7 @@ public class OcorrenciaController {
 
             
             resolucao.setOcorrencia(ocorrencia);
+            resolucao.setTipo("T");
             resolucaoRepository.save(resolucao);
             ocorrencia.setResolucao("T");
             ocorrenciaService.salvar(ocorrencia);
@@ -810,7 +819,7 @@ public class OcorrenciaController {
 
     @ModelAttribute("provincias")
 	public List<Provincia> listaDeDePronvicias() {
-		return provinciaService.buscarTodos();
+		return provinciaRepository.findAllOrderById();
 	}	
     
     @ModelAttribute("distritos")

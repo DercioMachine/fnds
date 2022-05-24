@@ -44,7 +44,7 @@
 
 	document.getElementById("observacao").style.display="block";
 	document.getElementById("motivo").style.display="none";
-	document.getElementById("responsavel").style.display="none";
+	document.getElementById("responsavel").style.display="block";
 
 
 	}
@@ -218,7 +218,7 @@
 						  <tbody>
 						  <!--  <tr th:each="p : ${categorias}"> -->
 						  <tr th:each="r : ${resolucoes}">
-							<div th:if="${r.tipo =='R' }">
+							<div th:if="${r.tipo =='R' || r.tipo=='T'}">
 								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
 								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
 								<td th:text="${r.mediador}" >Auxiliar Contábil</td>

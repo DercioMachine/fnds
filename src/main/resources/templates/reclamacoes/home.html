@@ -295,7 +295,7 @@ document.getElementById("divano").style.display="block";
                                     <select id="provincia" name="provincia" class="form-control custom-select form-select">
                                         <option value="">Selecione a Província...</option>
                                         <option th:each="p : ${provincias}"
-                                                th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                                                th:value="${p.designacao}" th:text="${p.designacao}" th:if="${p.designacao!='Nacional'}">Maputo</option>
                                     </select>
                                 </div>
                             </div>

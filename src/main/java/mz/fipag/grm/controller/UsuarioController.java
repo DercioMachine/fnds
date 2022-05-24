@@ -44,6 +44,8 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private ProvinciaRepository provinciaRepository;
+    @Autowired
     ResponsabilidadeRepository responsabilidadeRepository;
 
     @Autowired
@@ -168,9 +170,11 @@ public class UsuarioController {
         model.addAttribute("projectosusers",projectoUserRepository.buscarPorUser(id));
         model.addAttribute("userprojectos",new ProjectoUser());
         model.addAttribute("perfils", roleRepository.findAll());
-        model.addAttribute("provincias", provinciaService.buscarTodos());
+        model.addAttribute("provincias", provinciaRepository.findAllOrderById());
         model.addAttribute("projectos", projectoRepository.buscarTodosSemSelecao(id));
         model.addAttribute("niveis", responsabilidadeRepository.findAll());
+        
+        //System.out.println("PPPPPRRRRROOOOOJJJJEEEEEECCCTTTOOOOO = " + projectoRepository.buscarTodosSemSelecao(id));
 
         return "usuarios/editarUsuarios";
     }
