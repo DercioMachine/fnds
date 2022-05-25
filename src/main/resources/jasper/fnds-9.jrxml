@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatório" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="716e1f6d-4184-4e19-9de1-ab02368410cd">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexao"/>
+	<subDataset name="CartSexo" uuid="e45a1202-6238-48a5-b809-30bcadb73e04">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<parameter name="Parameter1" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select count(sexo),sexo from ocorrencia  where year(created)=2022 and sexo is not null 
+and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+group by sexo]]>
+		</queryString>
+		<field name="count(sexo)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(sexo)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(sexo)"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="ocorrencia"/>
+		</field>
+	</subDataset>
+	<subDataset name="DatasetCategoria" uuid="00d7ce43-9c97-42aa-a9e2-7e26e8dc2ea5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<queryString language="SQL">
+			<![CDATA[select categoriaid,designacao from ocorrencia inner join categoria on ocorrencia.categoriaid = categoria.id
+where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+ group by categoriaid]]>
+		</queryString>
+		<field name="categoriaid" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="categoriaid"/>
+			<property name="com.jaspersoft.studio.field.label" value="categoriaid"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="ocorrencia"/>
+		</field>
+		<field name="designacao" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="designacao"/>
+			<property name="com.jaspersoft.studio.field.label" value="designacao"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="categoria"/>
+		</field>
+	</subDataset>
+	<subDataset name="DatasetCanal" uuid="3269734e-0fe4-458c-8e72-4a741b36f401">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<queryString language="SQL">
+			<![CDATA[select count(forma_comunicacao),forma_comunicacao 
+from ocorrencia where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+group by forma_comunicacao]]>
+		</queryString>
+		<field name="count(forma_comunicacao)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(forma_comunicacao)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(forma_comunicacao)"/>
+		</field>
+		<field name="forma_comunicacao" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="forma_comunicacao"/>
+			<property name="com.jaspersoft.studio.field.label" value="forma_comunicacao"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="ocorrencia"/>
+		</field>
+	</subDataset>
+	<subDataset name="DatasetProvincia" uuid="fc513ca3-9fe6-4ece-ae4a-f3ce10a0fb9a">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<parameter name="Parameter1" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select count(provincia_id),designacao,count(resolucao), IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))
+from ocorrencia inner join provincia on provincia_id = provincia.id
+where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim'
+group by provincia_id,resolucao]]>
+		</queryString>
+		<field name="count(provincia_id)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(provincia_id)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(provincia_id)"/>
+		</field>
+		<field name="designacao" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="designacao"/>
+			<property name="com.jaspersoft.studio.field.label" value="designacao"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="provincia"/>
+		</field>
+		<field name="count(resolucao)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(resolucao)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(resolucao)"/>
+		</field>
+		<field name="IF(resolucao=&apos;T&apos;,&apos;Terminados&apos;,if(resolucao=&apos;P&apos;,&apos;Pendentes&apos;,if(resolucao=&apos;R&apos;,&apos;Resolvidos&apos;,if(resolucao=&apos;V&apos;,&apos;Validados&apos;,&apos;Em Andamento&apos;))))" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name">
+				<![CDATA[IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))]]>
+			</property>
+			<property name="com.jaspersoft.studio.field.label">
+				<![CDATA[IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))]]>
+			</property>
+		</field>
+	</subDataset>
+	<subDataset name="DatasetMes" uuid="c710f1d3-7a77-455a-89c9-b9e47bf45b6a">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexao"/>
+		<queryString language="SQL">
+			<![CDATA[Select count(month(created)),IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento')))) as resolucao,
+IF(month(created)=1,'Janeiro',if(month(created)=2,'Fevereiro',if(month(created)=3,'Março',if(month(created)=4,'Abril',if(month(created)=5,'Maio',if(month(created)=6,'Junho',
+if(month(created)=7,'Julho',if(month(created)=8,'Agosto',if(month(created)=9,'Setembro',if(month(created)=10,'Outubro',if(month(created)=11,'Novembro','Dezembro'))))))))))) as mes 
+ from ocorrencia 
+ where year(created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+ group by month(created),resolucao;]]>
+		</queryString>
+		<field name="count(month(created))" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(month(created))"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(month(created))"/>
+		</field>
+		<field name="resolucao" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="resolucao"/>
+			<property name="com.jaspersoft.studio.field.label" value="resolucao"/>
+		</field>
+		<field name="mes" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mes"/>
+			<property name="com.jaspersoft.studio.field.label" value="mes"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[select count(tipo_ocorrencia_id),designacao
+ from ocorrencia  inner join tipo_ocorrencia
+  on tipo_ocorrencia_id = tipo_ocorrencia.id
+  where year(ocorrencia.created)=2022
+group by tipo_ocorrencia_id]]>
+	</queryString>
+	<field name="count(tipo_ocorrencia_id)" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="count(tipo_ocorrencia_id)"/>
+		<property name="com.jaspersoft.studio.field.label" value="count(tipo_ocorrencia_id)"/>
+	</field>
+	<field name="designacao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="designacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="designacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_ocorrencia"/>
+	</field>
+	<group name="Pagina 2"/>
+	<group name="Group1">
+		<groupHeader>
+			<band height="566">
+				<staticText>
+					<reportElement x="393" y="3" width="159" height="30" uuid="cd8a5e03-145d-455e-9c04-76b64fc25963"/>
+					<textElement textAlignment="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reclamações por província]]></text>
+				</staticText>
+				<barChart>
+					<chart evaluationTime="Report">
+						<reportElement x="2" y="15" width="550" height="207" uuid="88dd5f69-6bc1-4f31-b564-fd93cd6cb805">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset resetType="Report">
+							<datasetRun subDataset="DatasetProvincia" uuid="78449abf-0b87-4561-aeab-39e2dc9eb933"/>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{designacao}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{count(resolucao)}]]></valueExpression>
+							<labelExpression><![CDATA[$F{IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))}]]></labelExpression>
+						</categorySeries>
+					</categoryDataset>
+					<barPlot>
+						<plot labelRotation="21.0"/>
+						<itemLabel>
+							<font fontName="Arial" size="8"/>
+						</itemLabel>
+						<categoryAxisFormat labelRotation="21.0">
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+								<tickLabelFont>
+									<font fontName="Arial" size="8"/>
+								</tickLabelFont>
+							</axisFormat>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+						</valueAxisFormat>
+					</barPlot>
+				</barChart>
+				<staticText>
+					<reportElement x="393" y="241" width="159" height="30" uuid="fa96542b-5de2-4b19-89b2-e166c67a8695"/>
+					<textElement textAlignment="Left">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reclamações por mês]]></text>
+				</staticText>
+				<barChart>
+					<chart evaluationTime="Report">
+						<reportElement x="2" y="261" width="550" height="207" uuid="d408e349-a688-42ef-a920-c5530db33da7"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset resetType="Report">
+							<datasetRun subDataset="DatasetMes" uuid="f4ede977-86b1-472b-b283-2109e5fac575"/>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{resolucao}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{mes}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{count(month(created))}]]></valueExpression>
+							<labelExpression><![CDATA[$F{resolucao}]]></labelExpression>
+						</categorySeries>
+					</categoryDataset>
+					<barPlot>
+						<plot labelRotation="21.0"/>
+						<itemLabel>
+							<font fontName="Arial" size="8"/>
+						</itemLabel>
+						<categoryAxisFormat labelRotation="21.0">
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+								<tickLabelFont>
+									<font fontName="Arial" size="8"/>
+								</tickLabelFont>
+							</axisFormat>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+						</valueAxisFormat>
+					</barPlot>
+				</barChart>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="29">
+				<staticText>
+					<reportElement x="0" y="8" width="553" height="13" uuid="eb1d1dbe-2757-4c6f-8217-ffc1abc15c01"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Desenvolvido por: Infordata Software]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="71" width="553" height="18" uuid="997af9e1-afc2-4fe2-aacc-2363c1c533ec"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FNDS - FUNDO DE DESENVOLVIMENTO SUSTENTAVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="91" width="553" height="18" uuid="c2b2b28e-1ad8-4353-8042-457574e6dc36"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MDR- MECANISMO DE DIALOGO E RECLAMACOES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="165" y="18" width="232" height="50" backcolor="#A69E9D" uuid="869630b5-3ee5-4d32-b06e-955236845f22"/>
+			</rectangle>
+			<image>
+				<reportElement x="221" y="21" width="118" height="48" uuid="20eda133-b703-45c7-9623-3380f493e591"/>
+				<imageExpression><![CDATA["C:/Users/apoiador/Music/fnds- logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="748" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="730" width="553" height="13" uuid="889a1e62-21ea-4064-9c6a-089859d3fe88"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Desenvolvido por: Infordata Software]]></text>
+			</staticText>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="270" y="27" width="284" height="187" uuid="7d3a4a4f-b092-482d-9b89-12cf5acc4505">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="DatasetCategoria" uuid="74726c83-9e3f-4ca5-8eae-63b84d596765"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{designacao}]]></keyExpression>
+					<valueExpression><![CDATA[$F{categoriaid}]]></valueExpression>
+					<labelExpression><![CDATA[$F{designacao}+": "+$F{categoriaid}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel>
+						<font fontName="Arial" size="8"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="381" y="10" width="152" height="30" uuid="bf24eaae-2909-4767-aec9-3c60e01a739e"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reclamações por categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="9" width="209" height="30" uuid="3ec368ed-b727-4371-974d-818a04f08bc4"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reclamações por canal de entrada]]></text>
+			</staticText>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="2" y="27" width="288" height="180" uuid="ded17bb6-a5fe-4f32-9900-6a3ac5b844a2"/>
+					<chartTitle>
+						<font size="8"/>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="8"/>
+					</chartSubtitle>
+					<chartLegend>
+						<font size="8"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="DatasetCanal" uuid="b653f2bf-32fa-4b98-bcc9-5832fd90201c"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{forma_comunicacao}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count(forma_comunicacao)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{forma_comunicacao}+": "+$F{count(forma_comunicacao)}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel>
+						<font fontName="Arial" size="8"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="260" y="275" width="293" height="182" uuid="b151ea3f-fb03-49a8-a790-c1344d211224">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$F{designacao}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count(tipo_ocorrencia_id)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{designacao}+" - "+ $F{count(tipo_ocorrencia_id)}]]></labelExpression>
+				</pieDataset>
+				<piePlot labelFormat="">
+					<plot/>
+					<itemLabel>
+						<font fontName="Arial" size="8" isBold="false"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="444" y="262" width="100" height="30" uuid="93abebc2-e29a-42e7-8a45-d90ec871be7a"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Ocorrências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="261" width="130" height="30" uuid="ceb17881-f4a5-4886-a231-5123378ca7ba"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reclamações por sexo]]></text>
+			</staticText>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="2" y="273" width="298" height="184" uuid="8b737030-7347-4b01-ab0e-e1b2e967eb8b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="CartSexo" uuid="c8d17dff-bb3c-4c1f-a4d6-9f77a3f0a60f"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{sexo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count(sexo)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{sexo}+": "+$F{count(sexo)}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel>
+						<font fontName="Arial" size="8"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>
