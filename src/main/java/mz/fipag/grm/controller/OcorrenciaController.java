@@ -504,7 +504,7 @@ public class OcorrenciaController {
    	}
 
     @PostMapping("/ocorrencias/editar") 
-	  public String editarCategoria(Ocorrencia ocorrencia,Authentication authentication) {
+	  public String editarCategoria(Ocorrencia ocorrencia,Authentication authentication, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) {
     	
     	User userlogado = userRepository.findByUsername(authentication.getName());
     	
@@ -512,6 +512,13 @@ public class OcorrenciaController {
     		ocorrencia.setRegistado(true);
     		ocorrencia.setEstado("Registado");
     		ocorrenciaService.editar(ocorrencia);
+
+        for(MultipartFile file: files) {
+            if(!file.getOriginalFilename().isEmpty()) {
+
+                docStorageService.saveFile(file, ocorrencia, descricaoNexo);
+            }
+        }
 		  
 		  return "redirect:/listar/ocorrencia"; 
 	  }

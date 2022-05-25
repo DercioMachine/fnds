@@ -11,13 +11,13 @@ import java.util.List;
 @Table(name = "user")
 public class User extends AbstractEntity implements UserDetails {
 
-    @Column(name = "username", nullable = false,length=120,unique=true)
+    @Column(name = "username", nullable = false,length=200,unique=true)
     private String username;
 
-    @Column(name = "password", nullable = true,length=120,unique=true)
+    @Column(name = "password", nullable = true,length=200,unique=true)
     private String password;
 
-    @Column(name = "nome", nullable = true,length=120,unique=true)
+    @Column(name = "nome")
     private String nome;
 
     @Column(name = "telefone", nullable = true,length=120,unique=true)

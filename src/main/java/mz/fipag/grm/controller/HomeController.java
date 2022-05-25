@@ -790,7 +790,8 @@ public class HomeController {
         //canaDeEntradaPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
         //categoriaPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
         //sexoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
-        //tipoPreocupacaoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
+        //
+        // tipoPreocupacaoPesquisa(model,datainicial,datafinal,tipoOcorrencia,estado,projecto,provincia,categoria);
 		
 		String projecto1="";
 		String categoria1="";
