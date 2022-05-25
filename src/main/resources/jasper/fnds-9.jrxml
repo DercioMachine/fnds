@@ -115,6 +115,7 @@ if(month(created)=7,'Julho',if(month(created)=8,'Agosto',if(month(created)=9,'Se
 			<property name="com.jaspersoft.studio.field.label" value="mes"/>
 		</field>
 	</subDataset>
+	<parameter name="logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select count(tipo_ocorrencia_id),designacao
  from ocorrencia  inner join tipo_ocorrencia
@@ -144,7 +145,7 @@ group by tipo_ocorrencia_id]]>
 				</staticText>
 				<barChart>
 					<chart evaluationTime="Report">
-						<reportElement x="2" y="15" width="550" height="207" uuid="88dd5f69-6bc1-4f31-b564-fd93cd6cb805">
+						<reportElement x="2" y="15" width="550" height="207" uuid="a253ffeb-335b-4430-8333-ef68ce19013f">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
 						<chartTitle/>
@@ -153,7 +154,7 @@ group by tipo_ocorrencia_id]]>
 					</chart>
 					<categoryDataset>
 						<dataset resetType="Report">
-							<datasetRun subDataset="DatasetProvincia" uuid="78449abf-0b87-4561-aeab-39e2dc9eb933"/>
+							<datasetRun subDataset="DatasetProvincia" uuid="ae8cdadc-2b1f-4029-b889-454f6f2f05fc"/>
 						</dataset>
 						<categorySeries>
 							<seriesExpression><![CDATA[$F{IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))}]]></seriesExpression>
@@ -163,7 +164,11 @@ group by tipo_ocorrencia_id]]>
 						</categorySeries>
 					</categoryDataset>
 					<barPlot>
-						<plot labelRotation="21.0"/>
+						<plot labelRotation="21.0">
+							<seriesColor seriesOrder="0" color="#FFA726"/>
+							<seriesColor seriesOrder="1" color="#66BB6A"/>
+							<seriesColor seriesOrder="2" color="#EF5350"/>
+						</plot>
 						<itemLabel>
 							<font fontName="Arial" size="8"/>
 						</itemLabel>
@@ -205,7 +210,11 @@ group by tipo_ocorrencia_id]]>
 						</categorySeries>
 					</categoryDataset>
 					<barPlot>
-						<plot labelRotation="21.0"/>
+						<plot labelRotation="21.0">
+							<seriesColor seriesOrder="0" color="#FFA726"/>
+							<seriesColor seriesOrder="1" color="#66BB6A"/>
+							<seriesColor seriesOrder="2" color="#EF5350"/>
+						</plot>
 						<itemLabel>
 							<font fontName="Arial" size="8"/>
 						</itemLabel>
@@ -258,8 +267,8 @@ group by tipo_ocorrencia_id]]>
 				<reportElement x="165" y="18" width="232" height="50" backcolor="#A69E9D" uuid="869630b5-3ee5-4d32-b06e-955236845f22"/>
 			</rectangle>
 			<image>
-				<reportElement x="221" y="21" width="118" height="48" uuid="20eda133-b703-45c7-9623-3380f493e591"/>
-				<imageExpression><![CDATA["C:/Users/apoiador/Music/fnds- logo.png"]]></imageExpression>
+				<reportElement x="250" y="19" width="50" height="50" uuid="4bdff04e-a1fe-49ae-a516-1c196d93e980"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -277,7 +286,7 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="270" y="27" width="284" height="187" uuid="7d3a4a4f-b092-482d-9b89-12cf5acc4505">
+					<reportElement x="260" y="27" width="294" height="187" uuid="7d3a4a4f-b092-482d-9b89-12cf5acc4505">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<chartTitle/>
@@ -293,7 +302,12 @@ group by tipo_ocorrencia_id]]>
 					<labelExpression><![CDATA[$F{designacao}+": "+$F{categoriaid}]]></labelExpression>
 				</pieDataset>
 				<piePlot>
-					<plot/>
+					<plot>
+						<seriesColor seriesOrder="0" color="#FFA726"/>
+						<seriesColor seriesOrder="1" color="#66BB6A"/>
+						<seriesColor seriesOrder="2" color="#800080"/>
+						<seriesColor seriesOrder="3" color="#4299F5"/>
+					</plot>
 					<itemLabel>
 						<font fontName="Arial" size="8"/>
 					</itemLabel>
@@ -315,7 +329,7 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="2" y="27" width="288" height="180" uuid="ded17bb6-a5fe-4f32-9900-6a3ac5b844a2"/>
+					<reportElement x="2" y="27" width="288" height="180" uuid="d341bf63-3691-4d77-8d0f-8af3c7f644e4"/>
 					<chartTitle>
 						<font size="8"/>
 					</chartTitle>
@@ -328,14 +342,19 @@ group by tipo_ocorrencia_id]]>
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="DatasetCanal" uuid="b653f2bf-32fa-4b98-bcc9-5832fd90201c"/>
+						<datasetRun subDataset="DatasetCanal" uuid="5999c4d5-f63c-4f10-9a77-5e0aa94c4cb3"/>
 					</dataset>
 					<keyExpression><![CDATA[$F{forma_comunicacao}]]></keyExpression>
 					<valueExpression><![CDATA[$F{count(forma_comunicacao)}]]></valueExpression>
 					<labelExpression><![CDATA[$F{forma_comunicacao}+": "+$F{count(forma_comunicacao)}]]></labelExpression>
 				</pieDataset>
 				<piePlot>
-					<plot/>
+					<plot>
+						<seriesColor seriesOrder="0" color="#800080"/>
+						<seriesColor seriesOrder="1" color="#4299F5"/>
+						<seriesColor seriesOrder="2" color="#FFA726"/>
+						<seriesColor seriesOrder="3" color="#66BB6A"/>
+					</plot>
 					<itemLabel>
 						<font fontName="Arial" size="8"/>
 					</itemLabel>
@@ -357,7 +376,12 @@ group by tipo_ocorrencia_id]]>
 					<labelExpression><![CDATA[$F{designacao}+" - "+ $F{count(tipo_ocorrencia_id)}]]></labelExpression>
 				</pieDataset>
 				<piePlot labelFormat="">
-					<plot/>
+					<plot>
+						<seriesColor seriesOrder="0" color="#FFA726"/>
+						<seriesColor seriesOrder="1" color="#4299F5"/>
+						<seriesColor seriesOrder="2" color="#66BB6A"/>
+						<seriesColor seriesOrder="3" color="#800080"/>
+					</plot>
 					<itemLabel>
 						<font fontName="Arial" size="8" isBold="false"/>
 					</itemLabel>
@@ -379,21 +403,26 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="2" y="273" width="298" height="184" uuid="8b737030-7347-4b01-ab0e-e1b2e967eb8b"/>
+					<reportElement x="2" y="273" width="298" height="184" uuid="f3db6f32-f437-4d69-9d15-eb14ce0ac2f8"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="CartSexo" uuid="c8d17dff-bb3c-4c1f-a4d6-9f77a3f0a60f"/>
+						<datasetRun subDataset="CartSexo" uuid="05d846ec-5c8b-4852-a7ff-ff0a0185f64e"/>
 					</dataset>
 					<keyExpression><![CDATA[$F{sexo}]]></keyExpression>
 					<valueExpression><![CDATA[$F{count(sexo)}]]></valueExpression>
 					<labelExpression><![CDATA[$F{sexo}+": "+$F{count(sexo)}]]></labelExpression>
 				</pieDataset>
 				<piePlot>
-					<plot/>
+					<plot>
+						<seriesColor seriesOrder="0" color="#4299F5"/>
+						<seriesColor seriesOrder="1" color="#F04D62"/>
+						<seriesColor seriesOrder="2" color="#FFA726"/>
+						<seriesColor seriesOrder="3" color="#66BB6A"/>
+					</plot>
 					<itemLabel>
 						<font fontName="Arial" size="8"/>
 					</itemLabel>
