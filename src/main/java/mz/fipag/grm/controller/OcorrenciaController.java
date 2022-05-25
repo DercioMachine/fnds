@@ -593,6 +593,8 @@ public class OcorrenciaController {
         	   if(resolucao.getResponsabilidade().getId() == 4){
                    ocorrencia.setResolucao("A");
                    resolucao.setTipo("A");
+                   
+                   
                }else{
                    ocorrencia.setResolucao("R");
                    resolucao.setTipo("R");
