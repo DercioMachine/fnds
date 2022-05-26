@@ -153,48 +153,88 @@
 			</div>
 		</div>
 
-	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
-		 <div style="background: #60a18a; color: white">
+		<div  th:if="${ocorrencia.resolucao =='T' }">
+			<div style="background: #60a18a; color: white">
+				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Terminada</h2>
+			</div>
+			<br>
+
+			<div class="card-body">
+				<div class="row" >
+
+					<div class="table-responsive">
+						<table  class="table card-table table-vcenter text-nowrap datatable">
+							<thead>
+							<tr style="color: rgb(65,105,225)">
+								<th class="w-1">Nivel</th>
+								<th>Designação</th>
+								<th>Data Resolução</th>
+								<!--  <th></th> -->
+							</tr>
+							</thead>
+							<tbody>
+
+							<!--  <tr th:each="p : ${categorias}"> -->
+							<tr th:each="r, stat : ${resolucoes}">
+								<div th:if="${r.tipo =='T' }">
+									<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+									<td th:text="${r.designacao}" >Auxiliar Contábil</td>
+									<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+								</div>
+							</tr>
+
+
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+			<div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
 			</div>
 			<br>
 
-		 <div class="card-body">
-			 <div class="row" >
+			<div class="card-body">
+				<div class="row" >
 
-				 <div class="table-responsive">
-					 <table  class="table card-table table-vcenter text-nowrap datatable">
-						<thead>
-						 <tr style="color: rgb(65,105,225)">
-							 <th class="w-1">Nivel</th>
-							 <th>Designação</th>
-							 <th>Data Resolução</th>
-							 <!--  <th></th> -->
-						 </tr>
-						 </thead>
-						 <tbody>
+					<div class="table-responsive">
+						<table  class="table card-table table-vcenter text-nowrap datatable">
+							<thead>
+							<tr style="color: rgb(65,105,225)">
+								<th class="w-1">Nivel</th>
+								<th>Designação</th>
+								<th>Data Resolução</th>
+								<!--  <th></th> -->
+							</tr>
+							</thead>
+							<tbody>
 
-						 <!--  <tr th:each="p : ${categorias}"> -->
-						 <tr th:each="r, stat : ${resolucoes}">
-							 <div th:if="${r.tipo =='A' }">
-								 <td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
-								 <td th:text="${r.designacao}" >Auxiliar Contábil</td>
-								 <td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
-							 </div>
-						 </tr>
-
-
-						 </tbody>
-					 </table>
-				 </div>
-
-			 </div>
-		 </div>
-
-	 </div>
+							<!--  <tr th:each="p : ${categorias}"> -->
+							<tr th:each="r, stat : ${resolucoes}">
+								<div th:if="${r.tipo =='A' }">
+									<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+									<td th:text="${r.designacao}" >Auxiliar Contábil</td>
+									<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+								</div>
+							</tr>
 
 
-	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	  <div th:if="${ocorrencia.resolucao =='R' || ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T'}">
 		  <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Resolução</h2>
 			</div>
@@ -218,7 +258,7 @@
 						  <tbody>
 						  <!--  <tr th:each="p : ${categorias}"> -->
 						  <tr th:each="r : ${resolucoes}">
-							<div th:if="${r.tipo =='R' || r.tipo=='T'}">
+							<div th:if="${r.tipo =='R'}">
 								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
 								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
 								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
@@ -638,7 +678,7 @@
 								<div class="col-lg-12">
 									<div>
 										<label class="form-label">Comentário</label>
-										<textarea class="form-control" th:field="*{designacao}" rows="3"></textarea>
+										<textarea required="required" class="form-control" th:field="*{designacao}" rows="3"></textarea>
 									</div>
 								</div>
 							</div>

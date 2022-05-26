@@ -390,13 +390,16 @@ public class OcorrenciaController {
 				docStorageService.saveFile(file, ocorrencia, descricaoNexo);
 			}
         }
-    	
-    	
-    	 List<User> lista = (List<User>) userRepository.findAll();
+
+
+        String localprovincia = ocorrencia.getProvincia().getDesignacao();
+        long projecto = ocorrencia.getProjecto().getId();
+
+    	 List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);
     	 String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
  		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
 
-     	String localprovincia = ocorrencia.getProvincia().getDesignacao();
+
 
         if(contacto!=null){
 
@@ -730,12 +733,12 @@ public class OcorrenciaController {
                 }
             }
             
-            
-            
-            List<User> lista = (List<User>) userRepository.findAll();
+
 
          	String localprovincia = ocorrencia.getProvincia().getDesignacao();
+            long projecto = ocorrencia.getProjecto().getId();
 
+            List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);
          	
          	 if(procedencia.equals("Sim")){
          	

@@ -192,6 +192,14 @@ public class UsuarioController {
     @PostMapping("/editar/usuarios")
     public String editarUsuario(User user, ProjectoUser projectoUser, @RequestParam("password") String password, RedirectAttributes attr) {
 
+        if(user.getTipourgente()==null){
+            user.setTipourgente("Não");
+        }
+
+        if(user.getTipogbv()==null){
+            user.setTipogbv("Não");
+        }
+
     	user.setPassword(password);
         userRepository.save(user);
 

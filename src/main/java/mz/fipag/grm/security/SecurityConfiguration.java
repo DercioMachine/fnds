@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 //Links que podem ser acessados pelos Admins
                 .antMatchers("/home").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers("/listar/ocorrencia").hasAnyAuthority("ROLE_ADMIN","OPERADOR","OBSERVADOR")
+                //.antMatchers("/listar/ocorrencia").hasAnyAuthority("ROLE_ADMIN","OPERADOR","OBSERVADOR")
                 .antMatchers("/user").hasAnyRole("OPERADOR")
                 .anyRequest().authenticated()
                 .and()

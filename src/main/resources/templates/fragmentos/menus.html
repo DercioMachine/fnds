@@ -5,7 +5,7 @@
         <div style="background: #fff" class="navbar navbar-light">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item active" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_OBSERVADOR')" >
+                    <li class="nav-item active" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_OBSERVADOR','ROLE_REGISTADOR')" >
                         <a class="nav-link" th:href="@{/dashboard}" >
 
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -21,7 +21,7 @@
                     
                     
                     
-                    <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_VALIDADOR')">
+                    <li class="nav-item dropdown" >
                         <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
 
                      <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -36,11 +36,11 @@
                                  Posto Administrativo
                              </a> -->
 
-                            <a class="dropdown-item" th:href="@{/listar/ocorrencia}" >
+                            <a class="dropdown-item" th:href="@{/listar/ocorrencia}" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_VALIDADOR','ROLE_REGISTADOR')" >
                                 Minhas Ocorrências
                             </a>
 
-                            <a class="dropdown-item" th:href="@{/ocorrencia/observador}" >
+                            <a class="dropdown-item" th:href="@{/ocorrencia/observador}" sec:authorize="hasAnyAuthority('ROLE_OPERADOR','ROLE_ADMIN','ROLE_REGISTADOR','ROLE_OBSERVADOR','ROLE_VALIDADOR')" >
                                 Visualizar todas Ocorrências
                             </a>
 
