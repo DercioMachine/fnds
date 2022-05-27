@@ -264,10 +264,10 @@ group by tipo_ocorrencia_id]]>
 				<text><![CDATA[MDR- MECANISMO DE DIALOGO E RECLAMACOES]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="165" y="18" width="232" height="50" backcolor="#A69E9D" uuid="869630b5-3ee5-4d32-b06e-955236845f22"/>
+				<reportElement x="213" y="10" width="133" height="50" backcolor="#969996" uuid="23ac8064-ab97-47c9-9520-760d19358ca7"/>
 			</rectangle>
-			<image>
-				<reportElement x="250" y="19" width="50" height="50" uuid="4bdff04e-a1fe-49ae-a516-1c196d93e980"/>
+			<image scaleImage="FillFrame">
+				<reportElement x="213" y="11" width="133" height="50" uuid="2ae27c45-8a9a-4187-b425-334e618a99bb"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 		</band>
