@@ -782,29 +782,107 @@ public List<Object[]> busqueTnTI();*/
 	@Query(value="select * from ocorrencia order by ocorrencia.numero_ordem desc", nativeQuery=true)
 	public List<Ocorrencia> findAllOrdenarPorNUmeroOrdem();
 
-	@Query(value="select *,c.designacao as provincia, r.designacao as categoria from ocorrencia o"
-			+ " inner join projecto p "
-			+ " inner join provincia c "
-			+ " inner join categoria r"
-			+ " inner join tipo_ocorrencia t "
-			+ " where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id and o.categoriaid=r.id and o.estado='Validado' "
-			+ " and o.created between (:datainicial) and (:datafinal) and if (:projecto='', 1=1,p.designacao =(:projecto)) and if (:categoria='', 1=1,r.designacao =(:categoria)) "
-			+ " and if (:provincia='',1=1,c.designacao=(:provincia)) and if (:tipoOcorrencia='',1=1,t.designacao=(:tipoOcorrencia)) and if (:estado='',1=1,o.resolucao=(:estado))",nativeQuery=true)
+	/*@Query(value="SELECT P.designacao,\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'T' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RT',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao IN ('R','A') and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RA',\r\n"
+			+ "   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'V' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RN',\r\n"
+			+ "   month(O.created) as nrmes\r\n"
+			+ "FROM  ocorrencia O inner join provincia P on O.provincia_id=P.id where year(O.created) =:ano  GROUP BY P.designacao;",nativeQuery=true)
+	public List<Object[]> busqueTudoAgrupadoPorProvinciaEstado(@Param("ano") int ano);*/
+
+
+	@Query(value="SELECT P.designacao,\n" +
+			"SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'T' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RT',\n" +
+			"SUM(CASE WHEN O.procedencia='Sim' and resolucao IN ('R','A') and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RA',\n" +
+			"SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'V' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RN',\n" +
+			"month(O.created) as nrmes\n" +
+			"FROM  ocorrencia O \n" +
+			"inner join provincia P on O.provincia_id=P.id \n" +
+			"inner join tipo_ocorrencia on O.tipo_ocorrencia_id = tipo_ocorrencia.id\n" +
+			"inner join projecto on O.projecto_id=projecto.id \n" +
+			"inner join categoria on O.categoriaid = categoria.id\n" +
+			"where O.tipo_ocorrencia_id=1 and O.procedencia='Sim'  \n" +
+			"     and O.created between :datainicial   and  :datafinal \n" +
+			"   \t and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
+			"   \t and if(:estado='',1=1,resolucao =:estado )\n" +
+			"   \t and if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
+			"   \t and if(:provincia='',1=1, P.designacao =:provincia)\n" +
+			"   \t and if(:categoria='',1=1,categoria.designacao=:categoria)\n" +
+			"GROUP BY P.designacao;",nativeQuery=true)
     List<Object[]> busqueTudoAgrupadoPorProvinciaEstadoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
-	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	@Query(value="select forma_comunicacao,count(forma_comunicacao)\n" +
+			"from ocorrencia \n" +
+			"\t inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id\n" +
+			"     inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
+			"     inner join categoria on ocorrencia.categoriaid = categoria.id\n" +
+			"     inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
+			"where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' \n" +
+			"     and ocorrencia.created between :datainicial   and  :datafinal \n" +
+			"   \t and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
+			"   \t and if(:estado='',1=1,resolucao =:estado )\n" +
+			"   \t and if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
+			"   \t and if(:provincia='',1=1, provincia.designacao =:provincia)\n" +
+			"   \t and if(:categoria='',1=1,categoria.designacao=:categoria)\n" +
+			"group by forma_comunicacao", nativeQuery=true)
 	List<Object[]> busqueTudoAgrupadoPorCanalDeEntradaPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
-	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	@Query(value="select sexo,count(sexo) \n" +
+			"from ocorrencia  \n" +
+			"inner join categoria on ocorrencia.categoriaid = categoria.id\n" +
+			"inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id\n" +
+			"inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
+			"inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
+			"where sexo is not null and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'\n" +
+			"\tand ocorrencia.created between :datainicial   and  :datafinal \n" +
+			"\tand if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
+			"\tand if(:estado='',1=1,resolucao =:estado )\n" +
+			"\tand if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
+			"\tand if(:provincia='',1=1, provincia.designacao =:provincia)\n" +
+			"\tand if(:categoria='',1=1,categoria.designacao=:categoria)\n" +
+			"group by sexo", nativeQuery=true)
 	List<Object[]> busqueTudoAgrupadoPorPeSexoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
-	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	@Query(value="select tipo_ocorrencia.designacao,count(tipo_ocorrencia_id)\n" +
+			" from ocorrencia  \n" +
+			" inner join categoria on ocorrencia.categoriaid = categoria.id\n" +
+			"inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id\n" +
+			"inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
+			"inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
+			" where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' \n" +
+			"\tand ocorrencia.created between :datainicial  and  :datafinal \n" +
+			"\tand if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
+			"\tand if(:estado='',1=1,resolucao =:estado )\n" +
+			"\tand if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
+			"\tand if(:provincia='',1=1, provincia.designacao =:provincia)\n" +
+			"\tand if(:categoria='',1=1,categoria.designacao=:categoria)\n" +
+			"group by tipo_ocorrencia_id", nativeQuery=true)
 	List<Object[]> busqueTudoAgrupadoTipoDePreocupacaoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
-	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	@Query(value=" select categoria.designacao,categoriaid \n" +
+			"from ocorrencia \n" +
+			"inner join categoria on ocorrencia.categoriaid = categoria.id\n" +
+			"inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id\n" +
+			"inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
+			"inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
+			"where ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'\n" +
+			"and ocorrencia.created between :datainicial   and  :datafinal \n" +
+			"and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
+			"and if(:estado='',1=1,resolucao =:estado )\n" +
+			"and if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
+			"and if(:provincia='',1=1, provincia.designacao =:provincia)\n" +
+			"and if(:categoria='',1=1,categoria.designacao=:categoria)\n" +
+			" group by categoriaid", nativeQuery=true)
 	List<Object[]> busqueTudoAgrupadoPorCategoriaPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
-	@Query(value="select Max(numero_ordem) from ocorrencia", nativeQuery=true)
+	@Query(value="Select IF(nrmes=1,'Janeiro',if(nrmes=2,'Fevereiro',if(nrmes=3,'Março',if(nrmes=4,'Abril',if(nrmes=5,'Maio',if(nrmes=6,'Junho',if(nrmes=7,'Julho',if(nrmes=8,'Agosto',if(nrmes=9,'Setembro',if(nrmes=10,'Outubro',if(nrmes=11,'Novembro','Dezembro'))))))))))) as mes,t.RT,t.RA,t.RN from  (SELECT  SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'T' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RT',  SUM(CASE WHEN O.procedencia='Sim' and resolucao IN ('R','A') and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RA',   SUM(CASE WHEN O.procedencia='Sim' and resolucao = 'V' and O.tipo_ocorrencia_id=1 THEN 1 ELSE 0 END) AS 'RN',   month(O.created) as nrmes \n" +
+			"FROM  ocorrencia O \n" +
+			"inner join projecto P on O.projecto_id=P.id \n" +
+			"inner join provincia Pr on O.provincia_id=Pr.id\n" +
+			"inner join tipo_ocorrencia on O.tipo_ocorrencia_id = tipo_ocorrencia.id \n" +
+			"inner join projecto on O.projecto_id=projecto.id \n" +
+			"inner join categoria on O.categoriaid = categoria.id   \n" +
+			"where O.tipo_ocorrencia_id=1 and O.procedencia='Sim'  and O.created between :datainicial   and  :datafinal and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia) and if(:estado='',1=1,resolucao =:estado) and if(:projecto='',1=1,projecto.designacao=:projecto) and if(:provincia='',1=1, Pr.designacao =:provincia) and if(:categoria='',1=1,categoria.designacao=:categoria) GROUP BY monthname(O.created))t order by nrmes;", nativeQuery=true)
 	List<Object[]> busqueTnTIPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
 
