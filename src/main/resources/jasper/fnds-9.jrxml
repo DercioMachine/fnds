@@ -6,10 +6,27 @@
 	<subDataset name="CartSexo" uuid="e45a1202-6238-48a5-b809-30bcadb73e04">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
-		<parameter name="Parameter1" class="java.lang.String"/>
+		<parameter name="data1" class="java.util.Date"/>
+		<parameter name="data2" class="java.util.Date"/>
+		<parameter name="tipoOcorrencia" class="java.lang.String"/>
+		<parameter name="estado" class="java.lang.String"/>
+		<parameter name="projecto" class="java.lang.String"/>
+		<parameter name="provincia" class="java.lang.String"/>
+		<parameter name="categoria" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[select count(sexo),sexo from ocorrencia  where year(created)=2022 and sexo is not null 
-and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+			<![CDATA[select count(sexo),sexo 
+from ocorrencia  
+inner join categoria on ocorrencia.categoriaid = categoria.id
+inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
+inner join projecto on ocorrencia.projecto_id=projecto.id 
+inner join provincia on ocorrencia.provincia_id=provincia.id
+where sexo is not null and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+	and ocorrencia.created between $P{data1}   and  $P{data2} 
+	and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
+	and if($P{estado}='',1=1,resolucao =$P{estado} )
+	and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
+	and if($P{provincia}='',1=1, provincia.designacao =$P{provincia})
+	and if($P{categoria}='',1=1,categoria.designacao=$P{categoria})
 group by sexo]]>
 		</queryString>
 		<field name="count(sexo)" class="java.lang.Long">
@@ -25,9 +42,27 @@ group by sexo]]>
 	<subDataset name="DatasetCategoria" uuid="00d7ce43-9c97-42aa-a9e2-7e26e8dc2ea5">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<parameter name="data1" class="java.util.Date"/>
+		<parameter name="data2" class="java.util.Date"/>
+		<parameter name="tipoOcorrencia" class="java.lang.String"/>
+		<parameter name="estado" class="java.lang.String"/>
+		<parameter name="projecto" class="java.lang.String"/>
+		<parameter name="provincia" class="java.lang.String"/>
+		<parameter name="categoria" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[select categoriaid,designacao from ocorrencia inner join categoria on ocorrencia.categoriaid = categoria.id
-where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+			<![CDATA[select categoriaid,categoria.designacao 
+from ocorrencia 
+inner join categoria on ocorrencia.categoriaid = categoria.id
+inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
+inner join projecto on ocorrencia.projecto_id=projecto.id 
+inner join provincia on ocorrencia.provincia_id=provincia.id
+where ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+and ocorrencia.created between $P{data1}   and  $P{data2} 
+and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
+and if($P{estado}='',1=1,resolucao =$P{estado} )
+and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
+and if($P{provincia}='',1=1, provincia.designacao =$P{provincia})
+and if($P{categoria}='',1=1,categoria.designacao=$P{categoria})
  group by categoriaid]]>
 		</queryString>
 		<field name="categoriaid" class="java.lang.Long">
@@ -44,9 +79,27 @@ where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and proc
 	<subDataset name="DatasetCanal" uuid="3269734e-0fe4-458c-8e72-4a741b36f401">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+		<parameter name="data1" class="java.util.Date"/>
+		<parameter name="data2" class="java.util.Date"/>
+		<parameter name="tipoOcorrencia" class="java.lang.String"/>
+		<parameter name="estado" class="java.lang.String"/>
+		<parameter name="projecto" class="java.lang.String"/>
+		<parameter name="provincia" class="java.lang.String"/>
+		<parameter name="categoria" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select count(forma_comunicacao),forma_comunicacao 
-from ocorrencia where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
+from ocorrencia 
+	 inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
+     inner join projecto on ocorrencia.projecto_id=projecto.id 
+     inner join categoria on ocorrencia.categoriaid = categoria.id
+     inner join provincia on ocorrencia.provincia_id=provincia.id
+where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
+     and ocorrencia.created between $P{data1}   and  $P{data2} 
+   	 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
+   	 and if($P{estado}='',1=1,resolucao =$P{estado} )
+   	 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
+   	 and if($P{provincia}='',1=1, provincia.designacao =$P{provincia})
+   	 and if($P{categoria}='',1=1,categoria.designacao=$P{categoria})
 group by forma_comunicacao]]>
 		</queryString>
 		<field name="count(forma_comunicacao)" class="java.lang.Long">
@@ -62,11 +115,26 @@ group by forma_comunicacao]]>
 	<subDataset name="DatasetProvincia" uuid="fc513ca3-9fe6-4ece-ae4a-f3ce10a0fb9a">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
-		<parameter name="Parameter1" class="java.lang.String"/>
+		<parameter name="data1" class="java.util.Date"/>
+		<parameter name="data2" class="java.util.Date"/>
+		<parameter name="provincia" class="java.lang.String"/>
+		<parameter name="tipoOcorrencia" class="java.lang.String"/>
+		<parameter name="estado" class="java.lang.String"/>
+		<parameter name="categoria" class="java.lang.String"/>
+		<parameter name="projecto" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[select count(provincia_id),designacao,count(resolucao), IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))
-from ocorrencia inner join provincia on provincia_id = provincia.id
-where year(ocorrencia.created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim'
+			<![CDATA[select count(provincia_id),provincia.designacao,count(resolucao), IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))
+from ocorrencia inner join provincia on provincia_id = provincia.id 
+	 inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
+     inner join projecto on ocorrencia.projecto_id=projecto.id 
+     inner join categoria on ocorrencia.categoriaid = categoria.id
+where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
+     and ocorrencia.created between $P{data1}    and  $P{data2} 
+   	 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
+   	 and if($P{estado}='',1=1,resolucao =$P{estado} )
+   	 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
+   	 and if($P{provincia}='',1=1, provincia.designacao =$P{provincia})
+   	 and if($P{categoria}='',1=1,categoria.designacao=$P{categoria})
 group by provincia_id,resolucao]]>
 		</queryString>
 		<field name="count(provincia_id)" class="java.lang.Long">
@@ -94,17 +162,34 @@ group by provincia_id,resolucao]]>
 	<subDataset name="DatasetMes" uuid="c710f1d3-7a77-455a-89c9-b9e47bf45b6a">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexao"/>
+		<parameter name="data1" class="java.util.Date"/>
+		<parameter name="data2" class="java.util.Date"/>
+		<parameter name="categoria" class="java.lang.String"/>
+		<parameter name="provincia" class="java.lang.String"/>
+		<parameter name="projecto" class="java.lang.String"/>
+		<parameter name="estado" class="java.lang.String"/>
+		<parameter name="tipoOcorrencia" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[Select count(month(created)),IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento')))) as resolucao,
-IF(month(created)=1,'Janeiro',if(month(created)=2,'Fevereiro',if(month(created)=3,'Março',if(month(created)=4,'Abril',if(month(created)=5,'Maio',if(month(created)=6,'Junho',
-if(month(created)=7,'Julho',if(month(created)=8,'Agosto',if(month(created)=9,'Setembro',if(month(created)=10,'Outubro',if(month(created)=11,'Novembro','Dezembro'))))))))))) as mes 
+			<![CDATA[Select count(month(ocorrencia.created)),IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento')))) as resolucao,
+IF(month(ocorrencia.created)=1,'Janeiro',if(month(ocorrencia.created)=2,'Fevereiro',if(month(ocorrencia.created)=3,'Março',if(month(ocorrencia.created)=4,'Abril',if(month(ocorrencia.created)=5,'Maio',if(month(ocorrencia.created)=6,'Junho',
+if(month(ocorrencia.created)=7,'Julho',if(month(ocorrencia.created)=8,'Agosto',if(month(ocorrencia.created)=9,'Setembro',if(month(ocorrencia.created)=10,'Outubro',if(month(ocorrencia.created)=11,'Novembro','Dezembro'))))))))))) as mes 
  from ocorrencia 
- where year(created)=2022 and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
- group by month(created),resolucao;]]>
+ 	 inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
+     inner join projecto on ocorrencia.projecto_id=projecto.id 
+     inner join categoria on ocorrencia.categoriaid = categoria.id
+     inner join provincia on ocorrencia.provincia_id=provincia.id
+ where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
+     and ocorrencia.created between $P{data1}   and  $P{data2} 
+   	 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
+   	 and if($P{estado}='',1=1,resolucao =$P{estado} )
+   	 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
+   	 and if($P{provincia}='',1=1, provincia.designacao =$P{provincia})
+   	 and if($P{categoria}='',1=1,categoria.designacao=$P{categoria})   	 
+ group by month(ocorrencia.created),resolucao;]]>
 		</queryString>
-		<field name="count(month(created))" class="java.lang.Long">
-			<property name="com.jaspersoft.studio.field.name" value="count(month(created))"/>
-			<property name="com.jaspersoft.studio.field.label" value="count(month(created))"/>
+		<field name="count(month(ocorrencia.created))" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(month(ocorrencia.created))"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(month(ocorrencia.created))"/>
 		</field>
 		<field name="resolucao" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="resolucao"/>
@@ -115,12 +200,54 @@ if(month(created)=7,'Julho',if(month(created)=8,'Agosto',if(month(created)=9,'Se
 			<property name="com.jaspersoft.studio.field.label" value="mes"/>
 		</field>
 	</subDataset>
+	<subDataset name="DatasetTipoOcc" uuid="99e655bb-ce70-49e0-a0df-d993359b0639">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexao"/>
+		<parameter name="data1" class="java.util.Date"/>
+		<parameter name="data2" class="java.util.Date"/>
+		<parameter name="tipoOcorrencia" class="java.lang.String"/>
+		<parameter name="estado" class="java.lang.String"/>
+		<parameter name="projecto" class="java.lang.String"/>
+		<parameter name="provincia" class="java.lang.String"/>
+		<parameter name="categoria" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select count(tipo_ocorrencia_id),tipo_ocorrencia.designacao
+ from ocorrencia  
+ inner join categoria on ocorrencia.categoriaid = categoria.id
+inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
+inner join projecto on ocorrencia.projecto_id=projecto.id 
+inner join provincia on ocorrencia.provincia_id=provincia.id
+ where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
+	and ocorrencia.created between $P{data1}  and  $P{data2} 
+	and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
+	and if($P{estado}='',1=1,resolucao =$P{estado} )
+	and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
+	and if($P{provincia}='',1=1, provincia.designacao =$P{provincia})
+	and if($P{categoria}='',1=1,categoria.designacao=$P{categoria})
+group by tipo_ocorrencia_id]]>
+		</queryString>
+		<field name="count(tipo_ocorrencia_id)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(tipo_ocorrencia_id)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(tipo_ocorrencia_id)"/>
+		</field>
+		<field name="designacao" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="designacao"/>
+			<property name="com.jaspersoft.studio.field.label" value="designacao"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tipo_ocorrencia"/>
+		</field>
+	</subDataset>
 	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="data1" class="java.util.Date"/>
+	<parameter name="data2" class="java.util.Date"/>
+	<parameter name="categoria" class="java.lang.String"/>
+	<parameter name="projecto" class="java.lang.String"/>
+	<parameter name="provincia" class="java.lang.String"/>
+	<parameter name="tipoOcorrencia" class="java.lang.String"/>
+	<parameter name="estado" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select count(tipo_ocorrencia_id),designacao
  from ocorrencia  inner join tipo_ocorrencia
   on tipo_ocorrencia_id = tipo_ocorrencia.id
-  where year(ocorrencia.created)=2022
 group by tipo_ocorrencia_id]]>
 	</queryString>
 	<field name="count(tipo_ocorrencia_id)" class="java.lang.Long">
@@ -145,7 +272,7 @@ group by tipo_ocorrencia_id]]>
 				</staticText>
 				<barChart>
 					<chart evaluationTime="Report">
-						<reportElement x="2" y="15" width="550" height="207" uuid="a253ffeb-335b-4430-8333-ef68ce19013f">
+						<reportElement x="2" y="15" width="550" height="207" uuid="a310af2f-3ae6-4551-a57d-55328fc43cda">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
 						<chartTitle/>
@@ -154,7 +281,29 @@ group by tipo_ocorrencia_id]]>
 					</chart>
 					<categoryDataset>
 						<dataset resetType="Report">
-							<datasetRun subDataset="DatasetProvincia" uuid="ae8cdadc-2b1f-4029-b889-454f6f2f05fc"/>
+							<datasetRun subDataset="DatasetProvincia" uuid="752a72fc-492f-4557-9eee-04a11dc03dc8">
+								<datasetParameter name="data1">
+									<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="data2">
+									<datasetParameterExpression><![CDATA[$P{data2}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="categoria">
+									<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="estado">
+									<datasetParameterExpression><![CDATA[$P{estado}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="projecto">
+									<datasetParameterExpression><![CDATA[$P{projecto}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="tipoOcorrencia">
+									<datasetParameterExpression><![CDATA[$P{tipoOcorrencia}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="provincia">
+									<datasetParameterExpression><![CDATA[$P{provincia}]]></datasetParameterExpression>
+								</datasetParameter>
+							</datasetRun>
 						</dataset>
 						<categorySeries>
 							<seriesExpression><![CDATA[$F{IF(resolucao='T','Terminados',if(resolucao='P','Pendentes',if(resolucao='R','Resolvidos',if(resolucao='V','Validados','Em Andamento'))))}]]></seriesExpression>
@@ -193,19 +342,41 @@ group by tipo_ocorrencia_id]]>
 				</staticText>
 				<barChart>
 					<chart evaluationTime="Report">
-						<reportElement x="2" y="261" width="550" height="207" uuid="d408e349-a688-42ef-a920-c5530db33da7"/>
+						<reportElement x="2" y="261" width="550" height="207" uuid="bfb605d5-e6ee-4a5e-81fd-4f27f4b7a950"/>
 						<chartTitle/>
 						<chartSubtitle/>
 						<chartLegend/>
 					</chart>
 					<categoryDataset>
 						<dataset resetType="Report">
-							<datasetRun subDataset="DatasetMes" uuid="f4ede977-86b1-472b-b283-2109e5fac575"/>
+							<datasetRun subDataset="DatasetMes" uuid="42922148-87c4-4874-8852-54468fe413aa">
+								<datasetParameter name="data1">
+									<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="data2">
+									<datasetParameterExpression><![CDATA[$P{data2}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="categoria">
+									<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="estado">
+									<datasetParameterExpression><![CDATA[$P{estado}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="projecto">
+									<datasetParameterExpression><![CDATA[$P{projecto}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="provincia">
+									<datasetParameterExpression><![CDATA[$P{provincia}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter name="tipoOcorrencia">
+									<datasetParameterExpression><![CDATA[$P{tipoOcorrencia}]]></datasetParameterExpression>
+								</datasetParameter>
+							</datasetRun>
 						</dataset>
 						<categorySeries>
 							<seriesExpression><![CDATA[$F{resolucao}]]></seriesExpression>
 							<categoryExpression><![CDATA[$F{mes}]]></categoryExpression>
-							<valueExpression><![CDATA[$F{count(month(created))}]]></valueExpression>
+							<valueExpression><![CDATA[$F{count(month(ocorrencia.created))}]]></valueExpression>
 							<labelExpression><![CDATA[$F{resolucao}]]></labelExpression>
 						</categorySeries>
 					</categoryDataset>
@@ -268,7 +439,7 @@ group by tipo_ocorrencia_id]]>
 			</rectangle>
 			<image scaleImage="FillFrame">
 				<reportElement x="213" y="11" width="133" height="50" uuid="2ae27c45-8a9a-4187-b425-334e618a99bb"/>
-				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+				<imageExpression><![CDATA["logoa.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -276,7 +447,7 @@ group by tipo_ocorrencia_id]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<summary>
-		<band height="748" splitType="Stretch">
+		<band height="785" splitType="Stretch">
 			<staticText>
 				<reportElement x="1" y="730" width="553" height="13" uuid="889a1e62-21ea-4064-9c6a-089859d3fe88"/>
 				<textElement textAlignment="Center">
@@ -286,7 +457,7 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="260" y="27" width="294" height="187" uuid="7d3a4a4f-b092-482d-9b89-12cf5acc4505">
+					<reportElement x="260" y="27" width="294" height="187" uuid="e846b12c-410e-4c5c-9763-4cc3a4de8f5d">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<chartTitle/>
@@ -295,7 +466,29 @@ group by tipo_ocorrencia_id]]>
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="DatasetCategoria" uuid="74726c83-9e3f-4ca5-8eae-63b84d596765"/>
+						<datasetRun subDataset="DatasetCategoria" uuid="a47d0189-4acd-48be-b8ad-6b56dc9ea0d4">
+							<datasetParameter name="data1">
+								<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="data2">
+								<datasetParameterExpression><![CDATA[$P{data2}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="categoria">
+								<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="estado">
+								<datasetParameterExpression><![CDATA[$P{estado}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="projecto">
+								<datasetParameterExpression><![CDATA[$P{projecto}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="provincia">
+								<datasetParameterExpression><![CDATA[$P{provincia}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="tipoOcorrencia">
+								<datasetParameterExpression><![CDATA[$P{tipoOcorrencia}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
 					</dataset>
 					<keyExpression><![CDATA[$F{designacao}]]></keyExpression>
 					<valueExpression><![CDATA[$F{categoriaid}]]></valueExpression>
@@ -329,7 +522,7 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="2" y="27" width="288" height="180" uuid="d341bf63-3691-4d77-8d0f-8af3c7f644e4"/>
+					<reportElement x="2" y="27" width="288" height="180" uuid="c80c0c9f-179a-49c4-b70f-add21762a6d4"/>
 					<chartTitle>
 						<font size="8"/>
 					</chartTitle>
@@ -342,7 +535,29 @@ group by tipo_ocorrencia_id]]>
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="DatasetCanal" uuid="5999c4d5-f63c-4f10-9a77-5e0aa94c4cb3"/>
+						<datasetRun subDataset="DatasetCanal" uuid="329406ca-2d26-4d84-bee3-1a9bf055483d">
+							<datasetParameter name="data1">
+								<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="data2">
+								<datasetParameterExpression><![CDATA[$P{data2}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="categoria">
+								<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="estado">
+								<datasetParameterExpression><![CDATA[$P{estado}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="projecto">
+								<datasetParameterExpression><![CDATA[$P{projecto}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="provincia">
+								<datasetParameterExpression><![CDATA[$P{provincia}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="tipoOcorrencia">
+								<datasetParameterExpression><![CDATA[$P{tipoOcorrencia}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
 					</dataset>
 					<keyExpression><![CDATA[$F{forma_comunicacao}]]></keyExpression>
 					<valueExpression><![CDATA[$F{count(forma_comunicacao)}]]></valueExpression>
@@ -362,7 +577,7 @@ group by tipo_ocorrencia_id]]>
 			</pieChart>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="260" y="275" width="293" height="182" uuid="b151ea3f-fb03-49a8-a790-c1344d211224">
+					<reportElement x="260" y="275" width="293" height="182" uuid="824ab4d8-cdd7-457f-a090-44b73a73ca99">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<chartTitle/>
@@ -370,7 +585,31 @@ group by tipo_ocorrencia_id]]>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
-					<dataset resetType="Report"/>
+					<dataset resetType="Report">
+						<datasetRun subDataset="DatasetTipoOcc" uuid="deee83af-221e-40ca-bd9a-01fcf5941379">
+							<datasetParameter name="data1">
+								<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="data2">
+								<datasetParameterExpression><![CDATA[$P{data2}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="categoria">
+								<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="estado">
+								<datasetParameterExpression><![CDATA[$P{estado}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="projecto">
+								<datasetParameterExpression><![CDATA[$P{projecto}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="provincia">
+								<datasetParameterExpression><![CDATA[$P{provincia}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="tipoOcorrencia">
+								<datasetParameterExpression><![CDATA[$P{tipoOcorrencia}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
+					</dataset>
 					<keyExpression><![CDATA[$F{designacao}]]></keyExpression>
 					<valueExpression><![CDATA[$F{count(tipo_ocorrencia_id)}]]></valueExpression>
 					<labelExpression><![CDATA[$F{designacao}+" - "+ $F{count(tipo_ocorrencia_id)}]]></labelExpression>
@@ -403,14 +642,36 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="2" y="273" width="298" height="184" uuid="f3db6f32-f437-4d69-9d15-eb14ce0ac2f8"/>
+					<reportElement x="2" y="273" width="298" height="184" uuid="1e28dad8-86a5-4735-a7c1-2d59d551ebfc"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report">
-						<datasetRun subDataset="CartSexo" uuid="05d846ec-5c8b-4852-a7ff-ff0a0185f64e"/>
+						<datasetRun subDataset="CartSexo" uuid="7611ad8d-fdc9-4f96-848b-3e171e1f328f">
+							<datasetParameter name="data1">
+								<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="data2">
+								<datasetParameterExpression><![CDATA[$P{data2}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="categoria">
+								<datasetParameterExpression><![CDATA[$P{categoria}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="estado">
+								<datasetParameterExpression><![CDATA[$P{estado}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="projecto">
+								<datasetParameterExpression><![CDATA[$P{projecto}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="provincia">
+								<datasetParameterExpression><![CDATA[$P{provincia}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="tipoOcorrencia">
+								<datasetParameterExpression><![CDATA[$P{tipoOcorrencia}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
 					</dataset>
 					<keyExpression><![CDATA[$F{sexo}]]></keyExpression>
 					<valueExpression><![CDATA[$F{count(sexo)}]]></valueExpression>
