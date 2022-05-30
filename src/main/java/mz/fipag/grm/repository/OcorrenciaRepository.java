@@ -802,7 +802,7 @@ public List<Object[]> busqueTnTI();*/
 			"inner join projecto on O.projecto_id=projecto.id \n" +
 			"inner join categoria on O.categoriaid = categoria.id\n" +
 			"where O.tipo_ocorrencia_id=1 and O.procedencia='Sim'  \n" +
-			"     and O.created between :datainicial   and  :datafinal \n" +
+			"     and O.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal) \n" +
 			"   \t and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
 			"   \t and if(:estado='',1=1,resolucao =:estado )\n" +
 			"   \t and if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
@@ -818,7 +818,8 @@ public List<Object[]> busqueTnTI();*/
 			"     inner join categoria on ocorrencia.categoriaid = categoria.id\n" +
 			"     inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
 			"where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' \n" +
-			"     and ocorrencia.created between :datainicial   and  :datafinal \n" +
+			"     and ocorrencia.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal)" +
+			"   \n" +
 			"   \t and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
 			"   \t and if(:estado='',1=1,resolucao =:estado )\n" +
 			"   \t and if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
@@ -834,7 +835,7 @@ public List<Object[]> busqueTnTI();*/
 			"inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
 			"inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
 			"where sexo is not null and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'\n" +
-			"\tand ocorrencia.created between :datainicial   and  :datafinal \n" +
+			"\tand ocorrencia.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal) \n" +
 			"\tand if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
 			"\tand if(:estado='',1=1,resolucao =:estado )\n" +
 			"\tand if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
@@ -850,7 +851,7 @@ public List<Object[]> busqueTnTI();*/
 			"inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
 			"inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
 			" where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' \n" +
-			"\tand ocorrencia.created between :datainicial  and  :datafinal \n" +
+			"\tand ocorrencia.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal) \n" +
 			"\tand if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
 			"\tand if(:estado='',1=1,resolucao =:estado )\n" +
 			"\tand if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
@@ -866,7 +867,7 @@ public List<Object[]> busqueTnTI();*/
 			"inner join projecto on ocorrencia.projecto_id=projecto.id \n" +
 			"inner join provincia on ocorrencia.provincia_id=provincia.id\n" +
 			"where ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'\n" +
-			"and ocorrencia.created between :datainicial   and  :datafinal \n" +
+			"and ocorrencia.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal) \n" +
 			"and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia)\n" +
 			"and if(:estado='',1=1,resolucao =:estado )\n" +
 			"and if(:projecto='',1=1,projecto.designacao=:projecto)\n" +
@@ -882,7 +883,7 @@ public List<Object[]> busqueTnTI();*/
 			"inner join tipo_ocorrencia on O.tipo_ocorrencia_id = tipo_ocorrencia.id \n" +
 			"inner join projecto on O.projecto_id=projecto.id \n" +
 			"inner join categoria on O.categoriaid = categoria.id   \n" +
-			"where O.tipo_ocorrencia_id=1 and O.procedencia='Sim'  and O.created between :datainicial   and  :datafinal and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia) and if(:estado='',1=1,resolucao =:estado) and if(:projecto='',1=1,projecto.designacao=:projecto) and if(:provincia='',1=1, Pr.designacao =:provincia) and if(:categoria='',1=1,categoria.designacao=:categoria) GROUP BY monthname(O.created))t order by nrmes;", nativeQuery=true)
+			"where O.tipo_ocorrencia_id=1 and O.procedencia='Sim'  and O.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal) and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia) and if(:estado='',1=1,resolucao =:estado) and if(:projecto='',1=1,projecto.designacao=:projecto) and if(:provincia='',1=1, Pr.designacao =:provincia) and if(:categoria='',1=1,categoria.designacao=:categoria) GROUP BY monthname(O.created))t order by nrmes;", nativeQuery=true)
 	List<Object[]> busqueTnTIPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
 

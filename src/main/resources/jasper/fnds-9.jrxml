@@ -21,7 +21,7 @@ inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
 inner join projecto on ocorrencia.projecto_id=projecto.id 
 inner join provincia on ocorrencia.provincia_id=provincia.id
 where sexo is not null and ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
-	and ocorrencia.created between $P{data1}   and  $P{data2} 
+	and ocorrencia.created between if($P{data1}='','2022-1-1',$P{data1}) and if($P{data2} ='',CURRENT_DATE,$P{data2})
 	and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
 	and if($P{estado}='',1=1,resolucao =$P{estado} )
 	and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
@@ -57,7 +57,7 @@ inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
 inner join projecto on ocorrencia.projecto_id=projecto.id 
 inner join provincia on ocorrencia.provincia_id=provincia.id
 where ocorrencia.tipo_ocorrencia_id=1 and procedencia='Sim'
-and ocorrencia.created between $P{data1}   and  $P{data2} 
+and ocorrencia.created between if($P{data1}='','2022-1-1',$P{data1}) and if($P{data2} ='',CURRENT_DATE,$P{data2})
 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
 and if($P{estado}='',1=1,resolucao =$P{estado} )
 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
@@ -94,7 +94,7 @@ from ocorrencia
      inner join categoria on ocorrencia.categoriaid = categoria.id
      inner join provincia on ocorrencia.provincia_id=provincia.id
 where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
-     and ocorrencia.created between $P{data1}   and  $P{data2} 
+     and ocorrencia.created between if($P{data1}='','2022-1-1',$P{data1}) and if($P{data2} ='',CURRENT_DATE,$P{data2})
    	 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
    	 and if($P{estado}='',1=1,resolucao =$P{estado} )
    	 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
@@ -129,7 +129,7 @@ from ocorrencia inner join provincia on provincia_id = provincia.id
      inner join projecto on ocorrencia.projecto_id=projecto.id 
      inner join categoria on ocorrencia.categoriaid = categoria.id
 where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
-     and ocorrencia.created between $P{data1}    and  $P{data2} 
+     and ocorrencia.created between if($P{data1}='','2022-1-1',$P{data1}) and if($P{data2} ='',CURRENT_DATE,$P{data2})
    	 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
    	 and if($P{estado}='',1=1,resolucao =$P{estado} )
    	 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
@@ -179,7 +179,7 @@ if(month(ocorrencia.created)=7,'Julho',if(month(ocorrencia.created)=8,'Agosto',i
      inner join categoria on ocorrencia.categoriaid = categoria.id
      inner join provincia on ocorrencia.provincia_id=provincia.id
  where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
-     and ocorrencia.created between $P{data1}   and  $P{data2} 
+     and ocorrencia.created between if($P{data1}='','2022-1-1',$P{data1}) and if($P{data2} ='',CURRENT_DATE,$P{data2})
    	 and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
    	 and if($P{estado}='',1=1,resolucao =$P{estado} )
    	 and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
@@ -218,7 +218,7 @@ inner join tipo_ocorrencia on ocorrencia.tipo_ocorrencia_id = tipo_ocorrencia.id
 inner join projecto on ocorrencia.projecto_id=projecto.id 
 inner join provincia on ocorrencia.provincia_id=provincia.id
  where ocorrencia.tipo_ocorrencia_id=1 and ocorrencia.procedencia='Sim' 
-	and ocorrencia.created between $P{data1}  and  $P{data2} 
+	and ocorrencia.created between if($P{data1}='','2022-1-1',$P{data1}) and if($P{data2} ='',CURRENT_DATE,$P{data2})
 	and if($P{tipoOcorrencia}='',1=1, tipo_ocorrencia.designacao=$P{tipoOcorrencia})
 	and if($P{estado}='',1=1,resolucao =$P{estado} )
 	and if($P{projecto}='',1=1,projecto.designacao=$P{projecto})
@@ -272,7 +272,7 @@ group by tipo_ocorrencia_id]]>
 				</staticText>
 				<barChart>
 					<chart evaluationTime="Report">
-						<reportElement x="2" y="15" width="550" height="207" uuid="a310af2f-3ae6-4551-a57d-55328fc43cda">
+						<reportElement x="2" y="15" width="550" height="207" uuid="425f5016-cc71-4e65-8e64-421074075139">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
 						<chartTitle/>
@@ -281,7 +281,7 @@ group by tipo_ocorrencia_id]]>
 					</chart>
 					<categoryDataset>
 						<dataset resetType="Report">
-							<datasetRun subDataset="DatasetProvincia" uuid="752a72fc-492f-4557-9eee-04a11dc03dc8">
+							<datasetRun subDataset="DatasetProvincia" uuid="ef3e0dee-f2b7-4a26-8ee8-64373cca9ae1">
 								<datasetParameter name="data1">
 									<datasetParameterExpression><![CDATA[$P{data1}]]></datasetParameterExpression>
 								</datasetParameter>
