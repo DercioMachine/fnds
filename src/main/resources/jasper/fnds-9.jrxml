@@ -439,7 +439,7 @@ group by tipo_ocorrencia_id]]>
 			</rectangle>
 			<image scaleImage="FillFrame">
 				<reportElement x="213" y="11" width="133" height="50" uuid="2ae27c45-8a9a-4187-b425-334e618a99bb"/>
-				<imageExpression><![CDATA["logoa.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -457,7 +457,7 @@ group by tipo_ocorrencia_id]]>
 			</staticText>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="260" y="27" width="294" height="187" uuid="e846b12c-410e-4c5c-9763-4cc3a4de8f5d">
+					<reportElement x="280" y="274" width="274" height="187" uuid="e846b12c-410e-4c5c-9763-4cc3a4de8f5d">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<chartTitle/>
@@ -507,7 +507,7 @@ group by tipo_ocorrencia_id]]>
 				</piePlot>
 			</pieChart>
 			<staticText>
-				<reportElement x="381" y="10" width="152" height="30" uuid="bf24eaae-2909-4767-aec9-3c60e01a739e"/>
+				<reportElement x="395" y="261" width="152" height="30" uuid="bf24eaae-2909-4767-aec9-3c60e01a739e"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
@@ -577,7 +577,7 @@ group by tipo_ocorrencia_id]]>
 			</pieChart>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="260" y="275" width="293" height="182" uuid="824ab4d8-cdd7-457f-a090-44b73a73ca99">
+					<reportElement x="259" y="26" width="293" height="182" uuid="824ab4d8-cdd7-457f-a090-44b73a73ca99">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<chartTitle/>
@@ -627,7 +627,7 @@ group by tipo_ocorrencia_id]]>
 				</piePlot>
 			</pieChart>
 			<staticText>
-				<reportElement x="444" y="262" width="100" height="30" uuid="93abebc2-e29a-42e7-8a45-d90ec871be7a"/>
+				<reportElement x="443" y="13" width="100" height="30" uuid="93abebc2-e29a-42e7-8a45-d90ec871be7a"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
