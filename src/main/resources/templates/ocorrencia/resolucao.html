@@ -206,9 +206,10 @@
 						<table  class="table card-table table-vcenter text-nowrap datatable">
 							<thead>
 							<tr style="color: rgb(65,105,225)">
-								<th class="w-1">Nivel</th>
-								<th>Designação</th>
 								<th>Data Resolução</th>
+								<th>Responsabilidade</th>
+								<th>Comentário</th>
+								<th></th>
 								<!--  <th></th> -->
 							</tr>
 							</thead>
@@ -217,9 +218,15 @@
 							<!--  <tr th:each="p : ${categorias}"> -->
 							<tr th:each="r, stat : ${resolucoes}">
 								<div th:if="${r.tipo =='A' }">
-									<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
-									<td th:text="${r.designacao}" >Auxiliar Contábil</td>
 									<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+									<td> Remetido a outras instâncias
+									</td>
+									<td th:text="${r.designacao}" >Auxiliar Contábil</td>
+									<td  >
+										<a th:if="${r.id == editarResolucao }" th:href="@{/editar/acompanhamento/{id} (id=${r.id})}">
+											<i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
+										</a>
+									</td>
 								</div>
 							</tr>
 
@@ -247,11 +254,11 @@
 					 <table  class="table card-table table-vcenter text-nowrap datatable">
 						  <thead>
 						   <tr style="color: rgb(65,105,225)">
-							  <th class="w-1">Nivel</th>
-							  <th>Designação</th>
-							  <th>Mediador</th>
-							  <th>Responsabilidade</th>
 							  <th>Data Resolução</th>
+							  <th>Responsabilidade</th>
+							   <th>Mediador</th>
+							   <th>Descrição</th>
+							   <th></th>
 							  <!--  <th></th> -->
 						  </tr>
 						  </thead>
@@ -259,14 +266,18 @@
 						  <!--  <tr th:each="p : ${categorias}"> -->
 						  <tr th:each="r : ${resolucoes}">
 							<div th:if="${r.tipo =='R'}">
-								<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
-								<td th:text="${r.designacao}" >Auxiliar Contábil</td>
-								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
+								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
 								<td>
 									<span th:if="${r != null && r.responsabilidade != null && r.responsabilidade.responsavel != null}" th:text="${r.responsabilidade.responsavel}"  class="text-muted">
 									</span>
 								</td>
-								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
+								<td th:text="${r.motivo}" >Auxiliar Contábil</td>
+								<td  >
+									<a th:if="${r.id == editarResolucao }" th:href="@{/editar/resolucao/{id} (id=${r.id})}">
+										<i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
+									</a>
+								</td>
 							</div>
 						  </tr>
 
@@ -655,7 +666,7 @@
 									<div class="form-group">
 										<select hidden class="form-control custom-select form-select" th:field="*{responsabilidade}" >
 											<option th:each="p : ${responsaveis}"
-													th:value="3" th:text="${p.responsavel}">Maputo</option>
+													th:value="4" th:text="${p.responsavel}">Maputo</option>
 										</select>
 									</div>
 								</div>

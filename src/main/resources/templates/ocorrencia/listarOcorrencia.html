@@ -140,6 +140,7 @@
 
                          <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.estado!='Validado' && p.tipoAlerta=='Normal'}">
                           <i style="font-size: 15pt; color: red;" aria-hidden="true" class="fas fa-clock"></i>
+
                          </span>
 
                               <span th:if="${(days.convert(#dates.createNow().getTime() - p.created.getTime(), millis) > 10) && p.resolucao!='T' && p.tipoAlerta=='Normal'}">
@@ -215,6 +216,10 @@
 
 
                               <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
+                                  <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
+                              </a>
+
+                              <a th:if="${p.resolucao == 'V' }" th:href="@{/ocorrencias/validar/{id} (id=${p.id})}">
                                   <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                               </a>
 
@@ -328,6 +333,10 @@
                                   <a th:if="${p.resolucao == 'P' && p.estado != 'Temporario'}" th:href="@{/ocorrencias/editar/{id} (id=${p.id})}">
                                       <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                                   </a>
+
+                                <a th:if="${p.resolucao == 'V' }" th:href="@{/ocorrencias/validar/{id} (id=${p.id})}">
+                                    <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
+                                </a>
 
 
                                   <a th:if="${p.nivelresolucao == userlogado.nivel || userlogado.provincia == 11 }" th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">

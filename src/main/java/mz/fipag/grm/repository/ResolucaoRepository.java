@@ -13,4 +13,7 @@ public interface ResolucaoRepository  extends CrudRepository<Resolucao, Long> {
 
     @Query(value="select * from resolucao, responsabilidade where resolucao.responsabilidade_id = responsabilidade.id and  ocorrencia_id=:id", nativeQuery=true)
     public List<Resolucao> findByOcorrencia(@Param("id") Long id);
+
+    @Query(value="select Max(id) from resolucao where ocorrencia_id=:id", nativeQuery=true)
+    Object ultimaResolucao(Long id);
 }
