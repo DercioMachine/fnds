@@ -734,6 +734,7 @@ public class HomeController {
         model.addAttribute("projectos", projectoService.buscarTodos());
         model.addAttribute("tipoOcorrencias", tpService.buscarTodos());
         model.addAttribute("categorias", catService.buscarTodos());
+        model.addAttribute("mostrarTabs", "Nao");
 
         ProvinciaEstado(model);
         cidade(model);
@@ -769,6 +770,7 @@ public class HomeController {
         model.addAttribute("projectos", projectoService.buscarTodos());
         model.addAttribute("tipoOcorrencias", tpService.buscarTodos());
         model.addAttribute("categorias", catService.buscarTodos());
+        model.addAttribute("mostrarTabs", "Sim");
 
         service.addParams("categoria", categoria);
         service.addParams("projecto", projecto);

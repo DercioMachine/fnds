@@ -543,10 +543,58 @@ public class OcorrenciaController {
         model.addAttribute("ocorrencia", ocorrenciaService.buscarPorId(id));
         model.addAttribute("anexos", docsRepository.findAllByIdResolucao(id));
         model.addAttribute("resolucoes", resolucaoRepository.findByOcorrencia(id));
+        model.addAttribute("editarResolucao", resolucaoRepository.ultimaResolucao(id));
         model.addAttribute("resolver", new Resolucao());
         model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
 
         return "ocorrencia/resolucao";
+    }
+
+    @GetMapping("/editar/acompanhamento/{id}")
+    public String editarAcompanhamento(@PathVariable("id") Long id, ModelMap model) {
+
+        //Resolucao
+        model.addAttribute("resolver", resolucaoRepository.findById(id));
+        model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
+
+        return "ocorrencia/editarAcompanhamento";
+    }
+
+    @GetMapping("/editar/resolucao/{id}")
+    public String editarResolucao(@PathVariable("id") Long id, ModelMap model) {
+
+        //Resolucao
+        model.addAttribute("resolver", resolucaoRepository.findById(id));
+        model.addAttribute("responsaveis", responsabilidadeRepository.findAll());
+
+        return "ocorrencia/editarResolucao";
+    }
+
+    @PostMapping("/resolucao/editar")
+    public String resolverEditar(Resolucao resolucao,Ocorrencia ocorrencia, @RequestParam boolean report) {
+
+
+        if(report == true){
+
+            resolucao.setOcorrencia(ocorrencia);
+            resolucaoRepository.save(resolucao);
+            ocorrencia.setResolucao("T");
+            ocorrenciaService.salvar(ocorrencia);
+
+
+        }else{
+
+            if(resolucao.getResponsabilidade().getId() == 4){
+                ocorrencia.setResolucao("A");
+                resolucao.setTipo("A");
+                resolucao.setDesignacao(resolucao.getMotivo());
+            }
+
+            resolucaoRepository.save(resolucao);
+
+        }
+
+        return "redirect:/resolver/ocorrencia/"+resolucao.getOcorrencia().getId();
     }
 
     @PostMapping("/cadastrar/acompanhamento")
@@ -602,8 +650,10 @@ public class OcorrenciaController {
         }else{
         	   if(resolucao.getResponsabilidade().getId() == 4){
                    ocorrencia.setResolucao("A");
+                   ocorrencia.setResolucao("A");
                    resolucao.setTipo("A");
-                   
+                   resolucao.setDesignacao(resolucao.getMotivo());
+
                    
                }else{
                    ocorrencia.setResolucao("R");

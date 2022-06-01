@@ -69,7 +69,7 @@ $('#cbxCidade').html(s);
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                <input required="required" id="txtDate" value="" name="datainicial" type="date" class="form-control">
+                <input required="required" id="txtDate"  name="datainicial" type="date" class="form-control">
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@ $('#cbxCidade').html(s);
 							<span class="input-icon-addon">
 							<i class="fe fe-calendar"></i>
 							</span>
-                <input  required="required" id="txtDate2" value="" name="datafinal" type="date" class="form-control">
+                <input required="required" id="txtDate2" name="datafinal" type="date" class="form-control">
               </div>
             </div>
           </div>
@@ -205,7 +205,7 @@ $('#cbxCidade').html(s);
   
   <br>
 
-  <div class="col-12">
+  <div class="col-12"  th:if="${mostrarTabs=='Sim'}">
     <div class="card">
       <ul class="nav nav-tabs nav-tabs-alt" data-bs-toggle="tabs">
         <li class="nav-item">
@@ -663,7 +663,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 30,
+                          size: 20,
                         }
                       }
                     }
@@ -716,7 +716,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 30,
+                          size: 20,
                         }
                       }
                     }
@@ -773,7 +773,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 30,
+                          size: 20,
                         }
                       }
                     }
@@ -820,7 +820,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 30,
+                          size: 20,
                         }
                       }
                     }
@@ -999,7 +999,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 16,
+                          size: 12,
                         }
                       }
                     }
@@ -1088,7 +1088,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 16,
+                          size: 12,
                         }
                       }
                     }
@@ -1108,7 +1108,6 @@ $('#cbxCidade').html(s);
     }
 
     </script>
-
   <!-- Conteudo-->
 
 </div>

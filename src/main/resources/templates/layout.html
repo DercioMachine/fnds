@@ -76,14 +76,34 @@ $(document).ready(function() {
 	</script>
 
 
+    <style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
 
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
 
-<!-- <link th:href="@{/../assets/plugins/maps-google/plugin.css}" rel="stylesheet" />
-<script th:src="@{/../assets/plugins/maps-google/plugin.js}"></script>
-<script th:src="@{/../assets/plugins/input-mask/plugin.js}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
-<!-- <link th:href="@{/../assets/css/dashboard.css}" rel="stylesheet" />
-<script th:src="@{/../assets/js/dashboard.js}"></script> -->
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
 
 </head>
 <body style="background: #f4f5fa" class="antialiased">
