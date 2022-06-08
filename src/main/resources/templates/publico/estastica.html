@@ -226,8 +226,7 @@ function onChangePorAno(){
             <div class="container-xl">
                 <div class="row row-deck row-cards">
 
-
-                    <div class="col-sm-2 col-lg-2">
+                    <div class="col-sm-6 col-lg-2">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
@@ -239,7 +238,10 @@ function onChangePorAno(){
                                         <option value="2019">2019</option>
                                         <option value="2018">2018</option>
 
+
+
                                     </select>
+
                                 </div>
                             </div>
                         </div>
@@ -251,8 +253,7 @@ function onChangePorAno(){
                         <div align="center" style="padding-top: 30px" class="card ">
                             <div style="padding-top: 8px" class="card-body">
 
-
-
+                                <div class="form-check-inline ">
                                     <label class="form-check-label">
                                         <input onchange="onChangeAnoActual()" id="radioAnoActual" value="A" name="radioButton" class="form-check-input check" type="radio" checked> Ano
                                     </label>
@@ -290,7 +291,7 @@ function onChangePorAno(){
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label">Semestre</label>
-                                    <select id="semestre" name="codSelectedSemestre" onchange="onChangeStatus()" class="form-control custom-select">
+                                    <select id="semestre" disabled name="codSelectedSemestre" onchange="onChangeStatus()" class="form-control custom-select">
                                         <option value="1">1° Semestre</option>
                                         <option value="2">2° Semestre</option>
                                     </select>
@@ -298,6 +299,8 @@ function onChangePorAno(){
                             </div>
                         </div>
                     </div>
+
+
 
 
                     <div style="display: none;" id="trimestree" class="col-sm-6 col-lg-2">
@@ -340,12 +343,12 @@ function onChangePorAno(){
                         </div>
                     </div>
 
-                    <div  class="col-sm-2 col-lg-2">
+                    <div  class="col-sm-6 col-lg-2">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label  class="form-label">Projecto</label>
-                                    <select  name="projecto" class="form-control custom-select form-select">
+                                    <label for="projecto" class="form-label">Projecto</label>
+                                    <select id="projecto" name="projecto" class="form-control custom-select form-select">
                                         <option value="">Selecione o Projecto...</option>
                                         <option th:each="p : ${projectos}"
                                                 th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
@@ -354,13 +357,13 @@ function onChangePorAno(){
                             </div>
                         </div>
                     </div>
-                    
+
                     <div  class="col-sm-6 col-lg-2">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="provincia" class="form-label">Província </label>
-                                    <select id="provincia1" name="provincia" class="form-control custom-select form-select">
+                                    <select id="provincia" name="provincia" class="form-control custom-select form-select">
                                         <option value="">Selecione a Província...</option>
                                         <option th:each="p : ${provincias}"
                                                 th:value="${p.designacao}" th:text="${p.designacao}" th:if="${p.designacao!='Nacional'}">Maputo</option>
@@ -373,14 +376,12 @@ function onChangePorAno(){
 
                     <div id="botoes1" class="col-sm-1 col-lg-1">
                         <div class="card">
-
                             <br>
                             <button class="btn btn-default" type="submit" style="margin-top:6px;border:none ; " >
                                 <i style="font-size: 20pt; color: #0277BD" class="far fa-rotate"></i>
                                 <i style="font-size: 20pt; color: #0277BD" class="fa-solid fa-rotate"></i>
                                 <i style="font-size: 20pt; color: #0277BD"  class="fas fa-sync-alt"></i>
                             </button>
-
                         </div>
                     </div>
 
@@ -694,7 +695,7 @@ function onChangePorAno(){
                 <div class="col-6" style=" height:400px; " >
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por Sexo</h3>
+                            <h3 class="card-title" style="  font-size: 12px;" >Reclamações por sexo</h3>
                         </div>
                         <center>
                             <div class="card-body" style="position: relative; height:20vh; width:24vw">

@@ -381,6 +381,10 @@ public class OcorrenciaController {
     		ocorrencia.setNumeroordem(numeroDeOrdem);
     		ocorrencia.setResponsavel(userlogado);
     		ocorrencia.setEstado("Registado");
+    		
+    		if(ocorrencia.getSexo()==null) {
+    			ocorrencia.setSexo("ND");
+    		}
     		ocorrenciaService.salvar(ocorrencia);
 
 

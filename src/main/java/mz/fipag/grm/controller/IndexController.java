@@ -1809,6 +1809,15 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 		ocorrencia.setEstado("Temporario");
         ocorrencia.setNumeroordem(numeroDeOrdem);
 		ocorrencia.setTemporario(true);
+		
+		
+		if(ocorrencia.getSexo()==null) {
+			ocorrencia.setSexo("ND");
+		}
+		
+		if(ocorrencia.getOrigem()==null) {
+			ocorrencia.setOrigem("Anónimo");
+		}
 
 		ocorrenciaRepository.save(ocorrencia);
 		

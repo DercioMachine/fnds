@@ -225,6 +225,7 @@ $('#subcategoria').html(s);
 
                 <input type="hidden" th:field="*{grmStamp}" class="form-control" placeholder="Designação...">
                 <input type="hidden" th:field="*{id}" class="form-control" placeholder="Designação...">
+                <input type="hidden" th:field="*{sexo}" class="form-control" placeholder="Designação...">
                 <!-- enctype="multipart/form-data" -->
 
                 <!-- <input type="file" name="files" multiple /> -->
@@ -418,18 +419,6 @@ $('#subcategoria').html(s);
                         </div>
                     </div>
                     
-                    <div  style="display: none" id="genero" class="col-6 col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Sexo</label>
-                            <select class="form-control custom-select" th:field="*{sexo}" >
-                                <option value=" ">Selecione...</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Femenino">ND</option>
-                            </select>
-                        </div>
-                    </div>
-		                    
 		                    
                     </div>
 
