@@ -644,9 +644,7 @@ $('#cbxCidade').html(s);
               '#EF5350',
               '#4299f5'
             ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
-            ],
+            
             borderWidth: 1
           }]
         };
@@ -663,7 +661,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -695,10 +693,8 @@ $('#cbxCidade').html(s);
               '#800080',
               '#4299f5',
               '#FFA726',
-              '#66BB6A'
-            ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
+              '#66BB6A',
+              '#EF5350'
             ],
             borderWidth: 1
           }]
@@ -716,7 +712,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -756,9 +752,6 @@ $('#cbxCidade').html(s);
               '#96a99b',
 
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
             borderWidth: 1
         }]
     },
@@ -773,7 +766,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -805,9 +798,6 @@ $('#cbxCidade').html(s);
               '#EF5350',
 
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
             borderWidth: 1
         }]
     },
@@ -820,7 +810,7 @@ $('#cbxCidade').html(s);
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -948,9 +938,6 @@ $('#cbxCidade').html(s);
                 backgroundColor: [
                      '#66BB6A',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -959,9 +946,6 @@ $('#cbxCidade').html(s);
                 backgroundColor: [
                      '#FFA726',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -969,9 +953,6 @@ $('#cbxCidade').html(s);
                 data: numeroocorencia3,
                 backgroundColor: [
                     '#EF5350',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }
@@ -989,7 +970,7 @@ $('#cbxCidade').html(s);
                     color: function(context) {
                       var index = context.dataIndex;
                       var value = context.dataset.data[index];
-                      return value > 0 ? 'blue' :  // draw negative values in red
+                      return value > 0 ? 'black' :  // draw negative values in red
                         value = 0 ? 'white' :      // else, alternate values in blue and green
                         'white';
                     },
@@ -1042,9 +1023,6 @@ $('#cbxCidade').html(s);
                 backgroundColor: [
                      '#66BB6A',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1053,9 +1031,6 @@ $('#cbxCidade').html(s);
                 backgroundColor: [
                      '#FFA726',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1063,9 +1038,6 @@ $('#cbxCidade').html(s);
                 data: numeroocorencia3,
                 backgroundColor: [
                     '#EF5350',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }
@@ -1078,7 +1050,7 @@ $('#cbxCidade').html(s);
                     color: function(context) {
                       var index = context.dataIndex;
                       var value = context.dataset.data[index];
-                      return value > 0 ? 'blue' :  // draw negative values in red
+                      return value > 0 ? 'black' :  // draw negative values in red
                         value = 0 ? 'white' :      // else, alternate values in blue and green
                         'white';
                     },

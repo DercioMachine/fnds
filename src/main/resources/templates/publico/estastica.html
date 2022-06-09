@@ -875,9 +875,7 @@ function onChangePorAno(){
               '#EF5350',
               '#4299f5'
             ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
-            ],
+            
             borderWidth: 1
           }]
         };
@@ -894,7 +892,7 @@ function onChangePorAno(){
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -926,10 +924,8 @@ function onChangePorAno(){
               '#800080',
               '#4299f5',
               '#FFA726',
-              '#66BB6A'
-            ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
+              '#66BB6A',
+              '#EF5350'
             ],
             borderWidth: 1
           }]
@@ -947,7 +943,7 @@ function onChangePorAno(){
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -987,9 +983,6 @@ function onChangePorAno(){
               '#96a99b',
 
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
             borderWidth: 1
         }]
     },
@@ -1004,7 +997,7 @@ function onChangePorAno(){
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -1036,9 +1029,6 @@ function onChangePorAno(){
               '#EF5350',
 
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
             borderWidth: 1
         }]
     },
@@ -1051,7 +1041,7 @@ function onChangePorAno(){
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -1179,9 +1169,6 @@ function onChangePorAno(){
                 backgroundColor: [
                      '#66BB6A',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1190,9 +1177,6 @@ function onChangePorAno(){
                 backgroundColor: [
                      '#FFA726',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1200,9 +1184,6 @@ function onChangePorAno(){
                 data: numeroocorencia3,
                 backgroundColor: [
                     '#EF5350',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }
@@ -1220,7 +1201,7 @@ function onChangePorAno(){
                     color: function(context) {
                       var index = context.dataIndex;
                       var value = context.dataset.data[index];
-                      return value > 0 ? 'blue' :  // draw negative values in red
+                      return value > 0 ? 'black' :  // draw negative values in red
                         value = 0 ? 'white' :      // else, alternate values in blue and green
                         'white';
                     },
@@ -1273,9 +1254,6 @@ function onChangePorAno(){
                 backgroundColor: [
                      '#66BB6A',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1284,9 +1262,6 @@ function onChangePorAno(){
                 backgroundColor: [
                      '#FFA726',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1294,9 +1269,6 @@ function onChangePorAno(){
                 data: numeroocorencia3,
                 backgroundColor: [
                     '#EF5350',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }
@@ -1309,7 +1281,7 @@ function onChangePorAno(){
                     color: function(context) {
                       var index = context.dataIndex;
                       var value = context.dataset.data[index];
-                      return value > 0 ? 'blue' :  // draw negative values in red
+                      return value > 0 ? 'black' :  // draw negative values in red
                         value = 0 ? 'white' :      // else, alternate values in blue and green
                         'white';
                     },

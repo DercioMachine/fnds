@@ -520,7 +520,7 @@ document.getElementById("divano").style.display="block";
                                 <div style="color:rgb(255,255,255); text-transform: capitalize;  font-size: 12px;" class="subheader" >Ocorrências</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-archive"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasProcedentes}]]</span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h3">[[${totalDeOcorrenciasProcedentes}]]</span>
                         </div>
                     </div>
                 </div>
@@ -532,7 +532,7 @@ document.getElementById("divano").style.display="block";
                                 <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Consultas/Sugestões...</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-alt"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoReclamacoes}]]</span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h3">[[${totalDeOcorrenciasNaoReclamacoes}]]</span>
                         </div>
                     </div>
                 </div>
@@ -544,7 +544,7 @@ document.getElementById("divano").style.display="block";
                                 <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader" >Reclamações</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-list-alt"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesProcedentes}]]</span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h3">[[${totalDeReclamacoesProcedentes}]]</span>
                         </div>
                     </div>
                 </div>
@@ -557,7 +557,7 @@ document.getElementById("divano").style.display="block";
                                 <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Resolvidas</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-calendar-check"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesTerminadas}]]</span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h3">[[${totalDeReclamacoesTerminadas}]]</span>
 
                         </div>
                     </div>
@@ -570,7 +570,7 @@ document.getElementById("divano").style.display="block";
                                 <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Em atendimento</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fas fa-recycle"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeReclamacoesEmAndamento}]]</span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h3">[[${totalDeReclamacoesEmAndamento}]]</span>
 
                         </div>
                     </div>
@@ -584,7 +584,7 @@ document.getElementById("divano").style.display="block";
                                 <div style="color:rgb(255,255,255); text-transform: capitalize; font-size: 12px;" class="subheader">Não resolvidas</div>
                             </div>
                             <span style="font-size:30px; padding-right:70px; color: rgba(255,255,255,0.5);margin-top:0; margin-bottom: 0" ><i class="fa fa-ban"></i></span>
-                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h2">[[${totalDeOcorrenciasNaoResolvidas}]]</span>
+                            <span style="color:rgb(255,255,255);margin-bottom: 25px;" class="h3">[[${totalDeOcorrenciasNaoResolvidas}]]</span>
                         </div>
                     </div>
                 </div>
@@ -867,9 +867,7 @@ document.getElementById("divano").style.display="block";
               '#EF5350',
               '#4299f5'
             ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
-            ],
+            
             borderWidth: 1
           }]
         };
@@ -886,7 +884,7 @@ document.getElementById("divano").style.display="block";
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -918,10 +916,8 @@ document.getElementById("divano").style.display="block";
               '#800080',
               '#4299f5',
               '#FFA726',
-              '#66BB6A'
-            ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
+              '#66BB6A',
+              '#EF5350'
             ],
             borderWidth: 1
           }]
@@ -939,7 +935,7 @@ document.getElementById("divano").style.display="block";
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -979,9 +975,6 @@ document.getElementById("divano").style.display="block";
               '#96a99b',
 
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
             borderWidth: 1
         }]
     },
@@ -996,7 +989,7 @@ document.getElementById("divano").style.display="block";
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -1028,9 +1021,6 @@ document.getElementById("divano").style.display="block";
               '#EF5350',
 
             ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
             borderWidth: 1
         }]
     },
@@ -1043,7 +1033,7 @@ document.getElementById("divano").style.display="block";
                       title: {
                         font: {
                           weight: 'bold',
-                          size: 20,
+                          size: 12,
                         }
                       }
                     }
@@ -1171,9 +1161,6 @@ document.getElementById("divano").style.display="block";
                 backgroundColor: [
                      '#66BB6A',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1182,9 +1169,6 @@ document.getElementById("divano").style.display="block";
                 backgroundColor: [
                      '#FFA726',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1192,9 +1176,6 @@ document.getElementById("divano").style.display="block";
                 data: numeroocorencia3,
                 backgroundColor: [
                     '#EF5350',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }
@@ -1212,7 +1193,7 @@ document.getElementById("divano").style.display="block";
                     color: function(context) {
                       var index = context.dataIndex;
                       var value = context.dataset.data[index];
-                      return value > 0 ? 'blue' :  // draw negative values in red
+                      return value > 0 ? 'black' :  // draw negative values in red
                         value = 0 ? 'white' :      // else, alternate values in blue and green
                         'white';
                     },
@@ -1265,9 +1246,6 @@ document.getElementById("divano").style.display="block";
                 backgroundColor: [
                      '#66BB6A',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1276,9 +1254,6 @@ document.getElementById("divano").style.display="block";
                 backgroundColor: [
                      '#FFA726',
                 ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
                 borderWidth: 1
             },
             {
@@ -1286,9 +1261,6 @@ document.getElementById("divano").style.display="block";
                 data: numeroocorencia3,
                 backgroundColor: [
                     '#EF5350',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }
@@ -1301,7 +1273,7 @@ document.getElementById("divano").style.display="block";
                     color: function(context) {
                       var index = context.dataIndex;
                       var value = context.dataset.data[index];
-                      return value > 0 ? 'blue' :  // draw negative values in red
+                      return value > 0 ? 'black' :  // draw negative values in red
                         value = 0 ? 'white' :      // else, alternate values in blue and green
                         'white';
                     },
