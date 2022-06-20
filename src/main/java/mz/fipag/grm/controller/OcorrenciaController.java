@@ -158,11 +158,11 @@ public class OcorrenciaController {
         List<Ocorrencia> ocorrencia = null;
 
 
-        System.out.println(authentication.getName());
+        //System.out.println(authentication.getName());
 
         User userlogado = userRepository.findByUsername(authentication.getName());
 
-        System.out.println(userlogado.getProvincia().getDesignacao());
+        //System.out.println(userlogado.getProvincia().getDesignacao());
 
         if(!userlogado.getProvincia().getDesignacao().equals("Nacional")){
             ocorrencia = ocorrenciaRepository.buscarOcorrenciasPorUsuariosProvinciaProjecto(userlogado.getProvincia().getId(),userlogado.getId());
@@ -360,144 +360,151 @@ public class OcorrenciaController {
     @PostMapping("/ocorrencias/cadastrar")
 	public String salvarOcorrencia(Ocorrencia ocorrencia,Authentication authentication, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
 
-
-        User userlogado = userRepository.findByUsername(authentication.getName());
-
-        int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
-        Integer numeroDeOrdem = numeroOrdem;
-
-        numeroDeOrdem++;
-
-    	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
-    	int ano = Calendar.getInstance().get(Calendar.YEAR);
     	
-    	String anoo = String.valueOf(ano);
-    	String anooo= anoo.substring(2, 4);
+    	try {
+			
+    		User userlogado = userRepository.findByUsername(authentication.getName());
+
+            int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+            Integer numeroDeOrdem = numeroOrdem;
+
+            numeroDeOrdem++;
+
+        	int codigo = ThreadLocalRandom.current().nextInt(9, 100);
+        	int ano = Calendar.getInstance().get(Calendar.YEAR);
+        	
+        	String anoo = String.valueOf(ano);
+        	String anooo= anoo.substring(2, 4);
+        	
+        	
+        	
+        		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
+        		ocorrencia.setRegistado(true);
+        		ocorrencia.setNumeroordem(numeroDeOrdem);
+        		ocorrencia.setResponsavel(userlogado);
+        		ocorrencia.setEstado("Registado");
+        		
+        		if(ocorrencia.getSexo()==null) {
+        			ocorrencia.setSexo("ND");
+        		}
+        		ocorrenciaService.salvar(ocorrencia);
+
+
+        	for(MultipartFile file: files) {
+        		if(!file.getOriginalFilename().isEmpty()) {
+    				
+    				docStorageService.saveFile(file, ocorrencia, descricaoNexo);
+    			}
+            }
+
+
+            String localprovincia = ocorrencia.getProvincia().getDesignacao();
+            long projecto = ocorrencia.getProjecto().getId();
+
+        	 List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);
+        	 String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
+     		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
+
+
+
+            if(contacto!=null){
+
+                String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
+                smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
+
+            }
+
+            if(email!=null){
+
+                String descricao ="Caro Utente, a sua preocupação foi submetida com sucesso.\n" +
+                        "NOTA: Anote o seu código para o acompanhamento\n"+provincia.getCodigo()+""+codigo+""+anooo;
+
+                String emaildestino = ocorrencia.getEmailUtente();
+                String nome = "A sua preocupação foi submetido com sucesso";
+
+                String assunto = "Confirmação de código de acesso - FNDS";
+
+                emailService.enviarEmail(descricao,nome,emaildestino,assunto);
+            }
+
+         	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente")) {
+         		
+         		 
+         		
+         		 for (int i=0;i<lista.size();i++) {
+         			 
+                    String nome = "Preocupação submetida com sucesso";
+
+                    String assunto = "Confirmação de submissão - FNDS";
+                	 
+                	 String smsurgente = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência urgente com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+                	 
+                	 
+                	 
+                	 if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
+            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
+            	  
+            	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
+            	   
+            	   
+               }
+         		
+         	}
+        	
+         	}
+         	
+         	if(ocorrencia.getTipoAlerta().getDesignacao().equals("GBV")) {
+         		
+         		
+        		 for (int i=0;i<lista.size();i++) {
+        			 
+                   String nome = "Preocupação submetida com sucesso";
+
+                   String assunto = "Confirmação de submissão - FNDS";
+               	 
+               	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi submetida uma ocorrência de violência Baseada no Gênero com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+               	 
+               	 
+               	if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
+           	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
+           	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
+              }
+        		
+        	}
+       	
+        	}
+         	
+         	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Normal")) {
+         		
+       		 
+         		
+       		 for (int i=0;i<lista.size();i++) {
+       			 
+                  String nome = "Preocupação submetida com sucesso";
+
+                  String assunto = "Confirmação de submissão - FNDS";
+              	 
+              	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+              	 
+              	 
+             if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+          	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
+             }
+       		
+       	}
+      	
+       	}
+         	
+    	
+    	} catch (Exception e) {
+			System.out.println("MENSAGEM: "+e.getStackTrace());
+			System.out.println("MENSAGEM: "+e.getMessage());
+		}
     	
     	
-    	
-    		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
-    		ocorrencia.setRegistado(true);
-    		ocorrencia.setNumeroordem(numeroDeOrdem);
-    		ocorrencia.setResponsavel(userlogado);
-    		ocorrencia.setEstado("Registado");
-    		
-    		if(ocorrencia.getSexo()==null) {
-    			ocorrencia.setSexo("ND");
-    		}
-    		ocorrenciaService.salvar(ocorrencia);
-
-
-    	for(MultipartFile file: files) {
-    		if(!file.getOriginalFilename().isEmpty()) {
-				
-				docStorageService.saveFile(file, ocorrencia, descricaoNexo);
-			}
-        }
-
-
-        String localprovincia = ocorrencia.getProvincia().getDesignacao();
-        long projecto = ocorrencia.getProjecto().getId();
-
-    	 List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);
-    	 String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
- 		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
-
-
-
-        if(contacto!=null){
-
-            String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
-            smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
-
-        }
-
-        if(email!=null){
-
-            String descricao ="Caro Utente, a sua preocupação foi submetida com sucesso.\n" +
-                    "NOTA: Anote o seu código para o acompanhamento\n"+provincia.getCodigo()+""+codigo+""+anooo;
-
-            String emaildestino = ocorrencia.getEmailUtente();
-            String nome = "A sua preocupação foi submetido com sucesso";
-
-            String assunto = "Confirmação de código de acesso - FNDS";
-
-            emailService.enviarEmail(descricao,nome,emaildestino,assunto);
-        }
-
-     	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Urgente")) {
-     		
-     		 
-     		
-     		 for (int i=0;i<lista.size();i++) {
-     			 
-                String nome = "Preocupação submetida com sucesso";
-
-                String assunto = "Confirmação de submissão - FNDS";
-            	 
-            	 String smsurgente = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência urgente com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
-            	 
-            	 
-            	 
-           if(lista.get(i).getTipourgente().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
-        	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
-        	  
-        	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
-        	   
-        	   
-           }
-     		
-     	}
-    	
-     	}
-     	
-     	if(ocorrencia.getTipoAlerta().getDesignacao().equals("GBV")) {
-     		
-    		 
-     		
-    		 for (int i=0;i<lista.size();i++) {
-    			 
-               String nome = "Preocupação submetida com sucesso";
-
-               String assunto = "Confirmação de submissão - FNDS";
-           	 
-           	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi submetida uma ocorrência GBV com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
-           	 
-           	 
-          if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
-       	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
-       	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
-          }
-    		
-    	}
-   	
-    	}
-     	
-     	if(ocorrencia.getTipoAlerta().getDesignacao().equals("Normal")) {
-     		
-   		 
-     		
-   		 for (int i=0;i<lista.size();i++) {
-   			 
-              String nome = "Preocupação submetida com sucesso";
-
-              String assunto = "Confirmação de submissão - FNDS";
-          	 
-          	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
-          	 
-          	 
-         if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
-      	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
-         }
-   		
-   	}
-  	
-   	}
-     	
-     	
-     	
-
     	return "redirect:/listar/ocorrencia";
+
+        
 	}
     
     @PostMapping("/ocorrencias/listar")
@@ -807,11 +814,11 @@ public class OcorrenciaController {
                 	 String smsurgente = "A ocorrência urgente com o código "+ocorrencia.getGrmStamp() +" está validado e é procedente!";
                 	 String smsgbv = "A ocorrência GBV com o código "+ocorrencia.getGrmStamp() +" está validado e é procedente!";
                 	 
-               if(lista.get(i).getTipourgente().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+               if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
             	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
             	   
-               }else if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+               }else if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
             	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
                }
