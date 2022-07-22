@@ -1818,7 +1818,7 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 			}
 			
 			if(ocorrencia.getFormaComunicacao()==null) {
-				ocorrencia.setFormaComunicacao("Email");
+				ocorrencia.setFormaComunicacao("E-mail");
 			}
 			
 			if(ocorrencia.getOrigem()==null) {
