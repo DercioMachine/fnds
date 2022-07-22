@@ -1817,6 +1817,10 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 				ocorrencia.setSexo("ND");
 			}
 			
+			if(ocorrencia.getFormaComunicacao()==null) {
+				ocorrencia.setFormaComunicacao("Email");
+			}
+			
 			if(ocorrencia.getOrigem()==null) {
 				ocorrencia.setOrigem("Anónimo");
 			}
