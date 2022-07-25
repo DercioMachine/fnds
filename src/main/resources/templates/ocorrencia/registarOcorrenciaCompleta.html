@@ -115,7 +115,7 @@ OrigemInternoExterno();
     type: 'GET',
    // url: 'http://localhost:8080/origem/externo',
    // url: 'http://196.22.53.245:8080/fnds/origem/externo',
-    url: 'https://sismdr.fnds.gov.mz/origem/externo',
+    url: 'http://sismdr.fnds.gov.mz/fnds/origem/externo',
     // url: 'http://portal.fipag.co.mz/grm2/origem/externo',
 
 
@@ -342,7 +342,7 @@ type: 'GET',
 
 //url: 'http://fipag.herokuapp.com/distrito/'+provinciaId,
 //url: 'http://portal.fipag.co.mz/grm/distrito/'+provinciaId,
- url: 'https://sismdr.fnds.gov.mz/distrito/'+provinciaId,
+ url: 'http://sismdr.fnds.gov.mz/fnds/distrito/'+provinciaId,
 //url: 'http://localhost:8080/distrito/'+provinciaId,
 
 
@@ -381,7 +381,7 @@ $.ajax({
 type: 'GET',
 //url: 'http://portal.fipag.co.mz/grm/posto/'+distritoId,
 //url: 'http://fipag.herokuapp.com/posto/'+distritoId,
-url: 'https://sismdr.fnds.gov.mz/posto/'+distritoId,
+url: 'http://sismdr.fnds.gov.mz/fnds/posto/'+distritoId,
 //url: 'http://localhost:8080/posto/'+distritoId,
 
 //url: 'http://portal.fipag.co.mz/grm2/posto/'+distritoId,
@@ -413,7 +413,7 @@ var categoriaId = $(this).val();
 
 $.ajax({
 type: 'GET',
-url: 'https://sismdr.fnds.gov.mz/subcategoria/'+categoriaId,
+url: 'http://sismdr.fnds.gov.mz/fnds/subcategoria/'+categoriaId,
 //url: 'http://localhost/subcategoria/'+categoriaId,
 
 success: function (result){
