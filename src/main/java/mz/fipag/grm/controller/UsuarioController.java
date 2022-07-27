@@ -13,11 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class UsuarioController {
@@ -120,17 +117,24 @@ public class UsuarioController {
         Regiao regiaonacional = regiaoRepository.findByDesignacao();
 
         if(user.getTipourgente()==null){
-            user.setTipogbv("Não");
+            user.setTipourgente("Não");
         }
 
         if(user.getTipogbv()==null){
             user.setTipogbv("Não");
         }
+
+        if(user.getRelatoriomensal()==null){
+            user.setRelatoriomensal("Não");
+        }
+
+
+        try{
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-
-        for(long projecto: projectos) {
+            for(long projecto: projectos) {
 
                 Projecto projecto1 = projectoService.buscarPorId(projecto);
 
@@ -138,7 +142,13 @@ public class UsuarioController {
                 projectoUser.setUser(user);
                 projectoUserRepository.save(projectoUser);
 
+            }
+
+        } catch (Exception e) {
+            System.out.println("MENSAGEM: "+e.getStackTrace());
+            System.out.println("MENSAGEM: "+e.getMessage());
         }
+
 
         return "redirect:/listar/usuarios";
     }
@@ -200,8 +210,19 @@ public class UsuarioController {
             user.setTipogbv("Não");
         }
 
-    	user.setPassword(password);
-        userRepository.save(user);
+        if(user.getRelatoriomensal()==null){
+            user.setRelatoriomensal("Não");
+        }
+
+        try {
+
+            user.setPassword(password);
+            userRepository.save(user);
+
+        } catch (Exception e) {
+            System.out.println("MENSAGEM: "+e.getStackTrace());
+            System.out.println("MENSAGEM: "+e.getMessage());
+        }
 
         return "redirect:/listar/usuarios";
     }

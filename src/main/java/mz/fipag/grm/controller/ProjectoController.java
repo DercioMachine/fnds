@@ -25,12 +25,12 @@ public class ProjectoController {
 	@GetMapping("/listar/projecto")
     public String listarProjecto(ModelMap model, @RequestParam("page") Optional<Integer> page){
 		
-		int paginaActual = page.orElse(1);
-		PaginacaoUtil<Projecto> pageProjecto = projectoService.buscaPorPagina(paginaActual);
+		//int paginaActual = page.orElse(1);
+		//PaginacaoUtil<Projecto> pageProjecto = projectoService.buscaPorPagina(paginaActual);
 		
-		//model.addAttribute("projectos", projectoService.buscarTodos());
+		model.addAttribute("projectos", projectoService.buscarTodos());
 		
-		model.addAttribute("pageProjecto", pageProjecto);
+		//model.addAttribute("pageProjecto", pageProjecto);
 		
         return "parametrizacao/projecto/listarprojecto";
     }

@@ -11,7 +11,7 @@ public class SMSService {
 	
 	 public static final String ACCOUNT_SID = "AC210a20618423ed1ec9fabcd1a047dc9c";
 	//public static final String ACCOUNT_SID = "SMe114e44d972e4362a10f97c3590ce380";
-    public static final String AUTH_TOKEN = "7702518facc3a68aa82f2911b8b8816c";
+    public static final String AUTH_TOKEN = "79e93accbc4e2642519302209ccd7bec";
 
     public void sendSMS(String telefone,String mensagem) throws AuthenticationException {
 

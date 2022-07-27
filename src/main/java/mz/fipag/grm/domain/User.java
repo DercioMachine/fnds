@@ -32,6 +32,9 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "tipourgente", nullable = true,length=120)
     private String tipourgente="Não";  // Sim e Nao
 
+    @Column(name = "relatoriomensal", nullable = true,length=120)
+    private String relatoriomensal="Não";
+
     @ManyToOne
     @JoinColumn(name="provincia_id")
     private Provincia provincia;
@@ -55,6 +58,14 @@ public class User extends AbstractEntity implements UserDetails {
 
     public void setNivel(long nivel) {
         this.nivel = nivel;
+    }
+
+    public String getRelatoriomensal() {
+        return relatoriomensal;
+    }
+
+    public void setRelatoriomensal(String relatoriomensal) {
+        this.relatoriomensal = relatoriomensal;
     }
 
     public String getTipogbv() {

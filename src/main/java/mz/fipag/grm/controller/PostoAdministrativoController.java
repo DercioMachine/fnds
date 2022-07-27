@@ -59,8 +59,7 @@ public class PostoAdministrativoController {
 		//attr.addFlashAttribute("success", "Posto Administrativo editado com sucesso.");
 		return "redirect:/listar/posto";
 	}
-	
-	
+
 	@GetMapping("/postos/editar/{id}")
 	public String vistaEditarPosto(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("posto", postoAdministrativoService.buscarPorId(id));

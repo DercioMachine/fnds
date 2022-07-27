@@ -280,6 +280,45 @@ document.getElementById("nacional").style.display="block";
 
                 </div>
 
+                <div class="row">
+                    <div  class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="local" class="form-label">Nivel de Responsabilidade</label>
+                            <select  class="form-control custom-select form-select" th:field="*{nivel}" >
+                                <option th:each="p : ${niveis}" th:value="${p.id}" th:text="${p.responsavel}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label">Recebe Relatório Mensal </label>
+                        </div>
+
+                        <th:block>
+
+                            <div class="card mt-2">
+
+                                <div  class="card-header">
+
+                                    <div class="form-check-inline" >
+                                        <label class="form-check-label">
+                                            <input  type="checkbox"  th:field="*{relatoriomensal}" value="Sim"> Sim
+                                        </label>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </th:block>
+
+                    </div>
+
+
+
+                </div>
+
                 <div class="row" >
 
                     <div class="col-12 col-sm-12" th:if="${!projectos.isEmpty}">
