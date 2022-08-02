@@ -398,10 +398,22 @@ public class OcorrenciaController {
             }
 
 
-            String localprovincia = ocorrencia.getProvincia().getDesignacao();
+            //String localprovincia = ocorrencia.getProvincia().getDesignacao();
+            String localprojecto = ocorrencia.getProjecto().getDesignacao();
+            
+            
+            
             long projecto = ocorrencia.getProjecto().getId();
 
         	 List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);
+        	 
+        	 List<ProjectoUser> listaProuser = (List<ProjectoUser>) projectoUserRepository.buscarTodosProjectoUserComProjectoSelecionado(projecto);
+        	 
+        	 
+        	// List<ProjectoUser> listaPuser
+        	 
+        	 
+        	 
         	 String contacto = ocorrencia.getContactoUtente().isEmpty() ? null : ocorrencia.getContactoUtente();
      		String email = ocorrencia.getEmailUtente().isEmpty() ? null : ocorrencia.getEmailUtente();
 
@@ -409,7 +421,7 @@ public class OcorrenciaController {
 
             if(contacto!=null){
 
-                String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
+                String mensagem = "A sua preocupação foi submetido com sucesso. Código: "+provincia.getCodigo()+""+codigo+""+anooo;
                 smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
 
             }
@@ -437,11 +449,14 @@ public class OcorrenciaController {
 
                     String assunto = "Confirmação de submissão - FNDS";
                 	 
-                	 String smsurgente = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência urgente com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+                	 String smsurgente = "Há uma ocorrência urgente. Código : "+provincia.getCodigo()+""+codigo+""+anooo;
                 	 
                 	 
                 	 
-                	 if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
+                	 //if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
+                	// if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()))){
+                	 
+                	 if(lista.get(i).getTipourgente().equals("Sim")  && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
             	  
             	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
@@ -462,10 +477,12 @@ public class OcorrenciaController {
 
                    String assunto = "Confirmação de submissão - FNDS";
                	 
-               	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi submetida uma ocorrência de violência Baseada no Gênero com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+               	 String smsgbv = "Há uma ocorrência VBG. Código : "+provincia.getCodigo()+""+codigo+""+anooo;
                	 
                	 
-               	if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
+               //	if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
+               	 
+               	if(lista.get(i).getTipogbv().equals("Sim") && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
            	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
               }
@@ -484,10 +501,10 @@ public class OcorrenciaController {
 
                   String assunto = "Confirmação de submissão - FNDS";
               	 
-              	 String smsgbv = "Sr(a) "+lista.get(i).getNome()+" foi Submetida uma ocorrência com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
+              	 String smsgbv = "Há uma ocorrência com o código : "+provincia.getCodigo()+""+codigo+""+anooo;
               	 
               	 
-             if(lista.get(i).getTipogbv().equals("Sim") && localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) {
+             if(lista.get(i).getTipogbv().equals("Sim") && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))) {
           	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
              }
        		
@@ -779,7 +796,7 @@ public class OcorrenciaController {
 
                 if(contacto!=null) {
 
-                    String smsNaoprocede = "Caro Utente a sua ocorrência não procede, veja os motivos pesquisando com o seu código: "+ocorrencia.getGrmStamp();
+                    String smsNaoprocede = "Caro Utente a sua ocorrência não procede, consulte o código: "+ocorrencia.getGrmStamp();
                     smsService.sendSMS("+258" + ocorrencia.getContactoUtente(), smsNaoprocede);
 
                 }
@@ -796,10 +813,16 @@ public class OcorrenciaController {
             
 
 
-         	String localprovincia = ocorrencia.getProvincia().getDesignacao();
+         	//String localprovincia = ocorrencia.getProvincia().getDesignacao();
+            String localprojecto = ocorrencia.getProjecto().getDesignacao();
+         	
+         	
+         	
             long projecto = ocorrencia.getProjecto().getId();
 
             List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);
+            
+            List<ProjectoUser> listaProuser = (List<ProjectoUser>) projectoUserRepository.buscarTodosProjectoUserComProjectoSelecionado(projecto);
          	
          	 if(procedencia.equals("Sim")){
          	
@@ -811,14 +834,21 @@ public class OcorrenciaController {
          		
          		 for (int i=0;i<lista.size();i++) {
                 	 
-                	 String smsurgente = "A ocorrência urgente com o código "+ocorrencia.getGrmStamp() +" está validado e é procedente!";
-                	 String smsgbv = "A ocorrência GBV com o código "+ocorrencia.getGrmStamp() +" está validado e é procedente!";
+                	 String smsurgente = "A ocorrência urgente "+ocorrencia.getGrmStamp() +" é procedente!";
+                	 String smsgbv = "A ocorrência GBV "+ocorrencia.getGrmStamp() +" é procedente!";
                 	 
-               if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
+              // if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
+                	 if(lista.get(i).getTipourgente().equals("Sim")  && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
+                	
+                		 
+                		 
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
             	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
             	   
-               }else if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
+               }else 
+            	   
+            	  // if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
+            	   if(lista.get(i).getTipogbv().equals("Sim")  && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
             	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
             	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
                }

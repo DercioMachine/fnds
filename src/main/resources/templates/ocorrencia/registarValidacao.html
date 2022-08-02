@@ -290,6 +290,29 @@ $('#subcategoria').html(s);
                         </div>
                     </div>
                     
+                    
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <select required id="categoria" class="form-control custom-select form-select" th:field="*{categoria}" >
+                                <option value="">Selecione a Categoria...</option>
+                                <option th:each="p : ${categorias}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="subcategoria" class="form-label">Sub Categoria</label>
+                            <select required id="subcategoria" class="form-control custom-select form-select" th:field="*{subcategoria}" >
+                                <option value="">Selecione a Sub Categoria ...</option>
+									<option th:each="p : ${subcategorias}"
+                                        th:value="${p.id}" th:text="${p.designacao}">Maputo</option>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div style="display: none;">
                     
                     

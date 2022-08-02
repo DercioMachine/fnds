@@ -40,6 +40,7 @@ import mz.fipag.grm.domain.Empreiteiro;
 import mz.fipag.grm.domain.Ocorrencia;
 import mz.fipag.grm.domain.PostoAdministrativo;
 import mz.fipag.grm.domain.Projecto;
+import mz.fipag.grm.domain.ProjectoUser;
 import mz.fipag.grm.domain.Provincia;
 import mz.fipag.grm.domain.Resolucao;
 import mz.fipag.grm.domain.TipoAlerta;
@@ -49,6 +50,7 @@ import mz.fipag.grm.repository.DistritoRepository;
 import mz.fipag.grm.repository.DocsRepository;
 import mz.fipag.grm.repository.OcorrenciaRepository;
 import mz.fipag.grm.repository.PostoAdminitrativoRepository;
+import mz.fipag.grm.repository.ProjectoUserRepository;
 import mz.fipag.grm.repository.ProvinciaRepository;
 import mz.fipag.grm.repository.ResolucaoRepository;
 import mz.fipag.grm.repository.ResponsabilidadeRepository;
@@ -74,6 +76,9 @@ public class IndexController {
 	
 	@Autowired
     private ProvinciaRepository provinciaRepository;
+	
+	@Autowired
+    private ProjectoUserRepository projectoUserRepository;
 
 	@Autowired
 	private OcorrenciaService ocorrenciaService;
@@ -1842,7 +1847,7 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 
 			if(contacto!=null){
 
-				String mensagem = "A sua preocupação foi submetido com sucesso, o código para acompanhamento é: "+provincia.getCodigo()+""+codigo+""+anooo;
+				String mensagem = "A sua preocupação foi submetido com sucesso. Código: "+provincia.getCodigo()+""+codigo+""+anooo;
 				smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
 
 			}
@@ -1862,11 +1867,18 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 
 
 			List<User> lista = (List<User>) userRepository.BuscarUserPorProjecto(ocorrencia.getProjecto());
+			
+			
+			 long projecto = ocorrencia.getProjecto().getId();
+			
+			List<ProjectoUser> listaProuser = (List<ProjectoUser>) projectoUserRepository.buscarTodosProjectoUserComProjectoSelecionado(projecto);
 
 
 			String assun = "Ocorrência Temporária - FNDS";
 
-			String localprovincia = ocorrencia.getProvincia().getDesignacao();
+			//String localprovincia = ocorrencia.getProvincia().getDesignacao();
+			
+			String localprojecto = ocorrencia.getProjecto().getDesignacao();
 
 			if(ocorrencia.getEstado().equals("Temporario")) {
 
@@ -1874,16 +1886,17 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 				for (int i=0;i<lista.size();i++) {
 
 					String emaildest = lista.get(i).getEmail();
-					String descric = "Sr(a). "+lista.get(i).getNome()+ ". Há uma  preocupação Temporária de CODIGO: "+provincia.getCodigo()+""+codigo+""+anooo;
+					String descric = "Há uma ocorrência Temporária com o código: "+provincia.getCodigo()+""+codigo+""+anooo;
 
-					if(localprovincia.equals((lista.get(i).getProvincia().getDesignacao())) ||("Nacional".equals(lista.get(i).getProvincia().getDesignacao())) ) {
+					//if(localprovincia.equals((lista.get(i).getProvincia().getDesignacao())) ||("Nacional".equals(lista.get(i).getProvincia().getDesignacao())) ) {
 						emailService.enviarEmail(descric,"FNDS", emaildest, assun);
-					}
+						
+						if(localprojecto.equals((listaProuser.get(i).getProjecto().getDesignacao()))) {
+				
+				}
 				}
 
 			}
-
-
 
 
 			// model.addAttribute("ocorrenciaa", ocorrencia.getGrmStamp());

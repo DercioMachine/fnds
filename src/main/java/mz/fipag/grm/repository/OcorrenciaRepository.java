@@ -625,6 +625,7 @@ public List<Object[]> busqueTnTI();*/
 			+ " WHEN :radioButton = 'A' THEN year(O.created)=(:ano)\r\n"
 			+ " WHEN :radioButton = 'S' THEN if(1=1,month(O.created)<=6,month(O.created)>6)\r\n"
 			+ " WHEN :radioButton = 'T' THEN quarter(O.created)=(:codSelected)\r\n"
+			+ "ELSE month(O.created)=(:codSelected)\r\n"
 			+ " END)  GROUP BY Pr.designacao", nativeQuery=true)
 
 	public List<Object[]> busqueTudoAgrupadoPorProvinciaFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("ano") int ano);
