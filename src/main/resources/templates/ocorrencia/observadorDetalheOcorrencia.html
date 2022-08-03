@@ -57,7 +57,7 @@
 
     <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
-	 <div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+	 <div  th:if="${ocorrencia.resolucao =='A' }">
 		 <div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
 			</div>
@@ -116,6 +116,7 @@
 							  <th>Mediador</th>
 							  <th>Responsabilidade</th>
 							  <th>Data Resolução</th>
+							  <th></th>
 							  <!--  <th></th> -->
 						  </tr>
 						  </thead>
@@ -128,7 +129,16 @@
 								<td th:text="${r.mediador}" >Auxiliar Contábil</td>
 								<td th:text="${r.responsabilidade.responsavel}" ><span class="text-muted">01401</span></td>
 								<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+								<td ></td>
 							</div>
+							  <div th:if="${r.tipo =='T' }">
+								  <td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
+								  <td th:text="${r.designacao}" >Auxiliar Contábil</td>
+								  <td th:text="${r.mediador}" >Auxiliar Contábil</td>
+								  <td th:text="${r.responsabilidade.responsavel}" ><span class="text-muted">01401</span></td>
+								  <td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+								  <td >Resolvido</td>
+							  </div>
 						  </tr>
 						  
 

@@ -156,47 +156,8 @@
 			</div>
 		</div>
 
-		<div  th:if="${ocorrencia.resolucao =='T' }">
-			<div style="background: #60a18a; color: white">
-				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Terminada</h2>
-			</div>
-			<br>
 
-			<div class="card-body">
-				<div class="row" >
-
-					<div class="table-responsive">
-						<table  class="table card-table table-vcenter text-nowrap datatable">
-							<thead>
-							<tr style="color: rgb(65,105,225)">
-								<th class="w-1">Nivel</th>
-								<th>Designação</th>
-								<th>Data</th>
-								<!--  <th></th> -->
-							</tr>
-							</thead>
-							<tbody>
-
-							<!--  <tr th:each="p : ${categorias}"> -->
-							<tr th:each="r, stat : ${resolucoes}">
-								<div th:if="${r.tipo =='T' }">
-									<td th:text="${r.responsabilidade.level}" ><span class="text-muted">01401</span></td>
-									<td th:text="${r.designacao}" >Auxiliar Contábil</td>
-									<td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
-								</div>
-							</tr>
-
-
-							</tbody>
-						</table>
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-
-		<div  th:if="${ocorrencia.resolucao =='A' || ocorrencia.resolucao =='T' }">
+		<div  th:if="${ocorrencia.resolucao =='A'  }">
 			<div style="background: #60a18a; color: white">
 				<h2 style=" padding: 10px; margin: 0px;" class="card-title" >Acompanhamento</h2>
 			</div>
@@ -282,6 +243,18 @@
 									</a>
 								</td>
 							</div>
+							  <div th:if="${r.tipo =='T'}">
+								  <td th:text="${#dates.format(r.dataResolucao,'dd-MMM-yyyy')}" >Auxiliar Contábil</td>
+								  <td>
+									<span th:if="${r != null && r.responsabilidade != null && r.responsabilidade.responsavel != null}" th:text="${r.responsabilidade.responsavel}"  class="text-muted">
+									</span>
+								  </td>
+								  <td th:text="${r.mediador}" >Auxiliar Contábil</td>
+								  <td th:text="${r.motivo}" >Auxiliar Contábil</td>
+								  <td  >
+									 Resolvido
+								  </td>
+							  </div>
 						  </tr>
 
 
