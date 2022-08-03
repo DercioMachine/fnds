@@ -810,7 +810,7 @@ public List<Object[]> busqueTnTI();*/
 			"   \t and if(:provincia='',1=1, P.designacao =:provincia)\n" +
 			"   \t and if(:categoria='',1=1,categoria.designacao=:categoria)\n" +
 			"GROUP BY P.designacao;",nativeQuery=true)
-    List<Object[]> busqueTudoAgrupadoPorProvinciaEstadoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+	List<Object[]> busqueTudoAgrupadoPorProvinciaEstadoPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
 
 	@Query(value="select forma_comunicacao,count(forma_comunicacao)\n" +
 			"from ocorrencia \n" +
@@ -886,6 +886,9 @@ public List<Object[]> busqueTnTI();*/
 			"inner join categoria on O.categoriaid = categoria.id   \n" +
 			"where O.tipo_ocorrencia_id=1 and O.procedencia='Sim'  and O.created between if(:datainicial='','2022-1-1',:datainicial) and if(:datafinal ='',CURRENT_DATE,:datafinal) and if(:tipoOcorrencia='',1=1, tipo_ocorrencia.designacao=:tipoOcorrencia) and if(:estado='',1=1,resolucao =:estado) and if(:projecto='',1=1,projecto.designacao=:projecto) and if(:provincia='',1=1, Pr.designacao =:provincia) and if(:categoria='',1=1,categoria.designacao=:categoria) GROUP BY monthname(O.created))t order by nrmes;", nativeQuery=true)
 	List<Object[]> busqueTnTIPesquisa(Date datainicial, Date datafinal, String tipoOcorrencia, String estado, String projecto, String provincia, String categoria);
+
+	@Query(value="select * from ocorrencia where procedencia='Sim' and created between (:datainicial) and (:datafinal) ", nativeQuery=true)
+	List<Ocorrencia> buscarOcorrenciaPorData(Date datainicial, Date datafinal);
 
 
 

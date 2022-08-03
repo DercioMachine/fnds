@@ -104,7 +104,7 @@ public class OcorrenciasExcelExporter {
             createCell(row, columnCount++, ocorrencia.getResponsavel()==null ? null : ocorrencia.getResponsavel().getNome(), style);
             createCell(row, columnCount++, ocorrencia.getProjecto().getDesignacao(), style);
             createCell(row, columnCount++, ocorrencia.getProvincia().getDesignacao(), style);
-            createCell(row, columnCount++, ocorrencia.getDistrito().getDesignacao(), style);
+            createCell(row, columnCount++, ocorrencia.getDistrito() ==null ? null : ocorrencia.getDistrito().getDesignacao(), style);
             createCell(row, columnCount++, ocorrencia.getTipoOcorrencia()==null ? null : ocorrencia.getTipoOcorrencia().getDesignacao(), style);
             createCell(row, columnCount++, ocorrencia.getProcedencia(), style);
             createCell(row, columnCount++, resolucao , style);
