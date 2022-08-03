@@ -318,9 +318,34 @@
                          </div>
                      </div>
 
-                     <div class="col-6 col-sm-6">
+                     <div class="col-6 col-sm-3">
                          <div class="form-group">
                              <label class="form-label">Recebe Relatório Mensal </label>
+                         </div>
+
+                         <th:block>
+
+                             <div class="card mt-2">
+
+                                 <div  class="card-header">
+
+                                     <div class="form-check-inline" >
+                                         <label class="form-check-label">
+                                             <input  type="checkbox"  th:field="*{relatoriomensal}" value="Sim"> Sim
+                                         </label>
+                                     </div>
+
+
+                                 </div>
+                             </div>
+
+                         </th:block>
+
+                     </div>
+
+                     <div class="col-6 col-sm-3">
+                         <div class="form-group">
+                             <label class="form-label">Recebe Alertas Normais</label>
                          </div>
 
                          <th:block>

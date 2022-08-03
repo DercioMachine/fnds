@@ -128,6 +128,10 @@ public class UsuarioController {
             user.setRelatoriomensal("Não");
         }
 
+        if(user.getTiponormal()==null){
+            user.setRelatoriomensal("Não");
+        }
+
 
         try{
 
@@ -214,8 +218,11 @@ public class UsuarioController {
             user.setRelatoriomensal("Não");
         }
 
-        try {
+        if(user.getTiponormal()==null){
+            user.setRelatoriomensal("Não");
+        }
 
+     try{
             user.setPassword(password);
             userRepository.save(user);
 

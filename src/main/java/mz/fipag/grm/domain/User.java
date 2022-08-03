@@ -35,6 +35,9 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "relatoriomensal", nullable = true,length=120)
     private String relatoriomensal="Não";
 
+    @Column(name = "tiponormal", nullable = true,length=120)
+    private String tiponormal="Não";
+
     @ManyToOne
     @JoinColumn(name="provincia_id")
     private Provincia provincia;
@@ -66,6 +69,14 @@ public class User extends AbstractEntity implements UserDetails {
 
     public void setRelatoriomensal(String relatoriomensal) {
         this.relatoriomensal = relatoriomensal;
+    }
+
+    public String getTiponormal() {
+        return tiponormal;
+    }
+
+    public void setTiponormal(String tiponormal) {
+        this.tiponormal = tiponormal;
     }
 
     public String getTipogbv() {

@@ -1799,8 +1799,11 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 	public String preCadastrarOcorrencia(Ocorrencia ocorrencia, ModelMap model, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files, RedirectAttributes attr) throws MessagingException {
 
         
-		try {
-			int numeroOrdem = 1;//(int) ocorrenciaRepository.BuscarUltimoNumero();
+		//try {
+			//int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+
+			int numeroOrdem=1;
+
 	        Integer numeroDeOrdem = numeroOrdem;
 
 	        numeroDeOrdem++;
@@ -1905,10 +1908,10 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 
 			attr.addFlashAttribute("ocorrenciaa", ocorrenciaService.buscarPorId(ocorrencia.getId()));
 			
-		} catch (Exception e) {
-			System.out.println("MENSAGEM: "+e.getStackTrace());
-			System.out.println("MENSAGEM: "+e.getMessage());
-		}
+		//} catch (Exception e) {
+		//	System.out.println("MENSAGEM: "+e.getStackTrace());
+		//	System.out.println("MENSAGEM: "+e.getMessage());
+		//}
 		
 		
 

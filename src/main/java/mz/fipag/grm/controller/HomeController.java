@@ -1,17 +1,21 @@
 package mz.fipag.grm.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+import mz.fipag.grm.domain.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +26,8 @@ import mz.fipag.grm.service.CategoriaService;
 import mz.fipag.grm.service.JasperService;
 import mz.fipag.grm.service.ProjectoService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController {
@@ -780,6 +786,15 @@ public class HomeController {
         service.addParams("tipoOcorrencia", tipoOcorrencia);
         service.addParams("estado", estado);
 
+        model.addAttribute("categoria",categoria);
+        model.addAttribute("projecto",projecto);
+        model.addAttribute("provincia",provincia);
+        model.addAttribute("tipoOcorrencia",tipoOcorrencia);
+        model.addAttribute("estado",estado);
+        model.addAttribute("datainicial",datainicial);
+        model.addAttribute("datafinal",datafinal);
+
+
         model.addAttribute("ocorrencia", ocorrenciaRepository.totalDeOcorrenciasPorDataseProjectoRelatorio(datainicial,datafinal,projecto,provincia,estado,tipoOcorrencia, categoria));
         
         SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
@@ -837,5 +852,24 @@ public class HomeController {
         return "relatorio/ocorrencia";
 
     }
+
+    @GetMapping("/export/excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=fnds_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Ocorrencia> listUsers = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+
+        OcorrenciasExcelExporter excelExporter = new OcorrenciasExcelExporter(listUsers);
+
+        excelExporter.export(response);
+
+    }
+
 
 }

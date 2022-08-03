@@ -1,6 +1,7 @@
 package mz.fipag.grm.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,6 +69,9 @@ import mz.fipag.grm.service.ProvinciaService;
 import mz.fipag.grm.service.SMSService;
 import mz.fipag.grm.service.TipoAlertaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 
 @Controller
@@ -76,8 +80,8 @@ public class OcorrenciaController {
 	@Autowired
 	private SMSService smsService;
 
-	 @Autowired
-	    ProjectoRepository projectoRepository;
+    @Autowired
+	ProjectoRepository projectoRepository;
 	
 	@Autowired
 	private EmailService emailService;
@@ -753,7 +757,34 @@ public class OcorrenciaController {
         return "ocorrencia/detalharOcorrencia";
 
     }
-    
+
+    @GetMapping("/users/export")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<Ocorrencia> listUsers = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = {"Número", "Data Lançamento", "Data Ocorrência", "Descrição da Preocupação", "Canal","Utilizador","Projecto","Província","Distrito","Tipo Registo","Procedente","Data Resolução","Nível da resolução","Detalhes da improcedência"};
+        String[] nameMapping = {"id", "created", "dataOcorrencia", "assunto", "formaComunicacao"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (Ocorrencia ocorrencia : listUsers) {
+            csvWriter.write(ocorrencia, nameMapping);
+        }
+
+        csvWriter.close();
+
+    }
+
+
     /*
 	 *  VALIDACAO
 	 *
