@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
@@ -54,6 +55,8 @@ public class HomeController {
     private JasperService service;
 
     LocalDate currentdate = LocalDate.now();
+
+
     int currentYear = currentdate.getYear();
 
     int ano= Calendar.getInstance().get(Calendar.YEAR);
@@ -791,8 +794,13 @@ public class HomeController {
         model.addAttribute("provincia",provincia);
         model.addAttribute("tipoOcorrencia",tipoOcorrencia);
         model.addAttribute("estado",estado);
-        model.addAttribute("datainicial",datainicial);
-        model.addAttribute("datafinal",datafinal);
+
+        SimpleDateFormat DateFor1 = new SimpleDateFormat("yyyy-MM-dd");
+        String datainicial1= DateFor1.format(datainicial);
+        String datafinal2= DateFor1.format(datafinal);
+
+        model.addAttribute("datainicial",datainicial1);
+        model.addAttribute("datafinal",datafinal2);
 
 
         model.addAttribute("ocorrencia", ocorrenciaRepository.totalDeOcorrenciasPorDataseProjectoRelatorio(datainicial,datafinal,projecto,provincia,estado,tipoOcorrencia, categoria));
@@ -853,8 +861,8 @@ public class HomeController {
 
     }
 
-    @GetMapping("/export/excel")
-    public void exportToExcel(HttpServletResponse response) throws IOException {
+    @GetMapping("/export/excel/{datainicial}/{datafinal}")
+    public void exportToExcel(@PathVariable("datainicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datainicial,@PathVariable("datafinal") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datafinal, HttpServletResponse response) throws IOException, ParseException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
@@ -863,7 +871,10 @@ public class HomeController {
         String headerValue = "attachment; filename=fnds_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List<Ocorrencia> listUsers = ocorrenciaRepository.listarOcorrenciasValidads();
+
+        //List<Ocorrencia> listUsers = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+
+        List<Ocorrencia> listUsers = (List<Ocorrencia>) ocorrenciaRepository.buscarOcorrenciaPorData(datainicial,datafinal);
 
         OcorrenciasExcelExporter excelExporter = new OcorrenciasExcelExporter(listUsers);
 

@@ -231,7 +231,7 @@ $('#cbxCidade').html(s);
                 Imprimir
               </a>
 
-              <a class="btn btn-secondary" th:href="@{/export/excel}"  role="button">
+              <a class="btn btn-secondary" th:href="@{/export/excel/{datainicial}/{datafinal} (datainicial=${datainicial},datafinal=${datafinal})}"  role="button">
                 <span class="oi oi-print" title="Cadastro" aria-hidden="true"></span>
                 <i class="fa fa-print mr-2"></i>
                 Imprimir Excel
