@@ -1888,12 +1888,12 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 					String emaildest = lista.get(i).getEmail();
 					String descric = "Há uma ocorrência Temporária com o código: "+provincia.getCodigo()+""+codigo+""+anooo;
 
-					//if(localprovincia.equals((lista.get(i).getProvincia().getDesignacao())) ||("Nacional".equals(lista.get(i).getProvincia().getDesignacao())) ) {
+				//if(localprovincia.equals((lista.get(i).getProvincia().getDesignacao())) ||("Nacional".equals(lista.get(i).getProvincia().getDesignacao())) ) {
+					if(localprojecto.equals((listaProuser.get(i).getProjecto().getDesignacao()))) {
 						emailService.enviarEmail(descric,"FNDS", emaildest, assun);
-						
-						if(localprojecto.equals((listaProuser.get(i).getProjecto().getDesignacao()))) {
-				
+			
 				}
+				
 				}
 
 			}
