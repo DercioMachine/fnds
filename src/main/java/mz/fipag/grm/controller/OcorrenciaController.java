@@ -28,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 import com.google.gson.Gson;
 
@@ -69,9 +72,6 @@ import mz.fipag.grm.service.ProvinciaService;
 import mz.fipag.grm.service.SMSService;
 import mz.fipag.grm.service.TipoAlertaService;
 import mz.fipag.grm.service.TipoOcorrenciaService;
-import org.supercsv.io.CsvBeanWriter;
-import org.supercsv.io.ICsvBeanWriter;
-import org.supercsv.prefs.CsvPreference;
 
 
 @Controller
@@ -179,6 +179,7 @@ public class OcorrenciaController {
 
         return "ocorrencia/listarOcorrencia";
     }
+
 
     @GetMapping("/ocorrencia/observador")
     public String listarOcorrenciaObservador(ModelMap model, Authentication authentication){

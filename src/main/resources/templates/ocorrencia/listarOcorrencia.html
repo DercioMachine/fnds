@@ -43,55 +43,55 @@
     <div class="page-body">
         <div class="container-xl">
 
-<!--            <div class="row">-->
-<!---->
-<!--                <div class="col-sm-6 col-lg-3">-->
-<!---->
-<!--                    <div class="form-group">-->
-<!--                        <label class="form-label">Data Inical: </label>-->
-<!--                        <div class="input-icon">-->
-<!--							<span class="input-icon-addon">-->
-<!--							<i class="fe fe-calendar"></i>-->
-<!--							</span>-->
-<!--                            <input id="txtDate" value="" name="datainicial" type="date" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="col-6 col-sm-3">-->
-<!--                    <div class="form-group">-->
-<!--                        <label class="form-label">Data Final: </label>-->
-<!--                        <div class="input-icon">-->
-<!--							<span class="input-icon-addon">-->
-<!--							<i class="fe fe-calendar"></i>-->
-<!--							</span>-->
-<!--                            <input id="txtDate2" value="" name="datafinal" type="date" class="form-control">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="col-6 col-sm-4">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="projecto" class="form-label">Projecto</label>-->
-<!--                        <select id="projecto" name="projecto" class="form-control custom-select form-select" >-->
-<!--                            <option value="">Selecione o Projecto...</option>-->
-<!--                            <option th:each="p : ${projectos}"-->
-<!--                                    th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div id="botoes" class="col-sm-6 col-lg-2">-->
-<!--                        <br>-->
-<!--                        <button class="btn btn-default" type="submit" style="margin-top:6px;border:none ; " >-->
-<!--                            <i style="font-size: 20pt; color: #0277BD" class="far fa-rotate"></i>-->
-<!--                            <i style="font-size: 20pt; color: #0277BD" class="fa-solid fa-rotate"></i>-->
-<!--                            <i style="font-size: 20pt; color: #0277BD"  class="fas fa-sync-alt"></i>-->
-<!--                        </button>-->
-<!--                        <br>-->
-<!--                </div>-->
-<!---->
-<!--            </div>-->
+            <div class="row">
+
+                <div class="col-sm-6 col-lg-3">
+
+                    <div class="form-group">
+                        <label class="form-label">Data Inical: </label>
+                        <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                            <input id="txtDate" value="" name="datainicial" type="date" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-3">
+                    <div class="form-group">
+                        <label class="form-label">Data Final: </label>
+                        <div class="input-icon">
+							<span class="input-icon-addon">
+							<i class="fe fe-calendar"></i>
+							</span>
+                            <input id="txtDate2" value="" name="datafinal" type="date" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4">
+                    <div class="form-group">
+                        <label for="projecto" class="form-label">Projecto</label>
+                        <select id="projecto" name="projecto" class="form-control custom-select form-select" >
+                            <option value="">Selecione o Projecto...</option>
+                            <option th:each="p : ${projectos}"
+                                    th:value="${p.designacao}" th:text="${p.designacao}">Maputo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="botoes" class="col-sm-6 col-lg-2">
+                        <br>
+                        <button class="btn btn-default" type="submit" style="margin-top:6px;border:none ; " >
+                            <i style="font-size: 20pt; color: #0277BD" class="far fa-rotate"></i>
+                            <i style="font-size: 20pt; color: #0277BD" class="fa-solid fa-rotate"></i>
+                            <i style="font-size: 20pt; color: #0277BD"  class="fas fa-sync-alt"></i>
+                        </button>
+                        <br>
+                </div>
+
+            </div>
 
         </div>
     </div>
@@ -339,11 +339,11 @@
                                 </a>
 
 
-                                  <a th:if="${p.nivelresolucao == userlogado.nivel || userlogado.provincia == 11 }" th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
+                                  <a th:if="${p.nivelresolucao <= userlogado.nivel || userlogado.provincia == 11 }" th:href="@{/resolver/ocorrencia/{id} (id=${p.id})}">
                                       <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
                                   </a>
 
-                                  <a th:if="${p.nivelresolucao != userlogado.nivel }" th:href="@{/observador/ocorrencia/{id} (id=${p.id})}">
+                                  <a th:if="${p.nivelresolucao > userlogado.nivel }" th:href="@{/observador/ocorrencia/{id} (id=${p.id})}">
                                       <i style="font-size: 15pt; color: blue" aria-hidden="true" class="fas fa-tools"></i>
                                   </a>
 

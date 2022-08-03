@@ -15,6 +15,10 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 
 	@Query(value="select distinct year(created) from ocorrencia order by created desc", nativeQuery=true)
 	public List<Object[]> findAnos();
+	
+	
+	@Query(value="select * from ocorrencia where resolucao='V' and year(created)=2022", nativeQuery=true)
+	public List<Ocorrencia> listarOcorrenciasValidads();
 
 	@Query(value="select * from Ocorrencia where grm_stamp=:codigo", nativeQuery=true)
 	public Ocorrencia findAllByCodigo(@Param("codigo") Long codigo);

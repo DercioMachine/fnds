@@ -1800,9 +1800,9 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 
         
 		//try {
-			//int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+			int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
 
-			int numeroOrdem=1;
+			//int numeroOrdem=1;
 
 	        Integer numeroDeOrdem = numeroOrdem;
 

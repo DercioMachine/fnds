@@ -94,16 +94,19 @@
 		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
 		<span>Resolver Ocorrência</span>
 	</a>
+	
+	<span sec:authorize="hasAnyAuthority('ROLE_VALIDADOR')" >
 
-	<a class="btn btn-success btn-md mb-3" th:href="@{/ocorrencias/validar/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.resolucao == 'P' }"  role="button">
-		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		<span>Validar Ocorrência</span>
-	</a>
-
-	<a class="btn btn-danger btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"  th:if="${ocorrencia.estado == 'Temporario' }" role="button">
-		<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-		<span>Excluir Ocorrência</span>
-	</a>
+		<a class="btn btn-success btn-md mb-3" th:href="@{/ocorrencias/validar/{id} (id=${ocorrencia.id})}"  th:if="${ocorrencia.resolucao == 'P' }"  role="button">
+			<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+			<span>Validar Ocorrência</span>
+		</a>
+	
+		<a class="btn btn-danger btn-md mb-3" href="#" data-bs-toggle="modal" data-bs-target="#modal-reportt"  th:if="${ocorrencia.estado == 'Temporario' }" role="button">
+			<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+			<span>Excluir Ocorrência</span>
+		</a>
+	</span>
 
     <div class="card">
 

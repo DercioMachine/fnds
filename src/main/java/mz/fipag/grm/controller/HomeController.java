@@ -863,7 +863,7 @@ public class HomeController {
         String headerValue = "attachment; filename=fnds_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List<Ocorrencia> listUsers = (List<Ocorrencia>) ocorrenciaRepository.findAll();
+        List<Ocorrencia> listUsers = ocorrenciaRepository.listarOcorrenciasValidads();
 
         OcorrenciasExcelExporter excelExporter = new OcorrenciasExcelExporter(listUsers);
 
