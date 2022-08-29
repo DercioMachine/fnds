@@ -252,8 +252,6 @@ public class OcorrenciaController {
     	List<Projecto> projecto = null;
     	
     	projecto = projectoRepository.buscarTodosComSelecao(userlogado.getId());
-    	
-    	
     	model.addAttribute("projectos", projecto);
 
         model.addAttribute("ocorrencia",new Ocorrencia());
@@ -342,20 +340,17 @@ public class OcorrenciaController {
         		 
         	 
         		 for (int k=0;k<listaUser.size();k++) {
-                	 
-        			 String smsUrgente = "Sr(a) "+listaUser.get(k).getNome()+", A ocorrência de código : "+listaOcorencia.get(i).getGrmStamp() +" passou do tempo.";
-   	              
-                	 
+
+        		   String smsUrgente = "Sr(a) "+listaUser.get(k).getNome()+", A ocorrência de código : "+listaOcorencia.get(i).getGrmStamp() +" passou do tempo.";
+
   	               if(listaUser.get(k).getTipourgente().equals("Sim") && listaOcorencia.get(i).getProvincia().getDesignacao().equals(listaUser.get(k).getProvincia().getDesignacao())) {
   	            	   smsService.sendSMS("+258"+listaUser.get(k).getTelefone(),smsUrgente);
   	               }
          		
-         	}
-        	 
-        	 }
+         	     }
+             }
     		 
-    		 
-        	 
+
  	}
     	 
     	 
@@ -365,12 +360,12 @@ public class OcorrenciaController {
     @PostMapping("/ocorrencias/cadastrar")
 	public String salvarOcorrencia(Ocorrencia ocorrencia,Authentication authentication, Provincia provincia, @RequestParam("descricaoAnx") String descricaoNexo, @RequestParam("files") MultipartFile[] files) throws MessagingException {
 
-    	
     	try {
 			
     		User userlogado = userRepository.findByUsername(authentication.getName());
 
             int numeroOrdem = (int) ocorrenciaRepository.BuscarUltimoNumero();
+
             Integer numeroDeOrdem = numeroOrdem;
 
             numeroDeOrdem++;
@@ -380,9 +375,8 @@ public class OcorrenciaController {
         	
         	String anoo = String.valueOf(ano);
         	String anooo= anoo.substring(2, 4);
-        	
-        	
-        	
+
+
         		ocorrencia.setGrmStamp(provincia.getCodigo()+""+codigo+""+anooo);
         		ocorrencia.setRegistado(true);
         		ocorrencia.setNumeroordem(numeroDeOrdem);
@@ -406,8 +400,7 @@ public class OcorrenciaController {
             //String localprovincia = ocorrencia.getProvincia().getDesignacao();
             String localprojecto = ocorrencia.getProjecto().getDesignacao();
             
-            
-            
+
             long projecto = ocorrencia.getProjecto().getId();
 
         	 List<User> lista = (List<User>) userRepository.buscarTodosComProjectoSelecionado(projecto);

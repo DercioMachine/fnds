@@ -331,14 +331,14 @@ where o.tipo_ocorrencia_id=t.id and o.projecto_id=p.id and o.provincia_id=c.id a
 				<textElement>
 					<font fontName="SansSerif" size="6"/>
 				</textElement>
-				<text><![CDATA[Contactos: Telefone: (+258) 21 308840 / (+258) 823025430, email : fipag@fipag.co.mz]]></text>
+				<text><![CDATA[Contactos: Telefone: (+258) 21 308840 / (+258) 823025430, email : pled@pled.co.mz]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="30" width="226" height="8" uuid="818fcfaf-9d59-4e6f-86d3-a90335309765"/>
 				<textElement>
 					<font fontName="SansSerif" size="6"/>
 				</textElement>
-				<text><![CDATA[Produzido por FIPAG]]></text>
+				<text><![CDATA[Produzido por PLED]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="533" y="20" width="21" height="18" uuid="37843778-ee5f-41e9-aac9-38675c84b6c4"/>
