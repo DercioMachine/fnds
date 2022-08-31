@@ -219,7 +219,7 @@
                                   <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                               </a>
 
-                              <a th:if="${p.resolucao == 'V' }" th:href="@{/ocorrencias/validar/{id} (id=${p.id})}">
+                              <a th:if="${p.resolucao == 'V'}" th:href="@{/ocorrencias/validar/{id} (id=${p.id})}">
                                   <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                               </a>
 
@@ -334,7 +334,7 @@
                                       <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                                   </a>
 
-                                <a th:if="${p.resolucao == 'V' }" th:href="@{/ocorrencias/validar/{id} (id=${p.id})}">
+                                <a th:if="${p.resolucao == 'V' && p.procedencia =='Sim'}" th:href="@{/ocorrencias/validar/{id} (id=${p.id})}">
                                     <i style="font-size: 15pt; color: orange" aria-hidden="true" class="fa fa-edit"></i>
                                 </a>
 
