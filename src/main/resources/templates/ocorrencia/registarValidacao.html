@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FIPAG</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/image/logoa.png}">
 </head>
 <body>
 <div layout:fragment="corpo">
@@ -323,7 +324,7 @@ $('#subcategoria').html(s);
 		                        <div class="form-group">
 		                            <label class="form-label">Canal Utilizado </label>
 		                            <select class="form-control custom-select" th:field="*{formaComunicacao}" >
-		                             	<option value="Plataforma">Plataforma</option>
+		                             	<option value="E-mail">E-mail</option>
 		                                <option value="Contacto Pessoal">Contacto Pessoal</option>
 		                                <option value="Telefone">Telefone</option>
 		                                <option value="Formulário">Formulário</option>
