@@ -20,13 +20,13 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	@Query(value="select * from ocorrencia where resolucao='V' and year(created)=2022", nativeQuery=true)
 	public List<Ocorrencia> listarOcorrenciasValidads();
 
-	@Query(value="select * from Ocorrencia where grm_stamp=:codigo", nativeQuery=true)
+	@Query(value="select * from ocorrencia where grm_stamp=:codigo", nativeQuery=true)
 	public Ocorrencia findAllByCodigo(@Param("codigo") Long codigo);
 
-	@Query(value="select * from Ocorrencia order by numero_ordem desc", nativeQuery=true)
+	@Query(value="select * from ocorrencia order by numero_ordem desc", nativeQuery=true)
 	public List<Ocorrencia> BuscarOrdemDecrecente();
 
-	@Query(value="select * from Ocorrencia, projectouser where ocorrencia.projecto_id=projectouser.projecto_id and ocorrencia.provincia_id=:id and projectouser.user_id=:id1", nativeQuery=true)
+	@Query(value="select * from ocorrencia, projectouser where ocorrencia.projecto_id=projectouser.projecto_id and ocorrencia.provincia_id=:id and projectouser.user_id=:id1", nativeQuery=true)
 	List<Ocorrencia> buscarOcorrenciasPorUsuariosProvinciaProjecto(Long id, Long id1);
 
 	/* QUERIES DAS PRIMEIRAS CARDS */
@@ -54,7 +54,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 
 
 
-	@Query(value="select count(*) from Ocorrencia where procedencia='Sim' and year(created)= :ano", nativeQuery=true)
+	@Query(value="select count(*) from ocorrencia where procedencia='Sim' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrenciasProcedentes(@Param("ano") int ano);
 
 
@@ -118,7 +118,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 
 
 
-	@Query(value="select count(*) from Ocorrencia where procedencia='Não' and estado='Validado' and year(created)= :ano", nativeQuery=true)
+	@Query(value="select count(*) from ocorrencia where procedencia='Não' and estado='Validado' and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrenciasImprocedentes(@Param("ano") int ano);
 
 
@@ -189,7 +189,7 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	 *
 	 * Todas as ocorrencias procedentes
 	 * */
-	@Query(value="select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
+	@Query(value="select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
 	public Object totalDeReclamacoesProcedentes(@Param("ano") int ano);
 
 
@@ -208,11 +208,11 @@ public interface OcorrenciaRepository extends CrudRepository<Ocorrencia, Long> {
 	public Object totalDeReclamacoesProcedentesFiltro2(@Param("radioButton") String radioButton, @Param("codSelected") int codSelected, @Param("projecto") String projecto, @Param("provincia") String provincia, @Param("ano") int ano);
 
 
-	@Query(value="select count(*) from Ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created)= :ano", nativeQuery=true)
+	@Query(value="select count(*) from ocorrencia where procedencia='Sim' and tipo_ocorrencia_id!=1 and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrenciasNaoReclamacoes(@Param("ano") int ano);
 
 
-	@Query(value="select count(*) from Ocorrencia where procedencia='Sim' and resolucao = 'V' and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
+	@Query(value="select count(*) from ocorrencia where procedencia='Sim' and resolucao = 'V' and tipo_ocorrencia_id=1 and year(created)= :ano", nativeQuery=true)
 	public Object totalDeOcorrenciasNaoReSolvidas(@Param("ano") int ano);
 
 
