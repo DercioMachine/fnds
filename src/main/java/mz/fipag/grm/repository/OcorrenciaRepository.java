@@ -765,7 +765,7 @@ public List<Object[]> busqueTnTI();*/
 	List<Object[]> busqueTudoAgrupadoPorSexo2(String radioButton, int codSelected, String projecto, String provincia, int ano);
 
 
-	@Query(value="select count(*) from ocorrencia, projecto, provincia where resolucao='V' and tipo_ocorrencia_id=1 and ocorrencia.provincia_id=provincia.id and ocorrencia.projecto_id=projecto.id and "
+	@Query(value="select count(*) from ocorrencia, projecto, provincia where procedencia='Sim' and resolucao='V' and tipo_ocorrencia_id=1 and ocorrencia.provincia_id=provincia.id and ocorrencia.projecto_id=projecto.id and "
 			+ " if (:provincia='', 1=1,provincia.designacao =(:provincia)) and if (:projecto='', 1=1,projecto.designacao =(:projecto)) and IF((:datainicial)='' and (:datafinal)='',1=1, "
 			+ " ocorrencia.created between (:datainicial) and (:datafinal))", nativeQuery=true)
 	Object totalDeOcorrenciasNaoReSolvidasDatas(Date datainicial, Date datafinal, String projecto, String provincia);
