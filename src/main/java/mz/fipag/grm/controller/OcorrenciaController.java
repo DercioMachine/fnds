@@ -383,7 +383,7 @@ public class OcorrenciaController {
         		ocorrencia.setResponsavel(userlogado);
         		ocorrencia.setEstado("Registado");
         		
-        		if(ocorrencia.getSexo().isBlank()) {
+        		if(ocorrencia.getSexo().isEmpty()) {
         			ocorrencia.setSexo("ND");
         		}
         		ocorrenciaService.salvar(ocorrencia);
