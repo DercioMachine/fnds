@@ -204,6 +204,8 @@ public class Ocorrencia extends AbstractEntity{
 	public String getNomeUtente() {
 		return nomeUtente;
 	}
+	
+	
 
 	public String getSexo() {
 		return sexo;

@@ -154,10 +154,9 @@ public class IndexController {
 	@GetMapping("/")
 	public String index() throws MessagingException {
 
-//sendEmail();
-//sendSMS();
 
-//emailService.enviarEmail("descricao","Jacinto Machava","jacintomachava@gmail.com","covid19");
+
+	//emailService.enviarEmail("descricao","Jacinto Machava","jacintomachava@gmail.com","covid19");
 
 		return "publico/principal";
 	}
@@ -187,7 +186,6 @@ public class IndexController {
 				userRepository.save(user);
 
 				String mensagem = "A sua Senha Foi recuperada com sucesso, a sua nova senha é: "+novasenha;
-				smsService.sendSMS("+258"+user.getTelefone(),mensagem);
 
 				model.addAttribute("success", "Recuperação efectuado com sucesso, verifique o teu telefone.");
 
@@ -1851,7 +1849,6 @@ model.addAttribute("totalDeOcorrenciasPorValidar", ocorrenciaRepository.totalDeO
 			if(contacto!=null){
 
 				String mensagem = "A sua preocupação foi submetido com sucesso. Código: "+provincia.getCodigo()+""+codigo+""+anooo;
-				smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
 
 			}
 

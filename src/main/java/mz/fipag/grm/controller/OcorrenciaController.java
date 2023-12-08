@@ -331,7 +331,7 @@ public class OcorrenciaController {
 	              
 	                	 
 	               if(listaUser.get(j).getTipourgente().equals("Sim") && listaOcorencia.get(i).getProvincia().getDesignacao().equals(listaUser.get(j).getProvincia().getDesignacao())) {
-	            	   smsService.sendSMS("+258"+listaUser.get(j).getTelefone(),smsNormal);
+
 	               }
 	         	}
         		 
@@ -344,7 +344,6 @@ public class OcorrenciaController {
         		   String smsUrgente = "Sr(a) "+listaUser.get(k).getNome()+", A ocorrência de código : "+listaOcorencia.get(i).getGrmStamp() +" passou do tempo.";
 
   	               if(listaUser.get(k).getTipourgente().equals("Sim") && listaOcorencia.get(i).getProvincia().getDesignacao().equals(listaUser.get(k).getProvincia().getDesignacao())) {
-  	            	   smsService.sendSMS("+258"+listaUser.get(k).getTelefone(),smsUrgente);
   	               }
          		
          	     }
@@ -420,7 +419,6 @@ public class OcorrenciaController {
             if(contacto!=null){
 
                 String mensagem = "A sua preocupação foi submetido com sucesso. Código: "+provincia.getCodigo()+""+codigo+""+anooo;
-                smsService.sendSMS("+258"+ocorrencia.getContactoUtente(),mensagem);
 
             }
 
@@ -455,8 +453,7 @@ public class OcorrenciaController {
                 	// if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()))){
                 	 
                 	 if(lista.get(i).getTipourgente().equals("Sim")  && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
-            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
-            	  
+
             	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
             	   
             	   
@@ -481,7 +478,6 @@ public class OcorrenciaController {
                //	if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao()) ) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))){
                	 
                	if(lista.get(i).getTipogbv().equals("Sim") && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
-           	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
            	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
               }
         		
@@ -822,7 +818,6 @@ public class OcorrenciaController {
                 if(contacto!=null) {
 
                     String smsNaoprocede = "Caro Utente a sua ocorrência não procede, consulte o código: "+ocorrencia.getGrmStamp();
-                    smsService.sendSMS("+258" + ocorrencia.getContactoUtente(), smsNaoprocede);
 
                 }
                 if(email!=null) {
@@ -865,16 +860,13 @@ public class OcorrenciaController {
               // if(lista.get(i).getTipourgente().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
                 	 if(lista.get(i).getTipourgente().equals("Sim")  && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
                 	
-                		 
-                		 
-            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsurgente);
+
             	   emailService.enviarEmail(smsurgente,nome,lista.get(i).getEmail(),assunto);
             	   
                }else 
             	   
             	  // if(lista.get(i).getTipogbv().equals("Sim") && (localprovincia.equals(lista.get(i).getProvincia().getDesignacao())) || ("Nacional".equals(lista.get(i).getProvincia().getDesignacao()))) {
             	   if(lista.get(i).getTipogbv().equals("Sim")  && (localprojecto.equals(listaProuser.get(i).getProjecto().getDesignacao()))){
-            	   smsService.sendSMS("+258"+lista.get(i).getTelefone(),smsgbv);
             	   emailService.enviarEmail(smsgbv,nome,lista.get(i).getEmail(),assunto);
                }
          		

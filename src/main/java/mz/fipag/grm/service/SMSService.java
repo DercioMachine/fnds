@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SMSService {
 	
-	 public static final String ACCOUNT_SID = "AC210a20618423ed1ec9fabcd1a047dc9c";
-	//public static final String ACCOUNT_SID = "SMe114e44d972e4362a10f97c3590ce380";
-    public static final String AUTH_TOKEN = "79e93accbc4e2642519302209ccd7bec";
+	 public static final String ACCOUNT_SID = "yhdufjfemdgjdbhfec9fabcd1a047dc9c";
+	//public static final String ACCOUNT_SID = "poljdtgefshujde4362a10f97c3590ce380";
+    public static final String AUTH_TOKEN = "83ueteveyhd2519302209ccd7bec";
 
     public void sendSMS(String telefone,String mensagem) throws AuthenticationException {
 
@@ -20,9 +20,9 @@ public class SMSService {
         Message message = Message.creator(
                 //new MYCOMPANY
                 new com.twilio.type.PhoneNumber(telefone),
-                new com.twilio.type.PhoneNumber("MGa7c0db649ff0f14a5d7f8296ae590c39"),
-                //new com.twilio.type.PhoneNumber("+19107084699"),
-               // new com.twilio.type.PhoneNumber("+18555944611"),
+                new com.twilio.type.PhoneNumber("873u7eys7sywtyeebe296ae590c39"),
+                //new com.twilio.type.PhoneNumber("+19451524854699"),
+               // new com.twilio.type.PhoneNumber("+1855478547545944611"),
                 mensagem)
                 .create();
 
